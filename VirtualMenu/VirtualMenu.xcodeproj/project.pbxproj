@@ -7,66 +7,66 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3A987A9B24802E1F0021F6E4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A987A9A24802E1F0021F6E4 /* AppDelegate.swift */; };
-		3A987A9D24802E1F0021F6E4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A987A9C24802E1F0021F6E4 /* SceneDelegate.swift */; };
-		3A987A9F24802E1F0021F6E4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A987A9E24802E1F0021F6E4 /* ViewController.swift */; };
-		3A987AA224802E1F0021F6E4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3A987AA024802E1F0021F6E4 /* Main.storyboard */; };
-		3A987AA424802E200021F6E4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3A987AA324802E200021F6E4 /* Assets.xcassets */; };
-		3A987AA724802E200021F6E4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3A987AA524802E200021F6E4 /* LaunchScreen.storyboard */; };
-		3A987AB224802E200021F6E4 /* VirtualMenuTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A987AB124802E200021F6E4 /* VirtualMenuTests.swift */; };
-		3A987ABD24802E200021F6E4 /* VirtualMenuUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A987ABC24802E200021F6E4 /* VirtualMenuUITests.swift */; };
+		3A987AD72480350C0021F6E4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A987AD62480350C0021F6E4 /* AppDelegate.swift */; };
+		3A987AD92480350C0021F6E4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A987AD82480350C0021F6E4 /* SceneDelegate.swift */; };
+		3A987ADB2480350C0021F6E4 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A987ADA2480350C0021F6E4 /* ContentView.swift */; };
+		3A987ADD2480350E0021F6E4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3A987ADC2480350E0021F6E4 /* Assets.xcassets */; };
+		3A987AE02480350E0021F6E4 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3A987ADF2480350E0021F6E4 /* Preview Assets.xcassets */; };
+		3A987AE32480350E0021F6E4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3A987AE12480350E0021F6E4 /* LaunchScreen.storyboard */; };
+		3A987AEE2480350E0021F6E4 /* VirtualMenuTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A987AED2480350E0021F6E4 /* VirtualMenuTests.swift */; };
+		3A987AF92480350E0021F6E4 /* VirtualMenuUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A987AF82480350E0021F6E4 /* VirtualMenuUITests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		3A987AAE24802E200021F6E4 /* PBXContainerItemProxy */ = {
+		3A987AEA2480350E0021F6E4 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 3A987A8F24802E1F0021F6E4 /* Project object */;
+			containerPortal = 3A987ACB2480350C0021F6E4 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 3A987A9624802E1F0021F6E4;
+			remoteGlobalIDString = 3A987AD22480350C0021F6E4;
 			remoteInfo = VirtualMenu;
 		};
-		3A987AB924802E200021F6E4 /* PBXContainerItemProxy */ = {
+		3A987AF52480350E0021F6E4 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 3A987A8F24802E1F0021F6E4 /* Project object */;
+			containerPortal = 3A987ACB2480350C0021F6E4 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 3A987A9624802E1F0021F6E4;
+			remoteGlobalIDString = 3A987AD22480350C0021F6E4;
 			remoteInfo = VirtualMenu;
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		3A987A9724802E1F0021F6E4 /* VirtualMenu.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VirtualMenu.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		3A987A9A24802E1F0021F6E4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		3A987A9C24802E1F0021F6E4 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		3A987A9E24802E1F0021F6E4 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		3A987AA124802E1F0021F6E4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		3A987AA324802E200021F6E4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		3A987AA624802E200021F6E4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		3A987AA824802E200021F6E4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		3A987AAD24802E200021F6E4 /* VirtualMenuTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VirtualMenuTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		3A987AB124802E200021F6E4 /* VirtualMenuTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VirtualMenuTests.swift; sourceTree = "<group>"; };
-		3A987AB324802E200021F6E4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		3A987AB824802E200021F6E4 /* VirtualMenuUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VirtualMenuUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		3A987ABC24802E200021F6E4 /* VirtualMenuUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VirtualMenuUITests.swift; sourceTree = "<group>"; };
-		3A987ABE24802E200021F6E4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3A987AD32480350C0021F6E4 /* VirtualMenu.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VirtualMenu.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		3A987AD62480350C0021F6E4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		3A987AD82480350C0021F6E4 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		3A987ADA2480350C0021F6E4 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		3A987ADC2480350E0021F6E4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		3A987ADF2480350E0021F6E4 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		3A987AE22480350E0021F6E4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		3A987AE42480350E0021F6E4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3A987AE92480350E0021F6E4 /* VirtualMenuTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VirtualMenuTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		3A987AED2480350E0021F6E4 /* VirtualMenuTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VirtualMenuTests.swift; sourceTree = "<group>"; };
+		3A987AEF2480350E0021F6E4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3A987AF42480350E0021F6E4 /* VirtualMenuUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VirtualMenuUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		3A987AF82480350E0021F6E4 /* VirtualMenuUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VirtualMenuUITests.swift; sourceTree = "<group>"; };
+		3A987AFA2480350E0021F6E4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		3A987A9424802E1F0021F6E4 /* Frameworks */ = {
+		3A987AD02480350C0021F6E4 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		3A987AAA24802E200021F6E4 /* Frameworks */ = {
+		3A987AE62480350E0021F6E4 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		3A987AB524802E200021F6E4 /* Frameworks */ = {
+		3A987AF12480350E0021F6E4 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -76,54 +76,62 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		3A987A8E24802E1F0021F6E4 = {
+		3A987ACA2480350C0021F6E4 = {
 			isa = PBXGroup;
 			children = (
-				3A987A9924802E1F0021F6E4 /* VirtualMenu */,
-				3A987AB024802E200021F6E4 /* VirtualMenuTests */,
-				3A987ABB24802E200021F6E4 /* VirtualMenuUITests */,
-				3A987A9824802E1F0021F6E4 /* Products */,
+				3A987AD52480350C0021F6E4 /* VirtualMenu */,
+				3A987AEC2480350E0021F6E4 /* VirtualMenuTests */,
+				3A987AF72480350E0021F6E4 /* VirtualMenuUITests */,
+				3A987AD42480350C0021F6E4 /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		3A987A9824802E1F0021F6E4 /* Products */ = {
+		3A987AD42480350C0021F6E4 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				3A987A9724802E1F0021F6E4 /* VirtualMenu.app */,
-				3A987AAD24802E200021F6E4 /* VirtualMenuTests.xctest */,
-				3A987AB824802E200021F6E4 /* VirtualMenuUITests.xctest */,
+				3A987AD32480350C0021F6E4 /* VirtualMenu.app */,
+				3A987AE92480350E0021F6E4 /* VirtualMenuTests.xctest */,
+				3A987AF42480350E0021F6E4 /* VirtualMenuUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		3A987A9924802E1F0021F6E4 /* VirtualMenu */ = {
+		3A987AD52480350C0021F6E4 /* VirtualMenu */ = {
 			isa = PBXGroup;
 			children = (
-				3A987A9A24802E1F0021F6E4 /* AppDelegate.swift */,
-				3A987A9C24802E1F0021F6E4 /* SceneDelegate.swift */,
-				3A987A9E24802E1F0021F6E4 /* ViewController.swift */,
-				3A987AA024802E1F0021F6E4 /* Main.storyboard */,
-				3A987AA324802E200021F6E4 /* Assets.xcassets */,
-				3A987AA524802E200021F6E4 /* LaunchScreen.storyboard */,
-				3A987AA824802E200021F6E4 /* Info.plist */,
+				3A987AD62480350C0021F6E4 /* AppDelegate.swift */,
+				3A987AD82480350C0021F6E4 /* SceneDelegate.swift */,
+				3A987ADA2480350C0021F6E4 /* ContentView.swift */,
+				3A987ADC2480350E0021F6E4 /* Assets.xcassets */,
+				3A987AE12480350E0021F6E4 /* LaunchScreen.storyboard */,
+				3A987AE42480350E0021F6E4 /* Info.plist */,
+				3A987ADE2480350E0021F6E4 /* Preview Content */,
 			);
 			path = VirtualMenu;
 			sourceTree = "<group>";
 		};
-		3A987AB024802E200021F6E4 /* VirtualMenuTests */ = {
+		3A987ADE2480350E0021F6E4 /* Preview Content */ = {
 			isa = PBXGroup;
 			children = (
-				3A987AB124802E200021F6E4 /* VirtualMenuTests.swift */,
-				3A987AB324802E200021F6E4 /* Info.plist */,
+				3A987ADF2480350E0021F6E4 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		3A987AEC2480350E0021F6E4 /* VirtualMenuTests */ = {
+			isa = PBXGroup;
+			children = (
+				3A987AED2480350E0021F6E4 /* VirtualMenuTests.swift */,
+				3A987AEF2480350E0021F6E4 /* Info.plist */,
 			);
 			path = VirtualMenuTests;
 			sourceTree = "<group>";
 		};
-		3A987ABB24802E200021F6E4 /* VirtualMenuUITests */ = {
+		3A987AF72480350E0021F6E4 /* VirtualMenuUITests */ = {
 			isa = PBXGroup;
 			children = (
-				3A987ABC24802E200021F6E4 /* VirtualMenuUITests.swift */,
-				3A987ABE24802E200021F6E4 /* Info.plist */,
+				3A987AF82480350E0021F6E4 /* VirtualMenuUITests.swift */,
+				3A987AFA2480350E0021F6E4 /* Info.plist */,
 			);
 			path = VirtualMenuUITests;
 			sourceTree = "<group>";
@@ -131,13 +139,13 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		3A987A9624802E1F0021F6E4 /* VirtualMenu */ = {
+		3A987AD22480350C0021F6E4 /* VirtualMenu */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 3A987AC124802E200021F6E4 /* Build configuration list for PBXNativeTarget "VirtualMenu" */;
+			buildConfigurationList = 3A987AFD2480350E0021F6E4 /* Build configuration list for PBXNativeTarget "VirtualMenu" */;
 			buildPhases = (
-				3A987A9324802E1F0021F6E4 /* Sources */,
-				3A987A9424802E1F0021F6E4 /* Frameworks */,
-				3A987A9524802E1F0021F6E4 /* Resources */,
+				3A987ACF2480350C0021F6E4 /* Sources */,
+				3A987AD02480350C0021F6E4 /* Frameworks */,
+				3A987AD12480350C0021F6E4 /* Resources */,
 			);
 			buildRules = (
 			);
@@ -145,69 +153,69 @@
 			);
 			name = VirtualMenu;
 			productName = VirtualMenu;
-			productReference = 3A987A9724802E1F0021F6E4 /* VirtualMenu.app */;
+			productReference = 3A987AD32480350C0021F6E4 /* VirtualMenu.app */;
 			productType = "com.apple.product-type.application";
 		};
-		3A987AAC24802E200021F6E4 /* VirtualMenuTests */ = {
+		3A987AE82480350E0021F6E4 /* VirtualMenuTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 3A987AC424802E200021F6E4 /* Build configuration list for PBXNativeTarget "VirtualMenuTests" */;
+			buildConfigurationList = 3A987B002480350E0021F6E4 /* Build configuration list for PBXNativeTarget "VirtualMenuTests" */;
 			buildPhases = (
-				3A987AA924802E200021F6E4 /* Sources */,
-				3A987AAA24802E200021F6E4 /* Frameworks */,
-				3A987AAB24802E200021F6E4 /* Resources */,
+				3A987AE52480350E0021F6E4 /* Sources */,
+				3A987AE62480350E0021F6E4 /* Frameworks */,
+				3A987AE72480350E0021F6E4 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				3A987AAF24802E200021F6E4 /* PBXTargetDependency */,
+				3A987AEB2480350E0021F6E4 /* PBXTargetDependency */,
 			);
 			name = VirtualMenuTests;
 			productName = VirtualMenuTests;
-			productReference = 3A987AAD24802E200021F6E4 /* VirtualMenuTests.xctest */;
+			productReference = 3A987AE92480350E0021F6E4 /* VirtualMenuTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		3A987AB724802E200021F6E4 /* VirtualMenuUITests */ = {
+		3A987AF32480350E0021F6E4 /* VirtualMenuUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 3A987AC724802E200021F6E4 /* Build configuration list for PBXNativeTarget "VirtualMenuUITests" */;
+			buildConfigurationList = 3A987B032480350E0021F6E4 /* Build configuration list for PBXNativeTarget "VirtualMenuUITests" */;
 			buildPhases = (
-				3A987AB424802E200021F6E4 /* Sources */,
-				3A987AB524802E200021F6E4 /* Frameworks */,
-				3A987AB624802E200021F6E4 /* Resources */,
+				3A987AF02480350E0021F6E4 /* Sources */,
+				3A987AF12480350E0021F6E4 /* Frameworks */,
+				3A987AF22480350E0021F6E4 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				3A987ABA24802E200021F6E4 /* PBXTargetDependency */,
+				3A987AF62480350E0021F6E4 /* PBXTargetDependency */,
 			);
 			name = VirtualMenuUITests;
 			productName = VirtualMenuUITests;
-			productReference = 3A987AB824802E200021F6E4 /* VirtualMenuUITests.xctest */;
+			productReference = 3A987AF42480350E0021F6E4 /* VirtualMenuUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		3A987A8F24802E1F0021F6E4 /* Project object */ = {
+		3A987ACB2480350C0021F6E4 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1130;
 				LastUpgradeCheck = 1130;
 				ORGANIZATIONNAME = "Rohan Tyagi";
 				TargetAttributes = {
-					3A987A9624802E1F0021F6E4 = {
+					3A987AD22480350C0021F6E4 = {
 						CreatedOnToolsVersion = 11.3.1;
 					};
-					3A987AAC24802E200021F6E4 = {
+					3A987AE82480350E0021F6E4 = {
 						CreatedOnToolsVersion = 11.3.1;
-						TestTargetID = 3A987A9624802E1F0021F6E4;
+						TestTargetID = 3A987AD22480350C0021F6E4;
 					};
-					3A987AB724802E200021F6E4 = {
+					3A987AF32480350E0021F6E4 = {
 						CreatedOnToolsVersion = 11.3.1;
-						TestTargetID = 3A987A9624802E1F0021F6E4;
+						TestTargetID = 3A987AD22480350C0021F6E4;
 					};
 				};
 			};
-			buildConfigurationList = 3A987A9224802E1F0021F6E4 /* Build configuration list for PBXProject "VirtualMenu" */;
+			buildConfigurationList = 3A987ACE2480350C0021F6E4 /* Build configuration list for PBXProject "VirtualMenu" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -215,37 +223,37 @@
 				en,
 				Base,
 			);
-			mainGroup = 3A987A8E24802E1F0021F6E4;
-			productRefGroup = 3A987A9824802E1F0021F6E4 /* Products */;
+			mainGroup = 3A987ACA2480350C0021F6E4;
+			productRefGroup = 3A987AD42480350C0021F6E4 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				3A987A9624802E1F0021F6E4 /* VirtualMenu */,
-				3A987AAC24802E200021F6E4 /* VirtualMenuTests */,
-				3A987AB724802E200021F6E4 /* VirtualMenuUITests */,
+				3A987AD22480350C0021F6E4 /* VirtualMenu */,
+				3A987AE82480350E0021F6E4 /* VirtualMenuTests */,
+				3A987AF32480350E0021F6E4 /* VirtualMenuUITests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		3A987A9524802E1F0021F6E4 /* Resources */ = {
+		3A987AD12480350C0021F6E4 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3A987AA724802E200021F6E4 /* LaunchScreen.storyboard in Resources */,
-				3A987AA424802E200021F6E4 /* Assets.xcassets in Resources */,
-				3A987AA224802E1F0021F6E4 /* Main.storyboard in Resources */,
+				3A987AE32480350E0021F6E4 /* LaunchScreen.storyboard in Resources */,
+				3A987AE02480350E0021F6E4 /* Preview Assets.xcassets in Resources */,
+				3A987ADD2480350E0021F6E4 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		3A987AAB24802E200021F6E4 /* Resources */ = {
+		3A987AE72480350E0021F6E4 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		3A987AB624802E200021F6E4 /* Resources */ = {
+		3A987AF22480350E0021F6E4 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -255,60 +263,52 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		3A987A9324802E1F0021F6E4 /* Sources */ = {
+		3A987ACF2480350C0021F6E4 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3A987A9F24802E1F0021F6E4 /* ViewController.swift in Sources */,
-				3A987A9B24802E1F0021F6E4 /* AppDelegate.swift in Sources */,
-				3A987A9D24802E1F0021F6E4 /* SceneDelegate.swift in Sources */,
+				3A987AD72480350C0021F6E4 /* AppDelegate.swift in Sources */,
+				3A987AD92480350C0021F6E4 /* SceneDelegate.swift in Sources */,
+				3A987ADB2480350C0021F6E4 /* ContentView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		3A987AA924802E200021F6E4 /* Sources */ = {
+		3A987AE52480350E0021F6E4 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3A987AB224802E200021F6E4 /* VirtualMenuTests.swift in Sources */,
+				3A987AEE2480350E0021F6E4 /* VirtualMenuTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		3A987AB424802E200021F6E4 /* Sources */ = {
+		3A987AF02480350E0021F6E4 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3A987ABD24802E200021F6E4 /* VirtualMenuUITests.swift in Sources */,
+				3A987AF92480350E0021F6E4 /* VirtualMenuUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		3A987AAF24802E200021F6E4 /* PBXTargetDependency */ = {
+		3A987AEB2480350E0021F6E4 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 3A987A9624802E1F0021F6E4 /* VirtualMenu */;
-			targetProxy = 3A987AAE24802E200021F6E4 /* PBXContainerItemProxy */;
+			target = 3A987AD22480350C0021F6E4 /* VirtualMenu */;
+			targetProxy = 3A987AEA2480350E0021F6E4 /* PBXContainerItemProxy */;
 		};
-		3A987ABA24802E200021F6E4 /* PBXTargetDependency */ = {
+		3A987AF62480350E0021F6E4 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 3A987A9624802E1F0021F6E4 /* VirtualMenu */;
-			targetProxy = 3A987AB924802E200021F6E4 /* PBXContainerItemProxy */;
+			target = 3A987AD22480350C0021F6E4 /* VirtualMenu */;
+			targetProxy = 3A987AF52480350E0021F6E4 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		3A987AA024802E1F0021F6E4 /* Main.storyboard */ = {
+		3A987AE12480350E0021F6E4 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				3A987AA124802E1F0021F6E4 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		3A987AA524802E200021F6E4 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				3A987AA624802E200021F6E4 /* Base */,
+				3A987AE22480350E0021F6E4 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -316,7 +316,7 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		3A987ABF24802E200021F6E4 /* Debug */ = {
+		3A987AFB2480350E0021F6E4 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -376,7 +376,7 @@
 			};
 			name = Debug;
 		};
-		3A987AC024802E200021F6E4 /* Release */ = {
+		3A987AFC2480350E0021F6E4 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -430,12 +430,14 @@
 			};
 			name = Release;
 		};
-		3A987AC224802E200021F6E4 /* Debug */ = {
+		3A987AFE2480350E0021F6E4 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_ASSET_PATHS = "\"VirtualMenu/Preview Content\"";
 				DEVELOPMENT_TEAM = 7XP2RUZ6VP;
+				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = VirtualMenu/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -448,12 +450,14 @@
 			};
 			name = Debug;
 		};
-		3A987AC324802E200021F6E4 /* Release */ = {
+		3A987AFF2480350E0021F6E4 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_ASSET_PATHS = "\"VirtualMenu/Preview Content\"";
 				DEVELOPMENT_TEAM = 7XP2RUZ6VP;
+				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = VirtualMenu/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -466,7 +470,7 @@
 			};
 			name = Release;
 		};
-		3A987AC524802E200021F6E4 /* Debug */ = {
+		3A987B012480350E0021F6E4 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
@@ -488,7 +492,7 @@
 			};
 			name = Debug;
 		};
-		3A987AC624802E200021F6E4 /* Release */ = {
+		3A987B022480350E0021F6E4 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
@@ -510,7 +514,7 @@
 			};
 			name = Release;
 		};
-		3A987AC824802E200021F6E4 /* Debug */ = {
+		3A987B042480350E0021F6E4 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
@@ -530,7 +534,7 @@
 			};
 			name = Debug;
 		};
-		3A987AC924802E200021F6E4 /* Release */ = {
+		3A987B052480350E0021F6E4 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
@@ -553,43 +557,43 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		3A987A9224802E1F0021F6E4 /* Build configuration list for PBXProject "VirtualMenu" */ = {
+		3A987ACE2480350C0021F6E4 /* Build configuration list for PBXProject "VirtualMenu" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				3A987ABF24802E200021F6E4 /* Debug */,
-				3A987AC024802E200021F6E4 /* Release */,
+				3A987AFB2480350E0021F6E4 /* Debug */,
+				3A987AFC2480350E0021F6E4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		3A987AC124802E200021F6E4 /* Build configuration list for PBXNativeTarget "VirtualMenu" */ = {
+		3A987AFD2480350E0021F6E4 /* Build configuration list for PBXNativeTarget "VirtualMenu" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				3A987AC224802E200021F6E4 /* Debug */,
-				3A987AC324802E200021F6E4 /* Release */,
+				3A987AFE2480350E0021F6E4 /* Debug */,
+				3A987AFF2480350E0021F6E4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		3A987AC424802E200021F6E4 /* Build configuration list for PBXNativeTarget "VirtualMenuTests" */ = {
+		3A987B002480350E0021F6E4 /* Build configuration list for PBXNativeTarget "VirtualMenuTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				3A987AC524802E200021F6E4 /* Debug */,
-				3A987AC624802E200021F6E4 /* Release */,
+				3A987B012480350E0021F6E4 /* Debug */,
+				3A987B022480350E0021F6E4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		3A987AC724802E200021F6E4 /* Build configuration list for PBXNativeTarget "VirtualMenuUITests" */ = {
+		3A987B032480350E0021F6E4 /* Build configuration list for PBXNativeTarget "VirtualMenuUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				3A987AC824802E200021F6E4 /* Debug */,
-				3A987AC924802E200021F6E4 /* Release */,
+				3A987B042480350E0021F6E4 /* Debug */,
+				3A987B052480350E0021F6E4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = 3A987A8F24802E1F0021F6E4 /* Project object */;
+	rootObject = 3A987ACB2480350C0021F6E4 /* Project object */;
 }
