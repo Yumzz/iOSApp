@@ -22,18 +22,15 @@ struct StartViewController: View {
                     }
                 
                     VStack(spacing: 30){
-                        //buttons
-                        NavigationLink(destination: SignInView()){
-                            CustomButton(action: {print("Digital tapped!") })
-                            {
-                                Text("Digital Menu")
-                            }
+                        CustomButton(action: {print("Digital tapped!") })
+                        {
+                            Text("Digital Menu")
                         }
                     
                         CustomButton(action: {print("Scan tapped!") })
                         {
                             Text("Scan Menu")
-                        }
+                        }.sheet(isPresented: self.$isShowingScannerSheet) { SignInView() }
                     
                     }
                 
@@ -43,4 +40,21 @@ struct StartViewController: View {
         
     }
     
+    @State private var isShowingScannerSheet = false
+    @State private var text: String = ""
+     
+    private func openCamera() {
+        isShowingScannerSheet = true
+    }
+     
+//    private func makeScannerView() -> SignInView {
+//
+//        ScannerViewController(completion: { textPerPage in
+//            if let text = textPerPage?.joined(separator: "\n").trimmingCharacters(in: .whitespacesAndNewlines) {
+//                self.text = text
+//            }
+//            self.isShowingScannerSheet = false
+//        })
+//    }
+//    }
 }

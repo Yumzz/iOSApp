@@ -21,15 +21,12 @@ struct SignInView: View {
 
     var body: some View {
         NavigationView{
-            
             VStack{
-        
                 VStack {
                     Logo()
                     Spacer()
                 }
                 VStack {
-                    
                     //sign in button
                     SignInWithAppleButton()
                         .frame(width: 280, height: 60)
@@ -38,11 +35,7 @@ struct SignInView: View {
                             self.showAppleLogin()
                     }
                     Spacer()
-                        
                 }
-                
-                
-            
             }
         }.alert(isPresented: $isAlertPresented){
             Alert(title: Text("Error"), message: Text(errDescription), dismissButton:
@@ -50,9 +43,6 @@ struct SignInView: View {
                     self.signInWithAppleManager.isUserAuthenticated = .signedOut
                 }))
         }
-            
-
-        
     }
     
     private func showAppleLogin(){
