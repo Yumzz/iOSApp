@@ -20,12 +20,11 @@ struct SignInView: View {
     @State private var errDescription = ""
 
     var body: some View {
-        
-        ZStack {
+        NavigationView{
+            
             VStack{
         
                 VStack {
-                    Spacer()
                     Logo()
                     Spacer()
                 }
@@ -51,6 +50,8 @@ struct SignInView: View {
                     self.signInWithAppleManager.isUserAuthenticated = .signedOut
                 }))
         }
+            
+
         
     }
     

@@ -13,6 +13,12 @@
 		3A3136CE248159B600E46292 /* AuthState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3136C9248159B600E46292 /* AuthState.swift */; };
 		3A3136CF248159B600E46292 /* EnvironmentWindowKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3136CA248159B600E46292 /* EnvironmentWindowKey.swift */; };
 		3A3136D1248168C800E46292 /* LaunchScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3136D0248168C800E46292 /* LaunchScreen.swift */; };
+		3A3137252483178A00E46292 /* Dish.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A31371F2483178900E46292 /* Dish.swift */; };
+		3A3137262483178A00E46292 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3137202483178900E46292 /* Model.swift */; };
+		3A3137282483178A00E46292 /* Restaurant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3137222483178A00E46292 /* Restaurant.swift */; };
+		3A3137292483178A00E46292 /* Review.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3137232483178A00E46292 /* Review.swift */; };
+		3A31372A2483178A00E46292 /* ARMUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3137242483178A00E46292 /* ARMUser.swift */; };
+		3A3137332483293300E46292 /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3137322483293300E46292 /* StartViewController.swift */; };
 		3A987AD72480350C0021F6E4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A987AD62480350C0021F6E4 /* AppDelegate.swift */; };
 		3A987AD92480350C0021F6E4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A987AD82480350C0021F6E4 /* SceneDelegate.swift */; };
 		3A987ADD2480350E0021F6E4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3A987ADC2480350E0021F6E4 /* Assets.xcassets */; };
@@ -48,6 +54,12 @@
 		3A3136C9248159B600E46292 /* AuthState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthState.swift; sourceTree = "<group>"; };
 		3A3136CA248159B600E46292 /* EnvironmentWindowKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnvironmentWindowKey.swift; sourceTree = "<group>"; };
 		3A3136D0248168C800E46292 /* LaunchScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreen.swift; sourceTree = "<group>"; };
+		3A31371F2483178900E46292 /* Dish.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dish.swift; sourceTree = "<group>"; };
+		3A3137202483178900E46292 /* Model.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		3A3137222483178A00E46292 /* Restaurant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Restaurant.swift; sourceTree = "<group>"; };
+		3A3137232483178A00E46292 /* Review.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Review.swift; sourceTree = "<group>"; };
+		3A3137242483178A00E46292 /* ARMUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ARMUser.swift; sourceTree = "<group>"; };
+		3A3137322483293300E46292 /* StartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartViewController.swift; sourceTree = "<group>"; };
 		3A987AD32480350C0021F6E4 /* VirtualMenu.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VirtualMenu.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A987AD62480350C0021F6E4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3A987AD82480350C0021F6E4 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -103,6 +115,25 @@
 			path = SignInWithAppleHelpers;
 			sourceTree = "<group>";
 		};
+		3A31371C2483172700E46292 /* Scanner */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Scanner;
+			sourceTree = "<group>";
+		};
+		3A31372B2483179800E46292 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				3A3137242483178A00E46292 /* ARMUser.swift */,
+				3A31371F2483178900E46292 /* Dish.swift */,
+				3A3137202483178900E46292 /* Model.swift */,
+				3A3137222483178A00E46292 /* Restaurant.swift */,
+				3A3137232483178A00E46292 /* Review.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		3A987ACA2480350C0021F6E4 = {
 			isa = PBXGroup;
 			children = (
@@ -126,8 +157,11 @@
 		3A987AD52480350C0021F6E4 /* VirtualMenu */ = {
 			isa = PBXGroup;
 			children = (
+				3A31372B2483179800E46292 /* Model */,
+				3A31371C2483172700E46292 /* Scanner */,
 				3A3136C52481598700E46292 /* SignInWithAppleHelpers */,
 				3A987B0E248086D30021F6E4 /* VirtualMenu.entitlements */,
+				3A3137322483293300E46292 /* StartViewController.swift */,
 				3A987AD62480350C0021F6E4 /* AppDelegate.swift */,
 				3A987AD82480350C0021F6E4 /* SceneDelegate.swift */,
 				3A987B0F2481511B0021F6E4 /* ContentView.swift */,
@@ -299,13 +333,19 @@
 			buildActionMask = 2147483647;
 			files = (
 				3A3136CB248159B600E46292 /* SignInWithAppleButton.swift in Sources */,
+				3A3137332483293300E46292 /* StartViewController.swift in Sources */,
 				3A987B102481511B0021F6E4 /* ContentView.swift in Sources */,
 				3A3136D1248168C800E46292 /* LaunchScreen.swift in Sources */,
 				3A987AD72480350C0021F6E4 /* AppDelegate.swift in Sources */,
 				3A3136CD248159B600E46292 /* SignInWithAppleManager.swift in Sources */,
+				3A3137292483178A00E46292 /* Review.swift in Sources */,
 				3A987AD92480350C0021F6E4 /* SceneDelegate.swift in Sources */,
+				3A31372A2483178A00E46292 /* ARMUser.swift in Sources */,
+				3A3137262483178A00E46292 /* Model.swift in Sources */,
 				3A3136CE248159B600E46292 /* AuthState.swift in Sources */,
 				3A987B0B24807E2B0021F6E4 /* SignInView.swift in Sources */,
+				3A3137282483178A00E46292 /* Restaurant.swift in Sources */,
+				3A3137252483178A00E46292 /* Dish.swift in Sources */,
 				3A3136CC248159B600E46292 /* SignInWithAppleDelegates.swift in Sources */,
 				3A3136CF248159B600E46292 /* EnvironmentWindowKey.swift in Sources */,
 			);
