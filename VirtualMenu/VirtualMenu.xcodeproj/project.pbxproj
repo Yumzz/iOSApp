@@ -23,6 +23,8 @@
 		3A31373A2483A25D00E46292 /* ScannerPreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3137362483A25D00E46292 /* ScannerPreViewController.swift */; };
 		3A31373D2483A2A400E46292 /* DatabaseRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A31373C2483A2A400E46292 /* DatabaseRequest.swift */; };
 		3A31377F2483ADD400E46292 /* ScannerFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A31377E2483ADD400E46292 /* ScannerFunctions.swift */; };
+		3A7E59C82489A98100288AB0 /* ScannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A7E59C72489A98100288AB0 /* ScannerViewController.swift */; };
+		3A7E59CD248A0FCA00288AB0 /* Scanner.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3A7E59CB248A0FCA00288AB0 /* Scanner.storyboard */; };
 		3A987AD72480350C0021F6E4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A987AD62480350C0021F6E4 /* AppDelegate.swift */; };
 		3A987AD92480350C0021F6E4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A987AD82480350C0021F6E4 /* SceneDelegate.swift */; };
 		3A987ADD2480350E0021F6E4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3A987ADC2480350E0021F6E4 /* Assets.xcassets */; };
@@ -68,6 +70,8 @@
 		3A3137362483A25D00E46292 /* ScannerPreViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScannerPreViewController.swift; sourceTree = "<group>"; };
 		3A31373C2483A2A400E46292 /* DatabaseRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatabaseRequest.swift; sourceTree = "<group>"; };
 		3A31377E2483ADD400E46292 /* ScannerFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ScannerFunctions.swift; path = "../../../../../ARMenu+ PlumTree Version/ARMenu/ARMenu/ScannerFunctions.swift"; sourceTree = "<group>"; };
+		3A7E59C72489A98100288AB0 /* ScannerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerViewController.swift; sourceTree = "<group>"; };
+		3A7E59CC248A0FCA00288AB0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = "../../../../../../Downloads/ReadingPhoneNumbersInRealTime (2)/RealtimeNumberReader/Base.lproj/Scanner.storyboard"; sourceTree = "<group>"; };
 		3A987AD32480350C0021F6E4 /* VirtualMenu.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VirtualMenu.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A987AD62480350C0021F6E4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3A987AD82480350C0021F6E4 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -127,6 +131,8 @@
 			isa = PBXGroup;
 			children = (
 				3A31377E2483ADD400E46292 /* ScannerFunctions.swift */,
+				3A7E59C72489A98100288AB0 /* ScannerViewController.swift */,
+				3A7E59CB248A0FCA00288AB0 /* Scanner.storyboard */,
 				3A3137362483A25D00E46292 /* ScannerPreViewController.swift */,
 				3A3137352483A25D00E46292 /* StringScanUtils.swift */,
 			);
@@ -320,6 +326,7 @@
 				3A987AE32480350E0021F6E4 /* LaunchScreen.storyboard in Resources */,
 				3A987AE02480350E0021F6E4 /* Preview Assets.xcassets in Resources */,
 				3A987ADD2480350E0021F6E4 /* Assets.xcassets in Resources */,
+				3A7E59CD248A0FCA00288AB0 /* Scanner.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -351,6 +358,7 @@
 				3A3136D1248168C800E46292 /* LaunchScreen.swift in Sources */,
 				3A987AD72480350C0021F6E4 /* AppDelegate.swift in Sources */,
 				3A3136CD248159B600E46292 /* SignInWithAppleManager.swift in Sources */,
+				3A7E59C82489A98100288AB0 /* ScannerViewController.swift in Sources */,
 				3A3137292483178A00E46292 /* Review.swift in Sources */,
 				3A31377F2483ADD400E46292 /* ScannerFunctions.swift in Sources */,
 				3A987AD92480350C0021F6E4 /* SceneDelegate.swift in Sources */,
@@ -399,6 +407,14 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		3A7E59CB248A0FCA00288AB0 /* Scanner.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3A7E59CC248A0FCA00288AB0 /* Base */,
+			);
+			name = Scanner.storyboard;
+			sourceTree = "<group>";
+		};
 		3A987AE12480350E0021F6E4 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (

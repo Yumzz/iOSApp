@@ -1,9 +1,9 @@
 //
 //  ScannerViewController.swift
-//  ARMenu
+//  VirtualMenu
 //
-//  Created by Rohan Tyagi on 3/9/20.
-//  Copyright © 2020 CS5150-ARMenu. All rights reserved.
+//  Created by Rohan Tyagi on 6/4/20.
+//  Copyright © 2020 Rohan Tyagi. All rights reserved.
 //
 
 import Foundation
@@ -11,108 +11,84 @@ import UIKit
 import AVFoundation
 import Vision
 import CloudKit
+import SwiftUI
 
 @available(iOS 13.0, *)
+
+let db = DatabaseRequest()
+var restaurant : Restaurant? = nil
+var dishes : [Dish] = []
+
 class ScannerViewController: ScannerFunctions {
-    var request: VNRecognizeTextRequest!
-    // Temporal string tracker
-    var promptLabel: UILabel!
+    var request: VNRecognizeTextRequest = VNRecognizeTextRequest()
     let numberTracker = StringTracker()
-    var dishName: String?
+    var dishName: String = ""
+    var isClicked: Bool = false
+    var foundDish: Bool = false
+
     
     override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        // Set up vision request before letting ViewController set up the camera
-        // so that it exists when the first buffer is received.
-        promptLabel.layer.cornerRadius = 8
-        promptLabel.layer.masksToBounds = true
-        promptLabel.textAlignment = .center
-        request = VNRecognizeTextRequest(completionHandler: recognizeTextHandler)
-        self.navigationController?.isNavigationBarHidden = false
-        print("Scanner Done")
-    }
+           super.viewDidLoad()
+           
+           // Set up vision request before letting ViewController set up the camera
+           // so that it exists when the first buffer is received.
+           request = VNRecognizeTextRequest(completionHandler: recognizeTextHandler)
+           self.navigationController?.isNavigationBarHidden = false
+           print("Scanner Done")
+       }
     
-    override func viewWillAppear(_ animated: Bool) {
-        if dishes.isEmpty {
-            customActivityIndicator(self.view)
-            DispatchQueue.main.async {
-                restaurant = db.fetchRestaurantWithID(id: "96D93F3C-F03A-2157-B4B7-C6DBFCCC37D0")
-                dishes = db.fetchRestaurantDishes(res: restaurant!)
-                removeActivityIndicator(self.view)
-            }
-        }
-    }
+//    init(dishName: Binding<String>, isClicked: Binding<Bool>, foundDish: Binding<Bool>)  {
+//        _isClicked = isClicked
+//        _dishName = dishName
+//        _foundDish = foundDish
+//        super.init(nibName: nil, bundle: nil)
+//    }
+//
+//    required init?(coder aDecoder: NSCoder) {
+//        fatalError("init(coder:) has not been implemented")
+//    }
     
-    // MARK: - Text recognition
-    
-    // Vision recognition handler.
-    func recognizeTextHandler(request: VNRequest, error: Error?) {
-        var letters = [String]()
-        var redBoxes = [CGRect]() // Shows all recognized text lines
-//        var greenBoxes = [CGRect]() // Shows words that might be serials
-        
-        guard let results = request.results as? [VNRecognizedTextObservation] else {
-            return
-        }
-        
-        let maximumCandidates = 1
-        
-        for visionResult in results {
-            guard let candidate = visionResult.topCandidates(maximumCandidates).first else { continue }
+     func recognizeTextHandler(request: VNRequest, error: Error?) {
+            var letters = [String]()
+            var redBoxes = [CGRect]() // Shows all recognized text lines
+    //        var greenBoxes = [CGRect]() // Shows words that might be serials
             
-            // Draw red boxes around any detected text, and green boxes around
-            // any detected phone numbers. The phone number may be a substring
-            // of the visionResult. If a substring, draw a green box around the
-            // number and a red box around the full string. If the number covers
-            // the full result only draw the green box.
+            guard let results = request.results as? [VNRecognizedTextObservation] else {
+                return
+            }
             
-            var name = ""
-            if let menuDish = candidate.string.extractMenuDish(menuItems: dishes){
-                name = menuDish.name
-                letters.append(name)
+            let maximumCandidates = 1
+            
+            for visionResult in results {
+                guard let candidate = visionResult.topCandidates(maximumCandidates).first else { continue }
+                
+                // Draw red boxes around any detected text, and green boxes around
+                // any detected phone numbers. The phone number may be a substring
+                // of the visionResult. If a substring, draw a green box around the
+                // number and a red box around the full string. If the number covers
+                // the full result only draw the green box.
+                
+                var name = ""
+                if let menuDish = candidate.string.extractMenuDish(menuItems: dishes){
+                    name = menuDish.name
+                    letters.append(name)
+                }
+                redBoxes.append(visionResult.boundingBox)
             }
-            redBoxes.append(visionResult.boundingBox)
-        }
-        
-        // Log any found numbers.
-        numberTracker.logFrame(strings: letters)
-        show(boxGroups: [(color: UIColor.red.cgColor, boxes: redBoxes)])
-        
-        // Check if we have any temporally stable numbers.
-        if let sureDishName = numberTracker.getStableString() {
-//            showString(string: sureNumber)
-            dishName = sureDishName
-            stopSession()
-            //this needs to trigger the prepare function
-            self.performSwitch()
-        }
-    }
-    
-    func performSwitch(){
-        DispatchQueue.global(qos: .background).async {
-            DispatchQueue.main.async {
-                print("perform")
-                self.performSegue(withIdentifier: "ARView", sender: self)
-                print("perform end")
+            
+            // Log any found numbers.
+            numberTracker.logFrame(strings: letters)
+            show(boxGroups: [(color: UIColor.red.cgColor, boxes: redBoxes)])
+            
+            // Check if we have any temporally stable numbers.
+            if let sureDishName = numberTracker.getStableString() {
+//                showString(string: sureNumber)
+                dishName = sureDishName
+                //triggers segue
+                self.foundDish.toggle()
+                stopSession()
             }
         }
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if(segue.identifier == "ARView"){
-            let dish = (dishes.filter{$0.name == dishName})[0]
-            print("prepare")
-            guard let detailViewController = segue.destination as? ItemDetailsViewController
-                else {
-                    return
-            }
-            detailViewController.dish = dish
-            print(dish.name)
-            print("prepare end")
-        }
-    }
-    
     override func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
         if let pixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer) {
             // Configure for running in real-time.
@@ -170,4 +146,55 @@ class ScannerViewController: ScannerFunctions {
             }
         }
     }
+}
+
+
+
+struct ScanView: View {
+    var body: some View {
+        VStack{
+            ScanView2ControllerRepresentable()
+//            .overlay(
+//                VStack{
+//                    Button(action: ScanView2ControllerRepresentable())
+//
+//                }
+//            )
+        }
+        
+    }
+
+
+}
+
+
+//struct ScannerViewControllerRepresentable: UIViewControllerRepresentable {
+//
+//        @Binding var isClicked: Bool
+//        @Binding var dishName: String
+//        @Binding var foundDish: Bool
+//
+//    func makeUIViewController(context: UIViewControllerRepresentableContext<ScannerViewControllerRepresentable>) -> ScannerViewController {
+//        return ScannerViewController(dishName: $dishName, isClicked: $isClicked, foundDish: $foundDish)
+//    }
+//
+//    func updateUIViewController(_ uiViewController: ScannerViewController, context: UIViewControllerRepresentableContext<ScannerViewControllerRepresentable>) {
+//        return
+//    }
+//}
+
+
+struct ScanView2ControllerRepresentable: UIViewControllerRepresentable {
+    
+    
+    func makeUIViewController(context: UIViewControllerRepresentableContext<ScanView2ControllerRepresentable>) -> UIViewController {
+        
+        let storyboard = UIStoryboard(name: "Scanner", bundle: Bundle.main)
+        return storyboard.instantiateViewController(withIdentifier: "Scan")
+    }
+
+    func updateUIViewController(_ uiViewController: UIViewController, context: UIViewControllerRepresentableContext<ScanView2ControllerRepresentable>) {
+        return
+    }
+    
 }

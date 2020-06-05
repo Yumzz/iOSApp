@@ -12,8 +12,13 @@ import SwiftUI
 
 struct StartViewController: View {
     
+    
+    @State private var isShowingScannerSheet = false
+    @State private var text: String = ""
+     
+    
+    
     var body: some View {
-        
         NavigationView{
                 VStack{
                     VStack{
@@ -27,24 +32,17 @@ struct StartViewController: View {
                             Text("Digital Menu")
                         }
                     
-                        CustomButton(action: {print("Scan tapped!") })
+                        CustomButton(action: {self.isShowingScannerSheet.toggle() })
                         {
                             Text("Scan Menu")
-                        }.sheet(isPresented: self.$isShowingScannerSheet) { SignInView() }
+                        }.sheet(isPresented: self.$isShowingScannerSheet) { ScanView() }
                     
                     }
-                
+                  
                 }
             
         }
         
-    }
-    
-    @State private var isShowingScannerSheet = false
-    @State private var text: String = ""
-     
-    private func openCamera() {
-        isShowingScannerSheet = true
     }
      
 //    private func makeScannerView() -> SignInView {
