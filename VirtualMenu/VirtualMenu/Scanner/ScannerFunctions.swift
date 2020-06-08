@@ -10,14 +10,12 @@ import SwiftUI
 import AVFoundation
 import Vision
 
-class ScannerFunctions: View {
+class ScannerFunctions: UIViewController {
     // MARK: - UI objects
     var resetScanner: UIButton!
-    var previewView: ScannerPreViewController!
-    var cutoutView: UIView!
-    var numberView: UILabel!
-    
-    
+    @IBOutlet weak var previewView: ScannerPreViewController!
+    @IBOutlet weak public var cutoutView: UIView!
+    @IBOutlet weak var numberView: UILabel!
     var reset = 0
     var maskLayer = CAShapeLayer()
     // Device orientation. Updated whenever the orientation changes to a
@@ -54,8 +52,16 @@ class ScannerFunctions: View {
     
     // MARK: - View controller methods
     
-    var body: some View {
+    override func viewDidLoad() {
+        // Set up preview view.
+
+//        previewView = ScannerPreViewController()
+        
+//        print(previewView.session?.accessibilityHint)
+
         previewView.session = captureSession
+//        cutoutView = UIView()
+//        numberView = UILabel()
         
         // Set up cutout view.
         cutoutView.backgroundColor = UIColor.gray.withAlphaComponent(0.5)
@@ -74,37 +80,34 @@ class ScannerFunctions: View {
                 self.calculateRegionOfInterest()
             }
         }
-        
-        
-        
+        print("Functions complete")
     }
     
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+
+        // Only change the current orientation if the new one is landscape or
+        // portrait. You can't really do anything about flat or unknown.
+        let deviceOrientation = UIDevice.current.orientation
+        if deviceOrientation.isPortrait || deviceOrientation.isLandscape {
+            currentOrientation = deviceOrientation
+        }
+        
+        // Handle device orientation in the preview layer.
+        if let videoPreviewLayerConnection = previewView.videoPreviewLayer.connection {
+            if let newVideoOrientation = AVCaptureVideoOrientation(deviceOrientation: deviceOrientation) {
+                videoPreviewLayerConnection.videoOrientation = newVideoOrientation
+            }
+        }
+        
+        // Orientation changed: figure out new region of interest (ROI).
+        calculateRegionOfInterest()
+    }
     
-//    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-//        super.viewWillTransition(to: size, with: coordinator)
-//
-//        // Only change the current orientation if the new one is landscape or
-//        // portrait. You can't really do anything about flat or unknown.
-//        let deviceOrientation = UIDevice.current.orientation
-//        if deviceOrientation.isPortrait || deviceOrientation.isLandscape {
-//            currentOrientation = deviceOrientation
-//        }
-//
-//        // Handle device orientation in the preview layer.
-//        if let videoPreviewLayerConnection = previewView.videoPreviewLayer.connection {
-//            if let newVideoOrientation = AVCaptureVideoOrientation(deviceOrientation: deviceOrientation) {
-//                videoPreviewLayerConnection.videoOrientation = newVideoOrientation
-//            }
-//        }
-//
-//        // Orientation changed: figure out new region of interest (ROI).
-//        calculateRegionOfInterest()
-//    }
-    
-//    override func viewDidLayoutSubviews() {
-//        super.viewDidLayoutSubviews()
-//        updateCutout()
-//    }
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        updateCutout()
+    }
     
     // MARK: - Setup
     
@@ -268,10 +271,10 @@ class ScannerFunctions: View {
     
 //    func showDish(string: String){
 //        var menuCards: MenuCardViewController?
-//
+//        
 //        let detailViewController = segue.destination as? ItemDetailsViewController
-//
-//
+//        
+//  
 //        detailViewController.menuitem = (menuCards?.menuitems.filter{$0.name == String(self)})
 //    }
     
@@ -291,6 +294,7 @@ class ScannerFunctions: View {
 // MARK: - AVCaptureVideoDataOutputSampleBufferDelegate
 
 extension ScannerFunctions: AVCaptureVideoDataOutputSampleBufferDelegate {
+    
     func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
         // This is implemented in ScannerViewController.
     }
