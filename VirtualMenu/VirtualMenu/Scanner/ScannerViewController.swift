@@ -12,6 +12,7 @@ import AVFoundation
 import Vision
 import CloudKit
 import SwiftUI
+import Instructions
 
 @available(iOS 13.0, *)
 
@@ -19,7 +20,8 @@ let db = DatabaseRequest()
 var restaurant : Restaurant? = nil
 var dishes : [Dish] = []
 
-class ScannerViewController: ScannerFunctions {
+class ScannerViewController: ScannerFunctions, CoachMarksControllerDataSource,
+CoachMarksControllerDelegate {
     var request: VNRecognizeTextRequest = VNRecognizeTextRequest()
     let numberTracker = StringTracker()
     var dishName: String = ""
@@ -27,15 +29,26 @@ class ScannerViewController: ScannerFunctions {
     var foundDish: Bool = false
 
     
+    let coachMarksController = CoachMarksController()
+
+    
     override func viewDidLoad() {
            super.viewDidLoad()
            
            // Set up vision request before letting ViewController set up the camera
            // so that it exists when the first buffer is received.
+           self.coachMarksController.dataSource = self
+
            request = VNRecognizeTextRequest(completionHandler: recognizeTextHandler)
            self.navigationController?.isNavigationBarHidden = false
            print("Scanner Done")
        }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        
+        self.coachMarksController.start(in: .window(over: self))
+        
+    }
     
 //    init(dishName: Binding<String>, isClicked: Binding<Bool>, foundDish: Binding<Bool>)  {
 //        _isClicked = isClicked
@@ -47,6 +60,39 @@ class ScannerViewController: ScannerFunctions {
 //    required init?(coder aDecoder: NSCoder) {
 //        fatalError("init(coder:) has not been implemented")
 //    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+
+        self.coachMarksController.stop(immediately: true)
+    }
+    
+    
+    func numberOfCoachMarks(for coachMarksController: CoachMarksController) -> Int {
+        return 1
+    }
+
+    func coachMarksController(_ coachMarksController: CoachMarksController,
+                              coachMarkAt index: Int) -> CoachMark {
+        return coachMarksController.helper.makeCoachMark(for: numberView)
+    }
+    
+    func coachMarksController(
+        _ coachMarksController: CoachMarksController,
+        coachMarkViewsAt index: Int,
+        madeFrom coachMark: CoachMark
+    ) -> (bodyView: UIView & CoachMarkBodyView, arrowView: (UIView & CoachMarkArrowView)?) {
+        let coachViews = coachMarksController.helper.makeDefaultCoachViews(
+            withArrow: true,
+            arrowOrientation: .bottom
+        )
+        
+//       coachViews.bodyView.frame = CGRect(x: self.view.center.x, y: self.view.center.y + 500, width: 300, height: 80)
+        coachViews.bodyView.hintLabel.text = "Scan the name of the food item you would like to see!"
+        
+        return (bodyView: coachViews.bodyView, arrowView: coachViews.arrowView)
+    }
+    
     
      func recognizeTextHandler(request: VNRequest, error: Error?) {
             var letters = [String]()

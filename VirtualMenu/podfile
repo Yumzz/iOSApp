@@ -1,0 +1,4 @@
+use_frameworks!
+target 'VirtualMenu' do
+    pod 'Instructions'
+end

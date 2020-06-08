@@ -1,0 +1,6 @@
+framework module Pods_VirtualMenu {
+  umbrella header "Pods-VirtualMenu-umbrella.h"
+
+  export *
+  module * { export * }
+}
