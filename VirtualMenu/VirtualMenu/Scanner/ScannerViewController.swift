@@ -25,7 +25,6 @@ CoachMarksControllerDelegate {
     var request: VNRecognizeTextRequest = VNRecognizeTextRequest()
     let numberTracker = StringTracker()
     var dishName: String = ""
-    var isClicked: Bool = false
     var foundDish: Bool = false
 
     
@@ -45,7 +44,7 @@ CoachMarksControllerDelegate {
        }
     
     override func viewDidAppear(_ animated: Bool) {
-        
+        //should only appear on first scanner so pressing new scanner makes it not happen
         self.coachMarksController.start(in: .window(over: self))
         
     }
@@ -74,7 +73,8 @@ CoachMarksControllerDelegate {
 
     func coachMarksController(_ coachMarksController: CoachMarksController,
                               coachMarkAt index: Int) -> CoachMark {
-        return coachMarksController.helper.makeCoachMark(for: numberView)
+        let x = numberView
+        return coachMarksController.helper.makeCoachMark(for: x)
     }
     
     func coachMarksController(
@@ -197,15 +197,24 @@ CoachMarksControllerDelegate {
 
 
 struct ScanView: View {
+    
+    @State private var isClicked: Bool = false
+
     var body: some View {
         VStack{
             ScanView2ControllerRepresentable()
-//            .overlay(
-//                VStack{
-//                    Button(action: ScanView2ControllerRepresentable())
-//
-//                }
-//            )
+            .overlay(
+                VStack{
+                    Spacer()
+                    HStack (alignment: .bottom) {
+
+                    CustomButton(action: {self.isClicked.toggle() })
+                    {
+                        Text("New Scanner")
+                    }.sheet(isPresented: self.$isClicked) { ScanView() }
+                    }
+                }
+            )
         }
         
     }
