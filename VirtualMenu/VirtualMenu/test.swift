@@ -5,19 +5,16 @@
 //  Created by EageRAssassin on 3/6/20.
 //  Copyright © 2020 ARMenu. All rights reserved.
 //
-
 import Foundation
 import CloudKit
 
 class DatabaseRequest {
     
-    //need to change with new database
-    
     let container: CKContainer
     let db: CKDatabase
     
     init() {
-        container = CKContainer(identifier: "iCloud.com.ARMenu.MenuDatabase")
+        container = CKContainer.default()
         db = container.publicCloudDatabase
     }
     

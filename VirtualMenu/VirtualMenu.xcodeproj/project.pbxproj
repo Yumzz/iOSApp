@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -35,6 +35,8 @@
 		3A9F981E248DD3F0007ABB71 /* ScannerFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A9F981D248DD3EF007ABB71 /* ScannerFunctions.swift */; };
 		3A9F9823248DD790007ABB71 /* Scanner.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3A9F9822248DD790007ABB71 /* Scanner.storyboard */; };
 		5AE04E935A74D796296998C2 /* Pods_VirtualMenu.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0071C2719F2506A39923A160 /* Pods_VirtualMenu.framework */; };
+		A731EB0E2495AD2300B75D05 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A731EB0D2495AD2300B75D05 /* CloudKit.framework */; };
+		A73FD46324919A1300A035AB /* ListDishesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A73FD46224919A1300A035AB /* ListDishesView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -92,6 +94,8 @@
 		3A9F981D248DD3EF007ABB71 /* ScannerFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScannerFunctions.swift; sourceTree = "<group>"; };
 		3A9F9822248DD790007ABB71 /* Scanner.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Scanner.storyboard; sourceTree = "<group>"; };
 		6E323FD7CC7F0EC1739CC297 /* Pods-VirtualMenu.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VirtualMenu.release.xcconfig"; path = "Target Support Files/Pods-VirtualMenu/Pods-VirtualMenu.release.xcconfig"; sourceTree = "<group>"; };
+		A731EB0D2495AD2300B75D05 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
+		A73FD46224919A1300A035AB /* ListDishesView.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = ListDishesView.swift; sourceTree = "<group>"; tabWidth = 4; usesTabs = 0; wrapsLines = 1; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,6 +104,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5AE04E935A74D796296998C2 /* Pods_VirtualMenu.framework in Frameworks */,
+				A731EB0E2495AD2300B75D05 /* CloudKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -187,6 +192,7 @@
 				3A3136C52481598700E46292 /* SignInWithAppleHelpers */,
 				3A987B0E248086D30021F6E4 /* VirtualMenu.entitlements */,
 				3A3137322483293300E46292 /* StartViewController.swift */,
+				A73FD46224919A1300A035AB /* ListDishesView.swift */,
 				3A987AD62480350C0021F6E4 /* AppDelegate.swift */,
 				3A987AD82480350C0021F6E4 /* SceneDelegate.swift */,
 				3A987B0F2481511B0021F6E4 /* ContentView.swift */,
@@ -229,6 +235,7 @@
 		72573513B3F6B92305A269F4 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A731EB0D2495AD2300B75D05 /* CloudKit.framework */,
 				0071C2719F2506A39923A160 /* Pods_VirtualMenu.framework */,
 			);
 			name = Frameworks;
@@ -240,7 +247,6 @@
 				294A7360B8AB4A015588F3F8 /* Pods-VirtualMenu.debug.xcconfig */,
 				6E323FD7CC7F0EC1739CC297 /* Pods-VirtualMenu.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -430,6 +436,7 @@
 				3A7E59C82489A98100288AB0 /* ScannerViewController.swift in Sources */,
 				3A3137292483178A00E46292 /* Review.swift in Sources */,
 				3A9F981E248DD3F0007ABB71 /* ScannerFunctions.swift in Sources */,
+				A73FD46324919A1300A035AB /* ListDishesView.swift in Sources */,
 				3A987AD92480350C0021F6E4 /* SceneDelegate.swift in Sources */,
 				3A31372A2483178A00E46292 /* ARMUser.swift in Sources */,
 				3A3137262483178A00E46292 /* Model.swift in Sources */,
