@@ -1,0 +1,83 @@
+Skip to content
+ Enterprise
+Search or jump to…
+
+Pull requests
+Issues
+Explore
+ 
+@hb388 
+Please read the Github Guide for Cornell Users.
+
+Learn Git and GitHub without any code!
+Using the Hello World guide, you’ll start a branch, write comments, and open a pull request.
+
+
+rt389
+/
+ARMenu
+Private
+1
+40
+ Code Issues 9 Pull requests 0 Projects 1 Wiki Insights
+ARMenu/.gitignore
+ williambaibai Initial commit
+41c9451 on Feb 10
+48 lines (41 sloc)  937 Bytes
+  
+# SwiftLintXcode - see: https://github.com/ypresto/SwiftLintXcode
+SwiftLintXcode/
+
+# Auto-gen build files
+node_modules/
+Uplift/API.swift
+Uplift/GoogleService-Info.plist
+schema.json
+# Secrets
+Secrets/
+
+# OS X
+.DS_Store
+
+# Xcode
+build/
+*.pbxuser
+!default.pbxuser
+*.mode1v3
+!default.mode1v3
+*.mode2v3
+!default.mode2v3
+*.perspectivev3
+!default.perspectivev3
+xcuserdata/
+*.xccheckout
+profile
+*.moved-aside
+DerivedData
+*.hmap
+*.ipa
+
+# Bundler
+.bundle
+
+# Add this line if you want to avoid checking in source code from Carthage dependencies.
+# Carthage/Checkouts
+
+# Carthage/Build
+
+# We recommend against adding the Pods directory to your .gitignore. However
+# you should judge for yourself, the pros and cons are mentioned at:
+# http://guides.cocoapods.org/using/using-cocoapods.html#should-i-ignore-the-pods-directory-in-source-control
+# 
+# Note: if you ignore the Pods directory, make sure to uncomment
+# `pod install` in .travis.yml
+#
+VirtualMenu/Pods/
+© 2020 GitHub, Inc.
+Help
+Support
+API
+Training
+Blog
+About
+GitHub Enterprise Server 2.20.4
