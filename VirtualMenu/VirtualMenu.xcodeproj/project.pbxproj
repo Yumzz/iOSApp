@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		34A5D663249BF6DF00E4FE9C /* DishDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34A5D662249BF6DF00E4FE9C /* DishDetailsView.swift */; };
 		3A3136CB248159B600E46292 /* SignInWithAppleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3136C6248159B500E46292 /* SignInWithAppleButton.swift */; };
 		3A3136CC248159B600E46292 /* SignInWithAppleDelegates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3136C7248159B500E46292 /* SignInWithAppleDelegates.swift */; };
 		3A3136CD248159B600E46292 /* SignInWithAppleManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3136C8248159B500E46292 /* SignInWithAppleManager.swift */; };
@@ -59,6 +60,7 @@
 /* Begin PBXFileReference section */
 		0071C2719F2506A39923A160 /* Pods_VirtualMenu.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VirtualMenu.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		294A7360B8AB4A015588F3F8 /* Pods-VirtualMenu.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VirtualMenu.debug.xcconfig"; path = "Target Support Files/Pods-VirtualMenu/Pods-VirtualMenu.debug.xcconfig"; sourceTree = "<group>"; };
+		34A5D662249BF6DF00E4FE9C /* DishDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DishDetailsView.swift; sourceTree = "<group>"; };
 		3A3136C6248159B500E46292 /* SignInWithAppleButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInWithAppleButton.swift; sourceTree = "<group>"; };
 		3A3136C7248159B500E46292 /* SignInWithAppleDelegates.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInWithAppleDelegates.swift; sourceTree = "<group>"; };
 		3A3136C8248159B500E46292 /* SignInWithAppleManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInWithAppleManager.swift; sourceTree = "<group>"; };
@@ -193,6 +195,7 @@
 				3A987B0E248086D30021F6E4 /* VirtualMenu.entitlements */,
 				3A3137322483293300E46292 /* StartViewController.swift */,
 				A73FD46224919A1300A035AB /* ListDishesView.swift */,
+				34A5D662249BF6DF00E4FE9C /* DishDetailsView.swift */,
 				3A987AD62480350C0021F6E4 /* AppDelegate.swift */,
 				3A987AD82480350C0021F6E4 /* SceneDelegate.swift */,
 				3A987B0F2481511B0021F6E4 /* ContentView.swift */,
@@ -430,6 +433,7 @@
 				3A3137392483A25D00E46292 /* StringScanUtils.swift in Sources */,
 				3A3137332483293300E46292 /* StartViewController.swift in Sources */,
 				3A987B102481511B0021F6E4 /* ContentView.swift in Sources */,
+				34A5D663249BF6DF00E4FE9C /* DishDetailsView.swift in Sources */,
 				3A3136D1248168C800E46292 /* LaunchScreen.swift in Sources */,
 				3A987AD72480350C0021F6E4 /* AppDelegate.swift in Sources */,
 				3A3136CD248159B600E46292 /* SignInWithAppleManager.swift in Sources */,

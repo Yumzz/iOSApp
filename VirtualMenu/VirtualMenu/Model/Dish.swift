@@ -8,6 +8,7 @@
 
 import Foundation
 import CloudKit
+import UIKit
 
 class Dish: Identifiable {
     
@@ -52,5 +53,23 @@ extension Dish: Hashable {
     
     func hash(into hasher: inout Hasher) {
         hasher.combine(id)
+    }
+    
+    static func previewDish() -> Dish {
+        let dbb = DatabaseRequest()
+        let restaurant2 = dbb.fetchRestaurantWithID(id: "96D93F3C-F03A-2157-B4B7-C6DBFCCC37D0")
+        let fetchDishes = dbb.fetchRestaurantDishes(res: restaurant2)
+        return fetchDishes[0]
+    }
+    
+    static func getUIImageFromCKAsset(image: CKAsset?) -> UIImage? {
+        let file: CKAsset? = image
+        let data = NSData(contentsOf: (file?.fileURL!)!)
+        
+        return UIImage(data: data! as Data) ?? nil
+    }
+    
+    static func formatPrice(price: Double) -> String {
+        return "$" + (price.truncatingRemainder(dividingBy: 1) == 0 ? String(format: "%.2f", price) : String(price))
     }
 }

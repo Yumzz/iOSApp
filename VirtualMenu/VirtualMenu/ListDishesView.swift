@@ -71,14 +71,7 @@ struct ListDishesView: View {
                 ForEach(self.listDishesVM.dishes) {
                     dish in
                     NavigationLink(destination:
-                        VStack(alignment: .leading) {
-                            Image(uiImage: self.listDishesVM.getUIImageFromCKAsset(image: dish.coverPhoto)!)
-                            .resizable()
-                            .frame(width: 150, height: 150)
-                            .aspectRatio(contentMode: .fit)
-                            Text("Details for \(dish.name)")
-                        }
-                        
+                        DishDetailsView(dish: dish)
                     ) {
                         HStack {
                             Image(uiImage: self.listDishesVM.getUIImageFromCKAsset(image: dish.coverPhoto)!)
