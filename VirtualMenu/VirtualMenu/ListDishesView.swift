@@ -19,11 +19,6 @@ class ListDishesViewModel: ObservableObject {
     
     @Published var dishes = [Dish]()
     
-    @Published var courses : [Course] = [
-        .init(name: "Bla"),
-        .init(name: "Bla Bla")
-    ]
-    
     @Published var restaurant2 : Restaurant? = nil
     
     let dbb = DatabaseRequest()
@@ -101,13 +96,11 @@ struct ListDishesView: View {
                 }
             }
         }.navigationBarTitle("Dishes")
-            .navigationBarItems(trailing: Button(action: {
-                self.listDishesVM.fetchDishes()
-                print(self.listDishesVM.$dishes)
-            }, label: {
-                Text("Fetch Data")
-                
-            }))
+            .navigationBarItems(trailing:
+                NavigationLink(destination: AccountProfileView()){
+                Text("Edit Account Profile")
+                //make this into profile pic in corner
+            })
             .padding(.trailing)
             .onAppear { UITableView.appearance().separatorStyle = .none
                 if self.listDishesVM.dishes.isEmpty {

@@ -23,6 +23,10 @@
 		3A3137392483A25D00E46292 /* StringScanUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3137352483A25D00E46292 /* StringScanUtils.swift */; };
 		3A31373A2483A25D00E46292 /* ScannerPreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3137362483A25D00E46292 /* ScannerPreViewController.swift */; };
 		3A31373D2483A2A400E46292 /* DatabaseRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A31373C2483A2A400E46292 /* DatabaseRequest.swift */; };
+		3A4A0E70249EB9320030635E /* AccountProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A4A0E6F249EB9320030635E /* AccountProfileView.swift */; };
+		3A4A0E72249EB94D0030635E /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A4A0E71249EB94D0030635E /* ImagePicker.swift */; };
+		3A4A0E74249EB9780030635E /* KeychainItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A4A0E73249EB9780030635E /* KeychainItem.swift */; };
+		3A4A0E76249EB9AA0030635E /* UserStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A4A0E75249EB9AA0030635E /* UserStruct.swift */; };
 		3A7E59C82489A98100288AB0 /* ScannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A7E59C72489A98100288AB0 /* ScannerViewController.swift */; };
 		3A987AD72480350C0021F6E4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A987AD62480350C0021F6E4 /* AppDelegate.swift */; };
 		3A987AD92480350C0021F6E4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A987AD82480350C0021F6E4 /* SceneDelegate.swift */; };
@@ -76,6 +80,10 @@
 		3A3137352483A25D00E46292 /* StringScanUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringScanUtils.swift; sourceTree = "<group>"; };
 		3A3137362483A25D00E46292 /* ScannerPreViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScannerPreViewController.swift; sourceTree = "<group>"; };
 		3A31373C2483A2A400E46292 /* DatabaseRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatabaseRequest.swift; sourceTree = "<group>"; };
+		3A4A0E6F249EB9320030635E /* AccountProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountProfileView.swift; sourceTree = "<group>"; };
+		3A4A0E71249EB94D0030635E /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
+		3A4A0E73249EB9780030635E /* KeychainItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainItem.swift; sourceTree = "<group>"; };
+		3A4A0E75249EB9AA0030635E /* UserStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserStruct.swift; sourceTree = "<group>"; };
 		3A7E59C72489A98100288AB0 /* ScannerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerViewController.swift; sourceTree = "<group>"; };
 		3A987AD32480350C0021F6E4 /* VirtualMenu.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VirtualMenu.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A987AD62480350C0021F6E4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -135,6 +143,8 @@
 				3A3136C6248159B500E46292 /* SignInWithAppleButton.swift */,
 				3A3136C7248159B500E46292 /* SignInWithAppleDelegates.swift */,
 				3A3136C8248159B500E46292 /* SignInWithAppleManager.swift */,
+				3A4A0E73249EB9780030635E /* KeychainItem.swift */,
+				3A4A0E75249EB9AA0030635E /* UserStruct.swift */,
 			);
 			path = SignInWithAppleHelpers;
 			sourceTree = "<group>";
@@ -197,6 +207,8 @@
 				A73FD46224919A1300A035AB /* ListDishesView.swift */,
 				34A5D662249BF6DF00E4FE9C /* DishDetailsView.swift */,
 				3A987AD62480350C0021F6E4 /* AppDelegate.swift */,
+				3A4A0E6F249EB9320030635E /* AccountProfileView.swift */,
+				3A4A0E71249EB94D0030635E /* ImagePicker.swift */,
 				3A987AD82480350C0021F6E4 /* SceneDelegate.swift */,
 				3A987B0F2481511B0021F6E4 /* ContentView.swift */,
 				3A987B0A24807E2B0021F6E4 /* SignInView.swift */,
@@ -431,6 +443,8 @@
 			files = (
 				3A3136CB248159B600E46292 /* SignInWithAppleButton.swift in Sources */,
 				3A3137392483A25D00E46292 /* StringScanUtils.swift in Sources */,
+				3A4A0E74249EB9780030635E /* KeychainItem.swift in Sources */,
+				3A4A0E72249EB94D0030635E /* ImagePicker.swift in Sources */,
 				3A3137332483293300E46292 /* StartViewController.swift in Sources */,
 				3A987B102481511B0021F6E4 /* ContentView.swift in Sources */,
 				34A5D663249BF6DF00E4FE9C /* DishDetailsView.swift in Sources */,
@@ -439,6 +453,7 @@
 				3A3136CD248159B600E46292 /* SignInWithAppleManager.swift in Sources */,
 				3A7E59C82489A98100288AB0 /* ScannerViewController.swift in Sources */,
 				3A3137292483178A00E46292 /* Review.swift in Sources */,
+				3A4A0E76249EB9AA0030635E /* UserStruct.swift in Sources */,
 				3A9F981E248DD3F0007ABB71 /* ScannerFunctions.swift in Sources */,
 				A73FD46324919A1300A035AB /* ListDishesView.swift in Sources */,
 				3A987AD92480350C0021F6E4 /* SceneDelegate.swift in Sources */,
@@ -449,6 +464,7 @@
 				3A987B0B24807E2B0021F6E4 /* SignInView.swift in Sources */,
 				3A31373A2483A25D00E46292 /* ScannerPreViewController.swift in Sources */,
 				3A3137282483178A00E46292 /* Restaurant.swift in Sources */,
+				3A4A0E70249EB9320030635E /* AccountProfileView.swift in Sources */,
 				3A3137252483178A00E46292 /* Dish.swift in Sources */,
 				3A3136CC248159B600E46292 /* SignInWithAppleDelegates.swift in Sources */,
 				3A3136CF248159B600E46292 /* EnvironmentWindowKey.swift in Sources */,
@@ -627,7 +643,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = iOSAppDev.TheVirtualMenu;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ARMenu.MenuDatabase;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -649,7 +665,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = iOSAppDev.TheVirtualMenu;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ARMenu.MenuDatabase;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
