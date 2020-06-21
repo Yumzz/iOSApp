@@ -9,10 +9,11 @@
 import Foundation
 import CloudKit
 
-class Review {
-  
+class Review: Identifiable {
+    
+  let id = UUID()
   static let recordType = "Model"
-  private let id: CKRecord.ID
+  private let ckid: CKRecord.ID
   let headLine: String
   let description: String
   let time: NSDate
@@ -20,7 +21,7 @@ class Review {
   var restaurant: CKRecord.Reference? = nil
 
   init?(record: CKRecord, database: CKDatabase) {
-    id = record.recordID
+    ckid = record.recordID
     headLine = record["Headline"] as? String ?? ""
     description = record["Description"] as? String ?? ""
     time = record["Time"] as? NSDate ?? NSDate.init()

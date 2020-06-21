@@ -8,6 +8,7 @@
 
 import Foundation
 import CloudKit
+import UIKit
 
 class ARMUser {
   
@@ -35,11 +36,21 @@ class ARMUser {
 }
 
 extension ARMUser: Hashable {
-  static func == (lhs: ARMUser, rhs: ARMUser) -> Bool {
-    return lhs.id == rhs.id
-  }
-  
-  func hash(into hasher: inout Hasher) {
-    hasher.combine(id)
-  }
+    static func == (lhs: ARMUser, rhs: ARMUser) -> Bool {
+        return lhs.id == rhs.id
+    }
+
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+    }
+    
+    func getProfilePhoto() -> UIImage? {
+        if self.profilePhoto == nil {
+            return nil
+        } else {
+            let data = NSData(contentsOf: (self.profilePhoto?.fileURL!)!)
+            let img = UIImage(data: data! as Data)
+            return img
+        }
+    }
 }
