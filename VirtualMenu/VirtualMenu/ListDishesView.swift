@@ -71,8 +71,10 @@ struct ListDishesView: View {
                         HStack {
                             Image(uiImage: self.listDishesVM.getUIImageFromCKAsset(image: dish.coverPhoto)!)
                                 .resizable()
+                                .aspectRatio(contentMode: .fill)
+                                .layoutPriority(-1)
                                 .frame(width: 100, height: 100)
-                                .aspectRatio(contentMode: .fit)
+                                .clipped()
                             
                             VStack(alignment: .leading, spacing: 10) {
                                 Text(dish.name)
