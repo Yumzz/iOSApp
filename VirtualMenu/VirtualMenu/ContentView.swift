@@ -102,7 +102,8 @@ struct CustomButton <V: View> : View {
                 .padding()
                 .frame(minWidth: 0, maxWidth: .infinity)
                 .background(
-                    Image("ar").resizable().renderingMode(.original).frame(width: 150))
+                    Image("ar").resizable().renderingMode(.original))
+                    
         }
         
         
