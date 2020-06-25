@@ -35,39 +35,44 @@ struct DishDetailsView: View {
             Text(dish.description)
                 Text("Reviews")
                     .font(.title)
-            List {
-                ForEach(self.reviewsusers) {reviewuser in
-                    VStack {
-                        HStack {
-                            if (reviewuser.user.profilePhoto == nil) {
-                                Image(uiImage: UIImage(imageLiteralResourceName: "profile_photo_edit"))
-                                .resizable()
-                                .frame(width: 50, height: 50)
-                                .aspectRatio(contentMode: .fit)
-                            } else {
-                                Image(uiImage: reviewuser.user.getProfilePhoto()!)
+            if (self.reviewsusers.count == 0) {
+                Text("No reviews yet. Add yours!")
+                    .frame(width: 330, height: 320, alignment: .center).cornerRadius(10)
+            } else {
+                List {
+                    ForEach(self.reviewsusers) {reviewuser in
+                        VStack {
+                            HStack {
+                                if (reviewuser.user.profilePhoto == nil) {
+                                    Image(uiImage: UIImage(imageLiteralResourceName: "profile_photo_edit"))
                                     .resizable()
                                     .frame(width: 50, height: 50)
-                                    .clipShape(Circle())
                                     .aspectRatio(contentMode: .fit)
-                            }
-                            VStack(alignment: .leading) {
-                                Text(reviewuser.user.userName)
-                                Text(reviewuser.review.headLine)
-                                    .foregroundColor(.primary)
-                                    .font(.headline)
-                            }
-                        }.frame(width: 300, height: 50, alignment: .topLeading)
-                        Text(reviewuser.review.description)
-                            .frame(width:300, alignment:.topLeading)
-                            .font(.body)
-                    }.frame(
-                        width: 300,
-                        alignment: .topLeading
-                    )
-                        .cornerRadius(10)
-                }
-            }.frame(width: 330, height: 320, alignment: .center).cornerRadius(10)
+                                } else {
+                                    Image(uiImage: reviewuser.user.getProfilePhoto()!)
+                                        .resizable()
+                                        .frame(width: 50, height: 50)
+                                        .clipShape(Circle())
+                                        .aspectRatio(contentMode: .fit)
+                                }
+                                VStack(alignment: .leading) {
+                                    Text(reviewuser.user.userName)
+                                    Text(reviewuser.review.headLine)
+                                        .foregroundColor(.primary)
+                                        .font(.headline)
+                                }
+                            }.frame(width: 300, height: 50, alignment: .topLeading)
+                            Text(reviewuser.review.description)
+                                .frame(width:300, alignment:.topLeading)
+                                .font(.body)
+                        }.frame(
+                            width: 300,
+                            alignment: .topLeading
+                        )
+                            .cornerRadius(10)
+                    }
+                }.frame(width: 330, height: 320, alignment: .center).cornerRadius(10)
+            }
         }
             .padding()
             .onAppear {
