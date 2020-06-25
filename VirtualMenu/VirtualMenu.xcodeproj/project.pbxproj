@@ -42,6 +42,8 @@
 		3AF9926524A2B7C9005446D8 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF9926424A2B7C9005446D8 /* LoginView.swift */; };
 		3AF9926824A2B918005446D8 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF9926724A2B918005446D8 /* Utils.swift */; };
 		3AF9926A24A2B95C005446D8 /* InputValidation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF9926924A2B95C005446D8 /* InputValidation.swift */; };
+		3AF9927324A53AB4005446D8 /* InitialScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF9927224A53AB4005446D8 /* InitialScreen.swift */; };
+		3AF9927524A53AC0005446D8 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF9927424A53AC0005446D8 /* SignUpView.swift */; };
 		5AE04E935A74D796296998C2 /* Pods_VirtualMenu.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0071C2719F2506A39923A160 /* Pods_VirtualMenu.framework */; };
 		A731EB0E2495AD2300B75D05 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A731EB0D2495AD2300B75D05 /* CloudKit.framework */; };
 		A73FD46324919A1300A035AB /* ListDishesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A73FD46224919A1300A035AB /* ListDishesView.swift */; };
@@ -109,6 +111,8 @@
 		3AF9926424A2B7C9005446D8 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		3AF9926724A2B918005446D8 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		3AF9926924A2B95C005446D8 /* InputValidation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputValidation.swift; sourceTree = "<group>"; };
+		3AF9927224A53AB4005446D8 /* InitialScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InitialScreen.swift; sourceTree = "<group>"; };
+		3AF9927424A53AC0005446D8 /* SignUpView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		6E323FD7CC7F0EC1739CC297 /* Pods-VirtualMenu.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VirtualMenu.release.xcconfig"; path = "Target Support Files/Pods-VirtualMenu/Pods-VirtualMenu.release.xcconfig"; sourceTree = "<group>"; };
 		A731EB0D2495AD2300B75D05 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		A73FD46224919A1300A035AB /* ListDishesView.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = ListDishesView.swift; sourceTree = "<group>"; tabWidth = 4; usesTabs = 0; wrapsLines = 1; };
@@ -215,10 +219,12 @@
 				34A5D662249BF6DF00E4FE9C /* DishDetailsView.swift */,
 				3A987AD62480350C0021F6E4 /* AppDelegate.swift */,
 				3A4A0E6F249EB9320030635E /* AccountProfileView.swift */,
-				3AF9926424A2B7C9005446D8 /* LoginView.swift */,
 				3A4A0E71249EB94D0030635E /* ImagePicker.swift */,
 				3A987AD82480350C0021F6E4 /* SceneDelegate.swift */,
 				3A987B0F2481511B0021F6E4 /* ContentView.swift */,
+				3AF9926424A2B7C9005446D8 /* LoginView.swift */,
+				3AF9927424A53AC0005446D8 /* SignUpView.swift */,
+				3AF9927224A53AB4005446D8 /* InitialScreen.swift */,
 				3A987B0A24807E2B0021F6E4 /* SignInView.swift */,
 				3A3136D0248168C800E46292 /* LaunchScreen.swift */,
 				3A987ADC2480350E0021F6E4 /* Assets.xcassets */,
@@ -460,6 +466,7 @@
 			files = (
 				3A3136CB248159B600E46292 /* SignInWithAppleButton.swift in Sources */,
 				3A3137392483A25D00E46292 /* StringScanUtils.swift in Sources */,
+				3AF9927324A53AB4005446D8 /* InitialScreen.swift in Sources */,
 				3A4A0E74249EB9780030635E /* KeychainItem.swift in Sources */,
 				3A4A0E72249EB94D0030635E /* ImagePicker.swift in Sources */,
 				3A3137332483293300E46292 /* StartViewController.swift in Sources */,
@@ -485,6 +492,7 @@
 				3AF9926524A2B7C9005446D8 /* LoginView.swift in Sources */,
 				3A3137282483178A00E46292 /* Restaurant.swift in Sources */,
 				3A4A0E70249EB9320030635E /* AccountProfileView.swift in Sources */,
+				3AF9927524A53AC0005446D8 /* SignUpView.swift in Sources */,
 				3A3137252483178A00E46292 /* Dish.swift in Sources */,
 				3A3136CC248159B600E46292 /* SignInWithAppleDelegates.swift in Sources */,
 				3A3136CF248159B600E46292 /* EnvironmentWindowKey.swift in Sources */,
