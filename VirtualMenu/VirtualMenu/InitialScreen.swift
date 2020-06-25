@@ -8,8 +8,54 @@
 import SwiftUI
 
 struct InitialScreen: View {
+    
+    @State private var isShowingLoginSheet = false
+    @State private var isShowingSignUpSheet = false
+    
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        
+        NavigationView{
+            
+            VStack{
+                
+                VStack{
+                    
+                    Logo()
+
+                    Spacer()
+                        .frame(height: (UIScreen.main.bounds.height/2.5))
+                }
+                      
+                VStack{
+                    CustomButton(action: { self.isShowingSignUpSheet.toggle()})
+                    {
+                        Text("SIGN UP")
+                            .foregroundColor(.green)
+                    }
+                    .frame(width: 100)
+                    .sheet(isPresented: self.$isShowingSignUpSheet) { SignUpView() }
+                    
+                    CustomButton(action: { self.isShowingLoginSheet.toggle()})
+                    {
+                        Text("LOGIN")
+                            .foregroundColor(.green)
+                    }
+                    .frame(width: 100)
+                    .sheet(isPresented: self.$isShowingLoginSheet) { LoginView() }
+                    
+                }
+            
+            }
+            
+            
+            
+            
+        }
+        
+        
+        
+        
     }
 }
 
