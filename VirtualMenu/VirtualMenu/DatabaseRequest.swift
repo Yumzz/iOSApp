@@ -149,7 +149,7 @@ class DatabaseRequest {
             print("user fetch completed")
             semaphore.signal()
         }
-        db.add(operation)
+        self.db.add(operation)
         _ = semaphore.wait(timeout: .now()+3)
         return user!
     }

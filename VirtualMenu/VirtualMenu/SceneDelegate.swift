@@ -9,6 +9,15 @@
 import UIKit
 import SwiftUI
 
+
+class AccountDetails: ObservableObject {
+    @Published var email: String = ""
+    @Published var password: String = ""
+    @Published var name: String = ""
+    @Published var count: Int = 0
+    @Published var loggedIn: Bool = false
+}
+
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
@@ -26,7 +35,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         //UserDefaults.standard.set("", forKey: signInWithAppleManager.userIdentifierKey)
         
         let contentView = ContentView().environmentObject(signInWithAppleManager)
-
+        
         // Use a UIHostingController as window root view controller.
         if let windowScene = scene as? UIWindowScene {
             let window = UIWindow(windowScene: windowScene)
