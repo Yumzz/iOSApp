@@ -15,9 +15,17 @@ struct RestaurantMapView: View {
             ZStack{
                 MapView().edgesIgnoringSafeArea(.all)
                 VStack {
-                    TextField("Search restaurant", text: self.$strSearch)
-                        .textFieldStyle(RoundedBorderTextFieldStyle())
-                        .frame(width: geometry.size.width - 100)
+                    HStack {
+                        Image(systemName: "magnifyingglass")
+                        TextField("Search restaurant", text: self.$strSearch)
+                        
+                    }.frame(width: geometry.size.width - 100)
+                        .padding(EdgeInsets(top: 8, leading: 6, bottom: 8, trailing: 6))
+                        .foregroundColor(.secondary)
+                    .background(Color(.tertiarySystemBackground))
+                    .cornerRadius(10.0)
+                    .shadow(radius: 5)
+                    
                     Spacer()
                     HStack(spacing: 10){
                         Spacer()
