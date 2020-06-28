@@ -26,10 +26,13 @@ struct StartViewController: View {
             }
             
             VStack(spacing: 30){
+                NavigationLink(destination: RestaurantMapView()) {
+                    Text("Find on the Map")
+                }
+                
                 NavigationLink(destination: ListDishesView()) {
                     Text("Digital Menu")
                 }
-                
                 
                 CustomButton(action: {self.isShowingScannerSheet.toggle() })
                 {
@@ -54,6 +57,9 @@ struct StartViewController: View {
 
 struct StartViewController_Previews: PreviewProvider {
     static var previews: some View {
-        StartViewController()
+        NavigationView{
+            StartViewController()
+        }
+        
     }
 }
