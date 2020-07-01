@@ -49,6 +49,10 @@
 		A73FD46324919A1300A035AB /* ListDishesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A73FD46224919A1300A035AB /* ListDishesView.swift */; };
 		A7FE250624A83C1D0007E5AD /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7FE250524A83C1D0007E5AD /* MapView.swift */; };
 		A7FE250824A841620007E5AD /* RestaurantMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7FE250724A841620007E5AD /* RestaurantMapView.swift */; };
+		C5CD0F2624AC421D00F0A60D /* FirebaseRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5CD0F2524AC421D00F0A60D /* FirebaseRequest.swift */; };
+		C5CD0F2924AC4C6600F0A60D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C5CD0F2824AC4C6600F0A60D /* GoogleService-Info.plist */; };
+		C5CD0F2A24AC4C6600F0A60D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C5CD0F2824AC4C6600F0A60D /* GoogleService-Info.plist */; };
+		C5CD0F2B24AC4C6600F0A60D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C5CD0F2824AC4C6600F0A60D /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -120,6 +124,8 @@
 		A73FD46224919A1300A035AB /* ListDishesView.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = ListDishesView.swift; sourceTree = "<group>"; tabWidth = 4; usesTabs = 0; wrapsLines = 1; };
 		A7FE250524A83C1D0007E5AD /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		A7FE250724A841620007E5AD /* RestaurantMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantMapView.swift; sourceTree = "<group>"; };
+		C5CD0F2524AC421D00F0A60D /* FirebaseRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseRequest.swift; sourceTree = "<group>"; };
+		C5CD0F2824AC4C6600F0A60D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -212,8 +218,10 @@
 		3A987AD52480350C0021F6E4 /* VirtualMenu */ = {
 			isa = PBXGroup;
 			children = (
+				C5CD0F2824AC4C6600F0A60D /* GoogleService-Info.plist */,
 				3AF9926624A2B8F8005446D8 /* Utils */,
 				3A31373C2483A2A400E46292 /* DatabaseRequest.swift */,
+				C5CD0F2524AC421D00F0A60D /* FirebaseRequest.swift */,
 				3A31372B2483179800E46292 /* Model */,
 				3A31371C2483172700E46292 /* Scanner */,
 				3A3136C52481598700E46292 /* SignInWithAppleHelpers */,
@@ -402,6 +410,7 @@
 			files = (
 				3A987AE32480350E0021F6E4 /* LaunchScreen.storyboard in Resources */,
 				3A987AE02480350E0021F6E4 /* Preview Assets.xcassets in Resources */,
+				C5CD0F2924AC4C6600F0A60D /* GoogleService-Info.plist in Resources */,
 				3A987ADD2480350E0021F6E4 /* Assets.xcassets in Resources */,
 				3A9F9823248DD790007ABB71 /* Scanner.storyboard in Resources */,
 			);
@@ -411,6 +420,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C5CD0F2A24AC4C6600F0A60D /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -418,6 +428,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C5CD0F2B24AC4C6600F0A60D /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -475,6 +486,7 @@
 				3AF9927324A53AB4005446D8 /* InitialScreen.swift in Sources */,
 				3A4A0E74249EB9780030635E /* KeychainItem.swift in Sources */,
 				3A4A0E72249EB94D0030635E /* ImagePicker.swift in Sources */,
+				C5CD0F2624AC421D00F0A60D /* FirebaseRequest.swift in Sources */,
 				3A3137332483293300E46292 /* StartViewController.swift in Sources */,
 				3A987B102481511B0021F6E4 /* ContentView.swift in Sources */,
 				34A5D663249BF6DF00E4FE9C /* DishDetailsView.swift in Sources */,
@@ -679,7 +691,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.ARMenu.MenuDatabase;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ARMenu.VirtualMenu;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -701,7 +713,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.ARMenu.MenuDatabase;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ARMenu.VirtualMenu;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
