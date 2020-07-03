@@ -1,28 +1,33 @@
 #Name {
   color: white;
   display: inline-block;
+  font-family: "Montserrat", sans-serif;
 }
 
 #TagLine {
   text-align: left;
   color: white;
+  font-family: "Montserrat", sans-serif;
 }
 
 #TagLine2 {
   text-align: left;
   color: white;
+  font-family: "Montserrat", sans-serif;
 }
 
 #mission {
   top: 100px;
   text-align: center;
   color: black;
+  font-family: "Montserrat", sans-serif;
 }
 
 #statement {
   text-align: center;
   color: black;
   padding-left: 200px;
+  font-family: "Montserrat", sans-serif;
 }
 
 #why {
@@ -30,11 +35,14 @@
   margin-bottom: 40px;
   text-align: center;
   color: black;
+  font-family: "Montserrat", sans-serif;
 }
 
 #want {
   text-align: center;
   color: white;
+  margin-top: 10px;
+  font-family: "Montserrat", sans-serif;
 }
 
 #whybox1 #whyrest {
@@ -52,11 +60,13 @@
 #how {
   text-align: right;
   color: white;
+  font-family: "Montserrat", sans-serif;
 }
 
 #restaurant {
   text-align: right;
   color: white;
+  font-family: "Montserrat", sans-serif;
 }
 
 button {
@@ -69,6 +79,7 @@ button {
   font-size: 16px;
   margin: 4px 2px;
   cursor: pointer;
+  font-family: "Montserrat", sans-serif;
 }
 #sameline {
   display: flex;
@@ -190,6 +201,7 @@ svg {
   padding: 20px;
   margin-top: 10px;
   margin-bottom: 100px;
+  font-family: "Montserrat", sans-serif;
 }
 
 #whybox2 {
@@ -202,6 +214,7 @@ svg {
   border-radius: 15px;
   padding: 20px;
   margin-top: 10px;
+  font-family: "Montserrat", sans-serif;
 }
 
 #fifth {
