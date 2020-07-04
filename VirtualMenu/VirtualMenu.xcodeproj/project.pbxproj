@@ -19,7 +19,7 @@
 		3A3137282483178A00E46292 /* Restaurant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3137222483178A00E46292 /* Restaurant.swift */; };
 		3A3137292483178A00E46292 /* Review.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3137232483178A00E46292 /* Review.swift */; };
 		3A31372A2483178A00E46292 /* ARMUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3137242483178A00E46292 /* ARMUser.swift */; };
-		3A3137332483293300E46292 /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3137322483293300E46292 /* StartViewController.swift */; };
+		3A3137332483293300E46292 /* StartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3137322483293300E46292 /* StartView.swift */; };
 		3A3137392483A25D00E46292 /* StringScanUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3137352483A25D00E46292 /* StringScanUtils.swift */; };
 		3A31373A2483A25D00E46292 /* ScannerPreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3137362483A25D00E46292 /* ScannerPreViewController.swift */; };
 		3A31373D2483A2A400E46292 /* DatabaseRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A31373C2483A2A400E46292 /* DatabaseRequest.swift */; };
@@ -46,6 +46,7 @@
 		3AF9927524A53AC0005446D8 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF9927424A53AC0005446D8 /* SignUpView.swift */; };
 		5AE04E935A74D796296998C2 /* Pods_VirtualMenu.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0071C2719F2506A39923A160 /* Pods_VirtualMenu.framework */; };
 		A731EB0E2495AD2300B75D05 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A731EB0D2495AD2300B75D05 /* CloudKit.framework */; };
+		A73B1B5F24B0FF8100A8C6A8 /* ListDishesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A73B1B5E24B0FF8100A8C6A8 /* ListDishesViewModel.swift */; };
 		A73FD46324919A1300A035AB /* ListDishesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A73FD46224919A1300A035AB /* ListDishesView.swift */; };
 		A7FE250624A83C1D0007E5AD /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7FE250524A83C1D0007E5AD /* MapView.swift */; };
 		A7FE250824A841620007E5AD /* RestaurantMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7FE250724A841620007E5AD /* RestaurantMapView.swift */; };
@@ -87,7 +88,7 @@
 		3A3137222483178A00E46292 /* Restaurant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Restaurant.swift; sourceTree = "<group>"; };
 		3A3137232483178A00E46292 /* Review.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Review.swift; sourceTree = "<group>"; };
 		3A3137242483178A00E46292 /* ARMUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ARMUser.swift; sourceTree = "<group>"; };
-		3A3137322483293300E46292 /* StartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartViewController.swift; sourceTree = "<group>"; };
+		3A3137322483293300E46292 /* StartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartView.swift; sourceTree = "<group>"; };
 		3A3137352483A25D00E46292 /* StringScanUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringScanUtils.swift; sourceTree = "<group>"; };
 		3A3137362483A25D00E46292 /* ScannerPreViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScannerPreViewController.swift; sourceTree = "<group>"; };
 		3A31373C2483A2A400E46292 /* DatabaseRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatabaseRequest.swift; sourceTree = "<group>"; };
@@ -121,6 +122,7 @@
 		3AF9927424A53AC0005446D8 /* SignUpView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		6E323FD7CC7F0EC1739CC297 /* Pods-VirtualMenu.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VirtualMenu.release.xcconfig"; path = "Target Support Files/Pods-VirtualMenu/Pods-VirtualMenu.release.xcconfig"; sourceTree = "<group>"; };
 		A731EB0D2495AD2300B75D05 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
+		A73B1B5E24B0FF8100A8C6A8 /* ListDishesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListDishesViewModel.swift; sourceTree = "<group>"; };
 		A73FD46224919A1300A035AB /* ListDishesView.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = ListDishesView.swift; sourceTree = "<group>"; tabWidth = 4; usesTabs = 0; wrapsLines = 1; };
 		A7FE250524A83C1D0007E5AD /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		A7FE250724A841620007E5AD /* RestaurantMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantMapView.swift; sourceTree = "<group>"; };
@@ -225,25 +227,15 @@
 				3A31372B2483179800E46292 /* Model */,
 				3A31371C2483172700E46292 /* Scanner */,
 				3A3136C52481598700E46292 /* SignInWithAppleHelpers */,
-				3A987B0E248086D30021F6E4 /* VirtualMenu.entitlements */,
-				3A3137322483293300E46292 /* StartViewController.swift */,
-				A73FD46224919A1300A035AB /* ListDishesView.swift */,
-				34A5D662249BF6DF00E4FE9C /* DishDetailsView.swift */,
+				A73B1B5D24B0FF4100A8C6A8 /* ViewModels */,
+				A73B1B5924B0FDA800A8C6A8 /* Views */,
 				3A987AD62480350C0021F6E4 /* AppDelegate.swift */,
-				A7FE250524A83C1D0007E5AD /* MapView.swift */,
-				A7FE250724A841620007E5AD /* RestaurantMapView.swift */,
-				3A4A0E6F249EB9320030635E /* AccountProfileView.swift */,
 				3A4A0E71249EB94D0030635E /* ImagePicker.swift */,
 				3A987AD82480350C0021F6E4 /* SceneDelegate.swift */,
-				3A987B0F2481511B0021F6E4 /* ContentView.swift */,
-				3AF9926424A2B7C9005446D8 /* LoginView.swift */,
-				3AF9927424A53AC0005446D8 /* SignUpView.swift */,
-				3AF9927224A53AB4005446D8 /* InitialScreen.swift */,
-				3A987B0A24807E2B0021F6E4 /* SignInView.swift */,
-				3A3136D0248168C800E46292 /* LaunchScreen.swift */,
 				3A987ADC2480350E0021F6E4 /* Assets.xcassets */,
 				3A987AE12480350E0021F6E4 /* LaunchScreen.storyboard */,
 				3A987AE42480350E0021F6E4 /* Info.plist */,
+				3A987B0E248086D30021F6E4 /* VirtualMenu.entitlements */,
 				3A987ADE2480350E0021F6E4 /* Preview Content */,
 			);
 			path = VirtualMenu;
@@ -300,6 +292,33 @@
 				6E323FD7CC7F0EC1739CC297 /* Pods-VirtualMenu.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		A73B1B5924B0FDA800A8C6A8 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				3A3136D0248168C800E46292 /* LaunchScreen.swift */,
+				3AF9927224A53AB4005446D8 /* InitialScreen.swift */,
+				3A3137322483293300E46292 /* StartView.swift */,
+				A73FD46224919A1300A035AB /* ListDishesView.swift */,
+				34A5D662249BF6DF00E4FE9C /* DishDetailsView.swift */,
+				A7FE250524A83C1D0007E5AD /* MapView.swift */,
+				A7FE250724A841620007E5AD /* RestaurantMapView.swift */,
+				3A4A0E6F249EB9320030635E /* AccountProfileView.swift */,
+				3A987B0F2481511B0021F6E4 /* ContentView.swift */,
+				3AF9926424A2B7C9005446D8 /* LoginView.swift */,
+				3AF9927424A53AC0005446D8 /* SignUpView.swift */,
+				3A987B0A24807E2B0021F6E4 /* SignInView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		A73B1B5D24B0FF4100A8C6A8 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				A73B1B5E24B0FF8100A8C6A8 /* ListDishesViewModel.swift */,
+			);
+			path = ViewModels;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -487,7 +506,7 @@
 				3A4A0E74249EB9780030635E /* KeychainItem.swift in Sources */,
 				3A4A0E72249EB94D0030635E /* ImagePicker.swift in Sources */,
 				C5CD0F2624AC421D00F0A60D /* FirebaseRequest.swift in Sources */,
-				3A3137332483293300E46292 /* StartViewController.swift in Sources */,
+				3A3137332483293300E46292 /* StartView.swift in Sources */,
 				3A987B102481511B0021F6E4 /* ContentView.swift in Sources */,
 				34A5D663249BF6DF00E4FE9C /* DishDetailsView.swift in Sources */,
 				3A3136D1248168C800E46292 /* LaunchScreen.swift in Sources */,
@@ -497,6 +516,7 @@
 				3A7E59C82489A98100288AB0 /* ScannerViewController.swift in Sources */,
 				3A3137292483178A00E46292 /* Review.swift in Sources */,
 				3AF9926A24A2B95C005446D8 /* InputValidation.swift in Sources */,
+				A73B1B5F24B0FF8100A8C6A8 /* ListDishesViewModel.swift in Sources */,
 				3A4A0E76249EB9AA0030635E /* UserStruct.swift in Sources */,
 				A7FE250824A841620007E5AD /* RestaurantMapView.swift in Sources */,
 				3A9F981E248DD3F0007ABB71 /* ScannerFunctions.swift in Sources */,

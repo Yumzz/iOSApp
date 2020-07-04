@@ -10,7 +10,7 @@ import Foundation
 import SwiftUI
 
 
-struct StartViewController: View {
+struct StartView: View {
     
     
     @State private var isShowingScannerSheet = false
@@ -55,10 +55,10 @@ struct StartViewController: View {
     //    }
 }
 
-struct StartViewController_Previews: PreviewProvider {
+struct StartView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView{
-            StartViewController()
+            StartView()
         }
         
     }
