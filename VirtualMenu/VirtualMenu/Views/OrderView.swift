@@ -28,6 +28,8 @@ struct OrderView: View {
                 Spacer()
             }
         }
+        .navigationBarTitle("")
+        .navigationBarHidden(true)
     }
 }
 
