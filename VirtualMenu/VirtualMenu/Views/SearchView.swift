@@ -19,7 +19,7 @@ struct SearchView: View {
                 
             }.frame(width: geometry.size.width - 100)
                 .padding(EdgeInsets(top: 8, leading: 6, bottom: 8, trailing: 6))
-                .foregroundColor(.secondary)
+                .foregroundColor(.primary)
                 .background(Color(.tertiarySystemBackground))
                 .cornerRadius(10.0)
                 .shadow(radius: 5)
