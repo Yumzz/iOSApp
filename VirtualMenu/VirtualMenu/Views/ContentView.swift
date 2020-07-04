@@ -17,9 +17,8 @@ struct ContentView: View {
     @EnvironmentObject var signInWithAppleManager: SignInWithAppleManager
     
     
-     var body: some View {
-        NavigationView{
-           ZStack {
+    var body: some View {
+        ZStack {
             if signInWithAppleManager.isUserAuthenticated == .undefined {
                 //should be taken to walkthrough screens
                 SignInView()
@@ -29,12 +28,10 @@ struct ContentView: View {
             }
             else if signInWithAppleManager.isUserAuthenticated == .signedIn{
                 //take into restaurant selection view
-                StartView()
+                AppView()
             }
-           }
         }
-           
-       }
+    }
 }
 
 struct ContentView_Previews: PreviewProvider {
@@ -46,7 +43,7 @@ struct ContentView_Previews: PreviewProvider {
 struct NavigationConfigurator: UIViewControllerRepresentable {
     
     var configure: (UINavigationController) -> Void = { _ in }
-
+    
     func makeUIViewController(context: Context) -> UIViewController {
         
         UIViewController()
@@ -73,12 +70,12 @@ struct Logo: View {
         }
         
     }
-
+    
 }
 
 struct AppleIdButton: UIViewRepresentable {
     func makeUIView(context: Context) -> ASAuthorizationAppleIDButton {
-            ASAuthorizationAppleIDButton()
+        ASAuthorizationAppleIDButton()
     }
     func updateUIView(_ uiView: ASAuthorizationAppleIDButton, context: Context) {
     }
@@ -103,7 +100,7 @@ struct CustomButton <V: View> : View {
                 .frame(minWidth: 0, maxWidth: .infinity)
                 .background(
                     Image("ar").resizable().renderingMode(.original))
-                    
+            
         }
         
         

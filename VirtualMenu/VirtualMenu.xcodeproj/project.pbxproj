@@ -47,6 +47,10 @@
 		5AE04E935A74D796296998C2 /* Pods_VirtualMenu.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0071C2719F2506A39923A160 /* Pods_VirtualMenu.framework */; };
 		A731EB0E2495AD2300B75D05 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A731EB0D2495AD2300B75D05 /* CloudKit.framework */; };
 		A73B1B5F24B0FF8100A8C6A8 /* ListDishesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A73B1B5E24B0FF8100A8C6A8 /* ListDishesViewModel.swift */; };
+		A73B1B6224B111D800A8C6A8 /* AppView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A73B1B6124B111D800A8C6A8 /* AppView.swift */; };
+		A73B1B6424B1162E00A8C6A8 /* OrderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A73B1B6324B1162E00A8C6A8 /* OrderView.swift */; };
+		A73B1B6624B116CE00A8C6A8 /* FavoriteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A73B1B6524B116CE00A8C6A8 /* FavoriteView.swift */; };
+		A73B1B6824B11C7200A8C6A8 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A73B1B6724B11C7200A8C6A8 /* SearchView.swift */; };
 		A73FD46324919A1300A035AB /* ListDishesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A73FD46224919A1300A035AB /* ListDishesView.swift */; };
 		A7FE250624A83C1D0007E5AD /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7FE250524A83C1D0007E5AD /* MapView.swift */; };
 		A7FE250824A841620007E5AD /* RestaurantMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7FE250724A841620007E5AD /* RestaurantMapView.swift */; };
@@ -123,6 +127,10 @@
 		6E323FD7CC7F0EC1739CC297 /* Pods-VirtualMenu.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VirtualMenu.release.xcconfig"; path = "Target Support Files/Pods-VirtualMenu/Pods-VirtualMenu.release.xcconfig"; sourceTree = "<group>"; };
 		A731EB0D2495AD2300B75D05 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		A73B1B5E24B0FF8100A8C6A8 /* ListDishesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListDishesViewModel.swift; sourceTree = "<group>"; };
+		A73B1B6124B111D800A8C6A8 /* AppView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppView.swift; sourceTree = "<group>"; };
+		A73B1B6324B1162E00A8C6A8 /* OrderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderView.swift; sourceTree = "<group>"; };
+		A73B1B6524B116CE00A8C6A8 /* FavoriteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteView.swift; sourceTree = "<group>"; };
+		A73B1B6724B11C7200A8C6A8 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 		A73FD46224919A1300A035AB /* ListDishesView.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = ListDishesView.swift; sourceTree = "<group>"; tabWidth = 4; usesTabs = 0; wrapsLines = 1; };
 		A7FE250524A83C1D0007E5AD /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		A7FE250724A841620007E5AD /* RestaurantMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantMapView.swift; sourceTree = "<group>"; };
@@ -298,8 +306,12 @@
 			isa = PBXGroup;
 			children = (
 				3A3136D0248168C800E46292 /* LaunchScreen.swift */,
+				A73B1B6324B1162E00A8C6A8 /* OrderView.swift */,
 				3AF9927224A53AB4005446D8 /* InitialScreen.swift */,
 				3A3137322483293300E46292 /* StartView.swift */,
+				A73B1B6124B111D800A8C6A8 /* AppView.swift */,
+				A73B1B6724B11C7200A8C6A8 /* SearchView.swift */,
+				A73B1B6524B116CE00A8C6A8 /* FavoriteView.swift */,
 				A73FD46224919A1300A035AB /* ListDishesView.swift */,
 				34A5D662249BF6DF00E4FE9C /* DishDetailsView.swift */,
 				A73B1B6024B1019E00A8C6A8 /* RestaurantMapView */,
@@ -520,6 +532,7 @@
 				3A3136D1248168C800E46292 /* LaunchScreen.swift in Sources */,
 				3AF9926824A2B918005446D8 /* Utils.swift in Sources */,
 				3A987AD72480350C0021F6E4 /* AppDelegate.swift in Sources */,
+				A73B1B6224B111D800A8C6A8 /* AppView.swift in Sources */,
 				3A3136CD248159B600E46292 /* SignInWithAppleManager.swift in Sources */,
 				3A7E59C82489A98100288AB0 /* ScannerViewController.swift in Sources */,
 				3A3137292483178A00E46292 /* Review.swift in Sources */,
@@ -527,9 +540,11 @@
 				A73B1B5F24B0FF8100A8C6A8 /* ListDishesViewModel.swift in Sources */,
 				3A4A0E76249EB9AA0030635E /* UserStruct.swift in Sources */,
 				A7FE250824A841620007E5AD /* RestaurantMapView.swift in Sources */,
+				A73B1B6824B11C7200A8C6A8 /* SearchView.swift in Sources */,
 				3A9F981E248DD3F0007ABB71 /* ScannerFunctions.swift in Sources */,
 				A73FD46324919A1300A035AB /* ListDishesView.swift in Sources */,
 				3A987AD92480350C0021F6E4 /* SceneDelegate.swift in Sources */,
+				A73B1B6424B1162E00A8C6A8 /* OrderView.swift in Sources */,
 				3A31372A2483178A00E46292 /* ARMUser.swift in Sources */,
 				3A3137262483178A00E46292 /* Model.swift in Sources */,
 				3A3136CE248159B600E46292 /* AuthState.swift in Sources */,
@@ -540,6 +555,7 @@
 				3AF9926524A2B7C9005446D8 /* LoginView.swift in Sources */,
 				3A3137282483178A00E46292 /* Restaurant.swift in Sources */,
 				3A4A0E70249EB9320030635E /* AccountProfileView.swift in Sources */,
+				A73B1B6624B116CE00A8C6A8 /* FavoriteView.swift in Sources */,
 				3AF9927524A53AC0005446D8 /* SignUpView.swift in Sources */,
 				3A3137252483178A00E46292 /* Dish.swift in Sources */,
 				3A3136CC248159B600E46292 /* SignInWithAppleDelegates.swift in Sources */,
