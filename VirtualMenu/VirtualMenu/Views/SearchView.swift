@@ -15,18 +15,41 @@ struct SearchView: View {
         GeometryReader { geometry in
             ScrollView {
                 
+                
                 VStack(){
-                    
-                    Text("Support local restaurants")
-                        .font(.largeTitle)
-                        .bold()
-                        .padding()
-                        .padding(.leading, 25)
-                        .padding(.trailing, 25)
-                        .padding(.top, 100)
-                        .padding(.bottom, 25)
-                        .frame(width: geometry.size.width, alignment: .leading)
-                        .background(Color(red: 1.0, green: 0.48, blue: 0.45, opacity: 1.0))
+                    GeometryReader { geo in
+                        ZStack {
+                            if geo.frame(in: .global).minY <= 0 {
+                                Text("Support local restaurants")
+                                    .font(.largeTitle)
+                                    .bold()
+                                    .fixedSize(horizontal: false, vertical: true)
+                                    .padding()
+                                    .padding(.leading, 25)
+                                    .padding(.trailing, 25)
+                                    .padding(.top, 100)
+                                    .padding(.bottom, 25)
+                                    .frame(width: geo.size.width, height: geo.size.height + geo.frame(in: .global).minY, alignment: .leading)
+                                    .background(Color(red: 1.0, green: 0.48, blue: 0.45, opacity: 1.0))
+                                    .offset(y: geo.frame(in: .global).minY/9)
+                                    .clipped()
+                            } else {
+                                Text("Support local restaurants")
+                                    .font(.largeTitle)
+                                    .bold()
+                                    .fixedSize(horizontal: false, vertical: true)
+                                    .padding()
+                                    .padding(.leading, 25)
+                                    .padding(.trailing, 25)
+                                    .padding(.top, 100)
+                                    .padding(.bottom, 25)
+                                    .frame(width: geo.size.width, height: geo.size.height + geo.frame(in: .global).minY, alignment: .leading)
+                                    .background(Color(red: 1.0, green: 0.48, blue: 0.45, opacity: 1.0))
+                                    .offset(y: -geo.frame(in: .global).minY)
+                            }
+                        }
+                        
+                    }.frame(height: 230)
                     
                     Spacer()
                         .frame(height: 50)
@@ -52,13 +75,12 @@ struct SearchView: View {
                         })
                     }.padding(.top, 20)
                         .frame(width: geometry.size.width - 100, alignment: .leading)
-                    
-                    Spacer()
                 }
-            }
-        }.navigationBarTitle("")
-            .navigationBarHidden(true)
-            .edgesIgnoringSafeArea(.top)
+                
+            }.navigationBarTitle("")
+                .navigationBarHidden(true)
+                .edgesIgnoringSafeArea(.top)
+        }
     }
 }
 
