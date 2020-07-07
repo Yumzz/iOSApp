@@ -7,12 +7,25 @@
 //
 
 import SwiftUI
+import Firebase
+import FirebaseFirestoreSwift
+import GoogleSignIn
+import FBSDKLoginKit
 
 struct SignUpView: View {
     
     @State var email: String = ""
     @State var password: String = ""
     @State var name: String = ""
+    
+    @State var alertMsg = ""
+    @State private var alertMessage = ""
+    @State private var alertTitle = ""
+    
+    @State var showAlert = false
+    @State var showDetails = false
+    
+    @State var createdAccount = false
     
     var body: some View {
             
@@ -108,54 +121,39 @@ struct SignUpView: View {
                         Spacer()
                             .frame(height: 10)
                         CustomButton(action: {
-    //                        if  self.isValidInputs() {
-                               
-                                // For use with property wrapper
-    //                            UserDefaults.standard.set(true, forKey: "LoggedIn")
-    //                            UserDefaults.standard.synchronize()
-    //
-    //                            let url = URL(string: Constants.baseURL.api + "/login")!
-    //                            var request = URLRequest(url: url)
-    //                            request.httpMethod = "POST"
-    //                            let bodyData = "email=\(self.email)&password=\(self.password)"
-    //                            print(bodyData)
-    //                            request.httpBody = bodyData.data(using: .utf8)
-    //
-    //                            URLSession.shared.dataTask(with: request) { data, response, error in
-    //                                guard let httpResponse = response as? HTTPURLResponse,
-    //                                      (200...299).contains(httpResponse.statusCode) else {
-    //                                        self.showAlert = true
-    //                                        self.alertTitle = "Network Error"
-    //                                        self.alertMessage = "There was a Network Error while processing your request"
-    //                                    return
-    //                                }
-    //                                guard let data = data, error == nil else { return }
-    //
-    //                                let json = try? JSONSerialization.jsonObject(with: data, options: [])
-    //                                if let dictionary = json as? [String: Any] {
-    //                                    if let success = dictionary["success"] as? Bool {
-    //                                        if success {
-    //                                            print("Would go to new view")
-    //                                            // Go to ContentView()
-    //                                        }
-    //                                    }
-    //                                }
-    //
-    //                                self.showAlert = true
-    //                                self.alertTitle = "Request Submitted!"
-    //                                self.alertMessage = "Our team will respond shortly"
-    //                            }.resume()
-    //                        } else {
-    //                            self.showAlert = true
-    //                            self.alertTitle = "Missing Field(s)"
-    //                            self.alertMessage = "Please ensure all three fields are filled out"
-    //                        }
+                            if self.isValidInputs() {
+                                Auth.auth().createUser(withEmail: self.email, password: self.password){
+                                    (result, error) in
+                                    if (error != nil){
+                                        self.alertMsg = "Error creating user"
+                                        self.showAlert.toggle()
+                                    }
+                                    else{
+                                        let db = Firestore.firestore()
+                                        db.collection("User").addDocument(data: ["email": self.email, "password": self.password, "username": self.name, "id": result!.user.uid]) {(error) in
+                                            
+                                            if error != nil {
+                                                self.alertMsg = "Error saving user info"
+                                                self.showAlert.toggle()
+                                            }
+                                            
+                                        }
+                                        
+                                    }
+                                    self.createdAccount.toggle()
+                                }
+                                
+                            }
                         })
                         {
                             Text("SIGN UP")
                                 .foregroundColor(.green)
                         }
                         .frame(width: 100)
+                        .sheet(isPresented: self.$createdAccount) {
+                            AppView()
+                        }
+
 
                     }
                     
@@ -183,7 +181,7 @@ struct SignUpView: View {
                             .frame(height: 10)
                         CustomButton(action: {
 //                            self.showAlert.toggle()
-
+                            SocialLogin().attemptLoginGoogle()
                         }){
                             HStack{
                                 Image("continue_with_google")
@@ -197,7 +195,9 @@ struct SignUpView: View {
                         }
                         CustomButton(action: {
 //                            self.showAlert.toggle()
-
+                            SocialLogin().attemptLoginFb(completion: { result, error in
+                                print(result)
+                            })
                         }){
                             HStack{
                                 Image("continue_with_facebook")
@@ -216,6 +216,53 @@ struct SignUpView: View {
                 
         }
     }
+    
+    fileprivate func isValidInputs() -> Bool {
+        if self.email == "" {
+            self.alertMsg = "Email can't be blank."
+            self.showAlert.toggle()
+            return false
+        } else if !self.email.isValidEmail {
+            self.alertMsg = "Email is not valid."
+            self.showAlert.toggle()
+            return false
+        } else if self.password == "" {
+            self.alertMsg = "Password can't be blank."
+            self.showAlert.toggle()
+            return false
+        } else if !(self.password.isValidPassword) {
+            self.alertMsg = "Please enter valid password"
+            self.showAlert.toggle()
+            return false
+        }
+        return true
+    }
+    
+    
+    struct SocialLogin: UIViewRepresentable {
+
+        func makeUIView(context: UIViewRepresentableContext<SocialLogin>) -> UIView {
+            return UIView()
+        }
+
+        func updateUIView(_ uiView: UIView, context: UIViewRepresentableContext<SocialLogin>) {
+        }
+
+        func attemptLoginGoogle() {
+            GIDSignIn.sharedInstance()?.presentingViewController = UIApplication.shared.windows.last?.rootViewController
+            GIDSignIn.sharedInstance()?.signIn()
+        }
+        
+        func attemptLoginFb(completion: @escaping (_ result: LoginManagerLoginResult?, _ error: Error?) -> Void) {
+            let fbLoginManager: LoginManager = LoginManager()
+            fbLoginManager.logOut()
+            fbLoginManager.logIn(permissions: ["email", "name", "public_profile"], from: UIApplication.shared.windows.last?.rootViewController) { (result, error) -> Void in
+                completion(result, error)
+            }
+        }
+    
+    }
+    
 }
 
 struct SignUpView_Previews: PreviewProvider {

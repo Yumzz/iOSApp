@@ -8,7 +8,7 @@
 
 import Foundation
 import Firebase
-
+import FirebaseFirestore
 
 class FirebaseRequest {
 
@@ -33,6 +33,25 @@ class FirebaseRequest {
         }
             
         return dishList
+    }
+    
+    
+    func fetchUser(name: String) -> UserFB {
+        var user: UserFB? = nil
+        
+        db.collectionGroup("User").getDocuments { (querySnapshot, error) in
+            if let error = error {
+                print("Error getting documents: \(error)")
+            } else {
+                for document in querySnapshot!.documents {
+                    print("\(document.documentID) => \(document.data())")
+                    if((document.data()["userName"].map(String.init(describing:)) ?? "nil") == name){
+                        user = UserFB(snapshot: document)!
+                    }
+                }
+            }
+        }
+        return user!
     }
     
     ///fetchDish() will fetch the dish given id in the database

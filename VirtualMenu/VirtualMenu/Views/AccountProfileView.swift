@@ -9,6 +9,8 @@
 import SwiftUI
 import CloudKit
 import AuthenticationServices
+import Firebase
+import FirebaseFirestore
 
 struct ProfileButton: View {
     
@@ -34,6 +36,16 @@ class AccountProfileViewModel: ObservableObject {
     @Published var username: String? = nil
     
     let dbb2 = DatabaseRequest()
+    let fbb2 = Firestore.firestore()
+    
+//    func fetchFireUser() {
+//           var fetchUser: UserFB? = nil
+//           DispatchQueue.main.async {
+//               fetchUser = self.fbb2.fetchUser(cloudID: KeychainItem.currentUserIdentifier!)
+//               self.user = fetchUser
+//               self.username = self.user?.userName
+//           }
+//       }
     
     func fetchUser() {
         var fetchUser: ARMUser? = nil

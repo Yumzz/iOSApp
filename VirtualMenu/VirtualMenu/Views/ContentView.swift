@@ -8,7 +8,7 @@
 
 import SwiftUI
 import AuthenticationServices
-
+import Firebase
 //initial view
 //Right now: View with Logo and says let's get started -> sign in
 
@@ -19,16 +19,11 @@ struct ContentView: View {
     
     var body: some View {
         ZStack {
-            if signInWithAppleManager.isUserAuthenticated == .undefined {
-                //should be taken to walkthrough screens
-                SignInView()
-            } else if signInWithAppleManager.isUserAuthenticated == .signedOut{
-                //take to sign in view
-                SignInView()
-            }
-            else if signInWithAppleManager.isUserAuthenticated == .signedIn{
-                //take into restaurant selection view
-                AppView()
+            if Auth.auth().currentUser != nil {
+               InitialScreen()
+            } else {
+               //User Not logged in
+                InitialScreen()
             }
         }
     }
