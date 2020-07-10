@@ -9,8 +9,159 @@
 import Foundation
 import SwiftUI
 import UIKit
+import Firebase
+import PromiseKit
 
+struct Utils {
+    
+    func uploadUserProfileImage(profileImage: UIImage) -> Promise<()> {
+        return Promise<()> { seal -> Void in
+            
+            // Use the auto id for the image name
+            // Generate a unique ID for the post and prepare the post database reference
+            
+            
+            
+            //what to do:
+            //1) get user's id
+            //2) post the image into profilephotos folder in DB bucket with their id as identifier
+            //3) retrieve that for user
+//            let name = Database.database().reference().child("users").child(Auth.auth().currentUser!.uid).username
+            
+            
+            let storage = Storage.storage()
+            
+            
+            let imagesRef = storage.reference().child("profilephotos/\(Auth.auth().currentUser!.uid)")
+            
+            print(imagesRef.storage)
+            print(imagesRef.bucket)
+            print(imagesRef.name)
+    //        PROFILE_IMGS_STORAGE_REF.child(Utilities.getCurrentUserId()).child("default.jpg")
+            
+            // Resize the image
+            //        let scaledImage = image.scale(newWidth: 640.0)
+            guard let imageData = profileImage.jpegData(compressionQuality: 0.9) else {
+                return
+            }
+            
+            // Create the file metadata
+            let metadata = StorageMetadata()
+            metadata.contentType = "image/jpeg"
+            
+            
+            // Upload the image to the userProfileImages storage
+            let uploadTask = imagesRef.putData(imageData, metadata: metadata, completion: {
+                (data, error) in
+                imagesRef.downloadURL(completion: { (url, error) in
+                    if let uploadedImageURL = url?.absoluteString {
+                        
+                        // Get the image url and assign to photoUrl for the current user and update
+                        
+                        if let changeRequest = Auth.auth().currentUser?.createProfileChangeRequest() {
+                            
+                            changeRequest.photoURL = URL(string: uploadedImageURL)
+                            changeRequest.commitChanges(completion: { (error) in
 
+                            if let error = error {
+                                print("Failed to change the profile image: \(error.localizedDescription)")
+                            }else {
+                                print("Changed user profile image")
+                                
+                                guard let userId = Auth.auth().currentUser?.uid else {
+                                    return
+                                }
+                                
+                                // Save the profile of the user
+                                let values = [UserProfile.UserInfoKey.profilePhotoURL: uploadedImageURL]
+                                Database.database().reference().child("users").child(userId).updateChildValues(values, withCompletionBlock: {
+                                    (error, ref) in
+                                    if error != nil {
+                                        print(error!)
+                                        return
+                                    }
+                                })
+                                    print("Updated user photoUrl")
+                                    // Update cache
+//                                CacheManager.shared.cache(object: profileImage, key: userId)
+                                    seal.fulfill(())
+                                }
+                            })
+                        }
+                    }
+                })
+            })
+        
+            uploadTask.observe(.failure) { (snapshot) in
+                        
+                        if let error = snapshot.error {
+                            print(error.localizedDescription)
+                        }
+                    }
+                    
+                    // Observe the upload status
+                    uploadTask.observe(.success) { (snapshot) in
+                        print("uploaded")
+                    }
+            }
+        }
+        
+        
+    func getUserProfileImgURL(userId: String, completionHandler: @escaping (String) -> Void) {
+            
+            // Get the rest of the user data
+//        DispatchQueue.main.async {
+        Database.database().reference().child("users").child(userId).observeSingleEvent(of: .value, with: { (snapshot) in
+            
+            // Get user value
+            if let userValues = snapshot.value as? NSDictionary {
+                if let userPhotoURL = userValues[UserProfile.UserInfoKey.profilePhotoURL] as? String {
+                    completionHandler(userPhotoURL)
+                }
+            }
+        })
+//        }
+    }
+    
+    
+    func loadUserProfilePhoto(userId: String) -> UIImage? {
+        
+        print("loadcalled")
+        var retImage: UIImage? = nil
+        
+        Utils().getUserProfileImgURL(userId: userId) { (profileImgURL) in
+        print(URL(string: profileImgURL))
+        if let url = URL(string: profileImgURL) {
+            
+            let downloadTask = URLSession.shared.dataTask(with: url, completionHandler: { (data, response, error) in
+                
+                if(error != nil){
+                    print(error?.localizedDescription)
+                    
+                }
+                
+                guard let imageData = data else {
+                    return
+                }
+                
+                OperationQueue.main.addOperation {
+                    guard let image = UIImage(data: imageData) else { print("no image")
+                        return }
+                    retImage = image
+                    
+                }
+                
+            })
+            downloadTask.resume()
+            }
+//                  }
+          }
+        print(retImage)
+        return retImage
+      }
+    
+    
+}
 
 extension String {
     

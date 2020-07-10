@@ -46,26 +46,105 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         return GIDSignIn.sharedInstance().handle(url)
     }
 
-    func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error?) {
-      // ...
-      if error != nil {
+//    func signUp(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error?){
+//
+//        if (error != nil) {
+//            if ((error as! NSError).code == -4) {
+//            NSLog("The user has not signed in before or they have since signed out.")
+//          } else {
+//            NSLog(String(error!.localizedDescription))
+//          }
+//          return
+//        }
+//
+//
+//        let userId: String = user.userID
+//        let idToken: String = user.authentication.idToken
+//        let fullName: String = user.profile.name
+//        let givenName: String = user.profile.givenName
+//        let familyName: String = user.profile.familyName
+//        let email: String = user.profile.email
+//        // ...
+        
+        
+        
+//        guard let authentication = user.authentication else { return []}
+//
+//
+//
+//        //Google Credential -> Firebase credential
+//        let credential = GoogleAuthProvider.credential(withIDToken: authentication.idToken,
+//                                                          accessToken: authentication.accessToken)
+        
+        
+            
+//        }
+        
+
+func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error?) {
+      // Google sign in and token retrieval
+    if(user == nil){
+        return
+    }
+      
+    if error != nil {
         print("Error:\(error)")
         return
       }
-
-      guard let authentication = user.authentication else { return }
-      let credential = GoogleAuthProvider.credential(withIDToken: authentication.idToken,
+ 
+    let userId: String = user.userID
+    let idToken: String = user.authentication.idToken
+    let fullName: String = user.profile.name
+    let givenName: String = user.profile.givenName
+    let familyName: String = user.profile.familyName
+    let email: String = user.profile.email
+    
+    
+    
+    guard let authentication = user.authentication else { return }
+        
+      //Google Credential -> Firebase credential
+    let credential = GoogleAuthProvider.credential(withIDToken: authentication.idToken,
                                                         accessToken: authentication.accessToken)
       
-        Auth.auth().signIn(with: credential) { (user, error) in
-            if user == nil {
-                print("no user")
-                return
-            }
-            
-            print("User is signed in")
-        }
+      //sign up has different method called in AppDelegate
+      
+      //try to sign in
+    Auth.auth().signIn(with: credential) { (authResult, error) in
+        //authresult = Promise of UserCredential
+    if(authResult != nil){
+        return
     }
+    //if user not found then create new user w temp password and send password reset link
+    var a = false
+    Auth.auth().fetchSignInMethods(forEmail: email, completion: { (emailProm, error) in
+        if(error != nil){
+            a = true
+        }
+    })
+    
+    if (error != nil){
+        if(a){
+            let x = user.hashValue
+            Auth.auth().createUser(withEmail: email, password: String(x)) { (authResult, error) in
+                if(error != nil){
+                    NSLog(String(error!.localizedDescription))
+                }
+            }
+            Auth.auth().sendPasswordReset(withEmail: email) { (error) in
+                if error != nil{
+                    NSLog(String(error!.localizedDescription))
+                }
+            }
+        }
+        NSLog(String(error!.localizedDescription))
+        return
+    }
+
+    }
+}
+    
+    
 
     func sign(_ signIn: GIDSignIn!, didDisconnectWith user: GIDGoogleUser!, withError error: Error!) {
         // Perform any operations when the user disconnects from app here.

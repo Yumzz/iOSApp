@@ -376,6 +376,15 @@ PODS:
     - nanopb/encode (= 1.30905.0)
   - nanopb/decode (1.30905.0)
   - nanopb/encode (1.30905.0)
+  - PromiseKit (6.13.1):
+    - PromiseKit/CorePromise (= 6.13.1)
+    - PromiseKit/Foundation (= 6.13.1)
+    - PromiseKit/UIKit (= 6.13.1)
+  - PromiseKit/CorePromise (6.13.1)
+  - PromiseKit/Foundation (6.13.1):
+    - PromiseKit/CorePromise
+  - PromiseKit/UIKit (6.13.1):
+    - PromiseKit/CorePromise
   - PromisesObjC (1.2.9)
 
 DEPENDENCIES:
@@ -391,6 +400,7 @@ DEPENDENCIES:
   - FirebaseFirestoreSwift
   - GoogleSignIn
   - Instructions
+  - PromiseKit (~> 6.8)
 
 SPEC REPOS:
   trunk:
@@ -422,6 +432,7 @@ SPEC REPOS:
     - Instructions
     - leveldb-library
     - nanopb
+    - PromiseKit
     - PromisesObjC
 
 SPEC CHECKSUMS:
@@ -453,8 +464,9 @@ SPEC CHECKSUMS:
   Instructions: debf9cedeaf8d095108fd35d2c54b97ccf769e65
   leveldb-library: 55d93ee664b4007aac644a782d11da33fba316f7
   nanopb: c43f40fadfe79e8b8db116583945847910cbabc9
+  PromiseKit: 28fda91c973cc377875d8c0ea4f973013c05b6db
   PromisesObjC: b48e0338dbbac2207e611750777895f7a5811b75
 
-PODFILE CHECKSUM: a11a613e537c3d27698431da990af73aed4a06e6
+PODFILE CHECKSUM: ecd6a246e9effe291c56328bafe57638ca5c2d3b
 
 COCOAPODS: 1.9.3

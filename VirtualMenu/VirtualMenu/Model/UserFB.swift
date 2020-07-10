@@ -70,7 +70,7 @@ extension UserFB: Hashable {
         let name = userName
         var image: UIImage?
         let storageRef = storage.reference()
-        let imagesRef = storageRef.child("virtual-menu-profilephotos/\(name)")
+        let imagesRef = storageRef.child("virtual-menu-profilephotos-/\(name)")
         imagesRef.getData(maxSize: 1 * 1024 * 1024) { data, error in
         if let error = error {
           // Uh-oh, an error occurred!

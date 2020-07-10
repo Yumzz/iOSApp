@@ -15,6 +15,8 @@ import GoogleSignIn
 import FBSDKLoginKit
 import FBSDKCoreKit
 
+var user: UserProfile = UserProfile(userId: "", fullName: "", emailAddress: "", profilePicture: "", profPhoto: nil)
+
 struct LoginView: View {
     
     @EnvironmentObject var accountDetails: AccountDetails
@@ -22,7 +24,7 @@ struct LoginView: View {
     @State var email: String = ""
     @State var password: String = ""
     @State var alertMsg = ""
-    
+        
     @State private var showForgotPassword = false
     @State private var showSignup = false
     @State var showAlert = false
@@ -133,7 +135,6 @@ struct LoginView: View {
                         }.padding(.trailing, (UIScreen.main.bounds.width * 10) / 414)
                     }
                     
-                    
                     VStack {
                         Spacer()
                             .frame(height: 10)
@@ -141,10 +142,8 @@ struct LoginView: View {
                             if  self.isValidInputs() {
                                 Auth.auth().signIn(withEmail: self.email, password: self.password){
                                     (result, error) in
-                                    
-                                    if error != nil{
-                                        self.alertMsg = "Email can't be blank."
-                                        self.showAlert.toggle()
+                                    if(error == nil){
+                                        self.updateProfile()
                                     }
                                     self.loggedin.toggle()
                                 }
@@ -235,13 +234,49 @@ struct LoginView: View {
                         .resizable()
                         .overlay(Color(UIColor().colorFromHex("#FFFFFF", 0.8)))
                         .edgesIgnoringSafeArea(.all))
-
-
-        
     }
     
     
-    
+    func updateProfile() {
+            let storage = Storage.storage()
+            let imagesRef = storage.reference().child("profilephotos/\(Auth.auth().currentUser!.uid)")
+            
+            print(imagesRef.storage)
+            print(imagesRef.bucket)
+            print(imagesRef.name)
+        
+            Utils().getUserProfileImgURL(userId: Auth.auth().currentUser!.uid, completionHandler: { (res) in
+                user.profilePhotoURL = res
+            })
+                
+            user.userId = Auth.auth().currentUser!.uid
+            Database.database().reference().child("users").child(user.userId).observeSingleEvent(of: .value, with: { (snapshot) in
+                let value = snapshot.value as? NSDictionary
+                user.fullName = value?["username"] as? String ?? ""
+            })
+//            user.fullName = Auth.auth().currentUser!.displayName!
+             user.emailAddress = Auth.auth().currentUser!.email!
+            
+            //finishes after return is given as it is a little slow
+             DispatchQueue.main.async {
+                imagesRef.getData(maxSize: 2 * 2048 * 2048) { data, error in
+                if let error = error {
+                  // Uh-oh, an error occurred!
+                    user.profilePhoto = UIImage(imageLiteralResourceName: "profile_photo_edit")
+                    print(error.localizedDescription)
+                } else {
+                  // Data for "profilephotos/\(uid).jpg" is returned
+                    print("data: \(data)")
+                    user.profilePhoto = UIImage(data: data!)!
+                    }
+                }
+            }
+    //        DispatchQueue.main.async {
+    //        }
+        print(user.profilePhotoURL)
+        print(user.emailAddress)
+        print(user.fullName)
+        }
     
     fileprivate func isValidInputs() -> Bool {
         if self.email == "" {
@@ -287,7 +322,7 @@ struct LoginView: View {
             }
         }
     
-}
+    }
 
 
 }

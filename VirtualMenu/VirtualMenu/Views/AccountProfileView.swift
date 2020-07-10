@@ -32,11 +32,18 @@ struct ProfileButton: View {
 
 class AccountProfileViewModel: ObservableObject {
     
-    @Published var user: ARMUser? = nil
     @Published var username: String? = nil
+    @Published var user1: UserFB? = nil
+    @Published var user2: User? = Auth.auth().currentUser!
+    @Published var userProf: UserProfile? = nil
+    @Published var num: Int = 0
+    
+
     
     let dbb2 = DatabaseRequest()
-    let fbb2 = Firestore.firestore()
+    let fbb2 = FirebaseRequest()
+    
+    let storage = Storage.storage()
     
 //    func fetchFireUser() {
 //           var fetchUser: UserFB? = nil
@@ -47,47 +54,115 @@ class AccountProfileViewModel: ObservableObject {
 //           }
 //       }
     
-    func fetchUser() {
-        var fetchUser: ARMUser? = nil
-        DispatchQueue.main.async {
-            fetchUser = self.dbb2.fetchUserWithCloudID(cloudID: KeychainItem.currentUserIdentifier!)
-            self.user = fetchUser
-            self.username = self.user?.userName
+//    func fetchUser() {
+//        var fetchUser: ARMUser? = nil
+//        DispatchQueue.main.async {
+//            fetchUser = self.dbb2.fetchUserWithCloudID(cloudID: KeychainItem.currentUserIdentifier!)
+//            self.user = fetchUser
+//            self.username = self.user?.userName
+//        }
+//    }
+//
+//    func fetchUser1() {
+//        var fetchUser: UserFB? = nil
+//        self.user2 = Auth.auth().currentUser!
+//        self.user1 = Auth.auth().currentUser
+//        DispatchQueue.main.async {
+//            fetchUser = self.fbb2.fetchUser(email: Auth.auth().currentUser!.email!)
+//            self.user1 = fetchUser
+//            self.username = Auth.auth().currentUser?.displayName
+//        }
+//    }
+    
+    func getProfilePhoto() -> UIImage {
+        var image: UIImage? = nil
+        let storageRef = storage.reference()
+        let imagesRef = storage.reference().child("profilephotos/\(Auth.auth().currentUser!.uid)")
+        
+        print(imagesRef.storage)
+        print(imagesRef.bucket)
+        print(imagesRef.name)
+        
+        //finishes after return is given as it is a little slow
+         DispatchQueue.main.async {
+            imagesRef.getData(maxSize: 1 * 1024 * 1024) { data, error in
+            if let error = error {
+              // Uh-oh, an error occurred!
+                print(error.localizedDescription)
+            } else {
+              // Data for "profilephotos/\(uid).jpg" is returned
+                print("data: \(data)")
+                image = UIImage(data: data!)!
+                print("image exists: \(image)")
+
+                }
+            }
         }
+//        DispatchQueue.main.async {
+        if(image != nil){
+            print("not nil")
+            return image!
+        }
+        else{
+            print("nil")
+             return UIImage(imageLiteralResourceName: "profile_photo_edit")
+        }
+//        }
     }
     
     func getProfPhoto() -> UIImage {
-        print("gettin photo")
-        if self.user != nil {
-            let imageAsset: CKAsset? = self.user!.profilePhoto
-            let data = NSData(contentsOf: (imageAsset?.fileURL!)!)
-            let image = UIImage(data: data! as Data)
-            if image == nil {
-                print("nil image but user is there")
-                return UIImage(imageLiteralResourceName: "profile_photo_edit")
+        if self.user2 != nil {
+            let found = Utils().loadUserProfilePhoto(userId: self.user2!.uid)
+            if(found != nil){
+                print("found")
+                return found!
             }
             else{
-                print("image exists")
-                return image!
+                print("no prof photo")
+                return UIImage(imageLiteralResourceName: "profile_photo_edit")
             }
         }
         else{
-            print("user does not exist")
-            return UIImage(imageLiteralResourceName: "profile_photo_edit")
+         print("no user")
+         return UIImage(imageLiteralResourceName: "profile_photo_edit")
         }
     }
     
-    func getUIImageFromCKAsset(image: CKAsset?) -> UIImage? {
-        if(self.user != nil){
-            let file: CKAsset? = image
-            let data = NSData(contentsOf: (file?.fileURL!)!)
-        
-            return UIImage(data: data! as Data) ?? nil
-        }
-        else {
-            return UIImage(imageLiteralResourceName: "profile_photo_edit")
-        }
-    }
+    
+//    func getProfPhoto() -> UIImage {
+//        print("gettin photo")
+//        if self.user != nil {
+//            let imageAsset: CKAsset? = self.user!.profilePhoto
+//            let data = NSData(contentsOf: (imageAsset?.fileURL!)!)
+//            let image = UIImage(data: data! as Data)
+//
+//            let a = self
+//            if image == nil {
+//                print("nil image but user is there")
+//                return UIImage(imageLiteralResourceName: "profile_photo_edit")
+//            }
+//            else{
+//                print("image exists")
+//                return image!
+//            }
+//        }
+//        else{
+//            print("user does not exist")
+//            return UIImage(imageLiteralResourceName: "profile_photo_edit")
+//        }
+//    }
+    
+//    func getUIImageFromCKAsset(image: CKAsset?) -> UIImage? {
+//        if(self.user != nil){
+//            let file: CKAsset? = image
+//            let data = NSData(contentsOf: (file?.fileURL!)!)
+//
+//            return UIImage(data: data! as Data) ?? nil
+//        }
+//        else {
+//            return UIImage(imageLiteralResourceName: "profile_photo_edit")
+//        }
+//    }
     
 }
 
@@ -101,7 +176,7 @@ struct AccountProfileView: View {
             VStack(spacing: 40){
                 ZStack{
                     if image ==  nil {
-                        Image(uiImage: self.AccountProf.getUIImageFromCKAsset(image: self.AccountProf.user?.profilePhoto)!)
+                        Image(uiImage: user.profilePhoto!)
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                         .frame(width: 150, height: 150)
@@ -150,10 +225,10 @@ struct AccountProfileView: View {
                     Text("Edit Profile Photo")
         }))
             .onAppear{
-                    if self.AccountProf.user == nil {
-                        print("calling fetching")
-                        self.AccountProf.fetchUser()
-                    }
+//                    if self.AccountProf.user == nil {
+//                        print("calling fetching")
+//                        self.AccountProf.fetchUser()
+//                    }
             }
             .sheet(isPresented: $showingImagePicker, onDismiss: changePhoto){ ImagePicker(image: self.$inputImage)
             }
@@ -163,6 +238,10 @@ struct AccountProfileView: View {
     func changePhoto(){
         guard let inputImage = inputImage else { return }
         image = Image(uiImage: inputImage)
+        Utils().uploadUserProfileImage(profileImage: inputImage)
+        user.profilePhoto = inputImage
+        
+//        changeRequest?.photoURL = image
     }
     
 }
