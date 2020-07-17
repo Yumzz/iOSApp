@@ -32,7 +32,7 @@ struct LoginView: View {
     @State private var alertMessage = ""
     @State private var alertTitle = ""
     
-    @State var loggedin = false
+    @Binding var loggedin: Bool
     @State var showGoogle = false
     @State var showFB = false
 
@@ -44,196 +44,204 @@ struct LoginView: View {
         Alert(title: Text(""), message: Text(alertMsg), dismissButton: .default(Text("OK")))
     }
     
+    @ViewBuilder
     var body: some View {
-            VStack {
-                
-                VStack {
-                    Spacer(minLength: (UIScreen.main.bounds.width * 15.0) / 414.0)
-                    
-    //                Logo + Name
-                    
-                    Spacer(minLength: (UIScreen.main.bounds.width * 15) / 414)
-                    
-                    VStack {
-                        
-    //                    Logo()
-                        
-                        VStack(spacing: 0) {
+            
+                       VStack {
                             
-                            Text("Email")
-                                .frame(maxWidth: .infinity, alignment: .leading)
-                                .padding(.leading, (UIScreen.main.bounds.width * 40) / 414)
-                                .foregroundColor(Color(UIColor().colorFromHex("#F88379", 1)))
+                            VStack {
+                                Spacer(minLength: (UIScreen.main.bounds.width * 15.0) / 414.0)
                                 
-                            
-                            TextField("", text: $email)
-                                .frame(height: (UIScreen.main.bounds.width * 40) / 414, alignment: .center)
-                                .padding(.leading, (UIScreen.main.bounds.width * 40) / 414)
-                                .padding(.trailing, (UIScreen.main.bounds.width * 40) / 414)
-                                .font(.system(size: (UIScreen.main.bounds.width * 15) / 414, weight: .regular, design: .default))
-                                .imageScale(.small)
-                                .keyboardType(.emailAddress)
-                                .autocapitalization(UITextAutocapitalizationType.none)
-                            
-                            Divider().background(Color(UIColor().colorFromHex("#F88379", 1)))
-                            .padding(.leading, (UIScreen.main.bounds.width * 40) / 414)
-                            .padding(.trailing, (UIScreen.main.bounds.width * 40) / 414)
-                            
-                        }
-    //                    seperator()
-                    }
-                    
-                    Spacer(minLength: (UIScreen.main.bounds.width * 15) / 414)
-                    
-                    VStack {
-                        
-                        VStack(spacing: 0) {
-                            
-                            Text("Password")
-                                .frame(maxWidth: .infinity, alignment: .leading)
-                                .padding(.leading, (UIScreen.main.bounds.width * 40) / 414)
-                                .foregroundColor(Color(UIColor().colorFromHex("#F88379", 1)))
+                //                Logo + Name
                                 
+                                Spacer(minLength: (UIScreen.main.bounds.width * 15) / 414)
                                 
-                            
-                            SecureField("", text: $password)
-                                .frame(height: (UIScreen.main.bounds.width * 40) / 414, alignment: .center)
-                                .padding(.leading, (UIScreen.main.bounds.width * 40) / 414)
-                                .padding(.trailing, (UIScreen.main.bounds.width * 40) / 414)
-                                .font(.system(size: (UIScreen.main.bounds.width * 15) / 414, weight: .regular, design: .default))
-                                .imageScale(.small)
-                                .foregroundColor(Color(UIColor().colorFromHex("#F88379", 1)))
-                            
-                            Divider().background(Color(UIColor().colorFromHex("#F88379", 1)))
-                            .padding(.leading, (UIScreen.main.bounds.width * 40) / 414)
-                            .padding(.trailing, (UIScreen.main.bounds.width * 40) / 414)
-                        }
-    //                    seperator()
-                        
-                    }
-                    
-                    Spacer(minLength: (UIScreen.main.bounds.width * 15) / 414)
-                    
-                    VStack(alignment: .trailing) {
-                        HStack {
-                            Spacer()
-                                .frame(height: 5)
-                            
-                            Button(action: {
-                                self.showForgotPassword = true
-                            }) {
-                                Text("Forgot Password?")
-                                    .foregroundColor(.black)
-                                    .padding(.trailing, (UIScreen.main.bounds.width * 40) / 414)
-                                    .font(.system(size: (UIScreen.main.bounds.width * 15) / 414, weight: .bold, design: .default))
-                                
-                            }
-    //                        .sheet(isPresented: self.$showForgotPassword) {
-    //                            ForgotPasswordView()
-    //                        }
-                            
-                        }.padding(.trailing, (UIScreen.main.bounds.width * 10) / 414)
-                    }
-                    
-                    VStack {
-                        Spacer()
-                            .frame(height: 10)
-                        CustomButton(action: {
-                            if  self.isValidInputs() {
-                                Auth.auth().signIn(withEmail: self.email, password: self.password){
-                                    (result, error) in
-                                    if(error == nil){
-                                        self.updateProfile()
+                                VStack {
+                                    
+                //                    Logo()
+                                    
+                                    VStack(spacing: 0) {
+                                        
+                                        Text("Email")
+                                            .frame(maxWidth: .infinity, alignment: .leading)
+                                            .padding(.leading, (UIScreen.main.bounds.width * 40) / 414)
+                                            .foregroundColor(Color(UIColor().colorFromHex("#F88379", 1)))
+                                            
+                                        
+                                        TextField("", text: $email)
+                                            .frame(height: (UIScreen.main.bounds.width * 40) / 414, alignment: .center)
+                                            .padding(.leading, (UIScreen.main.bounds.width * 40) / 414)
+                                            .padding(.trailing, (UIScreen.main.bounds.width * 40) / 414)
+                                            .font(.system(size: (UIScreen.main.bounds.width * 15) / 414, weight: .regular, design: .default))
+                                            .imageScale(.small)
+                                            .keyboardType(.emailAddress)
+                                            .autocapitalization(UITextAutocapitalizationType.none)
+                                        
+                                        Divider().background(Color(UIColor().colorFromHex("#F88379", 1)))
+                                        .padding(.leading, (UIScreen.main.bounds.width * 40) / 414)
+                                        .padding(.trailing, (UIScreen.main.bounds.width * 40) / 414)
+                                        
                                     }
-                                    self.loggedin.toggle()
+                //                    seperator()
                                 }
-                            }
-                        })
-                        {
-                            Text("LOGIN")
-                                .foregroundColor(Color(UIColor().colorFromHex("#F88379", 1)))
-                        }
-                        .frame(width: 100)
-                        .sheet(isPresented: self.$loggedin) {
-                            AppView()
-                        }
-                    }
-                    
-                    HStack{
-                        
-                        VStack{
-                            Divider()
-                                .padding(.leading, (UIScreen.main.bounds.width * 40) / 414)
-                                .frame(width: (UIScreen.main.bounds.width/2.3), height: 10, alignment: .leading)
+                                
+                                Spacer(minLength: (UIScreen.main.bounds.width * 15) / 414)
+                                
+                                VStack {
+                                    
+                                    VStack(spacing: 0) {
+                                        
+                                        Text("Password")
+                                            .frame(maxWidth: .infinity, alignment: .leading)
+                                            .padding(.leading, (UIScreen.main.bounds.width * 40) / 414)
+                                            .foregroundColor(Color(UIColor().colorFromHex("#F88379", 1)))
+                                            
+                                            
+                                        
+                                        SecureField("", text: $password)
+                                            .frame(height: (UIScreen.main.bounds.width * 40) / 414, alignment: .center)
+                                            .padding(.leading, (UIScreen.main.bounds.width * 40) / 414)
+                                            .padding(.trailing, (UIScreen.main.bounds.width * 40) / 414)
+                                            .font(.system(size: (UIScreen.main.bounds.width * 15) / 414, weight: .regular, design: .default))
+                                            .imageScale(.small)
+                                            .foregroundColor(Color(UIColor().colorFromHex("#F88379", 1)))
+                                        
+                                        Divider().background(Color(UIColor().colorFromHex("#F88379", 1)))
+                                        .padding(.leading, (UIScreen.main.bounds.width * 40) / 414)
+                                        .padding(.trailing, (UIScreen.main.bounds.width * 40) / 414)
+                                    }
+                //                    seperator()
+                                    
+                                }
+                                
+                                Spacer(minLength: (UIScreen.main.bounds.width * 15) / 414)
+                                
+                                VStack(alignment: .trailing) {
+                                    HStack {
+                                        Spacer()
+                                            .frame(height: 5)
+                                        
+                                        Button(action: {
+                                            self.showForgotPassword = true
+                                        }) {
+                                            Text("Forgot Password?")
+                                                .foregroundColor(.black)
+                                                .padding(.trailing, (UIScreen.main.bounds.width * 40) / 414)
+                                                .font(.system(size: (UIScreen.main.bounds.width * 15) / 414, weight: .bold, design: .default))
+                                            
+                                        }
+                //                        .sheet(isPresented: self.$showForgotPassword) {
+                //                            ForgotPasswordView()
+                //                        }
+                                        
+                                    }.padding(.trailing, (UIScreen.main.bounds.width * 10) / 414)
+                                }
+                                
+                                VStack {
+                                    Spacer()
+                                        .frame(height: 10)
+                                    Button(action: {
+                                        if  self.isValidInputs() {
+                                            Auth.auth().signIn(withEmail: self.email, password: self.password){
+                                                (result, error) in
+                                                if(error == nil){
+                                                    self.updateProfile()
+                                                }
+                                                self.loggedin.toggle()
+                                            }
+                                        }
+                                    }, label: {
+            //                                AppView()
+                                                Text("LOGIN")
+                                                    .foregroundColor(Color(UIColor().colorFromHex("#FFFFFF", 1)))
+                                            .navigationBarTitle("")
+                                            .navigationBarHidden(true)
+                                    })
+                                    .cornerRadius(10)
+                                    .padding().frame(width: UIScreen.main.bounds.width/1.5, height: 40)
+                                    .background(Color(UIColor().colorFromHex("#000000", 1)))
+                                    .frame(width: 100)
+                                    .sheet(isPresented: self.$loggedin) {
+                                        AppView()
+                                    }
+                                    
+                                }
+                                
+                                HStack{
+                                    
+                                    VStack{
+                                        Divider()
+                                            .padding(.leading, (UIScreen.main.bounds.width * 40) / 414)
+                                            .frame(width: (UIScreen.main.bounds.width/2.3), height: 10, alignment: .leading)
 
-                        }
-                        
-                        Text("OR")
-                        
-                        VStack{
-                             Divider()
-                               .padding(.trailing, (UIScreen.main.bounds.width * 40) / 414)
-                               .frame(width: (UIScreen.main.bounds.width/2.3), height: 10, alignment: .trailing)
-                           }
-                        
-                    }
-                    
-                    VStack(spacing: 10){
-                        Spacer()
-                            .frame(height: 10)
-                        CustomButton(action: {
-                            self.showGoogle.toggle()
-                            SocialLogin().attemptLoginGoogle()
-                        }){
-                            HStack{
-                                Image("continue_with_google")
-                                    .renderingMode(.original)
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fit)
-                                    .frame(width: 40, height: 40)
-                                Text("CONTINUE WITH GOOGLE")
-                                .foregroundColor(Color(UIColor().colorFromHex("#F88379", 1)))
-                            }
-                        }
-                        CustomButton(action: {
-                            self.showFB.toggle()
-                            SocialLogin().attemptLoginFb(completion: { result, error in
-                            })
+                                    }
+                                    
+                                    Text("OR")
+                                    
+                                    VStack{
+                                         Divider()
+                                           .padding(.trailing, (UIScreen.main.bounds.width * 40) / 414)
+                                           .frame(width: (UIScreen.main.bounds.width/2.3), height: 10, alignment: .trailing)
+                                       }
+                                    
+                                }
+                                
+                                VStack(spacing: 10){
+                                    Spacer()
+                                        .frame(height: 10)
+                                    CustomButton(action: {
+                                        self.showGoogle.toggle()
+                                        SocialLogin().attemptLoginGoogle()
+                                    }){
+                                        HStack{
+                                            Image("continue_with_google")
+                                                .renderingMode(.original)
+                                                .resizable()
+                                                .aspectRatio(contentMode: .fit)
+                                                .frame(width: 40, height: 40)
+                                            Text("CONTINUE WITH GOOGLE")
+                                            .foregroundColor(Color(UIColor().colorFromHex("#F88379", 1)))
+                                        }
+                                    }
+                                    CustomButton(action: {
+                                        self.showFB.toggle()
+                                        SocialLogin().attemptLoginFb(completion: { result, error in
+                                        })
 
-                        }){
-                            HStack{
-                                Image("continue_with_facebook")
-                                    .renderingMode(.original)
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fit)
-                                    .frame(width: 40, height: 40)
-                                Text("CONTINUE WITH FACEBOOK")
-                                .foregroundColor(Color(UIColor().colorFromHex("#F88379", 1)))
-                            }
-                        }
-                        Button(action: {
-                                self.showSignup.toggle()
-                        }) {
-                            Text("New User? Create an account")
-                                .foregroundColor(.black)
-                                .font(.system(size: (UIScreen.main.bounds.width * 15) / 414, weight: .bold, design: .default))
+                                    }){
+                                        HStack{
+                                            Image("continue_with_facebook")
+                                                .renderingMode(.original)
+                                                .resizable()
+                                                .aspectRatio(contentMode: .fit)
+                                                .frame(width: 40, height: 40)
+                                            Text("CONTINUE WITH FACEBOOK")
+                                            .foregroundColor(Color(UIColor().colorFromHex("#F88379", 1)))
+                                        }
+                                    }
+                                    Button(action: {
+                                            self.showSignup.toggle()
+                                    }) {
+                                        Text("New User? Create an account")
+                                            .foregroundColor(.black)
+                                            .font(.system(size: (UIScreen.main.bounds.width * 15) / 414, weight: .bold, design: .default))
 
-                        }
-                            .sheet(isPresented: self.$showSignup) {
-                                SignUpView()
+                                    }
+                                        .sheet(isPresented: self.$showSignup) {
+                                            SignUpView()
+                                        }
+                                }
+                                
+                //
+                //                    Spacer(minLength: (UIScreen.main.bounds.width * 20) / 414)
+                //                }
                             }
-                    }
-                    
-    //
-    //                    Spacer(minLength: (UIScreen.main.bounds.width * 20) / 414)
-    //                }
-                }
-            }
-            .alert(isPresented: $showAlert, content: { self.alert })
-            .background(Image("initial_screen_back")
-                        .resizable()
-                        .overlay(Color(UIColor().colorFromHex("#FFFFFF", 0.8)))
-                        .edgesIgnoringSafeArea(.all))
+                        }
+                        .alert(isPresented: $showAlert, content: { self.alert })
+            //            .background(Image("initial_screen_back")
+            //                        .resizable()
+            //                        .overlay(Color(UIColor().colorFromHex("#FFFFFF", 0.8)))
+            //                        .edgesIgnoringSafeArea(.all))
     }
     
     
@@ -329,6 +337,6 @@ struct LoginView: View {
 
 struct LoginView_Previews: PreviewProvider {
     static var previews: some View {
-        LoginView()
+        LoginView(loggedin: .constant(false))
     }
 }

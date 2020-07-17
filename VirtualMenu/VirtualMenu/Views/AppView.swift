@@ -9,8 +9,11 @@
 import SwiftUI
 
 struct AppView: View {
+    
+    @State private var currentTab = 1
+    
     var body: some View {
-        TabView {
+        TabView(selection: $currentTab) {
             NavigationView {
                 SearchView()
             }
