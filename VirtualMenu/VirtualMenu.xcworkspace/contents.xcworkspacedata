@@ -2,9 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:/Users/valentin/Projects/Menu/VirtualMenu/VirtualMenu/Views/SwiftUIView.swift">
-   </FileRef>
-   <FileRef
       location = "group:VirtualMenu.xcodeproj">
    </FileRef>
    <FileRef

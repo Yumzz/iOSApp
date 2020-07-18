@@ -130,13 +130,12 @@ struct Utils {
         var retImage: UIImage? = nil
         
         Utils().getUserProfileImgURL(userId: userId) { (profileImgURL) in
-        print(URL(string: profileImgURL))
         if let url = URL(string: profileImgURL) {
             
             let downloadTask = URLSession.shared.dataTask(with: url, completionHandler: { (data, response, error) in
                 
                 if(error != nil){
-                    print(error?.localizedDescription)
+                    print(error?.localizedDescription ?? "error")
                     
                 }
                 
@@ -156,7 +155,6 @@ struct Utils {
             }
 //                  }
           }
-        print(retImage)
         return retImage
       }
     
@@ -191,7 +189,6 @@ extension String {
     }
     
     var isValidPhoneNo: Bool {
-        
         let phoneCharacters = CharacterSet(charactersIn: "+0123456789").inverted
         let arrCharacters = self.components(separatedBy: phoneCharacters)
         return self == arrCharacters.joined(separator: "")

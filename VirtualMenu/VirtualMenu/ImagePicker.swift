@@ -40,10 +40,10 @@ struct ImagePicker: UIViewControllerRepresentable {
                         try editedImage.pngData()?.write(to: imageURL)
                     } catch { }
                     
-                    let imageAsset = CKAsset(fileURL: imageURL)
-                    
-                    let result = db.editUsePhoto(cloudID: KeychainItem.currentUserIdentifier!, photo: imageAsset)
-                    print("result: \(result)")
+//                    let imageAsset = CKAsset(fileURL: imageURL)
+//
+//                    let result = db.editUsePhoto(cloudID: KeychainItem.currentUserIdentifier!, photo: imageAsset)
+//                    print("result: \(result)")
                     
                 }
                 

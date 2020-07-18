@@ -10,10 +10,10 @@ import SwiftUI
 
 struct AppView: View {
     
-    @State private var currentTab = 1
+//    @State private var currentTab = 1
     
     var body: some View {
-        TabView(selection: $currentTab) {
+        TabView() {
             NavigationView {
                 SearchView()
             }

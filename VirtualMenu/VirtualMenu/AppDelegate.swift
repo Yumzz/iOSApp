@@ -92,11 +92,11 @@ func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError err
         return
       }
  
-    let userId: String = user.userID
-    let idToken: String = user.authentication.idToken
-    let fullName: String = user.profile.name
-    let givenName: String = user.profile.givenName
-    let familyName: String = user.profile.familyName
+//    let userId: String = user.userID
+//    let idToken: String = user.authentication.idToken
+//    let fullName: String = user.profile.name
+//    let givenName: String = user.profile.givenName
+//    let familyName: String = user.profile.familyName
     let email: String = user.profile.email
     
     
