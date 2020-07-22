@@ -15,16 +15,9 @@ struct RestaurantMapView: View {
             ZStack{
                 MapView().edgesIgnoringSafeArea(.all)
                 VStack {
-                    HStack {
-                        Image(systemName: "magnifyingglass")
-                        TextField("Search restaurant", text: self.$strSearch)
-                        
-                    }.frame(width: geometry.size.width - 100)
-                        .padding(EdgeInsets(top: 8, leading: 6, bottom: 8, trailing: 6))
-                        .foregroundColor(.primary)
-                    .background(Color(.tertiarySystemBackground))
-                    .cornerRadius(10.0)
-                    .shadow(radius: 5)
+                    RestaurantSearchbarView(strSearch: self.$strSearch)
+                        .padding()
+                    
                     
                     Spacer()
                     HStack(spacing: 10){
