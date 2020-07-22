@@ -14,8 +14,6 @@ import Firebase
 
 //Will be: walkthrough screens -> sign in view
 struct ContentView: View {
-    @EnvironmentObject var signInWithAppleManager: SignInWithAppleManager
-    
     
     var body: some View {
         ZStack {

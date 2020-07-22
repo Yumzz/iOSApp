@@ -27,9 +27,10 @@ struct OrderView: View {
                 Text("See: \(self.numbers[self.selectorIndex])").padding()
                 Spacer()
             }
+            .navigationBarTitle("")
+            .navigationBarHidden(true)
         }
-        .navigationBarTitle("")
-        .navigationBarHidden(true)
+
     }
 }
 

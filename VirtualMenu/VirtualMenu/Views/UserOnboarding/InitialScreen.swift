@@ -2,7 +2,7 @@
 //  InitialScreen.swift
 //  
 //
-//  Created by Rohan Tyagi on 6/24/20.
+//  Created by Rohan Tyagi on 6/24/20
 //
 
 import SwiftUI
@@ -56,14 +56,13 @@ struct InitialScreen: View {
                                     }
                                 }
                                     .cornerRadius(10)
-                                    
                                     .background(Color(UIColor().colorFromHex("#FFFFFF", 1)))
                             }
                         }
                     }
                 }
-            }
         }
+    }
     }
 
 struct InitialScreen_Previews: PreviewProvider {

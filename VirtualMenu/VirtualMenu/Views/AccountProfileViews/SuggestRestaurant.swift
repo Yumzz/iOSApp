@@ -111,6 +111,7 @@ struct MultiLineTFSuggestRestaurant: UIViewRepresentable {
         tview.text = "The street address, city, state, and zip code would help us out tremendously!"
         tview.delegate = context.coordinator
         tview.textColor = .gray
+        tview.returnKeyType = .continue
         return tview
     }
 

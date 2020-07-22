@@ -11,7 +11,7 @@ import Foundation
 struct Constants {
     
     struct baseURL {
-        static let api = "https://us-yumzz-web.cloudfunctions.net"
+        static let api = "https://us-central1-virtual-menu-59b9e.cloudfunctions.net"
     }
 }
 

@@ -28,7 +28,7 @@ struct SignUpView: View {
     @State var createdAccount = false
     
     var body: some View {
-            
+        NavigationView{
             VStack {
                 
                 VStack {
@@ -40,13 +40,14 @@ struct SignUpView: View {
                         
                         Spacer(minLength: (UIScreen.main.bounds.width * 15) / 414)
 
-                        Logo()
+//                        Logo()
                                                 
                         VStack(spacing: 0) {
                             
                             Text("Name")
                                 .frame(maxWidth: .infinity, alignment: .leading)
                                 .padding(.leading, (UIScreen.main.bounds.width * 40) / 414)
+                                .foregroundColor(Color(UIColor().colorFromHex("#F88379", 1)))
                             
                             TextField("", text: $name)
                                 .frame(height: (UIScreen.main.bounds.width * 40) / 414, alignment: .center)
@@ -55,8 +56,9 @@ struct SignUpView: View {
                                 .font(.system(size: (UIScreen.main.bounds.width * 15) / 414, weight: .regular, design: .default))
                                 .imageScale(.small)
                                 .autocapitalization(UITextAutocapitalizationType.words)
+                                .foregroundColor(Color(UIColor().colorFromHex("#F88379", 1)))
                             
-                            Divider()
+                            Divider().background(Color(UIColor().colorFromHex("#F88379", 1)))
                             .padding(.leading, (UIScreen.main.bounds.width * 40) / 414)
                             .padding(.trailing, (UIScreen.main.bounds.width * 40) / 414)
                         }
@@ -72,6 +74,7 @@ struct SignUpView: View {
                             Text("Email")
                                 .frame(maxWidth: .infinity, alignment: .leading)
                                 .padding(.leading, (UIScreen.main.bounds.width * 40) / 414)
+                                .foregroundColor(Color(UIColor().colorFromHex("#F88379", 1)))
                                 
                             
                             TextField("", text: $email)
@@ -79,11 +82,12 @@ struct SignUpView: View {
                                 .padding(.leading, (UIScreen.main.bounds.width * 40) / 414)
                                 .padding(.trailing, (UIScreen.main.bounds.width * 40) / 414)
                                 .font(.system(size: (UIScreen.main.bounds.width * 15) / 414, weight: .regular, design: .default))
+                                .foregroundColor(Color(UIColor().colorFromHex("#F88379", 1)))
                                 .imageScale(.small)
                             .keyboardType(.emailAddress)
                             .autocapitalization(UITextAutocapitalizationType.none)
                             
-                            Divider()
+                            Divider().background(Color(UIColor().colorFromHex("#F88379", 1)))
                             .padding(.leading, (UIScreen.main.bounds.width * 40) / 414)
                             .padding(.trailing, (UIScreen.main.bounds.width * 40) / 414)
                         }
@@ -99,6 +103,7 @@ struct SignUpView: View {
                             Text("Password")
                                 .frame(maxWidth: .infinity, alignment: .leading)
                                 .padding(.leading, (UIScreen.main.bounds.width * 40) / 414)
+                                .foregroundColor(Color(UIColor().colorFromHex("#F88379", 1)))
                                 
                                 
                             
@@ -107,9 +112,10 @@ struct SignUpView: View {
                                 .padding(.leading, (UIScreen.main.bounds.width * 40) / 414)
                                 .padding(.trailing, (UIScreen.main.bounds.width * 40) / 414)
                                 .font(.system(size: (UIScreen.main.bounds.width * 15) / 414, weight: .regular, design: .default))
+                                .foregroundColor(Color(UIColor().colorFromHex("#F88379", 1)))
                                 .imageScale(.small)
                             
-                            Divider()
+                            Divider().background(Color(UIColor().colorFromHex("#F88379", 1)))
                             .padding(.leading, (UIScreen.main.bounds.width * 40) / 414)
                             .padding(.trailing, (UIScreen.main.bounds.width * 40) / 414)
                         }
@@ -120,8 +126,10 @@ struct SignUpView: View {
                     VStack {
                         Spacer()
                             .frame(height: 10)
-                        CustomButton(action: {
+                        Button(action: {
+                            print("actionofbuttonstarted")
                             if self.isValidInputs() {
+                                print("valid")
                                 Auth.auth().createUser(withEmail: self.email, password: self.password){
                                     (result, error) in
                                     if (error != nil){
@@ -140,19 +148,25 @@ struct SignUpView: View {
                                         }
                                         
                                     }
+                                    print("created")
                                     self.createdAccount.toggle()
                                 }
                                 
                             }
                         })
                         {
-                            Text("SIGN UP")
-                                .foregroundColor(.green)
+                            NavigationLink(destination: AppView(), isActive: $createdAccount){
+                                Text("SIGNUP")
+                                .foregroundColor(Color(UIColor().colorFromHex("#FFFFFF", 1)))
+                            }.disabled(!self.createdAccount)
                         }
+                        .cornerRadius(10)
+                        .padding().frame(width: UIScreen.main.bounds.width/1.5, height: 40)
+                        .background(Color(UIColor().colorFromHex("#000000", 1)))
                         .frame(width: 100)
-                        .sheet(isPresented: self.$createdAccount) {
-                            AppView()
-                        }
+//                        .sheet(isPresented: self.$createdAccount) {
+//                            AppView()
+//                        }
 
 
                     }
@@ -190,13 +204,13 @@ struct SignUpView: View {
                                     .aspectRatio(contentMode: .fit)
                                     .frame(width: 40, height: 40)
                                 Text("CONTINUE WITH GOOGLE")
-                                .foregroundColor(.green)
+                                    .foregroundColor(Color(UIColor().colorFromHex("#F88379", 1)))
+
                             }
                         }
                         CustomButton(action: {
 //                            self.showAlert.toggle()
                             SocialLogin().attemptLoginFb(completion: { result, error in
-                                print(result)
                             })
                         }){
                             HStack{
@@ -206,7 +220,8 @@ struct SignUpView: View {
                                     .aspectRatio(contentMode: .fit)
                                     .frame(width: 40, height: 40)
                                 Text("CONTINUE WITH FACEBOOK")
-                                .foregroundColor(.green)
+                                    .foregroundColor(Color(UIColor().colorFromHex("#F88379", 1)))
+
                             }
                         }
                         
@@ -215,6 +230,10 @@ struct SignUpView: View {
                 }
                 
         }
+        }
+        .navigationBarTitle("")
+        .navigationBarBackButtonHidden(self.createdAccount)
+        .navigationBarHidden(self.createdAccount)
     }
     
     fileprivate func isValidInputs() -> Bool {

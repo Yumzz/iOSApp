@@ -35,42 +35,8 @@ class FirebaseRequest {
         return dishList
     }
     
-    
-    func fetchUser(name: String) -> UserFB {
-        var user: UserFB? = nil
-        
-        db.collectionGroup("User").getDocuments { (querySnapshot, error) in
-            if let error = error {
-                print("Error getting documents: \(error)")
-            } else {
-                for document in querySnapshot!.documents {
-                    print("\(document.documentID) => \(document.data())")
-                    if((document.data()["userName"].map(String.init(describing:)) ?? "nil") == name){
-                        user = UserFB(snapshot: document)!
-                    }
-                }
-            }
-        }
-        return user!
-    }
-    
-    func fetchUser(email: String) -> UserFB {
-        var user: UserFB? = nil
-        
-        db.collectionGroup("User").getDocuments { (querySnapshot, error) in
-            if let error = error {
-                print("Error getting documents: \(error)")
-            } else {
-                for document in querySnapshot!.documents {
-                    print("\(document.documentID) => \(document.data())")
-                    print((document.data()["email"].map(String.init(describing:)) ?? "nil"))
-                    if((document.data()["email"].map(String.init(describing:)) ?? "nil") == email){
-                        user = UserFB(snapshot: document)!
-                    }
-                }
-            }
-        }
-        return user!
+    func fetchUser() -> UserProfile{
+        return user
     }
     
     ///fetchDish() will fetch the dish given id in the database

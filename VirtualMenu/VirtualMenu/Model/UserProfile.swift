@@ -80,11 +80,10 @@ extension UserProfile: Hashable {
     
     func getProfilePhoto() -> UIImage? {
         var image: UIImage?
-        let storageRef = storage.reference()
         let imagesRef = storage.reference().child("profilephotos/\(Auth.auth().currentUser!.uid)")
         imagesRef.getData(maxSize: 1 * 1024 * 1024) { data, error in
         if let error = error {
-          // Uh-oh, an error occurred!
+            print(error.localizedDescription)
         } else {
           // Data for "virtual-menu-profilephotos/\(name).jpg" is returned
             image = UIImage(data: data!)!

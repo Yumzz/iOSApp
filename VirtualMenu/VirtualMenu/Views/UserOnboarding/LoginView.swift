@@ -33,9 +33,10 @@ struct LoginView: View {
     @State private var alertTitle = ""
     
     @Binding var loggedin: Bool
+    @State var loggedIn = false
     @State var showGoogle = false
     @State var showFB = false
-
+    
     
     @State var loginSelection: Int? = nil
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
@@ -46,13 +47,10 @@ struct LoginView: View {
     
     @ViewBuilder
     var body: some View {
-            
+        NavigationView{
                        VStack {
                             
                             VStack {
-                                Spacer(minLength: (UIScreen.main.bounds.width * 15.0) / 414.0)
-                                
-                //                Logo + Name
                                 
                                 Spacer(minLength: (UIScreen.main.bounds.width * 15) / 414)
                                 
@@ -130,9 +128,10 @@ struct LoginView: View {
                                                 .font(.system(size: (UIScreen.main.bounds.width * 15) / 414, weight: .bold, design: .default))
                                             
                                         }
-                //                        .sheet(isPresented: self.$showForgotPassword) {
-                //                            ForgotPasswordView()
-                //                        }
+                                        .sheet(isPresented: self.$showForgotPassword) {
+                                            ForgotPasswordView()
+                                            //dismiss once confirmation alert is sent
+                                        }
                                         
                                     }.padding(.trailing, (UIScreen.main.bounds.width * 10) / 414)
                                 }
@@ -141,29 +140,25 @@ struct LoginView: View {
                                     Spacer()
                                         .frame(height: 10)
                                     Button(action: {
-                                        if  self.isValidInputs() {
+                                        if self.isValidInputs() {
                                             Auth.auth().signIn(withEmail: self.email, password: self.password){
                                                 (result, error) in
                                                 if(error == nil){
+                                                    self.loggedIn.toggle()
                                                     self.updateProfile()
-                                                }
-                                                self.loggedin.toggle()
+                                                } 
                                             }
                                         }
-                                    }, label: {
-            //                                AppView()
-                                                Text("LOGIN")
-                                                    .foregroundColor(Color(UIColor().colorFromHex("#FFFFFF", 1)))
-                                            .navigationBarTitle("")
-                                            .navigationBarHidden(true)
-                                    })
+                                    }) {
+                                        NavigationLink(destination: AppView(), isActive: $loggedIn){
+                                            Text("LOGIN")
+                                            .foregroundColor(Color(UIColor().colorFromHex("#FFFFFF", 1)))
+                                        }.disabled(!self.loggedIn)
+                                    }
                                     .cornerRadius(10)
                                     .padding().frame(width: UIScreen.main.bounds.width/1.5, height: 40)
                                     .background(Color(UIColor().colorFromHex("#000000", 1)))
                                     .frame(width: 100)
-                                    .sheet(isPresented: self.$loggedin) {
-                                        AppView()
-                                    }
                                     
                                 }
                                 
@@ -232,9 +227,8 @@ struct LoginView: View {
                                         }
                                 }
                                 
-                //
-                //                    Spacer(minLength: (UIScreen.main.bounds.width * 20) / 414)
-                //                }
+                
+                                Spacer(minLength: (UIScreen.main.bounds.width * 20) / 414)
                             }
                         }
                         .alert(isPresented: $showAlert, content: { self.alert })
@@ -242,6 +236,11 @@ struct LoginView: View {
             //                        .resizable()
             //                        .overlay(Color(UIColor().colorFromHex("#FFFFFF", 0.8)))
             //                        .edgesIgnoringSafeArea(.all))
+    
+        }
+        .navigationBarTitle("")
+        .navigationBarBackButtonHidden(self.loggedIn)
+        .navigationBarHidden(self.loggedIn)
     }
     
     
@@ -285,6 +284,7 @@ struct LoginView: View {
         print(user.emailAddress)
         print(user.fullName)
         }
+    
     
     fileprivate func isValidInputs() -> Bool {
         if self.email == "" {

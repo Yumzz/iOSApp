@@ -10,7 +10,9 @@ import SwiftUI
 
 struct FavoriteView: View {
     var body: some View {
-        Text("My favorites")
+        VStack{
+            Text("My favorites")
+        }
     }
 }
 

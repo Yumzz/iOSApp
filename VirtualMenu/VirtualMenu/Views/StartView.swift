@@ -26,9 +26,9 @@ struct StartView: View {
             }
             
             VStack(spacing: 30){
-                NavigationLink(destination: RestaurantMapView()) {
-                    Text("Find on the Map")
-                }
+//                NavigationLink(destination: RestaurantMapView()) {
+//                    Text("Find on the Map")
+//                }
                 
                 NavigationLink(destination: ListDishesView()) {
                     Text("Digital Menu")
@@ -51,7 +51,7 @@ struct StartView: View {
     //            }
     //            self.isShowingScannerSheet = false
     //        })
-    //    }
+    //
     //    }
 }
 

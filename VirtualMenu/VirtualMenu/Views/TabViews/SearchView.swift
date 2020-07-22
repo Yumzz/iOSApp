@@ -80,12 +80,14 @@ struct SearchView: View {
                             .frame(width: geometry.size.width - 100, alignment: .leading)
                     }
                     
-                }.navigationBarTitle("")
-                    .navigationBarHidden(true)
-                    .edgesIgnoringSafeArea(.top)
+                }
+                .edgesIgnoringSafeArea(.top)
+
+
             }
-            
         }
+        .navigationBarTitle("")
+        .navigationBarHidden(true)
     }
 }
 

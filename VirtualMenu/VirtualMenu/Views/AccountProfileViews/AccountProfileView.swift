@@ -20,6 +20,7 @@ struct ProfileButton: View {
     var body: some View{
         HStack {
            Image(imageName)
+                .resizable()
                .shadow(radius: 10)
                .frame(width: 40, height: 40)
            VStack(alignment: .leading) {
@@ -27,6 +28,7 @@ struct ProfileButton: View {
                    .font(.custom("Futura Bold", size: 18))
            }
         }
+
     }
 }
 
@@ -35,6 +37,14 @@ struct AccountProfileView: View {
     @State private var showingImagePicker = false
     @State private var inputImage: UIImage?
     @State private var image: Image?
+    
+    @State private var signedOut = false
+    @State private var showingAlert = false
+    @State private var alertMessage = ""
+    @State private var alertTitle = ""
+    @State var show = false
+    
+    
     var body: some View {
             VStack(spacing: 40){
                 ZStack{
@@ -46,7 +56,7 @@ struct AccountProfileView: View {
                             .frame(width: 150, height: 150)
                         }
                         else{
-                            Image(uiImage: user.profilePhoto!)
+                            Image(uiImage: user.profilePhoto!.circle!)
                             .resizable()
                             .aspectRatio(contentMode: .fit)
                             .frame(width: 150, height: 150)
@@ -70,9 +80,28 @@ struct AccountProfileView: View {
                     }
 
                     NavigationLink(destination: SuggestRestaurant()) {
-                        ProfileButton(imageName: "report_problem", label: "Suggest Restaurant")
+                        ProfileButton(imageName: "suggest_restaurant", label: "Suggest Restaurant")
                     }
                 }
+                
+                HStack{
+                    Button(action: {
+                          let firebaseAuth = Auth.auth()
+                        do {
+                            try firebaseAuth.signOut()
+                            self.signedOut = true
+                        } catch let signOutError as NSError {
+                          print ("Error signing out: %@", signOutError)
+                        }
+                    }){
+                        NavigationLink(destination: InitialScreen().navigationBarBackButtonHidden(true), isActive: self.$signedOut){
+                            Text("Sign Out")
+                            .foregroundColor(Color(UIColor().colorFromHex("#F88379", 1)))
+                        }.disabled(!self.signedOut)
+                    }
+                }
+                
+                Spacer()
             }.navigationBarTitle("Account Profile")
             .navigationBarItems(trailing: Button(action: {
                 self.showingImagePicker.toggle()
@@ -80,13 +109,17 @@ struct AccountProfileView: View {
                     Text("Edit Profile Photo")
         }))
             .sheet(isPresented: $showingImagePicker, onDismiss: changePhoto){ ImagePicker(image: self.$inputImage)
+                .alert(isPresented: self.$showingAlert) {
+                Alert(title: Text("Thank you for submitting"), message: Text("\(self.alertMessage)"), dismissButton: .default(Text("OK")))
+            }
             }
         }
     
     func changePhoto(){
         guard let inputImage = inputImage else { return }
-        image = Image(uiImage: inputImage)
-        Utils().uploadUserProfileImage(profileImage: inputImage)
+        image = Image(uiImage: inputImage.circle!)
+        let x = Utils().uploadUserProfileImage(profileImage: inputImage)
+        print(x)
         user.profilePhoto = inputImage
         
 //        changeRequest?.photoURL = image

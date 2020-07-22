@@ -112,6 +112,7 @@ struct MultiLineTFReport: UIViewRepresentable {
         tview.text = "Tell us anything you want"
         tview.delegate = context.coordinator
         tview.textColor = .gray
+        tview.returnKeyType = .continue
         return tview
     }
 

@@ -22,7 +22,6 @@ class AccountDetails: ObservableObject {
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
-    let signInWithAppleManager = SignInWithAppleManager()
 
     func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
         guard let url = URLContexts.first?.url else {
@@ -47,7 +46,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         //This commented code allows us to be signed out everytime so we can test easier
         //UserDefaults.standard.set("", forKey: signInWithAppleManager.userIdentifierKey)
         
-        let contentView = ContentView().environmentObject(signInWithAppleManager)
+        let contentView = ContentView()
         
         // Use a UIHostingController as window root view controller.
         if let windowScene = scene as? UIWindowScene {
