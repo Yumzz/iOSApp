@@ -28,210 +28,102 @@ struct SignUpView: View {
     @State var createdAccount = false
     
     var body: some View {
-        NavigationView{
-            VStack {
-                
-                VStack {
-                    Spacer(minLength: (UIScreen.main.bounds.width * 15.0) / 414.0)
-                    
-//                    Logo + Name
-                                        
-                    VStack {
-                        
-                        Spacer(minLength: (UIScreen.main.bounds.width * 15) / 414)
-
-//                        Logo()
-                                                
-                        VStack(spacing: 0) {
-                            
-                            Text("Name")
-                                .frame(maxWidth: .infinity, alignment: .leading)
-                                .padding(.leading, (UIScreen.main.bounds.width * 40) / 414)
-                                .foregroundColor(Color(UIColor().colorFromHex("#F88379", 1)))
-                            
-                            TextField("", text: $name)
-                                .frame(height: (UIScreen.main.bounds.width * 40) / 414, alignment: .center)
-                                .padding(.leading, (UIScreen.main.bounds.width * 40) / 414)
-                                .padding(.trailing, (UIScreen.main.bounds.width * 40) / 414)
-                                .font(.system(size: (UIScreen.main.bounds.width * 15) / 414, weight: .regular, design: .default))
-                                .imageScale(.small)
-                                .autocapitalization(UITextAutocapitalizationType.words)
-                                .foregroundColor(Color(UIColor().colorFromHex("#F88379", 1)))
-                            
-                            Divider().background(Color(UIColor().colorFromHex("#F88379", 1)))
-                            .padding(.leading, (UIScreen.main.bounds.width * 40) / 414)
-                            .padding(.trailing, (UIScreen.main.bounds.width * 40) / 414)
+        
+        VStack(spacing: 30) {
+            
+            CustomTextField(strLabel: "Name", strField: $name, uiTextAutoCapitalizationType: .words, uiKeyboardType: .default)
+            
+            CustomTextField(strLabel: "Email", strField: $email, uiTextAutoCapitalizationType: .none, uiKeyboardType: .emailAddress)
+            
+            CustomPasswordField(strLabel: "Password", password: $password)
+            
+            
+            
+            Button(action: {
+                print("actionofbuttonstarted")
+                if self.isValidInputs() {
+                    print("valid")
+                    Auth.auth().createUser(withEmail: self.email, password: self.password){
+                        (result, error) in
+                        if (error != nil){
+                            self.alertMsg = "Error creating user"
+                            self.showAlert.toggle()
                         }
-    //                    seperator()
-                    }
-                    
-                    Spacer(minLength: (UIScreen.main.bounds.width * 15) / 414)
-                    
-                    VStack {
-                        
-                        VStack(spacing: 0) {
-                            
-                            Text("Email")
-                                .frame(maxWidth: .infinity, alignment: .leading)
-                                .padding(.leading, (UIScreen.main.bounds.width * 40) / 414)
-                                .foregroundColor(Color(UIColor().colorFromHex("#F88379", 1)))
+                        else{
+                            let db = Firestore.firestore()
+                            db.collection("User").addDocument(data: ["email": self.email, "password": self.password, "username": self.name, "id": result!.user.uid]) {(error) in
                                 
-                            
-                            TextField("", text: $email)
-                                .frame(height: (UIScreen.main.bounds.width * 40) / 414, alignment: .center)
-                                .padding(.leading, (UIScreen.main.bounds.width * 40) / 414)
-                                .padding(.trailing, (UIScreen.main.bounds.width * 40) / 414)
-                                .font(.system(size: (UIScreen.main.bounds.width * 15) / 414, weight: .regular, design: .default))
-                                .foregroundColor(Color(UIColor().colorFromHex("#F88379", 1)))
-                                .imageScale(.small)
-                            .keyboardType(.emailAddress)
-                            .autocapitalization(UITextAutocapitalizationType.none)
-                            
-                            Divider().background(Color(UIColor().colorFromHex("#F88379", 1)))
-                            .padding(.leading, (UIScreen.main.bounds.width * 40) / 414)
-                            .padding(.trailing, (UIScreen.main.bounds.width * 40) / 414)
-                        }
-    //                    seperator()
-                        
-                    }
-                    
-                    Spacer(minLength: (UIScreen.main.bounds.width * 15) / 414)
-                    
-                    VStack{
-                        
-                        VStack(spacing: 0) {
-                            Text("Password")
-                                .frame(maxWidth: .infinity, alignment: .leading)
-                                .padding(.leading, (UIScreen.main.bounds.width * 40) / 414)
-                                .foregroundColor(Color(UIColor().colorFromHex("#F88379", 1)))
-                                
-                                
-                            
-                            SecureField("", text: $password)
-                                .frame(height: (UIScreen.main.bounds.width * 40) / 414, alignment: .center)
-                                .padding(.leading, (UIScreen.main.bounds.width * 40) / 414)
-                                .padding(.trailing, (UIScreen.main.bounds.width * 40) / 414)
-                                .font(.system(size: (UIScreen.main.bounds.width * 15) / 414, weight: .regular, design: .default))
-                                .foregroundColor(Color(UIColor().colorFromHex("#F88379", 1)))
-                                .imageScale(.small)
-                            
-                            Divider().background(Color(UIColor().colorFromHex("#F88379", 1)))
-                            .padding(.leading, (UIScreen.main.bounds.width * 40) / 414)
-                            .padding(.trailing, (UIScreen.main.bounds.width * 40) / 414)
-                        }
-                        //                    seperator()
-                    }
-                    
-                    
-                    VStack {
-                        Spacer()
-                            .frame(height: 10)
-                        Button(action: {
-                            print("actionofbuttonstarted")
-                            if self.isValidInputs() {
-                                print("valid")
-                                Auth.auth().createUser(withEmail: self.email, password: self.password){
-                                    (result, error) in
-                                    if (error != nil){
-                                        self.alertMsg = "Error creating user"
-                                        self.showAlert.toggle()
-                                    }
-                                    else{
-                                        let db = Firestore.firestore()
-                                        db.collection("User").addDocument(data: ["email": self.email, "password": self.password, "username": self.name, "id": result!.user.uid]) {(error) in
-                                            
-                                            if error != nil {
-                                                self.alertMsg = "Error saving user info"
-                                                self.showAlert.toggle()
-                                            }
-                                            
-                                        }
-                                        
-                                    }
-                                    print("created")
-                                    self.createdAccount.toggle()
+                                if error != nil {
+                                    self.alertMsg = "Error saving user info"
+                                    self.showAlert.toggle()
                                 }
                                 
                             }
-                        })
-                        {
-                            NavigationLink(destination: AppView(), isActive: $createdAccount){
-                                Text("SIGNUP")
-                                .foregroundColor(Color(UIColor().colorFromHex("#FFFFFF", 1)))
-                            }.disabled(!self.createdAccount)
+                            
                         }
-                        .cornerRadius(10)
-                        .padding().frame(width: UIScreen.main.bounds.width/1.5, height: 40)
-                        .background(Color(UIColor().colorFromHex("#000000", 1)))
-                        .frame(width: 100)
-//                        .sheet(isPresented: self.$createdAccount) {
-//                            AppView()
-//                        }
-
-
+                        print("created")
+                        self.createdAccount.toggle()
                     }
                     
-                    HStack{
-                        
-                        VStack{
-                            Divider()
-                                .padding(.leading, (UIScreen.main.bounds.width * 40) / 414)
-                                .frame(width: (UIScreen.main.bounds.width/2.3), height: 10, alignment: .leading)
-
-                        }
-                        
-                        Text("OR")
-                        
-                        VStack{
-                             Divider()
-                               .padding(.trailing, (UIScreen.main.bounds.width * 40) / 414)
-                               .frame(width: (UIScreen.main.bounds.width/2.3), height: 10, alignment: .trailing)
-                           }
-                        
-                    }
+                }
+            })
+            {
+                NavigationLink(destination: AppView(), isActive: $createdAccount){
+                    BlackButton(strLabel: "SIGN UP")
+                }.disabled(!self.createdAccount)
+            }
+            
+            
+            HStack {
+                
+                VStack {
+                    Divider()
+                        .padding(.leading, (UIScreen.main.bounds.width * 40) / 414)
+                        .frame(width: (UIScreen.main.bounds.width/2.3), height: 10, alignment: .leading)
                     
-                    VStack(spacing: 10){
-                        Spacer()
-                            .frame(height: 10)
-                        CustomButton(action: {
-//                            self.showAlert.toggle()
-                            SocialLogin().attemptLoginGoogle()
-                        }){
-                            HStack{
-                                Image("continue_with_google")
-                                    .renderingMode(.original)
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fit)
-                                    .frame(width: 40, height: 40)
-                                Text("CONTINUE WITH GOOGLE")
-                                    .foregroundColor(Color(UIColor().colorFromHex("#F88379", 1)))
-
-                            }
-                        }
-                        CustomButton(action: {
-//                            self.showAlert.toggle()
-                            SocialLogin().attemptLoginFb(completion: { result, error in
-                            })
-                        }){
-                            HStack{
-                                Image("continue_with_facebook")
-                                    .renderingMode(.original)
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fit)
-                                    .frame(width: 40, height: 40)
-                                Text("CONTINUE WITH FACEBOOK")
-                                    .foregroundColor(Color(UIColor().colorFromHex("#F88379", 1)))
-
-                            }
-                        }
-                        
-                        Spacer()
-                    }
                 }
                 
+                Text("OR")
+                
+                VStack{
+                    Divider()
+                        .padding(.trailing, (UIScreen.main.bounds.width * 40) / 414)
+                        .frame(width: (UIScreen.main.bounds.width/2.3), height: 10, alignment: .trailing)
+                }
+                
+            }
+            
+            CustomButton(action: {
+                // self.showAlert.toggle()
+                SocialLogin().attemptLoginGoogle()
+            }){
+                HStack{
+                    Image("continue_with_google")
+                        .renderingMode(.original)
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 40, height: 40)
+                    Text("CONTINUE WITH GOOGLE")
+                        .foregroundColor(Color(UIColor().colorFromHex("#F88379", 1)))
+                }
+            }
+            CustomButton(action: {
+                // self.showAlert.toggle()
+                SocialLogin().attemptLoginFb(completion: { result, error in
+                })
+            }){
+                HStack{
+                    Image("continue_with_facebook")
+                        .renderingMode(.original)
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 40, height: 40)
+                    Text("CONTINUE WITH FACEBOOK")
+                        .foregroundColor(Color(UIColor().colorFromHex("#F88379", 1)))
+                }
+            }
         }
-        }
-        .navigationBarTitle("")
+        .navigationBarTitle("Sign Up")
         .navigationBarBackButtonHidden(self.createdAccount)
         .navigationBarHidden(self.createdAccount)
     }
@@ -259,14 +151,14 @@ struct SignUpView: View {
     
     
     struct SocialLogin: UIViewRepresentable {
-
+        
         func makeUIView(context: UIViewRepresentableContext<SocialLogin>) -> UIView {
             return UIView()
         }
-
+        
         func updateUIView(_ uiView: UIView, context: UIViewRepresentableContext<SocialLogin>) {
         }
-
+        
         func attemptLoginGoogle() {
             GIDSignIn.sharedInstance()?.presentingViewController = UIApplication.shared.windows.last?.rootViewController
             GIDSignIn.sharedInstance()?.signIn()
@@ -279,13 +171,13 @@ struct SignUpView: View {
                 completion(result, error)
             }
         }
-    
     }
-    
 }
 
 struct SignUpView_Previews: PreviewProvider {
     static var previews: some View {
-        SignUpView()
+        NavigationView {
+            SignUpView()
+        }
     }
 }
