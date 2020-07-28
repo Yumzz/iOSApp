@@ -93,34 +93,18 @@ struct SignUpView: View {
                 
             }
             
-            CustomButton(action: {
+            Button(action: {
                 // self.showAlert.toggle()
                 SocialLogin().attemptLoginGoogle()
             }){
-                HStack{
-                    Image("continue_with_google")
-                        .renderingMode(.original)
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(width: 40, height: 40)
-                    Text("CONTINUE WITH GOOGLE")
-                        .foregroundColor(Color(UIColor().colorFromHex("#F88379", 1)))
-                }
+                BlackButton(strLabel: "Sign Up with Google", imgName: "continue_with_google")
             }
-            CustomButton(action: {
+            Button(action: {
                 // self.showAlert.toggle()
                 SocialLogin().attemptLoginFb(completion: { result, error in
                 })
             }){
-                HStack{
-                    Image("continue_with_facebook")
-                        .renderingMode(.original)
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(width: 40, height: 40)
-                    Text("CONTINUE WITH FACEBOOK")
-                        .foregroundColor(Color(UIColor().colorFromHex("#F88379", 1)))
-                }
+                BlackButton(strLabel: "Sign Up with Facebook", imgName: "continue_with_facebook")
             }
         }
         .navigationBarTitle("Sign Up")
