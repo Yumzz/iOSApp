@@ -27,6 +27,8 @@ struct SignUpView: View {
     
     @State var createdAccount = false
     
+    @ObservedObject var AuthenticationVM = AuthenticationViewModel()
+    
     var body: some View {
         
         VStack(spacing: 30) {
@@ -40,31 +42,20 @@ struct SignUpView: View {
             
             
             Button(action: {
-                print("actionofbuttonstarted")
-                if self.isValidInputs() {
-                    print("valid")
-                    Auth.auth().createUser(withEmail: self.email, password: self.password){
-                        (result, error) in
-                        if (error != nil){
-                            self.alertMsg = "Error creating user"
-                            self.showAlert.toggle()
-                        }
-                        else{
-                            let db = Firestore.firestore()
-                            db.collection("User").addDocument(data: ["email": self.email, "password": self.password, "username": self.name, "id": result!.user.uid]) {(error) in
-                                
-                                if error != nil {
-                                    self.alertMsg = "Error saving user info"
-                                    self.showAlert.toggle()
-                                }
-                                
-                            }
-                            
-                        }
-                        print("created")
+                let val = self.AuthenticationVM.isValidInputs(email: self.email, password: self.password)
+                if (val == "") {
+                    let creation = self.AuthenticationVM.createUser(email: self.email, password: self.password, name: self.name)
+                    if(creation) {
                         self.createdAccount.toggle()
                     }
-                    
+                    else{
+                        self.alertMsg = "Error creating user"
+                        self.showAlert.toggle()
+                    }
+                }
+                else{
+                    self.alertMsg = val
+                    self.showAlert.toggle()
                 }
             })
             {
@@ -93,60 +84,23 @@ struct SignUpView: View {
                 
             }
             
-            CustomButton(action: {
+            Button(action: {
                 // self.showAlert.toggle()
                 SocialLogin().attemptLoginGoogle()
             }){
-                HStack{
-                    Image("continue_with_google")
-                        .renderingMode(.original)
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(width: 40, height: 40)
-                    Text("CONTINUE WITH GOOGLE")
-                        .foregroundColor(Color(UIColor().colorFromHex("#F88379", 1)))
-                }
+                BlackButton(strLabel: "Sign Up with Google", imgName: "continue_with_google")
             }
-            CustomButton(action: {
+            Button(action: {
                 // self.showAlert.toggle()
                 SocialLogin().attemptLoginFb(completion: { result, error in
                 })
             }){
-                HStack{
-                    Image("continue_with_facebook")
-                        .renderingMode(.original)
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(width: 40, height: 40)
-                    Text("CONTINUE WITH FACEBOOK")
-                        .foregroundColor(Color(UIColor().colorFromHex("#F88379", 1)))
-                }
+                BlackButton(strLabel: "Sign Up with Facebook", imgName: "continue_with_facebook")
             }
         }
         .navigationBarTitle("Sign Up")
         .navigationBarBackButtonHidden(self.createdAccount)
         .navigationBarHidden(self.createdAccount)
-    }
-    
-    fileprivate func isValidInputs() -> Bool {
-        if self.email == "" {
-            self.alertMsg = "Email can't be blank."
-            self.showAlert.toggle()
-            return false
-        } else if !self.email.isValidEmail {
-            self.alertMsg = "Email is not valid."
-            self.showAlert.toggle()
-            return false
-        } else if self.password == "" {
-            self.alertMsg = "Password can't be blank."
-            self.showAlert.toggle()
-            return false
-        } else if !(self.password.isValidPassword) {
-            self.alertMsg = "Please enter valid password"
-            self.showAlert.toggle()
-            return false
-        }
-        return true
     }
     
     
