@@ -17,7 +17,10 @@ struct ForgotPasswordView: View {
     @State var showingAlert = false
     @State var alertTitle = ""
     @State var alertMessage = ""
+    
+    @ObservedObject var AuthenticationVM = AuthenticationViewModel()
 
+    
     var alert: Alert {
         Alert(title: Text(""), message: Text(alertMsg), dismissButton: .default(Text("OK")))
     }
@@ -63,18 +66,17 @@ struct ForgotPasswordView: View {
                     Spacer(minLength: 20)
                     
                     Button(action: {
-                        if self.isValidInputs() {
-                            Auth.auth().sendPasswordReset(withEmail: self.email) { (error) in
-                                if(error != nil){
-                                    print(error?.localizedDescription)
-                                    return
-                                }
-                                else{
-                                    self.alertMessage = "Email has been sent. Go through provided link"
-                                    self.showingAlert = true
-                                    
-                                }
+                        let val = self.AuthenticationVM.forgotPasswordValidInputs(email: self.email)
+                        if (val == "") {
+                            let x = self.AuthenticationVM.passwordReset(email: self.email)
+                            if(x == ""){
+                                self.alertMsg = "Email was sent"
+                                self.showAlert.toggle()
                             }
+                        }
+                        else{
+                            self.alertMsg = val
+                            self.showAlert.toggle()
                         }
                     }) {
                         Text("Send Reset Link")
@@ -87,21 +89,6 @@ struct ForgotPasswordView: View {
         }.alert(isPresented: $showAlert, content: { self.alert })
     }
     
-    func isValidInputs() -> Bool {
-        
-        if self.email == "" {
-            self.alertMsg = "Email can't be blank."
-            self.showAlert.toggle()
-            return false
-            
-        } else if !self.email.isValidEmail {
-            self.alertMsg = "Email is not valid."
-            self.showAlert.toggle()
-            return false
-        }
-        
-        return true
-    }
 }
 
 struct ModalView: View {
@@ -120,4 +107,3 @@ struct ForgotPasswordView_Previews: PreviewProvider {
         
     }
 }
-
