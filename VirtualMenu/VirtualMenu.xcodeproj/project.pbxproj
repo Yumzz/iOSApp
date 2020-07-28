@@ -25,6 +25,7 @@
 		3A4A0E70249EB9320030635E /* AccountProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A4A0E6F249EB9320030635E /* AccountProfileView.swift */; };
 		3A4A0E72249EB94D0030635E /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A4A0E71249EB94D0030635E /* ImagePicker.swift */; };
 		3A4E2E2024C6244600C34DD8 /* ForgotPassword.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A4E2E1F24C6244600C34DD8 /* ForgotPassword.swift */; };
+		3A4E2E2F24D0D2D600C34DD8 /* AuthenticationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A4E2E2E24D0D2D600C34DD8 /* AuthenticationViewModel.swift */; };
 		3A6477F224B68D060077EF30 /* UserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6477F124B68D060077EF30 /* UserProfile.swift */; };
 		3A7E59C82489A98100288AB0 /* ScannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A7E59C72489A98100288AB0 /* ScannerViewController.swift */; };
 		3A987AD72480350C0021F6E4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A987AD62480350C0021F6E4 /* AppDelegate.swift */; };
@@ -120,6 +121,7 @@
 		3A4A0E6F249EB9320030635E /* AccountProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountProfileView.swift; sourceTree = "<group>"; };
 		3A4A0E71249EB94D0030635E /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		3A4E2E1F24C6244600C34DD8 /* ForgotPassword.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPassword.swift; sourceTree = "<group>"; };
+		3A4E2E2E24D0D2D600C34DD8 /* AuthenticationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationViewModel.swift; sourceTree = "<group>"; };
 		3A6477F124B68D060077EF30 /* UserProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfile.swift; sourceTree = "<group>"; };
 		3A7E59C72489A98100288AB0 /* ScannerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerViewController.swift; sourceTree = "<group>"; };
 		3A987AD32480350C0021F6E4 /* VirtualMenu.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VirtualMenu.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -413,6 +415,7 @@
 			isa = PBXGroup;
 			children = (
 				A73B1B5E24B0FF8100A8C6A8 /* ListDishesViewModel.swift */,
+				3A4E2E2E24D0D2D600C34DD8 /* AuthenticationViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -662,6 +665,7 @@
 			files = (
 				3A3137392483A25D00E46292 /* StringScanUtils.swift in Sources */,
 				3AF9927324A53AB4005446D8 /* InitialScreen.swift in Sources */,
+				3A4E2E2F24D0D2D600C34DD8 /* AuthenticationViewModel.swift in Sources */,
 				3A4A0E72249EB94D0030635E /* ImagePicker.swift in Sources */,
 				C5CD0F2624AC421D00F0A60D /* FirebaseRequest.swift in Sources */,
 				3A3137332483293300E46292 /* StartView.swift in Sources */,

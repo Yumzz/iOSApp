@@ -1,4 +1,3 @@
-//
 //  AuthenticationViewModel.swift
 //  VirtualMenu
 //
@@ -120,8 +119,8 @@ class AuthenticationViewModel: ObservableObject {
             else{
                 string = ""
             }
-            return string
         }
+        return string
     }
     
     func forgotPasswordValidInputs(email: String) -> String {
