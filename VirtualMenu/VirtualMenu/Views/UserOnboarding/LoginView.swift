@@ -86,17 +86,17 @@ struct LoginView: View {
                    }
                    
                        Button(action: {
-                           let val = self.AuthenticationVM.isValidInputs(email: self.email, password: self.password)
-                           if (val == "") {
-                               let x = self.AuthenticationVM.signIn(email: self.email, password: self.password)
-                               if(!x){
-                                   self.alertMsg = "Could not sign in. Please check your credentials."
-                                   self.showAlert.toggle()
+                        Auth.auth().signIn(withEmail: self.email, password: self.password){
+                               (result, error) in
+                               if(error == nil){
+                                  self.AuthenticationVM.updateProfile()
                                }
-                           }
-                           else{
-                               self.alertMsg = val
-                               self.showAlert.toggle()
+                               else{
+                                self.alertMessage = "No user exists with those credentials"
+                                self.alertTitle = "No user"
+                                self.showAlert.toggle()
+                               }
+                            self.loggedIn.toggle()
                            }
                        }) {
                            NavigationLink(destination: AppView(), isActive: $loggedIn){

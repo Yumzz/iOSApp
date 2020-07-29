@@ -74,7 +74,7 @@ struct Utils {
                                 
                                 // Save the profile of the user
                                 let values = [UserProfile.UserInfoKey.profilePhotoURL: uploadedImageURL]
-                                Database.database().reference().child("users").child(userId).updateChildValues(values, withCompletionBlock: {
+                                Database.database().reference().child("User").child(userId).updateChildValues(values, withCompletionBlock: {
                                     (error, ref) in
                                     if error != nil {
                                         print(error!)

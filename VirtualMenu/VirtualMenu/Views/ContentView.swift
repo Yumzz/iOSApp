@@ -18,10 +18,10 @@ struct ContentView: View {
     var body: some View {
         ZStack {
             if Auth.auth().currentUser != nil {
-               InitialScreen()
+               DishAdminView()
             } else {
                //User Not logged in
-                InitialScreen()
+                DishAdminView()
             }
         }
     }

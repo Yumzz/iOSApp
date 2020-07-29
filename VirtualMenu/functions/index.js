@@ -80,6 +80,42 @@ exports.feedback = functions.https.onRequest((req, resp) => {
   });
 });
 
+exports.dishAdd = functions.https.onRequest((req, resp) => {
+  cors(req, resp, () => {
+    //post info into feedback collection
+
+    let d = req.body.Description;
+    let n = req.body.Name;
+    let p = req.body.Price;
+    let r = req.body.Restaurant;
+    let t = req.body.Type;
+
+    admin
+      .firestore()
+      .collection("Dish")
+      .add({
+        Name: n,
+        Description: d,
+        Price: p,
+        Type: t,
+        Restaurant: r,
+      })
+      .then(function () {
+        console.log("Successfully added Feedback");
+        resp.status(200).send("Added Feedback");
+        return;
+      })
+      .catch(function (error) {
+        console.log("Error adding feedback:", error);
+        resp
+          .status(500)
+          .send(
+            `Not added. Something wrong with user ${name} and email ${email}`
+          );
+      });
+  });
+});
+
 // exports.signOut = functions.https.onRequest((req, resp) => {
 //   cors(req, resp, () => {
 //     firebase

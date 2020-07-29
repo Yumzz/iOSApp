@@ -18,6 +18,7 @@ struct RestaurantFB {
     let description: String
     let price: Double
     let type: String
+    var dishes: [DishFB]? = nil
 //    let coverPhoto: CKAsset?
 //    let photos: [CKAsset]?
 //    let database: CKDatabase
@@ -39,6 +40,10 @@ struct RestaurantFB {
             let name = snapshot.data()["name"] as? String else {
             return nil
         }
+        guard
+            let dishes = snapshot.data()["dishes"] as? [DishFB] else {
+            return nil
+        }
       
         self.ref = nil
         self.key = "nil"
@@ -46,6 +51,7 @@ struct RestaurantFB {
         self.description = ""
         self.price = 0
         self.type = ""
+        self.dishes = dishes
     }
     
     func toAnyObject() -> Any {

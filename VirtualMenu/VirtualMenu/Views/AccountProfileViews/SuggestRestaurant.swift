@@ -14,6 +14,8 @@ struct SuggestRestaurant: View {
     @State private var showingAlert = false
     @State private var alertMessage = ""
     @State private var alertTitle = ""
+    
+    @ObservedObject var FirebaseFunctions = FirebaseFunctionsViewModel()
         
     var body: some View {
         NavigationView {
@@ -58,30 +60,17 @@ struct SuggestRestaurant: View {
                 Spacer()
                     .frame(height: CGFloat(15))
                 Button(action: {
-                    if isValidInput(inputVal: self.email) && isValidInput(inputVal: self.name) && isValidInput(inputVal: self.messageBody) {
-                        let url = URL(string: Constants.baseURL.api + "/feedback")!
-                        var request = URLRequest(url: url)
-                        request.httpMethod = "POST"
-                        let bodyData = "name=\(self.name)&email=\(self.email)&message=\(self.messageBody)&Type=Suggest"
-                        print(bodyData)
-                        request.httpBody = bodyData.data(using: .utf8)
-                        
-                        URLSession.shared.dataTask(with: request) { data, response, error in
-                            guard let httpResponse = response as? HTTPURLResponse,
-                                  (200...299).contains(httpResponse.statusCode) else {
-                                    self.showingAlert = true
-                                    self.alertTitle = "Network Error"
-                                    self.alertMessage = "There was a Network Error while processing your request"
-                                return
-                            }
-                            self.showingAlert = true
-                            self.alertTitle = "Request Submitted!"
-                            self.alertMessage = "Our team will respond shortly"
-                        }.resume()
-                    } else {
-                        self.showingAlert = true
-                        self.alertTitle = "Missing Field(s)"
-                        self.alertMessage = "Please ensure all three fields are filled out"
+                    let results = self.FirebaseFunctions.suggestRestaurantButton(email: self.email, messageBody: self.messageBody, name: self.name)
+                    let result = results[0]
+                    let title = results[1]
+                    print(result)
+                    if(result == ""){
+                        return
+                    }
+                    else{
+                        self.alertTitle = title
+                        self.alertMessage = result
+                        self.showingAlert.toggle()
                     }
                 }) {
                     Text("Send")

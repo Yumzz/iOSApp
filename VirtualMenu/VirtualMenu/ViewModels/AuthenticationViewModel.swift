@@ -11,6 +11,8 @@ import GoogleSignIn
 import FBSDKLoginKit
 
 class AuthenticationViewModel: ObservableObject {
+    
+    @State var sign = false
         
     let fb = FirebaseRequest()
     
@@ -45,14 +47,20 @@ class AuthenticationViewModel: ObservableObject {
     }
     
     func signIn(email: String, password: String) -> Bool{
-        var bool = false
+        var bool = true
         Auth.auth().signIn(withEmail: email, password: password){
             (result, error) in
             if(error == nil){
-                bool = true
+                self.sign = true
+                print(self.sign)
                 self.updateProfile()
             }
+            else{
+                bool = false
+                print("failed")
+            }
         }
+        print(sign)
         return bool
     }
     

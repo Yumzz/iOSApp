@@ -8,38 +8,55 @@
 
 import SwiftUI
 import CloudKit
+import Firebase
 
 class ListDishesViewModel: ObservableObject {
     
-    @Published var dishes = [Dish]()
+    let db = Firestore.firestore()
     
-    @Published var restaurant2 : Restaurant? = nil
+    @Published var dish = [DishFB]()
     
-    let dbb = DatabaseRequest()
+    @Published var rest: RestaurantFB? = nil
     
-    func fetchDishes(){
-        var fetchDishes = [Dish]()
-        
-        DispatchQueue.main.async {
-            self.restaurant2 = self.dbb.fetchRestaurantWithID(id: "96D93F3C-F03A-2157-B4B7-C6DBFCCC37D0")
-            print((self.restaurant2?.name ?? "nil") as String)
-            fetchDishes = self.dbb.fetchRestaurantDishes(res: self.restaurant2!)
-            self.dishes = fetchDishes
-            print(self.dishes)
-            self.dishes.sort {
-                $0.name < $1.name
+    func fetchRestaurantFB(name: String){
+        var restaurant: RestaurantFB? = nil
+        db.collection("Restaurant").getDocuments { (rests, error) in
+        if let error = error {
+               print("Error getting documents: \(error)")
+           } else {
+               for document in rests!.documents {
+                   print("\(document.documentID) => \(document.data())")
+//                if(document.get("Name") == name){
+                       restaurant = (RestaurantFB(snapshot: document)!)
+//                   }
+               }
             }
         }
+        self.rest = restaurant
+    }
+    
+    func fetchDishesFB(restaurant: String){
+        var fetchDishes = [DishFB]()
+        
+        db.collection("Dish").getDocuments { (dishes, error) in
+            if let error = error {
+                print("Error getting documents: \(error)")
+            } else {
+                for document in dishes!.documents {
+                    print("\(document.documentID) => \(document.data())")
+//                    if(document.get("Restaurant") == restaurant){
+                        fetchDishes.append(DishFB(snapshot: document)!)
+//                    }
+                }
+            }
+        }
+        
+        self.dish = fetchDishes
+        
     }
     
     func formatPrice(price: Double) -> String {
         return "$" + (price.truncatingRemainder(dividingBy: 1) == 0 ? String(format: "%.2f", price) : String(price))
     }
-    
-    func getUIImageFromCKAsset(image: CKAsset?) -> UIImage? {
-        let file: CKAsset? = image
-        let data = NSData(contentsOf: (file?.fileURL!)!)
-        
-        return UIImage(data: data! as Data) ?? nil
-    }
+
 }

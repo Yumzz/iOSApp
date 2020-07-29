@@ -15,6 +15,8 @@ struct ReportProblem: View {
     @State private var showingAlert = false
     @State private var alertMessage = ""
     @State private var alertTitle = ""
+    
+    @ObservedObject var FirebaseFunctions = FirebaseFunctionsViewModel()
         
     var body: some View {
         NavigationView {
@@ -59,30 +61,16 @@ struct ReportProblem: View {
                 Spacer()
                     .frame(height: CGFloat(15))
                 Button(action: {
-                    if isValidInput(inputVal: self.email) && isValidInput(inputVal: self.name) && isValidInput(inputVal: self.messageBody) {
-                        let url = URL(string: Constants.baseURL.api + "/feedback")!
-                        var request = URLRequest(url: url)
-                        request.httpMethod = "POST"
-                        let bodyData = "name=\(self.name)&email=\(self.email)&message=\(self.messageBody)&Type=Problem"
-                        print(bodyData)
-                        request.httpBody = bodyData.data(using: .utf8)
-                        
-                        URLSession.shared.dataTask(with: request) { data, response, error in
-                            guard let httpResponse = response as? HTTPURLResponse,
-                                  (200...299).contains(httpResponse.statusCode) else {
-                                    self.showingAlert = true
-                                    self.alertTitle = "Network Error"
-                                    self.alertMessage = "There was a Network Error while processing your request"
-                                return
-                            }
-                            self.showingAlert = true
-                            self.alertTitle = "Request Submitted!"
-                            self.alertMessage = "Our team will respond shortly"
-                        }.resume()
-                    } else {
-                        self.showingAlert = true
-                        self.alertTitle = "Missing Field(s)"
-                        self.alertMessage = "Please ensure all three fields are filled out"
+                    let results = self.FirebaseFunctions.reportProblemButton(email: self.email, name: self.name, messageBody: self.messageBody)
+                    let result = results[0]
+                    let title = results[1]
+                    if(result == ""){
+                        return
+                    }
+                    else{
+                        self.alertTitle = title
+                        self.alertMessage = result
+                        self.showingAlert.toggle()
                     }
                 }) {
                     Text("Send")
@@ -92,6 +80,7 @@ struct ReportProblem: View {
                 }
                 Spacer()
             }
+                
             .navigationBarTitle("")
             .navigationBarHidden(true)
         }

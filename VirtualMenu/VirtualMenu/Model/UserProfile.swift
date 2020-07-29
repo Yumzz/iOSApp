@@ -46,7 +46,7 @@ struct UserProfile {
     }
     
     init?(snapshot: QueryDocumentSnapshot) {
-        guard let name = snapshot.data()["userName"] as? String else {
+        guard let name = snapshot.data()["username"] as? String else {
             return nil
         }
         guard let id = snapshot.data()["id"] as? String else {

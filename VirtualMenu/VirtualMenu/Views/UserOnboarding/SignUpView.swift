@@ -42,20 +42,24 @@ struct SignUpView: View {
             
             
             Button(action: {
-                let val = self.AuthenticationVM.isValidInputs(email: self.email, password: self.password)
-                if (val == "") {
-                    let creation = self.AuthenticationVM.createUser(email: self.email, password: self.password, name: self.name)
-                    if(creation) {
-                        self.createdAccount.toggle()
+                Auth.auth().createUser(withEmail: self.email, password: self.password){
+                    (result, error) in
+                    if (error != nil){
+                        self.alertMessage = "Error creating user"
+                        self.alertTitle = "Error"
                     }
                     else{
-                        self.alertMsg = "Error creating user"
-                        self.showAlert.toggle()
+                        let db = Firestore.firestore()
+                        db.collection("User").addDocument(data: ["email": self.email, "password": self.password, "username": self.name, "id": result!.user.uid]) {(error) in
+                            if error != nil {
+                                self.alertMessage = "Error creating user"
+                                self.alertTitle = "Error"
+                            }
+                            
+                        }
+                        
                     }
-                }
-                else{
-                    self.alertMsg = val
-                    self.showAlert.toggle()
+                    print("created")
                 }
             })
             {

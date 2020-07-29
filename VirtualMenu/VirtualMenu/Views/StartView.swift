@@ -30,7 +30,7 @@ struct StartView: View {
 //                    Text("Find on the Map")
 //                }
                 
-                NavigationLink(destination: ListDishesView()) {
+                NavigationLink(destination: DishAdminView()) {
                     Text("Digital Menu")
                 }
                 
