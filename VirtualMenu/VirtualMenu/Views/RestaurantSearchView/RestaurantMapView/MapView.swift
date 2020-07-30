@@ -10,12 +10,20 @@ import SwiftUI
 import MapKit
 
 struct MapView: UIViewRepresentable {
+    let restaurants: [RestaurantFB]
+    
     func makeUIView(context: Context) -> MKMapView{
-        MKMapView(frame: .zero)
+        let map = MKMapView()
+        map.showsUserLocation = true
+        map.delegate = context.coordinator
+        return map
     }
     
-    func updateUIView(_ view: MKMapView, context: Context){
-        
+    func makeCoordinator() -> Coordinator {
+        Coordinator(self)
+    }
+     
+    func updateUIView(_ view: MKMapView, context: UIViewRepresentableContext<MapView>){
     }
     
 }
@@ -23,7 +31,7 @@ struct MapView: UIViewRepresentable {
 struct MapView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView{
-            MapView()
+            MapView(restaurants: [])
         }
         
     }

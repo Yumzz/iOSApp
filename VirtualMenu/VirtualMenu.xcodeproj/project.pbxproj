@@ -28,6 +28,11 @@
 		3A4E2E2F24D0D2D600C34DD8 /* AuthenticationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A4E2E2E24D0D2D600C34DD8 /* AuthenticationViewModel.swift */; };
 		3A4E2E3224D12D2500C34DD8 /* DishAdminView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A4E2E3124D12D2500C34DD8 /* DishAdminView.swift */; };
 		3A4E2E3424D13DCF00C34DD8 /* FirebaseFunctionsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A4E2E3324D13DCF00C34DD8 /* FirebaseFunctionsViewModel.swift */; };
+		3A4E2E3724D21CDC00C34DD8 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A4E2E3624D21CDC00C34DD8 /* Coordinator.swift */; };
+		3A4E2E3B24D21E8E00C34DD8 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A4E2E3A24D21E8E00C34DD8 /* LocationManager.swift */; };
+		3A4E2E3D24D2275F00C34DD8 /* SearchBarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A4E2E3C24D2275F00C34DD8 /* SearchBarButton.swift */; };
+		3A4E2E3F24D2403300C34DD8 /* RestaurantDishViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A4E2E3E24D2403300C34DD8 /* RestaurantDishViewModel.swift */; };
+		3A4E2E4124D24B1D00C34DD8 /* RestaurantAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A4E2E4024D24B1D00C34DD8 /* RestaurantAnnotation.swift */; };
 		3A6477F224B68D060077EF30 /* UserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6477F124B68D060077EF30 /* UserProfile.swift */; };
 		3A7E59C82489A98100288AB0 /* ScannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A7E59C72489A98100288AB0 /* ScannerViewController.swift */; };
 		3A987AD72480350C0021F6E4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A987AD62480350C0021F6E4 /* AppDelegate.swift */; };
@@ -49,7 +54,6 @@
 		3AF9927324A53AB4005446D8 /* InitialScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF9927224A53AB4005446D8 /* InitialScreen.swift */; };
 		3AF9927524A53AC0005446D8 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF9927424A53AC0005446D8 /* SignUpView.swift */; };
 		A731EB0E2495AD2300B75D05 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A731EB0D2495AD2300B75D05 /* CloudKit.framework */; };
-		A73B1B5F24B0FF8100A8C6A8 /* ListDishesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A73B1B5E24B0FF8100A8C6A8 /* ListDishesViewModel.swift */; };
 		A73B1B6224B111D800A8C6A8 /* AppView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A73B1B6124B111D800A8C6A8 /* AppView.swift */; };
 		A73B1B6424B1162E00A8C6A8 /* OrderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A73B1B6324B1162E00A8C6A8 /* OrderView.swift */; };
 		A73B1B6624B116CE00A8C6A8 /* FavoriteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A73B1B6524B116CE00A8C6A8 /* FavoriteView.swift */; };
@@ -126,6 +130,11 @@
 		3A4E2E2E24D0D2D600C34DD8 /* AuthenticationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationViewModel.swift; sourceTree = "<group>"; };
 		3A4E2E3124D12D2500C34DD8 /* DishAdminView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DishAdminView.swift; sourceTree = "<group>"; };
 		3A4E2E3324D13DCF00C34DD8 /* FirebaseFunctionsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseFunctionsViewModel.swift; sourceTree = "<group>"; };
+		3A4E2E3624D21CDC00C34DD8 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
+		3A4E2E3A24D21E8E00C34DD8 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
+		3A4E2E3C24D2275F00C34DD8 /* SearchBarButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBarButton.swift; sourceTree = "<group>"; };
+		3A4E2E3E24D2403300C34DD8 /* RestaurantDishViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantDishViewModel.swift; sourceTree = "<group>"; };
+		3A4E2E4024D24B1D00C34DD8 /* RestaurantAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantAnnotation.swift; sourceTree = "<group>"; };
 		3A6477F124B68D060077EF30 /* UserProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfile.swift; sourceTree = "<group>"; };
 		3A7E59C72489A98100288AB0 /* ScannerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerViewController.swift; sourceTree = "<group>"; };
 		3A987AD32480350C0021F6E4 /* VirtualMenu.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VirtualMenu.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -153,7 +162,6 @@
 		3AF9927424A53AC0005446D8 /* SignUpView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		5282E935E7A89EA0ACB48A8D /* Pods-VirtualMenu.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VirtualMenu.release.xcconfig"; path = "Target Support Files/Pods-VirtualMenu/Pods-VirtualMenu.release.xcconfig"; sourceTree = "<group>"; };
 		A731EB0D2495AD2300B75D05 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
-		A73B1B5E24B0FF8100A8C6A8 /* ListDishesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListDishesViewModel.swift; sourceTree = "<group>"; };
 		A73B1B6124B111D800A8C6A8 /* AppView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppView.swift; sourceTree = "<group>"; };
 		A73B1B6324B1162E00A8C6A8 /* OrderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderView.swift; sourceTree = "<group>"; };
 		A73B1B6524B116CE00A8C6A8 /* FavoriteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteView.swift; sourceTree = "<group>"; };
@@ -256,6 +264,7 @@
 			isa = PBXGroup;
 			children = (
 				C55FDD6424CABA2800CC8561 /* RestaurantFB.swift */,
+				3A4E2E4024D24B1D00C34DD8 /* RestaurantAnnotation.swift */,
 				C5D0A16B24B1B6A300E44DF2 /* DishFB.swift */,
 				3A6477F124B68D060077EF30 /* UserProfile.swift */,
 				3A3137242483178A00E46292 /* ARMUser.swift */,
@@ -284,6 +293,22 @@
 				3A4E2E3124D12D2500C34DD8 /* DishAdminView.swift */,
 			);
 			path = AdminView;
+			sourceTree = "<group>";
+		};
+		3A4E2E3524D21CB900C34DD8 /* MapCoordinator */ = {
+			isa = PBXGroup;
+			children = (
+				3A4E2E3624D21CDC00C34DD8 /* Coordinator.swift */,
+			);
+			path = MapCoordinator;
+			sourceTree = "<group>";
+		};
+		3A4E2E3924D21E7700C34DD8 /* MapLocationManager */ = {
+			isa = PBXGroup;
+			children = (
+				3A4E2E3A24D21E8E00C34DD8 /* LocationManager.swift */,
+			);
+			path = MapLocationManager;
 			sourceTree = "<group>";
 		};
 		3A987ACA2480350C0021F6E4 = {
@@ -411,9 +436,9 @@
 		A73B1B5924B0FDA800A8C6A8 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				3A13B6DE24C181150006458B /* AccountProfileViews */,
 				3A4E2E3024D12D0800C34DD8 /* AdminView */,
 				A7F5506724C1238B00FAC1F0 /* RestaurantSearchView */,
-				3A13B6DE24C181150006458B /* AccountProfileViews */,
 				3A13B6EB24C19CB50006458B /* UserOnboarding */,
 				3A4E2E2124C6841E00C34DD8 /* TabViews */,
 				3A3137322483293300E46292 /* StartView.swift */,
@@ -427,8 +452,8 @@
 		A73B1B5D24B0FF4100A8C6A8 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
-				A73B1B5E24B0FF8100A8C6A8 /* ListDishesViewModel.swift */,
 				3A4E2E2E24D0D2D600C34DD8 /* AuthenticationViewModel.swift */,
+				3A4E2E3E24D2403300C34DD8 /* RestaurantDishViewModel.swift */,
 				3A4E2E3324D13DCF00C34DD8 /* FirebaseFunctionsViewModel.swift */,
 			);
 			path = ViewModels;
@@ -437,6 +462,8 @@
 		A73B1B6024B1019E00A8C6A8 /* RestaurantMapView */ = {
 			isa = PBXGroup;
 			children = (
+				3A4E2E3924D21E7700C34DD8 /* MapLocationManager */,
+				3A4E2E3524D21CB900C34DD8 /* MapCoordinator */,
 				A7FE250724A841620007E5AD /* RestaurantMapView.swift */,
 				A7FE250524A83C1D0007E5AD /* MapView.swift */,
 			);
@@ -449,6 +476,7 @@
 				A7912A2224CF7DED0052988C /* CustomTextField.swift */,
 				A7912A2924CF8EFE0052988C /* CustomPasswordField.swift */,
 				A7912A2524CF82140052988C /* WhiteButton.swift */,
+				3A4E2E3C24D2275F00C34DD8 /* SearchBarButton.swift */,
 				A7912A2724CF87260052988C /* BlackButton.swift */,
 			);
 			path = Components;
@@ -681,6 +709,7 @@
 				3AF9927324A53AB4005446D8 /* InitialScreen.swift in Sources */,
 				3A4E2E2F24D0D2D600C34DD8 /* AuthenticationViewModel.swift in Sources */,
 				3A4A0E72249EB94D0030635E /* ImagePicker.swift in Sources */,
+				3A4E2E3B24D21E8E00C34DD8 /* LocationManager.swift in Sources */,
 				C5CD0F2624AC421D00F0A60D /* FirebaseRequest.swift in Sources */,
 				3A3137332483293300E46292 /* StartView.swift in Sources */,
 				3A45AD8D24B3FE8800CF3A8F /* Constants.swift in Sources */,
@@ -689,6 +718,7 @@
 				3A987B102481511B0021F6E4 /* ContentView.swift in Sources */,
 				34A5D663249BF6DF00E4FE9C /* DishDetailsView.swift in Sources */,
 				3AF9926824A2B918005446D8 /* Utils.swift in Sources */,
+				3A4E2E3D24D2275F00C34DD8 /* SearchBarButton.swift in Sources */,
 				3A987AD72480350C0021F6E4 /* AppDelegate.swift in Sources */,
 				A7912A2324CF7DED0052988C /* CustomTextField.swift in Sources */,
 				A73B1B6224B111D800A8C6A8 /* AppView.swift in Sources */,
@@ -696,18 +726,20 @@
 				3A6477F224B68D060077EF30 /* UserProfile.swift in Sources */,
 				3A3137292483178A00E46292 /* Review.swift in Sources */,
 				3AF9926A24A2B95C005446D8 /* InputValidation.swift in Sources */,
-				A73B1B5F24B0FF8100A8C6A8 /* ListDishesViewModel.swift in Sources */,
 				A7FE250824A841620007E5AD /* RestaurantMapView.swift in Sources */,
 				A73B1B6824B11C7200A8C6A8 /* SearchView.swift in Sources */,
 				A7912A2624CF82140052988C /* WhiteButton.swift in Sources */,
 				3A13B6E424C1816B0006458B /* ReportProblem.swift in Sources */,
+				3A4E2E4124D24B1D00C34DD8 /* RestaurantAnnotation.swift in Sources */,
 				3A9F981E248DD3F0007ABB71 /* ScannerFunctions.swift in Sources */,
 				A73FD46324919A1300A035AB /* ListDishesView.swift in Sources */,
 				3A987AD92480350C0021F6E4 /* SceneDelegate.swift in Sources */,
 				A73B1B6424B1162E00A8C6A8 /* OrderView.swift in Sources */,
+				3A4E2E3724D21CDC00C34DD8 /* Coordinator.swift in Sources */,
 				3A31372A2483178A00E46292 /* ARMUser.swift in Sources */,
 				A7F5506B24C1248500FAC1F0 /* RestaurantSearchView.swift in Sources */,
 				3A4E2E3224D12D2500C34DD8 /* DishAdminView.swift in Sources */,
+				3A4E2E3F24D2403300C34DD8 /* RestaurantDishViewModel.swift in Sources */,
 				3A13B6ED24C3D9FB0006458B /* SuggestRestaurant.swift in Sources */,
 				3A4E2E3424D13DCF00C34DD8 /* FirebaseFunctionsViewModel.swift in Sources */,
 				3A13B6EA24C197B30006458B /* RestaurantSearchLabel.swift in Sources */,

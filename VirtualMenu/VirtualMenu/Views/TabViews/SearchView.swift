@@ -86,8 +86,6 @@ struct SearchView: View {
 
             }
         }
-        .navigationBarTitle("")
-        .navigationBarHidden(true)
     }
 }
 

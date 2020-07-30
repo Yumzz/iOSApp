@@ -1,8 +1,8 @@
 //
-//  ListDishesViewModel.swift
+//  RestauarantDishViewModel.swift
 //  VirtualMenu
 //
-//  Created by Valentin Porcellini on 04/07/2020.
+//  Created by Rohan Tyagi on .
 //  Copyright © 2020 Rohan Tyagi. All rights reserved.
 //
 
@@ -10,7 +10,7 @@ import SwiftUI
 import CloudKit
 import Firebase
 
-class ListDishesViewModel: ObservableObject {
+class RestaurantDishViewModel: ObservableObject {
     
     let db = Firestore.firestore()
     
@@ -18,22 +18,40 @@ class ListDishesViewModel: ObservableObject {
     
     @Published var rest: RestaurantFB? = nil
     
-    func fetchRestaurantFB(name: String){
-        var restaurant: RestaurantFB? = nil
+    @Published var allRests: [RestaurantFB] = [RestaurantFB]()
+    
+    func fetchRestaurantsFB(){
+        var restaurants: [RestaurantFB] = [RestaurantFB]()
         db.collection("Restaurant").getDocuments { (rests, error) in
         if let error = error {
                print("Error getting documents: \(error)")
            } else {
                for document in rests!.documents {
                    print("\(document.documentID) => \(document.data())")
-//                if(document.get("Name") == name){
-                       restaurant = (RestaurantFB(snapshot: document)!)
-//                   }
+                restaurants.append((RestaurantFB(snapshot: document)!))
                }
             }
         }
-        self.rest = restaurant
+        self.allRests = restaurants
     }
+    
+    func fetchOneRestaurantFB(name: String){
+            var restaurant: RestaurantFB? = nil
+            db.collection("Restaurant").getDocuments { (rests, error) in
+            if let error = error {
+                   print("Error getting documents: \(error)")
+               } else {
+                   for document in rests!.documents {
+                       print("\(document.documentID) => \(document.data())")
+//                    if(document.get("Name") == name){
+                           restaurant = (RestaurantFB(snapshot: document)!)
+//                       }
+                   }
+                }
+            }
+            self.rest = restaurant
+        }
+
     
     func fetchDishesFB(restaurant: String){
         var fetchDishes = [DishFB]()

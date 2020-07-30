@@ -48,3 +48,15 @@ var circle: UIImage? {
   return result
 }
 }
+
+extension UITabBar {
+func tabsVisiblty(_ isVisiblty: Bool = true){
+    if isVisiblty {
+        self.isHidden = false
+        self.layer.zPosition = 0
+    } else {
+        self.isHidden = true
+        self.layer.zPosition = -1
+    }
+}
+}

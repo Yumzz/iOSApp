@@ -18,7 +18,7 @@ struct RestaurantSearchbarView: View {
                 Image(systemName: "magnifyingglass")
                 TextField("Search restaurant", text: self.$strSearch)
                 
-            }.frame(minWidth: 0, maxWidth: .infinity)
+            }.frame(minWidth: 0, maxWidth: (2*UIScreen.main.bounds.width)/3)
                 .padding(EdgeInsets(top: 8, leading: 6, bottom: 8, trailing: 6))
                 .foregroundColor(.primary)
                 .background(Color(.tertiarySystemBackground))

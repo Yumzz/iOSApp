@@ -19,6 +19,8 @@ struct RestaurantFB {
     let price: Double
     let type: String
     var dishes: [DishFB]? = nil
+    let ethnicity: String
+    let coordinate: GeoPoint
 //    let coverPhoto: CKAsset?
 //    let photos: [CKAsset]?
 //    let database: CKDatabase
@@ -33,6 +35,9 @@ struct RestaurantFB {
         self.description = ""
         self.price = 0
         self.type = ""
+        self.ethnicity = ""
+        self.dishes = []
+        self.coordinate = GeoPoint(latitude: 1.1, longitude: 1.1)
     }
     
     init?(snapshot: QueryDocumentSnapshot) {
@@ -44,14 +49,31 @@ struct RestaurantFB {
             let dishes = snapshot.data()["dishes"] as? [DishFB] else {
             return nil
         }
+        
+        guard
+            let type = snapshot.data()["dishes"] as? String else {
+            return nil
+        }
+        
+        guard
+            let ethnicity = snapshot.data()["Ethnicity"] as? String else {
+            return nil
+        }
+        
+        guard
+            let coordinate = snapshot.data()["location"] as? GeoPoint else {
+            return nil
+        }
       
         self.ref = nil
         self.key = "nil"
         self.name = name
         self.description = ""
         self.price = 0
-        self.type = ""
+        self.type = type
         self.dishes = dishes
+        self.ethnicity = ethnicity
+        self.coordinate = coordinate
     }
     
     func toAnyObject() -> Any {

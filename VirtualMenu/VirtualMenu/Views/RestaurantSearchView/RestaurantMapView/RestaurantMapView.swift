@@ -7,26 +7,43 @@
 //
 
 import SwiftUI
+import MapKit
 
 struct RestaurantMapView: View {
     @State var strSearch: String = ""
+    @State private var restaurants: [RestaurantFB] = [RestaurantFB]()
+    private var locationManager = LocationManager()
+    
+    @State var restChosen: RestaurantFB? = nil
+    
+    @ObservedObject var restDishVM = RestaurantDishViewModel()
+    
     var body: some View {
         GeometryReader { geometry in
             ZStack{
-                MapView().edgesIgnoringSafeArea(.all)
+                MapView(restaurants: self.restaurants).edgesIgnoringSafeArea(.all)
                 VStack {
-                    RestaurantSearchbarView(strSearch: self.$strSearch)
-                        .padding()
                     
+                    HStack(alignment: .top){
+                        NavigationLink(destination: RestaurantSearchListView()){
+                            SearchBarButton(strLabel: "List")
+                        }
+                        
+                        RestaurantSearchbarView(strSearch: self.$strSearch)
+                            .padding([.leading, .trailing])
+                        
+                        NavigationLink(destination: AppView()){
+                            SearchBarButton(strLabel: "Filter")
+                        }
+                        }.background(Color.white)
                     
                     Spacer()
                     HStack(spacing: 10){
                         Spacer()
                         Button(action: {
-                            print("Locate button tapped!")
+                            //Inspiration: Coordinator Class has mapView function that zooms in on user location
                         }) {
                             Image(systemName: "location")
-                            
                             
                         }.padding()
                             .background(Color(UIColor.tertiarySystemBackground))
@@ -34,10 +51,16 @@ struct RestaurantMapView: View {
                             .shadow(radius: 5)
                     }
                     .frame(width: geometry.size.width - 60)
-                    .padding(.bottom, 75)
+                    .padding(.bottom, 25)
                     
                 }
             }
+        }
+        .navigationBarTitle("")
+        .navigationBarHidden(true)
+        .onAppear(){
+            self.restaurants = self.restDishVM.allRests
+            //need to show only ones within certain radius (city radius)
         }
     }
 }

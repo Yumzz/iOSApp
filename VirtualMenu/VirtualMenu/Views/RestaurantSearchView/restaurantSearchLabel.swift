@@ -10,6 +10,7 @@ import SwiftUI
 
 struct restaurantSearchLabel: View {
     
+    @State var restaurant: RestaurantFB?
     var restaurantName: String = "Restaurant"
     var restaurantAddress: String = "Address"
     

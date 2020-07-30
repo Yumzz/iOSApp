@@ -15,7 +15,7 @@ struct AppView: View {
     var body: some View {
         TabView(selection: $currentTab) {
             NavigationView {
-                SearchView()
+                RestaurantMapView()
             }
             .tabItem {
                 Image(systemName: "magnifyingglass")
@@ -57,6 +57,7 @@ struct AppView: View {
 
 
         }
+    
         .navigationBarTitle("")
         .navigationBarHidden(true)
         .navigationBarBackButtonHidden(true)
