@@ -9,48 +9,105 @@
 import SwiftUI
 import CloudKit
 import Firebase
+import MapKit
 
 class RestaurantDishViewModel: ObservableObject {
     
     let db = Firestore.firestore()
     
-    @Published var dish = [DishFB]()
+    @Published var restDishes = [DishFB]()
     
     @Published var rest: RestaurantFB? = nil
     
     @Published var allRests: [RestaurantFB] = [RestaurantFB]()
     
+    let dispatchGroup = DispatchGroup()
+
+    
     func fetchRestaurantsFB(){
-        var restaurants: [RestaurantFB] = [RestaurantFB]()
-        db.collection("Restaurant").getDocuments { (rests, error) in
+        db.collection("Restaurant").getDocuments { (snapshot, error) in
         if let error = error {
                print("Error getting documents: \(error)")
            } else {
-               for document in rests!.documents {
-                   print("\(document.documentID) => \(document.data())")
-                restaurants.append((RestaurantFB(snapshot: document)!))
+               for document in snapshot!.documents {
+//                   print("\(document.documentID) => \(document.data())")
+//                print(document.get("Name") as! String)
+                DispatchQueue.main.async {
+                    self.fetchRestsDishesFB(name: document.get("Name") as! String)
+                    self.dispatchGroup.notify(queue: .main) {
+                        let plates = self.restDishes
+                        self.allRests.append(RestaurantFB(snapshot: document, dishes: plates, averagePrice: self.getDishAveragePrice(dishes: plates))!)
+                    }
+                }
                }
             }
         }
-        self.allRests = restaurants
     }
     
-    func fetchOneRestaurantFB(name: String){
-            var restaurant: RestaurantFB? = nil
-            db.collection("Restaurant").getDocuments { (rests, error) in
+    
+//    func fetchOneRestaurantFB(name: String) -> RestaurantFB?{
+//            var restaurant: RestaurantFB? = nil
+//            db.collection("Restaurant").getDocuments { (rests, error) in
+//            if let error = error {
+//                   print("Error getting documents: \(error)")
+//               } else {
+//                   for document in rests!.documents {
+//                       print("\(document.documentID) => \(document.data())")
+////                    if(document.get("Name") == name){
+//                           restaurant = (RestaurantFB(snapshot: document)!)
+////                       }
+//                   }
+//                }
+//            }
+//        return restaurant
+//    }
+    
+    func fetchRestsDishesFB(name: String){
+        self.dispatchGroup.enter()
+        print(name)
+        let fb = Firestore.firestore()
+        
+        let ref = fb.collection("Dish")
+        
+        let query = ref.whereField("Restaurant", isEqualTo: name)
+        
+        var dishes: [DishFB] = []
+        
+        query.getDocuments { (snapshot, error) in
             if let error = error {
-                   print("Error getting documents: \(error)")
-               } else {
-                   for document in rests!.documents {
-                       print("\(document.documentID) => \(document.data())")
-//                    if(document.get("Name") == name){
-                           restaurant = (RestaurantFB(snapshot: document)!)
-//                       }
-                   }
+                print("Error getting documents: \(error)")
+            } else {
+                for document in snapshot!.documents {
+    //                  print("\(document.documentID) => \(document.data())")
+                    dishes.append(DishFB(snapshot: document)!)
+                    if(document == snapshot!.documents.last){
+                        print("last")
+                        self.restDishes = dishes
+                        self.dispatchGroup.leave()
+                    }
                 }
             }
-            self.rest = restaurant
         }
+    }
+    
+    func retrieveDish(dishes: [DishFB]) -> [DishFB]{
+        print("dishes: \(dishes)")
+        return dishes
+    }
+    
+    func getDishAveragePrice(dishes: [DishFB]) -> Double{
+        var count = 0.0
+        var averagePrice = 0.0
+        
+        for d in dishes {
+            count = count + 1
+            averagePrice = averagePrice + d.price
+            
+        }
+        
+        return averagePrice/count
+        
+    }
 
     
     func fetchDishesFB(restaurant: String){
@@ -69,7 +126,7 @@ class RestaurantDishViewModel: ObservableObject {
             }
         }
         
-        self.dish = fetchDishes
+//        self.restDishes = fetchDishes
         
     }
     
