@@ -59,6 +59,7 @@
 		A73B1B6624B116CE00A8C6A8 /* FavoriteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A73B1B6524B116CE00A8C6A8 /* FavoriteView.swift */; };
 		A73B1B6824B11C7200A8C6A8 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A73B1B6724B11C7200A8C6A8 /* SearchView.swift */; };
 		A73FD46324919A1300A035AB /* ListDishesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A73FD46224919A1300A035AB /* ListDishesView.swift */; };
+		A777C3A424D3EC7A009658AA /* Navigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A777C3A324D3EC7A009658AA /* Navigator.swift */; };
 		A7912A2324CF7DED0052988C /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7912A2224CF7DED0052988C /* CustomTextField.swift */; };
 		A7912A2624CF82140052988C /* WhiteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7912A2524CF82140052988C /* WhiteButton.swift */; };
 		A7912A2824CF87260052988C /* BlackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7912A2724CF87260052988C /* BlackButton.swift */; };
@@ -167,6 +168,7 @@
 		A73B1B6524B116CE00A8C6A8 /* FavoriteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteView.swift; sourceTree = "<group>"; };
 		A73B1B6724B11C7200A8C6A8 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 		A73FD46224919A1300A035AB /* ListDishesView.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = ListDishesView.swift; sourceTree = "<group>"; tabWidth = 4; usesTabs = 0; wrapsLines = 1; };
+		A777C3A324D3EC7A009658AA /* Navigator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Navigator.swift; sourceTree = "<group>"; };
 		A7912A2224CF7DED0052988C /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		A7912A2524CF82140052988C /* WhiteButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhiteButton.swift; sourceTree = "<group>"; };
 		A7912A2724CF87260052988C /* BlackButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlackButton.swift; sourceTree = "<group>"; };
@@ -453,6 +455,7 @@
 			isa = PBXGroup;
 			children = (
 				3A4E2E2E24D0D2D600C34DD8 /* AuthenticationViewModel.swift */,
+				A777C3A324D3EC7A009658AA /* Navigator.swift */,
 				3A4E2E3E24D2403300C34DD8 /* RestaurantDishViewModel.swift */,
 				3A4E2E3324D13DCF00C34DD8 /* FirebaseFunctionsViewModel.swift */,
 			);
@@ -475,8 +478,8 @@
 			children = (
 				A7912A2224CF7DED0052988C /* CustomTextField.swift */,
 				A7912A2924CF8EFE0052988C /* CustomPasswordField.swift */,
-				A7912A2524CF82140052988C /* WhiteButton.swift */,
 				3A4E2E3C24D2275F00C34DD8 /* SearchBarButton.swift */,
+				A7912A2524CF82140052988C /* WhiteButton.swift */,
 				A7912A2724CF87260052988C /* BlackButton.swift */,
 			);
 			path = Components;
@@ -726,6 +729,7 @@
 				3A6477F224B68D060077EF30 /* UserProfile.swift in Sources */,
 				3A3137292483178A00E46292 /* Review.swift in Sources */,
 				3AF9926A24A2B95C005446D8 /* InputValidation.swift in Sources */,
+				A777C3A424D3EC7A009658AA /* Navigator.swift in Sources */,
 				A7FE250824A841620007E5AD /* RestaurantMapView.swift in Sources */,
 				A73B1B6824B11C7200A8C6A8 /* SearchView.swift in Sources */,
 				A7912A2624CF82140052988C /* WhiteButton.swift in Sources */,
