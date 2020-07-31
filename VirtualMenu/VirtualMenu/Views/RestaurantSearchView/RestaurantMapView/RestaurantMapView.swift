@@ -15,7 +15,7 @@ struct RestaurantMapView: View {
     private var locationManager = LocationManager()
     
     @State var restChosen: RestaurantFB? = nil
-    
+        
     @ObservedObject var restDishVM = RestaurantDishViewModel()
     
     var body: some View {
@@ -27,14 +27,11 @@ struct RestaurantMapView: View {
                     HStack(alignment: .top){
                         NavigationLink(destination: RestaurantSearchListView()){
                             SearchBarButton(strLabel: "List")
-                        }
-                        
+                            }
                         RestaurantSearchbarView(strSearch: self.$strSearch)
                             .padding([.leading, .trailing])
                         
-                        NavigationLink(destination: AppView()){
-                            SearchBarButton(strLabel: "Filter")
-                        }
+                        
                         }.background(Color.white)
                     
                     Spacer()
@@ -42,6 +39,7 @@ struct RestaurantMapView: View {
                         Spacer()
                         Button(action: {
                             //Inspiration: Coordinator Class has mapView function that zooms in on user location
+                            
                         }) {
                             Image(systemName: "location")
                             
@@ -59,7 +57,16 @@ struct RestaurantMapView: View {
         .navigationBarTitle("")
         .navigationBarHidden(true)
         .onAppear(){
-            self.restaurants = self.restDishVM.allRests
+            var counter = 0
+            Timer.scheduledTimer(withTimeInterval: 5.0, repeats: true) { (timer) in
+                print("counter: \(counter)")
+                counter = counter + 1
+                if(counter == 4){
+                    timer.invalidate()
+                }
+                self.restDishVM.fetchRestaurantsFB()
+                self.restaurants = self.restDishVM.allRests
+            }
             //need to show only ones within certain radius (city radius)
         }
     }

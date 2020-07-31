@@ -60,3 +60,12 @@ func tabsVisiblty(_ isVisiblty: Bool = true){
     }
 }
 }
+
+
+extension String {
+    
+    
+    
+    
+    
+}

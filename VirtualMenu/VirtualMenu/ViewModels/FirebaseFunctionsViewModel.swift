@@ -99,4 +99,5 @@ class FirebaseFunctionsViewModel: ObservableObject {
         return [result, title]
     }
     
+    
 }

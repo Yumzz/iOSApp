@@ -12,6 +12,7 @@ import MapKit
 struct MapView: UIViewRepresentable {
     let restaurants: [RestaurantFB]
     
+    
     func makeUIView(context: Context) -> MKMapView{
         let map = MKMapView()
         map.showsUserLocation = true
@@ -24,11 +25,20 @@ struct MapView: UIViewRepresentable {
     }
      
     func updateUIView(_ view: MKMapView, context: UIViewRepresentableContext<MapView>){
+        updateAnnotations(from: view)
+    }
+    
+    private func updateAnnotations(from mapView: MKMapView){
+        mapView.removeAnnotations(mapView.annotations)
+        let annotations = self.restaurants.map(RestaurantAnnotation.init)
+        print("annotations: \(annotations.description)")
+        mapView.addAnnotations(annotations)
     }
     
 }
 
 struct MapView_Previews: PreviewProvider {
+
     static var previews: some View {
         NavigationView{
             MapView(restaurants: [])

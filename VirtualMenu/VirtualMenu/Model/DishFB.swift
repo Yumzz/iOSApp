@@ -30,32 +30,37 @@ struct DishFB {
 //    var model: CKRecord.Reference? = nil
 //    var reviews: [CKRecord.Reference]? = nil
     
-    init(name: String, key: String = "") {
+    init(name: String, key: String = "", description: String, price: Double, type: String, restaurant: String) {
         self.ref = nil
         self.key = key
         self.name = name
-        self.description = ""
-        self.price = 0
-        self.type = ""
+        self.description = description
+        self.price = price
+        self.type = type
         self.coverPhoto = nil
-        self.restaurant = ""
+        self.restaurant = restaurant
     }
     
     init?(snapshot: QueryDocumentSnapshot) {
         guard
             let name = snapshot.data()["Name"] as? String else {
+            print("no name")
             return nil
         }
-        guard let price = snapshot.data()["Price"] as? Double else {
+        guard let price = snapshot.data()["Price"] as? String else {
+            print("no price")
             return nil
         }
         guard let description = snapshot.data()["Description"] as? String else {
+            print("no description")
             return nil
         }
         guard let type = snapshot.data()["Type"] as? String else {
+            print("no type")
             return nil
         }
         guard let restau = snapshot.data()["Restaurant"] as? String else {
+            print("no rest")
             return nil
         }
       
@@ -63,7 +68,7 @@ struct DishFB {
         self.key = "nil"
         self.name = name
         self.description = description
-        self.price = price
+        self.price = (price as NSString).doubleValue
         self.type = type
         self.restaurant = restau
         self.coverPhoto = self.getProfilePhoto()
@@ -78,8 +83,14 @@ struct DishFB {
     func getProfilePhoto() -> UIImage? {
         var image: UIImage?
         //need current restaurant
-        let imagesRef = storage.reference().child("Restaurant/\(self.restaurant)/\(self.name)/cover.png")
-        imagesRef.getData(maxSize: 1 * 1024 * 1024) { data, error in
+        var n = self.name
+        n = n.replacingOccurrences(of: " ", with: "-")
+        n = n.lowercased()
+        
+//        print("name: \(n)")
+        
+        let imagesRef = storage.reference().child("Restaurant/\(self.restaurant.lowercased())/dish/\(n)/photo/Picture.jpg")
+        imagesRef.getData(maxSize: 2 * 2048 * 2048) { data, error in
         if let error = error {
             print(error.localizedDescription)
         } else {

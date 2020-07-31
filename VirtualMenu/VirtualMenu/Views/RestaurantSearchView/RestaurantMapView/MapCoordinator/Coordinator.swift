@@ -10,7 +10,7 @@ import SwiftUI
 import MapKit
 
 final class Coordinator: NSObject, MKMapViewDelegate {
-    
+    var locationManager = LocationManager()
     var control: MapView
     
     init(_ control: MapView){
@@ -34,8 +34,6 @@ final class Coordinator: NSObject, MKMapViewDelegate {
         }
         
     }
-    
-    
-    
+   
 }
 

@@ -15,6 +15,7 @@ final class RestaurantAnnotation: NSObject, MKAnnotation{
     let coordinate: CLLocationCoordinate2D
     
     init(restaurant: RestaurantFB){
+        print("annotation created")
         self.title = restaurant.name
         let lat: CLLocationDegrees = restaurant.coordinate.latitude
         let lon: CLLocationDegrees = restaurant.coordinate.longitude

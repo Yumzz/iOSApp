@@ -10,70 +10,127 @@ import Foundation
 import FirebaseFirestore
 import Firebase
 import FirebaseDatabase
+import MapKit
 
 struct RestaurantFB {
-    let ref: DatabaseReference?
+//    let ref: DatabaseReference?
     let key: String
     let name: String
     let description: String
-    let price: Double
+    var averagePrice: Double
     let type: String
     var dishes: [DishFB]? = nil
     let ethnicity: String
     let coordinate: GeoPoint
 //    let coverPhoto: CKAsset?
 //    let photos: [CKAsset]?
-//    let database: CKDatabase
-//    var restaurant: CKRecord.Reference? = nil
 //    var model: CKRecord.Reference? = nil
 //    var reviews: [CKRecord.Reference]? = nil
     
-    init(name: String, key: String = "") {
-        self.ref = nil
+    init(name: String, key: String = "", description: String, averagePrice: Double, type: String, ethnicity: String, dishes: [DishFB], coordinate: GeoPoint) {
+//        self.ref = nil
         self.key = key
         self.name = name
-        self.description = ""
-        self.price = 0
-        self.type = ""
-        self.ethnicity = ""
-        self.dishes = []
-        self.coordinate = GeoPoint(latitude: 1.1, longitude: 1.1)
+        self.description = description
+        self.averagePrice = averagePrice
+        self.type = type
+        self.ethnicity = ethnicity
+        self.dishes = dishes
+        self.coordinate = coordinate
     }
     
-    init?(snapshot: QueryDocumentSnapshot) {
+    init?(snapshot: QueryDocumentSnapshot){
+        
+       guard
+           let name = snapshot.data()["Name"] as? String else {
+           print("no name")
+           return nil
+       }
+       guard
+           let ds = snapshot.data()["dishes"] as? [DocumentReference?] else {
+           print("dishes messed up")
+           return nil
+       }
+       //dishes is an array of FIRDocumentReference in Firebase and is converted to ds, which is an array of DocumentReferences
+       
+       guard
+           let type = snapshot.data()["Type"] as? String else {
+           print("no type")
+           return nil
+       }
+       
+       guard
+           let description = snapshot.data()["description"] as? String else{
+               print("no description")
+               return nil
+       }
+       guard
+           let ethnicity = snapshot.data()["Ethnicity"] as? String else {
+           print("no ethnicity")
+           return nil
+       }
+
+       guard
+           let coordinate = snapshot.data()["location"] as? GeoPoint else {
+           print("no coordinate")
+           return nil
+       }
+       
+       self.key = snapshot.documentID
+       self.name = name
+       self.description = description
+       self.averagePrice = 0.0
+       self.type = type
+       self.ethnicity = ethnicity
+       self.coordinate = coordinate
+       self.dishes = []
+    }
+    
+    init?(snapshot: QueryDocumentSnapshot, dishes: [DishFB], averagePrice: Double) {
+//        print(snapshot.data())
         guard
-            let name = snapshot.data()["name"] as? String else {
+            let name = snapshot.data()["Name"] as? String else {
+            print("no name")
             return nil
         }
         guard
-            let dishes = snapshot.data()["dishes"] as? [DishFB] else {
+            let ds = snapshot.data()["dishes"] as? [DocumentReference?] else {
+            print("dishes messed up")
+            return nil
+        }
+        //dishes is an array of FIRDocumentReference in Firebase and is converted to ds, which is an array of DocumentReferences
+        
+        guard
+            let type = snapshot.data()["Type"] as? String else {
+            print("no type")
             return nil
         }
         
         guard
-            let type = snapshot.data()["dishes"] as? String else {
-            return nil
+            let description = snapshot.data()["description"] as? String else{
+                print("no description")
+                return nil
         }
-        
         guard
             let ethnicity = snapshot.data()["Ethnicity"] as? String else {
+            print("no ethnicity")
+            return nil
+        }
+
+        guard
+            let coordinate = snapshot.data()["location"] as? GeoPoint else {
+            print("no coordinate")
             return nil
         }
         
-        guard
-            let coordinate = snapshot.data()["location"] as? GeoPoint else {
-            return nil
-        }
-      
-        self.ref = nil
-        self.key = "nil"
+        self.key = snapshot.documentID
         self.name = name
-        self.description = ""
-        self.price = 0
+        self.description = description
+        self.averagePrice = averagePrice
         self.type = type
-        self.dishes = dishes
         self.ethnicity = ethnicity
         self.coordinate = coordinate
+        self.dishes = dishes
     }
     
     func toAnyObject() -> Any {
@@ -82,3 +139,4 @@ struct RestaurantFB {
         ]
     }
 }
+

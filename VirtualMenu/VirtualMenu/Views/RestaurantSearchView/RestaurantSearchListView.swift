@@ -27,15 +27,19 @@ struct RestaurantSearchListView: View {
                     .overlay(Color(UIColor().colorFromHex("#F88379", 0.5)))
                     .edgesIgnoringSafeArea(.all)
                     
-                    Text("")
+                    Text("Dots signifying swipability")
                 }
             }
             
             Text("Number of Restaurants in this category")
             
-//            List {
-//
-//            }
+            VStack {
+                Text("")
+                
+                
+                
+                
+            }
             
             //Type of Restaurant
             //
