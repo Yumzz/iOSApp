@@ -57,10 +57,6 @@ struct AppView: View {
 
 
         }
-    
-        .navigationBarTitle("")
-        .navigationBarHidden(true)
-        .navigationBarBackButtonHidden(true)
     }
 }
 

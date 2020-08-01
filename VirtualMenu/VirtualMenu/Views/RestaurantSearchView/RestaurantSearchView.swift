@@ -27,7 +27,7 @@ struct RestaurantSearchView: View {
             }
             
                 .padding()
-            RestaurantSearchListView()
+//            RestaurantSearchListView()
         }
     }
 }

@@ -53,6 +53,7 @@
 		3AF9926A24A2B95C005446D8 /* InputValidation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF9926924A2B95C005446D8 /* InputValidation.swift */; };
 		3AF9927324A53AB4005446D8 /* InitialScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF9927224A53AB4005446D8 /* InitialScreen.swift */; };
 		3AF9927524A53AC0005446D8 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF9927424A53AC0005446D8 /* SignUpView.swift */; };
+		A724364B24D4CFF200F8BBBB /* DishCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = A724364A24D4CFF200F8BBBB /* DishCard.swift */; };
 		A731EB0E2495AD2300B75D05 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A731EB0D2495AD2300B75D05 /* CloudKit.framework */; };
 		A73B1B6224B111D800A8C6A8 /* AppView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A73B1B6124B111D800A8C6A8 /* AppView.swift */; };
 		A73B1B6424B1162E00A8C6A8 /* OrderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A73B1B6324B1162E00A8C6A8 /* OrderView.swift */; };
@@ -162,6 +163,7 @@
 		3AF9927224A53AB4005446D8 /* InitialScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InitialScreen.swift; sourceTree = "<group>"; };
 		3AF9927424A53AC0005446D8 /* SignUpView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		5282E935E7A89EA0ACB48A8D /* Pods-VirtualMenu.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VirtualMenu.release.xcconfig"; path = "Target Support Files/Pods-VirtualMenu/Pods-VirtualMenu.release.xcconfig"; sourceTree = "<group>"; };
+		A724364A24D4CFF200F8BBBB /* DishCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DishCard.swift; sourceTree = "<group>"; };
 		A731EB0D2495AD2300B75D05 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		A73B1B6124B111D800A8C6A8 /* AppView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppView.swift; sourceTree = "<group>"; };
 		A73B1B6324B1162E00A8C6A8 /* OrderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderView.swift; sourceTree = "<group>"; };
@@ -435,6 +437,14 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		A724364924D4CFDB00F8BBBB /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				A724364A24D4CFF200F8BBBB /* DishCard.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
 		A73B1B5924B0FDA800A8C6A8 /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -488,6 +498,7 @@
 		A7F5506724C1238B00FAC1F0 /* RestaurantSearchView */ = {
 			isa = PBXGroup;
 			children = (
+				A724364924D4CFDB00F8BBBB /* Components */,
 				A73B1B6024B1019E00A8C6A8 /* RestaurantMapView */,
 				A7F5506824C123AA00FAC1F0 /* RestaurantSearchListView.swift */,
 				3A13B6E924C197B30006458B /* RestaurantSearchLabel.swift */,
@@ -758,6 +769,7 @@
 				C5D0A16C24B1B6A300E44DF2 /* DishFB.swift in Sources */,
 				A7FE250624A83C1D0007E5AD /* MapView.swift in Sources */,
 				3AF9926524A2B7C9005446D8 /* LoginView.swift in Sources */,
+				A724364B24D4CFF200F8BBBB /* DishCard.swift in Sources */,
 				A7912A2A24CF8EFE0052988C /* CustomPasswordField.swift in Sources */,
 				3A3137282483178A00E46292 /* Restaurant.swift in Sources */,
 				3A4A0E70249EB9320030635E /* AccountProfileView.swift in Sources */,

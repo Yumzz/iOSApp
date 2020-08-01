@@ -12,12 +12,13 @@ import MapKit
 struct RestaurantMapView: View {
     @State var strSearch: String = ""
     @State private var restaurants: [RestaurantFB] = [RestaurantFB]()
-    private var locationManager = LocationManager()
-    
     @State var restChosen: RestaurantFB? = nil
-        
+    
+    @State var isNavigationBarHidden: Bool = true
+    
     @ObservedObject var restDishVM = RestaurantDishViewModel()
     
+    private var locationManager = LocationManager()
     var body: some View {
         GeometryReader { geometry in
             ZStack{
@@ -25,7 +26,7 @@ struct RestaurantMapView: View {
                 VStack {
                     
                     HStack(alignment: .top){
-                        NavigationLink(destination: RestaurantSearchListView()){
+                        NavigationLink(destination: RestaurantSearchListView( isNavigationBarHidden: self.$isNavigationBarHidden)){
                             SearchBarButton(strLabel: "List")
                             }
                         RestaurantSearchbarView(strSearch: self.$strSearch)
@@ -54,9 +55,12 @@ struct RestaurantMapView: View {
                 }
             }
         }
-        .navigationBarTitle("")
-        .navigationBarHidden(true)
+        .navigationBarTitle("Map")
+        .navigationBarHidden(self.isNavigationBarHidden)
         .onAppear(){
+            
+            self.isNavigationBarHidden = true
+            
             var counter = 0
             Timer.scheduledTimer(withTimeInterval: 5.0, repeats: true) { (timer) in
                 print("counter: \(counter)")
