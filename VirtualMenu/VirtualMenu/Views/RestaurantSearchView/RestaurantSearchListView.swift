@@ -39,9 +39,9 @@ struct RestaurantSearchListView: View {
         
         Resto.init(id: 3, image: nil, name: "Gangnam Station", address: "113 Dryden Rd, Ithaca", score: 4.9, nbOfRatings: 120),
         
-        Resto.init(id: 2, image: nil, name: "CTB", address: "113 Dryden Rd, Ithaca", score: 4.9, nbOfRatings: 120),
+        Resto.init(id: 4, image: nil, name: "Indian", address: "113 Dryden Rd, Ithaca", score: 4.9, nbOfRatings: 120),
         
-        Resto.init(id: 3, image: nil, name: "Gangnam Station", address: "113 Dryden Rd, Ithaca", score: 4.9, nbOfRatings: 120)
+        Resto.init(id: 5, image: nil, name: "Thai", address: "113 Dryden Rd, Ithaca", score: 4.9, nbOfRatings: 120)
     ]
     
     var body: some View {
