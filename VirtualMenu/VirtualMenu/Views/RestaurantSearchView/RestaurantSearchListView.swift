@@ -47,7 +47,7 @@ struct RestaurantSearchListView: View {
     var body: some View {
         
         ScrollView {
-            Text("10 Places")
+            Text("\(String(restos.count)) Places")
             .bold()
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding()
