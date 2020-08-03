@@ -59,104 +59,101 @@ struct LoginView: View {
     var body: some View {
         
         VStack(spacing: 30) {
-                   CustomTextField(strLabel: "Email", strField: $email, uiTextAutoCapitalizationType: .none, uiKeyboardType: .emailAddress)
-                   
-                   CustomPasswordField(strLabel: "Password", password: $password)
-                   
-                   VStack(alignment: .trailing) {
-                       HStack {
-                           Spacer()
-                               .frame(height: 5)
-                           
-                           Button(action: {
-                               self.showForgotPassword = true
-                           }) {
-                               Text("Forgot Password?")
-                                   .foregroundColor(.black)
-                                   .padding(.trailing, (UIScreen.main.bounds.width * 40) / 414)
-                                   .font(.system(size: (UIScreen.main.bounds.width * 15) / 414, weight: .bold, design: .default))
-                               
-                           }
-                           .sheet(isPresented: self.$showForgotPassword) {
-                               ForgotPasswordView()
-                               //dismiss once confirmation alert is sent
-                           }
-                           
-                       }.padding(.trailing, (UIScreen.main.bounds.width * 10) / 414)
-                   }
-                   
-                       Button(action: {
-                        Auth.auth().signIn(withEmail: self.email, password: self.password){
-                               (result, error) in
-                               if(error == nil){
-                                  self.AuthenticationVM.updateProfile()
-                               }
-                               else{
-                                self.alertMessage = "No user exists with those credentials"
-                                self.alertTitle = "No user"
-                                self.showAlert.toggle()
-                               }
-                            self.loggedIn.toggle()
-                           }
-                       }) {
-                           NavigationLink(destination: AppView(), isActive: $loggedIn){
-                               BlackButton(strLabel: "LOGIN")
-                           }.disabled(!self.loggedIn)
-                       }
-                   
-                   HStack{
-                       
-                       VStack{
-                           Divider()
-                               .padding(.leading, (UIScreen.main.bounds.width * 40) / 414)
-                               .frame(width: (UIScreen.main.bounds.width/2.3), height: 10, alignment: .leading)
-                           
-                       }
-                       
-                       Text("OR")
-                       
-                       VStack{
-                           Divider()
-                               .padding(.trailing, (UIScreen.main.bounds.width * 40) / 414)
-                               .frame(width: (UIScreen.main.bounds.width/2.3), height: 10, alignment: .trailing)
-                       }
-                       
-                   }
-                   
-                   Button(action: {
-                       self.showGoogle.toggle()
-                       SocialLogin().attemptLoginGoogle()
-                   }){
-                       BlackButton(strLabel: "Sign In with Google", imgName: "continue_with_google")
-                   }
-                   
-                   Button(action: {
-                       self.showFB.toggle()
-                       SocialLogin().attemptLoginFb(completion: { result, error in
-                       })
-                       
-                   }){
-                       BlackButton(strLabel: "Sign In with Facebook", imgName: "continue_with_facebook")
-                   }
-                   
-                   Button(action: {
-                       self.showSignup.toggle()
-                   }) {
-                       Text("New User? Create an account")
-                           .foregroundColor(.black)
-                           .font(.system(size: (UIScreen.main.bounds.width * 15) / 414, weight: .bold, design: .default))
-                       
-                   }
-                   .sheet(isPresented: self.$showSignup) {
-                       SignUpView()
-                   }
-               }
-               .alert(isPresented: $showAlert, content: { self.alert })
-        
-                   .navigationBarTitle("Sign In")
-                   .navigationBarBackButtonHidden(self.loggedIn)
-                   .navigationBarHidden(self.loggedIn)
-           }
+            CustomTextField(strLabel: "Email", strField: $email, uiTextAutoCapitalizationType: .none, uiKeyboardType: .emailAddress)
+            
+            CustomPasswordField(strLabel: "Password", password: $password)
+            
+            VStack(alignment: .trailing) {
+                HStack {
+                    Spacer()
+                        .frame(height: 5)
+                    
+                    Button(action: {
+                        self.showForgotPassword = true
+                    }) {
+                        Text("Forgot Password?")
+                            .foregroundColor(.black)
+                            .padding(.trailing, (UIScreen.main.bounds.width * 40) / 414)
+                            .font(.system(size: (UIScreen.main.bounds.width * 15) / 414, weight: .bold, design: .default))
+                        
+                    }
+                    .sheet(isPresented: self.$showForgotPassword) {
+                        ForgotPasswordView()
+                        //dismiss once confirmation alert is sent
+                    }
+                    
+                }.padding(.trailing, (UIScreen.main.bounds.width * 10) / 414)
+            }
+            
+            Button(action: {
+                Auth.auth().signIn(withEmail: self.email, password: self.password){
+                    (result, error) in
+                    if(error == nil){
+                        self.AuthenticationVM.updateProfile()
+                    }
+                    else{
+                        self.alertMessage = "No user exists with those credentials"
+                        self.alertTitle = "No user"
+                        self.showAlert.toggle()
+                    }
+                    self.loggedIn.toggle()
+                }
+            }) {
+                NavigationLink(destination: AppView(), isActive: $loggedIn){
+                    BlackButton(strLabel: "LOGIN")
+                }.disabled(!self.loggedIn)
+            }
+            
+            HStack{
+                
+                VStack{
+                    Divider()
+                        .padding(.leading, (UIScreen.main.bounds.width * 40) / 414)
+                        .frame(width: (UIScreen.main.bounds.width/2.3), height: 10, alignment: .leading)
+                    
+                }
+                
+                Text("OR")
+                
+                VStack{
+                    Divider()
+                        .padding(.trailing, (UIScreen.main.bounds.width * 40) / 414)
+                        .frame(width: (UIScreen.main.bounds.width/2.3), height: 10, alignment: .trailing)
+                }
+                
+            }
+            
+            Button(action: {
+                self.showGoogle.toggle()
+                SocialLogin().attemptLoginGoogle()
+            }){
+                BlackButton(strLabel: "Sign In with Google", imgName: "continue_with_google")
+            }
+            
+            Button(action: {
+                self.showFB.toggle()
+                SocialLogin().attemptLoginFb(completion: { result, error in
+                })
+                
+            }){
+                BlackButton(strLabel: "Sign In with Facebook", imgName: "continue_with_facebook")
+            }
+            
+            Button(action: {
+                self.showSignup.toggle()
+            }) {
+                Text("New User? Create an account")
+                    .foregroundColor(.black)
+                    .font(.system(size: (UIScreen.main.bounds.width * 15) / 414, weight: .bold, design: .default))
+                
+            }
+            .sheet(isPresented: self.$showSignup) {
+                SignUpView()
+            }
+        }
+        .navigationBarTitle("Sign In")
+        .alert(isPresented: $showAlert, content: { self.alert })
+    }
     
     struct SocialLogin: UIViewRepresentable {
         

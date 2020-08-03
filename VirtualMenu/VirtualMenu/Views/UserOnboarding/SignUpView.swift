@@ -103,8 +103,6 @@ struct SignUpView: View {
             }
         }
         .navigationBarTitle("Sign Up")
-        .navigationBarBackButtonHidden(self.createdAccount)
-        .navigationBarHidden(self.createdAccount)
     }
     
     

@@ -73,6 +73,7 @@ struct InitialScreen: View {
                 AppView()
             }
         }
+        .navigationViewStyle(StackNavigationViewStyle())
     }
 }
 
