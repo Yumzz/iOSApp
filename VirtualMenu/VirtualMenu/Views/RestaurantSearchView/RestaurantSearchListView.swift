@@ -47,52 +47,34 @@ struct RestaurantSearchListView: View {
     var body: some View {
         
         ScrollView {
-            Text("\(String(restos.count)) Places")
-            .bold()
-            .frame(maxWidth: .infinity, alignment: .leading)
-            .padding()
             VStack(spacing: 20){
-            
-            //            VStack{
-            //                //Type of Restaurant
-            //                ZStack{
-            //                    Image("")
-            //                    .resizable()
-            //                    .aspectRatio(contentMode: .fill)
-            //                    .overlay(Color(UIColor().colorFromHex("#F88379", 0.5)))
-            //                    .edgesIgnoringSafeArea(.all)
-            //
-            //                    Text("Dots signifying swipability")
-            //                }
-            //            }
-            
-            
-            
+                
+                Text("\(String(restos.count)) Places")
+                    .bold()
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding(.leading)
+                
                 ForEach(restos, id: \.id) { resto in
                     Button(action: {
                         
                     }){
                         DishCard(image: resto.image, restaurantName: resto.name, restaurantAddress: resto.address,score: resto.score, nbOfRatings: resto.nbOfRatings)
                     }
-                        
-                    
-                    
                 }
                 
                 Spacer()
                     .frame(height: 30)
-            
-            //Type of Restaurant
-            //swipe to each theme
-            //have collection view for each type and make them scrollable
-        }
-        
-            
+            }
+            .padding(.top)
+            .frame(maxWidth: .infinity)
         }
         .navigationBarTitle("Asian Restaurants")
         .onAppear(){
             self.restaurants = self.restDishVM.allRests
             self.isNavigationBarHidden = false
+        }
+        .onDisappear(){
+            self.isNavigationBarHidden = true
         }
     }
 }
