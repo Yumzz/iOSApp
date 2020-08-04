@@ -23,7 +23,10 @@ class LocationManager: NSObject {
         self.locationManager.startUpdatingLocation()
         
     }
-    
+    func locationManager(_ manager: CLLocationManager,
+                         didUpdateLocations locations: [CLLocation]){
+        self.location = locations[0]
+    }
 }
 
 extension LocationManager: CLLocationManagerDelegate{

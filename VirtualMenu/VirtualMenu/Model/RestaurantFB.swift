@@ -22,6 +22,7 @@ struct RestaurantFB {
     var dishes: [DishFB]? = nil
     let ethnicity: String
     let coordinate: GeoPoint
+    let id: UUID
 //    let coverPhoto: CKAsset?
 //    let photos: [CKAsset]?
 //    var model: CKRecord.Reference? = nil
@@ -37,6 +38,7 @@ struct RestaurantFB {
         self.ethnicity = ethnicity
         self.dishes = dishes
         self.coordinate = coordinate
+        self.id = UUID()
     }
     
     init?(snapshot: QueryDocumentSnapshot){
@@ -84,6 +86,7 @@ struct RestaurantFB {
        self.ethnicity = ethnicity
        self.coordinate = coordinate
        self.dishes = []
+       self.id = UUID()
     }
     
     init?(snapshot: QueryDocumentSnapshot, dishes: [DishFB], averagePrice: Double) {
@@ -131,6 +134,7 @@ struct RestaurantFB {
         self.ethnicity = ethnicity
         self.coordinate = coordinate
         self.dishes = dishes
+        self.id = UUID()
     }
     
     func toAnyObject() -> Any {

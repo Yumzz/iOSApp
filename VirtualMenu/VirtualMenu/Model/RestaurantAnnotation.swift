@@ -13,6 +13,7 @@ import SwiftUI
 final class RestaurantAnnotation: NSObject, MKAnnotation{
     let title: String?
     let coordinate: CLLocationCoordinate2D
+    let restInfo: RestaurantFB
     
     init(restaurant: RestaurantFB){
         print("annotation created")
@@ -20,6 +21,7 @@ final class RestaurantAnnotation: NSObject, MKAnnotation{
         let lat: CLLocationDegrees = restaurant.coordinate.latitude
         let lon: CLLocationDegrees = restaurant.coordinate.longitude
         self.coordinate = CLLocationCoordinate2D(latitude: lat, longitude: lon)
+        self.restInfo = restaurant
     }
     
 }

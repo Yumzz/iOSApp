@@ -18,17 +18,11 @@ struct DishFB {
     let description: String
     let price: Double
     let type: String
-    var coverPhoto: UIImage? = nil
+    var coverPhoto: UIImage?
     var restaurant: String
+    var id: UUID
     
     var storage = Storage.storage()
-
-//    let coverPhoto: CKAsset?
-//    let photos: [CKAsset]?
-//    let database: CKDatabase
-//    var restaurant: CKRecord.Reference? = nil
-//    var model: CKRecord.Reference? = nil
-//    var reviews: [CKRecord.Reference]? = nil
     
     init(name: String, key: String = "", description: String, price: Double, type: String, restaurant: String) {
         self.ref = nil
@@ -39,9 +33,10 @@ struct DishFB {
         self.type = type
         self.coverPhoto = nil
         self.restaurant = restaurant
+        self.id = UUID()
     }
     
-    init?(snapshot: QueryDocumentSnapshot) {
+    init?(snapshot: QueryDocumentSnapshot, photo: UIImage) {
         guard
             let name = snapshot.data()["Name"] as? String else {
             print("no name")
@@ -63,7 +58,7 @@ struct DishFB {
             print("no rest")
             return nil
         }
-      
+        self.id = UUID()
         self.ref = nil
         self.key = "nil"
         self.name = name
@@ -71,7 +66,8 @@ struct DishFB {
         self.price = (price as NSString).doubleValue
         self.type = type
         self.restaurant = restau
-        self.coverPhoto = self.getProfilePhoto()
+        print(photo.description)
+        self.coverPhoto = photo
     }
     
     func toAnyObject() -> Any {
@@ -79,25 +75,26 @@ struct DishFB {
             "name": name
         ]
     }
-    
-    func getProfilePhoto() -> UIImage? {
-        var image: UIImage?
-        //need current restaurant
-        var n = self.name
-        n = n.replacingOccurrences(of: " ", with: "-")
-        n = n.lowercased()
-        
-//        print("name: \(n)")
-        
-        let imagesRef = storage.reference().child("Restaurant/\(self.restaurant.lowercased())/dish/\(n)/photo/Picture.jpg")
-        imagesRef.getData(maxSize: 2 * 2048 * 2048) { data, error in
-        if let error = error {
-            print(error.localizedDescription)
-        } else {
-          // Data for "virtual-menu-profilephotos/\(name).jpg" is returned
-            image = UIImage(data: data!)!
-            }
-        }
-        return image
+}
+
+extension DishFB: Hashable {
+    static func == (lhs: DishFB, rhs: DishFB) -> Bool {
+        return lhs.id == rhs.id
     }
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+    }
+    
+    static func previewDish() -> DishFB {
+        let restDish = RestaurantDishViewModel()
+        restDish.fetchRestsDishesFB(name: "PlumTree")
+        return restDish.restDishes[0]
+    }
+    
+    
+    static func formatPrice(price: Double) -> String {
+        return "$" + (price.truncatingRemainder(dividingBy: 1) == 0 ? String(format: "%.2f", price) : String(price))
+    }
+    
 }

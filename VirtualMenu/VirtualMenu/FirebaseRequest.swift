@@ -18,22 +18,22 @@ class FirebaseRequest {
         
     }
     
-    func fetchAllDishes() -> [DishFB] {
-        var dishList : [DishFB] = []
-        
-        db.collectionGroup("Dish").getDocuments { (querySnapshot, error) in
-            if let error = error {
-                print("Error getting documents: \(error)")
-            } else {
-                for document in querySnapshot!.documents {
-                    print("\(document.documentID) => \(document.data())")
-                    dishList.append(DishFB(snapshot: document)!)
-                }
-            }
-        }
-            
-        return dishList
-    }
+//    func fetchAllDishes() -> [DishFB] {
+//        var dishList : [DishFB] = []
+//
+//        db.collectionGroup("Dish").getDocuments { (querySnapshot, error) in
+//            if let error = error {
+//                print("Error getting documents: \(error)")
+//            } else {
+//                for document in querySnapshot!.documents {
+//                    print("\(document.documentID) => \(document.data())")
+//                    dishList.append(DishFB(snapshot: document)!)
+//                }
+//            }
+//        }
+//
+//        return dishList
+//    }
     
     func fetchUser() -> UserProfile{
         return user
