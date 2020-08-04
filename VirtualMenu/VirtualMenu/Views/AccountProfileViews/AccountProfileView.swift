@@ -98,14 +98,13 @@ struct AccountProfileView: View {
                             do {
                                 try firebaseAuth.signOut()
                                 self.signedOut = true
+                                self.navigator.isOnboardingShowing = true
                             } catch let signOutError as NSError {
                               print ("Error signing out: %@", signOutError)
                             }
                         }){
-                            NavigationLink(destination: InitialScreen().navigationBarBackButtonHidden(true), isActive: self.$signedOut){
                                 Text("Sign Out")
                                 .foregroundColor(Color(UIColor().colorFromHex("#F88379", 1)))
-                            }.disabled(!self.signedOut)
                         }
                     
                     Button(action: {
