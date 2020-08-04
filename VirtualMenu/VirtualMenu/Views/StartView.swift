@@ -31,9 +31,6 @@ struct StartView: View {
             }
             
             VStack(spacing: 50){
-//                NavigationLink(destination: RestaurantMapView()) {
-//                    Text("Find on the Map")
-//                }
                 
                 Text("Menu viewing options:")
                 

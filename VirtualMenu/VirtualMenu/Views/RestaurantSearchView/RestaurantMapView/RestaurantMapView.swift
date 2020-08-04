@@ -110,7 +110,7 @@ struct RestaurantMapView: View {
                                 }
                                 HStack{
                                     VStack(alignment: .center){
-                                        NavigationLink(destination: StartView(restChosen: self.click.restChosen!).navigationBarHidden(false)){
+                                        NavigationLink(destination: MenuSelectionView(restChosen: self.click.restChosen!).navigationBarHidden(false)){
                                             Text("Click here for \(self.click.restChosen!.name)'s Menu Details")
                                                 .foregroundColor(.black)
                                         }
@@ -123,8 +123,7 @@ struct RestaurantMapView: View {
                     
                 }
                 )
-                }
-                
+            }
             }
         }
         .navigationBarTitle("Map")
@@ -144,11 +143,18 @@ struct RestaurantMapView: View {
             }
             //need to show only ones within certain radius (city radius)
         }
+        .onDisappear(){
+            self.isNavigationBarHidden = false
+        }
     }
 }
 
-//struct RestaurantMapView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        RestaurantMapView(restChosen: Binding<RestaurantFB>)
-//    }
-//}
+
+
+struct RestaurantMapView_Previews: PreviewProvider {
+    static var previews: some View {
+        NavigationView {
+            RestaurantMapView()
+        }
+    }
+}

@@ -7,7 +7,7 @@
 //
 
 import SwiftUI
-import CloudKit
+import Firebase
 
 struct ListDishesView: View {
 
@@ -59,7 +59,6 @@ struct ListDishesView: View {
                     }
                 }
             }
-//            .listRowInsets(<#T##insets: EdgeInsets?##EdgeInsets?#>)
         }.navigationBarTitle("Dishes")
 //            .navigationBarItems(trailing:
 //                NavigationLink(destination: AccountProfileView()){

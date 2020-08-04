@@ -44,70 +44,86 @@ struct AccountProfileView: View {
     @State private var alertTitle = ""
     @State var show = false
     
+     @EnvironmentObject var navigator: Navigator
     
     var body: some View {
+        ScrollView {
             VStack(spacing: 40){
-                ZStack{
-                    if image ==  nil {
-                        if (user.profilePhoto == nil){
-                            Image("profile_photo_edit")
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(width: 150, height: 150)
+                    
+                    Spacer()
+                        .frame(maxHeight: 0)
+                    
+                    Group{
+                        if image ==  nil {
+                            if (user.profilePhoto == nil){
+                                Image(systemName: "person.crop.circle")
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: 80, height: 80)
+                            }
+                            else{
+                                Image(uiImage: user.profilePhoto!.circle!)
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: 150, height: 150)
+                            }
                         }
                         else{
-                            Image(uiImage: user.profilePhoto!.circle!)
+                            image?
                             .resizable()
                             .aspectRatio(contentMode: .fit)
                             .frame(width: 150, height: 150)
                         }
                     }
-                    else{
-                        image?
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(width: 150, height: 150)
-                    }
-                }
-                List{
                     
-                    NavigationLink(destination: ContactUs()) {
-                        ProfileButton(imageName: "contact_us", label: "Contact Us")
-                    }
+                    VStack(alignment: .leading, spacing: 20){
+                        NavigationLink(destination: ContactUs()) {
+                            ProfileButton(imageName: "contact_us", label: "Contact Us")
+                        }.buttonStyle(PlainButtonStyle())
+                        
 
-                    NavigationLink(destination: ReportProblem()) {
-                        ProfileButton(imageName: "report_problem", label: "Report Problem")
-                    }
+                        NavigationLink(destination: ReportProblem()) {
+                            ProfileButton(imageName: "report_problem", label: "Report Problem")
+                        }.buttonStyle(PlainButtonStyle())
 
-                    NavigationLink(destination: SuggestRestaurant()) {
-                        ProfileButton(imageName: "suggest_restaurant", label: "Suggest Restaurant")
+                        NavigationLink(destination: SuggestRestaurant()) {
+                            ProfileButton(imageName: "suggest_restaurant", label: "Suggest Restaurant")
+                        }.buttonStyle(PlainButtonStyle())
                     }
-                }
-                
-                HStack{
-                    Button(action: {
-                          let firebaseAuth = Auth.auth()
-                        do {
-                            try firebaseAuth.signOut()
-                            self.signedOut = true
-                        } catch let signOutError as NSError {
-                          print ("Error signing out: %@", signOutError)
+                        
+                        
+                    
+                        Button(action: {
+                              let firebaseAuth = Auth.auth()
+                            do {
+                                try firebaseAuth.signOut()
+                                self.signedOut = true
+                                self.navigator.isOnboardingShowing = true
+                            } catch let signOutError as NSError {
+                              print ("Error signing out: %@", signOutError)
+                            }
+                        }){
+                                Text("Sign Out")
+                                .foregroundColor(Color(UIColor().colorFromHex("#F88379", 1)))
                         }
-                    }){
-                        NavigationLink(destination: InitialScreen().navigationBarBackButtonHidden(true), isActive: self.$signedOut){
-                            Text("Sign Out")
-                            .foregroundColor(Color(UIColor().colorFromHex("#F88379", 1)))
-                        }.disabled(!self.signedOut)
+                    
+                    Button(action: {
+                        self.navigator.isOnboardingShowing = true
+                    }) {
+                        Text("Exit")
                     }
+                    
+                    Spacer()
                 }
-                
-                Spacer()
-            }.navigationBarTitle("Account Profile")
-            .navigationBarItems(trailing: Button(action: {
-                self.showingImagePicker.toggle()
-            }, label: {
-                    Text("Edit Profile Photo")
-        }))
+                .frame(maxWidth: .infinity)
+                .navigationBarTitle("Account Profile")
+                .navigationBarItems(trailing: Button(action: {
+                    self.showingImagePicker.toggle()
+                }, label: {
+                        Text("Edit Profile Photo")
+            }))
+        }
+            
             .sheet(isPresented: $showingImagePicker, onDismiss: changePhoto){ ImagePicker(image: self.$inputImage)
                 .alert(isPresented: self.$showingAlert) {
                 Alert(title: Text("Thank you for submitting"), message: Text("\(self.alertMessage)"), dismissButton: .default(Text("OK")))
@@ -129,7 +145,9 @@ struct AccountProfileView: View {
 
 struct AccountProfile_Previews: PreviewProvider {
     static var previews: some View {
-        AccountProfileView()
+        NavigationView {
+            AccountProfileView()
+        }
     }
 }
 

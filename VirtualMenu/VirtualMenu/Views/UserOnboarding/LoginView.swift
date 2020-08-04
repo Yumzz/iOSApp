@@ -47,6 +47,7 @@ struct LoginView: View {
     
     @ObservedObject var AuthenticationVM = AuthenticationViewModel()
     
+    @EnvironmentObject var navigator: Navigator
     
     @State var loginSelection: Int? = nil
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
@@ -97,11 +98,10 @@ struct LoginView: View {
                         self.showAlert.toggle()
                     }
                     self.loggedIn.toggle()
+                    self.navigator.isOnboardingShowing = false
                 }
             }) {
-                NavigationLink(destination: AppView(), isActive: $loggedIn){
                     BlackButton(strLabel: "LOGIN")
-                }.disabled(!self.loggedIn)
             }
             
             HStack{

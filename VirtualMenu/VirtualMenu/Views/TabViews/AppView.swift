@@ -26,8 +26,6 @@ struct AppView: View {
             NavigationView {
                 OrderView()
             }
-                .navigationBarTitle("")
-                .navigationBarHidden(true)
             .tabItem {
                 Image(systemName: "square.and.pencil")
                 Text("Order")
@@ -36,9 +34,8 @@ struct AppView: View {
             
             NavigationView {
                 FavoriteView()
+                .navigationBarTitle("Favorites")
             }
-                .navigationBarTitle("")
-                .navigationBarHidden(true)
             .tabItem {
                 Image(systemName: "star")
                 Text("Favorites")
@@ -48,8 +45,6 @@ struct AppView: View {
             NavigationView {
                 AccountProfileView()
             }
-                .navigationBarTitle("")
-                .navigationBarHidden(true)
             .tabItem {
                 Image(systemName: "person.crop.circle")
                 Text("Account")
