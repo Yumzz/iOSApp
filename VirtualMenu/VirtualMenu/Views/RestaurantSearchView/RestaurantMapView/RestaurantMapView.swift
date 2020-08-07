@@ -25,11 +25,11 @@ struct RestaurantMapView: View {
     
     private var locationManager = LocationManager()
     var body: some View {
-        GeometryReader { geometry in
-            ZStack{
-                MapView(restaurants: self.restaurants, region: self.region).edgesIgnoringSafeArea(.all)
-                VStack {
-                    HStack(){
+        ZStack{
+            MapView(restaurants: self.restaurants, region: self.region).edgesIgnoringSafeArea(.all)
+            VStack {
+                
+                HStack(){
                     NavigationLink(destination: RestaurantSearchListView( isNavigationBarHidden: self.$isNavigationBarHidden)){
                         
                         Text("List")
@@ -42,27 +42,37 @@ struct RestaurantMapView: View {
                         RestaurantSearchbarView(strSearch: self.$strSearch)
                             .padding([.leading, .trailing])
                         }
+
+                    
+                    RestaurantSearchbarView(strSearch: self.$strSearch)
+                        .padding([.leading, .trailing])
+                    
+                }
+                .frame(maxWidth: .infinity)
+                
+                Spacer()
+                
+                HStack(spacing: 16) {
+                    Spacer()
+                    
+                    Button(action: {
+                        self.region.append(MKCoordinateRegion(center: self.locationManager.location!.coordinate, latitudinalMeters: 1000, longitudinalMeters: 1000))
+                        
+                    }) {
+                        Image(systemName: "location")
+                    }
+                    .padding()
+                    .background(Color(UIColor.tertiarySystemBackground))
+                    .clipShape(Circle())
+                    .shadow(radius: 5)
                     
                     Spacer()
-                    HStack(spacing: 10){
-                        Spacer()
-                        Button(action: {
-                        self.region.append(MKCoordinateRegion(center: self.locationManager.location!.coordinate, latitudinalMeters: 1000, longitudinalMeters: 1000))
-
-                        }) {
-                            Image(systemName: "location")
-                            .frame(width: 20, height: 20)
-                        }
-                        .frame(width: 30, height: 30)
-                        .padding()
-                            .background(Color(UIColor.tertiarySystemBackground))
-                            .clipShape(Circle())
-                            .shadow(radius: 5)
-                    }
-                    .frame(width: geometry.size.width - 60)
-                    .padding(.bottom, 25)
-                .overlay(
-                BottomSheetModal(display: self.$click.isClicked, backgroundColor: .constant(Color(UIColor().colorFromHex("#F88379", 1))), rectangleColor: .constant(Color.white)) {
+                        .frame(maxWidth: 0)
+                    
+                }
+                .frame(maxWidth: .infinity)
+                .padding(.bottom, 25)
+                .overlay(BottomSheetModal(display: self.$click.isClicked, backgroundColor: .constant(Color(UIColor().colorFromHex("#F88379", 1))), rectangleColor: .constant(Color.white)) {
                         ZStack (alignment: .trailing){
                             VStack(alignment: .leading) {
                                 //name, image, address, number, hours, price, and menu
@@ -147,9 +157,8 @@ struct RestaurantMapView: View {
                     
                     
                 }
-                )
-            }
-            }
+            )
+
         }
         .navigationBarTitle("Map")
         .navigationBarHidden(self.isNavigationBarHidden)
