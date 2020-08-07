@@ -64,7 +64,13 @@ func tabsVisiblty(_ isVisiblty: Bool = true){
 
 extension String {
     
+    public func numberOfOccurrences(_ string: String) -> Int {
+        return components(separatedBy: string).count - 1
+    }
     
+    func numOfNums() -> Int{
+        self.numberOfOccurrences("1") + self.numberOfOccurrences("2") + self.numberOfOccurrences("3") + self.numberOfOccurrences("4") + self.numberOfOccurrences("5") + self.numberOfOccurrences("6") + self.numberOfOccurrences("7") + self.numberOfOccurrences("8") + self.numberOfOccurrences("9")
+    }
     
     
     

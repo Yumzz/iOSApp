@@ -15,36 +15,37 @@ struct MenuSelectionView: View {
     
     var body: some View {
         VStack{
-            
+            Spacer().frame(height: 100)
             VStack{
-                Text("Choose how you would like to view \(restChosen.name)'s menu")
-                .padding(.horizontal)
-                .foregroundColor(.black)
-                .font(.custom("Futura Bold", size: 24))
-
-            }
-            
-            Spacer().frame(height: 50)
-            
-            VStack(spacing: 30){
-                NavigationLink(destination: ListDishesView(dishes: self.restChosen.dishes!)) {
-                    Text("View Digital Menu")
+                
+                VStack{
+                    Text("How do you want to view \(restChosen.name)'s menu")
+                    .padding(.horizontal)
+                    .foregroundColor(.black)
+                    .font(.custom("Futura Bold", size: 24))
                 }
                 
-                CustomButton(action: {
-                    self.isScannerSelected = true
-                }) {
-                    Text("Scan Physical Menu")
+                Spacer()
+                
+                VStack(spacing: 30){
+                    HStack{
+                        Image("ar").resizable().frame(width: 200, height: 55).overlay(NavigationLink(destination: ListDishesView(dishes: self.restChosen.dishes!, rest: self.restChosen)){
+                            Text("View Digital Menu")
+                        })
+                    }
+                    
+                    HStack{
+                        Image("ar").resizable().frame(width: 200, height: 55).overlay(NavigationLink(destination: ScanView(dishes: self.restChosen.dishes!, rest: self.restChosen)){
+                            Text("Scan Physical Menu")
+                        })
+                    }
                 }
                 
-                
-                
             }
-            Spacer().frame(height: 20)
             
-        }.background(Color(UIColor().colorFromHex("#F88379", 1)))
-        .navigationBarTitle("Menu Selection")
+        }.navigationBarTitle("Menu Selection")
         .navigationBarHidden(false)
+        .background(Color(UIColor().colorFromHex("#F88379", 1)))
     }
 }
 

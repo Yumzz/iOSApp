@@ -1,8 +1,8 @@
 {
   "images" : [
     {
+      "filename" : "iconfinder_phone_2561369 (1).png",
       "idiom" : "universal",
-      "filename" : "button.png",
       "scale" : "1x"
     },
     {
@@ -15,7 +15,7 @@
     }
   ],
   "info" : {
-    "version" : 1,
-    "author" : "xcode"
+    "author" : "xcode",
+    "version" : 1
   }
 }

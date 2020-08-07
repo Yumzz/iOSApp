@@ -13,7 +13,7 @@ extension String {
     // the range of the number and the number itself as a tuple.
     // Returns nil if no number is found.
     
-    func extractMenuDish(menuItems: [Dish]?) -> (Dish)? {
+    func extractMenuDish(menuItems: [DishFB]?) -> (DishFB)? {
         // Do a first pass to find any substring that could be a Menu Dish
         // This will match the following common patterns and more:
         // Abcd Efgh

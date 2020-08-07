@@ -23,12 +23,21 @@ struct RestaurantFB {
     let ethnicity: String
     let coordinate: GeoPoint
     let id: UUID
+    let address: String
+    let phone: String
 //    let coverPhoto: CKAsset?
 //    let photos: [CKAsset]?
 //    var model: CKRecord.Reference? = nil
 //    var reviews: [CKRecord.Reference]? = nil
+    var price: Price
     
-    init(name: String, key: String = "", description: String, averagePrice: Double, type: String, ethnicity: String, dishes: [DishFB], coordinate: GeoPoint) {
+    enum Price {
+        case low
+        case medium
+        case high
+    }
+    
+    init(name: String, key: String = "", description: String, averagePrice: Double, type: String, ethnicity: String, dishes: [DishFB], coordinate: GeoPoint, address: String, phone: String) {
 //        self.ref = nil
         self.key = key
         self.name = name
@@ -39,6 +48,10 @@ struct RestaurantFB {
         self.dishes = dishes
         self.coordinate = coordinate
         self.id = UUID()
+        self.address = address
+        self.phone = phone
+        self.price = Price.low
+        self.price = self.getPriceRange(averagePrice: averagePrice)
     }
     
     init?(snapshot: QueryDocumentSnapshot){
@@ -71,12 +84,23 @@ struct RestaurantFB {
            print("no ethnicity")
            return nil
        }
+        guard
+            let address = snapshot.data()["Address"] as? String else {
+            print("no address")
+            return nil
+        }
 
        guard
            let coordinate = snapshot.data()["location"] as? GeoPoint else {
            print("no coordinate")
            return nil
        }
+        
+        guard
+            let phone = snapshot.data()["Phone"] as? String else {
+            print("no coordinate")
+            return nil
+        }
        
        self.key = snapshot.documentID
        self.name = name
@@ -87,6 +111,10 @@ struct RestaurantFB {
        self.coordinate = coordinate
        self.dishes = []
        self.id = UUID()
+       self.address = address
+       self.phone = phone
+       self.price = Price.low
+       self.price = self.getPriceRange(averagePrice: averagePrice)
     }
     
     init?(snapshot: QueryDocumentSnapshot, dishes: [DishFB], averagePrice: Double) {
@@ -119,9 +147,20 @@ struct RestaurantFB {
             print("no ethnicity")
             return nil
         }
+        
+        guard
+            let address = snapshot.data()["Address"] as? String else {
+            print("no address")
+            return nil
+        }
 
         guard
             let coordinate = snapshot.data()["location"] as? GeoPoint else {
+            print("no coordinate")
+            return nil
+        }
+        guard
+            let phone = snapshot.data()["Phone"] as? String else {
             print("no coordinate")
             return nil
         }
@@ -135,6 +174,10 @@ struct RestaurantFB {
         self.coordinate = coordinate
         self.dishes = dishes
         self.id = UUID()
+        self.address = address
+        self.phone = phone
+        self.price = Price.low
+        self.price = self.getPriceRange(averagePrice: averagePrice)
     }
     
     func toAnyObject() -> Any {
@@ -142,5 +185,28 @@ struct RestaurantFB {
             "name": name
         ]
     }
+    
+    func getPriceRange(averagePrice: Double) -> Price{
+        var price = Price.low
+        if(averagePrice <= 20){
+            price = Price.low
+        }
+        else{
+            if(averagePrice <= 40){
+                price = Price.medium
+            }
+            else{
+                price = Price.high
+            }
+        }
+        
+        return price
+        
+    }
+    
+    static func previewRest() -> RestaurantFB {
+        return RestaurantFB(name: "", description: "", averagePrice: 0.0, type: "", ethnicity: "", dishes: [], coordinate: GeoPoint(latitude: 0.0, longitude: 0.0), address: "", phone: "")
+    }
+    
 }
 

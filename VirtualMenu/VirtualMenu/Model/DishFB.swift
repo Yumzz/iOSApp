@@ -63,10 +63,11 @@ struct DishFB {
         self.key = "nil"
         self.name = name
         self.description = description
+        
         self.price = (price as NSString).doubleValue
+        
         self.type = type
         self.restaurant = restau
-        print(photo.description)
         self.coverPhoto = photo
     }
     
@@ -87,14 +88,16 @@ extension DishFB: Hashable {
     }
     
     static func previewDish() -> DishFB {
-        let restDish = RestaurantDishViewModel()
-        restDish.fetchRestsDishesFB(name: "PlumTree")
-        return restDish.restDishes[0]
+        return DishFB(name: "", description: "", price: 0.0, type: "", restaurant: "")
     }
     
     
     static func formatPrice(price: Double) -> String {
-        return "$" + (price.truncatingRemainder(dividingBy: 1) == 0 ? String(format: "%.2f", price) : String(price))
+        var x =  "$" + (price.truncatingRemainder(dividingBy: 1) == 0 ? String(format: "%.2f", price) : String(price))
+        if(x.numOfNums() < 3){
+            x = x + "0"
+        }
+        return x
     }
     
 }

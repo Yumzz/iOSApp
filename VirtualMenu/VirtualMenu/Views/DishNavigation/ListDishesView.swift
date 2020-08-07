@@ -15,6 +15,8 @@ struct ListDishesView: View {
     
     @State var dishes: [DishFB]
     
+    @State var rest: RestaurantFB
+    
     @State var categorizedDishes: [DishCategory] = [DishCategory]()
 
     var body: some View {
@@ -26,7 +28,7 @@ struct ListDishesView: View {
                         ForEach(cat.dishes, id: \.id) {
                         dish in
                         NavigationLink(destination:
-                            DishDetailsView(dish: dish).navigationBarHidden(false)
+                            DishDetailsView(dish: dish, restaurant: self.rest).navigationBarHidden(false)
                             ) {
                                 HStack {
                                     Image(uiImage: dish.coverPhoto!)
@@ -76,7 +78,7 @@ struct ListDishesView: View {
 struct ListDishesView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView{
-            ListDishesView(dishes: [])
+            ListDishesView(dishes: [], rest: RestaurantFB.previewRest())
         }
 
     }

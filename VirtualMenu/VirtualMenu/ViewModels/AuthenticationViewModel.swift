@@ -10,12 +10,13 @@ import Firebase
 import GoogleSignIn
 import FBSDKLoginKit
 
+var userProfile: UserProfile = UserProfile(userId: "", fullName: "", emailAddress: "", profilePicture: "", profPhoto: nil)
+
+
 class AuthenticationViewModel: ObservableObject {
     
     @State var sign = false
         
-    let fb = FirebaseRequest()
-    
     let db = Firestore.firestore()
         
     func createUser(email: String, password: String, name: String) -> Bool{
@@ -73,36 +74,36 @@ class AuthenticationViewModel: ObservableObject {
         print(imagesRef.name)
         
         Utils().getUserProfileImgURL(userId: Auth.auth().currentUser!.uid, completionHandler: { (res) in
-            user.profilePhotoURL = res
+            userProfile.profilePhotoURL = res
         })
         
-        user.userId = Auth.auth().currentUser!.uid
-        Database.database().reference().child("users").child(user.userId).observeSingleEvent(of: .value, with: { (snapshot) in
+        userProfile.userId = Auth.auth().currentUser!.uid
+        Database.database().reference().child("users").child(userProfile.userId).observeSingleEvent(of: .value, with: { (snapshot) in
             let value = snapshot.value as? NSDictionary
-            user.fullName = value?["username"] as? String ?? ""
+            userProfile.fullName = value?["username"] as? String ?? ""
         })
         //            user.fullName = Auth.auth().currentUser!.displayName!
-        user.emailAddress = Auth.auth().currentUser!.email!
+        userProfile.emailAddress = Auth.auth().currentUser!.email!
         
         //finishes after return is given as it is a little slow
         DispatchQueue.main.async {
             imagesRef.getData(maxSize: 2 * 2048 * 2048) { data, error in
                 if let error = error {
                     // Uh-oh, an error occurred!
-                    user.profilePhoto = UIImage(imageLiteralResourceName: "profile_photo_edit")
+                    userProfile.profilePhoto = UIImage(imageLiteralResourceName: "profile_photo_edit")
                     print(error.localizedDescription)
                 } else {
                     // Data for "profilephotos/\(uid).jpg" is returned
                     print("data: \(data)")
-                    user.profilePhoto = UIImage(data: data!)!
+                    userProfile.profilePhoto = UIImage(data: data!)!
                 }
             }
         }
         //        DispatchQueue.main.async {
         //        }
-        print(user.profilePhotoURL)
-        print(user.emailAddress)
-        print(user.fullName)
+        print(userProfile.profilePhotoURL)
+        print(userProfile.emailAddress)
+        print(userProfile.fullName)
     }
     
     func isValidInputs(email: String, password: String) -> String {

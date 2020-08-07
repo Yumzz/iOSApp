@@ -16,9 +16,7 @@ import Instructions
 
 @available(iOS 13.0, *)
 
-let db = DatabaseRequest()
-var restaurant : Restaurant? = nil
-var dishes : [Dish] = []
+//let db = DatabaseRequest()
 
 class ScannerViewController: ScannerFunctions, CoachMarksControllerDataSource,
 CoachMarksControllerDelegate {
@@ -26,7 +24,8 @@ CoachMarksControllerDelegate {
     let numberTracker = StringTracker()
     var dishName: String = ""
     var foundDish: Bool = false
-
+    var dishes: [DishFB] = []
+    var dish: DishFB = DishFB.previewDish()
     
     let coachMarksController = CoachMarksController()
 
@@ -126,13 +125,21 @@ CoachMarksControllerDelegate {
             numberTracker.logFrame(strings: letters)
             show(boxGroups: [(color: UIColor.red.cgColor, boxes: redBoxes)])
             
-            // Check if we have any temporally stable numbers.
+            // Check if we have any temporally stable dish names.
             if let sureDishName = numberTracker.getStableString() {
 //                showString(string: sureNumber)
                 dishName = sureDishName
                 //triggers segue
-                self.foundDish.toggle()
+                self.foundDish = true
+                for dish in self.dishes{
+                    if(dish.name == dishName){
+                        self.dish = dish
+                    }
+                }
                 stopSession()
+                let dishData: [String: DishFB] = ["dish": self.dish]
+                NotificationCenter.default.post(name: Notification.Name(rawValue: "DishFound"), object: nil, userInfo: dishData)
+//                self.present(DishDetailsView(dish: self.dish), animated: true)
             }
         }
     override func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
@@ -199,27 +206,35 @@ CoachMarksControllerDelegate {
 struct ScanView: View {
     
     @State private var isClicked: Bool = false
+    @State var dishes: [DishFB]
+    @State var rest: RestaurantFB
+    @ObservedObject var click: isClick = isClick()
 
     var body: some View {
         VStack{
-            ScanView2ControllerRepresentable()
+            ScanView2ControllerRepresentable(dishes: self.dishes)
             .overlay(
                 VStack{
                     Spacer()
                     HStack (alignment: .bottom) {
-
-                    CustomButton(action: {self.isClicked.toggle() })
-                    {
+                        
+                        Image("ar").resizable().frame(width: 200, height: 55).overlay(NavigationLink(destination: ScanView(dishes: self.dishes, rest: self.rest)){
                         Text("New Scanner")
-                    }.sheet(isPresented: self.$isClicked) { ScanView() }
+                    })
+
                     }
                 }
             )
+        }.sheet(isPresented: self.$click.isClicked){
+            DishDetailsView(dish: self.click.dishFound!, restaurant:  self.rest)
         }
+        //self.$click.isClicked
         
     }
-
-
+    
+    //do the isClick thing here
+    
+//    @objc func
 }
 
 
@@ -240,12 +255,14 @@ struct ScanView: View {
 
 
 struct ScanView2ControllerRepresentable: UIViewControllerRepresentable {
-    
+    @State var dishes: [DishFB]
     
     func makeUIViewController(context: UIViewControllerRepresentableContext<ScanView2ControllerRepresentable>) -> UIViewController {
         
         let storyboard = UIStoryboard(name: "Scanner", bundle: Bundle.main)
-        return storyboard.instantiateViewController(withIdentifier: "Scan")
+        let sc = storyboard.instantiateViewController(withIdentifier: "Scan") as! ScannerViewController
+        sc.dishes = self.dishes
+        return sc
     }
 
     func updateUIViewController(_ uiViewController: UIViewController, context: UIViewControllerRepresentableContext<ScanView2ControllerRepresentable>) {

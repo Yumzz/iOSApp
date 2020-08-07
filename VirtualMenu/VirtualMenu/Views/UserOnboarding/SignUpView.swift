@@ -39,8 +39,6 @@ struct SignUpView: View {
             
             CustomPasswordField(strLabel: "Password", password: $password)
             
-            
-            
             Button(action: {
                 Auth.auth().createUser(withEmail: self.email, password: self.password){
                     (result, error) in
