@@ -62,6 +62,7 @@ struct RestaurantFB {
         self.address = address
         self.phone = phone
         self.price = Price.low
+        self.coordinate = coordinate
         self.price = self.getPriceRange(averagePrice: averagePrice)
         
     }
@@ -122,11 +123,11 @@ struct RestaurantFB {
        self.coordinate = coordinate
        self.dishes = []
        self.id = UUID()
+        self.coverPhotoURL = "Restaurant/\(self.name.lowercased())/\(self.name.lowercased())_cover.png"
        self.address = address
        self.phone = phone
        self.price = Price.low
        self.price = self.getPriceRange(averagePrice: averagePrice)
-        self.coverPhotoURL = "Restaurant/\(self.name.lowercased())/\(self.name.lowercased())_cover.png"
     }
     
     init?(snapshot: QueryDocumentSnapshot, dishes: [DishFB], averagePrice: Double) {
@@ -173,16 +174,12 @@ struct RestaurantFB {
         }
         
         guard
-            let address = snapshot.data()["Address"] as? String else{
-                print("no address")
-                return nil
-        }
-        guard
             let phone = snapshot.data()["Phone"] as? String else {
             print("no coordinate")
             return nil
         }
         
+        self.id = UUID()
         self.key = snapshot.documentID
         self.name = name
         self.description = description
@@ -190,14 +187,13 @@ struct RestaurantFB {
         self.type = type
         self.ethnicity = ethnicity
         self.coordinate = coordinate
-        self.address = address
         self.dishes = dishes
         self.address = address
+        self.coverPhotoURL = "Restaurant/\(self.name.lowercased())/\(self.name.lowercased())_cover.png"
         self.phone = phone
         self.price = Price.low
         self.price = self.getPriceRange(averagePrice: averagePrice)
-        self.id = UUID()
-        self.coverPhotoURL = "Restaurant/\(self.name.lowercased())/\(self.name.lowercased())_cover.png"
+        
     }
     
     func toAnyObject() -> Any {
