@@ -83,6 +83,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
 
 func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error?) {
       // Google sign in and token retrieval
+    
     if(user == nil){
         return
     }
@@ -91,15 +92,12 @@ func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError err
         print("Error:\(error)")
         return
       }
+    
+    
  
-//    let userId: String = user.userID
-//    let idToken: String = user.authentication.idToken
-//    let fullName: String = user.profile.name
-//    let givenName: String = user.profile.givenName
-//    let familyName: String = user.profile.familyName
+    let userId: String = user.userID
+    let fullName: String = user.profile.name
     let email: String = user.profile.email
-    
-    
     
     guard let authentication = user.authentication else { return }
         
@@ -113,6 +111,11 @@ func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError err
     Auth.auth().signIn(with: credential) { (authResult, error) in
         //authresult = Promise of UserCredential
     if(authResult != nil){
+        userProfile.emailAddress = email
+        userProfile.fullName = fullName
+        userProfile.userId = userId
+        userProfile.profilePhoto = userProfile.getProfilePhoto()
+        print(userProfile.profilePhoto?.description)
         return
     }
     //if user not found then create new user w temp password and send password reset link

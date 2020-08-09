@@ -11,33 +11,60 @@ import SwiftUI
 struct ReviewUser: Identifiable {
     let id = UUID()
     let review: Review
-    let user: ARMUser
+    let user: UserProfile
 }
 
 struct DishDetailsView: View {
     
     let dish: DishFB
     
-    @State var reviewsusers: [ReviewUser] = []
+    let restaurant: RestaurantFB
+    
+    @ObservedObject var restDishVM = RestaurantDishViewModel()
+
+    @State var reviews: [DishReviewFB] = []
+    
+    //fetch reviews of dish on appear and have "Reviews" button pass info to new view of entire scroll view of it
     
     var body: some View {
         VStack(alignment: .center) {
-            Text("\(dish.name)")
-                .font(.title)
-            Image(uiImage: dish.coverPhoto!)
-                .resizable()
-                .frame(width: 330, height: 210)
-                .aspectRatio(contentMode: .fit)
-                .cornerRadius(10)
-            Text("Price: " + DishFB.formatPrice(price: dish.price))
-                .foregroundColor(.secondary)
-                .font(.headline)
-            Text(dish.description)
-                Text("Reviews")
+            VStack{
+                Text("\(dish.name)")
                     .font(.title)
+                Image(uiImage: dish.coverPhoto!)
+                    .resizable()
+                    .frame(width: 330, height: 210)
+                    .aspectRatio(contentMode: .fit)
+                    .cornerRadius(10)
+                Text("Price: " + DishFB.formatPrice(price: dish.price))
+                    .foregroundColor(.secondary)
+                    .font(.headline)
+                Text(dish.description)
+                    .fixedSize(horizontal: false, vertical: true)
+                    .padding(.bottom, 0)
+                OrderButton().onTapGesture {
+                    //send info to POS
+                    print("order tapped")
+                }
+                ReviewsButton().onTapGesture {
+                    //go to reviews view
+                    print("review: \(self.reviews[0])")
+                }
+                
+//                ReviewsButton().onTapGesture{
+//
+//
+//
+//                }
+            
+//            Text("Reviews")
+//                    .font(.title)
+        }
+//        ScrollView{
 //            if (self.reviewsusers.count == 0) {
-                Text("No reviews yet. Add yours!")
-                    .frame(width: 330, height: 320, alignment: .center).cornerRadius(10)
+//                Text("No reviews yet. Add yours!")
+//                        .frame(width: 330, height: 320, alignment: .center).cornerRadius(10)
+            
 //            } else {
 //                List {
 //                    ForEach(self.reviewsusers) {reviewuser in
@@ -73,25 +100,20 @@ struct DishDetailsView: View {
 //                    }
 //                }.frame(width: 330, height: 320, alignment: .center).cornerRadius(10)
 //            }
+//        }
         }
             .padding()
             .onAppear {
-//                let db = DatabaseRequest()
-//                let reviews = db.fetchDishReviews(d: self.dish)
-//
-//
-//                for review in reviews {
-//                    let user = db.fetchReviewUser(review: review)
-//                    self.reviewsusers.append(ReviewUser(review: review, user: user))
-//                }
-//
-//                print(self.reviewsusers.count)
+                
+                self.restDishVM.fetchDishReviewsFB(dName: self.dish.name, rName: self.restaurant.name)
+                self.reviews = self.restDishVM.dishReviews
+                
             }
     }
 }
 
 struct DishDetailsView_Previews: PreviewProvider {
     static var previews: some View {
-        DishDetailsView(dish: DishFB.previewDish())
+        DishDetailsView(dish: DishFB.previewDish(), restaurant: RestaurantFB.previewRest())
     }
 }

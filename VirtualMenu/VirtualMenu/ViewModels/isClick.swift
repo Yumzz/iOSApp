@@ -15,8 +15,9 @@ class isClick: ObservableObject {
     @Published var isClicked: Bool
     @Published var restChosen: RestaurantFB?
     @Published var numClicks: Int
-    
+    @Published var dishFound: DishFB?
 
+    
     init(){
         print("click made")
         self.numClicks = 0
@@ -24,12 +25,23 @@ class isClick: ObservableObject {
         self.restChosen = nil
         NotificationCenter.default.addObserver(self, selector: #selector(self.restClicked(_:)), name: Notification.Name(rawValue: "annotationPressed"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.restUnclicked(_:)), name: Notification.Name(rawValue: "XPressed"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.changeClick(_:)), name: Notification.Name(rawValue: "DishFound"), object: nil)
+        
     }
 
     @objc private func restClicked(_ notification: NSNotification){
             print(notification.userInfo ?? "damn")
             print("click switch called")
             self.restChosen = (notification.userInfo!["Restaurant"] as? RestaurantFB)!
+            self.isClicked = true
+            self.numClicks = self.numClicks + 1
+            print(isClicked)
+    }
+    
+    @objc private func changeClick(_ notification: NSNotification){
+            print(notification.userInfo ?? "damn")
+            print("click switch called")
+            self.dishFound = (notification.userInfo!["dish"] as? DishFB)!
             self.isClicked = true
             self.numClicks = self.numClicks + 1
             print(isClicked)

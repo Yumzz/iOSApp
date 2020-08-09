@@ -23,8 +23,6 @@ import GoogleSignIn
 import FBSDKLoginKit
 import FBSDKCoreKit
 
-var user: UserProfile = UserProfile(userId: "", fullName: "", emailAddress: "", profilePicture: "", profPhoto: nil)
-
 struct LoginView: View {
     
     @EnvironmentObject var accountDetails: AccountDetails

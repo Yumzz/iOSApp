@@ -30,14 +30,21 @@ struct RestaurantFB {
     
     let coordinate: GeoPoint
     let address: String
+    let phone: String
+//    let coverPhoto: CKAsset?
+//    let photos: [CKAsset]?
+//    var model: CKRecord.Reference? = nil
+//    var reviews: [CKRecord.Reference]? = nil
+    var price: Price
     
-    //    let coverPhoto: CKAsset?
-    //    let photos: [CKAsset]?
-    //    var model: CKRecord.Reference? = nil
-    //    var reviews: [CKRecord.Reference]? = nil
+    enum Price {
+        case low
+        case medium
+        case high
+    }
     
-    init(name: String, key: String = "", description: String, averagePrice: Double, type: String, ethnicity: String, dishes: [DishFB], coordinate: GeoPoint, address: String) {
-        //        self.ref = nil
+    init(name: String, key: String = "", description: String, averagePrice: Double, type: String, ethnicity: String, dishes: [DishFB], coordinate: GeoPoint, address: String, phone: String) {
+//        self.ref = nil
         self.id = UUID()
         self.key = key
         self.name = name
@@ -52,64 +59,73 @@ struct RestaurantFB {
         
         self.dishes = dishes
         
-        self.coordinate = coordinate
         self.address = address
+        self.phone = phone
+        self.price = Price.low
+        self.price = self.getPriceRange(averagePrice: averagePrice)
         
     }
     
     init?(snapshot: QueryDocumentSnapshot){
+       guard
+           let name = snapshot.data()["Name"] as? String else {
+           print("no name")
+           return nil
+       }
+       guard
+           let ds = snapshot.data()["dishes"] as? [DocumentReference?] else {
+           print("dishes messed up")
+           return nil
+       }
+       //dishes is an array of FIRDocumentReference in Firebase and is converted to ds, which is an array of DocumentReferences
+       
+       guard
+           let type = snapshot.data()["Type"] as? String else {
+           print("no type")
+           return nil
+       }
+       
+       guard
+           let description = snapshot.data()["description"] as? String else{
+               print("no description")
+               return nil
+       }
+       guard
+           let ethnicity = snapshot.data()["Ethnicity"] as? String else {
+           print("no ethnicity")
+           return nil
+       }
+        guard
+            let address = snapshot.data()["Address"] as? String else {
+            print("no address")
+            return nil
+        }
+
+       guard
+           let coordinate = snapshot.data()["location"] as? GeoPoint else {
+           print("no coordinate")
+           return nil
+       }
         
         guard
-            let name = snapshot.data()["Name"] as? String else {
-                print("no name")
-                return nil
+            let phone = snapshot.data()["Phone"] as? String else {
+            print("no coordinate")
+            return nil
         }
-        guard
-            let ds = snapshot.data()["dishes"] as? [DocumentReference?] else {
-                print("dishes messed up")
-                return nil
-        }
-        //dishes is an array of FIRDocumentReference in Firebase and is converted to ds, which is an array of DocumentReferences
-        
-        guard
-            let type = snapshot.data()["Type"] as? String else {
-                print("no type")
-                return nil
-        }
-        
-        guard
-            let description = snapshot.data()["description"] as? String else{
-                print("no description")
-                return nil
-        }
-        guard
-            let ethnicity = snapshot.data()["Ethnicity"] as? String else {
-                print("no ethnicity")
-                return nil
-        }
-        
-        guard
-            let coordinate = snapshot.data()["location"] as? GeoPoint else {
-                print("no coordinate")
-                return nil
-        }
-        
-        guard
-            let address = snapshot.data()["Address"] as? String else{
-                print("no address")
-                return nil
-        }
-        
-        self.key = snapshot.documentID
-        self.name = name
-        self.description = description
-        self.averagePrice = 0.0
-        self.type = type
-        self.ethnicity = ethnicity
-        self.coordinate = coordinate
-        self.address = address
-        self.dishes = []
-        self.id = UUID()
+       
+       self.key = snapshot.documentID
+       self.name = name
+       self.description = description
+       self.averagePrice = 0.0
+       self.type = type
+       self.ethnicity = ethnicity
+       self.coordinate = coordinate
+       self.dishes = []
+       self.id = UUID()
+       self.address = address
+       self.phone = phone
+       self.price = Price.low
+       self.price = self.getPriceRange(averagePrice: averagePrice)
         self.coverPhotoURL = "Restaurant/\(self.name.lowercased())/\(self.name.lowercased())_cover.png"
     }
     
@@ -145,6 +161,12 @@ struct RestaurantFB {
         }
         
         guard
+            let address = snapshot.data()["Address"] as? String else {
+            print("no address")
+            return nil
+        }
+
+        guard
             let coordinate = snapshot.data()["location"] as? GeoPoint else {
                 print("no coordinate")
                 return nil
@@ -154,6 +176,11 @@ struct RestaurantFB {
             let address = snapshot.data()["Address"] as? String else{
                 print("no address")
                 return nil
+        }
+        guard
+            let phone = snapshot.data()["Phone"] as? String else {
+            print("no coordinate")
+            return nil
         }
         
         self.key = snapshot.documentID
@@ -165,6 +192,10 @@ struct RestaurantFB {
         self.coordinate = coordinate
         self.address = address
         self.dishes = dishes
+        self.address = address
+        self.phone = phone
+        self.price = Price.low
+        self.price = self.getPriceRange(averagePrice: averagePrice)
         self.id = UUID()
         self.coverPhotoURL = "Restaurant/\(self.name.lowercased())/\(self.name.lowercased())_cover.png"
     }
@@ -174,5 +205,28 @@ struct RestaurantFB {
             "name": name
         ]
     }
+    
+    func getPriceRange(averagePrice: Double) -> Price{
+        var price = Price.low
+        if(averagePrice <= 20){
+            price = Price.low
+        }
+        else{
+            if(averagePrice <= 40){
+                price = Price.medium
+            }
+            else{
+                price = Price.high
+            }
+        }
+        
+        return price
+        
+    }
+    
+    static func previewRest() -> RestaurantFB {
+        return RestaurantFB(name: "", description: "", averagePrice: 0.0, type: "", ethnicity: "", dishes: [], coordinate: GeoPoint(latitude: 0.0, longitude: 0.0), address: "", phone: "")
+    }
+    
 }
 

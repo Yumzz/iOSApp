@@ -24,12 +24,12 @@ class ScannerFunctions: UIViewController {
     
     // MARK: - Capture related objects
     private let captureSession = AVCaptureSession()
-    let captureSessionQueue = DispatchQueue(label: "ARMenuRequests.CaptureSessionQueue")
+    let captureSessionQueue = DispatchQueue(label: "Yumzz.CaptureSessionQueue")
     
     var captureDevice: AVCaptureDevice?
     
     var videoDataOutput = AVCaptureVideoDataOutput()
-    let videoDataOutputQueue = DispatchQueue(label: "ARMenuRequests.VideoDataOutputQueue")
+    let videoDataOutputQueue = DispatchQueue(label: "Yumzz.VideoDataOutputQueue")
     
     // MARK: - Region of interest (ROI) and text orientation
     // Region of video data output buffer that recognition should be run on.

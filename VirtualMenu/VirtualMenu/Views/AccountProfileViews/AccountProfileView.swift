@@ -55,14 +55,14 @@ struct AccountProfileView: View {
                     
                     Group{
                         if image ==  nil {
-                            if (user.profilePhoto == nil){
+                            if (userProfile.profilePhoto == nil){
                                 Image(systemName: "person.crop.circle")
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
                                 .frame(width: 80, height: 80)
                             }
                             else{
-                                Image(uiImage: user.profilePhoto!.circle!)
+                                Image(uiImage: userProfile.profilePhoto!.circle!)
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
                                 .frame(width: 150, height: 150)
@@ -136,7 +136,7 @@ struct AccountProfileView: View {
         image = Image(uiImage: inputImage.circle!)
         let x = Utils().uploadUserProfileImage(profileImage: inputImage)
         print(x)
-        user.profilePhoto = inputImage
+        userProfile.profilePhoto = inputImage
         
 //        changeRequest?.photoURL = image
     }

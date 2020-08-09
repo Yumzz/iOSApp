@@ -11,7 +11,7 @@ import SwiftUI
 
 struct BottomSheetModal<Content: View>: View {
 
-  private let modalHeight: CGFloat = 290
+  private let modalHeight: CGFloat = 340
   private let modalWidth: CGFloat = UIScreen.main.bounds.width
   private let modalCornerRadius: CGFloat = 10
   private let backgroundOpacity = 0.65

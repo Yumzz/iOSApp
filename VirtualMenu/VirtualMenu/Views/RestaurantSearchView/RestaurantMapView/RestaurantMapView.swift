@@ -39,6 +39,10 @@ struct RestaurantMapView: View {
                             .cornerRadius(10.0)
                             .padding(.leading)
                     }
+                        RestaurantSearchbarView(strSearch: self.$strSearch)
+                            .padding([.leading, .trailing])
+                        }
+
                     
                     RestaurantSearchbarView(strSearch: self.$strSearch)
                         .padding([.leading, .trailing])
@@ -68,72 +72,93 @@ struct RestaurantMapView: View {
                 }
                 .frame(maxWidth: .infinity)
                 .padding(.bottom, 25)
-                .overlay(
-                    BottomSheetModal(display: self.$click.isClicked, backgroundColor: .constant(Color(UIColor().colorFromHex("#F88379", 1))), rectangleColor: .constant(Color.white)) {
-                        VStack{
-                            ZStack (alignment: .trailing){
-                                VStack {
-                                    //image, name, ethnicity, rating, menu button
-                                    HStack {
-                                        //                                Image(self.click.restChosen)
-                                        Text("Name: \(self.click.restChosen!.name)")
-                                            .padding(.horizontal)
-                                            .foregroundColor(.black)
-                                            .font(.custom("Futura Bold", size: 24))
-                                        Spacer()
-                                        Button("X") {
-                                            NotificationCenter.default.post(name: Notification.Name(rawValue: "XPressed"), object: nil)
-                                            //need to call for refreshing
-                                        }
+                .overlay(BottomSheetModal(display: self.$click.isClicked, backgroundColor: .constant(Color(UIColor().colorFromHex("#F88379", 1))), rectangleColor: .constant(Color.white)) {
+                        ZStack (alignment: .trailing){
+                            VStack(alignment: .leading) {
+                                //name, image, address, number, hours, price, and menu
+                                HStack {
+                                    Text(self.click.restChosen!.name)
+                                        .padding(.horizontal)
                                         .foregroundColor(.black)
-                                        .padding(.trailing)
-                                        .font(.custom("Futura Bold", size: 15))
-                                    }
-                                    HStack {
-                                        VStack (alignment: .leading){
-                                            Text("Type: \(self.click.restChosen!.ethnicity)")
-                                                .font(.custom("Open Sans", size: 20))
-                                                .foregroundColor(.black)
-                                                //.frame(width: 150, height: 20)
-                                                .fixedSize(horizontal: false, vertical: true)
-                                                .padding(.bottom, 11)
-                                        }
-                                    }
-                                    HStack {
-                                        VStack (alignment: .leading){
-                                            Text("Location: Latitude: \(self.click.restChosen!.coordinate.latitude) Longitude: \(self.click.restChosen!.coordinate.longitude)")
-                                                .font(.custom("Open Sans", size: 20))
-                                                .foregroundColor(.black)
-                                                //.frame(width: 150, height: 20)
-                                                .fixedSize(horizontal: false, vertical: true)
-                                                .padding(.bottom, 11)
-                                        }
-                                    }
-                                    HStack {
-                                        VStack (alignment: .leading){
-                                            Text("AveragePrice: \(self.click.restChosen!.averagePrice)")
-                                                .font(.custom("Open Sans", size: 20))
-                                                .foregroundColor(.black)
-                                                //.frame(width: 150, height: 20)
-                                                .fixedSize(horizontal: false, vertical: true)
-                                                .padding(.bottom, 11)
-                                        }
-                                    }
-                                    HStack{
-                                        VStack(alignment: .center){
-                                            NavigationLink(destination: MenuSelectionView(restChosen: self.click.restChosen!).navigationBarHidden(false)){
-                                                Text("Click here for \(self.click.restChosen!.name)'s Menu Details")
-                                                    .foregroundColor(.black)
-                                            }
-                                        }
-                                    }
+                                        .font(.custom("Futura Bold", size: 24))
                                     Spacer()
+                                    Button("X") {
+                                        NotificationCenter.default.post(name: Notification.Name(rawValue: "XPressed"), object: nil)
+                                        //need to call for refreshing
+                                    }
+                                    .foregroundColor(.black)
+                                    .padding(.trailing)
+                                    .font(.custom("Futura Bold", size: 15))
                                 }
+                                
+                                HStack {
+                                    Image("initial_screen_back")
+                                    .resizable()
+                                    .frame(width: 150, height:150)
+                                    .clipShape(Circle())
+                                
+                                    VStack (alignment: .leading){
+                                        Image("address")
+                                            .resizable()
+                                            .frame(width: 30, height: 30)
+                                            .padding(.bottom, 5)
+                                        Image("phone")
+                                            .resizable()
+                                            .frame(width: 30, height: 30)
+                                            .padding(.bottom, 5)
+//                                        Image("hours")
+//                                            .padding(.bottom, 10)
+                                        Image("price")
+                                            .resizable()
+                                            .frame(width: 30, height: 30)
+                                            .padding(.bottom, 5)
+                                        Image("menu")
+                                        .resizable()
+                                        .frame(width: 30, height: 30)
+                                        .padding(.bottom, 5)
+                                    }
+                                
+                            
+                                VStack (alignment: .leading){
+                                    Text("\((self.click.restChosen?.address)!)")
+                                        .font(.custom("Open Sans", size: 20))
+                                        .foregroundColor(.black)
+                                        //.frame(width: 150, height: 20)
+                                        .fixedSize(horizontal: false, vertical: true)
+                                        .padding(.bottom, 10)
+                                    Text("\((self.click.restChosen?.phone)!)")
+                                        .font(.custom("Open Sans", size: 20))
+                                        .foregroundColor(.black)
+                                        //.frame(width: 150, height: 20)
+                                        .fixedSize(horizontal: false, vertical: true)
+                                        .padding(.bottom, 15)
+                                
+                                    //if statement based on price level
+                                    Text("Price")
+                                        .font(.custom("Open Sans", size: 20))
+                                        .foregroundColor(.black)
+                                        .padding(.bottom,15)
+                                
+                                    NavigationLink(destination: MenuSelectionView(restChosen: self.click.restChosen!).navigationBarHidden(false)){
+                                        Text("Menu")
+                                            .font(.custom("Open Sans", size: 20))
+                                            .foregroundColor(.black)
+                                            .foregroundColor(.black)
+                                            .padding(.bottom, 15)
+                                        }
+                                }.onTapGesture {
+                                    self.click.isClicked = false
+                                    }
                             }
+                                Spacer()
+                            }
+                            
                         }
-                    }
-                )
-            }
+                    
+                    
+                }
+            )
+
         }
         .navigationBarTitle("Map")
         .navigationBarHidden(self.isNavigationBarHidden)
@@ -144,7 +169,7 @@ struct RestaurantMapView: View {
             Timer.scheduledTimer(withTimeInterval: 5.0, repeats: true) { (timer) in
                 print("counter: \(counter)")
                 counter = counter + 1
-                if(counter == 4){
+                if(counter == 2){
                     timer.invalidate()
                 }
                 self.restDishVM.fetchRestaurantsFB()
