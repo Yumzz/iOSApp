@@ -22,43 +22,37 @@ struct Resto: Identifiable {
 
 struct RestaurantSearchListView: View {
     
-    @ObservedObject var restDishVM = RestaurantDishViewModel()
-    
-    @State var restaurants: [RestaurantFB] = [RestaurantFB]()
+    @ObservedObject var restDishVM = RestaurantSearchListViewModel()
     
     @Binding var isNavigationBarHidden: Bool
-    
-    var types: [String] = ["Asian, Mexican, Italian"]
-    
-    var restos: [Resto] = [
-        Resto.init(id: 0, image: nil, name: "Oishii Bowl", address: "113 Dryden Rd, Ithaca", score: 4.9, nbOfRatings: 120),
-        
-        Resto.init(id: 1, image: nil, name: "Plum Tree", address: "113 Dryden Rd, Ithaca", score: 4.9, nbOfRatings: 120),
-        
-        Resto.init(id: 2, image: nil, name: "CTB", address: "113 Dryden Rd, Ithaca", score: 4.9, nbOfRatings: 120),
-        
-        Resto.init(id: 3, image: nil, name: "Gangnam Station", address: "113 Dryden Rd, Ithaca", score: 4.9, nbOfRatings: 120),
-        
-        Resto.init(id: 4, image: nil, name: "Indian", address: "113 Dryden Rd, Ithaca", score: 4.9, nbOfRatings: 120),
-        
-        Resto.init(id: 5, image: nil, name: "Thai", address: "113 Dryden Rd, Ithaca", score: 4.9, nbOfRatings: 120)
-    ]
     
     var body: some View {
         
         ScrollView {
             VStack(spacing: 20){
                 
-                Text("\(String(restos.count)) Places")
-                    .bold()
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .padding(.leading)
-                
-                ForEach(restos, id: \.id) { resto in
-                    Button(action: {
+                if !self.restDishVM.allRests.isEmpty {
+                    
+                    if self.restDishVM.allRests.count > 1 {
+                        Text("\(String(restDishVM.allRests.count)) Places")
+                            .bold()
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .padding(.leading)
+                    } else {
+                        Text("\(String(restDishVM.allRests.count)) Place")
+                            .bold()
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .padding(.leading)
+                    }
+                    
+                    ForEach(restDishVM.allRests, id: \.id) { resto in
                         
-                    }){
-                        DishCard(image: resto.image, restaurantName: resto.name, restaurantAddress: resto.address,score: resto.score, nbOfRatings: resto.nbOfRatings)
+                        NavigationLink(destination: MenuSelectionView(restChosen: resto)){
+                            VStack {
+                                DishCard(urlImage: FBURLImage(url: resto.coverPhotoURL),restaurantName: resto.name, restaurantAddress: resto.address, score: 8, nbOfRatings: 2)
+                            }
+                        }
+                        .buttonStyle(PlainButtonStyle())
                     }
                 }
                 
@@ -70,11 +64,7 @@ struct RestaurantSearchListView: View {
         }
         .navigationBarTitle("Asian Restaurants")
         .onAppear(){
-            self.restaurants = self.restDishVM.allRests
             self.isNavigationBarHidden = false
-        }
-        .onDisappear(){
-            self.isNavigationBarHidden = true
         }
     }
 }
