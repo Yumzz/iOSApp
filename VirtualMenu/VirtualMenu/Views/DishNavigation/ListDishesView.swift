@@ -13,7 +13,9 @@ struct ListDishesView: View {
 
     @ObservedObject var restDishVM = RestaurantDishViewModel()
     
-    @State var dishes: [DishFB]
+    @State var dishes: [DishFB] = []
+    
+    @State var show = false
     
     @State var rest: RestaurantFB
     
@@ -61,6 +63,12 @@ struct ListDishesView: View {
                     }
                 }
             }
+            if self.show{
+                GeometryReader{_ in
+                    
+                    Loader()
+                }.background(Color.black.opacity(0.45))
+            }
         }.navigationBarTitle("Dishes")
 //            .navigationBarItems(trailing:
 //                NavigationLink(destination: AccountProfileView()){
@@ -69,8 +77,17 @@ struct ListDishesView: View {
 //            })
             .padding(.trailing)
             .onAppear { UITableView.appearance().separatorStyle = .none
-                self.restDishVM.categorizeDishes(dishes: self.dishes)
-                self.categorizedDishes = self.restDishVM.sectionItems
+                //fetch dishes of rest - loader spinning while this happening
+                self.show.toggle()
+                print("start fetching dishes")
+                self.restDishVM.fetchRestsDishesFB(name: self.rest.name)
+                self.restDishVM.dispatchGroup.notify(queue: .main){
+                    print("arrived")
+                    self.dishes = self.restDishVM.restDishes
+                    self.restDishVM.categorizeDishes(dishes: self.dishes)
+                    self.categorizedDishes = self.restDishVM.sectionItems
+                    self.show.toggle()
+                }
         }
     }
 }

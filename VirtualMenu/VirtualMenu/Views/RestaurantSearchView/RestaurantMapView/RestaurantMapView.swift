@@ -29,7 +29,7 @@ struct RestaurantMapView: View {
             MapView(restaurants: self.restaurants, region: self.region).edgesIgnoringSafeArea(.all)
             VStack {
                 
-                HStack(){
+                HStack{
                     NavigationLink(destination: RestaurantSearchListView( isNavigationBarHidden: self.$isNavigationBarHidden)){
                         
                         Text("List")
@@ -41,11 +41,7 @@ struct RestaurantMapView: View {
                     }
                         RestaurantSearchbarView(strSearch: self.$strSearch)
                             .padding([.leading, .trailing])
-                        }
-
-                    
-                    RestaurantSearchbarView(strSearch: self.$strSearch)
-                        .padding([.leading, .trailing])
+                        
                     
                 }
                 .frame(maxWidth: .infinity)
@@ -70,6 +66,7 @@ struct RestaurantMapView: View {
                         .frame(maxWidth: 0)
                     
                 }
+                    
                 .frame(maxWidth: .infinity)
                 .padding(.bottom, 25)
                 .overlay(BottomSheetModal(display: self.$click.isClicked, backgroundColor: .constant(Color(UIColor().colorFromHex("#F88379", 1))), rectangleColor: .constant(Color.white)) {
@@ -118,6 +115,7 @@ struct RestaurantMapView: View {
                                         .padding(.bottom, 5)
                                     }
                                 
+                                
                             
                                 VStack (alignment: .leading){
                                     Text("\((self.click.restChosen?.address)!)")
@@ -125,7 +123,7 @@ struct RestaurantMapView: View {
                                         .foregroundColor(.black)
                                         //.frame(width: 150, height: 20)
                                         .fixedSize(horizontal: false, vertical: true)
-                                        .padding(.bottom, 10)
+                                        .padding(.bottom, 15)
                                     Text("\((self.click.restChosen?.phone)!)")
                                         .font(.custom("Open Sans", size: 20))
                                         .foregroundColor(.black)
@@ -134,10 +132,11 @@ struct RestaurantMapView: View {
                                         .padding(.bottom, 15)
                                 
                                     //if statement based on price level
-                                    Text("Price")
-                                        .font(.custom("Open Sans", size: 20))
-                                        .foregroundColor(.black)
-                                        .padding(.bottom,15)
+                                    Text("\((self.click.restChosen?.price)!)")
+                                    .font(.custom("Open Sans", size: 20))
+                                    .foregroundColor(.black)
+                                    .padding(.bottom,15)
+
                                 
                                     NavigationLink(destination: MenuSelectionView(restChosen: self.click.restChosen!).navigationBarHidden(false)){
                                         Text("Menu")
@@ -158,7 +157,7 @@ struct RestaurantMapView: View {
                     
                 }
             )
-
+            }
         }
         .navigationBarTitle("Map")
         .navigationBarHidden(self.isNavigationBarHidden)
@@ -172,8 +171,12 @@ struct RestaurantMapView: View {
                 if(counter == 2){
                     timer.invalidate()
                 }
-                self.restDishVM.fetchRestaurantsFB()
+                self.restDishVM.fetchRestaurantsBasicInfo()
                 self.restaurants = self.restDishVM.allRests
+                if(self.restaurants.isEmpty != true){
+                    print(self.restaurants[0].price)
+                }
+                //has info for each rest except for dishes
             }
             //need to show only ones within certain radius (city radius)
         }

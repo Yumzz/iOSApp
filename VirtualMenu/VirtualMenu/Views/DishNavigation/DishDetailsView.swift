@@ -22,8 +22,8 @@ struct DishDetailsView: View {
     
     @ObservedObject var restDishVM = RestaurantDishViewModel()
 
-    @State var reviews: [DishReviewFB] = []
-    
+    @State var reviewClicked = false
+        
     //fetch reviews of dish on appear and have "Reviews" button pass info to new view of entire scroll view of it
     
     var body: some View {
@@ -48,68 +48,15 @@ struct DishDetailsView: View {
                 }
                 ReviewsButton().onTapGesture {
                     //go to reviews view
-                    print("review: \(self.reviews[0])")
+                    self.reviewClicked = true
                 }
-                
-//                ReviewsButton().onTapGesture{
-//
-//
-//
-//                }
             
-//            Text("Reviews")
-//                    .font(.title)
-        }
-//        ScrollView{
-//            if (self.reviewsusers.count == 0) {
-//                Text("No reviews yet. Add yours!")
-//                        .frame(width: 330, height: 320, alignment: .center).cornerRadius(10)
-            
-//            } else {
-//                List {
-//                    ForEach(self.reviewsusers) {reviewuser in
-//                        VStack {
-//                            HStack {
-//                                if (reviewuser.user.profilePhoto == nil) {
-//                                    Image(uiImage: UIImage(imageLiteralResourceName: "profile_photo_edit"))
-//                                    .resizable()
-//                                    .frame(width: 50, height: 50)
-//                                    .aspectRatio(contentMode: .fit)
-//                                } else {
-//                                    Image(uiImage: reviewuser.user.getProfilePhoto()!)
-//                                        .resizable()
-//                                        .frame(width: 50, height: 50)
-//                                        .clipShape(Circle())
-//                                        .aspectRatio(contentMode: .fit)
-//                                }
-//                                VStack(alignment: .leading) {
-//                                    Text(reviewuser.user.userName)
-//                                    Text(reviewuser.review.headLine)
-//                                        .foregroundColor(.primary)
-//                                        .font(.headline)
-//                                }
-//                            }.frame(width: 300, height: 50, alignment: .topLeading)
-//                            Text(reviewuser.review.description)
-//                                .frame(width:300, alignment:.topLeading)
-//                                .font(.body)
-//                        }.frame(
-//                            width: 300,
-//                            alignment: .topLeading
-//                        )
-//                            .cornerRadius(10)
-//                    }
-//                }.frame(width: 330, height: 320, alignment: .center).cornerRadius(10)
-//            }
-//        }
-        }
-            .padding()
-            .onAppear {
-                
-                self.restDishVM.fetchDishReviewsFB(dName: self.dish.name, rName: self.restaurant.name)
-                self.reviews = self.restDishVM.dishReviews
-                
+            }.sheet(isPresented: self.$reviewClicked){
+                DishReviewsView(dish: self.dish, restaurant: self.restaurant)
             }
+            .padding()
     }
+}
 }
 
 struct DishDetailsView_Previews: PreviewProvider {

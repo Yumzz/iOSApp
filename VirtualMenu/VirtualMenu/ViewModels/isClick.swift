@@ -30,7 +30,7 @@ class isClick: ObservableObject {
     }
 
     @objc private func restClicked(_ notification: NSNotification){
-            print(notification.userInfo ?? "damn")
+            print(notification.userInfo ?? "oh man")
             print("click switch called")
             self.restChosen = (notification.userInfo!["Restaurant"] as? RestaurantFB)!
             self.isClicked = true
@@ -39,19 +39,13 @@ class isClick: ObservableObject {
     }
     
     @objc private func changeClick(_ notification: NSNotification){
-            print(notification.userInfo ?? "damn")
+            print(notification.userInfo ?? "oh man")
             print("click switch called")
             self.dishFound = (notification.userInfo!["dish"] as? DishFB)!
             self.isClicked = true
             self.numClicks = self.numClicks + 1
             print(isClicked)
     }
-//    func changeClick(isClick: Bool, rest: RestaurantFB){
-//        self.restChosen = rest
-//        self.isClicked.toggle()
-//        print(self.restChosen)
-//        print(isClicked)
-//    }
 
     @objc private func restUnclicked(_ notification: NSNotification){
         self.isClicked = false

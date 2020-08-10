@@ -206,27 +206,48 @@ CoachMarksControllerDelegate {
 struct ScanView: View {
     
     @State private var isClicked: Bool = false
-    @State var dishes: [DishFB]
+    @State var show = false
+    @State var dishes: [DishFB] = []
     @State var rest: RestaurantFB
     @ObservedObject var click: isClick = isClick()
+    @ObservedObject var restDishVM: RestaurantDishViewModel = RestaurantDishViewModel()
 
     var body: some View {
         VStack{
-            ScanView2ControllerRepresentable(dishes: self.dishes)
-            .overlay(
-                VStack{
-                    Spacer()
-                    HStack (alignment: .bottom) {
-                        
-                        Image("ar").resizable().frame(width: 200, height: 55).overlay(NavigationLink(destination: ScanView(dishes: self.dishes, rest: self.rest)){
-                        Text("New Scanner")
-                    })
+            if self.show{
+                GeometryReader{_ in
+                    
+                    Loader()
+                }.background(Color.black.opacity(0.45))
+            }
+            else{
+                ScanView2ControllerRepresentable(dishes: self.dishes)
+                    .overlay(
+                        VStack{
+                            Spacer()
+                            HStack (alignment: .bottom) {
+                                
+                                Image("ar").resizable().frame(width: 200, height: 55).overlay(NavigationLink(destination: ScanView(rest: self.rest)){
+                                Text("New Scanner")
+                            })
 
-                    }
-                }
-            )
-        }.sheet(isPresented: self.$click.isClicked){
+                            }
+                        }
+                )
+            }
+        }
+        .sheet(isPresented: self.$click.isClicked){
             DishDetailsView(dish: self.click.dishFound!, restaurant:  self.rest)
+        }
+        .onAppear{
+                self.show.toggle()
+                print("start fetching dishes")
+                self.restDishVM.fetchRestsDishesFB(name: self.rest.name)
+                self.restDishVM.dispatchGroup.notify(queue: .main){
+                    print("arrived")
+                    self.dishes = self.restDishVM.restDishes
+                    self.show.toggle()
+                }
         }
         //self.$click.isClicked
         

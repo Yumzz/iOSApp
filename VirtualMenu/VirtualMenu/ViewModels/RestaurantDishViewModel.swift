@@ -25,19 +25,39 @@ class RestaurantDishViewModel: ObservableObject {
     
     @Published var allRests: [RestaurantFB] = [RestaurantFB]()
     
-    @Published var dishReviews: [DishReviewFB] = [DishReviewFB]()
+    @Published var dishReviewsNoPhoto: [DishReviewFB] = [DishReviewFB]()
+    @Published var dishReviewsWithPhoto: [DishReviewFB] = [DishReviewFB]()
+
     
     var images: [String:UIImage] = [String:UIImage]()
-    
-    var profiles: [String:UserProfile] = [String:UserProfile]()
     
     var sectionItems: [DishCategory] = [DishCategory]()
     
     let dispatchGroup = DispatchGroup()
     let dispatchGroup1 = DispatchGroup()
+    let dispatchGroup2 = DispatchGroup()
     
     let locationManager = LocationManager()
-    
+            
+    //function to get nearby restaurants but no dish info
+    //Average Price = low, medium, or high
+    func fetchRestaurantsBasicInfo(){
+            db.collection("Restaurant").getDocuments { (snapshot, error) in
+            if let error = error {
+                   print("Error getting documents: \(error)")
+               } else {
+                   for document in snapshot!.documents {
+    //                   print("\(document.documentID) => \(document.data())")
+    //                print(document.get("Name") as! String)
+                    if(self.checkInRadius(coordinate: document.get("location") as! GeoPoint)){
+                        DispatchQueue.main.async {
+                            self.allRests.append(RestaurantFB(snapshot: document, dishes: self.restDishes)!)
+                        }
+                    }
+                   }
+                }
+            }
+        }
     
     func fetchRestaurantsFB(){
         db.collection("Restaurant").getDocuments { (snapshot, error) in
@@ -52,7 +72,7 @@ class RestaurantDishViewModel: ObservableObject {
                         self.fetchRestsDishesFB(name: document.get("Name") as! String)
                         self.dispatchGroup.notify(queue: .main) {
                             let plates = self.restDishes
-                            self.allRests.append(RestaurantFB(snapshot: document, dishes: plates, averagePrice: self.getDishAveragePrice(dishes: plates))!)
+                            self.allRests.append(RestaurantFB(snapshot: document, dishes: plates)!)
                         }
                     }
                 }
@@ -97,6 +117,7 @@ class RestaurantDishViewModel: ObservableObject {
                     self.getDishPhoto(dishName: dish, restName: name)
                     self.dispatchGroup1.notify(queue: .main) {
                         dishes.append(DishFB(snapshot: document, photo: self.images[dish]!)!)
+                        //this returns nil sometimes - check it out
                         if(document == snapshot!.documents.last){
                             print("last")
                             self.images.removeAll()
@@ -109,14 +130,36 @@ class RestaurantDishViewModel: ObservableObject {
         }
     }
     
-    func fetchDishReviewsFB(dName: String, rName: String){
+//    func getUserRatings(userId: String){
+//        let fb = Firestore.firestore()
+//
+//        let ref = fb.collection("DishReview")
+//
+//        let query = ref.whereField("userId", isEqualTo: userId)
+//
+//        query.getDocuments { (snap, error) in
+//
+//        if let error = error {
+//                   print("Error getting documents: \(error)")
+//               } else {
+//                   for document in snap!.documents {
+//                    self.userRatings["users"] = document.data()
+//                    //have this be global for ratings type to that [types ratings dict]
+//            }
+//            }
+//        }
+//    }
+        
+    
+    func fetchDishReviewsFB(dishID: String, restId: String){
+        dispatchGroup2.enter()
         let fb = Firestore.firestore()
         
         let ref = fb.collection("DishReview")
         
-        let query = ref.whereField("Dish", isEqualTo: dName)
-                       .whereField("Restaurant", isEqualTo: rName)
-        
+        let query = ref.whereField("dishID", isEqualTo: dishID)
+                       .whereField("restId", isEqualTo: restId)
+                
         query.getDocuments { (snapshot, error) in
         if let error = error {
             print("Error getting documents: \(error)")
@@ -125,42 +168,61 @@ class RestaurantDishViewModel: ObservableObject {
                 //going through each review of this dish in this restaurant
                 //create and get userprofile from getUserOfReview
                 //create DishReviewFB and append to dishReviews
-                self.getUserOfReview(username: (document.get("Username") as! String), id: (document.get("userid") as! String))
-                let use = self.profiles[(document.get("Username") as! String)]
-                self.dishReviews.append(DishReviewFB(snapshot: document, user: use!)!)
-                
+//                self.getUserOfReview(username: (document.get("Username") as! String), id: (document.get("userid") as! String))
+                print("username \(document.get("username"))")
+                let review = DishReviewFB(snapshot: document)!
+                self.dishReviewsNoPhoto.append(review)
             }
         }
         }
-    }
-    
-    
-    func getUserOfReview(username: String, id: String){
-        let fb = Firestore.firestore()
         
-        let ref = fb.collection("User")
-        
-        //double check with reference pulled from reviews array?
-        
-        let query = ref.whereField("username", isEqualTo: username).whereField("id", isEqualTo: id)
-        
-        //this query does not do anything
-        
-        print("before gettin user: \(query.description)")
-        
-        //build user profile from info here
-        query.getDocuments { (snap, error) in
-            if let error = error {
-                print("Error getting userreviewdocuments: \(error)")
-            }else{
-                for document in snap!.documents{
-                    print("getting user")
-                    self.profiles[(document.get("username") as! String)] = UserProfile(userId: (document.get("id") as! String), fullName: (document.get("username") as! String), emailAddress: (document.get("email") as! String), profilePicture: "", profPhoto: (Utils().loadUserProfilePhoto(userId: (document.get("id") as! String))))
-                    
-                }
-            }
+        for review in self.dishReviewsNoPhoto {
+            print("userID: \(review.userID)")
+            self.dishReviewsWithPhoto.append(DishReviewFB(headline: review.headline, body: review.body, dish: review.dish, restaurant: review.restaurant, user: review.userID, rating: review.rating, username: review.username, photo: self.getUserOfReviewsPhoto(userID: review.userID)))
         }
+        dispatchGroup2.leave()
+
     }
+    
+    func getUserOfReviewsPhoto(userID: String) -> UIImage{
+        //go through dishReviews
+        //get photo of each person with id
+        print("getting photo")
+        print(userID)
+        return Utils().loadUserProfilePhoto(userId: userID)!
+    }
+    
+    
+    
+//    func getUserOfReview(username: String, id: String){
+//        dispatchGroup2.enter()
+//        let fb = Firestore.firestore()
+//
+//        let reference = fb.collection("User")
+//
+//        print(username)
+//        print(id)
+//
+//        let query = reference.whereField("id", isEqualTo: id).whereField("username", isEqualTo: username)
+//
+//        //this query does not do anything
+//
+//        print("before gettin user: \(query.description)")
+//
+//        //build user profile from info here
+//        query.getDocuments { (snap, error) in
+//            if let error = error {
+//                print("Error getting user: \(error)")
+//            }else{
+//                print("wow user exists")
+//                for document in snap!.documents{
+//
+//                    self.profiles[(document.get("username") as! String)] = UserProfile(userId: (document.get("id") as! String), fullName: (document.get("username") as! String), emailAddress: (document.get("email") as! String), profilePicture: "", profPhoto: (Utils().loadUserProfilePhoto(userId: (document.get("id") as! String))))
+//                }
+//            }
+//        }
+//        dispatchGroup2.leave()
+//    }
     
     
     
@@ -195,6 +257,7 @@ class RestaurantDishViewModel: ObservableObject {
      }
 
     func getDishAveragePrice(dishes: [DishFB]) -> Double{
+        //make one for each category 
         var count = 0.0
         var averagePrice = 0.0
         

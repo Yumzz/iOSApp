@@ -17,7 +17,6 @@ struct RestaurantFB {
     let key: String
     let name: String
     let description: String
-    var averagePrice: Double
     let type: String
     var dishes: [DishFB]? = nil
     let ethnicity: String
@@ -29,20 +28,14 @@ struct RestaurantFB {
 //    let photos: [CKAsset]?
 //    var model: CKRecord.Reference? = nil
 //    var reviews: [CKRecord.Reference]? = nil
-    var price: Price
+    var price: String
     
-    enum Price {
-        case low
-        case medium
-        case high
-    }
     
-    init(name: String, key: String = "", description: String, averagePrice: Double, type: String, ethnicity: String, dishes: [DishFB], coordinate: GeoPoint, address: String, phone: String) {
+    init(name: String, key: String = "", description: String, averagePrice: Double, type: String, ethnicity: String, dishes: [DishFB], coordinate: GeoPoint, address: String, phone: String, price: String) {
 //        self.ref = nil
         self.key = key
         self.name = name
         self.description = description
-        self.averagePrice = averagePrice
         self.type = type
         self.ethnicity = ethnicity
         self.dishes = dishes
@@ -50,8 +43,8 @@ struct RestaurantFB {
         self.id = UUID()
         self.address = address
         self.phone = phone
-        self.price = Price.low
-        self.price = self.getPriceRange(averagePrice: averagePrice)
+        self.price = price
+        self.price = self.getDollaSigns(price: price)
     }
     
     init?(snapshot: QueryDocumentSnapshot){
@@ -101,11 +94,15 @@ struct RestaurantFB {
             print("no coordinate")
             return nil
         }
+        guard
+            let price = snapshot.data()["price_range"] as? String else {
+            print("no coordinate")
+            return nil
+        }
        
        self.key = snapshot.documentID
        self.name = name
        self.description = description
-       self.averagePrice = 0.0
        self.type = type
        self.ethnicity = ethnicity
        self.coordinate = coordinate
@@ -113,11 +110,11 @@ struct RestaurantFB {
        self.id = UUID()
        self.address = address
        self.phone = phone
-       self.price = Price.low
-       self.price = self.getPriceRange(averagePrice: averagePrice)
+       self.price = price
+       self.price = self.getDollaSigns(price: price)
     }
     
-    init?(snapshot: QueryDocumentSnapshot, dishes: [DishFB], averagePrice: Double) {
+    init?(snapshot: QueryDocumentSnapshot, dishes: [DishFB]) {
 //        print(snapshot.data())
         guard
             let name = snapshot.data()["Name"] as? String else {
@@ -164,11 +161,15 @@ struct RestaurantFB {
             print("no coordinate")
             return nil
         }
+        guard
+            let price = snapshot.data()["price_range"] as? String else {
+            print("no coordinate")
+            return nil
+        }
         
         self.key = snapshot.documentID
         self.name = name
         self.description = description
-        self.averagePrice = averagePrice
         self.type = type
         self.ethnicity = ethnicity
         self.coordinate = coordinate
@@ -176,8 +177,9 @@ struct RestaurantFB {
         self.id = UUID()
         self.address = address
         self.phone = phone
-        self.price = Price.low
-        self.price = self.getPriceRange(averagePrice: averagePrice)
+        self.price = price
+        self.price = self.getDollaSigns(price: price)
+
     }
     
     func toAnyObject() -> Any {
@@ -186,26 +188,22 @@ struct RestaurantFB {
         ]
     }
     
-    func getPriceRange(averagePrice: Double) -> Price{
-        var price = Price.low
-        if(averagePrice <= 20){
-            price = Price.low
-        }
-        else{
-            if(averagePrice <= 40){
-                price = Price.medium
-            }
-            else{
-                price = Price.high
-            }
-        }
-        
-        return price
-        
+    static func previewRest() -> RestaurantFB {
+        return RestaurantFB(name: "", description: "", averagePrice: 0.0, type: "", ethnicity: "", dishes: [], coordinate: GeoPoint(latitude: 0.0, longitude: 0.0), address: "", phone: "", price: "Low")
     }
     
-    static func previewRest() -> RestaurantFB {
-        return RestaurantFB(name: "", description: "", averagePrice: 0.0, type: "", ethnicity: "", dishes: [], coordinate: GeoPoint(latitude: 0.0, longitude: 0.0), address: "", phone: "")
+    func getDollaSigns(price: String) -> String{
+        var p = ""
+        if(price == "Low"){
+            p = "$"
+        }
+        else if(price.capitalized == "Medium"){
+            p = "$$"
+        }
+        else if(price == "High"){
+            p = "$$$"
+        }
+        return p
     }
     
 }

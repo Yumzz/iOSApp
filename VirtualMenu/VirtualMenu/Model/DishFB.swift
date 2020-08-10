@@ -60,7 +60,7 @@ struct DishFB {
         }
         self.id = UUID()
         self.ref = nil
-        self.key = "nil"
+        self.key = snapshot.documentID
         self.name = name
         self.description = description
         

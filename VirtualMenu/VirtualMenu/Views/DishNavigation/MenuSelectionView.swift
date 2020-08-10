@@ -29,13 +29,13 @@ struct MenuSelectionView: View {
                 
                 VStack(spacing: 30){
                     HStack{
-                        Image("ar").resizable().frame(width: 200, height: 55).overlay(NavigationLink(destination: ListDishesView(dishes: self.restChosen.dishes!, rest: self.restChosen)){
+                        Image("ar").resizable().frame(width: 200, height: 55).overlay(NavigationLink(destination: ListDishesView(rest: self.restChosen)){
                             Text("View Digital Menu")
                         })
                     }
                     
                     HStack{
-                        Image("ar").resizable().frame(width: 200, height: 55).overlay(NavigationLink(destination: ScanView(dishes: self.restChosen.dishes!, rest: self.restChosen)){
+                        Image("ar").resizable().frame(width: 200, height: 55).overlay(NavigationLink(destination: ScanView(rest: self.restChosen)){
                             Text("Scan Physical Menu")
                         })
                     }
