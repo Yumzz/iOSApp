@@ -214,16 +214,17 @@ struct ScanView: View {
 
     var body: some View {
         VStack{
-            if self.show{
-                GeometryReader{_ in
-                    
-                    Loader()
-                }.background(Color.black.opacity(0.45))
-            }
-            else{
+            
                 ScanView2ControllerRepresentable(dishes: self.dishes)
                     .overlay(
                         VStack{
+                            if self.show{
+                                GeometryReader{_ in
+                                    
+                                    Loader()
+                                }.background(Color.black.opacity(0.45))
+                            }
+                            else{
                             Spacer()
                             HStack (alignment: .bottom) {
                                 
@@ -232,9 +233,10 @@ struct ScanView: View {
                             })
 
                             }
+                            }
                         }
                 )
-            }
+            
         }
         .sheet(isPresented: self.$click.isClicked){
             DishDetailsView(dish: self.click.dishFound!, restaurant:  self.rest)
