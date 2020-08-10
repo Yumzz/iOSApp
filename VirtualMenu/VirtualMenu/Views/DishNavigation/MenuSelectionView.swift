@@ -15,37 +15,21 @@ struct MenuSelectionView: View {
     
     var body: some View {
         VStack{
-            Spacer().frame(height: 100)
-            VStack{
-                
-                VStack{
-                    Text("How do you want to view \(restChosen.name)'s menu")
-                    .padding(.horizontal)
-                    .foregroundColor(.black)
-                    .font(.custom("Futura Bold", size: 24))
+            VStack(spacing: 60){
+                NavigationLink(destination: ListDishesView(rest: self.restChosen)){
+                    MenuButton()
                 }
+                .buttonStyle(PlainButtonStyle())
                 
-                Spacer()
-                
-                VStack(spacing: 30){
-                    HStack{
-                        Image("ar").resizable().frame(width: 200, height: 55).overlay(NavigationLink(destination: ListDishesView(rest: self.restChosen)){
-                            Text("View Digital Menu")
-                        })
-                    }
-                    
-                    HStack{
-                        Image("ar").resizable().frame(width: 200, height: 55).overlay(NavigationLink(destination: ScanView(rest: self.restChosen)){
-                            Text("Scan Physical Menu")
-                        })
-                    }
+
+                NavigationLink(destination: ScanView(rest: self.restChosen)){
+                    ScannerButton()
                 }
-                
+                .buttonStyle(PlainButtonStyle())
             }
-            
-        }.navigationBarTitle("Menu Selection")
+        }
+        .navigationBarTitle("Menu Selection")
         .navigationBarHidden(false)
-        .background(Color(UIColor().colorFromHex("#F88379", 1)))
     }
 }
 
@@ -54,3 +38,68 @@ struct MenuSelectionView: View {
 //        MenuSelectionView(restChosen: <#T##RestaurantFB#>)
 //    }
 //}
+
+struct MenuButton: View {
+    var body: some View {
+        ZStack {
+            
+            
+            VStack {
+                Spacer()
+            }
+            .frame(width: 330, height: 120)
+            .background(LinearGradient(gradient: Gradient(colors: [.clear, .black]), startPoint: .top, endPoint: .bottom))
+            .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
+            .opacity(0.1)
+            
+            VStack {
+                Spacer()
+            }
+            .frame(width: 330, height: 120)
+            .background(Color.init(red: 1.00,green: 0.48,blue: 0.45))
+                .blur(radius: 5)
+                .opacity(1)
+                .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
+            
+            HStack(spacing: 16) {
+                
+                Image(systemName: "list.bullet")
+                    .resizable()
+                    .frame(width: 24, height: 24)
+                
+                Text("See the Menu")
+                    .font(.title)
+                    .fontWeight(.bold)
+            }
+            
+            
+        }
+    }
+}
+
+struct ScannerButton: View {
+    var body: some View {
+        ZStack {
+            
+            VStack {
+                Spacer()
+            }
+            .frame(width: 330, height: 120)
+            .background(Color.init(red: 0.24,green: 0.80, blue: 1.00))
+                .blur(radius: 5)
+                .opacity(1)
+                .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
+            
+            HStack(spacing: 16) {
+                
+                Image(systemName: "camera.fill")
+                    .resizable()
+                    .frame(width: 32, height: 24)
+                
+                Text("Scan the menu")
+                    .font(.title)
+                    .fontWeight(.bold)
+            }
+        }
+    }
+}

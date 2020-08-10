@@ -175,14 +175,17 @@ class RestaurantDishViewModel: ObservableObject {
             }
         }
         }
-        
+
+    }
+    
+    func fillReviewInfo(){
         for review in self.dishReviewsNoPhoto {
             print("userID: \(review.userID)")
             self.dishReviewsWithPhoto.append(DishReviewFB(headline: review.headline, body: review.body, dish: review.dish, restaurant: review.restaurant, user: review.userID, rating: review.rating, username: review.username, photo: self.getUserOfReviewsPhoto(userID: review.userID)))
         }
         dispatchGroup2.leave()
-
     }
+    
     
     func getUserOfReviewsPhoto(userID: String) -> UIImage{
         //go through dishReviews

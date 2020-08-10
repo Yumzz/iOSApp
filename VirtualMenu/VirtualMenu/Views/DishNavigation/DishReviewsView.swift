@@ -81,6 +81,7 @@ struct DishReviewsView: View {
             self.show.toggle()
             print("here at reviews")
             self.restDishVM.fetchDishReviewsFB(dishID: self.dish.key, restId: self.restaurant.key)
+            self.restDishVM.fillReviewInfo()
             self.restDishVM.dispatchGroup2.notify(queue: .main){
                 print("notified")
                 self.reviews = self.restDishVM.dishReviewsWithPhoto

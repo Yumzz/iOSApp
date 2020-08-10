@@ -64,6 +64,8 @@
 		A73B1B6624B116CE00A8C6A8 /* FavoriteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A73B1B6524B116CE00A8C6A8 /* FavoriteView.swift */; };
 		A73FD46324919A1300A035AB /* ListDishesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A73FD46224919A1300A035AB /* ListDishesView.swift */; };
 		A777C3A424D3EC7A009658AA /* Navigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A777C3A324D3EC7A009658AA /* Navigator.swift */; };
+		A77BC2F424DD2AE800ACAD84 /* RestaurantSearchListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77BC2F324DD2AE800ACAD84 /* RestaurantSearchListViewModel.swift */; };
+		A78531FA24DE312600F94C67 /* ImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = A78531F924DE312600F94C67 /* ImageLoader.swift */; };
 		A7912A2324CF7DED0052988C /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7912A2224CF7DED0052988C /* CustomTextField.swift */; };
 		A7912A2624CF82140052988C /* WhiteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7912A2524CF82140052988C /* WhiteButton.swift */; };
 		A7912A2824CF87260052988C /* BlackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7912A2724CF87260052988C /* BlackButton.swift */; };
@@ -82,6 +84,7 @@
 		A797EA6424B938D5005158FA /* Montserrat-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A797EA5624B938D5005158FA /* Montserrat-LightItalic.ttf */; };
 		A797EA6524B938D5005158FA /* Montserrat-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A797EA5724B938D5005158FA /* Montserrat-Light.ttf */; };
 		A797EA6624B938D5005158FA /* Montserrat-ThinItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A797EA5824B938D5005158FA /* Montserrat-ThinItalic.ttf */; };
+		A7D0F78324DF6B4100197631 /* FBURLImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7D0F78224DF6B4100197631 /* FBURLImage.swift */; };
 		A7F5506924C123AA00FAC1F0 /* RestaurantSearchListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7F5506824C123AA00FAC1F0 /* RestaurantSearchListView.swift */; };
 		A7F5506B24C1248500FAC1F0 /* RestaurantSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7F5506A24C1248500FAC1F0 /* RestaurantSearchView.swift */; };
 		A7F5506D24C1259100FAC1F0 /* RestaurantSearchbarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7F5506C24C1259100FAC1F0 /* RestaurantSearchbarView.swift */; };
@@ -176,6 +179,8 @@
 		A73B1B6524B116CE00A8C6A8 /* FavoriteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteView.swift; sourceTree = "<group>"; };
 		A73FD46224919A1300A035AB /* ListDishesView.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = ListDishesView.swift; sourceTree = "<group>"; tabWidth = 4; usesTabs = 0; wrapsLines = 1; };
 		A777C3A324D3EC7A009658AA /* Navigator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Navigator.swift; sourceTree = "<group>"; };
+		A77BC2F324DD2AE800ACAD84 /* RestaurantSearchListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantSearchListViewModel.swift; sourceTree = "<group>"; };
+		A78531F924DE312600F94C67 /* ImageLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLoader.swift; sourceTree = "<group>"; };
 		A7912A2224CF7DED0052988C /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		A7912A2524CF82140052988C /* WhiteButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhiteButton.swift; sourceTree = "<group>"; };
 		A7912A2724CF87260052988C /* BlackButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlackButton.swift; sourceTree = "<group>"; };
@@ -194,6 +199,7 @@
 		A797EA5624B938D5005158FA /* Montserrat-LightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-LightItalic.ttf"; sourceTree = "<group>"; };
 		A797EA5724B938D5005158FA /* Montserrat-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Light.ttf"; sourceTree = "<group>"; };
 		A797EA5824B938D5005158FA /* Montserrat-ThinItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-ThinItalic.ttf"; sourceTree = "<group>"; };
+		A7D0F78224DF6B4100197631 /* FBURLImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBURLImage.swift; sourceTree = "<group>"; };
 		A7F5506824C123AA00FAC1F0 /* RestaurantSearchListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantSearchListView.swift; sourceTree = "<group>"; };
 		A7F5506A24C1248500FAC1F0 /* RestaurantSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantSearchView.swift; sourceTree = "<group>"; };
 		A7F5506C24C1259100FAC1F0 /* RestaurantSearchbarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantSearchbarView.swift; sourceTree = "<group>"; };
@@ -478,6 +484,7 @@
 				3A4E2E2124C6841E00C34DD8 /* TabViews */,
 				3AFA233C24D9FFD800F90ED8 /* DishNavigation */,
 				3A987B0F2481511B0021F6E4 /* ContentView.swift */,
+				A7D0F78224DF6B4100197631 /* FBURLImage.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -487,8 +494,10 @@
 			children = (
 				3A4E2E2E24D0D2D600C34DD8 /* AuthenticationViewModel.swift */,
 				A777C3A324D3EC7A009658AA /* Navigator.swift */,
+				A78531F924DE312600F94C67 /* ImageLoader.swift */,
 				3A530DEE24D8E00100CBDE28 /* isClick.swift */,
 				3A4E2E3E24D2403300C34DD8 /* RestaurantDishViewModel.swift */,
+				A77BC2F324DD2AE800ACAD84 /* RestaurantSearchListViewModel.swift */,
 				3A4E2E3324D13DCF00C34DD8 /* FirebaseFunctionsViewModel.swift */,
 			);
 			path = ViewModels;
@@ -775,6 +784,7 @@
 				3A4E2E3724D21CDC00C34DD8 /* Coordinator.swift in Sources */,
 				3A31372A2483178A00E46292 /* ARMUser.swift in Sources */,
 				A7F5506B24C1248500FAC1F0 /* RestaurantSearchView.swift in Sources */,
+				A7D0F78324DF6B4100197631 /* FBURLImage.swift in Sources */,
 				3AFA233E24DA01AC00F90ED8 /* MenuSelectionView.swift in Sources */,
 				3A530DEF24D8E00100CBDE28 /* isClick.swift in Sources */,
 				3AFA234A24DCB14B00F90ED8 /* DishReviewsView.swift in Sources */,
@@ -782,11 +792,13 @@
 				3A4E2E3F24D2403300C34DD8 /* RestaurantDishViewModel.swift in Sources */,
 				3A13B6ED24C3D9FB0006458B /* SuggestRestaurant.swift in Sources */,
 				3A4E2E3424D13DCF00C34DD8 /* FirebaseFunctionsViewModel.swift in Sources */,
+				A78531FA24DE312600F94C67 /* ImageLoader.swift in Sources */,
 				3A13B6EA24C197B30006458B /* RestaurantSearchLabel.swift in Sources */,
 				A7F5506D24C1259100FAC1F0 /* RestaurantSearchbarView.swift in Sources */,
 				C55FDD6524CABA2800CC8561 /* RestaurantFB.swift in Sources */,
 				3A3137262483178A00E46292 /* Model.swift in Sources */,
 				3AA9897624B517F00070FD97 /* Extensions.swift in Sources */,
+				A77BC2F424DD2AE800ACAD84 /* RestaurantSearchListViewModel.swift in Sources */,
 				A7912A2824CF87260052988C /* BlackButton.swift in Sources */,
 				3A4E2E2024C6244600C34DD8 /* ForgotPassword.swift in Sources */,
 				3A31373A2483A25D00E46292 /* ScannerPreViewController.swift in Sources */,

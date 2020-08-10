@@ -25,7 +25,7 @@ extension Color {
 
 struct DishCard: View {
     
-    var image:Image?
+    var urlImage:FBURLImage?
     
     var restaurantName: String
     var restaurantAddress: String
@@ -40,18 +40,15 @@ struct DishCard: View {
             HStack(alignment: .center, spacing: 20) {
                 Spacer()
                     .frame(maxWidth: 0)
-                if image == nil {
+                if urlImage == nil {
                     Image(systemName: "square.fill")
                         .renderingMode(.original)
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                         .frame(width: 88, height: 88, alignment: .leading)
                 } else {
-                    image!
-                        .renderingMode(.original)
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(width: 88, height: 88, alignment: .leading)
+                    urlImage!
+                    
                 }
                 
                 VStack(alignment: .leading, spacing: 10) {
@@ -96,9 +93,9 @@ struct DishCard_Previews: PreviewProvider {
     static var previews: some View {
         
         Group {
-            DishCard(image: nil, restaurantName: "Oishii Bowl", restaurantAddress: "113 Dryden Rd, Ithaca", score: 4.9, nbOfRatings: 120).colorScheme(.light)
+            DishCard(urlImage: nil, restaurantName: "Oishii Bowl", restaurantAddress: "113 Dryden Rd, Ithaca", score: 4.9, nbOfRatings: 120).colorScheme(.light)
             
-            DishCard(image: nil, restaurantName: "Oishii Bowl", restaurantAddress: "113 Dryden Rd, Ithaca", score: 4.9, nbOfRatings: 120).colorScheme(.dark)
+            DishCard(urlImage: nil, restaurantName: "Oishii Bowl", restaurantAddress: "113 Dryden Rd, Ithaca", score: 4.9, nbOfRatings: 120).colorScheme(.dark)
         }
     }
 }

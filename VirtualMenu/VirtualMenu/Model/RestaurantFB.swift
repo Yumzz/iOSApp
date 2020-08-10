@@ -13,15 +13,20 @@ import FirebaseDatabase
 import MapKit
 
 struct RestaurantFB {
-//    let ref: DatabaseReference?
+    //    let ref: DatabaseReference?
+    let id: UUID
     let key: String
     let name: String
+    
     let description: String
     let type: String
-    var dishes: [DishFB]? = nil
     let ethnicity: String
+    
+    var coverPhotoURL: String
+    
+    var dishes: [DishFB]? = nil
+    
     let coordinate: GeoPoint
-    let id: UUID
     let address: String
     let phone: String
 //    let coverPhoto: CKAsset?
@@ -33,22 +38,26 @@ struct RestaurantFB {
     
     init(name: String, key: String = "", description: String, averagePrice: Double, type: String, ethnicity: String, dishes: [DishFB], coordinate: GeoPoint, address: String, phone: String, price: String) {
 //        self.ref = nil
+        self.id = UUID()
         self.key = key
         self.name = name
+        
         self.description = description
         self.type = type
         self.ethnicity = ethnicity
+        
+        self.coverPhotoURL = "Restaurant/\(self.name.lowercased())/\(self.name.lowercased())_cover.png"
+                
         self.dishes = dishes
         self.coordinate = coordinate
-        self.id = UUID()
         self.address = address
         self.phone = phone
         self.price = price
         self.price = self.getDollaSigns(price: price)
+
     }
     
     init?(snapshot: QueryDocumentSnapshot){
-        
        guard
            let name = snapshot.data()["Name"] as? String else {
            print("no name")
@@ -108,30 +117,33 @@ struct RestaurantFB {
        self.coordinate = coordinate
        self.dishes = []
        self.id = UUID()
+        self.coverPhotoURL = "Restaurant/\(self.name.lowercased())/\(self.name.lowercased())_cover.png"
        self.address = address
        self.phone = phone
        self.price = price
        self.price = self.getDollaSigns(price: price)
     }
     
+    
     init?(snapshot: QueryDocumentSnapshot, dishes: [DishFB]) {
 //        print(snapshot.data())
+
         guard
             let name = snapshot.data()["Name"] as? String else {
-            print("no name")
-            return nil
+                print("no name")
+                return nil
         }
         guard
             let ds = snapshot.data()["dishes"] as? [DocumentReference?] else {
-            print("dishes messed up")
-            return nil
+                print("dishes messed up")
+                return nil
         }
         //dishes is an array of FIRDocumentReference in Firebase and is converted to ds, which is an array of DocumentReferences
         
         guard
             let type = snapshot.data()["Type"] as? String else {
-            print("no type")
-            return nil
+                print("no type")
+                return nil
         }
         
         guard
@@ -141,8 +153,8 @@ struct RestaurantFB {
         }
         guard
             let ethnicity = snapshot.data()["Ethnicity"] as? String else {
-            print("no ethnicity")
-            return nil
+                print("no ethnicity")
+                return nil
         }
         
         guard
@@ -153,9 +165,10 @@ struct RestaurantFB {
 
         guard
             let coordinate = snapshot.data()["location"] as? GeoPoint else {
-            print("no coordinate")
-            return nil
+                print("no coordinate")
+                return nil
         }
+        
         guard
             let phone = snapshot.data()["Phone"] as? String else {
             print("no coordinate")
@@ -167,6 +180,7 @@ struct RestaurantFB {
             return nil
         }
         
+        self.id = UUID()
         self.key = snapshot.documentID
         self.name = name
         self.description = description
@@ -174,8 +188,8 @@ struct RestaurantFB {
         self.ethnicity = ethnicity
         self.coordinate = coordinate
         self.dishes = dishes
-        self.id = UUID()
         self.address = address
+        self.coverPhotoURL = "Restaurant/\(self.name.lowercased())/\(self.name.lowercased())_cover.png"
         self.phone = phone
         self.price = price
         self.price = self.getDollaSigns(price: price)
