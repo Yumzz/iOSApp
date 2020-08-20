@@ -27,7 +27,7 @@ struct SignUpView: View {
     
     @State var createdAccount = false
     
-    @ObservedObject var AuthenticationVM = AuthenticationViewModel()
+    @ObservedObject var authenticationVM = AuthenticationViewModel()
     
     var body: some View {
         

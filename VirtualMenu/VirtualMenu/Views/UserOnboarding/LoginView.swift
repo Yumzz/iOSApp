@@ -6,14 +6,6 @@
 //  Copyright © 2020 Rohan Tyagi. All rights reserved.
 //
 
-//
-//  LoginView.swift
-//  VirtualMenu
-//
-//  Created by Rohan Tyagi on 6/23/20.
-//  Copyright © 2020 Rohan Tyagi. All rights reserved.
-//
-
 import Foundation
 import SwiftUI
 import FirebaseStorage
@@ -45,13 +37,13 @@ struct LoginView: View {
     
     @ObservedObject var AuthenticationVM = AuthenticationViewModel()
     
-    @EnvironmentObject var navigator: Navigator
+    @EnvironmentObject var user: UserStore
     
     @State var loginSelection: Int? = nil
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     var alert: Alert {
-        Alert(title: Text(""), message: Text(alertMsg), dismissButton: .default(Text("OK")))
+        Alert(title: Text(alertTitle), message: Text(alertMsg), dismissButton: .default(Text("OK")))
     }
     
     @ViewBuilder
@@ -85,21 +77,27 @@ struct LoginView: View {
             }
             
             Button(action: {
-                Auth.auth().signIn(withEmail: self.email, password: self.password){
-                    (result, error) in
-                    if(error == nil){
-                        self.AuthenticationVM.updateProfile()
-                    }
-                    else{
-                        self.alertMessage = "No user exists with those credentials"
-                        self.alertTitle = "No user"
+                
+                Auth.auth().signIn(withEmail: self.email, password: self.password){ result, error in
+                    
+                    if(error != nil){
+                        print(error!)
+                        self.alertMsg = "Your email or password is incorrect"
+                        self.alertTitle = "Sign in error"
                         self.showAlert.toggle()
                     }
-                    self.loggedIn.toggle()
-                    self.navigator.isOnboardingShowing = false
+                    else{
+                        self.loggedIn.toggle()
+                        self.user.isLogged = true
+                        UserDefaults.standard.set(true, forKey: "isLogged")
+                        self.user.showOnboarding = false
+                        UserDefaults.standard.set(true, forKey: "showOnboarding")
+                        
+                        self.AuthenticationVM.updateProfile()
+                    }
                 }
             }) {
-                    BlackButton(strLabel: "LOGIN")
+                BlackButton(strLabel: "LOGIN")
             }
             
             HStack{

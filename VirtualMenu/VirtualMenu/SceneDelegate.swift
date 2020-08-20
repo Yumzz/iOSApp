@@ -45,13 +45,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         //This commented code allows us to be signed out everytime so we can test easier
         //UserDefaults.standard.set("", forKey: signInWithAppleManager.userIdentifierKey)
-        var navigator = Navigator()
+        
         let contentView = ContentView()
         
         // Use a UIHostingController as window root view controller.
         if let windowScene = scene as? UIWindowScene {
             let window = UIWindow(windowScene: windowScene)
-            window.rootViewController = UIHostingController(rootView: contentView.environmentObject(navigator))
+            window.rootViewController = UIHostingController(rootView: contentView.environmentObject(UserStore()))
             self.window = window
             window.makeKeyAndVisible()
         }

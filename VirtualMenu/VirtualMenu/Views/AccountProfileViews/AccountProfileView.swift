@@ -19,16 +19,16 @@ struct ProfileButton: View {
     
     var body: some View{
         HStack {
-           Image(imageName)
+            Image(imageName)
                 .resizable()
-               .shadow(radius: 10)
-               .frame(width: 40, height: 40)
-           VStack(alignment: .leading) {
-               Text(label)
-                   .font(.custom("Futura Bold", size: 18))
-           }
+                .shadow(radius: 10)
+                .frame(width: 40, height: 40)
+            VStack(alignment: .leading) {
+                Text(label)
+                    .font(.custom("Futura Bold", size: 18))
+            }
         }
-
+        
     }
 }
 
@@ -44,11 +44,14 @@ struct AccountProfileView: View {
     @State private var alertTitle = ""
     @State var show = false
     
-     @EnvironmentObject var navigator: Navigator
+    @EnvironmentObject var user: UserStore
+    @ObservedObject var authenticationVM = AuthenticationViewModel()
     
     var body: some View {
         ScrollView {
-            VStack(spacing: 40){
+            
+            if user.isLogged {
+                VStack(spacing: 40){
                     
                     Spacer()
                         .frame(maxHeight: 0)
@@ -57,22 +60,22 @@ struct AccountProfileView: View {
                         if image ==  nil {
                             if (userProfile.profilePhoto == nil){
                                 Image(systemName: "person.crop.circle")
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .frame(width: 80, height: 80)
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                                    .frame(width: 80, height: 80)
                             }
                             else{
                                 Image(uiImage: userProfile.profilePhoto!.circle!)
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .frame(width: 150, height: 150)
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                                    .frame(width: 150, height: 150)
                             }
                         }
                         else{
                             image?
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(width: 150, height: 150)
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: 150, height: 150)
                         }
                     }
                     
@@ -81,36 +84,32 @@ struct AccountProfileView: View {
                             ProfileButton(imageName: "contact_us", label: "Contact Us")
                         }.buttonStyle(PlainButtonStyle())
                         
-
+                        
                         NavigationLink(destination: ReportProblem()) {
                             ProfileButton(imageName: "report_problem", label: "Report Problem")
                         }.buttonStyle(PlainButtonStyle())
-
+                        
                         NavigationLink(destination: SuggestRestaurant()) {
                             ProfileButton(imageName: "suggest_restaurant", label: "Suggest Restaurant")
                         }.buttonStyle(PlainButtonStyle())
                     }
-                        
-                        
                     
-                        Button(action: {
-                              let firebaseAuth = Auth.auth()
-                            do {
-                                try firebaseAuth.signOut()
-                                self.signedOut = true
-                                self.navigator.isOnboardingShowing = true
-                            } catch let signOutError as NSError {
-                              print ("Error signing out: %@", signOutError)
-                            }
-                        }){
-                                Text("Sign Out")
-                                .foregroundColor(Color(UIColor().colorFromHex("#F88379", 1)))
-                        }
+                    
                     
                     Button(action: {
-                        self.navigator.isOnboardingShowing = true
-                    }) {
-                        Text("Exit")
+                        let firebaseAuth = Auth.auth()
+                        do {
+                            try firebaseAuth.signOut()
+                            self.signedOut = true
+                            self.user.isLogged = false
+                            UserDefaults.standard.set(false, forKey: "isLogged")
+                            self.user.showOnboarding = true
+                        } catch let signOutError as NSError {
+                            print ("Error signing out: %@", signOutError)
+                        }
+                    }){
+                        Text("Sign Out")
+                            .foregroundColor(Color(UIColor().colorFromHex("#F88379", 1)))
                     }
                     
                     Spacer()
@@ -120,16 +119,20 @@ struct AccountProfileView: View {
                 .navigationBarItems(trailing: Button(action: {
                     self.showingImagePicker.toggle()
                 }, label: {
-                        Text("Edit Profile Photo")
-            }))
-        }
-            
-            .sheet(isPresented: $showingImagePicker, onDismiss: changePhoto){ ImagePicker(image: self.$inputImage)
-                .alert(isPresented: self.$showingAlert) {
-                Alert(title: Text("Thank you for submitting"), message: Text("\(self.alertMessage)"), dismissButton: .default(Text("OK")))
+                    Text("Edit Profile Photo")
+                }))
+                    .sheet(isPresented: $showingImagePicker, onDismiss: changePhoto){ ImagePicker(image: self.$inputImage)
+                        .alert(isPresented: self.$showingAlert) {
+                            Alert(title: Text("Thank you for submitting"), message: Text("\(self.alertMessage)"), dismissButton: .default(Text("OK")))
+                        }
+                }
+                
+            } else {
+                AccountProfileLoginView()
+                    .navigationBarTitle("Log In to your account")
             }
-            }
         }
+    }
     
     func changePhoto(){
         guard let inputImage = inputImage else { return }
@@ -138,7 +141,7 @@ struct AccountProfileView: View {
         print(x)
         userProfile.profilePhoto = inputImage
         
-//        changeRequest?.photoURL = image
+        //        changeRequest?.photoURL = image
     }
     
 }
