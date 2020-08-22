@@ -19,6 +19,7 @@ struct DishReviewFB{
     let rating: Int
     var userPhoto: UIImage?
     var username: String
+    var userPhotoURL: String
 
     
     init(headline: String, body: String, dish: String, restaurant: String, user: String, rating: Int, username: String, photo: UIImage) {
@@ -31,39 +32,40 @@ struct DishReviewFB{
         self.rating = rating
         self.userPhoto = photo
         self.username = username
+        self.userPhotoURL = "profilephotos/\(userID)"
     }
     
     init?(snapshot: QueryDocumentSnapshot){
         //used when fetching from Firebase to add to DishFB list
         guard
             let headline = snapshot.data()["Headline"] as? String else {
-            print("no name")
+            print("no headline")
             return nil
         }
         guard
             let body = snapshot.data()["Body"] as? String else {
-            print("no name")
+            print("no body")
             return nil
         }
         guard
             let dish = snapshot.data()["dishID"] as? String else {
-            print("no name")
+            print("no dish")
             return nil
         }
         guard
-            let restaurant = snapshot.data()["restId"] as? String else {
-            print("no name")
+            let restaurant = snapshot.data()["restID"] as? String else {
+            print("no restaurant")
             return nil
         }
         
         guard
             let strRating = snapshot.data()["StarRating"] as? Int else {
-            print("no name")
+            print("no star Rating")
             return nil
         }
         guard
             let user = snapshot.data()["userid"] as? String else {
-            print("no name")
+            print("no user")
             return nil
         }
         guard
@@ -81,9 +83,19 @@ struct DishReviewFB{
         self.restaurant = restaurant
         self.body = body
         self.rating = strRating
-        self.userID = user
         self.userPhoto = nil
-        self.username = name
+        if(name == ""){
+            print("no user")
+            self.username = "Guest User"
+            self.userID = ""
+            self.userPhotoURL = ""
+        }
+        else{
+            print("user")
+            self.username = name
+            self.userID = user
+            self.userPhotoURL = "profilephotos/\(userID)"
+        }
     }
     
 }

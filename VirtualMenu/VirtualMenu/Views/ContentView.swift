@@ -21,7 +21,7 @@ struct ContentView: View {
                InitialScreen()
             } else {
                //User Not logged in
-                InitialScreen()
+               InitialScreen()
             }
         }
     }

@@ -25,7 +25,11 @@ struct DishAdminView: View {
     var body: some View {
             VStack{
                 VStack(spacing: 30){
-                CustomTextField(strLabel: "Description", strField: $description, uiTextAutoCapitalizationType: .none, uiKeyboardType: .emailAddress)
+                MultiLineTFDishAdmin(txt: $description)
+                    .border(Color.gray.opacity(0.5), width: 1)
+                    .padding(.leading, (UIScreen.main.bounds.width * 10) / 414)
+                    .padding(.trailing, (UIScreen.main.bounds.width * 10) / 414)
+//                CustomTextField(strLabel: "Description", strField: $description, uiTextAutoCapitalizationType: .none, uiKeyboardType: .emailAddress)
                 CustomTextField(strLabel: "Name", strField: $name, uiTextAutoCapitalizationType: .none, uiKeyboardType: .emailAddress)
                     CustomTextField(strLabel: "Price", strField: $price, uiTextAutoCapitalizationType: .none, uiKeyboardType: .decimalPad)
                 CustomTextField(strLabel: "Restaurant", strField: $restaurant, uiTextAutoCapitalizationType: .none, uiKeyboardType: .emailAddress)
@@ -75,5 +79,49 @@ struct DishAdminView: View {
 struct DishAdminView_Previews: PreviewProvider {
     static var previews: some View {
         DishAdminView()
+    }
+}
+
+struct MultiLineTFDishAdmin: UIViewRepresentable {
+
+    @Binding var txt: String
+
+    func makeUIView(context: UIViewRepresentableContext<MultiLineTFDishAdmin>) -> MultiLineTFDishAdmin.UIViewType {
+        let tview = UITextView()
+        tview.layer.cornerRadius = 20.0
+        tview.font = .systemFont(ofSize: 16)
+        tview.isEditable = true
+        tview.isUserInteractionEnabled = true
+        tview.isScrollEnabled = true
+        tview.text = "Description"
+        tview.delegate = context.coordinator
+        tview.textColor = .gray
+        tview.returnKeyType = .continue
+        return tview
+    }
+
+    func updateUIView(_ uiView: UITextView, context: UIViewRepresentableContext<MultiLineTFDishAdmin>) {
+
+    }
+
+    func makeCoordinator() -> MultiLineTFDishAdmin.Coordinator {
+        return MultiLineTFDishAdmin.Coordinator(parent1: self)
+    }
+
+    class Coordinator: NSObject, UITextViewDelegate {
+
+        var parent: MultiLineTFDishAdmin
+
+        init(parent1: MultiLineTFDishAdmin) {
+            parent = parent1
+        }
+
+        func textViewDidChange(_ textView: UITextView) {
+            self.parent.txt = textView.text
+        }
+        func textViewDidBeginEditing(_ textView: UITextView) {
+            textView.text = ""
+            textView.textColor = .label
+        }
     }
 }

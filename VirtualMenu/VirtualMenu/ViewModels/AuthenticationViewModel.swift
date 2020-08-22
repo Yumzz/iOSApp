@@ -16,6 +16,8 @@ var userProfile: UserProfile = UserProfile(userId: "", fullName: "", emailAddres
 class AuthenticationViewModel: ObservableObject {
     
     @State var sign = false
+    let dispatchGroup = DispatchGroup()
+
         
     let db = Firestore.firestore()
         
@@ -65,6 +67,29 @@ class AuthenticationViewModel: ObservableObject {
         return bool
     }
     
+    func fetchUserID(name: String, email: String, dispatch: DispatchGroup){
+        print("start dispatch")
+        let fb = Firestore.firestore()
+    
+        let ref = fb.collection("User")
+    
+        let query = ref.whereField("email", isEqualTo: email).whereField("username", isEqualTo: name)
+        
+        query.getDocuments { (snapshot, error) in
+            if let error = error {
+                print("Error getting documents: \(error)")
+            }
+            else {
+                for document in snapshot!.documents {
+                    userProfile.userId = document.get("id") as! String
+                    print("end dispatch")
+                    dispatch.leave()
+                }
+            }
+        }
+        
+    }
+    
     func updateProfile() {
         let storage = Storage.storage()
         let imagesRef = storage.reference().child("profilephotos/\(Auth.auth().currentUser!.uid)")
@@ -78,12 +103,23 @@ class AuthenticationViewModel: ObservableObject {
         })
         
         userProfile.userId = Auth.auth().currentUser!.uid
-        Database.database().reference().child("users").child(userProfile.userId).observeSingleEvent(of: .value, with: { (snapshot) in
-            let value = snapshot.value as? NSDictionary
-            userProfile.fullName = value?["username"] as? String ?? ""
-        })
-        //            user.fullName = Auth.auth().currentUser!.displayName!
         userProfile.emailAddress = Auth.auth().currentUser!.email!
+
+
+        let fb = Firestore.firestore()
+        let ref = fb.collection("User")
+        
+        let query = ref.whereField("id", isEqualTo: userProfile.userId).whereField("email", isEqualTo: userProfile.emailAddress)
+                        
+        query.getDocuments { (snapshot, error) in
+        if let error = error {
+            print("Error getting documents: \(error)")
+        } else {
+            for document in snapshot!.documents {
+                userProfile.fullName = (document.get("username") as? String)!
+            }
+        }
+        }
         
         //finishes after return is given as it is a little slow
         DispatchQueue.main.async {

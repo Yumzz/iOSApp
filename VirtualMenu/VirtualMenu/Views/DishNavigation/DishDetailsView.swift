@@ -21,18 +21,19 @@ struct DishDetailsView: View {
     let restaurant: RestaurantFB
     
     @ObservedObject var restDishVM = RestaurantDishViewModel()
+    
+    @ObservedObject var orderVM = OrderViewModel()
+    
+    let dispatchG1 = DispatchGroup()
 
     @State var reviewClicked = false
-        
-    //fetch reviews of dish on appear and have "Reviews" button pass info to new view of entire scroll view of it
-    
+            
     var body: some View {
         VStack(alignment: .center) {
             VStack{
                 Text("\(dish.name)")
                     .font(.title)
-                Image(uiImage: dish.coverPhoto!)
-                    .resizable()
+                FBURLImage(url: dish.coverPhotoURL)
                     .frame(width: 330, height: 210)
                     .aspectRatio(contentMode: .fit)
                     .cornerRadius(10)
@@ -45,6 +46,12 @@ struct DishDetailsView: View {
                 OrderButton().onTapGesture {
                     //send info to POS
                     print("order tapped")
+                    self.dispatchG1.enter()
+                    print("add dish to list")
+                    self.orderVM.addDish(dish: self.dish, rest: self.restaurant, dis: self.dispatchG1)
+                    self.dispatchG1.notify(queue: .main){
+                        print("\(self.orderVM.dishRestaurant[self.dish])")
+                    }
                 }
                 ReviewsButton().onTapGesture {
                     //go to reviews view

@@ -88,8 +88,8 @@ struct RestaurantMapView: View {
                             }
                             
                             HStack {
-                                Image("initial_screen_back")
-                                    .resizable()
+                                FBURLImage(url: self.click.restChosen!.coverPhotoURL)
+//                                    .resizable()
                                     .frame(width: 150, height:150)
                                     .clipShape(Circle())
                                 

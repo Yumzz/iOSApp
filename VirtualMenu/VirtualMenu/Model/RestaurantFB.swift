@@ -117,7 +117,7 @@ struct RestaurantFB {
        self.coordinate = coordinate
        self.dishes = []
        self.id = UUID()
-        self.coverPhotoURL = "Restaurant/\(self.name.lowercased())/\(self.name.lowercased())_cover.png"
+       self.coverPhotoURL = "Restaurant/\(self.name.lowercased())/\(self.name.lowercased())_cover.png"
        self.address = address
        self.phone = phone
        self.price = price

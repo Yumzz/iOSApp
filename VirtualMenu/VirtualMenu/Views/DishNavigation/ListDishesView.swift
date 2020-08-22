@@ -33,8 +33,7 @@ struct ListDishesView: View {
                             DishDetailsView(dish: dish, restaurant: self.rest).navigationBarHidden(false)
                             ) {
                                 HStack {
-                                    Image(uiImage: dish.coverPhoto!)
-                                        .resizable()
+                                    FBURLImage(url: dish.coverPhotoURL)
                                         .aspectRatio(contentMode: .fill)
                                         .layoutPriority(-1)
                                         .frame(width: 100, height: 100)
@@ -78,6 +77,7 @@ struct ListDishesView: View {
             .padding(.trailing)
             .onAppear { UITableView.appearance().separatorStyle = .none
                 //fetch dishes of rest - loader spinning while this happening
+                //save dishes to core data and dont fetch again when going back
                 self.show.toggle()
                 print("start fetching dishes")
                 self.restDishVM.fetchRestsDishesFB(name: self.rest.name)

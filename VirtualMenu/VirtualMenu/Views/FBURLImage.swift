@@ -22,7 +22,7 @@ struct FBURLImage: View {
             .renderingMode(.original)
             .resizable()
             .aspectRatio(contentMode: .fit)
-            .frame(width: 88, height: 88, alignment: .leading)
+//            .frame(width: 88, height: 88, alignment: .leading)
 //            .resizable()
 //            .aspectRatio(contentMode: .fit)
 //            .frame(width:100, height:100)

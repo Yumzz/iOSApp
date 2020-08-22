@@ -46,6 +46,7 @@ struct LoginView: View {
     @ObservedObject var AuthenticationVM = AuthenticationViewModel()
     
     @EnvironmentObject var navigator: Navigator
+
     
     @State var loginSelection: Int? = nil
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
@@ -122,7 +123,6 @@ struct LoginView: View {
             }
             
             Button(action: {
-                self.showGoogle.toggle()
                 SocialLogin().attemptLoginGoogle()
             }){
                 BlackButton(strLabel: "Sign In with Google", imgName: "continue_with_google")
@@ -130,9 +130,11 @@ struct LoginView: View {
             
             Button(action: {
                 self.showFB.toggle()
-                SocialLogin().attemptLoginFb(completion: { result, error in
+                SocialLogin().attemptLoginFb(completion: { result, error  in
+                    if(!result!.isCancelled){
+                        self.navigator.isOnboardingShowing = false
+                    }
                 })
-                
             }){
                 BlackButton(strLabel: "Sign In with Facebook", imgName: "continue_with_facebook")
             }
@@ -148,7 +150,13 @@ struct LoginView: View {
             .sheet(isPresented: self.$showSignup) {
                 SignUpView()
             }
-        }
+        }.onAppear(perform: {
+            if let token = AccessToken.current,
+                !token.isExpired {
+                // User is logged in, do work such as go to next view controller.
+                self.navigator.isOnboardingShowing = false
+            }
+        })
         .navigationBarTitle("Sign In")
         .alert(isPresented: $showAlert, content: { self.alert })
     }
@@ -165,12 +173,35 @@ struct LoginView: View {
         func attemptLoginGoogle() {
             GIDSignIn.sharedInstance()?.presentingViewController = UIApplication.shared.windows.last?.rootViewController
             GIDSignIn.sharedInstance()?.signIn()
+            
         }
         
         func attemptLoginFb(completion: @escaping (_ result: LoginManagerLoginResult?, _ error: Error?) -> Void) {
             let fbLoginManager: LoginManager = LoginManager()
             fbLoginManager.logOut()
+            print("logged out")
             fbLoginManager.logIn(permissions: ["email", "name", "public_profile"], from: UIApplication.shared.windows.last?.rootViewController) { (result, error) -> Void in
+                print("RESULT: '\(result)' ")
+                
+                if error != nil {
+                    print("error")
+                }else if(result!.isCancelled){
+                    print("result cancelled")
+                }else{
+                    print("success Get user information.")
+
+                    let fbRequest = GraphRequest(graphPath:"me", parameters: ["fields":"email, name, picture"])
+                    fbRequest.start { (connection, result, error) -> Void in
+
+                    if error == nil {
+                        print("User Info : \(result ?? "No result")")
+
+                    } else {
+                        print("Error Getting Info \(error ?? "error" as! Error)");
+
+                        }
+                    }
+                }
                 completion(result, error)
             }
         }

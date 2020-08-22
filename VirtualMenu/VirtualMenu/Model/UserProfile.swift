@@ -78,17 +78,24 @@ extension UserProfile: Hashable {
         hasher.combine(userId)
     }
     
-    func getProfilePhoto() -> UIImage? {
+    func getProfilePhoto() {
+        var dispatch = DispatchGroup()
+        dispatch.enter()
         var image: UIImage?
-        let imagesRef = storage.reference().child("profilephotos/\(Auth.auth().currentUser!.uid)")
-        imagesRef.getData(maxSize: 1 * 1024 * 1024) { data, error in
+        let imagesRef = storage.reference().child("profilephotos/\(self.userId)")
+        imagesRef.getData(maxSize: 2 * 2048 * 2048) { data, error in
         if let error = error {
             print(error.localizedDescription)
+            dispatch.leave()
         } else {
-          // Data for "virtual-menu-profilephotos/\(name).jpg" is returned
+          // Data for "profilephotos/\(id).jpg" is returned
             image = UIImage(data: data!)!
+            dispatch.leave()
             }
         }
-        return image
+        dispatch.notify(queue: .main) {
+            userProfile.profilePhoto = image
+            return
+        }
     }
 }

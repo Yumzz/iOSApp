@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -34,6 +34,9 @@
 		3A530DF324D9769100CBDE28 /* DishCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A530DF224D9769100CBDE28 /* DishCategory.swift */; };
 		3A6477F224B68D060077EF30 /* UserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6477F124B68D060077EF30 /* UserProfile.swift */; };
 		3A7E59C82489A98100288AB0 /* ScannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A7E59C72489A98100288AB0 /* ScannerViewController.swift */; };
+		3A87574F24EA7423004ABECC /* AddReviewButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A87574E24EA7423004ABECC /* AddReviewButton.swift */; };
+		3A87575124EA795D004ABECC /* DishAddReview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A87575024EA795D004ABECC /* DishAddReview.swift */; };
+		3A87575324EC910A004ABECC /* PostReviewButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A87575224EC910A004ABECC /* PostReviewButton.swift */; };
 		3A987AD72480350C0021F6E4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A987AD62480350C0021F6E4 /* AppDelegate.swift */; };
 		3A987AD92480350C0021F6E4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A987AD82480350C0021F6E4 /* SceneDelegate.swift */; };
 		3A987ADD2480350E0021F6E4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3A987ADC2480350E0021F6E4 /* Assets.xcassets */; };
@@ -47,6 +50,10 @@
 		3AA9897624B517F00070FD97 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA9897524B517F00070FD97 /* Extensions.swift */; };
 		3AA9897724B517F00070FD97 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA9897524B517F00070FD97 /* Extensions.swift */; };
 		3AA9897824B517F00070FD97 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA9897524B517F00070FD97 /* Extensions.swift */; };
+		3AE05F9824EF27550024F802 /* FacebookCore in Frameworks */ = {isa = PBXBuildFile; productRef = 3AE05F9724EF27550024F802 /* FacebookCore */; };
+		3AE05F9A24EF27550024F802 /* FacebookLogin in Frameworks */ = {isa = PBXBuildFile; productRef = 3AE05F9924EF27550024F802 /* FacebookLogin */; };
+		3AE05F9C24EF7EFC0024F802 /* OrderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE05F9B24EF7EFC0024F802 /* OrderViewModel.swift */; };
+		3AE05F9F24EFB5DA0024F802 /* OrderCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE05F9E24EFB5DA0024F802 /* OrderCard.swift */; };
 		3AF9926524A2B7C9005446D8 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF9926424A2B7C9005446D8 /* LoginView.swift */; };
 		3AF9926824A2B918005446D8 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF9926724A2B918005446D8 /* Utils.swift */; };
 		3AF9926A24A2B95C005446D8 /* InputValidation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF9926924A2B95C005446D8 /* InputValidation.swift */; };
@@ -143,6 +150,9 @@
 		3A530DF224D9769100CBDE28 /* DishCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DishCategory.swift; sourceTree = "<group>"; };
 		3A6477F124B68D060077EF30 /* UserProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfile.swift; sourceTree = "<group>"; };
 		3A7E59C72489A98100288AB0 /* ScannerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerViewController.swift; sourceTree = "<group>"; };
+		3A87574E24EA7423004ABECC /* AddReviewButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddReviewButton.swift; sourceTree = "<group>"; };
+		3A87575024EA795D004ABECC /* DishAddReview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DishAddReview.swift; sourceTree = "<group>"; };
+		3A87575224EC910A004ABECC /* PostReviewButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostReviewButton.swift; sourceTree = "<group>"; };
 		3A987AD32480350C0021F6E4 /* Yumzz.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Yumzz.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A987AD62480350C0021F6E4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3A987AD82480350C0021F6E4 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -161,6 +171,8 @@
 		3A9F981D248DD3EF007ABB71 /* ScannerFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScannerFunctions.swift; sourceTree = "<group>"; };
 		3A9F9822248DD790007ABB71 /* Scanner.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Scanner.storyboard; sourceTree = "<group>"; };
 		3AA9897524B517F00070FD97 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		3AE05F9B24EF7EFC0024F802 /* OrderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderViewModel.swift; sourceTree = "<group>"; };
+		3AE05F9E24EFB5DA0024F802 /* OrderCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderCard.swift; sourceTree = "<group>"; };
 		3AF9926424A2B7C9005446D8 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		3AF9926724A2B918005446D8 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		3AF9926924A2B95C005446D8 /* InputValidation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputValidation.swift; sourceTree = "<group>"; };
@@ -217,7 +229,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3AE05F9A24EF27550024F802 /* FacebookLogin in Frameworks */,
 				A731EB0E2495AD2300B75D05 /* CloudKit.framework in Frameworks */,
+				3AE05F9824EF27550024F802 /* FacebookCore in Frameworks */,
 				C3A7587B8B2CC14FE99150BD /* Pods_VirtualMenu.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -293,6 +307,7 @@
 		3A4E2E2124C6841E00C34DD8 /* TabViews */ = {
 			isa = PBXGroup;
 			children = (
+				3AE05F9D24EFB48C0024F802 /* New Group */,
 				A73B1B6124B111D800A8C6A8 /* AppView.swift */,
 				A73B1B6324B1162E00A8C6A8 /* OrderView.swift */,
 				A73B1B6524B116CE00A8C6A8 /* FavoriteView.swift */,
@@ -356,6 +371,7 @@
 				A73B1B5D24B0FF4100A8C6A8 /* ViewModels */,
 				A73B1B5924B0FDA800A8C6A8 /* Views */,
 				3A987AD62480350C0021F6E4 /* AppDelegate.swift */,
+				3A4E2E2124C6841E00C34DD8 /* TabViews */,
 				3A4A0E71249EB94D0030635E /* ImagePicker.swift */,
 				3A987AD82480350C0021F6E4 /* SceneDelegate.swift */,
 				3AA9892824B5153A0070FD97 /* Fonts */,
@@ -415,6 +431,14 @@
 			path = Fonts;
 			sourceTree = "<group>";
 		};
+		3AE05F9D24EFB48C0024F802 /* New Group */ = {
+			isa = PBXGroup;
+			children = (
+				3AE05F9E24EFB5DA0024F802 /* OrderCard.swift */,
+			);
+			path = "New Group";
+			sourceTree = "<group>";
+		};
 		3AF9926624A2B8F8005446D8 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
@@ -435,6 +459,7 @@
 				A73FD46224919A1300A035AB /* ListDishesView.swift */,
 				34A5D662249BF6DF00E4FE9C /* DishDetailsView.swift */,
 				3AFA234924DCB14B00F90ED8 /* DishReviewsView.swift */,
+				3A87575024EA795D004ABECC /* DishAddReview.swift */,
 			);
 			path = DishNavigation;
 			sourceTree = "<group>";
@@ -444,6 +469,8 @@
 			children = (
 				3AFA234324DBA42E00F90ED8 /* OrderButton.swift */,
 				3AFA234724DCACEA00F90ED8 /* ReviewsButton.swift */,
+				3A87574E24EA7423004ABECC /* AddReviewButton.swift */,
+				3A87575224EC910A004ABECC /* PostReviewButton.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -481,7 +508,6 @@
 				3A4E2E3024D12D0800C34DD8 /* AdminView */,
 				A7F5506724C1238B00FAC1F0 /* RestaurantSearchView */,
 				3A13B6EB24C19CB50006458B /* UserOnboarding */,
-				3A4E2E2124C6841E00C34DD8 /* TabViews */,
 				3AFA233C24D9FFD800F90ED8 /* DishNavigation */,
 				3A987B0F2481511B0021F6E4 /* ContentView.swift */,
 				A7D0F78224DF6B4100197631 /* FBURLImage.swift */,
@@ -495,6 +521,7 @@
 				3A4E2E2E24D0D2D600C34DD8 /* AuthenticationViewModel.swift */,
 				A777C3A324D3EC7A009658AA /* Navigator.swift */,
 				A78531F924DE312600F94C67 /* ImageLoader.swift */,
+				3AE05F9B24EF7EFC0024F802 /* OrderViewModel.swift */,
 				3A530DEE24D8E00100CBDE28 /* isClick.swift */,
 				3A4E2E3E24D2403300C34DD8 /* RestaurantDishViewModel.swift */,
 				A77BC2F324DD2AE800ACAD84 /* RestaurantSearchListViewModel.swift */,
@@ -558,6 +585,10 @@
 			dependencies = (
 			);
 			name = VirtualMenu;
+			packageProductDependencies = (
+				3AE05F9724EF27550024F802 /* FacebookCore */,
+				3AE05F9924EF27550024F802 /* FacebookLogin */,
+			);
 			productName = VirtualMenu;
 			productReference = 3A987AD32480350C0021F6E4 /* Yumzz.app */;
 			productType = "com.apple.product-type.application";
@@ -630,6 +661,9 @@
 				Base,
 			);
 			mainGroup = 3A987ACA2480350C0021F6E4;
+			packageReferences = (
+				3AE05F9624EF27550024F802 /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */,
+			);
 			productRefGroup = 3A987AD42480350C0021F6E4 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -755,11 +789,13 @@
 				3A4E2E2F24D0D2D600C34DD8 /* AuthenticationViewModel.swift in Sources */,
 				3A4A0E72249EB94D0030635E /* ImagePicker.swift in Sources */,
 				3A4E2E3B24D21E8E00C34DD8 /* LocationManager.swift in Sources */,
+				3A87574F24EA7423004ABECC /* AddReviewButton.swift in Sources */,
 				3A45AD8D24B3FE8800CF3A8F /* Constants.swift in Sources */,
 				3A13B6E024C1813D0006458B /* ContactUs.swift in Sources */,
 				3AFA234624DC9C2000F90ED8 /* DishReviewFB.swift in Sources */,
 				A7F5506924C123AA00FAC1F0 /* RestaurantSearchListView.swift in Sources */,
 				3A987B102481511B0021F6E4 /* ContentView.swift in Sources */,
+				3AE05F9F24EFB5DA0024F802 /* OrderCard.swift in Sources */,
 				34A5D663249BF6DF00E4FE9C /* DishDetailsView.swift in Sources */,
 				3AF9926824A2B918005446D8 /* Utils.swift in Sources */,
 				3A4E2E3D24D2275F00C34DD8 /* SearchBarButton.swift in Sources */,
@@ -780,6 +816,7 @@
 				3A987AD92480350C0021F6E4 /* SceneDelegate.swift in Sources */,
 				A73B1B6424B1162E00A8C6A8 /* OrderView.swift in Sources */,
 				3AFA234824DCACEA00F90ED8 /* ReviewsButton.swift in Sources */,
+				3A87575324EC910A004ABECC /* PostReviewButton.swift in Sources */,
 				3A530DF324D9769100CBDE28 /* DishCategory.swift in Sources */,
 				3A4E2E3724D21CDC00C34DD8 /* Coordinator.swift in Sources */,
 				3A31372A2483178A00E46292 /* ARMUser.swift in Sources */,
@@ -793,11 +830,13 @@
 				3A13B6ED24C3D9FB0006458B /* SuggestRestaurant.swift in Sources */,
 				3A4E2E3424D13DCF00C34DD8 /* FirebaseFunctionsViewModel.swift in Sources */,
 				A78531FA24DE312600F94C67 /* ImageLoader.swift in Sources */,
+				3AE05F9C24EF7EFC0024F802 /* OrderViewModel.swift in Sources */,
 				3A13B6EA24C197B30006458B /* RestaurantSearchLabel.swift in Sources */,
 				A7F5506D24C1259100FAC1F0 /* RestaurantSearchbarView.swift in Sources */,
 				C55FDD6524CABA2800CC8561 /* RestaurantFB.swift in Sources */,
 				3A3137262483178A00E46292 /* Model.swift in Sources */,
 				3AA9897624B517F00070FD97 /* Extensions.swift in Sources */,
+				3A87575124EA795D004ABECC /* DishAddReview.swift in Sources */,
 				A77BC2F424DD2AE800ACAD84 /* RestaurantSearchListViewModel.swift in Sources */,
 				A7912A2824CF87260052988C /* BlackButton.swift in Sources */,
 				3A4E2E2024C6244600C34DD8 /* ForgotPassword.swift in Sources */,
@@ -1144,6 +1183,30 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		3AE05F9624EF27550024F802 /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/facebook/facebook-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.1.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		3AE05F9724EF27550024F802 /* FacebookCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3AE05F9624EF27550024F802 /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */;
+			productName = FacebookCore;
+		};
+		3AE05F9924EF27550024F802 /* FacebookLogin */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3AE05F9624EF27550024F802 /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */;
+			productName = FacebookLogin;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 3A987ACB2480350C0021F6E4 /* Project object */;
 }

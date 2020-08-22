@@ -80,6 +80,44 @@ exports.feedback = functions.https.onRequest((req, resp) => {
   });
 });
 
+exports.reviewAdd = functions.https.onRequest((req, resp) => {
+  cors(req, resp, () => {
+    let h = req.body.Headline;
+    let body = req.body.Body;
+    let dishID = req.body.DishID;
+    let username = req.body.Username;
+    let restID = req.body.RestID;
+    let starRating = req.body.StarRating;
+    let userID = req.body.UserID;
+
+    admin
+      .firestore()
+      .collection("DishReview")
+      .add({
+        Headline: h,
+        Body: body,
+        dishID: dishID,
+        restID: restID,
+        username: username,
+        StarRating: Number(starRating),
+        userid: userID,
+      })
+      .then(function () {
+        console.log("Successfully added Review");
+        resp.status(200).send("Added Review");
+        return;
+      })
+      .catch(function (error) {
+        console.log("Error adding Review:", error);
+        resp
+          .status(500)
+          .send(
+            `Not added. Something wrong with user ${Username} and dish ${DishID}`
+          );
+      });
+  });
+});
+
 exports.dishAdd = functions.https.onRequest((req, resp) => {
   cors(req, resp, () => {
     //post info into feedback collection
@@ -101,16 +139,16 @@ exports.dishAdd = functions.https.onRequest((req, resp) => {
         Restaurant: r,
       })
       .then(function () {
-        console.log("Successfully added Feedback");
-        resp.status(200).send("Added Feedback");
+        console.log("Successfully added Dish");
+        resp.status(200).send("Added Dish");
         return;
       })
       .catch(function (error) {
-        console.log("Error adding feedback:", error);
+        console.log("Error adding Dish:", error);
         resp
           .status(500)
           .send(
-            `Not added. Something wrong with user ${name} and email ${email}`
+            `Not added. Something wrong with dish ${Name} and restaurant ${Restaurant}`
           );
       });
   });

@@ -10,7 +10,7 @@
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>com.googleusercontent.apps.224436038053-93ffpq5flljm15no7ib03ce3siogd0jf</string>
-				<string>fb625398278334299</string>
+				<string>fb1255178491497835</string>
 			</array>
 		</dict>
 	</array>
@@ -28,12 +28,12 @@
 		<string>fbapi20150629</string>
 		<string>fbapi20160328</string>
 		<string>fbauth</string>
-		<string>fb-messenger-share-api</string>
 		<string>fbauth2</string>
+		<string>fb-messenger-share-api</string>
 		<string>fbshareextension</string>
 	</array>
 	<key>FacebookAppID</key>
-	<string>625398278334299</string>
+	<string>1255178491497835</string>
 	<key>FacebookDisplayName</key>
 	<string>Yumzz</string>
 	<key>CFBundleDevelopmentRegion</key>
