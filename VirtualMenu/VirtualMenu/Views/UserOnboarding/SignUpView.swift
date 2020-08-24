@@ -37,7 +37,7 @@ struct SignUpView: View {
         Alert(title: Text(""), message: Text(alertMsg), dismissButton: .default(Text("OK")))
     }
     
-    @ObservedObject var AuthenticationVM = AuthenticationViewModel()
+    @ObservedObject var authenticationVM = AuthenticationViewModel()
     
     var body: some View {
         

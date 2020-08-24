@@ -10,13 +10,13 @@ import SwiftUI
 struct InitialScreen: View {
     var shortcut = true
     @State var loggedIn = false
-    @EnvironmentObject var navigator: Navigator
+    @EnvironmentObject var user: UserStore
     
     
     var body: some View {
         
         ZStack {
-            if navigator.isOnboardingShowing {
+            if user.showOnboarding {
                 NavigationView {
                     
                     ZStack {
@@ -57,10 +57,7 @@ struct InitialScreen: View {
                                 Spacer().frame(height: 30)
                                 
                                 Button(action: {
-                                    withAnimation {
-                                        self.navigator.isOnboardingShowing = false
-                                    }
-                                        
+                                        self.user.showOnboarding = false
                                 }){
                                     WhiteButton(strLabel: "Continue as a guest")
                                 }

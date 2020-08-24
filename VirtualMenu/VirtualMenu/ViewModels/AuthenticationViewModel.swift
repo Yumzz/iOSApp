@@ -12,59 +12,57 @@ import FBSDKLoginKit
 
 var userProfile: UserProfile = UserProfile(userId: "", fullName: "", emailAddress: "", profilePicture: "", profPhoto: nil)
 
-
 class AuthenticationViewModel: ObservableObject {
-    
+    @State var isUserSignedIn = false
     @State var sign = false
     let dispatchGroup = DispatchGroup()
 
         
-    let db = Firestore.firestore()
         
+    let db = Firestore.firestore()
+    
     func createUser(email: String, password: String, name: String) -> Bool{
-//        if self.isValidInputs() {
+        //        if self.isValidInputs() {
         print("valid")
         var bool = true
         Auth.auth().createUser(withEmail: email, password: password){
-                (result, error) in
-                if (error != nil){
-                  bool = false
-                }
-                else{
-                    let db = Firestore.firestore()
-                    db.collection("User").addDocument(data: ["email": email, "password": password, "username": name, "id": result!.user.uid]) {(error) in
-                        if error != nil {
-                            bool = false
-                        }
-                        
+            (result, error) in
+            if (error != nil){
+                bool = false
+            }
+            else{
+                let db = Firestore.firestore()
+                db.collection("User").addDocument(data: ["email": email, "password": password, "username": name, "id": result!.user.uid]) {(error) in
+                    if error != nil {
+                        bool = false
                     }
                     
                 }
-                bool = true
-                print("created")
-//            }
-//
+                
+            }
+            bool = true
+            print("created")
+            //            }
+            //
         }
         return bool
         
     }
     
     func signIn(email: String, password: String) -> Bool{
-        var bool = true
-        Auth.auth().signIn(withEmail: email, password: password){
-            (result, error) in
-            if(error == nil){
-                self.sign = true
-                print(self.sign)
-                self.updateProfile()
+
+        Auth.auth().signIn(withEmail: email, password: password){ result, error in
+            
+            if(error != nil){
+                print(error!)
             }
             else{
-                bool = false
-                print("failed")
+                print(result?.user.email! as Any)
+                self.isUserSignedIn = true
+                self.updateProfile()
             }
         }
-        print(sign)
-        return bool
+        return isUserSignedIn
     }
     
     func fetchUserID(name: String, email: String, dispatch: DispatchGroup){
