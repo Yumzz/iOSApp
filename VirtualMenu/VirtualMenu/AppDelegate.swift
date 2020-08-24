@@ -68,8 +68,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate, LoginB
             return
           }
         
-        
-     
         let fullName: String = user.profile.name
         let email: String = user.profile.email
         
@@ -80,50 +78,63 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate, LoginB
                                                             accessToken: authentication.accessToken)
           
           //sign up has different method called in AppDelegate
+        
+        print("SignUp: \(signUp)")
+        if(signUp){
+            //if user not found + signup then create new user w temp password and send password reset link
+            print("signup")
+            let x = user.hashValue
+            print(x)
+            self.dispatch.enter()
+            Auth.auth().createUser(withEmail: email, password: String(x)) { (authResult, error) in
+                if(error != nil){
+                    NSLog(String(error!.localizedDescription))
+                }
+                else{
+                    print("created user")
+                }
+                self.dispatch.leave()
+            }
+            dispatch.notify(queue: .main){
+                Auth.auth().sendPasswordReset(withEmail: email) { (error) in
+                    if error != nil{
+                        NSLog(String(error!.localizedDescription))
+                        return
+                    }
+                    else{
+                        print("sent password reset")
+                    }
+                }
+                signUp = false
+                self.navigator!.isOnboardingShowing = false
+            }
+        }
+        if(login){
+            Auth.auth().signIn(with: credential) { (authResult, error) in
+                //authresult = Promise of UserCredential
+                if(authResult != nil){
+                    if(login){
+                        userProfile.emailAddress = email
+                        userProfile.fullName = fullName
+                        print(userProfile.emailAddress)
+                        print(userProfile.fullName)
+                        self.dispatch.enter()
+                        authen.fetchUserID(name: fullName, email: email, dispatch: self.dispatch)
+                        self.dispatch.notify(queue: .main) {
+                            userProfile.getProfilePhoto()
+                            self.navigator!.isOnboardingShowing = false
+                            return
+                        }
+                        login = false
+                    }
+                }
+                
+                return
+               
+            }
+        }
           
           //try to sign in
-        Auth.auth().signIn(with: credential) { (authResult, error) in
-            //authresult = Promise of UserCredential
-            if(authResult != nil){
-                userProfile.emailAddress = email
-                userProfile.fullName = fullName
-                print(userProfile.emailAddress)
-                print(userProfile.fullName)
-                self.dispatch.enter()
-                authen.fetchUserID(name: fullName, email: email, dispatch: self.dispatch)
-                self.dispatch.notify(queue: .main) {
-                    userProfile.getProfilePhoto()
-                    self.navigator!.isOnboardingShowing = false
-                    return
-                }
-            }
-        //if user not found then create new user w temp password and send password reset link
-            var a = false
-            Auth.auth().fetchSignInMethods(forEmail: email, completion: { (emailProm, error) in
-                if(error != nil){
-                    a = true
-                }
-            })
-            
-            if (error != nil){
-                if(a){
-                    let x = user.hashValue
-                    Auth.auth().createUser(withEmail: email, password: String(x)) { (authResult, error) in
-                        if(error != nil){
-                            NSLog(String(error!.localizedDescription))
-                        }
-                    }
-                    Auth.auth().sendPasswordReset(withEmail: email) { (error) in
-                        if error != nil{
-                            NSLog(String(error!.localizedDescription))
-                        }
-                    }
-                }
-                NSLog(String(error!.localizedDescription))
-                return
-            }
-
-        }
     }
 
     func sign(_ signIn: GIDSignIn!, didDisconnectWith user: GIDGoogleUser!, withError error: Error!) {

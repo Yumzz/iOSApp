@@ -22,7 +22,7 @@ struct DishDetailsView: View {
     
     @ObservedObject var restDishVM = RestaurantDishViewModel()
     
-    @ObservedObject var orderVM = OrderViewModel()
+    @EnvironmentObject var order : Order
     
     let dispatchG1 = DispatchGroup()
 
@@ -48,9 +48,9 @@ struct DishDetailsView: View {
                     print("order tapped")
                     self.dispatchG1.enter()
                     print("add dish to list")
-                    self.orderVM.addDish(dish: self.dish, rest: self.restaurant, dis: self.dispatchG1)
+                    self.order.addDish(dish: self.dish, rest: self.restaurant, dis: self.dispatchG1)
                     self.dispatchG1.notify(queue: .main){
-                        print("\(self.orderVM.dishRestaurant[self.dish])")
+                        print("\(self.order.dishRestaurant[self.dish])")
                     }
                 }
                 ReviewsButton().onTapGesture {

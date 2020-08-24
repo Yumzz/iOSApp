@@ -52,7 +52,7 @@
 		3AA9897824B517F00070FD97 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA9897524B517F00070FD97 /* Extensions.swift */; };
 		3AE05F9824EF27550024F802 /* FacebookCore in Frameworks */ = {isa = PBXBuildFile; productRef = 3AE05F9724EF27550024F802 /* FacebookCore */; };
 		3AE05F9A24EF27550024F802 /* FacebookLogin in Frameworks */ = {isa = PBXBuildFile; productRef = 3AE05F9924EF27550024F802 /* FacebookLogin */; };
-		3AE05F9C24EF7EFC0024F802 /* OrderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE05F9B24EF7EFC0024F802 /* OrderViewModel.swift */; };
+		3AE05F9C24EF7EFC0024F802 /* Order.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE05F9B24EF7EFC0024F802 /* Order.swift */; };
 		3AE05F9F24EFB5DA0024F802 /* OrderCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE05F9E24EFB5DA0024F802 /* OrderCard.swift */; };
 		3AF9926524A2B7C9005446D8 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF9926424A2B7C9005446D8 /* LoginView.swift */; };
 		3AF9926824A2B918005446D8 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF9926724A2B918005446D8 /* Utils.swift */; };
@@ -171,7 +171,7 @@
 		3A9F981D248DD3EF007ABB71 /* ScannerFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScannerFunctions.swift; sourceTree = "<group>"; };
 		3A9F9822248DD790007ABB71 /* Scanner.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Scanner.storyboard; sourceTree = "<group>"; };
 		3AA9897524B517F00070FD97 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
-		3AE05F9B24EF7EFC0024F802 /* OrderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderViewModel.swift; sourceTree = "<group>"; };
+		3AE05F9B24EF7EFC0024F802 /* Order.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Order.swift; sourceTree = "<group>"; };
 		3AE05F9E24EFB5DA0024F802 /* OrderCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderCard.swift; sourceTree = "<group>"; };
 		3AF9926424A2B7C9005446D8 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		3AF9926724A2B918005446D8 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
@@ -370,9 +370,9 @@
 				3A31371C2483172700E46292 /* Scanner */,
 				A73B1B5D24B0FF4100A8C6A8 /* ViewModels */,
 				A73B1B5924B0FDA800A8C6A8 /* Views */,
-				3A987AD62480350C0021F6E4 /* AppDelegate.swift */,
 				3A4E2E2124C6841E00C34DD8 /* TabViews */,
 				3A4A0E71249EB94D0030635E /* ImagePicker.swift */,
+				3A987AD62480350C0021F6E4 /* AppDelegate.swift */,
 				3A987AD82480350C0021F6E4 /* SceneDelegate.swift */,
 				3AA9892824B5153A0070FD97 /* Fonts */,
 				3A987ADC2480350E0021F6E4 /* Assets.xcassets */,
@@ -521,7 +521,7 @@
 				3A4E2E2E24D0D2D600C34DD8 /* AuthenticationViewModel.swift */,
 				A777C3A324D3EC7A009658AA /* Navigator.swift */,
 				A78531F924DE312600F94C67 /* ImageLoader.swift */,
-				3AE05F9B24EF7EFC0024F802 /* OrderViewModel.swift */,
+				3AE05F9B24EF7EFC0024F802 /* Order.swift */,
 				3A530DEE24D8E00100CBDE28 /* isClick.swift */,
 				3A4E2E3E24D2403300C34DD8 /* RestaurantDishViewModel.swift */,
 				A77BC2F324DD2AE800ACAD84 /* RestaurantSearchListViewModel.swift */,
@@ -830,7 +830,7 @@
 				3A13B6ED24C3D9FB0006458B /* SuggestRestaurant.swift in Sources */,
 				3A4E2E3424D13DCF00C34DD8 /* FirebaseFunctionsViewModel.swift in Sources */,
 				A78531FA24DE312600F94C67 /* ImageLoader.swift in Sources */,
-				3AE05F9C24EF7EFC0024F802 /* OrderViewModel.swift in Sources */,
+				3AE05F9C24EF7EFC0024F802 /* Order.swift in Sources */,
 				3A13B6EA24C197B30006458B /* RestaurantSearchLabel.swift in Sources */,
 				A7F5506D24C1259100FAC1F0 /* RestaurantSearchbarView.swift in Sources */,
 				C55FDD6524CABA2800CC8561 /* RestaurantFB.swift in Sources */,

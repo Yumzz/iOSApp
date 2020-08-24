@@ -44,7 +44,7 @@ struct ListDishesView: View {
                                             .font(.headline)
                                             .foregroundColor(.primary)
 
-                                        Text(self.restDishVM.formatPrice(price: dish.price))
+                                        Text(DishFB.formatPrice(price: dish.price))
                                             .foregroundColor(.secondary)
                                     }
 

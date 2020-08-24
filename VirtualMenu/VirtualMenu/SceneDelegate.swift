@@ -47,6 +47,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         //UserDefaults.standard.set("", forKey: signInWithAppleManager.userIdentifierKey)
         var navigator = Navigator()
         let contentView = ContentView()
+        var order = Order()
         
         // Use a UIHostingController as window root view controller.
         if let windowScene = scene as? UIWindowScene {
@@ -54,7 +55,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
                 appDelegate.navigator = navigator
             }
-            window.rootViewController = UIHostingController(rootView: contentView.environmentObject(navigator))
+            window.rootViewController = UIHostingController(rootView: contentView.environmentObject(navigator)
+                .environmentObject(order))
             self.window = window
             window.makeKeyAndVisible()
         }

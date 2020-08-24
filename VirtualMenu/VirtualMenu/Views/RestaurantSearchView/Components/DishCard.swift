@@ -48,7 +48,7 @@ struct DishCard: View {
                         .frame(width: 88, height: 88, alignment: .leading)
                 } else {
                     urlImage!
-                    
+                    .frame(width: 150, height:150)
                 }
                 
                 VStack(alignment: .leading, spacing: 10) {

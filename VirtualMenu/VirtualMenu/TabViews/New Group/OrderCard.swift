@@ -15,12 +15,19 @@ struct OrderCard: View {
 
     var dish: DishFB
     
-    @ObservedObject var orderViewModel = OrderViewModel()
-    
+    @EnvironmentObject var order : Order
     @Environment (\.colorScheme) var colorScheme:ColorScheme
     
     var body: some View{
         Group {
+            VStack(alignment: .leading, spacing: 0){
+                HStack(alignment: .top) {
+                    Image("delete_cross")
+                        .frame(width: 5, height: 5)
+                        .onTapGesture {
+                            self.order.deleteDish(dish: self.dish)
+                    }
+                }.position(x: UIScreen.main.bounds.width - 100, y: 20)
             HStack(alignment: .center, spacing: 20) {
                 Spacer()
                     .frame(maxWidth: 0)
@@ -32,47 +39,26 @@ struct OrderCard: View {
                         .frame(width: 88, height: 88, alignment: .leading)
                 } else {
                     urlImage!
-                        .frame(width: 150, height:150)
+                        .frame(width: 100, height:100)
                         .clipShape(Circle())
                 }
                 
                 VStack(alignment: .leading, spacing: 10) {
                     Text(dish.name).bold()
                         .foregroundColor(Color.primary)
+                        .fixedSize(horizontal: false, vertical: true)
                     
-                    Spacer()
-                        .frame(maxHeight: 0)
-                    
-                    
+
                     HStack (spacing: 5) {
-                        
-                        Text("\(dish.price)")
+                        Text("\(DishFB.formatPrice(price: dish.price))")
                             .foregroundColor(Color.secondary)
                             .font(.footnote)
                     }
                     
-                    HStack (spacing: 5) {
-                        Image(systemName: "star.fill")
-                            .foregroundColor(.yellow)
-
-//                        Text(String(starRating)).bold()
-//                            .foregroundColor(Color.primary)
-//                            .font(.footnote)
-
-//                        Text("(\(String(nbOfReviews)) Reviews)")
-//                            .foregroundColor(Color(UIColor.systemGray))
-//                            .font(.footnote)
-                    }
                 }
-                VStack(alignment: .trailing) {
-                    Image("delete_cross")
-                        .frame(width: 150, height: 150)
-                        .onTapGesture {
-                            self.orderViewModel.deleteDish(dish: self.dish)
-                        }
-                    //pressing this should call deleteDish (which should refresh the list)
                 }
             }
+            
             .frame(maxWidth: .infinity, minHeight: 120, alignment: .leading)
             .background(Color.backgroundColor(for: colorScheme))
             .cornerRadius(10)

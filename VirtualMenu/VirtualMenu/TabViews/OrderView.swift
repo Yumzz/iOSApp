@@ -13,7 +13,7 @@ struct OrderView: View {
     @State private var selectorIndex = 0
     @State private var numbers = ["Current Selection","Past Orders"]
     
-    @ObservedObject var orderViewModel = OrderViewModel()
+    @EnvironmentObject var order : Order
     @ObservedObject var restViewModel = RestaurantDishViewModel()
     
     var body: some View {
@@ -28,31 +28,39 @@ struct OrderView: View {
             .frame(maxWidth: .infinity)
             .padding()
             
-            Spacer()
-            
-            Text("See: \(self.numbers[self.selectorIndex])").padding()
-            
-            if !self.orderViewModel.dishesChosen.isEmpty {
-                
-                ForEach(self.orderViewModel.dishesChosen, id: \.id) { dish in
-                    //need to get restaurantFB in orderViewModel
-                    NavigationLink(destination: DishDetailsView(dish: dish, restaurant: self.orderViewModel.dishRestaurant[dish]!)){
-                        VStack {
-                            OrderCard(urlImage: FBURLImage(url: dish.coverPhotoURL),dish: dish)
-                            //have star rating of dish on it
+//            How to switch between current selection and past orders
+            if selectorIndex == 0 {
+                if !self.order.dishesChosen.isEmpty {
+                    List{
+                        ForEach(self.order.dishesChosen, id: \.id) { dish in
+                            //need to get restaurantFB in orderViewModel
+                            NavigationLink(destination: DishDetailsView(dish: dish, restaurant: self.order.dishRestaurant[dish]!)){
+                                VStack {
+                                    OrderCard(urlImage: FBURLImage(url: dish.coverPhotoURL),dish: dish)
+                                    //have star rating of dish on it
+                                }
+                            }
+                            .buttonStyle(PlainButtonStyle())
                         }
                     }
-                    .buttonStyle(PlainButtonStyle())
+                    
+                    Text("Subtotal: \(self.order.totalCost)")
+                
+                }
+                else{
+                    Text("Go add some dishes to your order!")
                 }
             }
-
+            else{
+                //past orders
+            }
             
             Spacer()
             
         }.frame(maxWidth: .infinity, maxHeight: .infinity)
             .navigationBarTitle("My Orders")
             .onAppear {
-                print("\(self.orderViewModel.dishesChosen)")
+                print("\(self.order.dishesChosen)")
         }
     }
 }

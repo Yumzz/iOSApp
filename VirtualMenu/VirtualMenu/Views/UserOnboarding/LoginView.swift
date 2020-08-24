@@ -44,7 +44,7 @@ struct LoginView: View {
     @State var showFB = false
     
     @ObservedObject var AuthenticationVM = AuthenticationViewModel()
-    
+
     @EnvironmentObject var navigator: Navigator
 
     
@@ -161,6 +161,7 @@ struct LoginView: View {
         .alert(isPresented: $showAlert, content: { self.alert })
     }
     
+    
     struct SocialLogin: UIViewRepresentable {
         
         func makeUIView(context: UIViewRepresentableContext<SocialLogin>) -> UIView {
@@ -171,17 +172,43 @@ struct LoginView: View {
         }
         
         func attemptLoginGoogle() {
+            login = true
+            signUp = false
             GIDSignIn.sharedInstance()?.presentingViewController = UIApplication.shared.windows.last?.rootViewController
             GIDSignIn.sharedInstance()?.signIn()
             
         }
         
         func attemptLoginFb(completion: @escaping (_ result: LoginManagerLoginResult?, _ error: Error?) -> Void) {
+            var dispatch = DispatchGroup()
             let fbLoginManager: LoginManager = LoginManager()
             fbLoginManager.logOut()
             print("logged out")
             fbLoginManager.logIn(permissions: ["email", "name", "public_profile"], from: UIApplication.shared.windows.last?.rootViewController) { (result, error) -> Void in
                 print("RESULT: '\(result)' ")
+                let authen = AuthenticationViewModel()
+                var navigator: Navigator
+
+                if(!result!.isCancelled){
+                    let credential = FacebookAuthProvider.credential(withAccessToken: AccessToken.current!.tokenString)
+
+                    Auth.auth().signIn(with: credential) { (authResult, error) in
+                        //authresult = Promise of UserCredential
+                        if(authResult != nil){
+                            userProfile.emailAddress = Auth.auth().currentUser?.email! as! String
+                            userProfile.fullName = Auth.auth().currentUser?.displayName! as! String
+                            print(userProfile.emailAddress)
+                            print(userProfile.fullName)
+                            dispatch.enter()
+                            authen.fetchUserID(name: userProfile.fullName, email: userProfile.emailAddress, dispatch: dispatch)
+                            dispatch.notify(queue: .main) {
+                                userProfile.getProfilePhoto()
+//                                navigator.isOnboardingShowing = false
+                                return
+                            }
+                        }
+                    }
+                }
                 
                 if error != nil {
                     print("error")

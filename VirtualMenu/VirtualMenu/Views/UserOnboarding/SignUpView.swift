@@ -12,6 +12,8 @@ import FirebaseFirestoreSwift
 import GoogleSignIn
 import FBSDKLoginKit
 
+var signUp = false
+var login = false
 struct SignUpView: View {
     
     @State var email: String = ""
@@ -26,6 +28,14 @@ struct SignUpView: View {
     @State var showDetails = false
     
     @State var createdAccount = false
+    @EnvironmentObject var navigator: Navigator
+    
+    typealias FinishedSigninUp = () -> ()
+
+    
+    var alert: Alert {
+        Alert(title: Text(""), message: Text(alertMsg), dismissButton: .default(Text("OK")))
+    }
     
     @ObservedObject var AuthenticationVM = AuthenticationViewModel()
     
@@ -58,6 +68,13 @@ struct SignUpView: View {
                         
                     }
                     print("created")
+                    self.alertMessage = "Password Reset email was sent to you so you can choose your own password!"
+                    self.alertTitle = "User Created!"
+                    self.showAlert.toggle()
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+                        self.showAlert = false
+                        self.navigator.isOnboardingShowing = false
+                    }
                 }
             })
             {
@@ -89,6 +106,11 @@ struct SignUpView: View {
             Button(action: {
                 // self.showAlert.toggle()
                 SocialLogin().attemptLoginGoogle()
+//                if(userProfile.fullName != ""){
+//                    self.alertMessage = "Password Reset email was sent to you so you can choose your own password!"
+//                    self.alertTitle = "User Created!"
+//                    self.showAlert.toggle()
+//                }
             }){
                 BlackButton(strLabel: "Sign Up with Google", imgName: "continue_with_google")
             }
@@ -98,6 +120,8 @@ struct SignUpView: View {
                 })
             }){
                 BlackButton(strLabel: "Sign Up with Facebook", imgName: "continue_with_facebook")
+            }.alert(isPresented: $showAlert) {
+                Alert(title: Text("\(self.alertTitle)"), message: Text("\(self.alertMessage)"), dismissButton: .default(Text("OK")))
             }
         }
         .navigationBarTitle("Sign Up")
@@ -114,6 +138,8 @@ struct SignUpView: View {
         }
         
         func attemptLoginGoogle() {
+            signUp = true
+            login = false
             GIDSignIn.sharedInstance()?.presentingViewController = UIApplication.shared.windows.last?.rootViewController
             GIDSignIn.sharedInstance()?.signIn()
         }

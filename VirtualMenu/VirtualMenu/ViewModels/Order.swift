@@ -11,27 +11,35 @@ import CloudKit
 import Firebase
 import MapKit
 
-class OrderViewModel: ObservableObject {
+class Order: ObservableObject {
 
     let db = Firestore.firestore()
+
+    @Published var restChosen: RestaurantFB
+    @Published var dishesChosen: [DishFB]
     
-    @Published var restChosen: RestaurantFB = RestaurantFB.previewRest()
-    @Published var dishesChosen = [DishFB]()
+    @Published var totalCost: Double
     
-    @Published var totalCost = 0.0
     
-    var dishIndexes = [DishFB : Int]()
+    //do i want these attributes to cause an update when they change
+    var dishIndexes : [DishFB : Int]
     
-    var dishRestaurant = [DishFB : RestaurantFB]()
+    var dishRestaurant : [DishFB : RestaurantFB]
     
+    init() {
+        //TODO: initialize to false if the user logged in before
+        self.restChosen = RestaurantFB.previewRest()
+        self.dishesChosen = [DishFB]()
+        self.dishIndexes = [DishFB : Int]()
+        self.dishRestaurant = [DishFB : RestaurantFB]()
+        self.totalCost = 0.0
+    }
 
     //func - add dish to order list
     func addDish(dish: DishFB, rest: RestaurantFB, dis: DispatchGroup){
-        print("enter add dish")
         dishIndexes[dish] = dishesChosen.count
         dishRestaurant[dish] = rest
         dishesChosen.append(dish)
-        print("leave add dish")
         dis.leave()
     }
     
@@ -56,15 +64,4 @@ class OrderViewModel: ObservableObject {
         return self.restChosen
     }
     
-    
-
-
-
-
-
-
-
-
-
-
 }

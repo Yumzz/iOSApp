@@ -66,6 +66,7 @@ struct DishFB {
         
         self.price = (price as NSString).doubleValue
         
+        
         self.type = type
         self.restaurant = restau
         self.coverPhotoURL = "Restaurant/\(restaurant.lowercased())/dish/\(name.lowercased().replacingOccurrences(of: " ", with: "-"))/photo/Picture.jpg"
@@ -94,8 +95,16 @@ extension DishFB: Hashable {
     
     static func formatPrice(price: Double) -> String {
         var x =  "$" + (price.truncatingRemainder(dividingBy: 1) == 0 ? String(format: "%.2f", price) : String(price))
-        if(x.numOfNums() < 3){
-            x = x + "0"
+        print(x)
+        if let range = x.range(of: ".") {
+            let afterdeci = x[range.upperBound...].trimmingCharacters(in: .whitespaces)
+            print(afterdeci) // prints "123.456.7891"
+            if(afterdeci.numOfNums() < 2){
+                print(x.numOfNums())
+                print("less")
+                x = x + "0"
+                print(x)
+            }
         }
         return x
     }
