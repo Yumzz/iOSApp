@@ -48,11 +48,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let contentView = ContentView()
         var order = Order()
+        var user = UserStore()
         
         // Use a UIHostingController as window root view controller.
         if let windowScene = scene as? UIWindowScene {
             let window = UIWindow(windowScene: windowScene)
-            window.rootViewController = UIHostingController(rootView: contentView.environmentObject(UserStore())
+            window.rootViewController = UIHostingController(rootView: contentView.environmentObject(user)
                 .environmentObject(order))
             self.window = window
             window.makeKeyAndVisible()

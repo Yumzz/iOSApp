@@ -1,16 +1,16 @@
 //
-//  CoralButton.swift
+//  SocialMediaButton.swift
 //  VirtualMenu
 //
-//  Created by Valentin Porcellini on 27/07/2020.
+//  Created by Rohan Tyagi on 8/26/20.
 //  Copyright © 2020 Rohan Tyagi. All rights reserved.
 //
+
 import Foundation
 import SwiftUI
 
-struct BlackButton: View {
+struct SocialMediaButton: View {
     
-    var strLabel: String
     var imgName: String?
     
     var body: some View {
@@ -23,19 +23,18 @@ struct BlackButton: View {
                     .renderingMode(.original)
                     .resizable()
                     .aspectRatio(contentMode: .fit)
-                        .frame(width: 30, height: 30)
+                        .frame(width: 60, height: 30)
+//                    .cornerRadius(60)
+                        .background(Color(UIColor(white: 1, alpha: 0)))
                 }
-                
-                Text(strLabel)
-                           .foregroundColor(Color(UIColor().colorFromHex("#FFFFFF", 1)))
                                
             }
             .padding()
-                
-        .modifier(LeadingTextModifier(imgExists: imageExists(named: imgName)))
-           
+                           
         }
-        .cornerRadius(10)
-        .background((Color.black))
+        .cornerRadius(60)
+        .background((Color.white))
+        .shadow(radius: 4)
+//        .shadow(radius: 10)
     }
 }

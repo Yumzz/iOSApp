@@ -19,12 +19,8 @@ struct CustomTextField: View {
     
     var body: some View {
         VStack (spacing: 0) {
-            Text(strLabel)
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .padding(.leading, (UIScreen.main.bounds.width * 40) / 414)
-                .foregroundColor(Color(UIColor().colorFromHex("#F88379", 1)))
             
-            TextField("", text: $strField)
+            TextField(strLabel, text: $strField)
                 .frame(height: (UIScreen.main.bounds.width * 40) / 414, alignment: .center)
                 .padding(.leading, (UIScreen.main.bounds.width * 40) / 414)
                 .padding(.trailing, (UIScreen.main.bounds.width * 40) / 414)
@@ -33,10 +29,10 @@ struct CustomTextField: View {
                 .keyboardType(uiKeyboardType)
                 .autocapitalization(uiTextAutoCapitalizationType)
                 .foregroundColor(Color(UIColor().colorFromHex("#F88379", 1)))
-            
-            Divider().background(Color(UIColor().colorFromHex("#F88379", 1)))
-                .padding(.leading, (UIScreen.main.bounds.width * 40) / 414)
-                .padding(.trailing, (UIScreen.main.bounds.width * 40) / 414)
+                .textFieldStyle(RoundedBorderTextFieldStyle())
+                .shadow(radius: 4)
+                
+
         }
     }
 }

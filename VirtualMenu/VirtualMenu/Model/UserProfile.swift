@@ -78,17 +78,17 @@ extension UserProfile: Hashable {
         hasher.combine(userId)
     }
     
-    func getProfilePhoto() {
-        var dispatch = DispatchGroup()
-        dispatch.enter()
+    func getProfilePhoto(dispatch: DispatchGroup) {
         var image: UIImage?
         let imagesRef = storage.reference().child("profilephotos/\(self.userId)")
         imagesRef.getData(maxSize: 2 * 2048 * 2048) { data, error in
         if let error = error {
+            print("error getting photo")
             print(error.localizedDescription)
             dispatch.leave()
         } else {
           // Data for "profilephotos/\(id).jpg" is returned
+            print("photo got")
             image = UIImage(data: data!)!
             dispatch.leave()
             }
@@ -96,6 +96,44 @@ extension UserProfile: Hashable {
         dispatch.notify(queue: .main) {
             userProfile.profilePhoto = image
             return
+        }
+    }
+    
+    func downloadPhoto(url:URL){
+        let session = URLSession(configuration: .default)
+        print("here")
+        var image: UIImage? = nil
+        var dispatch = DispatchGroup()
+
+        // Define a download task. The download task will download the contents of the URL as a Data object and then you can do what you wish with that data.
+        dispatch.enter()
+        let downloadPicTask = session.dataTask(with: url) { (data, response, error) in
+            // The download has finished.
+            print("downloading")
+            if let e = error {
+                print("Error downloading this picture: \(e)")
+            } else {
+                // No errors found.
+                // It would be weird if we didn't have a response, so check for that too.
+                if let res = response as? HTTPURLResponse {
+                    print("Downloaded cat picture with response code \(res.statusCode)")
+                    if let imageData = data {
+                        // Finally convert that Data into an image and do what you wish with it.
+                        userProfile.profilePhoto = UIImage(data: imageData)
+                        Utils().uploadUserProfileImage(profileImage: userProfile.profilePhoto!)
+                        // Do something with your image.
+                    } else {
+                        print("Couldn't get image: Image is nil")
+                    }
+                } else {
+                    print("Couldn't get response code for some reason")
+                }
+            }
+        }
+        downloadPicTask.resume()
+        dispatch.leave()
+        dispatch.notify(queue: .main){
+            print("finished")
         }
     }
 }

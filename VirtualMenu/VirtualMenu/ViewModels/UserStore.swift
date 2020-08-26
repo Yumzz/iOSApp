@@ -25,14 +25,15 @@ class UserStore: ObservableObject {
     @Published var showOnboarding: Bool = {
         // Register the app default:
         UserDefaults.standard.register(defaults: ["showOnboarding" : true])
-        
         // Initialize the property with the current user default:
+        UserDefaults.standard.set(true, forKey: "showOnboarding")
         return UserDefaults.standard.bool(forKey: "showOnboarding")
         }()
         {
         didSet {
             UserDefaults.standard.set(self.showOnboarding, forKey: "showOnboarding")
         }
+
     }
     
 }

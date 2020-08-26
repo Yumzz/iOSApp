@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct InitialScreen: View {
+struct LaunchScreen: View {
     var shortcut = true
     @State var loggedIn = false
     @EnvironmentObject var user: UserStore
@@ -19,12 +19,12 @@ struct InitialScreen: View {
             if user.showOnboarding {
                 NavigationView {
                     
-                    ZStack {
-                        Image("initial_screen_back")
-                            .resizable()
-                            .aspectRatio(contentMode: .fill)
-                            .overlay(Color(UIColor().colorFromHex("#F88379", 0.5)))
-                            .edgesIgnoringSafeArea(.all)
+//                    ZStack {
+//                        Image("initial_screen_back")
+//                            .resizable()
+//                            .aspectRatio(contentMode: .fill)
+//                            .overlay(Color(UIColor().colorFromHex("#F88379", 0.5)))
+//                            .edgesIgnoringSafeArea(.all)
                         
                         VStack{
                             VStack{
@@ -37,35 +37,35 @@ struct InitialScreen: View {
                                     .frame(height: (UIScreen.main.bounds.height/2.5))
                             }
                             
-                            VStack{
-                                Button(action: {
-                                }, label: {
-                                    NavigationLink(destination: SignUpView()) {
-                                        BlackButton(strLabel: "SIGN UP")
-                                    }
-                                })
-                                
-                                Spacer().frame(height: 30)
-                                
-                                Button(action: {
-                                }){
-                                    NavigationLink(destination: LoginView(loggedin: self.$loggedIn)) {
-                                        WhiteButton(strLabel: "LOGIN")
-                                    }
-                                }
-                                
-                                Spacer().frame(height: 30)
-                                
-                                Button(action: {
-                                        self.user.showOnboarding = false
-                                }){
-                                    WhiteButton(strLabel: "Continue as a guest")
-                                }
-                                
-                            }
-                        }
+//                            VStack{
+//                                Button(action: {
+//                                }, label: {
+//                                    NavigationLink(destination: SignUpView()) {
+//                                        BlackButton(strLabel: "SIGN UP")
+//                                    }
+//                                })
+//
+//                                Spacer().frame(height: 30)
+//
+//                                Button(action: {
+//                                }){
+//                                    NavigationLink(destination: LoginView(loggedin: self.$loggedIn)) {
+//                                        WhiteButton(strLabel: "LOGIN")
+//                                    }
+//                                }
+//
+//                                Spacer().frame(height: 30)
+//
+//                                Button(action: {
+//                                        self.user.showOnboarding = false
+//                                }){
+//                                    WhiteButton(strLabel: "Continue as a guest")
+//                                }
+//
+//                            }
+//                        }
                     }
-                }
+                }.background(Color(UIColor().colorFromHex("#F88379", 1)))
             } else {
                 AppView()
             }
@@ -76,6 +76,6 @@ struct InitialScreen: View {
 
 struct InitialScreen_Previews: PreviewProvider {
     static var previews: some View {
-        InitialScreen()
+        LaunchScreen()
     }
 }

@@ -14,14 +14,15 @@ import Firebase
 
 //Will be: walkthrough screens -> sign in view
 struct ContentView: View {
+    @State var loggedIn = false
     
     var body: some View {
         ZStack {
             if Auth.auth().currentUser != nil {
-               InitialScreen()
+                LoginView(loggedin: $loggedIn)
             } else {
                //User Not logged in
-               InitialScreen()
+                LoginView(loggedin: $loggedIn)
             }
         }
     }

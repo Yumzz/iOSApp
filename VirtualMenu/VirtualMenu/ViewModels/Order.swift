@@ -40,6 +40,7 @@ class Order: ObservableObject {
         dishIndexes[dish] = dishesChosen.count
         dishRestaurant[dish] = rest
         dishesChosen.append(dish)
+        self.totalCost = self.totalCost + dish.price
         dis.leave()
     }
     
@@ -49,6 +50,7 @@ class Order: ObservableObject {
         dishesChosen.remove(at: dishIndexes[dish]!)
         dishIndexes.removeValue(forKey: dish)
         dishRestaurant.removeValue(forKey: dish)
+        self.totalCost = self.totalCost - dish.price
     }
     
     //func - total the amount

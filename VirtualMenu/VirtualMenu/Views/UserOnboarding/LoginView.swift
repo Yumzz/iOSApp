@@ -35,6 +35,8 @@ struct LoginView: View {
     @State var showGoogle = false
     @State var showFB = false
     
+    var socialLogin = SocialLogin()
+    
     @ObservedObject var AuthenticationVM = AuthenticationViewModel()
     
     @EnvironmentObject var user: UserStore
@@ -48,114 +50,164 @@ struct LoginView: View {
     
     @ViewBuilder
     var body: some View {
-        
-        VStack(spacing: 30) {
-            CustomTextField(strLabel: "Email", strField: $email, uiTextAutoCapitalizationType: .none, uiKeyboardType: .emailAddress)
-            
-            CustomPasswordField(strLabel: "Password", password: $password)
-            
-            VStack(alignment: .trailing) {
-                HStack {
-                    Spacer()
-                        .frame(height: 5)
+        NavigationView{
+            VStack(spacing: 20) {
+    //            if user.showOnboarding {
+                    VStack{
+                        Text("Yumzz")
+                        .font(.custom("Montserrat-SemiBold", size: 48))
+                        .foregroundColor(Color(UIColor().colorFromHex("#F88379", 1)))
+                        .bold()
+                        .padding(.leading, 0)
+                    }
+                    
+                    Text("Login to your account")
+                    .font(.custom("Montserrat-SemiBold", size: 20))
+                    .foregroundColor(Color(UIColor().colorFromHex("#707070", 1)))
+                    .bold()
+                    
+                    CustomTextField(strLabel: "Email", strField: $email, uiTextAutoCapitalizationType: .none, uiKeyboardType: .emailAddress)
+                    
+                    CustomPasswordField(strLabel: "Password", password: $password)
                     
                     Button(action: {
-                        self.showForgotPassword = true
+                        
+                        Auth.auth().signIn(withEmail: self.email, password: self.password){ result, error in
+                            
+                            if(error != nil){
+                                print(error!)
+                                self.alertMsg = "Your email or password is incorrect"
+                                self.alertTitle = "Sign in error"
+                                self.showAlert.toggle()
+                            }
+                            else{
+                                self.loggedIn.toggle()
+                                self.user.isLogged = true
+                                UserDefaults.standard.set(true, forKey: "isLogged")
+                                self.user.showOnboarding = false
+                                UserDefaults.standard.set(true, forKey: "showOnboarding")
+                                
+                                self.AuthenticationVM.updateProfile()
+                            }
+                        }
                     }) {
-                        Text("Forgot Password?")
+                        CoralButton(strLabel: "Sign in")
+                    }
+                    
+                    VStack(alignment: .trailing) {
+                        HStack {
+                            Spacer()
+                                .frame(height: 5)
+                            
+                            Button(action: {
+                                self.showForgotPassword = true
+                            }) {
+                                Text("Forgot Password?")
+                                    .foregroundColor(.black)
+                                    .padding(.trailing, (UIScreen.main.bounds.width * 40) / 414)
+                                    .font(.system(size: (UIScreen.main.bounds.width * 15) / 414, weight: .bold, design: .default))
+                                
+                            }
+                            .sheet(isPresented: self.$showForgotPassword) {
+                                ForgotPasswordView()
+                                //dismiss once confirmation alert is sent
+                            }
+                            
+                        }.padding(.trailing, (UIScreen.main.bounds.width * 10) / 414)
+                    }
+                    
+                    HStack{
+                        
+                        VStack{
+                            Divider()
+                                .padding(.leading, (UIScreen.main.bounds.width * 40) / 414)
+                                .frame(width: (UIScreen.main.bounds.width/2.3), height: 10, alignment: .leading)
+                            
+                        }
+                        
+                        Text("OR")
+                               
+                        
+                        VStack{
+                            Divider()
+                                .padding(.trailing, (UIScreen.main.bounds.width * 40) / 414)
+                                .frame(width: (UIScreen.main.bounds.width/2.3), height: 10, alignment: .trailing)
+                            
+
+                        }
+                        
+                    }
+                    
+                    HStack{
+                        Button(action: {
+                            self.socialLogin.attemptLoginGoogle()
+                        }){
+                            SocialMediaButton(imgName: "continue_with_google")
+                            .frame(width: 100, height: 50)
+                        }
+
+                        Button(action: {
+                            print("apple")
+                        }){
+                            SocialMediaButton(imgName: "continue_with_apple")
+                            .frame(width: 100, height: 50)
+                        }
+
+                        Button(action: {
+                            self.logginFb()
+                        }){
+                            SocialMediaButton(imgName: "continue_with_facebook")
+                            .frame(width: 100, height: 50)
+                        }
+                    }
+                
+                VStack(spacing: 20){
+                    Button(action: {
+                            self.user.showOnboarding = false
+                    }){
+                        GuestButton(strLabel: "Sign in as a Guest")
+                    }
+                        
+                    Button(action: {
+                    }, label: {
+                        NavigationLink(destination: SignUpView()) {
+                            Text("New User? Create an account")
                             .foregroundColor(.black)
-                            .padding(.trailing, (UIScreen.main.bounds.width * 40) / 414)
                             .font(.system(size: (UIScreen.main.bounds.width * 15) / 414, weight: .bold, design: .default))
+                        }
                         
-                    }
-                    .sheet(isPresented: self.$showForgotPassword) {
-                        ForgotPasswordView()
-                        //dismiss once confirmation alert is sent
-                    }
-                    
-                }.padding(.trailing, (UIScreen.main.bounds.width * 10) / 414)
-            }
-            
-            Button(action: {
-                
-                Auth.auth().signIn(withEmail: self.email, password: self.password){ result, error in
-                    
-                    if(error != nil){
-                        print(error!)
-                        self.alertMsg = "Your email or password is incorrect"
-                        self.alertTitle = "Sign in error"
-                        self.showAlert.toggle()
-                    }
-                    else{
-                        self.loggedIn.toggle()
-                        self.user.isLogged = true
-                        UserDefaults.standard.set(true, forKey: "isLogged")
-                        self.user.showOnboarding = false
-                        UserDefaults.standard.set(true, forKey: "showOnboarding")
-                        
-                        self.AuthenticationVM.updateProfile()
-                    }
+                    })
                 }
-            }) {
-                BlackButton(strLabel: "LOGIN")
             }
-            
-            HStack{
                 
-                VStack{
-                    Divider()
-                        .padding(.leading, (UIScreen.main.bounds.width * 40) / 414)
-                        .frame(width: (UIScreen.main.bounds.width/2.3), height: 10, alignment: .leading)
-                    
-                }
-                
-                Text("OR")
-                
-                VStack{
-                    Divider()
-                        .padding(.trailing, (UIScreen.main.bounds.width * 40) / 414)
-                        .frame(width: (UIScreen.main.bounds.width/2.3), height: 10, alignment: .trailing)
-                }
-                
-            }
-            
-            Button(action: {
-                SocialLogin().attemptLoginGoogle()
-            }){
-                BlackButton(strLabel: "Sign In with Google", imgName: "continue_with_google")
-            }
-            
-            Button(action: {
-                self.showFB.toggle()
-                SocialLogin().attemptLoginFb(completion: { result, error  in
-                    if(!result!.isCancelled){
-                        self.navigator.isOnboardingShowing = false
-                    }
-                })
-            }){
-                BlackButton(strLabel: "Sign In with Facebook", imgName: "continue_with_facebook")
-            }
-            
-            Button(action: {
-                self.showSignup.toggle()
-            }) {
-                Text("New User? Create an account")
-                    .foregroundColor(.black)
-                    .font(.system(size: (UIScreen.main.bounds.width * 15) / 414, weight: .bold, design: .default))
-                
-            }
-            .sheet(isPresented: self.$showSignup) {
-                SignUpView()
-            }
+//            }
+
+//            }else{
+//                AppView()
+//            }
         }.onAppear(perform: {
-            if let token = AccessToken.current,
-                !token.isExpired {
-                // User is logged in, do work such as go to next view controller.
-                self.navigator.isOnboardingShowing = false
+//            if let token = AccessToken.current,
+//                !token.isExpired {
+//                 User is logged in, do work such as go to next view controller.
+//                self.user.showOnboarding = false
+//            }
+//            self.user.showOnboarding = true
+        })
+        .navigationBarTitle("")
+        .navigationBarHidden(true)
+        .alert(isPresented: $showAlert, content: { self.alert })
+    }
+    
+    func logginFb() {
+        socialLogin.attemptLoginFb(completion: { result, error in
+            if(error == nil){
+                self.user.isLogged = true
+                self.user.showOnboarding = false
+            }else{
+                //create alert saying no account associated with this FB profile. Please use sign up page
+                //make case for the error that comes when above happens
             }
         })
-        .navigationBarTitle("Sign In")
-        .alert(isPresented: $showAlert, content: { self.alert })
     }
     
     
@@ -181,52 +233,77 @@ struct LoginView: View {
             let fbLoginManager: LoginManager = LoginManager()
             fbLoginManager.logOut()
             print("logged out")
-            fbLoginManager.logIn(permissions: ["email", "name", "public_profile"], from: UIApplication.shared.windows.last?.rootViewController) { (result, error) -> Void in
+            
+            fbLoginManager.logIn(permissions: ["email"], from: UIApplication.shared.windows.last?.rootViewController) { (result, error) -> Void in
                 print("RESULT: '\(result)' ")
                 let authen = AuthenticationViewModel()
-                var navigator: Navigator
 
+                if error != nil {
+                    print("error")
+                    return
+                }else if(result!.isCancelled){
+                    print("result cancelled")
+                    return
+                }
+                
                 if(!result!.isCancelled){
                     let credential = FacebookAuthProvider.credential(withAccessToken: AccessToken.current!.tokenString)
-
+                    
                     Auth.auth().signIn(with: credential) { (authResult, error) in
                         //authresult = Promise of UserCredential
+                        print("signing in")
                         if(authResult != nil){
-                            userProfile.emailAddress = Auth.auth().currentUser?.email! as! String
-                            userProfile.fullName = Auth.auth().currentUser?.displayName! as! String
+                            print("authorized")
+                            print(authResult?.additionalUserInfo?.profile)
+                            let userInfo = authResult?.additionalUserInfo?.profile
+                            if let userInfo = userInfo as? [String:Any],
+                                                       let email: String = userInfo["email"] as? String,
+                                                       let name: String = userInfo["name"] as? String,
+                                                       let picture = userInfo["picture"] as? [String: Any],
+                                                       let data = picture["data"] as? [String: Any],
+                                let url = data["url"] as? String {
+                                    userProfile.fullName = name
+                                    userProfile.emailAddress = email
+                                    userProfile.profilePhotoURL = url
+                                    print(userProfile.emailAddress)
+                                    print(userProfile.fullName)
+                                    dispatch.enter()
+                                    authen.fetchUserID(name: userProfile.fullName, email: userProfile.emailAddress, dispatch: dispatch)
+                                    dispatch.notify(queue: .main) {
+                                        dispatch.enter()
+                                        userProfile.getProfilePhoto(dispatch: dispatch)
+                                        dispatch.notify(queue: .main){
+                                            completion(result, error)
+                                            return
+                                        }
+                                    }
+                            }
+                            print(authResult?.additionalUserInfo?.profile)
+//                            print(Auth.auth().currentUser?.value(forKey: "displayName"))
+//                            userProfile.emailAddress = Auth.auth().currentUser?.email! as! String
+//                            userProfile.fullName = Auth.auth().currentUser?.displayName! as! String
                             print(userProfile.emailAddress)
                             print(userProfile.fullName)
                             dispatch.enter()
                             authen.fetchUserID(name: userProfile.fullName, email: userProfile.emailAddress, dispatch: dispatch)
                             dispatch.notify(queue: .main) {
-                                userProfile.getProfilePhoto()
-//                                navigator.isOnboardingShowing = false
-                                return
+                                dispatch.enter()
+                                userProfile.getProfilePhoto(dispatch: dispatch)
+                                dispatch.notify(queue: .main){
+                                    completion(result, error)
+                                    return
+                                }
                             }
                         }
-                    }
-                }
-                
-                if error != nil {
-                    print("error")
-                }else if(result!.isCancelled){
-                    print("result cancelled")
-                }else{
-                    print("success Get user information.")
-
-                    let fbRequest = GraphRequest(graphPath:"me", parameters: ["fields":"email, name, picture"])
-                    fbRequest.start { (connection, result, error) -> Void in
-
-                    if error == nil {
-                        print("User Info : \(result ?? "No result")")
-
-                    } else {
-                        print("Error Getting Info \(error ?? "error" as! Error)");
-
+                        else{
+                            //no account exists with this FB profile -> alert saying "please go to sign up"
+                            print("no account exists")
+                            print(error.debugDescription)
+                            completion(result, error)
+                            return
                         }
                     }
                 }
-                completion(result, error)
             }
         }
         
