@@ -14,14 +14,19 @@ import FirebaseFirestoreSwift
 import GoogleSignIn
 import FBSDKLoginKit
 import FBSDKCoreKit
+import AuthenticationServices
+import CryptoKit
 
 struct LoginView: View {
     
     @EnvironmentObject var accountDetails: AccountDetails
+    @Environment(\.window) var window: UIWindow?
+    @State var delegate: SignInWithAppleDelegates! = nil
     
     @State var email: String = ""
     @State var password: String = ""
     @State var alertMsg = ""
+    @State var currentNonce: String? = ""
     
     @State private var showForgotPassword = false
     @State private var showSignup = false
@@ -50,9 +55,10 @@ struct LoginView: View {
     
     @ViewBuilder
     var body: some View {
+        ZStack {
+        if user.showOnboarding {
         NavigationView{
             VStack(spacing: 20) {
-    //            if user.showOnboarding {
                     VStack{
                         Text("Yumzz")
                         .font(.custom("Montserrat-SemiBold", size: 48))
@@ -81,11 +87,12 @@ struct LoginView: View {
                                 self.showAlert.toggle()
                             }
                             else{
-                                self.loggedIn.toggle()
                                 self.user.isLogged = true
                                 UserDefaults.standard.set(true, forKey: "isLogged")
+                                print(self.user.showOnboarding)
                                 self.user.showOnboarding = false
-                                UserDefaults.standard.set(true, forKey: "showOnboarding")
+                                print(self.user.showOnboarding)
+                                UserDefaults.standard.set(false, forKey: "showOnboarding")
                                 
                                 self.AuthenticationVM.updateProfile()
                             }
@@ -132,8 +139,6 @@ struct LoginView: View {
                             Divider()
                                 .padding(.trailing, (UIScreen.main.bounds.width * 40) / 414)
                                 .frame(width: (UIScreen.main.bounds.width/2.3), height: 10, alignment: .trailing)
-                            
-
                         }
                         
                     }
@@ -146,11 +151,10 @@ struct LoginView: View {
                             .frame(width: 100, height: 50)
                         }
 
-                        Button(action: {
-                            print("apple")
-                        }){
-                            SocialMediaButton(imgName: "continue_with_apple")
-                            .frame(width: 100, height: 50)
+                        AppleSignInButton()
+                        .frame(width: 100, height: 50)
+                            .onTapGesture {
+                                self.showAppleLogin()
                         }
 
                         Button(action: {
@@ -179,19 +183,15 @@ struct LoginView: View {
                     })
                 }
             }
-                
-//            }
-
-//            }else{
-//                AppView()
-//            }
+            }
+        }else{
+                AppView()
+            }
         }.onAppear(perform: {
-//            if let token = AccessToken.current,
-//                !token.isExpired {
-//                 User is logged in, do work such as go to next view controller.
-//                self.user.showOnboarding = false
-//            }
-//            self.user.showOnboarding = true
+            NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: "NoMoreOnboard"), object: nil, queue: .main) { (Notification) in
+                self.user.showOnboarding = false
+                self.user.isLogged = true
+            }
         })
         .navigationBarTitle("")
         .navigationBarHidden(true)
@@ -201,6 +201,7 @@ struct LoginView: View {
     func logginFb() {
         socialLogin.attemptLoginFb(completion: { result, error in
             if(error == nil){
+                print("made it")
                 self.user.isLogged = true
                 self.user.showOnboarding = false
             }else{
@@ -208,6 +209,91 @@ struct LoginView: View {
                 //make case for the error that comes when above happens
             }
         })
+    }
+    
+    private func performExistingAccountFlows(){
+        let requests = [ASAuthorizationAppleIDProvider().createRequest(),
+                        ASAuthorizationPasswordProvider().createRequest()
+        ]
+        performSignIn(using: requests)
+    }
+    
+    private func showAppleLogin(){
+        let request = ASAuthorizationAppleIDProvider()
+        .createRequest()
+        request.requestedScopes = [
+            .fullName, .email
+        ]
+        performSignIn(using: [request])
+    }
+    
+    private func performSignIn(using requests: [ASAuthorizationRequest]){
+        login = true
+        signUp = false
+        print("here")
+        delegate = SignInWithAppleDelegates(window: window, currentNonce: currentNonce!){ result in
+            switch result {
+            case .success(_):
+                //already created a new account or signed in
+                print("here")
+                self.alertMessage = "You have successfully logged in through Apple"
+                self.alertTitle = "Success!"
+                self.showAlert.toggle()
+                self.user.showOnboarding = false
+                self.user.isLogged = true
+            case .failure(let error):
+                //send alert
+                self.alertMessage = "\(error.localizedDescription)"
+                self.alertTitle = "Error!"
+                self.showAlert.toggle()
+            }
+        }
+        let controller = ASAuthorizationController(authorizationRequests: requests)
+        controller.delegate = delegate
+        controller.presentationContextProvider = delegate
+        controller.performRequests()
+    }
+    
+    private func randomNonceString(length: Int = 32) -> String {
+      precondition(length > 0)
+      let charset: Array<Character> =
+          Array("0123456789ABCDEFGHIJKLMNOPQRSTUVXYZabcdefghijklmnopqrstuvwxyz-._")
+      var result = ""
+      var remainingLength = length
+
+      while remainingLength > 0 {
+        let randoms: [UInt8] = (0 ..< 16).map { _ in
+          var random: UInt8 = 0
+          let errorCode = SecRandomCopyBytes(kSecRandomDefault, 1, &random)
+          if errorCode != errSecSuccess {
+            fatalError("Unable to generate nonce. SecRandomCopyBytes failed with OSStatus \(errorCode)")
+          }
+          return random
+        }
+
+        randoms.forEach { random in
+          if remainingLength == 0 {
+            return
+          }
+
+          if random < charset.count {
+            result.append(charset[Int(random)])
+            remainingLength -= 1
+          }
+        }
+      }
+
+      return result
+    }
+    
+    private func sha256(_ input: String) -> String {
+      let inputData = Data(input.utf8)
+      let hashedData = SHA256.hash(data: inputData)
+      let hashString = hashedData.compactMap {
+        return String(format: "%02x", $0)
+      }.joined()
+
+      return hashString
     }
     
     
@@ -236,7 +322,6 @@ struct LoginView: View {
             
             fbLoginManager.logIn(permissions: ["email"], from: UIApplication.shared.windows.last?.rootViewController) { (result, error) -> Void in
                 print("RESULT: '\(result)' ")
-                let authen = AuthenticationViewModel()
 
                 if error != nil {
                     print("error")
@@ -268,7 +353,7 @@ struct LoginView: View {
                                     print(userProfile.emailAddress)
                                     print(userProfile.fullName)
                                     dispatch.enter()
-                                    authen.fetchUserID(name: userProfile.fullName, email: userProfile.emailAddress, dispatch: dispatch)
+                                    userProfile.userId = Auth.auth().currentUser!.uid
                                     dispatch.notify(queue: .main) {
                                         dispatch.enter()
                                         userProfile.getProfilePhoto(dispatch: dispatch)
@@ -278,22 +363,19 @@ struct LoginView: View {
                                         }
                                     }
                             }
-                            print(authResult?.additionalUserInfo?.profile)
-//                            print(Auth.auth().currentUser?.value(forKey: "displayName"))
-//                            userProfile.emailAddress = Auth.auth().currentUser?.email! as! String
-//                            userProfile.fullName = Auth.auth().currentUser?.displayName! as! String
-                            print(userProfile.emailAddress)
-                            print(userProfile.fullName)
-                            dispatch.enter()
-                            authen.fetchUserID(name: userProfile.fullName, email: userProfile.emailAddress, dispatch: dispatch)
-                            dispatch.notify(queue: .main) {
-                                dispatch.enter()
-                                userProfile.getProfilePhoto(dispatch: dispatch)
-                                dispatch.notify(queue: .main){
-                                    completion(result, error)
-                                    return
+                            //need to check if user exists with password, if so, then get pic
+                            Auth.auth().fetchSignInMethods(forEmail: userProfile.emailAddress) { (methods, error) in
+                                if(methods!.count > 1){
+                                    dispatch.enter()
+                                    userProfile.getProfilePhoto(dispatch: dispatch)
+                                    dispatch.notify(queue: .main){
+                                        completion(result, error)
+                                        return
+                                    }
                                 }
-                            }
+                                }
+                                completion(result, error)
+                                return
                         }
                         else{
                             //no account exists with this FB profile -> alert saying "please go to sign up"

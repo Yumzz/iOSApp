@@ -11,6 +11,8 @@ import Firebase
 import GoogleSignIn
 import FBSDKCoreKit
 import FBSDKLoginKit
+import FirebaseFirestoreSwift
+//import FirebaseDynamicLinks
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
@@ -35,6 +37,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
     @available(iOS 9.0, *)
     func application(_ application: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any])
       -> Bool {
+        
         if let fbSDKAppId = Settings.appID, url.scheme!.hasPrefix("fb\(fbSDKAppId)"), url.host == "authorize" {
             print("facebook login")
             let shouldOpen :Bool = ApplicationDelegate.shared.application(
@@ -45,8 +48,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
             )
         return shouldOpen
         }
+//        if let dynamicLink = DynamicLinks.dynamicLinks().dynamicLink(fromCustomSchemeURL: url){
+//            print("here instade")
+//            self.handlePasswordlessSignIn(withURL: dynamicLink.url!)
+//            return true
+//        }
         
-      return GIDSignIn.sharedInstance().handle(url)
+        return GIDSignIn.sharedInstance().handle(url)
+        
     }
     
     // MARK: UISceneSession Lifecycle
@@ -74,84 +83,82 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         guard let authentication = user.authentication else { return }
         
           //Google Credential -> Firebase credential
-        let credential = GoogleAuthProvider.credential(withIDToken: authentication.idToken,
+        credential = GoogleAuthProvider.credential(withIDToken: authentication.idToken,
                                                             accessToken: authentication.accessToken)
           
-          //sign up has different method called in AppDelegate
-        var noUser = false
-        Auth.auth().fetchSignInMethods(forEmail: email) { (methods, error) in
-            if(error != nil){
-                noUser = true
-            }
-        }
+//        var noUser = false
+//        Auth.auth().fetchSignInMethods(forEmail: email) { (methods, error) in
+//            if(error != nil){
+//                noUser = true
+//            }
+//        }
         
         print("SignUp: \(signUp)")
         if(signUp){
-            //if user not found + signup then create new user w temp password and send password reset link
-            if(noUser){
-                print("signup")
-                let x = user.hashValue
-                print(x)
-                self.dispatch.enter()
-                Auth.auth().createUser(withEmail: email, password: String(x)) { (authResult, error) in
-                    if(error != nil){
-                        NSLog(String(error!.localizedDescription))
-                    }
-                    else{
-                        print("created user")
-                    }
-                    self.dispatch.leave()
+            //send confirmation email, go to app and link account with credential, save user info, and transition
+//            if(noUser){
+            google = true
+            facebook = false
+            let actionCode = ActionCodeSettings()
+            actionCode.url = URL(string: "https://yumzzapp.page.link/connect")
+            actionCode.handleCodeInApp = true
+            actionCode.setIOSBundleID(Bundle.main.bundleIdentifier!)
+            facebook = true
+            self.dispatch.enter()
+            
+            Auth.auth().sendSignInLink(toEmail: email, actionCodeSettings: actionCode) { (error) in
+//                            self.user.showOnboarding = false
+                if let error = error {
+                  return
                 }
-                dispatch.notify(queue: .main){
-                    Auth.auth().sendPasswordReset(withEmail: email) { (error) in
-                        if error != nil{
-                            NSLog(String(error!.localizedDescription))
-                            return
-                        }
-                        else{
-                            print("sent password reset")
-                        }
-                    }
-                    signUp = false
-                    self.user.isLogged = true
-                    self.user.showOnboarding = false
-                }
-            }else{
-                print("user already exists")
+                UserDefaults.standard.set(email, forKey: "Email")
+                UserDefaults.standard.set(fullName, forKey: "Name")
+                userProfile.emailAddress = email
+                userProfile.fullName = fullName
+                self.dispatch.leave()
+            }
+            self.dispatch.notify(queue: .main){
+                facebook = false
+                signUp = false
+                return
             }
         }
         if(login){
-            Auth.auth().signIn(with: credential) { (authResult, error) in
+            print("login")
+            Auth.auth().signIn(with: credential!) { (authResult, error) in
                 //authresult = Promise of UserCredential
+                if let error = error {
+                    print(error.localizedDescription)
+                }
+                
                 if(authResult != nil){
-                    if(login){
-                        userProfile.emailAddress = email
-                        userProfile.fullName = fullName
-                        print(userProfile.emailAddress)
-                        print(userProfile.fullName)
-                        self.dispatch.enter()
-                        authen.fetchUserID(name: fullName, email: email, dispatch: self.dispatch)
-                        self.dispatch.notify(queue: .main) {
+                    userProfile.emailAddress = email
+                    userProfile.fullName = fullName
+                    userProfile.userId = Auth.auth().currentUser!.uid
+                    Auth.auth().fetchSignInMethods(forEmail: userProfile.emailAddress) { (methods, error) in
+                        if(methods!.count > 1){
                             self.dispatch.enter()
                             userProfile.getProfilePhoto(dispatch: self.dispatch)
                             self.dispatch.notify(queue: .main){
-                                print("done with photo getting")
-                                login = false
+                                NotificationCenter.default.post(name: Notification.Name(rawValue: "NoMoreOnboard"), object: nil)
                                 return
                             }
                         }
                     }
                 }
-                print(error.debugDescription)
                 return
                
             }
-            self.user.isLogged = true
-            self.user.showOnboarding = false
         }
         
-          
-          //try to sign in
+    }
+    
+    
+    
+
+    func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
+        print("here")
+        return false
     }
 
     func sign(_ signIn: GIDSignIn!, didDisconnectWith user: GIDGoogleUser!, withError error: Error!) {
@@ -159,35 +166,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         // ...
     }
     
-//    func loginButton(_ loginButton: FBLoginButton, didCompleteWith result: LoginManagerLoginResult?, error: Error?) {
-//        print("app del here")
-//        let authen = AuthenticationViewModel()
-//
-//        if(!result!.isCancelled){
-//            let credential = FacebookAuthProvider.credential(withAccessToken: AccessToken.current!.tokenString)
-//
-//            Auth.auth().signIn(with: credential) { (authResult, error) in
-//                //authresult = Promise of UserCredential
-//                if(authResult != nil){
-//                    userProfile.emailAddress = Auth.auth().currentUser?.email! as! String
-//                    userProfile.fullName = Auth.auth().currentUser?.displayName! as! String
-//                    print(userProfile.emailAddress)
-//                    print(userProfile.fullName)
-//                    self.dispatch.enter()
-//                    authen.fetchUserID(name: userProfile.fullName, email: userProfile.emailAddress, dispatch: self.dispatch)
-//                    self.dispatch.notify(queue: .main) {
-//                        userProfile.getProfilePhoto()
-//                        self.user.showOnboarding = false
-//                        return
-//                    }
-//                }
-//            }
-//        }
-//    }
-    
-//    func loginButtonDidLogOut(_ loginButton: FBLoginButton) {
-//        print("log out")
-//    }
     
     func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {
         // Called when a new scene session is being created.

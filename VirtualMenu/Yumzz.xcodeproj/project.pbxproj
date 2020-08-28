@@ -32,6 +32,14 @@
 		3A530DEF24D8E00100CBDE28 /* isClick.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A530DEE24D8E00100CBDE28 /* isClick.swift */; };
 		3A530DF124D8E07F00CBDE28 /* BottomSheetModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A530DF024D8E07F00CBDE28 /* BottomSheetModal.swift */; };
 		3A530DF324D9769100CBDE28 /* DishCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A530DF224D9769100CBDE28 /* DishCategory.swift */; };
+		3A5633BA24F9014C0059B603 /* SignInWithAppleCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5633B924F9014C0059B603 /* SignInWithAppleCoordinator.swift */; };
+		3A5633BC24F901B70059B603 /* SignInWithAppleManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5633BB24F901B70059B603 /* SignInWithAppleManager.swift */; };
+		3A5633BE24F901E80059B603 /* SignInWithAppleDelegates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5633BD24F901E80059B603 /* SignInWithAppleDelegates.swift */; };
+		3A5633C024F902070059B603 /* SignInWithAppleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5633BF24F902070059B603 /* SignInWithAppleButton.swift */; };
+		3A5633C224F902280059B603 /* EnvironmentWindowKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5633C124F902280059B603 /* EnvironmentWindowKey.swift */; };
+		3A5633C424F902630059B603 /* AuthState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5633C324F902630059B603 /* AuthState.swift */; };
+		3A5633C624F9057D0059B603 /* AppleSignInButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5633C524F9057D0059B603 /* AppleSignInButton.swift */; };
+		3A5633C824F90E080059B603 /* SignInWithApple.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5633C724F90E080059B603 /* SignInWithApple.swift */; };
 		3A6477F224B68D060077EF30 /* UserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6477F124B68D060077EF30 /* UserProfile.swift */; };
 		3A7E59C82489A98100288AB0 /* ScannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A7E59C72489A98100288AB0 /* ScannerViewController.swift */; };
 		3A87574F24EA7423004ABECC /* AddReviewButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A87574E24EA7423004ABECC /* AddReviewButton.swift */; };
@@ -54,6 +62,7 @@
 		3ABA90F324F640AE00695B06 /* SocialMediaButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ABA90F224F640AE00695B06 /* SocialMediaButton.swift */; };
 		3ABA90F524F64EDE00695B06 /* GuestButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ABA90F424F64EDE00695B06 /* GuestButton.swift */; };
 		3ABA90F724F6FEDB00695B06 /* Launch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ABA90F624F6FEDB00695B06 /* Launch.swift */; };
+		3ABA90F924F71E7C00695B06 /* PinkBackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ABA90F824F71E7C00695B06 /* PinkBackButton.swift */; };
 		3AE05F9824EF27550024F802 /* FacebookCore in Frameworks */ = {isa = PBXBuildFile; productRef = 3AE05F9724EF27550024F802 /* FacebookCore */; };
 		3AE05F9A24EF27550024F802 /* FacebookLogin in Frameworks */ = {isa = PBXBuildFile; productRef = 3AE05F9924EF27550024F802 /* FacebookLogin */; };
 		3AE05F9C24EF7EFC0024F802 /* Order.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE05F9B24EF7EFC0024F802 /* Order.swift */; };
@@ -153,6 +162,14 @@
 		3A530DEE24D8E00100CBDE28 /* isClick.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = isClick.swift; sourceTree = "<group>"; };
 		3A530DF024D8E07F00CBDE28 /* BottomSheetModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetModal.swift; sourceTree = "<group>"; };
 		3A530DF224D9769100CBDE28 /* DishCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DishCategory.swift; sourceTree = "<group>"; };
+		3A5633B924F9014C0059B603 /* SignInWithAppleCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInWithAppleCoordinator.swift; sourceTree = "<group>"; };
+		3A5633BB24F901B70059B603 /* SignInWithAppleManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInWithAppleManager.swift; sourceTree = "<group>"; };
+		3A5633BD24F901E80059B603 /* SignInWithAppleDelegates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInWithAppleDelegates.swift; sourceTree = "<group>"; };
+		3A5633BF24F902070059B603 /* SignInWithAppleButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInWithAppleButton.swift; sourceTree = "<group>"; };
+		3A5633C124F902280059B603 /* EnvironmentWindowKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnvironmentWindowKey.swift; sourceTree = "<group>"; };
+		3A5633C324F902630059B603 /* AuthState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthState.swift; sourceTree = "<group>"; };
+		3A5633C524F9057D0059B603 /* AppleSignInButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleSignInButton.swift; sourceTree = "<group>"; };
+		3A5633C724F90E080059B603 /* SignInWithApple.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInWithApple.swift; sourceTree = "<group>"; };
 		3A6477F124B68D060077EF30 /* UserProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfile.swift; sourceTree = "<group>"; };
 		3A7E59C72489A98100288AB0 /* ScannerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerViewController.swift; sourceTree = "<group>"; };
 		3A87574E24EA7423004ABECC /* AddReviewButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddReviewButton.swift; sourceTree = "<group>"; };
@@ -180,6 +197,7 @@
 		3ABA90F224F640AE00695B06 /* SocialMediaButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialMediaButton.swift; sourceTree = "<group>"; };
 		3ABA90F424F64EDE00695B06 /* GuestButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuestButton.swift; sourceTree = "<group>"; };
 		3ABA90F624F6FEDB00695B06 /* Launch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Launch.swift; sourceTree = "<group>"; };
+		3ABA90F824F71E7C00695B06 /* PinkBackButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinkBackButton.swift; sourceTree = "<group>"; };
 		3AE05F9B24EF7EFC0024F802 /* Order.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Order.swift; sourceTree = "<group>"; };
 		3AE05F9E24EFB5DA0024F802 /* OrderCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderCard.swift; sourceTree = "<group>"; };
 		3AF9926424A2B7C9005446D8 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
@@ -279,6 +297,7 @@
 			isa = PBXGroup;
 			children = (
 				A7912A2424CF7DF70052988C /* Components */,
+				3A5633B824F9010A0059B603 /* SignInWithAppleHelpers */,
 				3AF9927424A53AC0005446D8 /* SignUpView.swift */,
 				3ABA90F624F6FEDB00695B06 /* Launch.swift */,
 				3AF9926424A2B7C9005446D8 /* LoginView.swift */,
@@ -348,6 +367,20 @@
 				3A4E2E3A24D21E8E00C34DD8 /* LocationManager.swift */,
 			);
 			path = MapLocationManager;
+			sourceTree = "<group>";
+		};
+		3A5633B824F9010A0059B603 /* SignInWithAppleHelpers */ = {
+			isa = PBXGroup;
+			children = (
+				3A5633B924F9014C0059B603 /* SignInWithAppleCoordinator.swift */,
+				3A5633BB24F901B70059B603 /* SignInWithAppleManager.swift */,
+				3A5633BF24F902070059B603 /* SignInWithAppleButton.swift */,
+				3A5633C124F902280059B603 /* EnvironmentWindowKey.swift */,
+				3A5633C324F902630059B603 /* AuthState.swift */,
+				3A5633BD24F901E80059B603 /* SignInWithAppleDelegates.swift */,
+				3A5633C724F90E080059B603 /* SignInWithApple.swift */,
+			);
+			path = SignInWithAppleHelpers;
 			sourceTree = "<group>";
 		};
 		3A987ACA2480350C0021F6E4 = {
@@ -564,6 +597,8 @@
 				3ABA90F024F63DB500695B06 /* BlackButton.swift */,
 				3ABA90F224F640AE00695B06 /* SocialMediaButton.swift */,
 				3ABA90F424F64EDE00695B06 /* GuestButton.swift */,
+				3A5633C524F9057D0059B603 /* AppleSignInButton.swift */,
+				3ABA90F824F71E7C00695B06 /* PinkBackButton.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -806,6 +841,8 @@
 				3ABA90F324F640AE00695B06 /* SocialMediaButton.swift in Sources */,
 				3A87574F24EA7423004ABECC /* AddReviewButton.swift in Sources */,
 				3A45AD8D24B3FE8800CF3A8F /* Constants.swift in Sources */,
+				3A5633C824F90E080059B603 /* SignInWithApple.swift in Sources */,
+				3A5633C224F902280059B603 /* EnvironmentWindowKey.swift in Sources */,
 				3A13B6E024C1813D0006458B /* ContactUs.swift in Sources */,
 				3AFA234624DC9C2000F90ED8 /* DishReviewFB.swift in Sources */,
 				A7F5506924C123AA00FAC1F0 /* RestaurantSearchListView.swift in Sources */,
@@ -819,24 +856,29 @@
 				A73B1B6224B111D800A8C6A8 /* AppView.swift in Sources */,
 				3A7E59C82489A98100288AB0 /* ScannerViewController.swift in Sources */,
 				3A6477F224B68D060077EF30 /* UserProfile.swift in Sources */,
+				3A5633BC24F901B70059B603 /* SignInWithAppleManager.swift in Sources */,
 				3A3137292483178A00E46292 /* Review.swift in Sources */,
 				3AF9926A24A2B95C005446D8 /* InputValidation.swift in Sources */,
 				A777C3A424D3EC7A009658AA /* UserStore.swift in Sources */,
 				A7FE250824A841620007E5AD /* RestaurantMapView.swift in Sources */,
+				3A5633BE24F901E80059B603 /* SignInWithAppleDelegates.swift in Sources */,
 				A7912A2624CF82140052988C /* WhiteButton.swift in Sources */,
 				3A13B6E424C1816B0006458B /* ReportProblem.swift in Sources */,
 				3A4E2E4124D24B1D00C34DD8 /* RestaurantAnnotation.swift in Sources */,
 				3A9F981E248DD3F0007ABB71 /* ScannerFunctions.swift in Sources */,
 				A73FD46324919A1300A035AB /* ListDishesView.swift in Sources */,
+				3ABA90F924F71E7C00695B06 /* PinkBackButton.swift in Sources */,
 				3A987AD92480350C0021F6E4 /* SceneDelegate.swift in Sources */,
 				A73B1B6424B1162E00A8C6A8 /* OrderView.swift in Sources */,
 				3AFA234824DCACEA00F90ED8 /* ReviewsButton.swift in Sources */,
+				3A5633C424F902630059B603 /* AuthState.swift in Sources */,
 				3A87575324EC910A004ABECC /* PostReviewButton.swift in Sources */,
 				3A530DF324D9769100CBDE28 /* DishCategory.swift in Sources */,
 				3A4E2E3724D21CDC00C34DD8 /* Coordinator.swift in Sources */,
 				3A31372A2483178A00E46292 /* ARMUser.swift in Sources */,
 				A7F5506B24C1248500FAC1F0 /* RestaurantSearchView.swift in Sources */,
 				A7D0F78324DF6B4100197631 /* FBURLImage.swift in Sources */,
+				3A5633C024F902070059B603 /* SignInWithAppleButton.swift in Sources */,
 				3AFA233E24DA01AC00F90ED8 /* MenuSelectionView.swift in Sources */,
 				3A530DEF24D8E00100CBDE28 /* isClick.swift in Sources */,
 				3AFA234A24DCB14B00F90ED8 /* DishReviewsView.swift in Sources */,
@@ -849,6 +891,7 @@
 				3AE05F9C24EF7EFC0024F802 /* Order.swift in Sources */,
 				3A13B6EA24C197B30006458B /* RestaurantSearchLabel.swift in Sources */,
 				A7F5506D24C1259100FAC1F0 /* RestaurantSearchbarView.swift in Sources */,
+				3A5633C624F9057D0059B603 /* AppleSignInButton.swift in Sources */,
 				C55FDD6524CABA2800CC8561 /* RestaurantFB.swift in Sources */,
 				3A3137262483178A00E46292 /* Model.swift in Sources */,
 				3AA9897624B517F00070FD97 /* Extensions.swift in Sources */,
@@ -862,6 +905,7 @@
 				3A31373A2483A25D00E46292 /* ScannerPreViewController.swift in Sources */,
 				C5D0A16C24B1B6A300E44DF2 /* DishFB.swift in Sources */,
 				3A530DF124D8E07F00CBDE28 /* BottomSheetModal.swift in Sources */,
+				3A5633BA24F9014C0059B603 /* SignInWithAppleCoordinator.swift in Sources */,
 				A7FE250624A83C1D0007E5AD /* MapView.swift in Sources */,
 				3AF9926524A2B7C9005446D8 /* LoginView.swift in Sources */,
 				A724364B24D4CFF200F8BBBB /* DishCard.swift in Sources */,

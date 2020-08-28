@@ -9,6 +9,7 @@
 import UIKit
 import SwiftUI
 import FBSDKCoreKit
+import Firebase
 
 
 class AccountDetails: ObservableObject {
@@ -20,7 +21,7 @@ class AccountDetails: ObservableObject {
 }
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
-
+    var user =  UserStore()
     var window: UIWindow?
 
     func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
@@ -36,6 +37,116 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         )
     }
     
+    func scene(_ scene: UIScene, continue userActivity: NSUserActivity) {
+        var google = false
+        guard userActivity.activityType == NSUserActivityTypeBrowsingWeb,
+            let urlToOpen = userActivity.webpageURL
+            else {
+                return
+        }
+        
+//        print(userActivity.webpageURL?.)
+
+        print(handlePasswordlessSignIn(withURL: urlToOpen, facebook: facebook, google: google))
+    }
+    
+    func handlePasswordlessSignIn(withURL: URL, facebook: Bool, google: Bool) -> Bool{
+        print("here")
+        
+        let link = withURL.absoluteString
+        if(!facebook && !google){
+            if(Auth.auth().isSignIn(withEmailLink: link)){
+                    print("is link")
+                    guard let email = UserDefaults.standard.value(forKey: "Email") as? String else { return false}
+                    guard let password = UserDefaults.standard.value(forKey: "Password") as? String else { return false}
+                    guard let name = UserDefaults.standard.value(forKey: "Name") as? String else { return false}
+                    
+                    var disp = DispatchGroup()
+                    disp.enter()
+                    Auth.auth().signIn(withEmail: email, link: link) { (dataResult, error) in
+                        if let error = error {
+                            print("Error \(error.localizedDescription)")
+                            //show alert to user
+                            return
+                        }
+                        else{
+                            guard let result = dataResult else{
+                                return
+                            }
+                            userProfile.emailAddress = email
+                            userProfile.fullName = name
+                            userProfile.userId = Auth.auth().currentUser!.uid
+                            
+        //                    userProfile.profilePhotoURL = result.user.photoURL!.absoluteString
+                            print("UserProfile: \(userProfile.userId)")
+                            disp.leave()
+                        }
+                    }
+                    disp.notify(queue: .main){
+                        let data = [
+                                "uid" : userProfile.userId,
+                                 "email" : email,
+                                 "password": password,
+                                 "username" : name
+                                 ] as [String : Any]
+
+                            Firestore.firestore().collection("User").addDocument(data: data, completion: {
+                                (err) in
+                                if let err = err {
+                                    //show alert to user
+                                    print(err.localizedDescription)
+                                    return
+                                }
+                                print("added doc")
+                                NotificationCenter.default.post(name: Notification.Name(rawValue: "NoMoreOnboard"), object: nil)
+                //                show success alert
+                            })
+                    }
+                    return true
+
+                }
+        }
+        else if (facebook || google){
+            //facebook - email sign in and link credential
+            print("fb or google in")
+            if(Auth.auth().isSignIn(withEmailLink: link)){
+                guard let email = UserDefaults.standard.value(forKey: "Email") as? String else { return false}
+                
+                guard let name = UserDefaults.standard.value(forKey: "Name") as? String else { return false}
+                
+                var disp = DispatchGroup()
+                disp.enter()
+                Auth.auth().signIn(withEmail: email, link: link) { (dataResult, error) in
+                    if let error = error {
+                        print("Error \(error.localizedDescription)")
+                        //show alert to user
+                        return
+                    }
+                    else{
+                        guard let result = dataResult else{
+                            return
+                        }
+                        userProfile.emailAddress = email
+                        userProfile.fullName = name
+                        userProfile.userId = Auth.auth().currentUser!.uid
+                        Auth.auth().currentUser?.link(with: credential!, completion: { (res, err) in
+                            if let err = err {
+                                print(err.localizedDescription)
+                            }
+                        })
+                        disp.leave()
+                        disp.notify(queue: .main){
+                            NotificationCenter.default.post(name: Notification.Name(rawValue: "NoMoreOnboard"), object: nil)
+                        }
+                    }
+                }
+                
+            }
+        }
+        
+        return false
+    }
+        
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
