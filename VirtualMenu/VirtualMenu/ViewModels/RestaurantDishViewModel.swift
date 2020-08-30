@@ -5,7 +5,6 @@
 //  Created by Rohan Tyagi on .
 //  Copyright © 2020 Rohan Tyagi. All rights reserved.
 //
-
 import SwiftUI
 import CloudKit
 import Firebase
@@ -26,7 +25,7 @@ class RestaurantDishViewModel: ObservableObject {
     @Published var allRests: [RestaurantFB] = [RestaurantFB]()
     
     @Published var dishReviews: [DishReviewFB] = [DishReviewFB]()
-
+    
     
     var images: [String:UIImage] = [String:UIImage]()
     
@@ -37,66 +36,66 @@ class RestaurantDishViewModel: ObservableObject {
     let dispatchGroup2 = DispatchGroup()
     
     let locationManager = LocationManager()
-            
+    
     //function to get nearby restaurants but no dish info
     //Average Price = low, medium, or high
     func fetchRestaurantsBasicInfo(){
         db.collection("Restaurant").getDocuments { (snapshot, error) in
-        if let error = error {
-               print("Error getting documents: \(error)")
-           } else {
-               for document in snapshot!.documents {
-//                   print("\(document.documentID) => \(document.data())")
-//                print(document.get("Name") as! String)
-                if(self.checkInRadius(coordinate: document.get("location") as! GeoPoint)){
-                    DispatchQueue.main.async {
-                        self.allRests.append(RestaurantFB(snapshot: document, dishes: self.restDishes)!)
+            if let error = error {
+                print("Error getting documents: \(error)")
+            } else {
+                for document in snapshot!.documents {
+                    //                   print("\(document.documentID) => \(document.data())")
+                    //                print(document.get("Name") as! String)
+                    if(self.checkInRadius(coordinate: document.get("location") as! GeoPoint)){
+                        DispatchQueue.main.async {
+                            self.allRests.append(RestaurantFB(snapshot: document, dishes: self.restDishes)!)
+                        }
                     }
                 }
-               }
             }
         }
     }
     
     func fetchRestaurantsFB(){
         db.collection("Restaurant").getDocuments { (snapshot, error) in
-        if let error = error {
-               print("Error getting documents: \(error)")
-           } else {
-               for document in snapshot!.documents {
-//                   print("\(document.documentID) => \(document.data())")
-//                print(document.get("Name") as! String)
-                if(self.checkInRadius(coordinate: document.get("location") as! GeoPoint)){
-                    DispatchQueue.main.async {
-                        self.fetchRestsDishesFB(name: document.get("Name") as! String)
-                        self.dispatchGroup.notify(queue: .main) {
-                            let plates = self.restDishes
-                            self.allRests.append(RestaurantFB(snapshot: document, dishes: plates)!)
+            if let error = error {
+                print("Error getting documents: \(error)")
+            } else {
+                for document in snapshot!.documents {
+                    //                   print("\(document.documentID) => \(document.data())")
+                    //                print(document.get("Name") as! String)
+                    if(self.checkInRadius(coordinate: document.get("location") as! GeoPoint)){
+                        DispatchQueue.main.async {
+                            self.fetchRestsDishesFB(name: document.get("Name") as! String)
+                            self.dispatchGroup.notify(queue: .main) {
+                                let plates = self.restDishes
+                                self.allRests.append(RestaurantFB(snapshot: document, dishes: plates)!)
+                            }
                         }
                     }
                 }
-               }
             }
         }
     }
     
     
-    func fetchSingleRestaurantFB(name: String){
+    func fetchSingleRestaurantFB(name: String) {
         db.collection("Restaurant").getDocuments { (rests, error) in
-        if let error = error {
-               print("Error getting documents: \(error)")
-           } else {
-               for document in rests!.documents {
-                   print("\(document.documentID) => \(document.data())")
-                if(document.get("Name") as! String == name){
-                    self.rest = (RestaurantFB(snapshot: document)!)
-                   }
-               }
+            if let error = error {
+                print("Error getting documents: \(error)")
+            } else {
+                for document in rests!.documents {
+                    print("\(document.documentID) => \(document.data())")
+                    if(document.get("Name") as! String == name){
+                        self.rest = (RestaurantFB(snapshot: document)!)
+                    }
+                }
             }
         }
     }
     
-    func fetchRestsDishesFB(name: String){
+    func fetchRestsDishesFB(name: String) {
         self.dispatchGroup.enter()
         let fb = Firestore.firestore()
         
@@ -111,7 +110,7 @@ class RestaurantDishViewModel: ObservableObject {
                 print("Error getting documents: \(error)")
             } else {
                 for document in snapshot!.documents {
-    //                  print("\(document.documentID) => \(document.data())")
+                    //                  print("\(document.documentID) => \(document.data())")
                     let dish = (document.get("Name") as! String)
                     self.dispatchGroup1.notify(queue: .main) {
                         dishes.append(DishFB(snapshot: document)!)
@@ -131,74 +130,74 @@ class RestaurantDishViewModel: ObservableObject {
         }
     }
     
-    func getDishPhoto(dishName: String, restName: String){
+    func getDishPhoto(dishName: String, restName: String) {
         self.dispatchGroup1.enter()
-
-         var image: UIImage?
-         //need current restaurant
-         var storage = Storage.storage()
-         var dName = dishName
-         dName = dName.replacingOccurrences(of: " ", with: "-")
-         dName = dName.lowercased()
-         
- //        print("name: \(n)")
-         
-         let imagesRef = storage.reference().child("Restaurant/\(restName.lowercased())/dish/\(dName)/photo/Picture.jpg")
-         imagesRef.getData(maxSize: 2 * 2048 * 2048) { data, error in
-         if let error = error {
-             print(error.localizedDescription)
-         } else {
-           // Data for "virtual-menu-profilephotos/\(name).jpg" is returned
-             if(data == nil){
-                 print("Name of dish without photo in FB: \(dName)")
-             }
-             image = UIImage(data: data!)!
-            self.images[dishName] = image!
-//            self.images.append(image!)
-//            print(self.images)
-            self.dispatchGroup1.leave()
-            }
-         }
-     }
         
+        var image: UIImage?
+        //need current restaurant
+        var storage = Storage.storage()
+        var dName = dishName
+        dName = dName.replacingOccurrences(of: " ", with: "-")
+        dName = dName.lowercased()
+        
+        //        print("name: \(n)")
+        
+        let imagesRef = storage.reference().child("Restaurant/\(restName.lowercased())/dish/\(dName)/photo/Picture.jpg")
+        imagesRef.getData(maxSize: 2 * 2048 * 2048) { data, error in
+            if let error = error {
+                print(error.localizedDescription)
+            } else {
+                // Data for "virtual-menu-profilephotos/\(name).jpg" is returned
+                if(data == nil){
+                    print("Name of dish without photo in FB: \(dName)")
+                }
+                image = UIImage(data: data!)!
+                self.images[dishName] = image!
+                //            self.images.append(image!)
+                //            print(self.images)
+                self.dispatchGroup1.leave()
+            }
+        }
+    }
     
-    func fetchDishReviewsFB(dishID: String, restId: String){
+    
+    func fetchDishReviewsFB(dishID: String, restId: String) {
         dispatchGroup2.enter()
         let fb = Firestore.firestore()
         
         let ref = fb.collection("DishReview")
         
         let query = ref.whereField("dishID", isEqualTo: dishID)
-                       .whereField("restID", isEqualTo: restId)
-                        
+            .whereField("restID", isEqualTo: restId)
+        
         query.getDocuments { (snapshot, error) in
-        if let error = error {
-            print("Error getting documents: \(error)")
-        } else {
-            if(snapshot!.documents.isEmpty){
-                print("leave")
-                self.dispatchGroup2.leave()
-            }
-            for document in snapshot!.documents {
-                //going through each review of this dish in this restaurant
-                //create and get userprofile from getUserOfReview
-                //create DishReviewFB and append to dishReviews
-//                self.getUserOfReview(username: (document.get("Username") as! String), id: (document.get("userid") as! String))
-//                print("username \(document.get("username"))")
-                let review = DishReviewFB(snapshot: document)!
-                self.dishReviews.append(review)
-                if(document == snapshot!.documents.last){
-                    print("last and leavin")
+            if let error = error {
+                print("Error getting documents: \(error)")
+            } else {
+                if(snapshot!.documents.isEmpty){
+                    print("leave")
                     self.dispatchGroup2.leave()
+                }
+                for document in snapshot!.documents {
+                    //going through each review of this dish in this restaurant
+                    //create and get userprofile from getUserOfReview
+                    //create DishReviewFB and append to dishReviews
+                    //                self.getUserOfReview(username: (document.get("Username") as! String), id: (document.get("userid") as! String))
+                    //                print("username \(document.get("username"))")
+                    let review = DishReviewFB(snapshot: document)!
+                    self.dishReviews.append(review)
+                    if(document == snapshot!.documents.last){
+                        print("last and leavin")
+                        self.dispatchGroup2.leave()
+                    }
                 }
             }
         }
-        }
-//        self.fillReviewInfo()
+        //        self.fillReviewInfo()
     }
-
-    func getDishAveragePrice(dishes: [DishFB]) -> Double{
-        //make one for each category 
+    
+    func getDishAveragePrice(dishes: [DishFB]) -> Double {
+        //make one for each category
         var count = 0.0
         var averagePrice = 0.0
         
@@ -235,20 +234,20 @@ class RestaurantDishViewModel: ObservableObject {
     }
     
     
-    func getDistFromUser(coordinate: GeoPoint) -> Double{
+    func getDistFromUser(coordinate: GeoPoint) -> Double {
         //haversine formula - distance in miles
-//        const R = 6371e3; // metres
-//        const φ1 = lat1 * Math.PI/180; // φ, λ in radians
-//        const φ2 = lat2 * Math.PI/180;
-//        const Δφ = (lat2-lat1) * Math.PI/180;
-//        const Δλ = (lon2-lon1) * Math.PI/180;
-//
-//        const a = Math.sin(Δφ/2) * Math.sin(Δφ/2) +
-//                  Math.cos(φ1) * Math.cos(φ2) *
-//                  Math.sin(Δλ/2) * Math.sin(Δλ/2);
-//        const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
-//
-//        const d = R * c; in meters
+        //        const R = 6371e3; // metres
+        //        const φ1 = lat1 * Math.PI/180; // φ, λ in radians
+        //        const φ2 = lat2 * Math.PI/180;
+        //        const Δφ = (lat2-lat1) * Math.PI/180;
+        //        const Δλ = (lon2-lon1) * Math.PI/180;
+        //
+        //        const a = Math.sin(Δφ/2) * Math.sin(Δφ/2) +
+        //                  Math.cos(φ1) * Math.cos(φ2) *
+        //                  Math.sin(Δλ/2) * Math.sin(Δλ/2);
+        //        const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+        //
+        //        const d = R * c; in meters
         //d = d x 0.00062137 in miles
         
         let lat1 = coordinate.latitude * Double.pi/180
@@ -268,27 +267,16 @@ class RestaurantDishViewModel: ObservableObject {
         let d = Double(Eradius) * c
         
         return Double(d * 0.00062137)
-        
-        
     }
     
     
-    func checkInRadius(coordinate: GeoPoint) -> Bool{
+    func checkInRadius(coordinate: GeoPoint) -> Bool {
         let dist = self.getDistFromUser(coordinate: coordinate)
         if(dist <= Double(proximity)){
             return true
         }
-        else{
+        else {
             return false
         }
-        
-        
     }
-    
-    
-    
-    
-    
-    
-
 }

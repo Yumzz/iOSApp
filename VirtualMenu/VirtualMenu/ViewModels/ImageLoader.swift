@@ -13,7 +13,7 @@ import FirebaseFirestore
 
 final class ImageLoader : ObservableObject {
     @Published var data: Data?
-
+    
     func loadImage(url: String){
         let storage = Storage.storage()
         let ref = storage.reference().child(url)
@@ -21,7 +21,7 @@ final class ImageLoader : ObservableObject {
             if let error = error {
                 print("\(error)")
             }
-
+            
             DispatchQueue.main.async {
                 self.data = data
             }

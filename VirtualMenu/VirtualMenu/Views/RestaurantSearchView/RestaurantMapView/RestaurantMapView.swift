@@ -88,9 +88,7 @@ struct RestaurantMapView: View {
                             }
                             
                             HStack {
-                                FBURLImage(url: self.click.restChosen!.coverPhotoURL)
-//                                    .resizable()
-                                    .frame(width: 150, height:150)
+                                FBURLImage(url: self.click.restChosen!.coverPhotoURL, imageWidth: 120, imageHeight: 120)
                                     .clipShape(Circle())
                                 
                                 VStack (alignment: .leading){

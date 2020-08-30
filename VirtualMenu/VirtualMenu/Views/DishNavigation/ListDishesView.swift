@@ -10,93 +10,73 @@ import SwiftUI
 import Firebase
 
 struct ListDishesView: View {
-
+    
     @ObservedObject var restDishVM = RestaurantDishViewModel()
     
-    @State var dishes: [DishFB] = []
+    var restaurant: RestaurantFB
     
-    @State var show = false
+    @ObservedObject var dishCategoriesVM: DishCategoriesViewModel
     
-    @State var rest: RestaurantFB
+    @State var dishesDisplayed: [DishFB] = []
     
-    @State var categorizedDishes: [DishCategory] = [DishCategory]()
-
+    @State var isLoading = false
+    
+    @State var dishCategoriesDisplayed: [DishCategory] = []
+    
+    
+    init(restaurant: RestaurantFB) {
+        
+        self.restaurant = restaurant
+        
+        self.dishCategoriesVM = DishCategoriesViewModel(restaurant: self.restaurant)
+        
+        self.dishCategoriesDisplayed = self.dishCategoriesVM.dishCategories
+    }
+    
     var body: some View {
-        GeometryReader { geometryProxy in
-            List {
-                ForEach(self.categorizedDishes, id: \.name){
-                    cat in
-                    Section(header: Text("\(cat.name)")) {
-                        ForEach(cat.dishes, id: \.id) {
-                        dish in
-                        NavigationLink(destination:
-                            DishDetailsView(dish: dish, restaurant: self.rest).navigationBarHidden(false)
-                            ) {
-                                HStack {
-                                    FBURLImage(url: dish.coverPhotoURL)
-                                        .aspectRatio(contentMode: .fill)
-                                        .layoutPriority(-1)
-                                        .frame(width: 100, height: 100)
-                                        .clipped()
-
-                                    VStack(alignment: .leading, spacing: 10) {
-                                        Text(dish.name)
-                                            .font(.headline)
-                                            .foregroundColor(.primary)
-
-                                        Text(DishFB.formatPrice(price: dish.price))
-                                            .foregroundColor(.secondary)
+        ZStack {
+            ScrollView {
+                VStack {
+                    Spacer().frame(height: 20)
+                    
+                    ForEach(self.dishCategoriesVM.dishCategories, id: \.name){ dishCategory in
+                        
+                        VStack(alignment: .leading, spacing: 40) {
+                            
+                            Text("\(dishCategory.name)")
+                                .font(.title)
+                                .fontWeight(.semibold)
+                                .padding(.leading)
+                            
+                            VStack(spacing: 20){
+                                
+                                ForEach(dishCategory.dishes, id: \.id) {
+                                    dish in
+                                    NavigationLink(destination:
+                                        DishDetailsView(dish: dish, restaurant: self.restaurant).navigationBarHidden(false)
+                                    ) {
+                                        DishCard(urlImage: FBURLImage(url: dish.coverPhotoURL, imageAspectRatio: .fill), dishName: dish.name, dishIngredients: dish.description, price: self.restDishVM.formatPrice(price: dish.price))
                                     }
-
-                                }.frame(
-                                    width: geometryProxy.size.width - 16,
-                                    alignment: .topLeading
-                                )
-                                    .cornerRadius(10)
-                                    .overlay(
-                                        RoundedRectangle(cornerRadius: 10)
-                                            .stroke(Color(.sRGB, red: 150/255, green: 150/255, blue: 150/255, opacity: 0.3), lineWidth: 1)
-                                )
+                                }
+                                Spacer().frame(height: 20)
                             }
                         }
                     }
+                    Spacer()
                 }
+                .frame(maxWidth: .infinity)
             }
-            if self.show{
-                GeometryReader{_ in
-                    
-                    Loader()
-                }.background(Color.black.opacity(0.45))
-            }
-        }.navigationBarTitle("Dishes")
-//            .navigationBarItems(trailing:
-//                NavigationLink(destination: AccountProfileView()){
-//                    Text("Edit Account Profile")
-//                    //make this into profile pic in corner
-//            })
-            .padding(.trailing)
-            .onAppear { UITableView.appearance().separatorStyle = .none
-                //fetch dishes of rest - loader spinning while this happening
-                //save dishes to core data and dont fetch again when going back
-                self.show.toggle()
-                print("start fetching dishes")
-                self.restDishVM.fetchRestsDishesFB(name: self.rest.name)
-                self.restDishVM.dispatchGroup.notify(queue: .main){
-                    print("arrived")
-                    self.dishes = self.restDishVM.restDishes
-                    self.restDishVM.categorizeDishes(dishes: self.dishes)
-                    self.categorizedDishes = self.restDishVM.sectionItems
-                    self.show.toggle()
-                }
         }
+        .navigationBarTitle("Dishes")
     }
 }
+
 
 struct ListDishesView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView{
-            ListDishesView(dishes: [], rest: RestaurantFB.previewRest())
+            ListDishesView(restaurant:  RestaurantFB.previewRest())
         }
-
+        
     }
 }

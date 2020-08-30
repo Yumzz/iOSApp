@@ -6,7 +6,7 @@
 //  Copyright © 2020 Rohan Tyagi. All rights reserved.
 //
 
-struct DishCategory {
+struct DishCategory: Hashable {
     var isExpanded: Bool
     let dishes: [DishFB]
     let name: String

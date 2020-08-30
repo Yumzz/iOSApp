@@ -16,7 +16,7 @@ struct MenuSelectionView: View {
     var body: some View {
         VStack{
             VStack(spacing: 60){
-                NavigationLink(destination: ListDishesView(rest: self.restChosen)){
+                NavigationLink(destination: ListDishesView(restaurant: self.restChosen)){
                     MenuButton()
                 }
                 .buttonStyle(PlainButtonStyle())

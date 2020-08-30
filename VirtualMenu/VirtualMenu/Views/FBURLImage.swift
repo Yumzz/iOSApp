@@ -10,25 +10,36 @@ import SwiftUI
 
 struct FBURLImage: View {
     @ObservedObject var imageLoader: ImageLoader
-
-    init(url: String) {
+    
+    var aspectRatio: ContentMode = .fit
+    var width = CGFloat()
+    var height = CGFloat()
+    
+    init(url: String, imageAspectRatio: ContentMode = .fit, imageWidth: CGFloat = 88, imageHeight: CGFloat = 88) {
         imageLoader = ImageLoader()
         imageLoader.loadImage(url: url)
+        
+        self.aspectRatio = imageAspectRatio
+        
+        self.width = imageWidth
+        self.height = imageHeight
     }
-
+    
     var body: some View {
-        Image(uiImage:
-            imageLoader.data != nil ? UIImage(data: imageLoader.data!)! : UIImage())
-            .renderingMode(.original)
-            .resizable()
-            .aspectRatio(contentMode: .fit)
-//            .frame(width: 88, height: 88, alignment: .leading)
-//            .resizable()
-//            .aspectRatio(contentMode: .fit)
-//            .frame(width:100, height:100)
-            
-            .background(Color.gray)
-//            .clipShape(RoundedRectangle(cornerRadius: 5.0))
+        
+        Group {
+            if imageLoader.data == nil {
+                EmptyView()
+
+            } else {
+                Image(uiImage: UIImage(data: imageLoader.data!)!)
+                    .renderingMode(.original)
+                    .resizable()
+                    .aspectRatio(contentMode: self.aspectRatio)
+                    .frame(width: self.width, height: self.height, alignment: .center)
+//                    .background(Color.gray)
+            }
+        }
     }
 }
 

@@ -27,7 +27,9 @@ struct DishDetailsView: View {
     let dispatchG1 = DispatchGroup()
 
     @State var reviewClicked = false
-            
+    
+    //fetch reviews of dish on appear and have "Reviews" button pass info to new view of entire scroll view of it
+    
     var body: some View {
         VStack(alignment: .center) {
             VStack{
@@ -37,6 +39,7 @@ struct DishDetailsView: View {
                     .frame(width: 330, height: 210)
                     .aspectRatio(contentMode: .fit)
                     .cornerRadius(10)
+                
                 Text("Price: " + DishFB.formatPrice(price: dish.price))
                     .foregroundColor(.secondary)
                     .font(.headline)
@@ -57,17 +60,17 @@ struct DishDetailsView: View {
                     //go to reviews view
                     self.reviewClicked = true
                 }
-            
+                
             }.sheet(isPresented: self.$reviewClicked){
                 DishReviewsView(dish: self.dish, restaurant: self.restaurant)
             }
             .padding()
+        }
     }
-}
 }
 
 struct DishDetailsView_Previews: PreviewProvider {
     static var previews: some View {
-        DishDetailsView(dish: DishFB.previewDish(), restaurant: RestaurantFB.previewRest())
+        DishDetailsView(dish: .init(name: "Dish", description: "Description", price: 25, type: "Type", restaurant: "Restaurant"), restaurant: .init(name: "Restaurant", description: "Description", averagePrice: 10, type: "Type", ethnicity: "Ethnicity", dishes: [], coordinate: .init(latitude: 10, longitude: 10), address: "Address", phone: "Phone", price: "Price"))
     }
 }

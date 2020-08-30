@@ -33,14 +33,15 @@ struct DishFB {
         self.type = type
         self.coverPhotoURL = "Restaurant/\(restaurant.lowercased())/dish/\(name.lowercased().replacingOccurrences(of: " ", with: "-"))/photo/Picture.jpg"
         self.restaurant = restaurant
+        self.coverPhotoURL = "\(self.restaurant)/dish/\(self.name.lowercased().replacingOccurrences(of: " ", with: "-"))/photo/Picture.jpg"
         self.id = UUID()
     }
     
     init?(snapshot: QueryDocumentSnapshot) {
         guard
             let name = snapshot.data()["Name"] as? String else {
-            print("no name")
-            return nil
+                print("no name")
+                return nil
         }
         guard let price = snapshot.data()["Price"] as? String else {
             print("no price")
@@ -69,7 +70,7 @@ struct DishFB {
         
         self.type = type
         self.restaurant = restau
-        self.coverPhotoURL = "Restaurant/\(restaurant.lowercased())/dish/\(name.lowercased().replacingOccurrences(of: " ", with: "-"))/photo/Picture.jpg"
+        self.coverPhotoURL = "Restaurant/\(self.restaurant.lowercased())/dish/\(self.name.lowercased().replacingOccurrences(of: " ", with: "-"))/photo/Picture.jpg"
     }
     
     func toAnyObject() -> Any {
