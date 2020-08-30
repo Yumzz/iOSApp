@@ -35,9 +35,7 @@ struct DishDetailsView: View {
             VStack{
                 Text("\(dish.name)")
                     .font(.title)
-                FBURLImage(url: dish.coverPhotoURL)
-                    .frame(width: 330, height: 210)
-                    .aspectRatio(contentMode: .fit)
+                FBURLImage(url: dish.coverPhotoURL, imageWidth: 330, imageHeight: 210)
                     .cornerRadius(10)
                 
                 Text("Price: " + DishFB.formatPrice(price: dish.price))
