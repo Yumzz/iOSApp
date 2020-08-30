@@ -96,7 +96,7 @@ struct OrderCard2: View {
             .padding(.horizontal, 32)
             
         }
-        .background(Color.white)
+        .background(Color(UIColor.systemBackground))
         .cornerRadius(10)
         .frame(maxWidth: .infinity)
         .padding()
