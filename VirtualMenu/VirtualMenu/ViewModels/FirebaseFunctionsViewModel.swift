@@ -10,16 +10,16 @@ import SwiftUI
 
 class FirebaseFunctionsViewModel: ObservableObject {
     
-    func addReview(headline: String, body: String, dish: DishFB, rest: RestaurantFB, starRating: Int, userID: String, username: String) -> [String] {
+    func addReview(body: String, dish: DishFB, rest: RestaurantFB, starRating: Int, userID: String, username: String) -> [String] {
         var result = ""
         var title = ""
 
             
-        if isValidInput(inputVal: headline) && isValidInput(inputVal: body){
+        if isValidInput(inputVal: body){
             let url = URL(string: Constants.baseURL.api + "/reviewAdd")!
             var request = URLRequest(url: url)
             request.httpMethod = "POST"
-            let bodyData = "Headline=\(headline)&Body=\(body)&DishID=\(dish.key)&RestID=\(rest.key)&StarRating=\((starRating))&Username=\(username)&UserID=\(userID)"
+            let bodyData = "Body=\(body)&DishID=\(dish.key)&RestID=\(rest.key)&StarRating=\((starRating))&Username=\(username)&UserID=\(userID)"
             print(bodyData)
             request.httpBody = bodyData.data(using: .utf8)
             

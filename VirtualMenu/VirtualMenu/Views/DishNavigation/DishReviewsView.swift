@@ -17,6 +17,15 @@ struct DishReviewsView: View {
     
     @State var show = false
     @State var reviewClicked = false
+
+    @State var review: String = ""
+    @Binding var isPresented: Bool
+    
+    @State private var showingAlert = false
+    @State private var alertMessage = ""
+    @State private var alertTitle = ""
+    
+    @ObservedObject var FirebaseFunctions = FirebaseFunctionsViewModel()
     
     let dish: DishFB
     
@@ -31,12 +40,15 @@ struct DishReviewsView: View {
                 }.background(Color.black.opacity(0.45))
             }
             else{
-                VStack{
-//                    navigationBarTitle("Reviews")
-                    Spacer().frame(height: 10)
-                    Text("\(self.dish.name)'s Reviews")
-                        .font(.custom("Montserrat-Bold", size: 32))
-                        .bold()
+                Spacer()
+                HStack{
+                    FBURLImage(url: dish.coverPhotoURL)
+                        .frame(width: 200, height: 100)
+                        .aspectRatio(contentMode: .fit)
+                        .cornerRadius(10)
+                    Text("\(self.dish.name)")
+                        .font(.custom("Open Sans", size: 32))
+                        
 
                 }
 
@@ -60,21 +72,16 @@ struct DishReviewsView: View {
                                                 .aspectRatio(contentMode: .fit)
                                             } else {
                                                 FBURLImage(url: reviewuser.userPhotoURL)
-    //                                                .resizable()
-//                                                    .frame(width: 80, height: 50)
                                                     .clipShape(Circle())
                                                     .aspectRatio(contentMode: .fit)
                                             }
                                             VStack(alignment: .leading) {
-                                                Text(reviewuser.headline)
+                                                Text(reviewuser.body)
                                                     .foregroundColor(.primary)
                                                     .font(.headline)
-                                                Text(reviewuser.username)
                                             }
                                         }.frame(width: 300, height: 50, alignment: .topLeading)
-                                        Text(reviewuser.body)
-                                            .frame(width:300, alignment:.topLeading)
-                                            .font(.body)
+                                        
                                     }.frame(
                                         width: 300,
                                         alignment: .topLeading
@@ -85,17 +92,62 @@ struct DishReviewsView: View {
                             
                         }
                     }
-                    AddReviewButton().onTapGesture {
-                        //go to reviews view
-                        self.reviewClicked = true
-                        print("Add Review")
-                    }
-                    Spacer().frame(height: 10)
-                }
+                        DishNavButton(strLabel: "Submit a Review").onTapGesture{
+                            self.reviewClicked = true
+                            print("Add Review")
+                        }
+                    
+                    .frame(maxWidth: .infinity)
+                    .padding(.bottom, 25)
+                }.overlay(BottomSheetModal(display: self.$reviewClicked, backgroundColor: .constant(Color(UIColor().colorFromHex("#FFFFFF", 1))), rectangleColor: .constant(Color(UIColor().colorFromHex("#000000", 1)))) {
+                            ZStack{
+                                VStack(spacing: 20) {
+                                    HStack{
+                                        Text("Write your review:")
+                                        .foregroundColor(Color(UIColor().colorFromHex("#707070", 1)))
+                                        Spacer()
+                                    }
+                //                                        Spacer().frame(height: 20)
+                //                    VStack(alignment: .center){
+                                        MultiLineTFReview(txt: self.$review)
+                                        .shadow(radius: 5)
+                //                    }
+
+                //                        VStack(alignment: .leading){
+                                    HStack{
+                                        Spacer().frame(width: UIScreen.main.bounds.width/3)
+                                        PostReviewButton().onTapGesture {
+                                            self.show = true
+                                            let results = self.FirebaseFunctions.addReview(body: self.review, dish: self.dish, rest: self.restaurant, starRating: 5, userID: userProfile.userId, username: userProfile.fullName)
+                                            let result = results[0]
+                                            let title = results[1]
+                                            if(result == ""){
+                                                self.show = false
+                                                self.isPresented = false
+                                                return
+                                            }
+                                            else{
+                                                print("did not add review")
+                                                self.alertTitle = title
+                                                self.alertMessage = result
+                                                self.showingAlert.toggle()
+                                            }
+                                        }
+                    //                    .frame(width: UIScreen.main.bounds.width/6, height: 40, alignment: .trailing)
+                                        .alert(isPresented: self.$showingAlert) {
+                                            Alert(title: Text("Thank you for submitting"), message: Text("\(self.alertMessage)"), dismissButton: .default(Text("OK")))
+                                        }
+                                    }
+                //                        }
+                                    Spacer()
+
+                                }
+                                }
+                            }
+                        )
                 
             }
-        }
-        .onAppear {
+        }        .onAppear {
             self.show = true
             print("here at reviews")
             self.restDishVM.fetchDishReviewsFB(dishID: self.dish.key, restId: self.restaurant.key)
@@ -104,15 +156,61 @@ struct DishReviewsView: View {
                 self.reviews = self.restDishVM.dishReviews
                 self.show = false
             }
+            
         }
-        .sheet(isPresented: self.$reviewClicked){
-            DishAddReview(dish: self.dish, restaurant: self.restaurant, isPresented: self.$reviewClicked)
-        }
+        
     }
 }
 
 struct DishReviewsView_Previews: PreviewProvider {
     static var previews: some View {
-        DishReviewsView(dish: DishFB.previewDish(), restaurant: RestaurantFB.previewRest())
+        DishReviewsView(isPresented: .constant(true), dish: DishFB.previewDish(), restaurant: RestaurantFB.previewRest())
+    }
+}
+
+struct MultiLineTFReview: UIViewRepresentable {
+    
+    @Binding var txt: String
+
+    func makeUIView(context: UIViewRepresentableContext<MultiLineTFReview>) -> MultiLineTFReview.UIViewType {
+        let tview = UITextView()
+        tview.layer.cornerRadius = 20.0
+        tview.font = .systemFont(ofSize: 16)
+        tview.isEditable = true
+        tview.isUserInteractionEnabled = true
+        tview.isScrollEnabled = true
+        tview.text = "Tell us anything you want"
+        tview.delegate = context.coordinator
+        tview.textColor = .black
+        tview.returnKeyType = .done
+        tview.resignFirstResponder()
+
+        tview.backgroundColor = .white
+        return tview
+    }
+
+    func updateUIView(_ uiView: UITextView, context: UIViewRepresentableContext<MultiLineTFReview>) {
+
+    }
+
+    func makeCoordinator() -> MultiLineTFReview.Coordinator {
+        return MultiLineTFReview.Coordinator(parent1: self)
+    }
+
+    class Coordinator: NSObject, UITextViewDelegate {
+
+        var parent: MultiLineTFReview
+
+        init(parent1: MultiLineTFReview) {
+            parent = parent1
+        }
+
+        func textViewDidChange(_ textView: UITextView) {
+            self.parent.txt = textView.text
+        }
+        func textViewDidBeginEditing(_ textView: UITextView) {
+            textView.text = ""
+            textView.textColor = .label
+        }
     }
 }

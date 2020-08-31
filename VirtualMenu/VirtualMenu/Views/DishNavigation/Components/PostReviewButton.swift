@@ -10,7 +10,7 @@ import Foundation
 import SwiftUI
 
 struct PostReviewButton: View {
-    var buttonText: String = "Add Review"
+    var buttonText: String = "Submit"
     
     var body: some View {
         ZStack{
@@ -19,6 +19,7 @@ struct PostReviewButton: View {
             .foregroundColor(Color(UIColor().colorFromHex("#F88379", 1)))
                 .padding(.top, 0)
             Text(buttonText)
+                .foregroundColor(.white)
         }
 
     }

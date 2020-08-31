@@ -11,20 +11,20 @@ import CloudKit
 import Firebase
 import MapKit
 
-class Order: ObservableObject {
+class OrderModel: ObservableObject {
 
     let db = Firestore.firestore()
 
-    @Published var restChosen: RestaurantFB
-    @Published var dishesChosen: [DishFB]
+    @Published var restChosen: RestaurantFB = RestaurantFB.previewRest()
+    @Published var dishesChosen: [DishFB] = []
     
-    @Published var totalCost: Double
+    @Published var totalCost: Double = 0.0
     
     
     //do i want these attributes to cause an update when they change
-    var dishIndexes : [DishFB : Int]
+    var dishIndexes : [DishFB : Int] = [DishFB : Int]()
     
-    var dishRestaurant : [DishFB : RestaurantFB]
+    var dishRestaurant : [DishFB : RestaurantFB] = [DishFB : RestaurantFB]()
     
     init() {
         //TODO: initialize to false if the user logged in before

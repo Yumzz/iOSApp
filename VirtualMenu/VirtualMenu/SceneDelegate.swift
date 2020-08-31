@@ -38,7 +38,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
     
     func scene(_ scene: UIScene, continue userActivity: NSUserActivity) {
-        var google = false
+        google = false
+        facebook = true
         guard userActivity.activityType == NSUserActivityTypeBrowsingWeb,
             let urlToOpen = userActivity.webpageURL
             else {
@@ -55,6 +56,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let link = withURL.absoluteString
         if(!facebook && !google){
+            print("facebook: \(facebook)")
+            print("google: \(google)")
             if(Auth.auth().isSignIn(withEmailLink: link)){
                     print("is link")
                     guard let email = UserDefaults.standard.value(forKey: "Email") as? String else { return false}
@@ -112,9 +115,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             if(Auth.auth().isSignIn(withEmailLink: link)){
                 guard let email = UserDefaults.standard.value(forKey: "Email") as? String else { return false}
                 
-                guard let name = UserDefaults.standard.value(forKey: "Name") as? String else { return false}
+//                guard let name = UserDefaults.standard.value(forKey: "Name") as? String else { return false}
                 
                 var disp = DispatchGroup()
+                
                 disp.enter()
                 Auth.auth().signIn(withEmail: email, link: link) { (dataResult, error) in
                     if let error = error {
@@ -127,12 +131,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                             return
                         }
                         userProfile.emailAddress = email
-                        userProfile.fullName = name
+//                        userProfile.fullName = name
                         userProfile.userId = Auth.auth().currentUser!.uid
                         Auth.auth().currentUser?.link(with: credential!, completion: { (res, err) in
                             if let err = err {
                                 print(err.localizedDescription)
                             }
+                            print("credential: \(credential.debugDescription)")
                         })
                         disp.leave()
                         disp.notify(queue: .main){
@@ -158,7 +163,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         //UserDefaults.standard.set("", forKey: signInWithAppleManager.userIdentifierKey)
         
         let contentView = ContentView()
-        var order = Order()
+        var order = OrderModel()
         var user = UserStore()
         
         // Use a UIHostingController as window root view controller.

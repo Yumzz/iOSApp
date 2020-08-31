@@ -15,12 +15,14 @@ struct ReviewsButton: View {
     var body: some View {
         ZStack{
             RoundedRectangle(cornerRadius: 5)
-            .frame(width: 150, height: 55)
-                .foregroundColor(.black)
+            .frame(width: UIScreen.main.bounds.width/2, height: 40)
+                .foregroundColor(Color(
+                    UIColor().colorFromHex("#FFFFFF", 1)
+                ))
                 .padding(.top, 0)
             Text(buttonText)
-            .foregroundColor(Color(UIColor().colorFromHex("#F88379", 1)))
-        }
+            .foregroundColor(Color(UIColor().colorFromHex("#707070", 1)))
+            } .shadow(radius: 5)
 
     }
 }

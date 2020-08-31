@@ -13,7 +13,7 @@ struct OrderView: View {
     @State private var selectorIndex = 0
     @State private var numbers = ["Current Selection","Past Orders"]
     
-    @EnvironmentObject var order : Order
+    @EnvironmentObject var order : OrderModel
     @ObservedObject var restViewModel = RestaurantDishViewModel()
     
     var body: some View {

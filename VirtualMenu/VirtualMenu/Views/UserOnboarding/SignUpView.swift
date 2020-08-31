@@ -162,11 +162,14 @@ struct SignUpView: View {
     func signinInFb() {
         socialLogin.attemptLoginFb(completion: { result, error in
             if(error == nil){
-//                self.user.isLogged = true
-//                self.user.showOnboarding = false
             }else{
                 //create alert saying no account associated with this FB profile. Please use sign up page
+                self.alertMessage = "\(error!.localizedDescription)"
+                self.alertTitle = "Error!"
+                self.showAlert.toggle()
             }
+            facebook = false
+            signUp = false
         })
     }
 
@@ -279,6 +282,10 @@ struct SignUpView: View {
         func attemptLoginFb(completion: @escaping (_ result: LoginManagerLoginResult?, _ error: Error?) -> Void) {
             let fbLoginManager: LoginManager = LoginManager()
             fbLoginManager.logOut()
+            facebook = true
+            google = false
+            signUp = true
+            login = false
             fbLoginManager.logIn(permissions: ["email"], from: UIApplication.shared.windows.last?.rootViewController) { (result, error) -> Void in
                 print("RESULT: '\(result)' ")
                 let authen = AuthenticationViewModel()
@@ -308,13 +315,13 @@ struct SignUpView: View {
                             let data = picture["data"] as? [String: Any],
                             let url = data["url"] as? String
                             {
-                            
+                            UserDefaults.standard.set(email, forKey: "Email")
+                            UserDefaults.standard.set(name, forKey: "Name")
 //                            let dispatchTwo = DispatchGroup()
                             let actionCode = ActionCodeSettings()
                             actionCode.url = URL(string: "https://yumzzapp.page.link/connect")
                             actionCode.handleCodeInApp = true
                             actionCode.setIOSBundleID(Bundle.main.bundleIdentifier!)
-                            facebook = true
                             self.dispatch.enter()
                             
                             Auth.auth().sendSignInLink(toEmail: email, actionCodeSettings: actionCode) { (error) in
@@ -322,16 +329,12 @@ struct SignUpView: View {
                                 if let error = error {
                                   return
                                 }
-                                UserDefaults.standard.set(email, forKey: "Email")
-                                UserDefaults.standard.set(name, forKey: "Name")
                                 userProfile.emailAddress = email
                                 userProfile.fullName = name
                                 userProfile.profilePhotoURL = url
                                 self.dispatch.leave()
                             }
                             self.dispatch.notify(queue: .main){
-                                facebook = false
-                                signUp = false
                                 completion(result, error)
                                 return
                             }

@@ -103,7 +103,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
             actionCode.url = URL(string: "https://yumzzapp.page.link/connect")
             actionCode.handleCodeInApp = true
             actionCode.setIOSBundleID(Bundle.main.bundleIdentifier!)
-            facebook = true
             self.dispatch.enter()
             
             Auth.auth().sendSignInLink(toEmail: email, actionCodeSettings: actionCode) { (error) in

@@ -15,7 +15,7 @@ struct OrderCard: View {
 
     var dish: DishFB
     
-    @EnvironmentObject var order : Order
+    @EnvironmentObject var order : OrderModel
     @Environment (\.colorScheme) var colorScheme:ColorScheme
     
     var body: some View{
