@@ -10,7 +10,6 @@ import Foundation
 import Firebase
 
 struct DishReviewFB{
-    let headline: String
     let id = UUID()
     let userID: String
     let body: String
@@ -22,11 +21,10 @@ struct DishReviewFB{
     var userPhotoURL: String
 
     
-    init(headline: String, body: String, dish: String, restaurant: String, user: String, rating: Int, username: String, photo: UIImage) {
+    init(body: String, dish: String, restaurant: String, user: String, rating: Int, username: String, photo: UIImage) {
         //used when creating a review bc all info is available
         self.body = body
         self.dish = dish
-        self.headline = headline
         self.restaurant = restaurant
         self.userID = user
         self.rating = rating
@@ -37,11 +35,6 @@ struct DishReviewFB{
     
     init?(snapshot: QueryDocumentSnapshot){
         //used when fetching from Firebase to add to DishFB list
-        guard
-            let headline = snapshot.data()["Headline"] as? String else {
-            print("no headline")
-            return nil
-        }
         guard
             let body = snapshot.data()["Body"] as? String else {
             print("no body")
@@ -73,12 +66,10 @@ struct DishReviewFB{
             print("no name")
             return nil
         }
-        print("head: \(headline)")
         print("dish: \(dish)")
         print("rest: \(restaurant)")
         print("rating: \(strRating)")
 
-        self.headline = headline
         self.dish = dish
         self.restaurant = restaurant
         self.body = body

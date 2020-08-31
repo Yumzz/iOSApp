@@ -62,26 +62,26 @@ struct DishAddReview: View {
                         .frame(height: CGFloat(30))
                 }
                 Spacer()
-                PostReviewButton().onTapGesture{
-                    self.show = true
-                    let results = self.FirebaseFunctions.addReview(headline: self.headline, body: self.description, dish: self.dish, rest: self.restaurant, starRating: 5, userID: userProfile.userId, username: userProfile.fullName)
-                    let result = results[0]
-                    let title = results[1]
-                    if(result == ""){
-                        self.show = false
-                        self.isPresented = false
-                        return
-                    }
-                    else{
-                        print("did not add review")
-                        self.alertTitle = title
-                        self.alertMessage = result
-                        self.showingAlert.toggle()
-                    }
-                }
-                .alert(isPresented: $showingAlert) {
-                    Alert(title: Text("Thank you for submitting"), message: Text("\(self.alertMessage)"), dismissButton: .default(Text("OK")))
-                }
+//                PostReviewButton().onTapGesture{
+//                    self.show = true
+//                    let results = self.FirebaseFunctions.addReview(body: self.description, dish: self.dish, rest: self.restaurant, starRating: 5, userID: userProfile.userId, username: userProfile.fullName)
+//                    let result = results[0]
+//                    let title = results[1]
+//                    if(result == ""){
+//                        self.show = false
+//                        self.isPresented = false
+//                        return
+//                    }
+//                    else{
+//                        print("did not add review")
+//                        self.alertTitle = title
+//                        self.alertMessage = result
+//                        self.showingAlert.toggle()
+//                    }
+//                }
+//                .alert(isPresented: $showingAlert) {
+//                    Alert(title: Text("Thank you for submitting"), message: Text("\(self.alertMessage)"), dismissButton: .default(Text("OK")))
+//                }
                 Spacer()
             }
         }

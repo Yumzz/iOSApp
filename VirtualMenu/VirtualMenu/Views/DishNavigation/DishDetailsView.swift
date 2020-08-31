@@ -8,11 +8,11 @@
 
 import SwiftUI
 
-struct ReviewUser: Identifiable {
-    let id = UUID()
-    let review: Review
-    let user: UserProfile
-}
+//struct ReviewUser: Identifiable {
+//    let id = UUID()
+//    let review: Review
+//    let user: UserProfile
+//}
 
 struct DishDetailsView: View {
     
@@ -22,7 +22,7 @@ struct DishDetailsView: View {
     
     @ObservedObject var restDishVM = RestaurantDishViewModel()
     
-    @EnvironmentObject var order : Order
+    @EnvironmentObject var order : OrderModel
     
     let dispatchG1 = DispatchGroup()
 
@@ -32,19 +32,24 @@ struct DishDetailsView: View {
     
     var body: some View {
         VStack(alignment: .center) {
-            VStack{
+            Spacer().frame(width: 0, height: 0)
+            VStack(spacing: 20){
                 Text("\(dish.name)")
                     .font(.title)
-                FBURLImage(url: dish.coverPhotoURL, imageWidth: 330, imageHeight: 210)
+                    .font(.custom("Open Sans", size: 32))
+                FBURLImage(url: dish.coverPhotoURL)
+                    .frame(width: 330, height: 210)
+                    .aspectRatio(contentMode: .fit)
                     .cornerRadius(10)
-                
                 Text("Price: " + DishFB.formatPrice(price: dish.price))
-                    .foregroundColor(.secondary)
+                    .foregroundColor(.black)
                     .font(.headline)
-                Text(dish.description)
-                    .fixedSize(horizontal: false, vertical: true)
-                    .padding(.bottom, 0)
-                OrderButton().onTapGesture {
+                ScrollView{
+                    Text(dish.description)
+                        .fixedSize(horizontal: false, vertical: true)
+                        .padding(.bottom, 0)
+                }
+                DishNavButton(strLabel: "Add to Order").onTapGesture {
                     //send info to POS
                     print("order tapped")
                     self.dispatchG1.enter()
@@ -54,13 +59,9 @@ struct DishDetailsView: View {
                         print("\(self.order.dishRestaurant[self.dish])")
                     }
                 }
-                ReviewsButton().onTapGesture {
-                    //go to reviews view
-                    self.reviewClicked = true
+                NavigationLink(destination: DishReviewsView(isPresented: .constant(true), dish: self.dish, restaurant: self.restaurant)){
+                    ReviewsButton()
                 }
-                
-            }.sheet(isPresented: self.$reviewClicked){
-                DishReviewsView(dish: self.dish, restaurant: self.restaurant)
             }
             .padding()
         }
@@ -69,6 +70,6 @@ struct DishDetailsView: View {
 
 struct DishDetailsView_Previews: PreviewProvider {
     static var previews: some View {
-        DishDetailsView(dish: .init(name: "Dish", description: "Description", price: 25, type: "Type", restaurant: "Restaurant"), restaurant: .init(name: "Restaurant", description: "Description", averagePrice: 10, type: "Type", ethnicity: "Ethnicity", dishes: [], coordinate: .init(latitude: 10, longitude: 10), address: "Address", phone: "Phone", price: "Price"))
+        DishDetailsView(dish: DishFB.previewDish(), restaurant: RestaurantFB.previewRest())
     }
 }

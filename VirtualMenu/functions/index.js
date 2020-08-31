@@ -82,7 +82,6 @@ exports.feedback = functions.https.onRequest((req, resp) => {
 
 exports.reviewAdd = functions.https.onRequest((req, resp) => {
   cors(req, resp, () => {
-    let h = req.body.Headline;
     let body = req.body.Body;
     let dishID = req.body.DishID;
     let username = req.body.Username;
@@ -94,7 +93,6 @@ exports.reviewAdd = functions.https.onRequest((req, resp) => {
       .firestore()
       .collection("DishReview")
       .add({
-        Headline: h,
         Body: body,
         dishID: dishID,
         restID: restID,

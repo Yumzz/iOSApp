@@ -188,6 +188,8 @@ struct LoginView: View {
                 AppView()
             }
         }.onAppear(perform: {
+            self.email = ""
+            self.password = ""
             NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: "NoMoreOnboard"), object: nil, queue: .main) { (Notification) in
                 self.user.showOnboarding = false
                 self.user.isLogged = true
@@ -207,6 +209,9 @@ struct LoginView: View {
             }else{
                 //create alert saying no account associated with this FB profile. Please use sign up page
                 //make case for the error that comes when above happens
+                self.alertMessage = "No account associated with this Facebook profile. Please create a new account."
+                self.alertTitle = "Error!"
+                self.showAlert.toggle()
             }
         })
     }
