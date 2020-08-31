@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import MapKit
 
 struct MenuSelectionView: View {
     @State var restChosen : RestaurantFB
@@ -41,7 +42,17 @@ struct MenuSelectionView: View {
             Divider()
             HStack{
                 Button(action: {
-                    print("Direction tapped!")
+                    let regionDistance:CLLocationDistance = 10000
+                    let coordinates = CLLocationCoordinate2DMake(self.restChosen.coordinate.latitude, self.restChosen.coordinate.longitude)
+                    let regionSpan = MKCoordinateRegion(center: coordinates, latitudinalMeters: regionDistance, longitudinalMeters: regionDistance)
+                    let options = [
+                        MKLaunchOptionsMapCenterKey: NSValue(mkCoordinate: regionSpan.center),
+                        MKLaunchOptionsMapSpanKey: NSValue(mkCoordinateSpan: regionSpan.span)
+                    ]
+                    let placemark = MKPlacemark(coordinate: coordinates, addressDictionary: nil)
+                    let mapItem = MKMapItem(placemark: placemark)
+                    mapItem.name=self.restChosen.name
+                    mapItem.openInMaps(launchOptions: options)
                 }) {
                     VStack {
                         Image(systemName: "arrow.uturn.right")
