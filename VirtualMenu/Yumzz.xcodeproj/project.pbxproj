@@ -38,9 +38,9 @@
 		3A5633C424F902630059B603 /* AuthState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5633C324F902630059B603 /* AuthState.swift */; };
 		3A5633C624F9057D0059B603 /* AppleSignInButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5633C524F9057D0059B603 /* AppleSignInButton.swift */; };
 		3A5633C824F90E080059B603 /* SignInWithApple.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5633C724F90E080059B603 /* SignInWithApple.swift */; };
-		3A5633CA24FA12A70059B603 /* DishNavButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5633C924FA12A70059B603 /* DishNavButton.swift */; };
 		3A5633CC24FA33790059B603 /* Order.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5633CB24FA33790059B603 /* Order.swift */; };
 		3A5633CE24FC8FE70059B603 /* OrderModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5633CD24FC8FE70059B603 /* OrderModel.swift */; };
+		3A5633D524FCED0C0059B603 /* DishNavButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5633D424FCED0C0059B603 /* DishNavButton.swift */; };
 		3A6477F224B68D060077EF30 /* UserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6477F124B68D060077EF30 /* UserProfile.swift */; };
 		3A7E59C82489A98100288AB0 /* ScannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A7E59C72489A98100288AB0 /* ScannerViewController.swift */; };
 		3A87575124EA795D004ABECC /* DishAddReview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A87575024EA795D004ABECC /* DishAddReview.swift */; };
@@ -170,9 +170,9 @@
 		3A5633C324F902630059B603 /* AuthState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthState.swift; sourceTree = "<group>"; };
 		3A5633C524F9057D0059B603 /* AppleSignInButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleSignInButton.swift; sourceTree = "<group>"; };
 		3A5633C724F90E080059B603 /* SignInWithApple.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInWithApple.swift; sourceTree = "<group>"; };
-		3A5633C924FA12A70059B603 /* DishNavButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DishNavButton.swift; sourceTree = "<group>"; };
 		3A5633CB24FA33790059B603 /* Order.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Order.swift; sourceTree = "<group>"; };
 		3A5633CD24FC8FE70059B603 /* OrderModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderModel.swift; sourceTree = "<group>"; };
+		3A5633D424FCED0C0059B603 /* DishNavButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DishNavButton.swift; sourceTree = "<group>"; };
 		3A6477F124B68D060077EF30 /* UserProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfile.swift; sourceTree = "<group>"; };
 		3A7E59C72489A98100288AB0 /* ScannerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerViewController.swift; sourceTree = "<group>"; };
 		3A87575024EA795D004ABECC /* DishAddReview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DishAddReview.swift; sourceTree = "<group>"; };
@@ -386,6 +386,13 @@
 			path = SignInWithAppleHelpers;
 			sourceTree = "<group>";
 		};
+		3A5633D124FCEA220059B603 /* Recovered References */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "Recovered References";
+			sourceTree = "<group>";
+		};
 		3A987ACA2480350C0021F6E4 = {
 			isa = PBXGroup;
 			children = (
@@ -395,6 +402,7 @@
 				3A987AD42480350C0021F6E4 /* Products */,
 				7D43EDA24CF9AA630D4BB85D /* Pods */,
 				72573513B3F6B92305A269F4 /* Frameworks */,
+				3A5633D124FCEA220059B603 /* Recovered References */,
 			);
 			sourceTree = "<group>";
 		};
@@ -516,9 +524,9 @@
 			children = (
 				3AFA234324DBA42E00F90ED8 /* OrderButton.swift */,
 				3AFA234724DCACEA00F90ED8 /* ReviewsButton.swift */,
+				3A5633D424FCED0C0059B603 /* DishNavButton.swift */,
 				A741C95F24FB516000B7F406 /* OrderCard2.swift */,
 				A7FE996124F4A552006E5980 /* DishCard.swift */,
-				3A87574E24EA7423004ABECC /* AddReviewButton.swift */,
 				3A87575224EC910A004ABECC /* PostReviewButton.swift */,
 			);
 			path = Components;
@@ -859,6 +867,7 @@
 				3AF9926824A2B918005446D8 /* Utils.swift in Sources */,
 				3A4E2E3D24D2275F00C34DD8 /* SearchBarButton.swift in Sources */,
 				3A987AD72480350C0021F6E4 /* AppDelegate.swift in Sources */,
+				3A5633D524FCED0C0059B603 /* DishNavButton.swift in Sources */,
 				A7912A2324CF7DED0052988C /* CustomTextField.swift in Sources */,
 				A73B1B6224B111D800A8C6A8 /* AppView.swift in Sources */,
 				A7FE996224F4A552006E5980 /* DishCard.swift in Sources */,
@@ -866,7 +875,6 @@
 				3A6477F224B68D060077EF30 /* UserProfile.swift in Sources */,
 				3A5633BC24F901B70059B603 /* SignInWithAppleManager.swift in Sources */,
 				A741C96024FB516000B7F406 /* OrderCard2.swift in Sources */,
-				3A3137292483178A00E46292 /* Review.swift in Sources */,
 				3AF9926A24A2B95C005446D8 /* InputValidation.swift in Sources */,
 				A777C3A424D3EC7A009658AA /* UserStore.swift in Sources */,
 				A7FE250824A841620007E5AD /* RestaurantMapView.swift in Sources */,
@@ -885,10 +893,8 @@
 				3A530DF324D9769100CBDE28 /* DishCategory.swift in Sources */,
 				3A4E2E3724D21CDC00C34DD8 /* Coordinator.swift in Sources */,
 				A77F6F1B24F8F6C100C9629F /* DishCategoriesViewModel.swift in Sources */,
-				3A31372A2483178A00E46292 /* ARMUser.swift in Sources */,
 				A7F5506B24C1248500FAC1F0 /* RestaurantSearchView.swift in Sources */,
 				A7D0F78324DF6B4100197631 /* FBURLImage.swift in Sources */,
-				3A5633CA24FA12A70059B603 /* DishNavButton.swift in Sources */,
 				3A5633C024F902070059B603 /* SignInWithAppleButton.swift in Sources */,
 				3AFA233E24DA01AC00F90ED8 /* MenuSelectionView.swift in Sources */,
 				3A530DEF24D8E00100CBDE28 /* isClick.swift in Sources */,
