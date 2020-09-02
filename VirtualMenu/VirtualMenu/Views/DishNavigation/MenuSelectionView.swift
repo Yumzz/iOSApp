@@ -7,28 +7,105 @@
 //
 
 import SwiftUI
+import MapKit
 
 struct MenuSelectionView: View {
     @State var restChosen : RestaurantFB
     
     @State var isScannerSelected = false
     
+    @State private var action: Int? = 0
+    
     var body: some View {
-        VStack{
-            VStack(spacing: 60){
-                NavigationLink(destination: ListDishesView(restaurant: self.restChosen)){
-                    MenuButton()
-                }
-                .buttonStyle(PlainButtonStyle())
-                
-
-                NavigationLink(destination: ScanView(rest: self.restChosen)){
-                    ScannerButton()
-                }
-                .buttonStyle(PlainButtonStyle())
+        VStack(spacing: 10){
+            FBURLImage(url: self.restChosen.coverPhotoURL)
+                .frame(width: 220, height:150)
+                .cornerRadius(30)
+            HStack{
+                Text(self.restChosen.name)
+                    .padding(.horizontal)
+                    .foregroundColor(.black)
+                    .font(.custom("Montserrat", size: 26))
+                Image(systemName: "heart.fill")
+                    .foregroundColor(.pink)
+            }.frame(alignment: .center)
+            Text(self.restChosen.ethnicity)
+                .foregroundColor(Color.secondary)
+                .font(.footnote)
+            HStack{
+                Image(systemName: "star.fill")
+                    .foregroundColor(.yellow)
+                Text("Rating")
+                    .foregroundColor(Color.secondary)
+                    .font(.footnote)
             }
+            Divider()
+            HStack{
+                Button(action: {
+                    let regionDistance:CLLocationDistance = 10000
+                    let coordinates = CLLocationCoordinate2DMake(self.restChosen.coordinate.latitude, self.restChosen.coordinate.longitude)
+                    let regionSpan = MKCoordinateRegion(center: coordinates, latitudinalMeters: regionDistance, longitudinalMeters: regionDistance)
+                    let options = [
+                        MKLaunchOptionsMapCenterKey: NSValue(mkCoordinate: regionSpan.center),
+                        MKLaunchOptionsMapSpanKey: NSValue(mkCoordinateSpan: regionSpan.span)
+                    ]
+                    let placemark = MKPlacemark(coordinate: coordinates, addressDictionary: nil)
+                    let mapItem = MKMapItem(placemark: placemark)
+                    mapItem.name=self.restChosen.name
+                    mapItem.openInMaps(launchOptions: options)
+                }) {
+                    VStack {
+                        Image(systemName: "arrow.uturn.right")
+                            .font(.title)
+                        Text("Direction")
+                            .fontWeight(.semibold)
+                            .font(.footnote)
+                            .frame(width: 80)
+                    }
+                    .padding()
+                    .foregroundColor(.red)
+                    .background(Color.white)
+                    .cornerRadius(30)
+                    
+                }
+                
+                Button(action: {
+                    guard let number = URL(string: "tel://" + self.restChosen.phone) else { return }
+                UIApplication.shared.open(number)
+
+                }) {
+                    VStack {
+                        Image(systemName: "phone.fill")
+                            .font(.title)
+                        Text("Call")
+                            .fontWeight(.semibold)
+                            .font(.footnote)
+                            .frame(width: 80)
+                    }
+                    .padding()
+                    .foregroundColor(.red)
+                    .background(Color.white)
+                    .cornerRadius(30)
+                }
+                
+                
+                NavigationLink(destination: ListDishesView(restaurant: self.restChosen)){
+                    VStack {
+                        Image(systemName: "doc.plaintext")
+                            .font(.title)
+                        Text("Menu")
+                            .fontWeight(.semibold)
+                            .font(.footnote)
+                            .frame(minWidth: 80)
+                    }
+                    .padding()
+                    .foregroundColor(.red)
+                    .background(Color.white)
+                    .cornerRadius(30)
+                }
+            }
+            Spacer()
         }
-        .navigationBarTitle("Menu Selection")
         .navigationBarHidden(false)
     }
 }
