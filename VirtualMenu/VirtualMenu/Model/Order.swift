@@ -11,6 +11,6 @@ import SwiftUI
 
 struct Order {
     var dishes: [DishFB]
-    var totalPrice: CGFloat
+    var totalPrice: Double
     
 }

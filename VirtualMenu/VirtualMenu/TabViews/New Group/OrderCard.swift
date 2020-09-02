@@ -25,7 +25,7 @@ struct OrderCard: View {
                     Image("delete_cross")
                         .frame(width: 5, height: 5)
                         .onTapGesture {
-                            self.order.deleteDish(dish: self.dish)
+//                            self.order.deleteDish(dish: self.dish)
                     }
                 }.position(x: UIScreen.main.bounds.width - 100, y: 20)
             HStack(alignment: .center, spacing: 20) {

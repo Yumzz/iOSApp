@@ -62,7 +62,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                     guard let email = UserDefaults.standard.value(forKey: "Email") as? String else { return false}
                     guard let password = UserDefaults.standard.value(forKey: "Password") as? String else { return false}
                     guard let name = UserDefaults.standard.value(forKey: "Name") as? String else { return false}
-                    
+                    let faveDishes = [String: [DocumentReference]]()
+                        
                     var disp = DispatchGroup()
                     disp.enter()
                     Auth.auth().signIn(withEmail: email, link: link) { (dataResult, error) in
@@ -89,7 +90,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                                 "uid" : userProfile.userId,
                                  "email" : email,
                                  "password": password,
-                                 "username" : name
+                                 "username" : name,
+                                 "FavDishes": faveDishes
                                  ] as [String : Any]
 
                             Firestore.firestore().collection("User").addDocument(data: data, completion: {

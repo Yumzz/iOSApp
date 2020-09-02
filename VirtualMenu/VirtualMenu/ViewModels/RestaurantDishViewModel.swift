@@ -37,6 +37,10 @@ class RestaurantDishViewModel: ObservableObject {
     
     let locationManager = LocationManager()
     
+    func resetReviews(){
+        self.dishReviews = [DishReviewFB]()
+    }
+    
     //function to get nearby restaurants but no dish info
     //Average Price = low, medium, or high
     func fetchRestaurantsBasicInfo(){

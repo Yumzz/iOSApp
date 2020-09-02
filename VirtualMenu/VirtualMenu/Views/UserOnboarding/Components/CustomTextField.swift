@@ -31,6 +31,7 @@ struct CustomTextField: View {
                 .foregroundColor(Color(UIColor().colorFromHex("#F88379", 1)))
                 .textFieldStyle(RoundedBorderTextFieldStyle())
                 .shadow(radius: 4)
+            
                 
 
         }

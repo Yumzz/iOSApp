@@ -41,6 +41,9 @@
 		3A5633CC24FA33790059B603 /* Order.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5633CB24FA33790059B603 /* Order.swift */; };
 		3A5633CE24FC8FE70059B603 /* OrderModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5633CD24FC8FE70059B603 /* OrderModel.swift */; };
 		3A5633D524FCED0C0059B603 /* DishNavButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5633D424FCED0C0059B603 /* DishNavButton.swift */; };
+		3A5F685424FE230200F9B43D /* TextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5F685324FE230200F9B43D /* TextView.swift */; };
+		3A5F685624FE470C00F9B43D /* ReviewCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5F685524FE470C00F9B43D /* ReviewCard.swift */; };
+		3A5F685824FEFB5000F9B43D /* SaveOrderButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5F685724FEFB5000F9B43D /* SaveOrderButton.swift */; };
 		3A6477F224B68D060077EF30 /* UserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6477F124B68D060077EF30 /* UserProfile.swift */; };
 		3A7E59C82489A98100288AB0 /* ScannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A7E59C72489A98100288AB0 /* ScannerViewController.swift */; };
 		3A87575124EA795D004ABECC /* DishAddReview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A87575024EA795D004ABECC /* DishAddReview.swift */; };
@@ -83,7 +86,7 @@
 		A73B1B6424B1162E00A8C6A8 /* OrderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A73B1B6324B1162E00A8C6A8 /* OrderView.swift */; };
 		A73B1B6624B116CE00A8C6A8 /* FavoriteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A73B1B6524B116CE00A8C6A8 /* FavoriteView.swift */; };
 		A73FD46324919A1300A035AB /* ListDishesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A73FD46224919A1300A035AB /* ListDishesView.swift */; };
-		A741C96024FB516000B7F406 /* OrderCard2.swift in Sources */ = {isa = PBXBuildFile; fileRef = A741C95F24FB516000B7F406 /* OrderCard2.swift */; };
+		A741C96024FB516000B7F406 /* CompleteOrderCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = A741C95F24FB516000B7F406 /* CompleteOrderCard.swift */; };
 		A777C3A424D3EC7A009658AA /* UserStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = A777C3A324D3EC7A009658AA /* UserStore.swift */; };
 		A77BC2F424DD2AE800ACAD84 /* RestaurantSearchListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77BC2F324DD2AE800ACAD84 /* RestaurantSearchListViewModel.swift */; };
 		A77F6F1B24F8F6C100C9629F /* DishCategoriesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77F6F1A24F8F6C100C9629F /* DishCategoriesViewModel.swift */; };
@@ -173,6 +176,9 @@
 		3A5633CB24FA33790059B603 /* Order.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Order.swift; sourceTree = "<group>"; };
 		3A5633CD24FC8FE70059B603 /* OrderModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderModel.swift; sourceTree = "<group>"; };
 		3A5633D424FCED0C0059B603 /* DishNavButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DishNavButton.swift; sourceTree = "<group>"; };
+		3A5F685324FE230200F9B43D /* TextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextView.swift; sourceTree = "<group>"; };
+		3A5F685524FE470C00F9B43D /* ReviewCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewCard.swift; sourceTree = "<group>"; };
+		3A5F685724FEFB5000F9B43D /* SaveOrderButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveOrderButton.swift; sourceTree = "<group>"; };
 		3A6477F124B68D060077EF30 /* UserProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfile.swift; sourceTree = "<group>"; };
 		3A7E59C72489A98100288AB0 /* ScannerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerViewController.swift; sourceTree = "<group>"; };
 		3A87575024EA795D004ABECC /* DishAddReview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DishAddReview.swift; sourceTree = "<group>"; };
@@ -219,7 +225,7 @@
 		A73B1B6324B1162E00A8C6A8 /* OrderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderView.swift; sourceTree = "<group>"; };
 		A73B1B6524B116CE00A8C6A8 /* FavoriteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteView.swift; sourceTree = "<group>"; };
 		A73FD46224919A1300A035AB /* ListDishesView.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = ListDishesView.swift; sourceTree = "<group>"; tabWidth = 4; usesTabs = 0; wrapsLines = 1; };
-		A741C95F24FB516000B7F406 /* OrderCard2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderCard2.swift; sourceTree = "<group>"; };
+		A741C95F24FB516000B7F406 /* CompleteOrderCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompleteOrderCard.swift; sourceTree = "<group>"; };
 		A777C3A324D3EC7A009658AA /* UserStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserStore.swift; sourceTree = "<group>"; };
 		A77BC2F324DD2AE800ACAD84 /* RestaurantSearchListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantSearchListViewModel.swift; sourceTree = "<group>"; };
 		A77F6F1A24F8F6C100C9629F /* DishCategoriesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DishCategoriesViewModel.swift; sourceTree = "<group>"; };
@@ -489,7 +495,9 @@
 		3AE05F9D24EFB48C0024F802 /* New Group */ = {
 			isa = PBXGroup;
 			children = (
+				A741C95F24FB516000B7F406 /* CompleteOrderCard.swift */,
 				3AE05F9E24EFB5DA0024F802 /* OrderCard.swift */,
+				3A5F685724FEFB5000F9B43D /* SaveOrderButton.swift */,
 			);
 			path = "New Group";
 			sourceTree = "<group>";
@@ -525,8 +533,9 @@
 				3AFA234324DBA42E00F90ED8 /* OrderButton.swift */,
 				3AFA234724DCACEA00F90ED8 /* ReviewsButton.swift */,
 				3A5633D424FCED0C0059B603 /* DishNavButton.swift */,
-				A741C95F24FB516000B7F406 /* OrderCard2.swift */,
+				3A5F685324FE230200F9B43D /* TextView.swift */,
 				A7FE996124F4A552006E5980 /* DishCard.swift */,
+				3A5F685524FE470C00F9B43D /* ReviewCard.swift */,
 				3A87575224EC910A004ABECC /* PostReviewButton.swift */,
 			);
 			path = Components;
@@ -850,6 +859,7 @@
 			files = (
 				3A3137392483A25D00E46292 /* StringScanUtils.swift in Sources */,
 				3A5633CE24FC8FE70059B603 /* OrderModel.swift in Sources */,
+				3A5F685624FE470C00F9B43D /* ReviewCard.swift in Sources */,
 				3A4E2E2F24D0D2D600C34DD8 /* AuthenticationViewModel.swift in Sources */,
 				3A5633CC24FA33790059B603 /* Order.swift in Sources */,
 				3A4A0E72249EB94D0030635E /* ImagePicker.swift in Sources */,
@@ -874,7 +884,7 @@
 				3A7E59C82489A98100288AB0 /* ScannerViewController.swift in Sources */,
 				3A6477F224B68D060077EF30 /* UserProfile.swift in Sources */,
 				3A5633BC24F901B70059B603 /* SignInWithAppleManager.swift in Sources */,
-				A741C96024FB516000B7F406 /* OrderCard2.swift in Sources */,
+				A741C96024FB516000B7F406 /* CompleteOrderCard.swift in Sources */,
 				3AF9926A24A2B95C005446D8 /* InputValidation.swift in Sources */,
 				A777C3A424D3EC7A009658AA /* UserStore.swift in Sources */,
 				A7FE250824A841620007E5AD /* RestaurantMapView.swift in Sources */,
@@ -890,9 +900,11 @@
 				3AFA234824DCACEA00F90ED8 /* ReviewsButton.swift in Sources */,
 				3A5633C424F902630059B603 /* AuthState.swift in Sources */,
 				3A87575324EC910A004ABECC /* PostReviewButton.swift in Sources */,
+				3A5F685824FEFB5000F9B43D /* SaveOrderButton.swift in Sources */,
 				3A530DF324D9769100CBDE28 /* DishCategory.swift in Sources */,
 				3A4E2E3724D21CDC00C34DD8 /* Coordinator.swift in Sources */,
 				A77F6F1B24F8F6C100C9629F /* DishCategoriesViewModel.swift in Sources */,
+				3A5F685424FE230200F9B43D /* TextView.swift in Sources */,
 				A7F5506B24C1248500FAC1F0 /* RestaurantSearchView.swift in Sources */,
 				A7D0F78324DF6B4100197631 /* FBURLImage.swift in Sources */,
 				3A5633C024F902070059B603 /* SignInWithAppleButton.swift in Sources */,

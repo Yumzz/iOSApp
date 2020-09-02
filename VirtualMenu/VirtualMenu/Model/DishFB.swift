@@ -107,6 +107,7 @@ extension DishFB: Hashable {
                 print(x)
             }
         }
+        print("x: \(x)")
         return x
     }
     

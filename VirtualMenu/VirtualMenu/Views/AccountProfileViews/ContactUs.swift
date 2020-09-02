@@ -16,6 +16,8 @@ struct ContactUs: View {
     @State private var alertMessage = ""
     @State private var alertTitle = ""
     @State var show = false
+    @State private var textStyle = UIFont.TextStyle.body
+
     
     @ObservedObject var FirebaseFunctions = FirebaseFunctionsViewModel()
     
@@ -54,7 +56,8 @@ struct ContactUs: View {
                     Text("What's on your mind?")
                         .padding(.leading, (UIScreen.main.bounds.width * 10) / 414)
                         .padding(.trailing, (UIScreen.main.bounds.width * 10) / 414)
-                    MultiLineTFContact(txt: $messageBody)
+                    TextView(text: self.$messageBody, textStyle: self.$textStyle)
+                        .padding(.horizontal)
                         .border(Color.gray.opacity(0.5), width: 1)
                         .padding(.leading, (UIScreen.main.bounds.width * 10) / 414)
                         .padding(.trailing, (UIScreen.main.bounds.width * 10) / 414)

@@ -16,6 +16,7 @@ struct UserProfile {
     var fullName: String = ""
     var profilePhotoURL: String = ""
     var profilePhoto: UIImage? = nil
+    var favRests: [String:DishFB] = [String:DishFB]()
    
     // MARK: - Firebase Keys
     
@@ -61,6 +62,7 @@ struct UserProfile {
         guard let profPhoto = snapshot.data()["profilePhoto"] as? UIImage else {
             return nil
         }
+        
         self.fullName = name
         self.userId = id
         self.emailAddress = email
@@ -136,4 +138,49 @@ extension UserProfile: Hashable {
             print("finished")
         }
     }
+    
+    mutating func getFaveDishes(){
+        //decode favorites mapping from FB
+        let db = Firestore.firestore()
+        var map: [String: DishFB] = [String: DishFB]()
+        var docRef = db.collection("User").whereField("id", isEqualTo: self.userId)
+        docRef.getDocuments { (snap, err) in
+            if let error = err {
+                print("Error getting documents: \(error)")
+            } else {
+                for document in snap!.documents {
+                guard
+                    let ds = document.data()["FavDishes"] as? [String:[DocumentReference?]] else {
+                        print("dishes messed up")
+                        return
+                    }
+                    ds.forEach { (arg0) in
+                        let (rest, dish) = arg0
+                        dish.forEach { (arg1) in
+                            let d = arg1
+                            d!.getDocument(completion: { (s, err) in
+                                if let error = err {
+                                    print("Error getting documents: \(error)")
+                                } else {
+                                    let dname = s?.data()!["Name"] as! String
+                                    let description = s?.data()!["Description"] as! String
+                                    let price = s?.data()!["Price"] as! Double
+                                    let rest = s?.data()!["Restaurant"] as! String
+                                    let type = s?.data()!["Type"] as! String
+                                    map[rest] = DishFB(name: dname, description: description, price: price, type: type, restaurant: rest)
+                                }
+                            })
+                        }
+                        
+                    }
+                }
+            }
+    
+        }
+        self.favRests = map
+    }
+    
+    
+    
 }
+    

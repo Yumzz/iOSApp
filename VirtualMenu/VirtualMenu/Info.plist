@@ -44,6 +44,11 @@
 	<string>1255178491497835</string>
 	<key>FacebookDisplayName</key>
 	<string>Yumzz</string>
+	<key>FirebaseDynamicLinksCustomDomains</key>
+	<array>
+		<string>https://yumzzapp.page.link/connect</string>
+		<string>https://yumzzmenu.com</string>
+	</array>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>fbapi</string>
@@ -92,7 +97,7 @@
 		</dict>
 	</dict>
 	<key>UILaunchStoryboardName</key>
-	<string>Launch_Screen</string>
+	<string>LaunchScreen</string>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>
@@ -110,10 +115,5 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
-    <key>FirebaseDynamicLinksCustomDomains</key>
-    <array>
-        <string>https://yumzzapp.page.link/connect</string>
-        <string>https://yumzzmenu.com</string>
-    </array>
 </dict>
 </plist>

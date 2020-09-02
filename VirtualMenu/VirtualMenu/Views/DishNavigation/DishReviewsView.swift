@@ -20,6 +20,7 @@ struct DishReviewsView: View {
 
     @State var review: String = ""
     @Binding var isPresented: Bool
+    @State private var textStyle = UIFont.TextStyle.body
     
     @State private var showingAlert = false
     @State private var alertMessage = ""
@@ -60,10 +61,28 @@ struct DishReviewsView: View {
                             Text("No reviews yet. Add yours!")
                                     .frame(width: 330, height: 320, alignment: .center).cornerRadius(10)
                         } else {
-                            List {
+                            ScrollView {
                                 ForEach(self.reviews, id: \.id) {
                                     reviewuser in
                                     VStack {
+//                                        ReviewCard
+//                                        if (reviewuser.userPhotoURL == "") {
+//                                            HStack{
+//                                                Image(uiImage: UIImage(imageLiteralResourceName: "profile_photo_edit"))
+//                                                    .resizable()
+//                                                    .frame(width: 50, height: 50)
+//                                                    .aspectRatio(contentMode: .fit)
+//                                                VStack(alignment: .leading) {
+//                                                    Text(reviewuser.body)
+//                                                        .foregroundColor(.primary)
+//                                                        .font(.headline)
+//                                                }
+//                                            }
+//                                        }
+//                                        else{
+//                                            ReviewCard(urlImage: FBURLImage(url: reviewuser.userPhotoURL, imageAspectRatio: .fill), review: reviewuser.body)
+//                                        }
+                                        
                                         HStack {
                                             if (reviewuser.userPhotoURL == "") {
                                                 Image(uiImage: UIImage(imageLiteralResourceName: "profile_photo_edit"))
@@ -73,6 +92,7 @@ struct DishReviewsView: View {
                                             } else {
                                                 FBURLImage(url: reviewuser.userPhotoURL)
                                                     .clipShape(Circle())
+                                                    .frame(width: 50, height: 50)
                                                     .aspectRatio(contentMode: .fit)
                                             }
                                             VStack(alignment: .leading) {
@@ -92,68 +112,75 @@ struct DishReviewsView: View {
                             
                         }
                     }
+                    HStack{
                         DishNavButton(strLabel: "Submit a Review").onTapGesture{
                             self.reviewClicked = true
                             print("Add Review")
                         }
+                    }.overlay(BottomSheetModal(display: self.$reviewClicked, backgroundColor: .constant(Color(UIColor().colorFromHex("#3399FF", 1))), rectangleColor: .constant(Color(UIColor().colorFromHex("#FFFFFF", 1)))) {
+                                ZStack{
+                                    VStack(spacing: 20) {
+                                        HStack{
+                                            Text("Write your review:")
+                                            .foregroundColor(Color(UIColor().colorFromHex("#FFFFFF", 1)))
+                                            Spacer()
+                                        }
+
+                                        TextView(text: self.$review, textStyle: self.$textStyle)
+                                        .padding(.horizontal)
+
+                    //                        VStack(alignment: .leading){
+                                        HStack{
+                                            Spacer().frame(width: UIScreen.main.bounds.width/3)
+                                            PostReviewButton().onTapGesture {
+                                                self.show = true
+                                                let results = self.FirebaseFunctions.addReview(body: self.review, dish: self.dish, rest: self.restaurant, starRating: 5, userID: userProfile.userId, username: userProfile.fullName)
+                                                let result = results[0]
+                                                let title = results[1]
+                                                if(result == ""){
+                                                    print("here: ")
+                                                    self.alertTitle = "Review Sent"
+                                                    self.alertMessage = "Review has been updated"
+                                                    self.showingAlert.toggle()
+                                                    self.show = false
+                                                    self.isPresented = false
+                                                    return
+                                                }
+                                                else{
+                                                    print("did not add review")
+                                                    self.alertTitle = title
+                                                    self.alertMessage = result
+                                                    self.showingAlert.toggle()
+                                                }
+                                            }
+                        //                    .frame(width: UIScreen.main.bounds.width/6, height: 40, alignment: .trailing)
+                                            .alert(isPresented: self.$showingAlert) {
+                                                Alert(title: Text("Thank you for submitting"), message: Text("\(self.alertMessage)"), dismissButton: .default(Text("OK")))
+                                            }
+                                        }
+                    //                        }
+                                        Spacer()
+                                        Spacer()
+                                        Spacer()
+                                    }
+                                    }
+                                }
+                            )
+
                     
                     .frame(maxWidth: .infinity)
                     .padding(.bottom, 25)
-                }.overlay(BottomSheetModal(display: self.$reviewClicked, backgroundColor: .constant(Color(UIColor().colorFromHex("#FFFFFF", 1))), rectangleColor: .constant(Color(UIColor().colorFromHex("#000000", 1)))) {
-                            ZStack{
-                                VStack(spacing: 20) {
-                                    HStack{
-                                        Text("Write your review:")
-                                        .foregroundColor(Color(UIColor().colorFromHex("#707070", 1)))
-                                        Spacer()
-                                    }
-                //                                        Spacer().frame(height: 20)
-                //                    VStack(alignment: .center){
-                                        MultiLineTFReview(txt: self.$review)
-                                        .shadow(radius: 5)
-                //                    }
-
-                //                        VStack(alignment: .leading){
-                                    HStack{
-                                        Spacer().frame(width: UIScreen.main.bounds.width/3)
-                                        PostReviewButton().onTapGesture {
-                                            self.show = true
-                                            let results = self.FirebaseFunctions.addReview(body: self.review, dish: self.dish, rest: self.restaurant, starRating: 5, userID: userProfile.userId, username: userProfile.fullName)
-                                            let result = results[0]
-                                            let title = results[1]
-                                            if(result == ""){
-                                                self.show = false
-                                                self.isPresented = false
-                                                return
-                                            }
-                                            else{
-                                                print("did not add review")
-                                                self.alertTitle = title
-                                                self.alertMessage = result
-                                                self.showingAlert.toggle()
-                                            }
-                                        }
-                    //                    .frame(width: UIScreen.main.bounds.width/6, height: 40, alignment: .trailing)
-                                        .alert(isPresented: self.$showingAlert) {
-                                            Alert(title: Text("Thank you for submitting"), message: Text("\(self.alertMessage)"), dismissButton: .default(Text("OK")))
-                                        }
-                                    }
-                //                        }
-                                    Spacer()
-
-                                }
-                                }
-                            }
-                        )
+                }
                 
             }
-        }        .onAppear {
+        }.onAppear {
             self.show = true
             print("here at reviews")
             self.restDishVM.fetchDishReviewsFB(dishID: self.dish.key, restId: self.restaurant.key)
             self.restDishVM.dispatchGroup2.notify(queue: .main){
                 print("notified")
                 self.reviews = self.restDishVM.dishReviews
+                self.restDishVM.resetReviews()
                 self.show = false
             }
             

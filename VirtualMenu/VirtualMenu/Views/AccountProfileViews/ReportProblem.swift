@@ -15,6 +15,8 @@ struct ReportProblem: View {
     @State private var showingAlert = false
     @State private var alertMessage = ""
     @State private var alertTitle = ""
+    @State private var textStyle = UIFont.TextStyle.body
+
     
     @ObservedObject var FirebaseFunctions = FirebaseFunctionsViewModel()
         
@@ -53,7 +55,8 @@ struct ReportProblem: View {
                     Text("What's going on? We'll try and fix it.")
                         .padding(.leading, (UIScreen.main.bounds.width * 10) / 414)
                         .padding(.trailing, (UIScreen.main.bounds.width * 10) / 414)
-                    MultiLineTFReport(txt: $messageBody)
+                    TextView(text: self.$messageBody, textStyle: self.$textStyle)
+                        .padding(.horizontal)
                         .border(Color.gray.opacity(0.5), width: 1)
                         .padding(.leading, (UIScreen.main.bounds.width * 10) / 414)
                         .padding(.trailing, (UIScreen.main.bounds.width * 10) / 414)

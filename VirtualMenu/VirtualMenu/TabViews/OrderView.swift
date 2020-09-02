@@ -16,6 +16,10 @@ struct OrderView: View {
     @EnvironmentObject var order : OrderModel
     @ObservedObject var restViewModel = RestaurantDishViewModel()
     
+    @State private var showingAlert = false
+    @State private var alertMessage = ""
+    @State private var alertTitle = ""
+    
     var body: some View {
         VStack() {
             //If Current Selection, show what is added to cart so far
@@ -31,28 +35,35 @@ struct OrderView: View {
 //            How to switch between current selection and past orders
             if selectorIndex == 0 {
                 if !self.order.dishesChosen.isEmpty {
-                    List{
-                        ForEach(self.order.dishesChosen, id: \.id) { dish in
-                            //need to get restaurantFB in orderViewModel
-                            NavigationLink(destination: DishDetailsView(dish: dish, restaurant: self.order.dishRestaurant[dish]!)){
-                                VStack {
-                                    OrderCard(urlImage: FBURLImage(url: dish.coverPhotoURL),dish: dish)
-                                    //have star rating of dish on it
-                                }
-                            }
-                            .buttonStyle(PlainButtonStyle())
+                    CompleteOrderCard()
+                    SaveOrderButton().onTapGesture {
+                        //what do we do here to save orders for user?
+                        //have dishes here, need to store into user's orders on FB
+                        let ord = Order(dishes: self.order.dishesChosen, totalPrice: self.order.totalCost)
+                        //put this order onto firebase and add to user's list
+                        if(userProfile.userId != ""){
+                            self.order.saveOrder(order: ord)
                         }
+                        else{
+                            self.alertTitle = "Can't Save"
+                            self.alertMessage = "You need to have a Yumzz account to save this order for future viewing."
+                            self.showingAlert.toggle()
+                        }
+                        print("save order")
+                        
                     }
-                    
-                    Text("Subtotal: \(self.order.totalCost)")
-                
+                    .alert(isPresented: self.$showingAlert) {
+                        Alert(title: Text("\(self.alertTitle)"), message: Text("\(self.alertMessage)"), dismissButton: .default(Text("OK")))
+                    }
                 }
                 else{
                     Text("Go add some dishes to your order!")
                 }
             }
             else{
-                //past orders
+                //past orders - fetch based on userID
+                //card view for each
+                
             }
             
             Spacer()
