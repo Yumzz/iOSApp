@@ -9,8 +9,20 @@
 import Foundation
 import SwiftUI
 
-struct Order {
+struct Order: Hashable {
     var dishes: [DishFB]
     var totalPrice: Double
+    var rest: String
+    var id: UUID = UUID()
     
+}
+
+extension Order {
+    static func == (lhs: Order, rhs: Order) -> Bool {
+        return lhs.id == rhs.id
+    }
+
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+    }
 }

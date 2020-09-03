@@ -64,7 +64,6 @@
 		3ABA90F124F63DB500695B06 /* BlackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ABA90F024F63DB500695B06 /* BlackButton.swift */; };
 		3ABA90F324F640AE00695B06 /* SocialMediaButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ABA90F224F640AE00695B06 /* SocialMediaButton.swift */; };
 		3ABA90F524F64EDE00695B06 /* GuestButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ABA90F424F64EDE00695B06 /* GuestButton.swift */; };
-		3ABA90F724F6FEDB00695B06 /* Launch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ABA90F624F6FEDB00695B06 /* Launch.swift */; };
 		3ABA90F924F71E7C00695B06 /* PinkBackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ABA90F824F71E7C00695B06 /* PinkBackButton.swift */; };
 		3AE05F9824EF27550024F802 /* FacebookCore in Frameworks */ = {isa = PBXBuildFile; productRef = 3AE05F9724EF27550024F802 /* FacebookCore */; };
 		3AE05F9A24EF27550024F802 /* FacebookLogin in Frameworks */ = {isa = PBXBuildFile; productRef = 3AE05F9924EF27550024F802 /* FacebookLogin */; };
@@ -204,7 +203,6 @@
 		3ABA90F024F63DB500695B06 /* BlackButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlackButton.swift; sourceTree = "<group>"; };
 		3ABA90F224F640AE00695B06 /* SocialMediaButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialMediaButton.swift; sourceTree = "<group>"; };
 		3ABA90F424F64EDE00695B06 /* GuestButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuestButton.swift; sourceTree = "<group>"; };
-		3ABA90F624F6FEDB00695B06 /* Launch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Launch.swift; sourceTree = "<group>"; };
 		3ABA90F824F71E7C00695B06 /* PinkBackButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinkBackButton.swift; sourceTree = "<group>"; };
 		3AE05F9E24EFB5DA0024F802 /* OrderCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderCard.swift; sourceTree = "<group>"; };
 		3AF9926424A2B7C9005446D8 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
@@ -309,7 +307,6 @@
 				A7912A2424CF7DF70052988C /* Components */,
 				3A5633B824F9010A0059B603 /* SignInWithAppleHelpers */,
 				3AF9927424A53AC0005446D8 /* SignUpView.swift */,
-				3ABA90F624F6FEDB00695B06 /* Launch.swift */,
 				3AF9926424A2B7C9005446D8 /* LoginView.swift */,
 				3A4E2E1F24C6244600C34DD8 /* ForgotPassword.swift */,
 			);
@@ -939,7 +936,6 @@
 				A724364B24D4CFF200F8BBBB /* RestaurantCard.swift in Sources */,
 				A7912A2A24CF8EFE0052988C /* CustomPasswordField.swift in Sources */,
 				3A4A0E70249EB9320030635E /* AccountProfileView.swift in Sources */,
-				3ABA90F724F6FEDB00695B06 /* Launch.swift in Sources */,
 				3AFA234424DBA42E00F90ED8 /* OrderButton.swift in Sources */,
 				A73B1B6624B116CE00A8C6A8 /* FavoriteView.swift in Sources */,
 				3AF9927524A53AC0005446D8 /* SignUpView.swift in Sources */,

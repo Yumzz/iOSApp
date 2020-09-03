@@ -77,7 +77,8 @@ struct LoginView: View {
                     CustomPasswordField(strLabel: "Password", password: $password)
                     
                     Button(action: {
-                        
+                        print(self.email)
+                        print(self.password)
                         Auth.auth().signIn(withEmail: self.email, password: self.password){ result, error in
                             
                             if(error != nil){

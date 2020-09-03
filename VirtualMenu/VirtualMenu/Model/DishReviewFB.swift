@@ -30,7 +30,11 @@ struct DishReviewFB{
         self.rating = rating
         self.userPhoto = photo
         self.username = username
-        self.userPhotoURL = "profilephotos/\(userID)"
+        if(userID != ""){
+            self.userPhotoURL = "profilephotos/\(userID)"
+        }else{
+            self.userPhotoURL = ""
+        }
     }
     
     init?(snapshot: QueryDocumentSnapshot){

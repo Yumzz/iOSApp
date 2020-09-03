@@ -19,18 +19,20 @@ struct ReviewCard: View {
     
     var body: some View {
         
-        HStack(alignment: .top, spacing: 20) {
+        HStack(alignment: .center, spacing: 40) {
         
             if urlImage == nil {
-                Image(systemName: "square.fill")
+                Image(uiImage: UIImage(imageLiteralResourceName: "profile_photo_edit"))
                     .renderingMode(.original)
                     .resizable()
                     .aspectRatio(contentMode: .fit)
-                    .frame(width: 88, height: 88, alignment: .leading)
+                    .frame(width: 50, height: 50, alignment: .leading)
             }
             else {
                 urlImage!
-                .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
+                .clipShape(RoundedRectangle(cornerRadius: 10))
+                .aspectRatio(contentMode: .fit)
+                .frame(width: 50, height: 50, alignment: .leading)
             }
             
             VStack(alignment: .leading) {

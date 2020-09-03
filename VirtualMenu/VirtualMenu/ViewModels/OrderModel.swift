@@ -22,6 +22,8 @@ class OrderModel: ObservableObject {
     
     var dishReferences = [DocumentReference]()
     
+    var pastOrders = [Order]()
+    
     
     //do i want these attributes to cause an update when they change
     var dishIndexes : [DishFB : Int] = [DishFB : Int]()
@@ -121,9 +123,6 @@ class OrderModel: ObservableObject {
         let ds = DispatchGroup()
         print("save")
         let db = Firestore.firestore()
-//      1. go through each dish in order
-//      2. for each dish, get reference and append onto self.dishReferences
-//      3. create new order on FB with dishes = self.dishReferences
         for d in order.dishes{
             let dishQuery = db.collection("Dish").whereField("Restaurant", isEqualTo: self.restChosen.name)
                 .whereField("Name", isEqualTo: d.name)
@@ -144,43 +143,85 @@ class OrderModel: ObservableObject {
                 if(d == order.dishes.last){
                     print("last: \(d.name)")
                     print(self.dishReferences)
-                    let data = ["dishes": self.dishReferences, "userId": userProfile.userId] as [String : Any]
+                    let data = ["dishes": self.dishReferences, "userId": userProfile.userId, "rest": self.restChosen.name] as [String : Any]
                     let reference = db.collection("Order").addDocument(data: data)
                     print("posted order")
                     self.dishReferences = [DocumentReference]()
     //                                self.addOrder(ref: reference)
+                    self.retrieveOrders(userID: userProfile.userId)
                 }
             }
         }
     }
     
-//    func addOrder(ref: DocumentReference){
-//        print("userQuery")
-//        let userQuery = db.collection("User").whereField("id", isEqualTo: userProfile.userId)
-//        userQuery.getDocuments { (snap, err) in
-//            if let err = err {
-//                print("Error getting documents: \(err)")
-//            }else{
-//                for document in snap!.documents {
-////                    document.data().updateValue(<#T##value: Any##Any#>, forKey: <#T##String#>)
-//
-//                    var orders: [DocumentReference?] = document.data()["orders"] as! [DocumentReference?]
-//                    if(orders == nil){
-//                        //add orders field and populate
-//                        document.setValue([ref], forKeyPath: "orders")
-//                    }else{
-//                        orders.append(ref)
-//                        document.setValue(orders, forKeyPath: "orders")
-////                        document.data().updateValue(orders, forKey: "orders")
-//                    }
-//                }
-//            }
-//        }
-//    }
-    
-    func retrieveOrder(){
+    func retrieveOrders(userID: String){
+        let db = Firestore.firestore()
+        let orderQuery = db.collection("Order").whereField("userId", isEqualTo: userID)
+        let ds = DispatchGroup()
+        var orderss : Set<[DocumentReference]> = Set<[DocumentReference]>()
+        //1. go through each order for this user
+        //2. construct each order with its' list of dishes
+        //3. add all orders to prevOrders
+        orderQuery.getDocuments { (snap, err) in
+            if let err = err {
+                print(err.localizedDescription)
+            }
+            else{
+                ds.enter()
+                print("got order doc")
+                for doc in snap!.documents {
+                    //int to dish list and send that to function afet ds.notify?
+                    let dishes: [DocumentReference] = doc.data()["dishes"] as! [DocumentReference]
+                    //need to create order
+                    orderss.insert(dishes)
+                    print("got dishes")
+                    if(doc == snap!.documents.last){
+                        ds.leave()
+                        ds.notify(queue: .main){
+                            print("got all orders")
+                            let ds2 = DispatchGroup()
+                            print(orderss)
+                            self.makeOrder(orders: orderss, ds2: ds2)
+                            print(self.pastOrders)
+                        }
+                    }
+                }
+            }
+            
+        }
         
     }
     
-    
+    func makeOrder(orders: Set<[DocumentReference]>, ds2: DispatchGroup){
+//        var order = Order(dishes: [], totalPrice: 0.0)
+        for ord in orders {
+            var order = Order(dishes: [], totalPrice: 0.0, rest: "")
+            print("going through each order")
+            ds2.enter()
+            for d in ord {
+                d.getDocument { (snap2, err2) in
+                    if let err2 = err2 {
+                        print(err2.localizedDescription)
+                    }
+                    else{
+                        print("dish exists in order: \(snap2!.data()!["Name"] as! String)")
+                        let price = Double(snap2!.data()!["Price"] as! String)
+                        let dish = DishFB(name: snap2!.data()!["Name"] as! String, description: snap2!.data()!["Description"] as! String, price: price!, type: snap2!.data()!["Type"] as! String, restaurant: snap2!.data()!["Restaurant"] as! String)
+                        order.dishes.append(dish)
+                        order.totalPrice = order.totalPrice + dish.price
+                        
+                        if(d == ord.last){
+                            print("last dish in order")
+                            order.rest = snap2!.data()!["Restaurant"] as! String
+                            ds2.leave()
+                            ds2.notify(queue: .main){
+                                self.pastOrders.append(order)
+                                print(self.pastOrders)
+                            }
+                        }
+                    }
+                }
+            }
+        }
+      }
 }

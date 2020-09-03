@@ -84,22 +84,30 @@ struct DishReviewsView: View {
 //                                        }
                                         
                                         HStack {
-                                            if (reviewuser.userPhotoURL == "") {
-                                                Image(uiImage: UIImage(imageLiteralResourceName: "profile_photo_edit"))
-                                                .resizable()
-                                                .frame(width: 50, height: 50)
-                                                .aspectRatio(contentMode: .fit)
-                                            } else {
-                                                FBURLImage(url: reviewuser.userPhotoURL)
-                                                    .clipShape(Circle())
-                                                    .frame(width: 50, height: 50)
-                                                    .aspectRatio(contentMode: .fit)
+                                            if(reviewuser.userPhotoURL == ""){
+                                                ReviewCard(urlImage: nil, review: reviewuser.body)
                                             }
-                                            VStack(alignment: .leading) {
-                                                Text(reviewuser.body)
-                                                    .foregroundColor(.primary)
-                                                    .font(.headline)
+                                            else{
+                                                ReviewCard(urlImage: FBURLImage(url: reviewuser.userPhotoURL, imageAspectRatio: .fill), review: reviewuser.body)
                                             }
+
+//                                            if (reviewuser.userPhotoURL == "") {
+//                                                ReviewCard(urlImage: FBURLImage(url: reviewuser.userPhotoURL, imageAspectRatio: .fill), review: reviewuser.body)
+//                                                Image(uiImage: UIImage(imageLiteralResourceName: "profile_photo_edit"))
+//                                                .resizable()
+//                                                .frame(width: 50, height: 50)
+//                                                .aspectRatio(contentMode: .fit)
+//                                            } else {
+//                                                FBURLImage(url: reviewuser.userPhotoURL)
+//                                                    .clipShape(Circle())
+//                                                    .frame(width: 50, height: 50)
+//                                                    .aspectRatio(contentMode: .fit)
+//                                            }
+//                                            VStack(alignment: .leading) {
+//                                                Text(reviewuser.body)
+//                                                    .foregroundColor(.primary)
+//                                                    .font(.headline)
+//                                            }
                                         }.frame(width: 300, height: 50, alignment: .topLeading)
                                         
                                     }.frame(

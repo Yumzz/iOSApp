@@ -15,12 +15,16 @@ struct OrderView: View {
     
     @EnvironmentObject var order : OrderModel
     @ObservedObject var restViewModel = RestaurantDishViewModel()
+    @ObservedObject var restDishVM = RestaurantDishViewModel()
+
     
     @State private var showingAlert = false
     @State private var alertMessage = ""
     @State private var alertTitle = ""
     
     var body: some View {
+        ZStack {
+            ScrollView {
         VStack() {
             //If Current Selection, show what is added to cart so far
             Picker("Numbers", selection: self.$selectorIndex) {
@@ -31,6 +35,9 @@ struct OrderView: View {
             .pickerStyle(SegmentedPickerStyle())
             .frame(maxWidth: .infinity)
             .padding()
+//            .onReceive([self.selectorIndex].publisher.first()){ (value) in
+//                 print(value)
+//            }
             
 //            How to switch between current selection and past orders
             if selectorIndex == 0 {
@@ -39,7 +46,7 @@ struct OrderView: View {
                     SaveOrderButton().onTapGesture {
                         //what do we do here to save orders for user?
                         //have dishes here, need to store into user's orders on FB
-                        let ord = Order(dishes: self.order.dishesChosen, totalPrice: self.order.totalCost)
+                        let ord = Order(dishes: self.order.dishesChosen, totalPrice: self.order.totalCost, rest: self.order.restChosen.name)
                         //put this order onto firebase and add to user's list
                         if(userProfile.userId != ""){
                             self.order.saveOrder(order: ord)
@@ -63,7 +70,39 @@ struct OrderView: View {
             else{
                 //past orders - fetch based on userID
                 //card view for each
+                if(self.order.pastOrders.isEmpty){
+                    Text("No past orders. Go make one!")
+                }
+                else{
+//                    self.order.retrieveOrders(userID: userProfile.userId)
+//                    self.order.pastOrders
+                    VStack(spacing: 20){
+                        ForEach(self.order.pastOrders, id: \.id) {
+                            ord in
+                            VStack(alignment: .leading, spacing: 20) {
+                                Text("\(ord.rest) Order")
+                                .fontWeight(.semibold)
+                                .padding(.leading)
+                            
+                            VStack(spacing: 20){
+                            ForEach(ord.dishes, id: \.id){
+                                dish in
+                                VStack{
+                                    NavigationLink(destination:
+                                        DishDetailsView(dish: dish, restaurant: self.order.restChosen).navigationBarHidden(false)
+                                    ) {
+                                        DishCard(urlImage: FBURLImage(url: dish.coverPhotoURL, imageAspectRatio: .fill), dishName: dish.name, dishIngredients: dish.description, price: self.restDishVM.formatPrice(price: dish.price))
+                                    }
+                                }
+                            }
+                        }
+                            }
+                        }
+                    }
+                }
                 
+            }
+                }
             }
             
             Spacer()
@@ -72,6 +111,10 @@ struct OrderView: View {
             .navigationBarTitle("My Orders")
             .onAppear {
                 print("\(self.order.dishesChosen)")
+                if(userProfile.userId != ""){
+                    self.order.retrieveOrders(userID: userProfile.userId)
+                    print("Past Orders: \(self.order.pastOrders)")
+                }
         }
     }
 }
