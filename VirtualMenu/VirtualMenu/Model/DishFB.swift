@@ -73,6 +73,42 @@ struct DishFB {
         self.coverPhotoURL = "Restaurant/\(self.restaurant.lowercased())/dish/\(self.name.lowercased().replacingOccurrences(of: " ", with: "-"))/photo/Picture.jpg"
     }
     
+    init?(snapshot: DocumentSnapshot) {
+        guard
+            let name = snapshot.data()!["Name"] as? String else {
+                print("no name")
+                return nil
+        }
+        guard let price = snapshot.data()!["Price"] as? String else {
+            print("no price")
+            return nil
+        }
+        guard let description = snapshot.data()!["Description"] as? String else {
+            print("no description")
+            return nil
+        }
+        guard let type = snapshot.data()!["Type"] as? String else {
+            print("no type")
+            return nil
+        }
+        guard let restau = snapshot.data()!["Restaurant"] as? String else {
+            print("no rest")
+            return nil
+        }
+        self.id = UUID()
+        self.ref = nil
+        self.key = snapshot.documentID
+        self.name = name
+        self.description = description
+        
+        self.price = (price as NSString).doubleValue
+        
+        
+        self.type = type
+        self.restaurant = restau
+        self.coverPhotoURL = "Restaurant/\(self.restaurant.lowercased())/dish/\(self.name.lowercased().replacingOccurrences(of: " ", with: "-"))/photo/Picture.jpg"
+    }
+    
     func toAnyObject() -> Any {
         return [
             "name": name
