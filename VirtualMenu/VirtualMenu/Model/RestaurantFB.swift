@@ -63,11 +63,11 @@ struct RestaurantFB {
            print("no name")
            return nil
        }
-       guard
-           let ds = snapshot.data()["dishes"] as? [DocumentReference?] else {
-           print("dishes messed up")
-           return nil
-       }
+//       guard
+//           let ds = snapshot.data()["dishes"] as? [DocumentReference?] else {
+//           print("dishes messed up")
+//           return nil
+//       }
        //dishes is an array of FIRDocumentReference in Firebase and is converted to ds, which is an array of DocumentReferences
        
        guard
@@ -133,11 +133,11 @@ struct RestaurantFB {
                 print("no name")
                 return nil
         }
-        guard
-            let ds = snapshot.data()["dishes"] as? [DocumentReference?] else {
-                print("dishes messed up")
-                return nil
-        }
+//        guard
+//            let ds = snapshot.data()["dishes"] as? [DocumentReference?] else {
+//                print("dishes messed up")
+//                return nil
+//        }
         //dishes is an array of FIRDocumentReference in Firebase and is converted to ds, which is an array of DocumentReferences
         
         guard
