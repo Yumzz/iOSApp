@@ -17,14 +17,24 @@ final class ImageLoader : ObservableObject {
     func loadImage(url: String){
         let storage = Storage.storage()
         let ref = storage.reference().child(url)
-        ref.getData(maxSize: 2 * 2048 * 2048) { data, error in
-            if let error = error {
-                print("\(error)")
+//        let ds = DispatchGroup()
+//        ds.enter()
+        ref.downloadURL(completion: { (url, err) in
+            if err != nil {
+                return
             }
-            
-            DispatchQueue.main.async {
-                self.data = data
+            else{
+                ref.getData(maxSize: 2 * 2048 * 2048) { data, error in
+                    if let error = error {
+                        print("\(error)")
+                    }
+                    
+                    DispatchQueue.main.async {
+                        self.data = data
+                    }
+                }
             }
-        }
+            return
+        })
     }
 }

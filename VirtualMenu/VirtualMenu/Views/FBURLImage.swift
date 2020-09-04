@@ -25,6 +25,16 @@ struct FBURLImage: View {
         self.height = imageHeight
     }
     
+    init(url: String, imageAspectRatio: ContentMode = .fit, imageWidth: CGFloat, imageHeight: CGFloat, owndimen: Bool) {
+        imageLoader = ImageLoader()
+        imageLoader.loadImage(url: url)
+        
+        self.aspectRatio = imageAspectRatio
+        
+        self.width = imageWidth
+        self.height = imageHeight
+    }
+    
     var body: some View {
         
         Group {
