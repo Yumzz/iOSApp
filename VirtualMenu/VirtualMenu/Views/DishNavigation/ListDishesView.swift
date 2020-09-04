@@ -23,24 +23,75 @@ struct ListDishesView: View {
     
     @State var dishCategoriesDisplayed: [DishCategory] = []
     
+    @State var allClicked = false
+    
     
     init(restaurant: RestaurantFB) {
         
         self.restaurant = restaurant
         
         self.dishCategoriesVM = DishCategoriesViewModel(restaurant: self.restaurant)
-        
-        self.dishCategoriesDisplayed = self.dishCategoriesVM.dishCategories
+                
+        print("categories: \(self.dishCategoriesVM.dishCategories)")
+                
     }
     
     var body: some View {
         ZStack {
             ScrollView {
                 VStack {
+                    ScrollView(.horizontal, showsIndicators: false) {
+                        HStack(spacing: 10){
+                            Text("View All")
+                                .padding()
+                                .frame(maxWidth: 100)
+                                .background(
+                                Color(UIColor().colorFromHex("#F88379", 1)))
+                                .foregroundColor(self.allClicked ? Color.white : Color.black)
+                            .cornerRadius(5)
+                            .onTapGesture {
+                                if(self.allClicked){
+                                    self.dishCategoriesDisplayed = []
+                                    self.allClicked = false
+                                }
+                                else{
+                                    self.dishCategoriesDisplayed = self.dishCategoriesVM.dishCategories
+                                    self.allClicked = true
+                                }
+                            }
+                            ForEach(self.dishCategoriesVM.dishCategories, id: \.name){ dishCategory in
+                                Text("\(dishCategory.name)")
+                                    .padding()
+                                    .scaledToFit()
+                                    .background(
+                                       Color(UIColor().colorFromHex("#F88379", 1)
+                                       ))
+                                    .foregroundColor(self.dishCategoriesDisplayed.contains(dishCategory) ? Color.white : Color.black)
+                                    .cornerRadius(5)
+                                    .onTapGesture {
+                                        if(self.allClicked){
+                                            self.dishCategoriesDisplayed.removeAll()
+                                            self.dishCategoriesDisplayed.append(dishCategory)
+                                            self.allClicked = false
+                                        }else{
+                                        if(self.dishCategoriesDisplayed.contains(dishCategory)){
+                                                if let index = self.dishCategoriesDisplayed.firstIndex(of: dishCategory) {
+                                                        self.dishCategoriesDisplayed.remove(at: index)
+                                                    }
+                                        }else{
+                                            self.dishCategoriesDisplayed.append(dishCategory)
+                                        }
+                                    }
+                                }
+                                    
+                            }
+                        }
+
+                    }
+                    
                     Spacer().frame(height: 20)
                     
-                    ForEach(self.dishCategoriesVM.dishCategories, id: \.name){ dishCategory in
-                        
+                    ForEach(self.dishCategoriesDisplayed, id: \.name){ dishCategory in
                         VStack(alignment: .leading, spacing: 40) {
                             
                             Text("\(dishCategory.name)")
@@ -66,6 +117,11 @@ struct ListDishesView: View {
                 }
                 .frame(maxWidth: .infinity)
             }
+            
+        }.onAppear{
+            self.allClicked = true
+            
+            self.dishCategoriesDisplayed = self.dishCategoriesVM.dishCategories
         }
         .navigationBarTitle("Dishes")
     }

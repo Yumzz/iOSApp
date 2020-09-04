@@ -41,16 +41,11 @@ struct DishReviewsView: View {
                 }.background(Color.black.opacity(0.45))
             }
             else{
-                Spacer()
                 HStack{
-                    FBURLImage(url: dish.coverPhotoURL)
-                        .frame(width: 200, height: 100)
-                        .aspectRatio(contentMode: .fit)
+                    FBURLImage(url: dish.coverPhotoURL, imageAspectRatio: .fill, imageWidth: 200, imageHeight: 100, owndimen: true)
                         .cornerRadius(10)
                     Text("\(self.dish.name)")
                         .font(.custom("Open Sans", size: 32))
-                        
-
                 }
 
                 Spacer().frame(height: 30)
@@ -65,52 +60,15 @@ struct DishReviewsView: View {
                                 ForEach(self.reviews, id: \.id) {
                                     reviewuser in
                                     VStack {
-//                                        ReviewCard
-//                                        if (reviewuser.userPhotoURL == "") {
-//                                            HStack{
-//                                                Image(uiImage: UIImage(imageLiteralResourceName: "profile_photo_edit"))
-//                                                    .resizable()
-//                                                    .frame(width: 50, height: 50)
-//                                                    .aspectRatio(contentMode: .fit)
-//                                                VStack(alignment: .leading) {
-//                                                    Text(reviewuser.body)
-//                                                        .foregroundColor(.primary)
-//                                                        .font(.headline)
-//                                                }
-//                                            }
-//                                        }
-//                                        else{
-//                                            ReviewCard(urlImage: FBURLImage(url: reviewuser.userPhotoURL, imageAspectRatio: .fill), review: reviewuser.body)
-//                                        }
-                                        
-                                        HStack {
+
                                             if(reviewuser.userPhotoURL == ""){
                                                 ReviewCard(urlImage: nil, review: reviewuser.body)
                                             }
                                             else{
                                                 ReviewCard(urlImage: FBURLImage(url: reviewuser.userPhotoURL, imageAspectRatio: .fill), review: reviewuser.body)
                                             }
-
-//                                            if (reviewuser.userPhotoURL == "") {
-//                                                ReviewCard(urlImage: FBURLImage(url: reviewuser.userPhotoURL, imageAspectRatio: .fill), review: reviewuser.body)
-//                                                Image(uiImage: UIImage(imageLiteralResourceName: "profile_photo_edit"))
-//                                                .resizable()
-//                                                .frame(width: 50, height: 50)
-//                                                .aspectRatio(contentMode: .fit)
-//                                            } else {
-//                                                FBURLImage(url: reviewuser.userPhotoURL)
-//                                                    .clipShape(Circle())
-//                                                    .frame(width: 50, height: 50)
-//                                                    .aspectRatio(contentMode: .fit)
-//                                            }
-//                                            VStack(alignment: .leading) {
-//                                                Text(reviewuser.body)
-//                                                    .foregroundColor(.primary)
-//                                                    .font(.headline)
-//                                            }
-                                        }.frame(width: 300, height: 50, alignment: .topLeading)
-                                        
-                                    }.frame(
+                                    }
+                                    .frame(
                                         width: 300,
                                         alignment: .topLeading
                                     )

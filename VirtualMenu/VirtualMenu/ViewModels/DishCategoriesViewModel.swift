@@ -20,25 +20,32 @@ class DishCategoriesViewModel: ObservableObject {
     
     let dispatchGroup = DispatchGroup()
     
+
+    
     
     init(restaurant: RestaurantFB) {
         
         self.restaurant = restaurant
         
         self.dispatchGroup.enter()
-        
+                
         fetchDishesFB(name: restaurant.name)
         
         self.dispatchGroup.notify(queue: .main) {
+
             self.dishes.sort {
                 $0.name < $1.name
             }
-            
+            print("sorting")
+                        
             self.categorizeDishes(dishes: self.dishes)
+            
+            print("catted")
             
             self.dishCategories.sort {
                 $0.name < $1.name
             }
+            
         }
         
         

@@ -19,31 +19,36 @@ struct ReviewCard: View {
     
     var body: some View {
         
-        HStack(alignment: .center, spacing: 40) {
+        Group{
         
-            if urlImage == nil {
-                Image(uiImage: UIImage(imageLiteralResourceName: "profile_photo_edit"))
-                    .renderingMode(.original)
-                    .resizable()
+            HStack(alignment: .center, spacing: 40) {
+            
+                if urlImage == nil {
+                    Image(uiImage: UIImage(imageLiteralResourceName: "profile_photo_edit"))
+                        .renderingMode(.original)
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 50, height: 50, alignment: .leading)
+                }
+                else {
+                    urlImage!
+                    .clipShape(Circle())
                     .aspectRatio(contentMode: .fit)
                     .frame(width: 50, height: 50, alignment: .leading)
-            }
-            else {
-                urlImage!
-                .clipShape(RoundedRectangle(cornerRadius: 10))
-                .aspectRatio(contentMode: .fit)
-                .frame(width: 50, height: 50, alignment: .leading)
-            }
-            
-            VStack(alignment: .leading) {
-                Text(review)
-                    .foregroundColor(.primary)
-                    .font(.headline)
-            }
-            
-            
-        }
+                }
+                                
+                VStack(alignment: .leading) {
+                    Text(review)
+                        .foregroundColor(Color.black)
+                        .font(.headline)
+                }
+                
+            }.frame(maxWidth: .infinity, alignment: .leading)
+            .frame(height: 100)
+            .background(Color.backgroundColor(for: colorScheme))
+            .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
         
+        }
     }
 
 }
