@@ -25,6 +25,7 @@ struct RestaurantFB {
     var coverPhotoURL: String
     
     var dishes: [DishFB]? = nil
+    var featuredDishRefs: [DocumentReference?]
     
     let coordinate: GeoPoint
     let address: String
@@ -36,7 +37,7 @@ struct RestaurantFB {
     var price: String
     
     
-    init(name: String, key: String = "", description: String, averagePrice: Double, type: String, ethnicity: String, dishes: [DishFB], coordinate: GeoPoint, address: String, phone: String, price: String) {
+    init(name: String, key: String = "", description: String, averagePrice: Double, type: String, ethnicity: String, dishes: [DishFB], featuredDishRefs: [DocumentReference?], coordinate: GeoPoint, address: String, phone: String, price: String) {
 //        self.ref = nil
         self.id = UUID()
         self.key = key
@@ -49,6 +50,7 @@ struct RestaurantFB {
         self.coverPhotoURL = "Restaurant/\(self.name.lowercased())/\(self.name.lowercased())_cover.png"
                 
         self.dishes = dishes
+        self.featuredDishRefs = featuredDishRefs
         self.coordinate = coordinate
         self.address = address
         self.phone = phone
@@ -63,11 +65,16 @@ struct RestaurantFB {
            print("no name")
            return nil
        }
-//       guard
-//           let ds = snapshot.data()["dishes"] as? [DocumentReference?] else {
-//           print("dishes messed up")
-//           return nil
-//       }
+//        guard
+//            (snapshot.data()["dishes"] as? [DocumentReference?]) != nil else {
+//            print("dishes messed up")
+//            return nil
+//        }
+       guard
+           let featuredDishRefs = (snapshot.data()["FeaturedDishes"] as? [DocumentReference?]) else {
+           print("featured dishes messed up")
+           return nil
+       }
        //dishes is an array of FIRDocumentReference in Firebase and is converted to ds, which is an array of DocumentReferences
        
        guard
@@ -116,6 +123,7 @@ struct RestaurantFB {
        self.ethnicity = ethnicity
        self.coordinate = coordinate
        self.dishes = []
+       self.featuredDishRefs = featuredDishRefs
        self.id = UUID()
        self.coverPhotoURL = "Restaurant/\(self.name.lowercased())/\(self.name.lowercased())_cover.png"
        self.address = address
@@ -138,7 +146,13 @@ struct RestaurantFB {
 //                print("dishes messed up")
 //                return nil
 //        }
+
         //dishes is an array of FIRDocumentReference in Firebase and is converted to ds, which is an array of DocumentReferences
+        guard
+            let featuredDishRefs = (snapshot.data()["FeaturedDishes"] as? [DocumentReference?]) else {
+            print("featured dishes messed up")
+            return nil
+        }
         
         guard
             let type = snapshot.data()["Type"] as? String else {
@@ -188,6 +202,7 @@ struct RestaurantFB {
         self.ethnicity = ethnicity
         self.coordinate = coordinate
         self.dishes = dishes
+        self.featuredDishRefs = featuredDishRefs
         self.address = address
         self.coverPhotoURL = "Restaurant/\(self.name.lowercased())/\(self.name.lowercased())_cover.png"
         self.phone = phone
@@ -203,7 +218,7 @@ struct RestaurantFB {
     }
     
     static func previewRest() -> RestaurantFB {
-        return RestaurantFB(name: "", description: "", averagePrice: 0.0, type: "", ethnicity: "", dishes: [], coordinate: GeoPoint(latitude: 0.0, longitude: 0.0), address: "", phone: "", price: "Low")
+        return RestaurantFB(name: "", description: "", averagePrice: 0.0, type: "", ethnicity: "", dishes: [], featuredDishRefs: [], coordinate: GeoPoint(latitude: 0.0, longitude: 0.0), address: "", phone: "", price: "Low")
     }
     
     func getDollaSigns(price: String) -> String{
