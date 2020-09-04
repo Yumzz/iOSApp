@@ -10,24 +10,26 @@ import SwiftUI
 import MapKit
 
 struct MenuSelectionView: View {
-    @State var restChosen : RestaurantFB
-    
-    @State var isScannerSelected = false
+    var restChosen : RestaurantFB
     
     @State private var action: Int? = 0
     
+    @ObservedObject var menuSelectionVM: MenuSelectionViewModel
+    
+    init(restChosen: RestaurantFB) {
+        self.restChosen = restChosen
+        self.menuSelectionVM = MenuSelectionViewModel(restaurant: self.restChosen)
+    }
+    
     var body: some View {
         VStack(spacing: 10){
-            FBURLImage(url: self.restChosen.coverPhotoURL)
-                .frame(width: 220, height:150)
-                .cornerRadius(30)
+            FBURLImage(url: self.restChosen.coverPhotoURL, imageWidth: 220, imageHeight: 160)
+                .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
             HStack{
                 Text(self.restChosen.name)
                     .padding(.horizontal)
                     .foregroundColor(.black)
                     .font(.custom("Montserrat", size: 26))
-                Image(systemName: "heart.fill")
-                    .foregroundColor(.pink)
             }.frame(alignment: .center)
             Text(self.restChosen.ethnicity)
                 .foregroundColor(Color.secondary)
@@ -104,79 +106,44 @@ struct MenuSelectionView: View {
                     .cornerRadius(30)
                 }
             }
+            ScrollView(.horizontal) {
+                HStack(spacing: 15) {
+                    ForEach(0..<(self.menuSelectionVM.featuredDishes.count/2 + 1), id: \.self) {
+                        column in
+                        VStack(alignment: .leading, spacing: 15) {
+                            if column*2 < self.menuSelectionVM.featuredDishes.count {
+                                PreviewDish(dish: self.menuSelectionVM.featuredDishes[column*2], restChosen: self.restChosen).frame(alignment: .top)
+                            }
+                            if column*2+1 < self.menuSelectionVM.featuredDishes.count {
+                                PreviewDish(dish: self.menuSelectionVM.featuredDishes[column*2+1], restChosen: self.restChosen)
+                            }
+                        }.frame(height: 180)
+                    }
+                }
+            }
+            .padding(15)
+            .frame(height: 180)
             Spacer()
         }
         .navigationBarHidden(false)
     }
 }
 
-//struct MenuSelectionView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        MenuSelectionView(restChosen: <#T##RestaurantFB#>)
-//    }
-//}
+struct MenuSelectionView_Previews: PreviewProvider {
+    static var previews: some View {
+        MenuSelectionView(restChosen: RestaurantFB.previewRest())
+    }
+}
 
-struct MenuButton: View {
+struct PreviewDish: View {
+    @State var dish: DishFB
+    @State var restChosen: RestaurantFB
+    
     var body: some View {
-        ZStack {
-            
-            
-            VStack {
-                Spacer()
-            }
-            .frame(width: 330, height: 120)
-            .background(LinearGradient(gradient: Gradient(colors: [.clear, .black]), startPoint: .top, endPoint: .bottom))
-            .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
-            .opacity(0.1)
-            
-            VStack {
-                Spacer()
-            }
-            .frame(width: 330, height: 120)
-            .background(Color.init(red: 1.00,green: 0.48,blue: 0.45))
-                .blur(radius: 5)
-                .opacity(1)
-                .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
-            
-            HStack(spacing: 16) {
-                
-                Image(systemName: "list.bullet")
-                    .resizable()
-                    .frame(width: 24, height: 24)
-                
-                Text("See the Menu")
-                    .font(.title)
-                    .fontWeight(.bold)
-            }
-            
-            
+        NavigationLink(destination: DishDetailsView(dish: self.dish, restaurant: self.restChosen).navigationBarHidden(false)) {
+            FBURLImage(url: self.dish.coverPhotoURL, imageAspectRatio: .fill, imageWidth: 160, imageHeight: 80)
+                .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
         }
     }
 }
 
-struct ScannerButton: View {
-    var body: some View {
-        ZStack {
-            
-            VStack {
-                Spacer()
-            }
-            .frame(width: 330, height: 120)
-            .background(Color.init(red: 0.24,green: 0.80, blue: 1.00))
-                .blur(radius: 5)
-                .opacity(1)
-                .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
-            
-            HStack(spacing: 16) {
-                
-                Image(systemName: "camera.fill")
-                    .resizable()
-                    .frame(width: 32, height: 24)
-                
-                Text("Scan the menu")
-                    .font(.title)
-                    .fontWeight(.bold)
-            }
-        }
-    }
-}
