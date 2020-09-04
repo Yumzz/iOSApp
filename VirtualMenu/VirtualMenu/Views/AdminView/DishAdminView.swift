@@ -20,12 +20,14 @@ struct DishAdminView: View {
     @State private var alertMessage = ""
     @State var show = false
     @State private var alertTitle = ""
+    @State private var textStyle = UIFont.TextStyle.body
+
     
     
     var body: some View {
             VStack{
                 VStack(spacing: 30){
-                MultiLineTFDishAdmin(txt: $description)
+               TextView(text: self.$description, textStyle: self.$textStyle)
                     .border(Color.gray.opacity(0.5), width: 1)
                     .padding(.leading, (UIScreen.main.bounds.width * 10) / 414)
                     .padding(.trailing, (UIScreen.main.bounds.width * 10) / 414)
