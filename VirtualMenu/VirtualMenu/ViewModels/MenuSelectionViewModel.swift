@@ -27,8 +27,10 @@ class MenuSelectionViewModel: ObservableObject {
                 if let error = error {
                     print("Error getting documents: \(error)")
                 } else {
-                    let dish = DishFB.init(snapshot: snapshot!)!
-                    self.featuredDishes.append(dish)
+                    let dish = DishFB.init(snapshot: snapshot!) ?? nil
+                    if dish != nil {
+                        self.featuredDishes.append(dish!)
+                    }
                 }
             }
         }

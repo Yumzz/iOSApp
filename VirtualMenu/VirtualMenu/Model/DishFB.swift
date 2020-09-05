@@ -75,23 +75,23 @@ struct DishFB {
     
     init?(snapshot: DocumentSnapshot) {
         guard
-            let name = snapshot.data()!["Name"] as? String else {
+            let name = snapshot.data()?["Name"] as? String else {
                 print("no name")
                 return nil
         }
-        guard let price = snapshot.data()!["Price"] as? String else {
+        guard let price = snapshot.data()?["Price"] as? String else {
             print("no price")
             return nil
         }
-        guard let description = snapshot.data()!["Description"] as? String else {
+        guard let description = snapshot.data()?["Description"] as? String else {
             print("no description")
             return nil
         }
-        guard let type = snapshot.data()!["Type"] as? String else {
+        guard let type = snapshot.data()?["Type"] as? String else {
             print("no type")
             return nil
         }
-        guard let restau = snapshot.data()!["Restaurant"] as? String else {
+        guard let restau = snapshot.data()?["Restaurant"] as? String else {
             print("no rest")
             return nil
         }
