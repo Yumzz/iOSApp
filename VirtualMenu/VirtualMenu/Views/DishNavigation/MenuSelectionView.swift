@@ -35,11 +35,19 @@ struct MenuSelectionView: View {
                 .foregroundColor(Color.secondary)
                 .font(.footnote)
             HStack{
-                Image(systemName: "star.fill")
-                    .foregroundColor(.yellow)
-                Text("Rating")
-                    .foregroundColor(Color.secondary)
-                    .font(.footnote)
+                if self.restChosen.n_Ratings > 0 {
+                    StarRatingView(rating: .constant(Int(Float(self.restChosen.ratingSum) / Float(self.restChosen.n_Ratings))), fontSize: 12)
+                    Text(String(Float(self.restChosen.ratingSum) / Float(self.restChosen.n_Ratings)))
+                        .foregroundColor(Color.secondary)
+                        .font(.footnote)
+                    Text("(" + String(self.restChosen.n_Ratings) + " ratings)")
+                        .foregroundColor(Color.secondary)
+                        .font(.footnote)
+                } else {
+                    Text("No Ratings Yet")
+                        .foregroundColor(Color.secondary)
+                        .font(.footnote)
+                }
             }
             Divider()
             HStack{
@@ -105,6 +113,20 @@ struct MenuSelectionView: View {
                     .background(Color.white)
                     .cornerRadius(30)
                 }
+            }
+            NavigationLink(destination: RatingView(restaurant: self.restChosen)){
+                HStack {
+                    Image(systemName: "square.and.pencil")
+                        .font(.title)
+                    Text("Add Your Rating")
+                        .fontWeight(.semibold)
+                        .font(.footnote)
+                        .frame(minWidth: 80)
+                }
+                .padding()
+                .foregroundColor(.red)
+                .background(Color.white)
+                .cornerRadius(15)
             }
             ScrollView(.horizontal) {
                 HStack(spacing: 15) {

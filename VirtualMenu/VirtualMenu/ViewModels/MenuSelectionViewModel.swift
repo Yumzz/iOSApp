@@ -7,11 +7,8 @@
 //
 
 import SwiftUI
-import Firebase
 
 class MenuSelectionViewModel: ObservableObject {
-    let db = Firestore.firestore()
-
     var restaurant: RestaurantFB
     @Published var featuredDishes = [DishFB]()
     
@@ -34,7 +31,6 @@ class MenuSelectionViewModel: ObservableObject {
                 }
             }
         }
-        print(self.featuredDishes)
     }
     
 }
