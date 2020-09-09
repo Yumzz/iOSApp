@@ -49,7 +49,7 @@ struct RestaurantSearchListView: View {
                         
                         NavigationLink(destination: MenuSelectionView(restChosen: resto)){
                             VStack {
-                                RestaurantCard(urlImage: FBURLImage(url: resto.coverPhotoURL),restaurantName: resto.name, restaurantAddress: resto.address, score: 8, nbOfRatings: 2)
+                                RestaurantCard(urlImage: FBURLImage(url: resto.coverPhotoURL),restaurantName: resto.name, restaurantAddress: resto.address, ratingSum: resto.ratingSum, nbOfRatings: resto.n_Ratings)
                             }
                         }
                         .buttonStyle(PlainButtonStyle())

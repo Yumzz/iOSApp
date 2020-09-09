@@ -35,9 +35,11 @@ struct RestaurantFB {
 //    var model: CKRecord.Reference? = nil
 //    var reviews: [CKRecord.Reference]? = nil
     var price: String
+    var ratingSum: Int64
+    var n_Ratings: Int64
     
     
-    init(name: String, key: String = "", description: String, averagePrice: Double, type: String, ethnicity: String, dishes: [DishFB], featuredDishRefs: [DocumentReference?], coordinate: GeoPoint, address: String, phone: String, price: String) {
+    init(name: String, key: String = "", description: String, averagePrice: Double, type: String, ethnicity: String, dishes: [DishFB], featuredDishRefs: [DocumentReference?], coordinate: GeoPoint, address: String, phone: String, price: String, ratingSum: Int64, n_Ratings: Int64) {
 //        self.ref = nil
         self.id = UUID()
         self.key = key
@@ -54,9 +56,10 @@ struct RestaurantFB {
         self.coordinate = coordinate
         self.address = address
         self.phone = phone
+        self.ratingSum = ratingSum
+        self.n_Ratings = n_Ratings
         self.price = price
         self.price = self.getDollaSigns(price: price)
-
     }
     
     init?(snapshot: QueryDocumentSnapshot){
@@ -115,6 +118,16 @@ struct RestaurantFB {
             print("no coordinate")
             return nil
         }
+        guard
+            let ratingSum = snapshot.data()["RatingSum"] as? Int64 else {
+            print("no RatingSum")
+            return nil
+        }
+        guard
+            let n_Ratings = snapshot.data()["N_Ratings"] as? Int64 else {
+            print("no RatingSum")
+            return nil
+        }
        
        self.key = snapshot.documentID
        self.name = name
@@ -128,6 +141,8 @@ struct RestaurantFB {
        self.coverPhotoURL = "Restaurant/\(self.name.lowercased())/\(self.name.lowercased())_cover.png"
        self.address = address
        self.phone = phone
+       self.ratingSum = ratingSum
+       self.n_Ratings = n_Ratings
        self.price = price
        self.price = self.getDollaSigns(price: price)
     }
@@ -193,6 +208,16 @@ struct RestaurantFB {
             print("no coordinate")
             return nil
         }
+        guard
+            let ratingSum = snapshot.data()["RatingSum"] as? Int64 else {
+            print("no RatingSum")
+            return nil
+        }
+        guard
+            let n_Ratings = snapshot.data()["N_Ratings"] as? Int64 else {
+            print("no RatingSum")
+            return nil
+        }
         
         self.id = UUID()
         self.key = snapshot.documentID
@@ -206,9 +231,10 @@ struct RestaurantFB {
         self.address = address
         self.coverPhotoURL = "Restaurant/\(self.name.lowercased())/\(self.name.lowercased())_cover.png"
         self.phone = phone
+        self.ratingSum = ratingSum
+        self.n_Ratings = n_Ratings
         self.price = price
         self.price = self.getDollaSigns(price: price)
-
     }
     
     func toAnyObject() -> Any {
@@ -218,7 +244,7 @@ struct RestaurantFB {
     }
     
     static func previewRest() -> RestaurantFB {
-        return RestaurantFB(name: "", description: "", averagePrice: 0.0, type: "", ethnicity: "", dishes: [], featuredDishRefs: [], coordinate: GeoPoint(latitude: 0.0, longitude: 0.0), address: "", phone: "", price: "Low")
+        return RestaurantFB(name: "", description: "", averagePrice: 0.0, type: "", ethnicity: "", dishes: [], featuredDishRefs: [], coordinate: GeoPoint(latitude: 0.0, longitude: 0.0), address: "", phone: "", price: "Low", ratingSum: 5, n_Ratings: 1)
     }
     
     func getDollaSigns(price: String) -> String{
