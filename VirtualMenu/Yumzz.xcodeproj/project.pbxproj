@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		34370CC72500D59A00ECD88B /* MenuSelectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34370CC62500D59A00ECD88B /* MenuSelectionViewModel.swift */; };
 		34A5D663249BF6DF00E4FE9C /* DishDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34A5D662249BF6DF00E4FE9C /* DishDetailsView.swift */; };
+		34FCE2722507297F00329162 /* RatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34FCE2712507297F00329162 /* RatingView.swift */; };
 		3A13B6E024C1813D0006458B /* ContactUs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A13B6DF24C1813D0006458B /* ContactUs.swift */; };
 		3A13B6E424C1816B0006458B /* ReportProblem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A13B6E324C1816B0006458B /* ReportProblem.swift */; };
 		3A13B6EA24C197B30006458B /* RestaurantSearchLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A13B6E924C197B30006458B /* RestaurantSearchLabel.swift */; };
@@ -144,6 +145,7 @@
 /* Begin PBXFileReference section */
 		34370CC62500D59A00ECD88B /* MenuSelectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuSelectionViewModel.swift; sourceTree = "<group>"; };
 		34A5D662249BF6DF00E4FE9C /* DishDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DishDetailsView.swift; sourceTree = "<group>"; };
+		34FCE2712507297F00329162 /* RatingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingView.swift; sourceTree = "<group>"; };
 		3A13B6DF24C1813D0006458B /* ContactUs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactUs.swift; sourceTree = "<group>"; };
 		3A13B6E324C1816B0006458B /* ReportProblem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportProblem.swift; sourceTree = "<group>"; };
 		3A13B6E924C197B30006458B /* RestaurantSearchLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantSearchLabel.swift; sourceTree = "<group>"; };
@@ -522,6 +524,7 @@
 				34A5D662249BF6DF00E4FE9C /* DishDetailsView.swift */,
 				3AFA234924DCB14B00F90ED8 /* DishReviewsView.swift */,
 				3A87575024EA795D004ABECC /* DishAddReview.swift */,
+				34FCE2712507297F00329162 /* RatingView.swift */,
 			);
 			path = DishNavigation;
 			sourceTree = "<group>";
@@ -869,6 +872,7 @@
 				3A5633C824F90E080059B603 /* SignInWithApple.swift in Sources */,
 				3A5633C224F902280059B603 /* EnvironmentWindowKey.swift in Sources */,
 				3A13B6E024C1813D0006458B /* ContactUs.swift in Sources */,
+				34FCE2722507297F00329162 /* RatingView.swift in Sources */,
 				3AFA234624DC9C2000F90ED8 /* DishReviewFB.swift in Sources */,
 				A7F5506924C123AA00FAC1F0 /* RestaurantSearchListView.swift in Sources */,
 				3A987B102481511B0021F6E4 /* ContentView.swift in Sources */,

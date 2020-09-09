@@ -30,8 +30,8 @@ struct RestaurantCard: View {
     var restaurantName: String
     var restaurantAddress: String
     
-    var score: Float
-    var nbOfRatings: Int
+    var ratingSum: Int64
+    var nbOfRatings: Int64
     
     @Environment (\.colorScheme) var colorScheme:ColorScheme
     
@@ -59,17 +59,20 @@ struct RestaurantCard: View {
                             .font(.footnote)
                     }
                     
-                    HStack (spacing: 5) {
-                        Image(systemName: "star.fill")
-                            .foregroundColor(.yellow)
-                        
-                        Text(String(score)).bold()
-                            .foregroundColor(Color.primary)
-                            .font(.footnote)
-                        
-                        Text("(\(String(nbOfRatings)) Ratings)")
-                            .foregroundColor(Color(UIColor.systemGray))
-                            .font(.footnote)
+                    HStack{
+                        if self.nbOfRatings > 0 {
+                            StarRatingView(rating: .constant(Int(Float(self.ratingSum) / Float(self.nbOfRatings))), fontSize: 12)
+                            Text(String(Float(self.ratingSum) / Float(self.nbOfRatings)))
+                                .foregroundColor(Color.secondary)
+                                .font(.footnote)
+                            Text("(" + String(self.nbOfRatings) + " ratings)")
+                                .foregroundColor(Color.secondary)
+                                .font(.footnote)
+                        } else {
+                            Text("No Ratings Yet")
+                                .foregroundColor(Color.secondary)
+                                .font(.footnote)
+                        }
                     }
                 }
             }
@@ -85,9 +88,9 @@ struct RestaurantCard_Previews: PreviewProvider {
     static var previews: some View {
         
         Group {
-            RestaurantCard(urlImage: nil, restaurantName: "Oishii Bowl", restaurantAddress: "113 Dryden Rd, Ithaca", score: 4.9, nbOfRatings: 120).colorScheme(.light)
+            RestaurantCard(urlImage: nil, restaurantName: "Oishii Bowl", restaurantAddress: "113 Dryden Rd, Ithaca", ratingSum: 560, nbOfRatings: 120).colorScheme(.light)
             
-            RestaurantCard(urlImage: nil, restaurantName: "Oishii Bowl", restaurantAddress: "113 Dryden Rd, Ithaca", score: 4.9, nbOfRatings: 120).colorScheme(.dark)
+            RestaurantCard(urlImage: nil, restaurantName: "Oishii Bowl", restaurantAddress: "113 Dryden Rd, Ithaca", ratingSum: 580, nbOfRatings: 120).colorScheme(.dark)
         }
     }
 }
