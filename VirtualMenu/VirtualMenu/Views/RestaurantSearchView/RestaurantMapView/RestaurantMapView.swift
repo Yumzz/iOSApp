@@ -22,160 +22,180 @@ struct RestaurantMapView: View {
     @ObservedObject var restDishVM = RestaurantDishViewModel()
     
     @ObservedObject var click: isClick = isClick()
+    @State var show = false
+
     
     private var locationManager = LocationManager()
     var body: some View {
         ZStack{
-            MapView(restaurants: self.restaurants, region: self.region).edgesIgnoringSafeArea(.all)
-            VStack {
-                
-                HStack{
-                    NavigationLink(destination: RestaurantSearchListView( isNavigationBarHidden: self.$isNavigationBarHidden)){
+            if self.show{
+                GeometryReader{_ in
+                    Loader()
+                }.background(Color.black.opacity(0.45))
+            }
+            else{
+                MapView(restaurants: self.restaurants, region: self.region).edgesIgnoringSafeArea(.all)
+                VStack {
+                    HStack{
+                        NavigationLink(destination: RestaurantSearchListView( isNavigationBarHidden: self.$isNavigationBarHidden)){
+                            
+                            Text("List")
+                                .foregroundColor(Color(.white))
+                                .padding(8)
+                                .background(Color(UIColor().colorFromHex("#F88379", 1)))
+                                .cornerRadius(10.0)
+                                .padding(.leading)
+                        }
+                            RestaurantSearchbarView(strSearch: self.$strSearch)
+                                .padding([.leading])
                         
-                        Text("List")
+                        Button(action: {
+                            self.show = true
+                            let disp = DispatchGroup()
+                            self.restDishVM.fetchRestaurantsBasicInfo(disp: disp)
+                            disp.notify(queue: .main){
+                                self.restaurants = self.restDishVM.allRests
+                                self.show = false
+                            }
+                        }){
+                            Text("Near Me")
                             .foregroundColor(Color(.white))
                             .padding(8)
-                            .background(Color(.systemBlue))
+                            .background(Color(UIColor().colorFromHex("#F88379", 1)))
                             .cornerRadius(10.0)
                             .padding(.leading)
-                    }
-                        RestaurantSearchbarView(strSearch: self.$strSearch)
-                            .padding([.leading, .trailing])
+                        }
+                        Spacer().frame(width: 10)
 
-                }
-                .frame(maxWidth: .infinity)
-                
-                Spacer()
-                
-                HStack(spacing: 16) {
+                    }
+                    .frame(maxWidth: .infinity)
+                    
                     Spacer()
                     
-                    Button(action: {
-                        self.region.append(MKCoordinateRegion(center: self.locationManager.location!.coordinate, latitudinalMeters: 1000, longitudinalMeters: 1000))
+                    HStack(spacing: 16) {
+                        Spacer()
                         
-                    }) {
-                        Image(systemName: "location")
-                    }
-                    .padding()
-                    .background(Color(UIColor.tertiarySystemBackground))
-                    .clipShape(Circle())
-                    .shadow(radius: 5)
-                    
-                    Spacer()
-                        .frame(maxWidth: 0)
-                    
-                }
-                    
-                .frame(maxWidth: .infinity)
-                .padding(.bottom, 25)
-                .overlay(BottomSheetModal(display: self.$click.isClicked, backgroundColor: .constant(Color(UIColor().colorFromHex("#F88379", 1))), rectangleColor: .constant(Color.white)) {
-                    ZStack (alignment: .trailing){
-                        VStack(alignment: .leading) {
-                            //name, image, address, number, hours, price, and menu
-                            HStack {
-                                Text(self.click.restChosen!.name)
-                                    .padding(.horizontal)
-                                    .foregroundColor(.black)
-                                    .font(.custom("Futura Bold", size: 24))
-                                Spacer()
-                                Button("X") {
-                                    NotificationCenter.default.post(name: Notification.Name(rawValue: "XPressed"), object: nil)
-                                    //need to call for refreshing
-                                }
-                                .foregroundColor(.black)
-                                .padding(.trailing)
-                                .font(.custom("Futura Bold", size: 15))
-                            }
+                        Button(action: {
+                            self.region.append(MKCoordinateRegion(center: self.locationManager.location!.coordinate, latitudinalMeters: 1000, longitudinalMeters: 1000))
                             
-                            HStack {
-                                FBURLImage(url: self.click.restChosen!.coverPhotoURL, imageWidth: 120, imageHeight: 120)
-                                    .clipShape(Circle())
-                                
-                                VStack (alignment: .leading){
-                                    Image("address")
-                                        .resizable()
-                                        .frame(width: 30, height: 30)
-                                        .padding(.bottom, 5)
-                                    Image("phone")
-                                        .resizable()
-                                        .frame(width: 30, height: 30)
-                                        .padding(.bottom, 5)
-                                    //                                        Image("hours")
-                                    //                                            .padding(.bottom, 10)
-                                    Image("price")
-                                        .resizable()
-                                        .frame(width: 30, height: 30)
-                                        .padding(.bottom, 5)
-                                    Image("menu")
-                                        .resizable()
-                                        .frame(width: 30, height: 30)
-                                        .padding(.bottom, 5)
+                        }) {
+                            Image(systemName: "location")
+                        }
+                        .padding()
+                        .background(Color(UIColor.tertiarySystemBackground))
+                        .clipShape(Circle())
+                        .shadow(radius: 5)
+                        
+                        Spacer()
+                            .frame(maxWidth: 0)
+                        
+                    }
+                        
+                    .frame(maxWidth: .infinity)
+                    .padding(.bottom, 25)
+                    .overlay(BottomSheetModal(display: self.$click.isClicked, backgroundColor: .constant(Color(UIColor().colorFromHex("#F88379", 1))), rectangleColor: .constant(Color.white)) {
+                        ZStack (alignment: .trailing){
+                            VStack(alignment: .leading) {
+                                //name, image, address, number, hours, price, and menu
+                                HStack {
+                                    Text(self.click.restChosen!.name)
+                                        .padding(.horizontal)
+                                        .foregroundColor(.black)
+                                        .font(.custom("Futura Bold", size: 24))
+                                    Spacer()
+                                    Button("X") {
+                                        NotificationCenter.default.post(name: Notification.Name(rawValue: "XPressed"), object: nil)
+                                        //need to call for refreshing
+                                    }
+                                    .foregroundColor(.black)
+                                    .padding(.trailing)
+                                    .font(.custom("Futura Bold", size: 15))
                                 }
                                 
-
-                                VStack (alignment: .leading){
-                                    Text("\((self.click.restChosen?.address)!)")
-                                        .font(.custom("Open Sans", size: 20))
-                                        .foregroundColor(.black)
-                                        //.frame(width: 150, height: 20)
-                                        .fixedSize(horizontal: false, vertical: true)
-                                        .padding(.bottom, 15)
-                                    Text("\((self.click.restChosen?.phone)!)")
-                                        .font(.custom("Open Sans", size: 20))
-                                        .foregroundColor(.black)
-                                        //.frame(width: 150, height: 20)
-                                        .fixedSize(horizontal: false, vertical: true)
-                                        .padding(.bottom, 15)
+                                HStack {
+                                    FBURLImage(url: self.click.restChosen!.coverPhotoURL, imageWidth: 120, imageHeight: 120)
+                                        .clipShape(Circle())
                                     
-                                    //if statement based on price level
-                                    Text("\((self.click.restChosen?.price)!)")
-                                    .font(.custom("Open Sans", size: 20))
-                                    .foregroundColor(.black)
-                                    .padding(.bottom,15)
+                                    VStack (alignment: .leading){
+                                        Image("address")
+                                            .resizable()
+                                            .frame(width: 30, height: 30)
+                                            .padding(.bottom, 5)
+                                        Image("phone")
+                                            .resizable()
+                                            .frame(width: 30, height: 30)
+                                            .padding(.bottom, 5)
+                                        //                                        Image("hours")
+                                        //                                            .padding(.bottom, 10)
+                                        Image("price")
+                                            .resizable()
+                                            .frame(width: 30, height: 30)
+                                            .padding(.bottom, 5)
+                                        Image("menu")
+                                            .resizable()
+                                            .frame(width: 30, height: 30)
+                                            .padding(.bottom, 5)
+                                    }
+                                    
 
-                                    NavigationLink(destination: MenuSelectionView(restChosen: self.click.restChosen!).navigationBarHidden(false)){
-                                        Text("Menu")
+                                    VStack (alignment: .leading){
+                                        Text("\((self.click.restChosen?.address)!)")
                                             .font(.custom("Open Sans", size: 20))
                                             .foregroundColor(.black)
-                                            .foregroundColor(.black)
+                                            //.frame(width: 150, height: 20)
+                                            .fixedSize(horizontal: false, vertical: true)
                                             .padding(.bottom, 15)
+                                        Text("\((self.click.restChosen?.phone)!)")
+                                            .font(.custom("Open Sans", size: 20))
+                                            .foregroundColor(.black)
+                                            //.frame(width: 150, height: 20)
+                                            .fixedSize(horizontal: false, vertical: true)
+                                            .padding(.bottom, 15)
+                                        
+                                        //if statement based on price level
+                                        Text("\((self.click.restChosen?.price)!)")
+                                        .font(.custom("Open Sans", size: 20))
+                                        .foregroundColor(.black)
+                                        .padding(.bottom,15)
+
+                                        NavigationLink(destination: MenuSelectionView(restChosen: self.click.restChosen!).navigationBarHidden(false)){
+                                            Text("Menu")
+                                                .font(.custom("Open Sans", size: 20))
+                                                .foregroundColor(.black)
+                                                .foregroundColor(.black)
+                                                .padding(.bottom, 15)
+                                        }
+                                    }.onTapGesture {
+                                        self.click.isClicked = false
                                     }
-                                }.onTapGesture {
-                                    self.click.isClicked = false
                                 }
+                                Spacer()
                             }
-                            Spacer()
+                            
                         }
                         
+                        
                     }
-                    
-                    
-                }
-            )
+                )
 
+                }
             }
         }
         .navigationBarTitle("Map")
         .navigationBarHidden(self.isNavigationBarHidden)
         .onAppear(){
             self.isNavigationBarHidden = true
-            
-            var counter = 0
-            Timer.scheduledTimer(withTimeInterval: 5.0, repeats: true) { (timer) in
-                print("counter: \(counter)")
-                counter = counter + 1
-                if(counter == 2){
-                    timer.invalidate()
+            let disp = DispatchGroup()
+            if(self.restDishVM.allRests.isEmpty){
+                self.show = true
+                self.restDishVM.fetchRestaurantsBasicInfo(disp: disp)
+                disp.notify(queue: .main){
+                    self.restaurants = self.restDishVM.allRests
+                    self.show = false
                 }
-                self.restDishVM.fetchRestaurantsBasicInfo()
+            }else{
                 self.restaurants = self.restDishVM.allRests
-                if(self.restaurants.isEmpty != true){
-                    print(self.restaurants[0].price)
-                }
-                //has info for each rest except for dishes
             }
-
-            //need to show only ones within certain radius (city radius)
         }
         .onDisappear(){
             self.isNavigationBarHidden = false

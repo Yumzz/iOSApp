@@ -53,14 +53,11 @@ struct ContactUs: View {
                         .frame(height: CGFloat(30))
                 }
                 VStack (alignment: .leading, spacing: 15) {
-                    Text("What's on your mind?")
-                        .padding(.leading, (UIScreen.main.bounds.width * 10) / 414)
-                        .padding(.trailing, (UIScreen.main.bounds.width * 10) / 414)
+//                    Text("What's on your mind?")
+//                        .padding(.leading, (UIScreen.main.bounds.width * 10) / 414)
+//                        .padding(.trailing, (UIScreen.main.bounds.width * 10) / 414)
                     TextView(text: self.$messageBody, textStyle: self.$textStyle)
                         .padding(.horizontal)
-                        .border(Color.gray.opacity(0.5), width: 1)
-                        .padding(.leading, (UIScreen.main.bounds.width * 10) / 414)
-                        .padding(.trailing, (UIScreen.main.bounds.width * 10) / 414)
                 }
                 Spacer()
                     .frame(height: CGFloat(15))
@@ -153,7 +150,7 @@ struct Loader: View {
             
             Circle()
                 .trim(from: 0, to: 0.8)
-                .stroke(AngularGradient(gradient: .init(colors: [.orange, .red]), center: .center), style: StrokeStyle(lineWidth: 8, lineCap: .round))
+                .stroke(AngularGradient(gradient: .init(colors: [Color(UIColor().colorFromHex("#F88379", 1)), Color(UIColor().colorFromHex("#FFFFFF", 1))]), center: .center), style: StrokeStyle(lineWidth: 8, lineCap: .round))
                 .frame(width: 45, height: 45)
                 .rotationEffect(.init(degrees: self.animate ? 360 : 0))
                 .animation(Animation.linear(duration: 0.7).repeatForever(autoreverses: false))

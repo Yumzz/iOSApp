@@ -80,7 +80,7 @@ struct LoginView: View {
                         print(self.email)
                         print(self.password)
                         Auth.auth().signIn(withEmail: self.email, password: self.password){ result, error in
-                            
+                            print("signin attempt: \(result)")
                             if(error != nil){
                                 print(error!)
                                 self.alertMsg = "Your email or password is incorrect"

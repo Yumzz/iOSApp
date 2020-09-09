@@ -21,7 +21,6 @@ struct BottomSheetModal<Content: View>: View {
   @Binding var display: Bool
   @Binding var backgroundColor: Color
   @Binding var rectangleColor: Color
-    
 
   var content: () -> Content
 

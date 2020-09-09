@@ -51,14 +51,11 @@ struct SuggestRestaurant: View {
                         .frame(height: CGFloat(30))
                 }
                 VStack (alignment: .leading, spacing: 15) {
-                    Text("What's the address?")
-                        .padding(.leading, (UIScreen.main.bounds.width * 10) / 414)
-                        .padding(.trailing, (UIScreen.main.bounds.width * 10) / 414)
+//                    Text("What's the address?")
+//                        .padding(.leading, (UIScreen.main.bounds.width * 10) / 414)
+//                        .padding(.trailing, (UIScreen.main.bounds.width * 10) / 414)
                     TextView(text: self.$messageBody, textStyle: self.$textStyle)
                         .padding(.horizontal)
-                        .border(Color.gray.opacity(0.5), width: 1)
-                        .padding(.leading, (UIScreen.main.bounds.width * 10) / 414)
-                        .padding(.trailing, (UIScreen.main.bounds.width * 10) / 414)
                 }
                 Spacer()
                     .frame(height: CGFloat(15))

@@ -43,7 +43,8 @@ class RestaurantDishViewModel: ObservableObject {
     
     //function to get nearby restaurants but no dish info
     //Average Price = low, medium, or high
-    func fetchRestaurantsBasicInfo(){
+    func fetchRestaurantsBasicInfo(disp: DispatchGroup){
+        disp.enter()
         db.collection("Restaurant").getDocuments { (snapshot, error) in
             if let error = error {
                 print("Error getting documents: \(error)")
@@ -55,6 +56,9 @@ class RestaurantDishViewModel: ObservableObject {
                         DispatchQueue.main.async {
                             self.allRests.append(RestaurantFB(snapshot: document, dishes: self.restDishes)!)
                         }
+                    }
+                    if(document == snapshot?.documents.last){
+                        disp.leave()
                     }
                 }
             }

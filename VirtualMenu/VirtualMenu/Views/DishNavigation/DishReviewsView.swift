@@ -83,7 +83,7 @@ struct DishReviewsView: View {
                             self.reviewClicked = true
                             print("Add Review")
                         }
-                    }.overlay(BottomSheetModal(display: self.$reviewClicked, backgroundColor: .constant(Color(UIColor().colorFromHex("#3399FF", 1))), rectangleColor: .constant(Color(UIColor().colorFromHex("#FFFFFF", 1)))) {
+                    }.overlay(BottomSheetModal(display: self.$reviewClicked, backgroundColor: .constant(Color(UIColor().colorFromHex("#F88379", 1))), rectangleColor: .constant(Color(UIColor().colorFromHex("#FFFFFF", 1)))) {
                                 ZStack{
                                     VStack(spacing: 20) {
                                         HStack{
@@ -94,6 +94,7 @@ struct DishReviewsView: View {
 
                                         TextView(text: self.$review, textStyle: self.$textStyle)
                                         .padding(.horizontal)
+                                        
 
                     //                        VStack(alignment: .leading){
                                         HStack{
@@ -177,6 +178,8 @@ struct MultiLineTFReview: UIViewRepresentable {
         tview.textColor = .black
         tview.returnKeyType = .done
         tview.resignFirstResponder()
+        tview.layer.borderWidth = 10
+        tview.layer.borderColor = UIColor.black.cgColor
 
         tview.backgroundColor = .white
         return tview

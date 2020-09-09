@@ -32,14 +32,14 @@ struct AppView: View {
             }.tag(2)
 
             
-            NavigationView {
-                FavoriteView()
-                .navigationBarTitle("Favorites")
-            }
-            .tabItem {
-                Image(systemName: "star")
-                Text("Favorites")
-            }.tag(3)
+//            NavigationView {
+//                FavoriteView()
+//                .navigationBarTitle("Favorites")
+//            }
+//            .tabItem {
+//                Image(systemName: "star")
+//                Text("Favorites")
+//            }.tag(3)
 
             
             NavigationView {
@@ -48,7 +48,7 @@ struct AppView: View {
             .tabItem {
                 Image(systemName: "person.crop.circle")
                 Text("Account")
-            }.tag(4)
+            }.tag(3)
 
 
         }

@@ -70,11 +70,11 @@ struct RestaurantFB {
 //            print("dishes messed up")
 //            return nil
 //        }
-       guard
-           let featuredDishRefs = (snapshot.data()["FeaturedDishes"] as? [DocumentReference?]) else {
-           print("featured dishes messed up")
-           return nil
-       }
+//       guard
+//           let featuredDishRefs = (snapshot.data()["FeaturedDishes"] as? [DocumentReference?]) else {
+//           print("featured dishes messed up: \(name)")
+//           return nil
+//       }
        //dishes is an array of FIRDocumentReference in Firebase and is converted to ds, which is an array of DocumentReferences
        
        guard
@@ -123,7 +123,7 @@ struct RestaurantFB {
        self.ethnicity = ethnicity
        self.coordinate = coordinate
        self.dishes = []
-       self.featuredDishRefs = featuredDishRefs
+       self.featuredDishRefs = []
        self.id = UUID()
        self.coverPhotoURL = "Restaurant/\(self.name.lowercased())/\(self.name.lowercased())_cover.png"
        self.address = address
@@ -148,11 +148,11 @@ struct RestaurantFB {
 //        }
 
         //dishes is an array of FIRDocumentReference in Firebase and is converted to ds, which is an array of DocumentReferences
-        guard
-            let featuredDishRefs = (snapshot.data()["FeaturedDishes"] as? [DocumentReference?]) else {
-            print("featured dishes messed up")
-            return nil
-        }
+//        guard
+//            let featuredDishRefs = (snapshot.data()["FeaturedDishes"] as? [DocumentReference?]) else {
+//            print("featured dishes messed up")
+//            return nil
+//        }
         
         guard
             let type = snapshot.data()["Type"] as? String else {
@@ -202,7 +202,7 @@ struct RestaurantFB {
         self.ethnicity = ethnicity
         self.coordinate = coordinate
         self.dishes = dishes
-        self.featuredDishRefs = featuredDishRefs
+        self.featuredDishRefs = []
         self.address = address
         self.coverPhotoURL = "Restaurant/\(self.name.lowercased())/\(self.name.lowercased())_cover.png"
         self.phone = phone

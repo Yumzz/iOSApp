@@ -106,21 +106,21 @@ struct MenuSelectionView: View {
                     .cornerRadius(30)
                 }
             }
-            ScrollView(.horizontal) {
-                HStack(spacing: 15) {
-                    ForEach(0..<(self.menuSelectionVM.featuredDishes.count/2 + 1), id: \.self) {
-                        column in
-                        VStack(alignment: .leading, spacing: 15) {
-                            if column*2 < self.menuSelectionVM.featuredDishes.count {
-                                PreviewDish(dish: self.menuSelectionVM.featuredDishes[column*2], restChosen: self.restChosen).frame(alignment: .top)
-                            }
-                            if column*2+1 < self.menuSelectionVM.featuredDishes.count {
-                                PreviewDish(dish: self.menuSelectionVM.featuredDishes[column*2+1], restChosen: self.restChosen)
-                            }
-                        }.frame(height: 180)
-                    }
-                }
-            }
+//            ScrollView(.horizontal) {
+//                HStack(spacing: 15) {
+//                    ForEach(0..<(self.menuSelectionVM.featuredDishes.count/2 + 1), id: \.self) {
+//                        column in
+//                        VStack(alignment: .leading, spacing: 15) {
+//                            if column*2 < self.menuSelectionVM.featuredDishes.count {
+//                                PreviewDish(dish: self.menuSelectionVM.featuredDishes[column*2], restChosen: self.restChosen).frame(alignment: .top)
+//                            }
+//                            if column*2+1 < self.menuSelectionVM.featuredDishes.count {
+//                                PreviewDish(dish: self.menuSelectionVM.featuredDishes[column*2+1], restChosen: self.restChosen)
+//                            }
+//                        }.frame(height: 180)
+//                    }
+//                }
+//            }
             .padding(15)
             .frame(height: 180)
             Spacer()
