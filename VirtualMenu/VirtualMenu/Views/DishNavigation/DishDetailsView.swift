@@ -53,7 +53,6 @@ struct DishDetailsView: View {
                 }
                 DishNavButton(strLabel: "Add to Order").onTapGesture {
                     //send info to POS
-                    print("order tapped")
                     if(!self.order.checkSameRest(dish: self.dish)){
                         self.alertTitle = "Different Restaurant"
                         self.alertMessage = "A new order has been started for \(self.restaurant.name)"

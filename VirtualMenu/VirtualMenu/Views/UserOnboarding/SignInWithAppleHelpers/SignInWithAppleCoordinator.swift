@@ -34,6 +34,10 @@ final class SignInWithAppleCoordinator: NSObject {
                         fatalError()
                 }
             
+            if(authState == "authorized"){
+                return
+            }
+            
 //            let user = User(fullName: fullName ?? "not provided", email: email ?? "email", authState: authState ?? "unknown")
 //            if let userEncoded = try? JSONEncoder().encode(user) {
 //                UserDefaults.standard.set(userEncoded, forKey: "user")

@@ -67,7 +67,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
 
     func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error?) {
       // Google sign in and token retrieval
-        let authen = AuthenticationViewModel()
         if(user == nil){
             return
         }

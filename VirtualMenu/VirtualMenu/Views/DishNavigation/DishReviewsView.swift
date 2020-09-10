@@ -81,7 +81,6 @@ struct DishReviewsView: View {
                     HStack{
                         DishNavButton(strLabel: "Submit a Review").onTapGesture{
                             self.reviewClicked = true
-                            print("Add Review")
                         }
                     }.overlay(BottomSheetModal(display: self.$reviewClicked, backgroundColor: .constant(Color(UIColor().colorFromHex("#F88379", 1))), rectangleColor: .constant(Color(UIColor().colorFromHex("#FFFFFF", 1)))) {
                                 ZStack{
@@ -142,10 +141,8 @@ struct DishReviewsView: View {
             }
         }.onAppear {
             self.show = true
-            print("here at reviews")
             self.restDishVM.fetchDishReviewsFB(dishID: self.dish.key, restId: self.restaurant.key)
             self.restDishVM.dispatchGroup2.notify(queue: .main){
-                print("notified")
                 self.reviews = self.restDishVM.dishReviews
                 self.restDishVM.resetReviews()
                 self.show = false

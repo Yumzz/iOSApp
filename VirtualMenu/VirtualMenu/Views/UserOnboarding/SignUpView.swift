@@ -198,12 +198,11 @@ struct SignUpView: View {
         print("here")
         delegate = SignInWithAppleDelegates(window: window, currentNonce: currentNonce!){ result in
             switch result {
-            case .success(let user):
+            case .success(_):
                 //already created a new account or signed in
-                print("here")
-                self.alertMessage = "You have successfully logged in through Apple"
-                self.alertTitle = "Success!"
-                self.showAlert.toggle()
+//                self.alertMessage = "You have successfully logged in through Apple"
+//                self.alertTitle = "Success!"
+//                self.showAlert.toggle()
                 self.user.showOnboarding = false
                 self.user.isLogged = true
             case .failure(let error):
@@ -288,7 +287,6 @@ struct SignUpView: View {
             login = false
             fbLoginManager.logIn(permissions: ["email"], from: UIApplication.shared.windows.last?.rootViewController) { (result, error) -> Void in
                 // print("RESULT: '\(result)' ")
-                let authen = AuthenticationViewModel()
                 if error != nil {
                     print("error")
                 }else if(result!.isCancelled){
