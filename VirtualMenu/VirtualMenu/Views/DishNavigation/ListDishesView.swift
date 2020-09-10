@@ -120,9 +120,7 @@ struct ListDishesView: View {
             
         }.onAppear{
             self.allClicked = true
-            
-            print("here")
-            
+                        
             self.dishCategoriesDisplayed = self.dishCategoriesVM.dishCategories
         }
         .navigationBarTitle("Dishes")

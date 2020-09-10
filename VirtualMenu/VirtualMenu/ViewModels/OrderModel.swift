@@ -50,14 +50,10 @@ class OrderModel: ObservableObject {
     }
     
     func checkSameRest(dish: DishFB) -> Bool{
-        print("here")
         if(restChosen.name != ""){
-            print("not first chosen")
             if(dish.restaurant != self.restChosen.name){
-                print("not same name")
                 return false
             }else{
-                print("same name")
                 return true
             }
         }else{
@@ -133,7 +129,6 @@ class OrderModel: ObservableObject {
                     print("Error getting documents: \(err)")
                 }else{
                     for document in snap!.documents {
-                        print(document.data())
                         self.dishReferences.append(document.reference)
                         ds.leave()
                     }
@@ -141,11 +136,8 @@ class OrderModel: ObservableObject {
             }
             ds.notify(queue: .main){
                 if(d == order.dishes.last){
-                    print("last: \(d.name)")
-                    print(self.dishReferences)
                     let data = ["dishes": self.dishReferences, "userId": userProfile.userId, "rest": self.restChosen.name] as [String : Any]
-                    let reference = db.collection("Order").addDocument(data: data)
-                    print("posted order")
+                    db.collection("Order").addDocument(data: data)
                     self.dishReferences = [DocumentReference]()
     //                                self.addOrder(ref: reference)
                     self.retrieveOrders(userID: userProfile.userId)
@@ -168,13 +160,11 @@ class OrderModel: ObservableObject {
             }
             else{
                 ds.enter()
-                print("got order doc")
                 for doc in snap!.documents {
                     //int to dish list and send that to function afet ds.notify?
                     let dishes: [DocumentReference] = doc.data()["dishes"] as! [DocumentReference]
                     //need to create order
                     orderss.insert(dishes)
-                    print("got dishes")
                     if(doc == snap!.documents.last){
                         ds.leave()
                         ds.notify(queue: .main){
@@ -196,7 +186,6 @@ class OrderModel: ObservableObject {
 //        var order = Order(dishes: [], totalPrice: 0.0)
         for ord in orders {
             var order = Order(dishes: [], totalPrice: 0.0, rest: "")
-            print("going through each order")
             ds2.enter()
             for d in ord {
                 d.getDocument { (snap2, err2) in
@@ -204,14 +193,12 @@ class OrderModel: ObservableObject {
                         print(err2.localizedDescription)
                     }
                     else{
-                        print("dish exists in order: \(snap2!.data()!["Name"] as! String)")
                         let price = Double(snap2!.data()!["Price"] as! String)
                         let dish = DishFB(name: snap2!.data()!["Name"] as! String, description: snap2!.data()!["Description"] as! String, price: price!, type: snap2!.data()!["Type"] as! String, restaurant: snap2!.data()!["Restaurant"] as! String)
                         order.dishes.append(dish)
                         order.totalPrice = order.totalPrice + dish.price
                         
                         if(d == ord.last){
-                            print("last dish in order")
                             order.rest = snap2!.data()!["Restaurant"] as! String
                             ds2.leave()
                             ds2.notify(queue: .main){

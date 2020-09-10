@@ -12,7 +12,13 @@ func changePhoto(inputImage: UIImage?){
     
     //image = Image(uiImage: inputImage.circle!)
     
-    Utils().uploadUserProfileImage(profileImage: inputImage)
-    
     userProfile.profilePhoto = inputImage
+    
+    let prom = Utils().uploadUserProfileImage(profileImage: inputImage)
+    
+    if(prom.result != nil){
+        return
+    }else{
+        print(prom.error!)
+    }
 }

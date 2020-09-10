@@ -104,7 +104,6 @@ extension UserProfile: Hashable {
     func downloadPhoto(url:URL){
         let session = URLSession(configuration: .default)
         print("here")
-        var image: UIImage? = nil
         let dispatch = DispatchGroup()
 
         // Define a download task. The download task will download the contents of the URL as a Data object and then you can do what you wish with that data.
@@ -122,7 +121,10 @@ extension UserProfile: Hashable {
                     if let imageData = data {
                         // Finally convert that Data into an image and do what you wish with it.
                         userProfile.profilePhoto = UIImage(data: imageData)
-                        Utils().uploadUserProfileImage(profileImage: userProfile.profilePhoto!)
+                        let prom = Utils().uploadUserProfileImage(profileImage: userProfile.profilePhoto!)
+                        if(prom.error != nil){
+                            return
+                        }
                         // Do something with your image.
                     } else {
                         print("Couldn't get image: Image is nil")
@@ -135,7 +137,6 @@ extension UserProfile: Hashable {
         downloadPicTask.resume()
         dispatch.leave()
         dispatch.notify(queue: .main){
-            print("finished")
         }
     }
     
@@ -155,7 +156,7 @@ extension UserProfile: Hashable {
                         return
                     }
                     ds.forEach { (arg0) in
-                        let (rest, dish) = arg0
+                        let (_, dish) = arg0
                         dish.forEach { (arg1) in
                             let d = arg1
                             d!.getDocument(completion: { (s, err) in

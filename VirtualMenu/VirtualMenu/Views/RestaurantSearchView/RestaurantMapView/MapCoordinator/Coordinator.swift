@@ -41,7 +41,6 @@ final class Coordinator: NSObject, MKMapViewDelegate {
         //need to flip variable there by throwing notification
         if(view.annotation is RestaurantAnnotation){
             let rest = (view.annotation as! RestaurantAnnotation).restInfo
-            print("restannotation: \(rest)")
             let restaurantData: [String: RestaurantFB] = ["Restaurant": rest]
             NotificationCenter.default.post(name: Notification.Name(rawValue: "annotationPressed"), object: nil, userInfo: restaurantData)
             
