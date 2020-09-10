@@ -105,7 +105,7 @@ extension UserProfile: Hashable {
         let session = URLSession(configuration: .default)
         print("here")
         var image: UIImage? = nil
-        var dispatch = DispatchGroup()
+        let dispatch = DispatchGroup()
 
         // Define a download task. The download task will download the contents of the URL as a Data object and then you can do what you wish with that data.
         dispatch.enter()
@@ -143,7 +143,7 @@ extension UserProfile: Hashable {
         //decode favorites mapping from FB
         let db = Firestore.firestore()
         var map: [String: DishFB] = [String: DishFB]()
-        var docRef = db.collection("User").whereField("id", isEqualTo: self.userId)
+        let docRef = db.collection("User").whereField("id", isEqualTo: self.userId)
         docRef.getDocuments { (snap, err) in
             if let error = err {
                 print("Error getting documents: \(error)")

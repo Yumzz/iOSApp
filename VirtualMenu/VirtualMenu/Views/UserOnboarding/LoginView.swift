@@ -80,7 +80,7 @@ struct LoginView: View {
                         print(self.email)
                         print(self.password)
                         Auth.auth().signIn(withEmail: self.email, password: self.password){ result, error in
-                            print("signin attempt: \(result)")
+                            // print("signin attempt:String(describing:  \(res)ult)")
                             if(error != nil){
                                 print(error!)
                                 self.alertMsg = "Your email or password is incorrect"
@@ -321,13 +321,13 @@ struct LoginView: View {
         }
         
         func attemptLoginFb(completion: @escaping (_ result: LoginManagerLoginResult?, _ error: Error?) -> Void) {
-            var dispatch = DispatchGroup()
+            let dispatch = DispatchGroup()
             let fbLoginManager: LoginManager = LoginManager()
             fbLoginManager.logOut()
             print("logged out")
             
             fbLoginManager.logIn(permissions: ["email"], from: UIApplication.shared.windows.last?.rootViewController) { (result, error) -> Void in
-                print("RESULT: '\(result)' ")
+                // print("RESULT: '\(result)' ")
 
                 if error != nil {
                     print("error")
@@ -342,12 +342,12 @@ struct LoginView: View {
                     
                     Auth.auth().signIn(with: credential) { (authResult, error) in
                         //authresult = Promise of UserCredential
-                        print("signing in")
+                        //print("signing in")
                         if(authResult != nil){
-                            print("authorized")
-                            print(authResult?.additionalUserInfo?.profile)
+                            //print("authorized")
+                            //print(authResult?.additionalUserInfo?.profile)
                             let userInfo = authResult?.additionalUserInfo?.profile
-                            if let userInfo = userInfo as? [String:Any],
+                            if let userInfo = userInfo,
                                                        let email: String = userInfo["email"] as? String,
                                                        let name: String = userInfo["name"] as? String,
                                                        let picture = userInfo["picture"] as? [String: Any],

@@ -128,7 +128,7 @@ class AuthenticationViewModel: ObservableObject {
                     print(error.localizedDescription)
                 } else {
                     // Data for "profilephotos/\(uid).jpg" is returned
-                    print("data: \(data)")
+                    // print("data: \(data)")
                     userProfile.profilePhoto = UIImage(data: data!)!
                 }
             }

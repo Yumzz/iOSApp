@@ -143,7 +143,7 @@ class RestaurantDishViewModel: ObservableObject {
         
         var image: UIImage?
         //need current restaurant
-        var storage = Storage.storage()
+        let storage = Storage.storage()
         var dName = dishName
         dName = dName.replacingOccurrences(of: " ", with: "-")
         dName = dName.lowercased()

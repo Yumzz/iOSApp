@@ -38,7 +38,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
     
     func scene(_ scene: UIScene, continue userActivity: NSUserActivity) {
-        var google = false
+        let google = false
         guard userActivity.activityType == NSUserActivityTypeBrowsingWeb,
             let urlToOpen = userActivity.webpageURL
             else {
@@ -64,7 +64,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                     guard let name = UserDefaults.standard.value(forKey: "Name") as? String else { return false}
                     let faveDishes = [String: [DocumentReference]]()
                         
-                    var disp = DispatchGroup()
+                    let disp = DispatchGroup()
                     disp.enter()
                     Auth.auth().signIn(withEmail: email, link: link) { (dataResult, error) in
                         if let error = error {
@@ -73,7 +73,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                             return
                         }
                         else{
-                            guard let result = dataResult else{
+                            guard dataResult != nil else{
                                 return
                             }
                             userProfile.emailAddress = email
@@ -118,7 +118,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                 
 //                guard let name = UserDefaults.standard.value(forKey: "Name") as? String else { return false}
                 
-                var disp = DispatchGroup()
+                let disp = DispatchGroup()
                 
                 disp.enter()
                 Auth.auth().signIn(withEmail: email, link: link) { (dataResult, error) in
@@ -128,7 +128,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                         return
                     }
                     else{
-                        guard let result = dataResult else{
+                        guard dataResult != nil else{
                             return
                         }
                         userProfile.emailAddress = email
@@ -164,8 +164,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         //UserDefaults.standard.set("", forKey: signInWithAppleManager.userIdentifierKey)
         
         let contentView = ContentView()
-        var order = OrderModel()
-        var user = UserStore()
+        let order = OrderModel()
+        let user = UserStore()
         
         // Use a UIHostingController as window root view controller.
         if let windowScene = scene as? UIWindowScene {

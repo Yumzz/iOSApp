@@ -70,7 +70,7 @@ class OrderModel: ObservableObject {
     func deleteDish(dish: DishFB, dis: DispatchGroup){
 //        dishesChosen
 //        if(dishIndexes[dish])
-        print("dishIndexes: \(dishIndexes[dish])")
+        // print("dishIndexes: \(dishIndexes[dish])")
         if(dishesChosen.count == 1){
             dishesChosen.removeAll()
             dishIndexes.removeAll()
