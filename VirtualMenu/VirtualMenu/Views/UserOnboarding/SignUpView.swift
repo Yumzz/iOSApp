@@ -287,7 +287,7 @@ struct SignUpView: View {
             signUp = true
             login = false
             fbLoginManager.logIn(permissions: ["email"], from: UIApplication.shared.windows.last?.rootViewController) { (result, error) -> Void in
-                print("RESULT: '\(result)' ")
+                // print("RESULT: '\(result)' ")
                 let authen = AuthenticationViewModel()
                 if error != nil {
                     print("error")
@@ -326,7 +326,7 @@ struct SignUpView: View {
                             
                             Auth.auth().sendSignInLink(toEmail: email, actionCodeSettings: actionCode) { (error) in
     //                            self.user.showOnboarding = false
-                                if let error = error {
+                                if error != nil {
                                   return
                                 }
                                 userProfile.emailAddress = email

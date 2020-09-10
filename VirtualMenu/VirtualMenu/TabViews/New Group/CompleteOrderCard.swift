@@ -61,7 +61,7 @@ struct CompleteOrderCard: View {
                                 .foregroundColor(Color.secondary)
                                 
                                 Button("X") {
-                                    var dis = DispatchGroup()
+                                    let dis = DispatchGroup()
                                     dis.enter()
                                     self.order.deleteDish(dish: dish, dis: dis)
                                     //need to call for refreshing

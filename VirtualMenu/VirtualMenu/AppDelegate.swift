@@ -107,7 +107,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
             
             Auth.auth().sendSignInLink(toEmail: email, actionCodeSettings: actionCode) { (error) in
 //                            self.user.showOnboarding = false
-                if let error = error {
+                if error != nil {
                   return
                 }
                 UserDefaults.standard.set(email, forKey: "Email")
