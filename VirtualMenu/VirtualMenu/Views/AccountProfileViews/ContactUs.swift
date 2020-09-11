@@ -19,7 +19,7 @@ struct ContactUs: View {
     @State private var textStyle = UIFont.TextStyle.body
 
     
-    @ObservedObject var FirebaseFunctions = FirebaseFunctionsViewModel()
+    @ObservedObject var contactUs = ContactUsViewModel()
     
     var body: some View {
         NavigationView {
@@ -62,18 +62,11 @@ struct ContactUs: View {
                 Spacer()
                     .frame(height: CGFloat(15))
                 Button(action: {
-                    self.show.toggle()
-                    let results = self.FirebaseFunctions.suggestRestaurantButton(email: self.email, messageBody: self.messageBody, name: self.name)
-                    let result = results[0]
-                    let title = results[1]
-                    if(result == ""){
-                        return
-                    }
-                    else{
-                        self.alertTitle = title
-                        self.alertMessage = result
-                        self.showingAlert.toggle()
-                    }
+                    let dispatch = DispatchGroup()
+                    self.contactUs.sendResponse(email: self.email, messageBody: self.messageBody, name: self.name, disp: dispatch)
+                    self.alertMessage = self.contactUs.alertMessage
+                    self.alertTitle = self.contactUs.alertTitle
+                    self.showingAlert.toggle()
                 }) {
                     Text("Send")
                 }

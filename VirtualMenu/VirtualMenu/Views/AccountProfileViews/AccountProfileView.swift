@@ -45,7 +45,7 @@ struct AccountProfileView: View {
     @State var show = false
     
     @EnvironmentObject var user: UserStore
-    @ObservedObject var authenticationVM = AuthenticationViewModel()
+    @ObservedObject var accountVM = AccountProfileViewModel()
     
     var body: some View {
         ScrollView {
@@ -97,15 +97,16 @@ struct AccountProfileView: View {
                     
                     
                     Button(action: {
-                        let firebaseAuth = Auth.auth()
-                        do {
-                            try firebaseAuth.signOut()
-                            self.signedOut = true
-                            self.user.isLogged = false
-                            UserDefaults.standard.set(false, forKey: "isLogged")
-                            self.user.showOnboarding = true
-                        } catch let signOutError as NSError {
-                            print ("Error signing out: %@", signOutError)
+                        let dispatch = DispatchGroup()
+                        dispatch.enter()
+                        self.accountVM.signOut(dispatch: dispatch)
+                        dispatch.notify(queue: .main){
+                            if(self.accountVM.signedOut){
+                                print("signed out")
+                                self.user.isLogged = false
+                                UserDefaults.standard.set(false, forKey: "isLogged")
+                                self.user.showOnboarding = true
+                            }
                         }
                     }){
                         Text("Sign Out")
@@ -121,7 +122,7 @@ struct AccountProfileView: View {
                 }, label: {
                     Text("Edit Profile Photo")
                 }))
-                    .sheet(isPresented: $showingImagePicker, onDismiss: changePhoto){ ImagePicker(image: self.$inputImage)
+                    .sheet(isPresented: $showingImagePicker, onDismiss: self.changePhoto){ ImagePicker(image: self.$inputImage)
                         .alert(isPresented: self.$showingAlert) {
                             Alert(title: Text("Thank you for submitting"), message: Text("\(self.alertMessage)"), dismissButton: .default(Text("OK")))
                         }
@@ -136,12 +137,18 @@ struct AccountProfileView: View {
     
     func changePhoto(){
         guard let inputImage = inputImage else { return }
-        image = Image(uiImage: inputImage.circle!)
-        let x = Utils().uploadUserProfileImage(profileImage: inputImage)
-        print(x)
+        
+        //image = Image(uiImage: inputImage.circle!)
+        
         userProfile.profilePhoto = inputImage
         
-        //        changeRequest?.photoURL = image
+        let prom = Utils().uploadUserProfileImage(profileImage: inputImage)
+        
+        if(prom.result != nil){
+            return
+        }else{
+            print(prom.error!)
+        }
     }
     
 }

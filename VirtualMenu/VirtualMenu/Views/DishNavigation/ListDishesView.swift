@@ -10,13 +10,11 @@ import SwiftUI
 import Firebase
 
 struct ListDishesView: View {
-    
-    @ObservedObject var restDishVM = RestaurantDishViewModel()
-    
+        
     var restaurant: RestaurantFB
     
-    @ObservedObject var dishCategoriesVM: DishCategoriesViewModel
-    
+    @ObservedObject var listDishVM: ListDishesViewModel
+        
     @State var dishesDisplayed: [DishFB] = []
     
     @State var isLoading = false
@@ -30,9 +28,9 @@ struct ListDishesView: View {
         
         self.restaurant = restaurant
         
-        self.dishCategoriesVM = DishCategoriesViewModel(restaurant: self.restaurant)
+        self.listDishVM = ListDishesViewModel(restaurant: self.restaurant)
                 
-        print("categories: \(self.dishCategoriesVM.dishCategories)")
+//        print("categories: \(self.dishCategoriesVM.dishCategories)")
                 
     }
     
@@ -55,11 +53,11 @@ struct ListDishesView: View {
                                     self.allClicked = false
                                 }
                                 else{
-                                    self.dishCategoriesDisplayed = self.dishCategoriesVM.dishCategories
+                                    self.dishCategoriesDisplayed = self.listDishVM.dishCategories
                                     self.allClicked = true
                                 }
                             }
-                            ForEach(self.dishCategoriesVM.dishCategories, id: \.name){ dishCategory in
+                            ForEach(self.listDishVM.dishCategories, id: \.name){ dishCategory in
                                 Text("\(dishCategory.name)")
                                     .padding()
                                     .scaledToFit()
@@ -106,7 +104,7 @@ struct ListDishesView: View {
                                     NavigationLink(destination:
                                         DishDetailsView(dish: dish, restaurant: self.restaurant).navigationBarHidden(false)
                                     ) {
-                                        DishCard(urlImage: FBURLImage(url: dish.coverPhotoURL, imageAspectRatio: .fill), dishName: dish.name, dishIngredients: dish.description, price: self.restDishVM.formatPrice(price: dish.price))
+                                        DishCard(urlImage: FBURLImage(url: dish.coverPhotoURL, imageAspectRatio: .fill), dishName: dish.name, dishIngredients: dish.description, price: self.listDishVM.formatPrice(price: dish.price))
                                     }
                                 }
                                 Spacer().frame(height: 20)
@@ -121,7 +119,7 @@ struct ListDishesView: View {
         }.onAppear{
             self.allClicked = true
                         
-            self.dishCategoriesDisplayed = self.dishCategoriesVM.dishCategories
+            self.dishCategoriesDisplayed = self.listDishVM.dishCategories
         }
         .navigationBarTitle("Dishes")
     }

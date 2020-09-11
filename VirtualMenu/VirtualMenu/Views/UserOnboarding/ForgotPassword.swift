@@ -18,7 +18,7 @@ struct ForgotPasswordView: View {
     @State var alertTitle = ""
     @State var alertMessage = ""
     
-    @ObservedObject var AuthenticationVM = AuthenticationViewModel()
+    @ObservedObject var forgotPassword = ForgotPasswordViewModel()
 
     
     var alert: Alert {
@@ -50,7 +50,6 @@ struct ForgotPasswordView: View {
                             Image("ic_email")
                                 .padding(.leading, 20)
                             
-                            
                             TextField("Email", text: $email)
                                 .frame(height: 40, alignment: .center)
                                 .padding(.leading, 10)
@@ -66,9 +65,9 @@ struct ForgotPasswordView: View {
                     Spacer(minLength: 20)
                     
                     Button(action: {
-                        let val = self.AuthenticationVM.forgotPasswordValidInputs(email: self.email)
+                        let val = self.forgotPassword.forgotPasswordValidInputs(email: self.email)
                         if (val == "") {
-                            let x = self.AuthenticationVM.passwordReset(email: self.email)
+                            let x = self.forgotPassword.passwordReset(email: self.email)
                             if(x == ""){
                                 self.alertMsg = "Email was sent"
                                 self.showAlert.toggle()

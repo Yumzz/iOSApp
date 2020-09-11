@@ -26,7 +26,7 @@ struct DishReviewsView: View {
     @State private var alertMessage = ""
     @State private var alertTitle = ""
     
-    @ObservedObject var FirebaseFunctions = FirebaseFunctionsViewModel()
+    @ObservedObject var dishReviewVM = DishReviewsViewModel()
     
     let dish: DishFB
     
@@ -100,7 +100,7 @@ struct DishReviewsView: View {
                                             Spacer().frame(width: UIScreen.main.bounds.width/3)
                                             PostReviewButton().onTapGesture {
                                                 self.show = true
-                                                let results = self.FirebaseFunctions.addReview(body: self.review, dish: self.dish, rest: self.restaurant, starRating: 5, userID: userProfile.userId, username: userProfile.fullName)
+                                                let results = self.dishReviewVM.addReview(body: self.review, dish: self.dish, rest: self.restaurant, starRating: 5, userID: userProfile.userId, username: userProfile.fullName)
                                                 let result = results[0]
                                                 let title = results[1]
                                                 if(result == ""){

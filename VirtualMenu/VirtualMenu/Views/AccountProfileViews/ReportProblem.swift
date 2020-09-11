@@ -18,7 +18,7 @@ struct ReportProblem: View {
     @State private var textStyle = UIFont.TextStyle.body
 
     
-    @ObservedObject var FirebaseFunctions = FirebaseFunctionsViewModel()
+    @ObservedObject var reportVM = ReportProblemViewModel()
         
     var body: some View {
         NavigationView {
@@ -52,26 +52,17 @@ struct ReportProblem: View {
                         .frame(height: CGFloat(30))
                 }
                 VStack (alignment: .leading, spacing: 15) {
-//                    Text("What's going on? We'll try and fix it.")
-//                        .padding(.leading, (UIScreen.main.bounds.width * 10) / 414)
-//                        .padding(.trailing, (UIScreen.main.bounds.width * 10) / 414)
                     TextView(text: self.$messageBody, textStyle: self.$textStyle)
                         .padding(.horizontal)
                 }
                 Spacer()
                     .frame(height: CGFloat(15))
                 Button(action: {
-                    let results = self.FirebaseFunctions.reportProblemButton(email: self.email, name: self.name, messageBody: self.messageBody)
-                    let result = results[0]
-                    let title = results[1]
-                    if(result == ""){
-                        return
-                    }
-                    else{
-                        self.alertTitle = title
-                        self.alertMessage = result
-                        self.showingAlert.toggle()
-                    }
+                    let dispatch = DispatchGroup()
+                    self.reportVM.sendResponse(email: self.email, messageBody: self.messageBody, name: self.name, disp: dispatch)
+                    self.alertMessage = self.reportVM.alertMessage
+                    self.alertTitle = self.reportVM.alertTitle
+                    self.showingAlert.toggle()
                 }) {
                     Text("Send")
                 }

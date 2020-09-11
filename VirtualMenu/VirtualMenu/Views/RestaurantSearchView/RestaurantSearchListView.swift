@@ -22,45 +22,54 @@ struct Resto: Identifiable {
 
 struct RestaurantSearchListView: View {
     
-    @ObservedObject var restDishVM = RestaurantSearchListViewModel()
+    @ObservedObject var restaurantListVM = RestaurantSearchListViewModel()
     
     @Binding var isNavigationBarHidden: Bool
     
+    @State var show = false
+    
     var body: some View {
-        
-        ScrollView {
-            VStack(spacing: 20){
-                
-                if !self.restDishVM.allRests.isEmpty {
-                    
-                    if self.restDishVM.allRests.count > 1 {
-                        Text("\(String(restDishVM.allRests.count)) Places")
-                            .bold()
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                            .padding(.leading)
-                    } else {
-                        Text("\(String(restDishVM.allRests.count)) Place")
-                            .bold()
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                            .padding(.leading)
-                    }
-                    
-                    ForEach(restDishVM.allRests, id: \.id) { resto in
-                        
-                        NavigationLink(destination: MenuSelectionView(restChosen: resto)){
-                            VStack {
-                                RestaurantCard(urlImage: FBURLImage(url: resto.coverPhotoURL),restaurantName: resto.name, restaurantAddress: resto.address, ratingSum: resto.ratingSum, nbOfRatings: resto.n_Ratings)
+        ZStack{
+            if self.show{
+                GeometryReader{_ in
+                    Loader()
+                }.background(Color.black.opacity(0.45))
+            }
+            else{
+                ScrollView {
+                    VStack(spacing: 20){
+                        if !self.restaurantListVM.allRests.isEmpty {
+                            
+                            if self.restaurantListVM.allRests.count > 1 {
+                                Text("\(String(restaurantListVM.allRests.count)) Places")
+                                    .bold()
+                                    .frame(maxWidth: .infinity, alignment: .leading)
+                                    .padding(.leading)
+                            } else {
+                                Text("\(String(restaurantListVM.allRests.count)) Place")
+                                    .bold()
+                                    .frame(maxWidth: .infinity, alignment: .leading)
+                                    .padding(.leading)
+                            }
+                            
+                            ForEach(restaurantListVM.allRests, id: \.id) { resto in
+                                
+                                NavigationLink(destination: MenuSelectionView(restChosen: resto)){
+                                    VStack {
+                                        RestaurantCard(urlImage: FBURLImage(url: resto.coverPhotoURL),restaurantName: resto.name, restaurantAddress: resto.address, ratingSum: resto.ratingSum, nbOfRatings: resto.n_Ratings)
+                                    }
+                                }
+                                .buttonStyle(PlainButtonStyle())
                             }
                         }
-                        .buttonStyle(PlainButtonStyle())
+                        
+                        Spacer()
+                            .frame(height: 30)
                     }
+                    .padding(.top)
+                    .frame(maxWidth: .infinity)
                 }
-                
-                Spacer()
-                    .frame(height: 30)
             }
-            .padding(.top)
-            .frame(maxWidth: .infinity)
         }
         .navigationBarTitle("Asian Restaurants")
         .onAppear(){

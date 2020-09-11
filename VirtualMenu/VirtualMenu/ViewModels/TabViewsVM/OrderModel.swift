@@ -211,4 +211,12 @@ class OrderModel: ObservableObject {
             }
         }
       }
+    
+    func formatPrice(price: Double) -> String {
+        var x =  "$" + (price.truncatingRemainder(dividingBy: 1) == 0 ? String(format: "%.2f", price) : String(price))
+        if(x.numOfNums() < 3){
+            x = x + "0"
+        }
+        return x
+    }
 }

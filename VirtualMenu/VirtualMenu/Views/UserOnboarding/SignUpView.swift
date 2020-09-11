@@ -21,13 +21,10 @@ var google = false
 var credential: AuthCredential? = nil
 
 struct SignUpView: View {
-    @Environment(\.window) var window: UIWindow?
-    @State var delegate: SignInWithAppleDelegates! = nil
     
     @State var email: String = ""
     @State var password: String = ""
     @State var name: String = ""
-    @State var currentNonce: String? = ""
     
     @State var alertMsg = ""
     @State private var alertMessage = ""
@@ -35,12 +32,16 @@ struct SignUpView: View {
     
     @State var showAlert = false
     @State var showDetails = false
+    @State var currentNonce: String? = ""
+
     
     @State var createdAccount = false
-    var socialLogin = SocialLogin()
     
     @EnvironmentObject var user: UserStore
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
+    
+    @Environment(\.window) var window: UIWindow?
+    @State var delegate: SignInWithAppleDelegates! = nil
     
 
     
@@ -48,7 +49,7 @@ struct SignUpView: View {
         Alert(title: Text(""), message: Text(alertMsg), dismissButton: .default(Text("OK")))
     }
     
-    @ObservedObject var authenticationVM = AuthenticationViewModel()
+    @ObservedObject var signUpVM = SignUpViewModel()
     
     var body: some View {
         ZStack {
@@ -71,27 +72,12 @@ struct SignUpView: View {
                     CustomPasswordField(strLabel: "Password", password: $password)
                     
                     Button(action: {
-                        self.showAlert = false
-                        let actionCode = ActionCodeSettings()
-                        actionCode.url = URL(string: "https://yumzzapp.page.link/connect")
-                        actionCode.handleCodeInApp = true
-                        actionCode.setIOSBundleID(Bundle.main.bundleIdentifier!)
-                        Auth.auth().sendSignInLink(toEmail: self.email, actionCodeSettings: actionCode) { (error) in
-            //                            self.user.showOnboarding = false
-                            if let error = error {
-                                self.alertMessage = error.localizedDescription
-                                self.alertTitle = "Error!"
-                                self.showAlert.toggle()
-                              return
-                            }
-                            UserDefaults.standard.set(self.email, forKey: "Email")
-                            UserDefaults.standard.set(self.name, forKey: "Name")
-                            UserDefaults.standard.set(self.password, forKey: "Password")
-                            self.alertMessage = "A confirmation email was sent to \(self.email). Please click the link to sign in!"
-                            self.alertTitle = "Email Sent!"
-                            self.showAlert.toggle()
-                        }
-            //                print("just ended button action")
+                        let dispatch = DispatchGroup()
+                        dispatch.enter()
+                        self.signUpVM.signUpUser(email: self.email, name: self.name, password: self.password, dispatch: dispatch)
+                        self.alertMessage = self.signUpVM.alertMessage
+                        self.alertTitle = self.signUpVM.alertTitle
+                        self.showAlert.toggle()
                     })
                     {
                         NavigationLink(destination: AppView(), isActive: $createdAccount){
@@ -121,7 +107,7 @@ struct SignUpView: View {
                     
                     HStack{
                         Button(action: {
-                            self.socialLogin.attemptLoginGoogle()
+                            self.signUpVM.socialLogin.attemptSignUpGoogle()
                         }){
                             SocialMediaButton(imgName: "continue_with_google")
                             .frame(width: 100, height: 50)
@@ -134,7 +120,7 @@ struct SignUpView: View {
                         }
 
                         Button(action: {
-                            self.signinInFb()
+                            self.signUpVM.signUpFb()
                         }){
                             SocialMediaButton(imgName: "continue_with_facebook")
                             .frame(width: 100, height: 50)
@@ -158,196 +144,50 @@ struct SignUpView: View {
         .navigationBarItems(leading: PinkBackButton(mode: self.mode))
     }
     
-    
-    func signinInFb() {
-        socialLogin.attemptLoginFb(completion: { result, error in
-            if(error == nil){
-            }else{
-                //create alert saying no account associated with this FB profile. Please use sign up page
-                self.alertMessage = "\(error!.localizedDescription)"
-                self.alertTitle = "Error!"
-                self.showAlert.toggle()
-            }
-            facebook = false
-            signUp = false
-        })
-    }
-
     private func performExistingAccountFlows(){
-        let requests = [ASAuthorizationAppleIDProvider().createRequest(),
-                        ASAuthorizationPasswordProvider().createRequest()
-        ]
-        performSignUp(using: requests)
-    }
-    
-    private func showAppleLogin(){
-        let nonce = randomNonceString()
-        currentNonce = nonce
-        let request = ASAuthorizationAppleIDProvider()
-        .createRequest()
-        request.requestedScopes = [
-            .fullName, .email
-        ]
-        performSignUp(using: [request])
-        request.nonce = sha256(nonce)
-    }
-    
-    private func performSignUp(using requests: [ASAuthorizationRequest]){
-        login = false
-        signUp = true
-        print("here")
-        delegate = SignInWithAppleDelegates(window: window, currentNonce: currentNonce!){ result in
-            switch result {
-            case .success(_):
-                //already created a new account or signed in
-//                self.alertMessage = "You have successfully logged in through Apple"
-//                self.alertTitle = "Success!"
-//                self.showAlert.toggle()
-                self.user.showOnboarding = false
-                self.user.isLogged = true
-            case .failure(let error):
-                //send alert
-                self.alertMessage = "\(error.localizedDescription)"
-                self.alertTitle = "Error!"
-                self.showAlert.toggle()
-            }
-        }
-        let controller = ASAuthorizationController(authorizationRequests: requests)
-        controller.delegate = delegate
-        controller.presentationContextProvider = delegate
-        controller.performRequests()
-    }
-    
-    private func randomNonceString(length: Int = 32) -> String {
-      precondition(length > 0)
-      let charset: Array<Character> =
-          Array("0123456789ABCDEFGHIJKLMNOPQRSTUVXYZabcdefghijklmnopqrstuvwxyz-._")
-      var result = ""
-      var remainingLength = length
-
-      while remainingLength > 0 {
-        let randoms: [UInt8] = (0 ..< 16).map { _ in
-          var random: UInt8 = 0
-          let errorCode = SecRandomCopyBytes(kSecRandomDefault, 1, &random)
-          if errorCode != errSecSuccess {
-            fatalError("Unable to generate nonce. SecRandomCopyBytes failed with OSStatus \(errorCode)")
-          }
-          return random
-        }
-
-        randoms.forEach { random in
-          if remainingLength == 0 {
-            return
-          }
-
-          if random < charset.count {
-            result.append(charset[Int(random)])
-            remainingLength -= 1
-          }
-        }
-      }
-
-      return result
-    }
-    
-    private func sha256(_ input: String) -> String {
-      let inputData = Data(input.utf8)
-      let hashedData = SHA256.hash(data: inputData)
-      let hashString = hashedData.compactMap {
-        return String(format: "%02x", $0)
-      }.joined()
-
-      return hashString
-    }
-    
-    struct SocialLogin: UIViewRepresentable {
-        var dispatch = DispatchGroup()
-
-        
-        func makeUIView(context: UIViewRepresentableContext<SocialLogin>) -> UIView {
-            return UIView()
+            let requests = [ASAuthorizationAppleIDProvider().createRequest(),
+                            ASAuthorizationPasswordProvider().createRequest()
+            ]
+            performSignUp(using: requests)
         }
         
-        func updateUIView(_ uiView: UIView, context: UIViewRepresentableContext<SocialLogin>) {
+        func showAppleLogin(){
+            let nonce = self.signUpVM.randomNonceString()
+            currentNonce = nonce
+            let request = ASAuthorizationAppleIDProvider()
+            .createRequest()
+            request.requestedScopes = [
+                .fullName, .email
+            ]
+            performSignUp(using: [request])
+            request.nonce = self.signUpVM.sha256(nonce)
         }
         
-        func attemptLoginGoogle() {
-            signUp = true
+        func performSignUp(using requests: [ASAuthorizationRequest]){
             login = false
-            GIDSignIn.sharedInstance()?.presentingViewController = UIApplication.shared.windows.last?.rootViewController
-            GIDSignIn.sharedInstance()?.signIn()
-        }
-        
-        func attemptLoginFb(completion: @escaping (_ result: LoginManagerLoginResult?, _ error: Error?) -> Void) {
-            let fbLoginManager: LoginManager = LoginManager()
-            fbLoginManager.logOut()
-            facebook = true
-            google = false
             signUp = true
-            login = false
-            fbLoginManager.logIn(permissions: ["email"], from: UIApplication.shared.windows.last?.rootViewController) { (result, error) -> Void in
-                // print("RESULT: '\(result)' ")
-                if error != nil {
-                    print("error")
-                }else if(result!.isCancelled){
-                    print("result cancelled")
-                }else if(!result!.isCancelled){
-                    //create a userProfile based on FB info
-                    credential = FacebookAuthProvider.credential(withAccessToken: AccessToken.current!.tokenString)
-                    
-                    print("success Get user information.")
-                    
-
-                    let fbRequest = GraphRequest(graphPath:"me", parameters: ["fields":"email, name, picture"])
-                    fbRequest.start { (connection, infoResult, error) -> Void in
-                        
-                    if error == nil {
-                        print("User Info : \(infoResult ?? "No result")")
-                        print(infoResult.unsafelyUnwrapped)
-                        print(credential!.description)
-                        
-                        if let infoResult = infoResult as? [String:Any],
-                            let email: String = infoResult["email"] as? String,
-                            let name: String = infoResult["name"] as? String,
-                            let picture = infoResult["picture"] as? [String: Any],
-                            let data = picture["data"] as? [String: Any],
-                            let url = data["url"] as? String
-                            {
-                            UserDefaults.standard.set(email, forKey: "Email")
-                            UserDefaults.standard.set(name, forKey: "Name")
-//                            let dispatchTwo = DispatchGroup()
-                            let actionCode = ActionCodeSettings()
-                            actionCode.url = URL(string: "https://yumzzapp.page.link/connect")
-                            actionCode.handleCodeInApp = true
-                            actionCode.setIOSBundleID(Bundle.main.bundleIdentifier!)
-                            self.dispatch.enter()
-                            
-                            Auth.auth().sendSignInLink(toEmail: email, actionCodeSettings: actionCode) { (error) in
-    //                            self.user.showOnboarding = false
-                                if error != nil {
-                                  return
-                                }
-                                userProfile.emailAddress = email
-                                userProfile.fullName = name
-                                userProfile.profilePhotoURL = url
-                                self.dispatch.leave()
-                            }
-                            self.dispatch.notify(queue: .main){
-                                completion(result, error)
-                                return
-                            }
-
-                        }
-                    } else {
-                        print("Error Getting Info \(error ?? "error" as! Error)");
-                        completion(result, error)
-                        return
-                        }
-                    }
+            print("here")
+            delegate = SignInWithAppleDelegates(window: window, currentNonce: currentNonce!){ result in
+                switch result {
+                case .success(_):
+                    //already created a new account or signed in
+    //                self.alertMessage = "You have successfully logged in through Apple"
+    //                self.alertTitle = "Success!"
+    //                self.showAlert.toggle()
+                    self.user.showOnboarding = false
+                    self.user.isLogged = true
+                case .failure(let error):
+                    //send alert
+                    self.alertMessage = "\(error.localizedDescription)"
+                    self.alertTitle = "Error!"
                 }
             }
+            let controller = ASAuthorizationController(authorizationRequests: requests)
+            controller.delegate = delegate
+            controller.presentationContextProvider = delegate
+            controller.performRequests()
         }
-    }
+
 }
 
 struct SignUpView_Previews: PreviewProvider {
