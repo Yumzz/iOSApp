@@ -27,16 +27,16 @@ struct CoralButton: View {
                 }
                 
                 Text(strLabel)
-                           .foregroundColor(Color(UIColor().colorFromHex("#FFFFFF", 1)))
+                        .foregroundColor(Color(UIColor().colorFromHex("#FFFFFF", 1)))
                                
             }
-            .padding()
-                
         .modifier(LeadingTextModifier(imgExists: imageExists(named: imgName)))
            
         }
-        .cornerRadius(10)
-        .background(Color(UIColor().colorFromHex("#F88379", 1)))
+            .padding(.leading, (UIScreen.main.bounds.width * 40) / 414)
+            .padding(.trailing, (UIScreen.main.bounds.width * 40) / 414)
+            .background(Color(UIColor().colorFromHex("#F88379", 1)))
+            .clipShape(RoundedRectangle(cornerRadius: 10, style: .circular))
     }
 }
 

@@ -19,7 +19,6 @@ struct RestaurantFB {
     let name: String
     
     let description: String
-    let type: String
     let ethnicity: String
     
     var coverPhotoURL: String
@@ -28,8 +27,12 @@ struct RestaurantFB {
     var featuredDishRefs: [DocumentReference?]
     
     let coordinate: GeoPoint
-    let address: String
+    let streetAddress: String
+    let cityAddress: String
+    var delimiter = ","
+    
     let phone: String
+
 //    let coverPhoto: CKAsset?
 //    let photos: [CKAsset]?
 //    var model: CKRecord.Reference? = nil
@@ -39,14 +42,13 @@ struct RestaurantFB {
     var n_Ratings: Int64
     
     
-    init(name: String, key: String = "", description: String, averagePrice: Double, type: String, ethnicity: String, dishes: [DishFB], featuredDishRefs: [DocumentReference?], coordinate: GeoPoint, address: String, phone: String, price: String, ratingSum: Int64, n_Ratings: Int64) {
+    init(name: String, key: String = "", description: String, averagePrice: Double, ethnicity: String, dishes: [DishFB], featuredDishRefs: [DocumentReference?], coordinate: GeoPoint, address: String, phone: String, price: String, ratingSum: Int64, n_Ratings: Int64) {
 //        self.ref = nil
         self.id = UUID()
         self.key = key
         self.name = name
         
         self.description = description
-        self.type = type
         self.ethnicity = ethnicity
         
         self.coverPhotoURL = "Restaurant/\(self.name.lowercased())/\(self.name.lowercased())_cover.png"
@@ -54,7 +56,16 @@ struct RestaurantFB {
         self.dishes = dishes
         self.featuredDishRefs = featuredDishRefs
         self.coordinate = coordinate
-        self.address = address
+        if(address != ""){
+            print(address)
+            self.cityAddress = address.components(separatedBy: delimiter)[1] + (address.components(separatedBy: delimiter)[2]).components(separatedBy: " ")[0]
+            self.streetAddress = address.components(separatedBy: delimiter)[0]
+        }
+        else{
+            self.cityAddress = address
+            self.streetAddress = address
+        }
+        
         self.phone = phone
         self.ratingSum = ratingSum
         self.n_Ratings = n_Ratings
@@ -80,11 +91,11 @@ struct RestaurantFB {
        }
        //dishes is an array of FIRDocumentReference in Firebase and is converted to ds, which is an array of DocumentReferences
        
-       guard
-           let type = snapshot.data()["Type"] as? String else {
-           print("no type")
-           return nil
-       }
+//       guard
+//           let type = snapshot.data()["Type"] as? String else {
+//           print("no type")
+//           return nil
+//       }
        
        guard
            let description = snapshot.data()["description"] as? String else{
@@ -132,14 +143,14 @@ struct RestaurantFB {
        self.key = snapshot.documentID
        self.name = name
        self.description = description
-       self.type = type
        self.ethnicity = ethnicity
        self.coordinate = coordinate
        self.dishes = []
        self.featuredDishRefs = featuredDishRefs
        self.id = UUID()
        self.coverPhotoURL = "Restaurant/\(self.name.lowercased())/\(self.name.lowercased())_cover.png"
-       self.address = address
+       self.cityAddress = address.components(separatedBy: delimiter)[1] + (address.components(separatedBy: delimiter)[2]).components(separatedBy: " ")[0]
+       self.streetAddress = address.components(separatedBy: delimiter)[0]
        self.phone = phone
        self.ratingSum = ratingSum
        self.n_Ratings = n_Ratings
@@ -169,11 +180,11 @@ struct RestaurantFB {
             return nil
         }
         
-        guard
-            let type = snapshot.data()["Type"] as? String else {
-                print("no type")
-                return nil
-        }
+//        guard
+//            let type = snapshot.data()["Type"] as? String else {
+//                print("no type")
+//                return nil
+//        }
         
         guard
             let description = snapshot.data()["description"] as? String else{
@@ -223,12 +234,12 @@ struct RestaurantFB {
         self.key = snapshot.documentID
         self.name = name
         self.description = description
-        self.type = type
         self.ethnicity = ethnicity
         self.coordinate = coordinate
         self.dishes = dishes
         self.featuredDishRefs = featuredDishRefs
-        self.address = address
+        self.cityAddress = address.components(separatedBy: delimiter)[1] + (address.components(separatedBy: delimiter)[2]).components(separatedBy: " ")[0]
+        self.streetAddress = address.components(separatedBy: delimiter)[0]
         self.coverPhotoURL = "Restaurant/\(self.name.lowercased())/\(self.name.lowercased())_cover.png"
         self.phone = phone
         self.ratingSum = ratingSum
@@ -244,7 +255,7 @@ struct RestaurantFB {
     }
     
     static func previewRest() -> RestaurantFB {
-        return RestaurantFB(name: "", description: "", averagePrice: 0.0, type: "", ethnicity: "", dishes: [], featuredDishRefs: [], coordinate: GeoPoint(latitude: 0.0, longitude: 0.0), address: "", phone: "", price: "Low", ratingSum: 5, n_Ratings: 1)
+        return RestaurantFB(name: "", description: "", averagePrice: 0.0, ethnicity: "", dishes: [], featuredDishRefs: [], coordinate: GeoPoint(latitude: 0.0, longitude: 0.0), address: "", phone: "", price: "Low", ratingSum: 5, n_Ratings: 1)
     }
     
     func getDollaSigns(price: String) -> String{

@@ -140,7 +140,7 @@ struct RestaurantMapView: View {
                                     
 
                                     VStack (alignment: .leading){
-                                        Text("\((self.click.restChosen?.address)!)")
+                                        Text("\((self.click.restChosen?.streetAddress)!)")
                                             .font(.custom("Open Sans", size: 20))
                                             .foregroundColor(.black)
                                             //.frame(width: 150, height: 20)

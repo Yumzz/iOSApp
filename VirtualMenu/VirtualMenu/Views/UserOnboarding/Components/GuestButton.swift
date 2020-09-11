@@ -16,9 +16,10 @@ struct GuestButton: View {
                 
             Text(strLabel)
             .foregroundColor(Color(UIColor().colorFromHex("#FFFFFF", 1)))
-            .frame(width: UIScreen.main.bounds.width/1.5, height: 10)
+            .frame(width: UIScreen.main.bounds.width/1.3, height: 1)
             .padding()
             .cornerRadius(60)
             .background(Color(UIColor().colorFromHex("#707070", 1)))
+            .clipShape(RoundedRectangle(cornerRadius: 10, style: .circular))
     }
 }

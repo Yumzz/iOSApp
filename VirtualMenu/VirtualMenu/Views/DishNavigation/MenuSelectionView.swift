@@ -22,6 +22,7 @@ struct MenuSelectionView: View {
     }
     
     var body: some View {
+        ZStack{
         VStack(spacing: 10){
             FBURLImage(url: self.restChosen.coverPhotoURL, imageWidth: 220, imageHeight: 160)
                 .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
@@ -147,6 +148,7 @@ struct MenuSelectionView: View {
             .frame(height: 180)
             Spacer()
         }
+        }.background(GradientView().edgesIgnoringSafeArea(.all))
         .navigationBarHidden(false)
     }
 }

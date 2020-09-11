@@ -119,7 +119,6 @@ class RestaurantDishViewModel: ObservableObject {
             } else {
                 for document in snapshot!.documents {
                     //                  print("\(document.documentID) => \(document.data())")
-                    let dish = (document.get("Name") as! String)
                     self.dispatchGroup1.notify(queue: .main) {
                         dishes.append(DishFB(snapshot: document)!)
                         //change photo setting in initialization

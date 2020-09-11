@@ -41,6 +41,8 @@
 		3A5F685424FE230200F9B43D /* TextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5F685324FE230200F9B43D /* TextView.swift */; };
 		3A5F685624FE470C00F9B43D /* ReviewCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5F685524FE470C00F9B43D /* ReviewCard.swift */; };
 		3A5F685824FEFB5000F9B43D /* SaveOrderButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5F685724FEFB5000F9B43D /* SaveOrderButton.swift */; };
+		3A632281250C19B9001427F7 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A632280250C19B9001427F7 /* GradientView.swift */; };
+		3A632283250C1A7D001427F7 /* GradientUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A632282250C1A7D001427F7 /* GradientUIView.swift */; };
 		3A6477F224B68D060077EF30 /* UserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6477F124B68D060077EF30 /* UserProfile.swift */; };
 		3A87575324EC910A004ABECC /* PostReviewButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A87575224EC910A004ABECC /* PostReviewButton.swift */; };
 		3A987AD72480350C0021F6E4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A987AD62480350C0021F6E4 /* AppDelegate.swift */; };
@@ -177,6 +179,8 @@
 		3A5F685324FE230200F9B43D /* TextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextView.swift; sourceTree = "<group>"; };
 		3A5F685524FE470C00F9B43D /* ReviewCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewCard.swift; sourceTree = "<group>"; };
 		3A5F685724FEFB5000F9B43D /* SaveOrderButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveOrderButton.swift; sourceTree = "<group>"; };
+		3A632280250C19B9001427F7 /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
+		3A632282250C1A7D001427F7 /* GradientUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientUIView.swift; sourceTree = "<group>"; };
 		3A6477F124B68D060077EF30 /* UserProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfile.swift; sourceTree = "<group>"; };
 		3A87575224EC910A004ABECC /* PostReviewButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostReviewButton.swift; sourceTree = "<group>"; };
 		3A987AD32480350C0021F6E4 /* Yumzz.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Yumzz.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -388,6 +392,15 @@
 			name = "Recovered References";
 			sourceTree = "<group>";
 		};
+		3A63227F250C1973001427F7 /* BackgroundViews */ = {
+			isa = PBXGroup;
+			children = (
+				3A632280250C19B9001427F7 /* GradientView.swift */,
+				3A632282250C1A7D001427F7 /* GradientUIView.swift */,
+			);
+			path = BackgroundViews;
+			sourceTree = "<group>";
+		};
 		3A987ACA2480350C0021F6E4 = {
 			isa = PBXGroup;
 			children = (
@@ -419,7 +432,6 @@
 				3A31372B2483179800E46292 /* Model */,
 				A73B1B5D24B0FF4100A8C6A8 /* ViewModels */,
 				A73B1B5924B0FDA800A8C6A8 /* Views */,
-				3A4E2E2124C6841E00C34DD8 /* TabViews */,
 				3A4A0E71249EB94D0030635E /* ImagePicker.swift */,
 				3A987AD62480350C0021F6E4 /* AppDelegate.swift */,
 				3A987AD82480350C0021F6E4 /* SceneDelegate.swift */,
@@ -606,6 +618,8 @@
 		A73B1B5924B0FDA800A8C6A8 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				3A63227F250C1973001427F7 /* BackgroundViews */,
+				3A4E2E2124C6841E00C34DD8 /* TabViews */,
 				3A13B6DE24C181150006458B /* AccountProfileViews */,
 				3A4E2E3024D12D0800C34DD8 /* AdminView */,
 				A7F5506724C1238B00FAC1F0 /* RestaurantSearchView */,
@@ -925,6 +939,7 @@
 				3ACAD174250AE39D00B24CEB /* SuggestRestaurantViewModel.swift in Sources */,
 				A777C3A424D3EC7A009658AA /* UserStore.swift in Sources */,
 				A7FE250824A841620007E5AD /* RestaurantMapView.swift in Sources */,
+				3A632283250C1A7D001427F7 /* GradientUIView.swift in Sources */,
 				3A5633BE24F901E80059B603 /* SignInWithAppleDelegates.swift in Sources */,
 				A7912A2624CF82140052988C /* WhiteButton.swift in Sources */,
 				3A13B6E424C1816B0006458B /* ReportProblem.swift in Sources */,
@@ -963,6 +978,7 @@
 				3ABA90F524F64EDE00695B06 /* GuestButton.swift in Sources */,
 				A7912A2824CF87260052988C /* CoralButton.swift in Sources */,
 				34370CC72500D59A00ECD88B /* MenuSelectionViewModel.swift in Sources */,
+				3A632281250C19B9001427F7 /* GradientView.swift in Sources */,
 				A735992A24ECFDCF00584BFD /* AccountProfileLoginView.swift in Sources */,
 				3A4E2E2024C6244600C34DD8 /* ForgotPassword.swift in Sources */,
 				A735992824ECD83300584BFD /* AccountProfileViewModel.swift in Sources */,

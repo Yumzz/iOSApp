@@ -33,6 +33,7 @@ struct DishReviewsView: View {
     let restaurant: RestaurantFB
         
     var body: some View {
+        ZStack{
         VStack{
             if self.show{
                 GeometryReader{_ in
@@ -147,8 +148,9 @@ struct DishReviewsView: View {
                 self.restDishVM.resetReviews()
                 self.show = false
             }
-            
         }
+            
+        }.background(GradientView().edgesIgnoringSafeArea(.all))
         
     }
 }

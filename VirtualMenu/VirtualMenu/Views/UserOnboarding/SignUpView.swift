@@ -64,6 +64,8 @@ struct SignUpView: View {
                     .font(.custom("Montserrat-SemiBold", size: 20))
                     .foregroundColor(Color(UIColor().colorFromHex("#707070", 1)))
                     .bold()
+                    .padding(.trailing, (UIScreen.main.bounds.width) / 3)
+
                     
                     CustomTextField(strLabel: "Name", strField: $name, uiTextAutoCapitalizationType: .words, uiKeyboardType: .default)
                     

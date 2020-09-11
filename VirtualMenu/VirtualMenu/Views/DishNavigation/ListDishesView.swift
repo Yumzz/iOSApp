@@ -121,6 +121,7 @@ struct ListDishesView: View {
                         
             self.dishCategoriesDisplayed = self.listDishVM.dishCategories
         }
+        .background(GradientView().edgesIgnoringSafeArea(.all))
         .navigationBarTitle("Dishes")
     }
 }
