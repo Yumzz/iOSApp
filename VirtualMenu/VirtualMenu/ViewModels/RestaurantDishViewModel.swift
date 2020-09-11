@@ -119,6 +119,7 @@ class RestaurantDishViewModel: ObservableObject {
             } else {
                 for document in snapshot!.documents {
                     //                  print("\(document.documentID) => \(document.data())")
+                    let dish = (document.get("Name") as! String)
                     self.dispatchGroup1.notify(queue: .main) {
                         dishes.append(DishFB(snapshot: document)!)
                         //change photo setting in initialization
@@ -232,13 +233,6 @@ class RestaurantDishViewModel: ObservableObject {
         }
     }
     
-    func formatPrice(price: Double) -> String {
-        var x =  "$" + (price.truncatingRemainder(dividingBy: 1) == 0 ? String(format: "%.2f", price) : String(price))
-        if(x.numOfNums() < 3){
-            x = x + "0"
-        }
-        return x
-    }
     
     
     func getDistFromUser(coordinate: GeoPoint) -> Double {

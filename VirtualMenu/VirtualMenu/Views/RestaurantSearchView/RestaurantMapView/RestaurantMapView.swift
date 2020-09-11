@@ -19,7 +19,7 @@ struct RestaurantMapView: View {
     
     @State var isNavigationBarHidden: Bool = true
     
-    @ObservedObject var restDishVM = RestaurantDishViewModel()
+    @ObservedObject var restMapVM = RestaurantMapViewModel()
     
     @ObservedObject var click: isClick = isClick()
     @State var show = false
@@ -52,9 +52,9 @@ struct RestaurantMapView: View {
                         Button(action: {
                             self.show = true
                             let disp = DispatchGroup()
-                            self.restDishVM.fetchRestaurantsBasicInfo(disp: disp)
+                            self.restMapVM.fetchRestaurantsBasicInfo(disp: disp)
                             disp.notify(queue: .main){
-                                self.restaurants = self.restDishVM.allRests
+                                self.restaurants = self.restMapVM.allRests
                                 self.show = false
                             }
                         }){
@@ -186,15 +186,15 @@ struct RestaurantMapView: View {
         .onAppear(){
             self.isNavigationBarHidden = true
             let disp = DispatchGroup()
-            if(self.restDishVM.allRests.isEmpty){
+            if(self.restMapVM.allRests.isEmpty){
                 self.show = true
-                self.restDishVM.fetchRestaurantsBasicInfo(disp: disp)
+                self.restMapVM.fetchRestaurantsBasicInfo(disp: disp)
                 disp.notify(queue: .main){
-                    self.restaurants = self.restDishVM.allRests
+                    self.restaurants = self.restMapVM.allRests
                     self.show = false
                 }
             }else{
-                self.restaurants = self.restDishVM.allRests
+                self.restaurants = self.restMapVM.allRests
             }
         }
         .onDisappear(){

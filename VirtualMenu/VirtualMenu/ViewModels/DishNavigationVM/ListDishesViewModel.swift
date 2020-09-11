@@ -1,16 +1,16 @@
 //
-//  DishCategoriesViewModel.swift
+//  ListDishesViewModel.swift
 //  VirtualMenu
 //
-//  Created by Valentin Porcellini on 28/08/2020.
+//  Created by Rohan Tyagi on 9/10/20.
 //  Copyright © 2020 Rohan Tyagi. All rights reserved.
 //
 
+import Foundation
 import SwiftUI
 import Firebase
-import PromiseKit
 
-class DishCategoriesViewModel: ObservableObject {
+class ListDishesViewModel: ObservableObject {
     
     let db = Firestore.firestore()
 
@@ -85,4 +85,13 @@ class DishCategoriesViewModel: ObservableObject {
             dishCategories.append(DishCategory(isExpanded: true, dishes: dishes, name: category))
         }
     }
+    
+    func formatPrice(price: Double) -> String {
+        var x =  "$" + (price.truncatingRemainder(dividingBy: 1) == 0 ? String(format: "%.2f", price) : String(price))
+        if(x.numOfNums() < 3){
+            x = x + "0"
+        }
+        return x
+    }
+    
 }

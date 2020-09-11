@@ -22,7 +22,7 @@ struct AccountProfileLoginView: View {
     
     @State var showAlert = false
     
-    @ObservedObject var AuthenticationVM = AuthenticationViewModel()
+    @ObservedObject var loginVM = LoginViewModel()
     
     @EnvironmentObject var user: UserStore
     
@@ -96,23 +96,12 @@ struct AccountProfileLoginView: View {
             .shadow(color: Color.black.opacity(0.15), radius: 20, x: 0, y: 20)
             
             Button(action: {
-                
-                Auth.auth().signIn(withEmail: self.email, password: self.password){ result, error in
-                    
-                    if error != nil {
-                        print(error!)
-
-                        self.alertMessage = "Your email or password is incorrect"
-                        self.alertTitle = "Sign in error"
-                        self.showAlert = true
-                    }
-                    else {
-                        self.isFocused = false
-                        self.hideKeyboard()
-                        self.user.isLogged = true
-                        UserDefaults.standard.set(true, forKey: "isLogged")
-                        self.AuthenticationVM.updateProfile()
-                    }
+                let dispatch = DispatchGroup()
+                self.loginVM.loginUser(email: self.email, password: self.password, disp: dispatch)
+                if(self.loginVM.alertMessage != ""){
+                    self.alertMessage = self.loginVM.alertMessage
+                    self.alertTitle = self.loginVM.alertTitle
+                    self.showAlert.toggle()
                 }
             }) {
                 Text("Log in")

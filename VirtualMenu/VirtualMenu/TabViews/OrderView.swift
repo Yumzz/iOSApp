@@ -14,9 +14,9 @@ struct OrderView: View {
     @State private var numbers = ["Current Selection","Past Orders"]
     
     @EnvironmentObject var order : OrderModel
-    @ObservedObject var restViewModel = RestaurantDishViewModel()
-    @ObservedObject var restDishVM = RestaurantDishViewModel()
-
+//    @ObservedObject var restViewModel = RestaurantDishViewModel()
+//    @ObservedObject var restDishVM = RestaurantDishViewModel()
+    
     
     @State private var showingAlert = false
     @State private var alertMessage = ""
@@ -91,7 +91,7 @@ struct OrderView: View {
                                     NavigationLink(destination:
                                         DishDetailsView(dish: dish, restaurant: self.order.restChosen).navigationBarHidden(false)
                                     ) {
-                                        DishCard(urlImage: FBURLImage(url: dish.coverPhotoURL, imageAspectRatio: .fill), dishName: dish.name, dishIngredients: dish.description, price: self.restDishVM.formatPrice(price: dish.price))
+                                        DishCard(urlImage: FBURLImage(url: dish.coverPhotoURL, imageAspectRatio: .fill), dishName: dish.name, dishIngredients: dish.description, price: self.order.formatPrice(price: dish.price))
                                     }
                                 }
                             }

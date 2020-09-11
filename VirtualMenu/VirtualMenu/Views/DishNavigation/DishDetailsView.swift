@@ -20,8 +20,6 @@ struct DishDetailsView: View {
     
     let restaurant: RestaurantFB
     
-    @ObservedObject var restDishVM = RestaurantDishViewModel()
-    
     @EnvironmentObject var order : OrderModel
     
     let dispatchG1 = DispatchGroup()

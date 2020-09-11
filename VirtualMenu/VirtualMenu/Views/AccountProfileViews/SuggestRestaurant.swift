@@ -17,7 +17,7 @@ struct SuggestRestaurant: View {
     @State private var textStyle = UIFont.TextStyle.body
 
     
-    @ObservedObject var FirebaseFunctions = FirebaseFunctionsViewModel()
+    @ObservedObject var suggestVM = SuggestRestaurantViewModel()
         
     var body: some View {
         NavigationView {
@@ -57,18 +57,12 @@ struct SuggestRestaurant: View {
                 Spacer()
                     .frame(height: CGFloat(15))
                 Button(action: {
-                    let results = self.FirebaseFunctions.suggestRestaurantButton(email: self.email, messageBody: self.messageBody, name: self.name)
-                    let result = results[0]
-                    let title = results[1]
-                    print(result)
-                    if(result == ""){
-                        return
-                    }
-                    else{
-                        self.alertTitle = title
-                        self.alertMessage = result
-                        self.showingAlert.toggle()
-                    }
+                    let dispatch = DispatchGroup()
+                    self.suggestVM.sendResponse(email: self.email, messageBody: self.messageBody, name: self.name, disp: dispatch)
+                    self.alertMessage = self.suggestVM.alertMessage
+                    self.alertTitle = self.suggestVM.alertTitle
+                    self.showingAlert.toggle()
+
                 }) {
                     Text("Send")
                 }
@@ -83,49 +77,6 @@ struct SuggestRestaurant: View {
     }
 }
 
-struct MultiLineTFSuggestRestaurant: UIViewRepresentable {
-
-    @Binding var txt: String
-
-    func makeUIView(context: UIViewRepresentableContext<MultiLineTFSuggestRestaurant>) -> MultiLineTFSuggestRestaurant.UIViewType {
-        let tview = UITextView()
-        tview.layer.cornerRadius = 20.0
-        tview.font = .systemFont(ofSize: 16)
-        tview.isEditable = true
-        tview.isUserInteractionEnabled = true
-        tview.isScrollEnabled = true
-        tview.text = "The street address, city, state, and zip code would help us out tremendously!"
-        tview.delegate = context.coordinator
-        tview.textColor = .gray
-        tview.returnKeyType = .continue
-        return tview
-    }
-
-    func updateUIView(_ uiView: UITextView, context: UIViewRepresentableContext<MultiLineTFSuggestRestaurant>) {
-
-    }
-
-    func makeCoordinator() -> MultiLineTFSuggestRestaurant.Coordinator {
-        return MultiLineTFSuggestRestaurant.Coordinator(parent1: self)
-    }
-
-    class Coordinator: NSObject, UITextViewDelegate {
-
-        var parent: MultiLineTFSuggestRestaurant
-
-        init(parent1: MultiLineTFSuggestRestaurant) {
-            parent = parent1
-        }
-
-        func textViewDidChange(_ textView: UITextView) {
-            self.parent.txt = textView.text
-        }
-        func textViewDidBeginEditing(_ textView: UITextView) {
-            textView.text = ""
-            textView.textColor = .label
-        }
-    }
-}
 
 struct SuggestRestaurant_Previews: PreviewProvider {
     static var previews: some View {
