@@ -263,3 +263,13 @@ struct RestaurantFB {
     
 }
 
+extension RestaurantFB: Hashable {
+    static func == (lhs: RestaurantFB, rhs: RestaurantFB) -> Bool {
+        return lhs.id == rhs.id
+    }
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+    }
+    
+}

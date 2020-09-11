@@ -22,11 +22,22 @@ struct Resto: Identifiable {
 
 struct RestaurantSearchListView: View {
     
-    @ObservedObject var restaurantListVM = RestaurantSearchListViewModel()
+    @ObservedObject var restaurantListVM : RestaurantSearchListViewModel
     
-    @Binding var isNavigationBarHidden: Bool
+    var isNavigationBarHidden: Bool
     
     @State var show = false
+    
+    @State var restCategoriesDisplayed: [RestCategory] = []
+    
+    @State var allClicked = false
+        
+    init(isNavigationBarHidden: Bool){
+        self.isNavigationBarHidden = isNavigationBarHidden
+        
+        self.restaurantListVM = RestaurantSearchListViewModel()
+    }
+
     
     var body: some View {
         ZStack{
@@ -38,42 +49,97 @@ struct RestaurantSearchListView: View {
             else{
                 ScrollView {
                     VStack(spacing: 20){
-                        if !self.restaurantListVM.allRests.isEmpty {
-                            
-                            if self.restaurantListVM.allRests.count > 1 {
-                                Text("\(String(restaurantListVM.allRests.count)) Places")
-                                    .bold()
-                                    .frame(maxWidth: .infinity, alignment: .leading)
-                                    .padding(.leading)
-                            } else {
-                                Text("\(String(restaurantListVM.allRests.count)) Place")
-                                    .bold()
-                                    .frame(maxWidth: .infinity, alignment: .leading)
-                                    .padding(.leading)
-                            }
-                            
-                            ForEach(restaurantListVM.allRests, id: \.id) { resto in
-                                
-                                NavigationLink(destination: MenuSelectionView(restChosen: resto)){
-                                    VStack {
-                                        RestaurantCard(urlImage: FBURLImage(url: resto.coverPhotoURL),restaurantName: resto.name, restaurantAddress: resto.address, ratingSum: resto.ratingSum, nbOfRatings: resto.n_Ratings)
+                        ScrollView(.horizontal, showsIndicators: false) {
+                            HStack(spacing: 10){
+                                Text("View All")
+                                    .padding()
+                                    .frame(maxWidth: 100)
+                                    .background(
+                                    Color(UIColor().colorFromHex("#F88379", 1)))
+                                    .foregroundColor(self.allClicked ? Color.white : Color.black)
+                                .cornerRadius(5)
+                                .onTapGesture {
+                                    if(self.allClicked){
+                                        self.restCategoriesDisplayed = []
+                                        self.allClicked = false
+                                    }
+                                    else{
+                                        self.restCategoriesDisplayed = self.restaurantListVM.restCategories
+                                        self.allClicked = true
                                     }
                                 }
-                                .buttonStyle(PlainButtonStyle())
+                                ForEach(self.restaurantListVM.restCategories, id: \.name){ restCategory in
+                                    Text("\(restCategory.name)")
+                                    .padding()
+                                    .scaledToFit()
+                                    .background(
+                                       Color(UIColor().colorFromHex("#F88379", 1)
+                                       ))
+                                    .foregroundColor(self.restCategoriesDisplayed.contains(restCategory) ? Color.white : Color.black)
+                                    .cornerRadius(5)
+                                    .onTapGesture {
+                                        if(self.allClicked){
+                                            self.restCategoriesDisplayed.removeAll()
+                                            self.restCategoriesDisplayed.append(restCategory)
+                                            self.allClicked = false
+                                        }else{
+                                            if(self.restCategoriesDisplayed.contains(restCategory)){
+                                                    if let index = self.restCategoriesDisplayed.firstIndex(of: restCategory) {
+                                                            self.restCategoriesDisplayed.remove(at: index)
+                                                        }
+                                            }else{
+                                                self.restCategoriesDisplayed.append(restCategory)
+                                            }
+                                        }
+                                    }
+                                }
+                                
+                                
                             }
                         }
                         
-                        Spacer()
-                            .frame(height: 30)
+                        ForEach(self.restCategoriesDisplayed, id: \.name){ restCategory in
+                            VStack(alignment: .leading, spacing: 40) {
+                                
+                                Text("\(restCategory.name)")
+                                    .font(.title)
+                                    .fontWeight(.semibold)
+                                    .padding(.leading)
+                                
+                                VStack(spacing: 20){
+                                    
+                                    ForEach(restCategory.restaurants, id: \.id) {
+                                        rest in
+                                        NavigationLink(destination:
+                                            MenuSelectionView(restChosen: rest).navigationBarHidden(false)
+                                        ) {
+                                            RestaurantCard(restaurantName: rest.name, restaurantAddress: rest.address, ratingSum: rest.ratingSum, nbOfRatings: rest.n_Ratings)
+                                        }
+                                    }
+                                    Spacer().frame(height: 20)
+                                }
+                            }
+                        }
+                    Spacer().frame(height: 30)
                     }
                     .padding(.top)
                     .frame(maxWidth: .infinity)
                 }
             }
         }
-        .navigationBarTitle("Asian Restaurants")
+        .navigationBarTitle("Restaurants")
         .onAppear(){
-            self.isNavigationBarHidden = false
+            print("wow")
+            
+                self.allClicked = true
+
+                self.restCategoriesDisplayed = self.restaurantListVM.restCategories
+                
+                print(self.restaurantListVM.restCategories)
+                
+            
+            print("you said it")
+            
         }
     }
 }
@@ -81,7 +147,7 @@ struct RestaurantSearchListView: View {
 struct RestaurantSearchListView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            RestaurantSearchListView( isNavigationBarHidden: .constant(false))
+            RestaurantSearchListView(isNavigationBarHidden: false)
         }
     }
 }
