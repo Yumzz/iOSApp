@@ -37,7 +37,8 @@ struct RestaurantMapView: View {
                 MapView(restaurants: self.restaurants, region: self.region).edgesIgnoringSafeArea(.all)
                 VStack {
                     HStack{
-                        NavigationLink(destination: RestaurantSearchListView( isNavigationBarHidden: self.$isNavigationBarHidden)){
+                    
+                        NavigationLink(destination: RestaurantSearchListView( isNavigationBarHidden: self.isNavigationBarHidden)){
                             
                             Text("List")
                                 .foregroundColor(Color(.white))
