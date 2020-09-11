@@ -36,8 +36,9 @@ struct RestaurantSearchListView: View {
         self.isNavigationBarHidden = isNavigationBarHidden
         
         self.restaurantListVM = RestaurantSearchListViewModel()
+    
     }
-
+    
     
     var body: some View {
         ZStack{
@@ -113,7 +114,7 @@ struct RestaurantSearchListView: View {
                                         NavigationLink(destination:
                                             MenuSelectionView(restChosen: rest).navigationBarHidden(false)
                                         ) {
-                                            RestaurantCard(restaurantName: rest.name, restaurantAddress: rest.address, ratingSum: rest.ratingSum, nbOfRatings: rest.n_Ratings)
+                                            RestaurantCard(restaurantName: rest.name, restaurantAddress: rest.cityAddress, ratingSum: rest.ratingSum, nbOfRatings: rest.n_Ratings)
                                         }
                                     }
                                     Spacer().frame(height: 20)
@@ -127,9 +128,9 @@ struct RestaurantSearchListView: View {
                 }
             }
         }
+    .background(GradientView().edgesIgnoringSafeArea(.all))
         .navigationBarTitle("Restaurants")
         .onAppear(){
-            print("wow")
             
                 self.allClicked = true
 
@@ -137,12 +138,11 @@ struct RestaurantSearchListView: View {
                 
                 print(self.restaurantListVM.restCategories)
                 
-            
-            print("you said it")
-            
+                    
         }
     }
 }
+
 
 struct RestaurantSearchListView_Previews: PreviewProvider {
     static var previews: some View {

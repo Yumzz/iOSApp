@@ -19,7 +19,6 @@ struct CustomTextField: View {
     
     var body: some View {
         VStack (spacing: 0) {
-            
             TextField(strLabel, text: $strField)
                 .frame(height: (UIScreen.main.bounds.width * 40) / 414, alignment: .center)
                 .padding(.leading, (UIScreen.main.bounds.width * 40) / 414)
@@ -31,9 +30,6 @@ struct CustomTextField: View {
                 .foregroundColor(Color(UIColor().colorFromHex("#F88379", 1)))
                 .textFieldStyle(RoundedBorderTextFieldStyle())
                 .shadow(radius: 4)
-            
-                
-
         }
     }
 }

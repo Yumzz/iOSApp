@@ -60,19 +60,22 @@ struct LoginView: View {
             VStack(spacing: 20) {
                     VStack{
                         Text("Yumzz")
-                        .font(.custom("Montserrat-SemiBold", size: 48))
+                        .font(.custom("Open Sans-SemiBold", size: 50))
                         .foregroundColor(Color(UIColor().colorFromHex("#F88379", 1)))
                         .bold()
                         .padding(.leading, 0)
+                        
                     }
                     
                     Text("Login to your account")
-                    .font(.custom("Montserrat-SemiBold", size: 20))
+                    .font(.custom("Open Sans-SemiBold", size: 20))
                     .foregroundColor(Color(UIColor().colorFromHex("#707070", 1)))
                     .bold()
+                    .padding(.trailing, (UIScreen.main.bounds.width) / 3)
+                    
                     
                     CustomTextField(strLabel: "Email", strField: $email, uiTextAutoCapitalizationType: .none, uiKeyboardType: .emailAddress)
-                    
+
                     CustomPasswordField(strLabel: "Password", password: $password)
                     
                     Button(action: {
@@ -93,6 +96,7 @@ struct LoginView: View {
                         }
                     }) {
                         CoralButton(strLabel: "Sign in")
+                        
                     }
                     
                     VStack(alignment: .trailing) {
@@ -123,16 +127,19 @@ struct LoginView: View {
                             Divider()
                                 .padding(.leading, (UIScreen.main.bounds.width * 40) / 414)
                                 .frame(width: (UIScreen.main.bounds.width/2.3), height: 10, alignment: .leading)
+                            .foregroundColor(Color(UIColor().colorFromHex("#C4C4C4", 1)))
                             
                         }
                         
-                        Text("OR")
+                        Text("Or")
+                            .foregroundColor(Color(UIColor().colorFromHex("#C4C4C4", 1)))
                                
                         
                         VStack{
                             Divider()
                                 .padding(.trailing, (UIScreen.main.bounds.width * 40) / 414)
                                 .frame(width: (UIScreen.main.bounds.width/2.3), height: 10, alignment: .trailing)
+                                .foregroundColor(Color(UIColor().colorFromHex("#C4C4C4", 1)))
                         }
                         
                     }
@@ -169,10 +176,16 @@ struct LoginView: View {
                     Button(action: {
                     }, label: {
                         NavigationLink(destination: SignUpView()) {
-                            Text("New User? Create an account")
-                            .foregroundColor(.black)
-                            .font(.system(size: (UIScreen.main.bounds.width * 15) / 414, weight: .bold, design: .default))
-                        }
+                            HStack{
+                                    Text("Don't have an account?")
+                                    .foregroundColor(Color(UIColor().colorFromHex("#C4C4C4", 1)))
+                                    .font(.system(size: (UIScreen.main.bounds.width * 15) / 414, weight: .bold, design: .default))
+                                
+                                    Text("Sign Up")
+                                    .foregroundColor(Color(UIColor().colorFromHex("#F88379", 1)))
+                                    .font(.system(size: (UIScreen.main.bounds.width * 15) / 414, weight: .bold, design: .default))
+                                }
+                            }
                         
                     })
                 }
@@ -181,7 +194,8 @@ struct LoginView: View {
         }else{
                 AppView()
             }
-        }.onAppear(perform: {
+            }
+        .onAppear(perform: {
             self.email = ""
             self.password = ""
             NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: "NoMoreOnboard"), object: nil, queue: .main) { (Notification) in

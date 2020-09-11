@@ -52,27 +52,32 @@ struct RestaurantCard: View {
                         .frame(maxHeight: 0)
                     
                     
-                    HStack (spacing: 5) {
-                        
-                        Text(restaurantAddress)
-                            .foregroundColor(Color.secondary)
-                            .font(.footnote)
-                    }
-                    
-                    HStack{
+                    HStack (alignment: .center , spacing: 5) {
                         if self.nbOfRatings > 0 {
-                            StarRatingView(rating: .constant(Int(Float(self.ratingSum) / Float(self.nbOfRatings))), fontSize: 12)
-                            Text(String(Float(self.ratingSum) / Float(self.nbOfRatings)))
-                                .foregroundColor(Color.secondary)
-                                .font(.footnote)
-                            Text("(" + String(self.nbOfRatings) + " ratings)")
-                                .foregroundColor(Color.secondary)
-                                .font(.footnote)
+//                            StarRatingView(rating: .constant(Int(Float(self.ratingSum) / Float(self.nbOfRatings))), fontSize: 12)
+                            Image("star_coral")
+                                .renderingMode(.original)
+                                .frame(width: 10, height: 10)
+                            
+                            VStack (alignment: .leading , spacing: 5) {
+                                Text(String(Float(self.ratingSum) / Float(self.nbOfRatings)))
+                                    .foregroundColor(Color.secondary)
+                                    .font(.footnote)
+                            }
+                            VStack (alignment: .trailing , spacing: 5) {
+                                Text("(" + String(self.nbOfRatings) + " ratings)")
+                                    .foregroundColor(Color.secondary)
+                                    .font(.footnote)
+                            }
                         } else {
                             Text("No Ratings Yet")
                                 .foregroundColor(Color.secondary)
                                 .font(.footnote)
                         }
+                        
+                        Text(restaurantAddress)
+                            .foregroundColor(Color.secondary)
+                            .font(.footnote)
                     }
                 }
             }

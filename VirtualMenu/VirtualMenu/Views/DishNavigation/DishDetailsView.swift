@@ -33,6 +33,7 @@ struct DishDetailsView: View {
     //fetch reviews of dish on appear and have "Reviews" button pass info to new view of entire scroll view of it
     
     var body: some View {
+        ZStack{
         VStack(alignment: .center) {
             Spacer().frame(width: 0, height: -60)
             VStack(spacing: 20){
@@ -77,6 +78,7 @@ struct DishDetailsView: View {
             }
             .padding()
         }
+        }.background(GradientView().edgesIgnoringSafeArea(.all))
     }
 }
 
