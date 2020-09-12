@@ -16,6 +16,9 @@ struct MenuSelectionView: View {
     
     @ObservedObject var menuSelectionVM: MenuSelectionViewModel
     
+    @Environment(\.presentationMode) var mode: Binding<PresentationMode>
+
+    
     init(restChosen: RestaurantFB) {
         self.restChosen = restChosen
         self.menuSelectionVM = MenuSelectionViewModel(restaurant: self.restChosen)
@@ -150,6 +153,8 @@ struct MenuSelectionView: View {
         }
         }.background(GradientView().edgesIgnoringSafeArea(.all))
         .navigationBarHidden(false)
+        .navigationBarBackButtonHidden(true)
+        .navigationBarItems(leading: WhiteBackButton(mode: self.mode))
     }
 }
 

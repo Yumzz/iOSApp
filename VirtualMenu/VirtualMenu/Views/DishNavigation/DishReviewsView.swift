@@ -27,6 +27,8 @@ struct DishReviewsView: View {
     @State private var alertTitle = ""
     
     @ObservedObject var dishReviewVM = DishReviewsViewModel()
+    @Environment(\.presentationMode) var mode: Binding<PresentationMode>
+
     
     let dish: DishFB
     
@@ -151,6 +153,8 @@ struct DishReviewsView: View {
         }
             
         }.background(GradientView().edgesIgnoringSafeArea(.all))
+        .navigationBarBackButtonHidden(true)
+        .navigationBarItems(leading: WhiteBackButton(mode: self.mode))
         
     }
 }

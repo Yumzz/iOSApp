@@ -17,8 +17,8 @@ class GradientUIView : UIView {
     var startPointX : CGFloat = 0
     var startPointY : CGFloat = 0
     
-    var endPointX: CGFloat = 0.5
-    var endPointY: CGFloat = 0.5
+    var endPointX: CGFloat = 0.25
+    var endPointY: CGFloat = 0.75
     
     override func layoutSubviews() {
         let gradientLayer = CAGradientLayer()

@@ -37,9 +37,7 @@ struct RestaurantCard: View {
     
     var body: some View {
         Group {
-            HStack(alignment: .center, spacing: 20) {
-                Spacer()
-                    .frame(maxWidth: 0)
+            HStack(spacing: 20) {
                 if urlImage != nil {
                     urlImage!
                 }
@@ -47,9 +45,6 @@ struct RestaurantCard: View {
                 VStack(alignment: .leading, spacing: 10) {
                     Text(restaurantName).bold()
                         .foregroundColor(Color.primary)
-                    
-                    Spacer()
-                        .frame(maxHeight: 0)
                     
                     
                     HStack (alignment: .center , spacing: 5) {
@@ -81,8 +76,9 @@ struct RestaurantCard: View {
                     }
                 }
             }
-            .frame(maxWidth: .infinity, minHeight: 120, alignment: .leading)
-            .background(Color.backgroundColor(for: colorScheme))
+            .frame(maxWidth: .infinity, minHeight: 60, alignment: .leading)
+            .shadow(radius: 10)
+            .background(Color.white)
             .cornerRadius(10)
         }
         .padding(.horizontal)
