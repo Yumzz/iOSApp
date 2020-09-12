@@ -38,10 +38,9 @@ struct RestaurantCard: View {
     var body: some View {
         Group {
             HStack(alignment: .center, spacing: 20) {
-                Spacer()
-                    .frame(maxWidth: 0)
                 if urlImage != nil {
                     urlImage!
+                        .frame(alignment: .leading)
                 }
                 
                 VStack(alignment: .leading, spacing: 10) {
@@ -55,10 +54,9 @@ struct RestaurantCard: View {
                     HStack (alignment: .center , spacing: 5) {
                         if self.nbOfRatings > 0 {
 //                            StarRatingView(rating: .constant(Int(Float(self.ratingSum) / Float(self.nbOfRatings))), fontSize: 12)
-                            Image("star_coral")
+                            Image(systemName: "star.fill")
                                 .renderingMode(.original)
-                                .frame(width: 10, height: 10)
-                            
+                                .font(.system(size: 12))
                             VStack (alignment: .leading , spacing: 5) {
                                 Text(String(Float(self.ratingSum) / Float(self.nbOfRatings)))
                                     .foregroundColor(Color.secondary)
@@ -81,9 +79,11 @@ struct RestaurantCard: View {
                     }
                 }
             }
-            .frame(maxWidth: .infinity, minHeight: 120, alignment: .leading)
-            .background(Color.backgroundColor(for: colorScheme))
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .frame(height: 70)
+            .background(Color(.white))
             .cornerRadius(10)
+            .shadow(radius: 2)
         }
         .padding(.horizontal)
     }
