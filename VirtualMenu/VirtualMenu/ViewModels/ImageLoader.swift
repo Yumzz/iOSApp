@@ -12,29 +12,78 @@ import Firebase
 import FirebaseFirestore
 
 final class ImageLoader : ObservableObject {
-    @Published var data: Data?
     
-    func loadImage(url: String){
+    @Published var image: UIImage?
+    
+    var urlString: String?
+    
+    var imageCache = ImageCache.getImageCache()
+    
+    init(urlString: String?) {
+        self.urlString = urlString
+        loadImage()
+    }
+    
+    func loadImage(){
+        
+        if loadImageFromCache() {
+            return
+        }
+        
+        loadImageFromUrl()
+    }
+    
+    func loadImageFromUrl() {
+        
+        guard let urlString = urlString else {
+            return
+        }
+        
         let storage = Storage.storage()
-        let ref = storage.reference().child(url)
-//        let ds = DispatchGroup()
-//        ds.enter()
+        let ref = storage.reference().child(urlString)
+        
         ref.downloadURL(completion: { (url, err) in
             if err != nil {
                 return
             }
             else{
-                ref.getData(maxSize: 2 * 2048 * 2048) { data, error in
-                    if let error = error {
-                        print("\(error)")
+                ref.getData(maxSize: 1 * 2048 * 2048) { data, error in
+                    
+                    guard error == nil else {
+                        print("Error: \(error!)")
+                        return
+                    }
+                    
+                    guard let data = data else {
+                        print("No data found")
+                        return
                     }
                     
                     DispatchQueue.main.async {
-                        self.data = data
+                        
+                        guard let loadedImage = UIImage(data: data) else {
+                            return
+                        }
+                        self.imageCache.set(forKey: self.urlString!, image: loadedImage)
+                        self.image = loadedImage
                     }
                 }
             }
             return
         })
     }
+    
+    func loadImageFromCache() -> Bool {
+        guard let urlString = self.urlString else {
+            return false
+        }
+        
+        guard let cacheImage = imageCache.get(forKey: urlString) else {
+            return false
+        }
+        
+        self.image = cacheImage
+        return true
+    }
+    
 }

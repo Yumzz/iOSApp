@@ -15,39 +15,30 @@ struct FBURLImage: View {
     var width = CGFloat()
     var height = CGFloat()
     
-    init(url: String, imageAspectRatio: ContentMode = .fit, imageWidth: CGFloat = 88, imageHeight: CGFloat = 88) {
-        imageLoader = ImageLoader()
-        imageLoader.loadImage(url: url)
-        
-        self.aspectRatio = imageAspectRatio
-        
-        self.width = imageWidth
-        self.height = imageHeight
-    }
+    let url: String
     
-    init(url: String, imageAspectRatio: ContentMode = .fit, imageWidth: CGFloat, imageHeight: CGFloat, owndimen: Bool) {
-        imageLoader = ImageLoader()
-        imageLoader.loadImage(url: url)
-        
+    init(url: String, imageAspectRatio: ContentMode = .fit, imageWidth: CGFloat = 88, imageHeight: CGFloat = 88) {
+        self.url = url
         self.aspectRatio = imageAspectRatio
-        
         self.width = imageWidth
         self.height = imageHeight
+        
+        imageLoader = ImageLoader(urlString: self.url)
     }
     
     var body: some View {
         
         Group {
-            if imageLoader.data == nil {
-                EmptyView()
-
-            } else {
-                Image(uiImage: UIImage(data: imageLoader.data!)!)
+            if (imageLoader.image != nil) {
+                Image(uiImage: imageLoader.image!)
                     .renderingMode(.original)
                     .resizable()
                     .aspectRatio(contentMode: self.aspectRatio)
                     .frame(width: self.width, height: self.height, alignment: .center)
-//                    .background(Color.gray)
+            } else {
+                Rectangle()
+                    .frame(width: self.width, height: self.height, alignment: .center)
+                    .foregroundColor(Color.gray)
             }
         }
     }
