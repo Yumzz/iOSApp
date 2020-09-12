@@ -117,7 +117,8 @@ struct RestaurantSearchListView: View {
                                         NavigationLink(destination:
                                             MenuSelectionView(restChosen: rest).navigationBarHidden(false)
                                         ) {
-                                            RestaurantCard(urlImage: FBURLImage(url: rest.coverPhotoURL, imageAspectRatio: .fill, imageWidth: UIScreen.main.bounds.width/5, imageHeight: 30) , restaurantName: rest.name, restaurantAddress: rest.cityAddress, ratingSum: rest.ratingSum, nbOfRatings: rest.n_Ratings)
+
+                                            RestaurantCard(urlImage: FBURLImage(url: rest.coverPhotoURL, imageWidth: 70, imageHeight: 80), restaurantName: rest.name, restaurantAddress: rest.cityAddress, ratingSum: rest.ratingSum, nbOfRatings: rest.n_Ratings)
                                         }
                                     }
                                     Spacer().frame(height: 20)
