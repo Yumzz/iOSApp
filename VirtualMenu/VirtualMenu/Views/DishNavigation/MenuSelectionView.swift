@@ -23,133 +23,139 @@ struct MenuSelectionView: View {
     
     var body: some View {
         ZStack{
-        VStack(spacing: 10){
-            FBURLImage(url: self.restChosen.coverPhotoURL, imageWidth: 220, imageHeight: 160)
-                .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
-            HStack{
-                Text(self.restChosen.name)
-                    .padding(.horizontal)
-                    .foregroundColor(.black)
-                    .font(.custom("Montserrat", size: 26))
-            }.frame(alignment: .center)
-            Text(self.restChosen.ethnicity)
-                .foregroundColor(Color.secondary)
-                .font(.footnote)
-            HStack{
-                if self.restChosen.n_Ratings > 0 {
-                    StarRatingView(rating: .constant(Int(Float(self.restChosen.ratingSum) / Float(self.restChosen.n_Ratings))), fontSize: 12)
-                    Text(String(Float(self.restChosen.ratingSum) / Float(self.restChosen.n_Ratings)))
-                        .foregroundColor(Color.secondary)
-                        .font(.footnote)
-                    Text("(" + String(self.restChosen.n_Ratings) + " ratings)")
-                        .foregroundColor(Color.secondary)
-                        .font(.footnote)
-                } else {
-                    Text("No Ratings Yet")
-                        .foregroundColor(Color.secondary)
-                        .font(.footnote)
-                }
-            }
-            Divider()
-            HStack{
-                Button(action: {
-                    let regionDistance:CLLocationDistance = 10000
-                    let coordinates = CLLocationCoordinate2DMake(self.restChosen.coordinate.latitude, self.restChosen.coordinate.longitude)
-                    let regionSpan = MKCoordinateRegion(center: coordinates, latitudinalMeters: regionDistance, longitudinalMeters: regionDistance)
-                    let options = [
-                        MKLaunchOptionsMapCenterKey: NSValue(mkCoordinate: regionSpan.center),
-                        MKLaunchOptionsMapSpanKey: NSValue(mkCoordinateSpan: regionSpan.span)
-                    ]
-                    let placemark = MKPlacemark(coordinate: coordinates, addressDictionary: nil)
-                    let mapItem = MKMapItem(placemark: placemark)
-                    mapItem.name=self.restChosen.name
-                    mapItem.openInMaps(launchOptions: options)
-                }) {
-                    VStack {
-                        Image(systemName: "arrow.uturn.right")
-                            .font(.title)
-                        Text("Direction")
-                            .fontWeight(.semibold)
+            ScrollView{
+            VStack(spacing: 10){
+                FBURLImage(url: self.restChosen.coverPhotoURL, imageWidth: 190, imageHeight: 133)
+                    .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
+                HStack{
+                    Text(self.restChosen.name)
+                        .padding(.horizontal)
+                        .foregroundColor(.black)
+                        .font(.custom("Montserrat", size: 26))
+                }.frame(alignment: .center)
+                Text(self.restChosen.ethnicity)
+                    .foregroundColor(Color.secondary)
+                    .font(.footnote)
+                HStack{
+                    if self.restChosen.n_Ratings > 0 {
+                        StarRatingView(rating: .constant(Int(Float(self.restChosen.ratingSum) / Float(self.restChosen.n_Ratings))), fontSize: 12)
+                        Text(String(Float(self.restChosen.ratingSum) / Float(self.restChosen.n_Ratings)))
+                            .foregroundColor(Color.secondary)
                             .font(.footnote)
-                            .frame(width: 80)
+                        Text("(" + String(self.restChosen.n_Ratings) + " ratings)")
+                            .foregroundColor(Color.secondary)
+                            .font(.footnote)
+                    } else {
+                        Text("No Ratings Yet")
+                            .foregroundColor(Color.secondary)
+                            .font(.footnote)
                     }
-                    .padding()
-                    .foregroundColor(.red)
-                    .background(Color.white)
-                    .cornerRadius(30)
+                }
+                Divider()
+                HStack(spacing: 10){
+                    Button(action: {
+                        let regionDistance:CLLocationDistance = 10000
+                        let coordinates = CLLocationCoordinate2DMake(self.restChosen.coordinate.latitude, self.restChosen.coordinate.longitude)
+                        let regionSpan = MKCoordinateRegion(center: coordinates, latitudinalMeters: regionDistance, longitudinalMeters: regionDistance)
+                        let options = [
+                            MKLaunchOptionsMapCenterKey: NSValue(mkCoordinate: regionSpan.center),
+                            MKLaunchOptionsMapSpanKey: NSValue(mkCoordinateSpan: regionSpan.span)
+                        ]
+                        let placemark = MKPlacemark(coordinate: coordinates, addressDictionary: nil)
+                        let mapItem = MKMapItem(placemark: placemark)
+                        mapItem.name=self.restChosen.name
+                        mapItem.openInMaps(launchOptions: options)
+                    }) {
+                        VStack {
+                            Image(systemName: "arrow.uturn.right")
+                                .font(.system(size: 18))
+                            Text("Direction")
+                                .fontWeight(.semibold)
+                                .font(.system(size: 10))
+                                .frame(width: 46)
+                        }
+                        .padding()
+                        .foregroundColor(.red)
+                        .background(Color.white)
+                        .cornerRadius(10)
+                        .shadow(radius: 2)
+                    }
                     
-                }
-                
-                Button(action: {
-                    guard let number = URL(string: "tel://" + self.restChosen.phone) else { return }
-                UIApplication.shared.open(number)
+                    Button(action: {
+                        guard let number = URL(string: "tel://" + self.restChosen.phone) else { return }
+                    UIApplication.shared.open(number)
 
-                }) {
-                    VStack {
-                        Image(systemName: "phone.fill")
-                            .font(.title)
-                        Text("Call")
+                    }) {
+                        VStack {
+                            Image(systemName: "phone.fill")
+                                .font(.system(size: 18))
+                            Text("Call")
+                                .font(.system(size: 10))
+                                .font(.footnote)
+                                .frame(width: 46)
+                        }
+                        .padding()
+                        .foregroundColor(.red)
+                        .background(Color.white)
+                        .cornerRadius(10)
+                        .shadow(radius: 2)
+                    }
+                    
+                    
+                    NavigationLink(destination: ListDishesView(restaurant: self.restChosen)){
+                        VStack {
+                            Image(systemName: "doc.plaintext")
+                                 .font(.system(size: 18))
+                            Text("Menu")
+                                .font(.system(size: 10))
+                                .font(.footnote)
+                                .frame(width: 46)
+                        }
+                        .padding()
+                        .foregroundColor(.red)
+                        .background(Color.white)
+                        .cornerRadius(10)
+                        .shadow(radius: 2)
+                    }
+                }
+                NavigationLink(destination: RatingView(restaurant: self.restChosen)){
+                    HStack {
+                        Image(systemName: "square.and.pencil")
+                            .foregroundColor(.gray)
+                            .font(.system(size: 18))
+                        Text("Add Your Rating")
+                            .foregroundColor(.red)
                             .fontWeight(.semibold)
-                            .font(.footnote)
-                            .frame(width: 80)
+                            .font(.system(size: 10))
+                            .frame(width: 100)
                     }
                     .padding()
-                    .foregroundColor(.red)
                     .background(Color.white)
-                    .cornerRadius(30)
+                    .cornerRadius(10)
+                    .shadow(radius: 2)
                 }
-                
-                
-                NavigationLink(destination: ListDishesView(restaurant: self.restChosen)){
-                    VStack {
-                        Image(systemName: "doc.plaintext")
-                            .font(.title)
-                        Text("Menu")
-                            .fontWeight(.semibold)
-                            .font(.footnote)
-                            .frame(minWidth: 80)
+                ScrollView(.horizontal) {
+                    HStack(spacing: 10) {
+                        ForEach(0..<(self.menuSelectionVM.featuredDishes.count/2 + 1), id: \.self) {
+                            column in
+                            VStack(alignment: .leading, spacing: 15) {
+                                if column*2 < self.menuSelectionVM.featuredDishes.count {
+                                    PreviewDish(dish: self.menuSelectionVM.featuredDishes[column*2], restChosen: self.restChosen).frame(alignment: .top)
+                                }
+                                if column*2+1 < self.menuSelectionVM.featuredDishes.count {
+                                    PreviewDish(dish: self.menuSelectionVM.featuredDishes[column*2+1], restChosen: self.restChosen)
+                                }
+                            }.frame(height: 180)
+                        }
                     }
-                    .padding()
-                    .foregroundColor(.red)
-                    .background(Color.white)
-                    .cornerRadius(30)
                 }
+                .padding(15)
+                .frame(height: 220)
+                Spacer()
             }
-            NavigationLink(destination: RatingView(restaurant: self.restChosen)){
-                HStack {
-                    Image(systemName: "square.and.pencil")
-                        .font(.title)
-                    Text("Add Your Rating")
-                        .fontWeight(.semibold)
-                        .font(.footnote)
-                        .frame(minWidth: 80)
-                }
-                .padding()
-                .foregroundColor(.red)
-                .background(Color.white)
-                .cornerRadius(15)
-            }
-//            ScrollView(.horizontal) {
-//                HStack(spacing: 15) {
-//                    ForEach(0..<(self.menuSelectionVM.featuredDishes.count/2 + 1), id: \.self) {
-//                        column in
-//                        VStack(alignment: .leading, spacing: 15) {
-//                            if column*2 < self.menuSelectionVM.featuredDishes.count {
-//                                PreviewDish(dish: self.menuSelectionVM.featuredDishes[column*2], restChosen: self.restChosen).frame(alignment: .top)
-//                            }
-//                            if column*2+1 < self.menuSelectionVM.featuredDishes.count {
-//                                PreviewDish(dish: self.menuSelectionVM.featuredDishes[column*2+1], restChosen: self.restChosen)
-//                            }
-//                        }.frame(height: 180)
-//                    }
-//                }
-//            }
-            .padding(15)
-            .frame(height: 180)
-            Spacer()
+            }.background(GradientView().edgesIgnoringSafeArea(.all))
+            .navigationBarHidden(false)
         }
-        }.background(GradientView().edgesIgnoringSafeArea(.all))
-        .navigationBarHidden(false)
     }
 }
 
@@ -165,7 +171,7 @@ struct PreviewDish: View {
     
     var body: some View {
         NavigationLink(destination: DishDetailsView(dish: self.dish, restaurant: self.restChosen).navigationBarHidden(false)) {
-            FBURLImage(url: self.dish.coverPhotoURL, imageAspectRatio: .fill, imageWidth: 160, imageHeight: 80)
+            FBURLImage(url: self.dish.coverPhotoURL, imageAspectRatio: .fill, imageWidth: 130, imageHeight: 80)
                 .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
         }
     }
