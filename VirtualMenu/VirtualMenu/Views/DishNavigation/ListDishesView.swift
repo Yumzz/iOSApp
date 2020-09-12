@@ -23,11 +23,14 @@ struct ListDishesView: View {
     
     @State var allClicked = false
     
+    @Environment(\.presentationMode) var mode: Binding<PresentationMode>
+    
     
     init(restaurant: RestaurantFB) {
         
         self.restaurant = restaurant
         
+        print("List Dish Vm created")
         self.listDishVM = ListDishesViewModel(restaurant: self.restaurant)
                 
 //        print("categories: \(self.dishCategoriesVM.dishCategories)")
@@ -41,10 +44,10 @@ struct ListDishesView: View {
                     ScrollView(.horizontal, showsIndicators: false) {
                         HStack(spacing: 10){
                             Text("View All")
-                                .padding()
-                                .frame(maxWidth: 100)
-                                .background(
-                                Color(UIColor().colorFromHex("#F88379", 1)))
+                                .padding(.horizontal, 20)
+                                .padding(.vertical, 10)
+                                .font(.system(size: 12))
+                                .background(self.allClicked ? Color(UIColor().colorFromHex("#707070", 1)) : Color.white)
                                 .foregroundColor(self.allClicked ? Color.white : Color.black)
                             .cornerRadius(5)
                             .onTapGesture {
@@ -59,11 +62,11 @@ struct ListDishesView: View {
                             }
                             ForEach(self.listDishVM.dishCategories, id: \.name){ dishCategory in
                                 Text("\(dishCategory.name)")
-                                    .padding()
+                                    .padding(.horizontal, 20)
+                                    .padding(.vertical, 10)
+                                    .font(.system(size: 12))
                                     .scaledToFit()
-                                    .background(
-                                       Color(UIColor().colorFromHex("#F88379", 1)
-                                       ))
+                                    .background(self.allClicked ? Color(UIColor().colorFromHex("#707070", 1)) : Color.white)
                                     .foregroundColor(self.dishCategoriesDisplayed.contains(dishCategory) ? Color.white : Color.black)
                                     .cornerRadius(5)
                                     .onTapGesture {
@@ -118,11 +121,14 @@ struct ListDishesView: View {
             
         }.onAppear{
             self.allClicked = true
-                        
+            print("appear")
             self.dishCategoriesDisplayed = self.listDishVM.dishCategories
+            print("show dishcats")
         }
-        .background(GradientView().edgesIgnoringSafeArea(.all))
+        .background(GradientView().edgesIgnoringSafeArea(.top))
         .navigationBarTitle("Dishes")
+        .navigationBarBackButtonHidden(true)
+        .navigationBarItems(leading: WhiteBackButton(mode: self.mode))
     }
 }
 

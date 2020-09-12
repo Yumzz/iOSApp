@@ -30,6 +30,9 @@ struct DishDetailsView: View {
     @State private var alertMessage = ""
     @State private var alertTitle = ""
     
+    @Environment(\.presentationMode) var mode: Binding<PresentationMode>
+
+    
     //fetch reviews of dish on appear and have "Reviews" button pass info to new view of entire scroll view of it
     
     var body: some View {
@@ -79,6 +82,8 @@ struct DishDetailsView: View {
             .padding()
         }
         }.background(GradientView().edgesIgnoringSafeArea(.all))
+        .navigationBarBackButtonHidden(true)
+        .navigationBarItems(leading: WhiteBackButton(mode: self.mode))
     }
 }
 

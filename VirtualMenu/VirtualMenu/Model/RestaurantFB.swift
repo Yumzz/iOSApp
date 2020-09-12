@@ -57,7 +57,7 @@ struct RestaurantFB {
         self.featuredDishRefs = featuredDishRefs
         self.coordinate = coordinate
         if(address != ""){
-            print(address)
+            print("wow: \(address.components(separatedBy: delimiter)[2])")
             self.cityAddress = address.components(separatedBy: delimiter)[1] + (address.components(separatedBy: delimiter)[2]).components(separatedBy: " ")[0]
             self.streetAddress = address.components(separatedBy: delimiter)[0]
         }

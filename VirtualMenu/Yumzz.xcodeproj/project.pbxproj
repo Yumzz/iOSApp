@@ -43,6 +43,7 @@
 		3A5F685824FEFB5000F9B43D /* SaveOrderButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5F685724FEFB5000F9B43D /* SaveOrderButton.swift */; };
 		3A632281250C19B9001427F7 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A632280250C19B9001427F7 /* GradientView.swift */; };
 		3A632283250C1A7D001427F7 /* GradientUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A632282250C1A7D001427F7 /* GradientUIView.swift */; };
+		3A632285250C3531001427F7 /* WhiteBackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A632284250C3531001427F7 /* WhiteBackButton.swift */; };
 		3A6477F224B68D060077EF30 /* UserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6477F124B68D060077EF30 /* UserProfile.swift */; };
 		3A87575324EC910A004ABECC /* PostReviewButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A87575224EC910A004ABECC /* PostReviewButton.swift */; };
 		3A987AD72480350C0021F6E4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A987AD62480350C0021F6E4 /* AppDelegate.swift */; };
@@ -181,6 +182,7 @@
 		3A5F685724FEFB5000F9B43D /* SaveOrderButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveOrderButton.swift; sourceTree = "<group>"; };
 		3A632280250C19B9001427F7 /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		3A632282250C1A7D001427F7 /* GradientUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientUIView.swift; sourceTree = "<group>"; };
+		3A632284250C3531001427F7 /* WhiteBackButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhiteBackButton.swift; sourceTree = "<group>"; };
 		3A6477F124B68D060077EF30 /* UserProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfile.swift; sourceTree = "<group>"; };
 		3A87575224EC910A004ABECC /* PostReviewButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostReviewButton.swift; sourceTree = "<group>"; };
 		3A987AD32480350C0021F6E4 /* Yumzz.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Yumzz.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -611,6 +613,7 @@
 			isa = PBXGroup;
 			children = (
 				A724364A24D4CFF200F8BBBB /* RestaurantCard.swift */,
+				3A632284250C3531001427F7 /* WhiteBackButton.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -967,6 +970,7 @@
 				3A4E2E3F24D2403300C34DD8 /* RestaurantDishViewModel.swift in Sources */,
 				3ACAD178250AE6E400B24CEB /* ReportProblemViewModel.swift in Sources */,
 				3A13B6ED24C3D9FB0006458B /* SuggestRestaurant.swift in Sources */,
+				3A632285250C3531001427F7 /* WhiteBackButton.swift in Sources */,
 				A78531FA24DE312600F94C67 /* ImageLoader.swift in Sources */,
 				3A13B6EA24C197B30006458B /* RestaurantSearchLabel.swift in Sources */,
 				A7F5506D24C1259100FAC1F0 /* RestaurantSearchbarView.swift in Sources */,

@@ -18,6 +18,7 @@ struct Resto: Identifiable {
     let score: Float
     let nbOfRatings: Int
 }
+let coloredNavAppearance = UINavigationBarAppearance()
 
 
 struct RestaurantSearchListView: View {
@@ -30,13 +31,15 @@ struct RestaurantSearchListView: View {
     
     @State var restCategoriesDisplayed: [RestCategory] = []
     
+//    @Environment(\.presentationMode) var mode: Binding<PresentationMode>
+    
     @State var allClicked = false
         
     init(isNavigationBarHidden: Bool){
         self.isNavigationBarHidden = isNavigationBarHidden
         
         self.restaurantListVM = RestaurantSearchListViewModel()
-    
+        
     }
     
     
@@ -53,10 +56,10 @@ struct RestaurantSearchListView: View {
                         ScrollView(.horizontal, showsIndicators: false) {
                             HStack(spacing: 10){
                                 Text("View All")
-                                    .padding()
-                                    .frame(maxWidth: 100)
-                                    .background(
-                                    Color(UIColor().colorFromHex("#F88379", 1)))
+                                    .padding(.horizontal, 20)
+                                    .padding(.vertical, 10)
+                                    .font(.system(size: 12))
+                                    .background(self.allClicked ? Color(UIColor().colorFromHex("#707070", 1)) : Color.white)
                                     .foregroundColor(self.allClicked ? Color.white : Color.black)
                                 .cornerRadius(5)
                                 .onTapGesture {
@@ -71,11 +74,11 @@ struct RestaurantSearchListView: View {
                                 }
                                 ForEach(self.restaurantListVM.restCategories, id: \.name){ restCategory in
                                     Text("\(restCategory.name)")
-                                    .padding()
+                                        .padding(.horizontal, 20)
+                                        .padding(.vertical, 10)
+                                    .font(.system(size: 12))
                                     .scaledToFit()
-                                    .background(
-                                       Color(UIColor().colorFromHex("#F88379", 1)
-                                       ))
+                                    .background(self.restCategoriesDisplayed.contains(restCategory) ? Color(UIColor().colorFromHex("#707070", 1)) : Color.white)
                                     .foregroundColor(self.restCategoriesDisplayed.contains(restCategory) ? Color.white : Color.black)
                                     .cornerRadius(5)
                                     .onTapGesture {
@@ -114,6 +117,7 @@ struct RestaurantSearchListView: View {
                                         NavigationLink(destination:
                                             MenuSelectionView(restChosen: rest).navigationBarHidden(false)
                                         ) {
+
                                             RestaurantCard(urlImage: FBURLImage(url: rest.coverPhotoURL, imageWidth: 70, imageHeight: 80), restaurantName: rest.name, restaurantAddress: rest.cityAddress, ratingSum: rest.ratingSum, nbOfRatings: rest.n_Ratings)
                                         }
                                     }
@@ -128,8 +132,10 @@ struct RestaurantSearchListView: View {
                 }
             }
         }
-    .background(GradientView().edgesIgnoringSafeArea(.all))
+    .background(GradientView().edgesIgnoringSafeArea(.top))
         .navigationBarTitle("Restaurants")
+//        .navigationBarBackButtonHidden(true)
+//        .navigationBarItems(leading: WhiteBackButton(mode: self.mode))
         .onAppear(){
             
                 self.allClicked = true
@@ -137,12 +143,10 @@ struct RestaurantSearchListView: View {
                 self.restCategoriesDisplayed = self.restaurantListVM.restCategories
                 
                 print(self.restaurantListVM.restCategories)
-                
-                    
+                                
         }
     }
 }
-
 
 struct RestaurantSearchListView_Previews: PreviewProvider {
     static var previews: some View {
