@@ -52,9 +52,10 @@ struct RestaurantCard: View {
                     HStack (alignment: .center , spacing: 5) {
                         if self.nbOfRatings > 0 {
 //                            StarRatingView(rating: .constant(Int(Float(self.ratingSum) / Float(self.nbOfRatings))), fontSize: 12)
-                            Image("star_coral")
-                                .renderingMode(.original)
+                          
+                            Image(systemName: "star.fill")
                                 .font(.system(size: 12))
+                                .foregroundColor(Color.pink)
                             VStack (alignment: .leading , spacing: 5) {
                                 Text(String(Float(self.ratingSum) / Float(self.nbOfRatings)))
                                     .foregroundColor(Color.secondary)
@@ -75,13 +76,12 @@ struct RestaurantCard: View {
                             .foregroundColor(Color.secondary)
                             .font(.footnote)
                     }
-                }
+                }.padding(.leading, 5)
             }
 
             .frame(maxWidth: .infinity, alignment: .leading)
             .frame(height: 70)
             .background(Color(.white))
-
             .cornerRadius(10)
             .shadow(radius: 2)
         }

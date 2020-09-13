@@ -105,7 +105,8 @@ struct ListDishesView: View {
                                     NavigationLink(destination:
                                         DishDetailsView(dish: dish, restaurant: self.restaurant).navigationBarHidden(false)
                                     ) {
-                                        DishCard(urlImage: FBURLImage(url: dish.coverPhotoURL, imageWidth: 70, imageHeight: 80), dishName: dish.name, dishIngredients: dish.description, price: self.listDishVM.formatPrice(price: dish.price))
+
+                                        DishCard(urlImage: FBURLImage(url: dish.coverPhotoURL, imageAspectRatio: .fill, imageWidth: 80, imageHeight: 80), dishName: dish.name, dishIngredients: dish.description, price: self.listDishVM.formatPrice(price: dish.price))
                                     }
                                 }
                                 Spacer().frame(height: 20)

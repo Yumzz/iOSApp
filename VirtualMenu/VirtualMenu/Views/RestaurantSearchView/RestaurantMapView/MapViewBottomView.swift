@@ -1,15 +1,14 @@
 //
-//  MenuSelectionView.swift
+//  MapViewBottomView.swift
 //  VirtualMenu
 //
-//  Created by Rohan Tyagi on 8/4/20.
+//  Created by William Bai on 9/12/20.
 //  Copyright © 2020 Rohan Tyagi. All rights reserved.
 //
-
 import SwiftUI
 import MapKit
 
-struct MenuSelectionView: View {
+struct MapViewBottomView: View {
     var restChosen : RestaurantFB
     
     @State private var action: Int? = 0
@@ -28,32 +27,34 @@ struct MenuSelectionView: View {
         ZStack{
             ScrollView{
             VStack(spacing: 10){
-                FBURLImage(url: self.restChosen.coverPhotoURL, imageWidth: 190, imageHeight: 133)
-                    .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
-                HStack{
-                    Text(self.restChosen.name)
-                        .padding(.horizontal)
-                        .foregroundColor(.black)
-                        .font(.custom("Montserrat", size: 26))
-                }.frame(alignment: .center)
-                Text(self.restChosen.ethnicity)
-                    .foregroundColor(Color.secondary)
-                    .font(.footnote)
-                HStack{
-                    if self.restChosen.n_Ratings > 0 {
-                        StarRatingView(rating: .constant(Int(Float(self.restChosen.ratingSum) / Float(self.restChosen.n_Ratings))), fontSize: 12)
-                        Text(String(Float(self.restChosen.ratingSum) / Float(self.restChosen.n_Ratings)))
-                            .foregroundColor(Color.secondary)
-                            .font(.footnote)
-                        Text("(" + String(self.restChosen.n_Ratings) + " ratings)")
-                            .foregroundColor(Color.secondary)
-                            .font(.footnote)
-                    } else {
-                        Text("No Ratings Yet")
-                            .foregroundColor(Color.secondary)
-                            .font(.footnote)
+                VStack {
+                    FBURLImage(url: self.restChosen.coverPhotoURL, imageWidth: 190, imageHeight: 133)
+                        .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
+                    HStack{
+                        Text(self.restChosen.name)
+                            .padding(.horizontal)
+                            .foregroundColor(.black)
+                            .font(.custom("Montserrat", size: 26))
+                    }.frame(alignment: .center)
+                    Text(self.restChosen.ethnicity)
+                        .foregroundColor(Color.secondary)
+                        .font(.footnote)
+                    HStack{
+                        if self.restChosen.n_Ratings > 0 {
+                            StarRatingView(rating: .constant(Int(Float(self.restChosen.ratingSum) / Float(self.restChosen.n_Ratings))), fontSize: 12)
+                            Text(String(Float(self.restChosen.ratingSum) / Float(self.restChosen.n_Ratings)))
+                                .foregroundColor(Color.secondary)
+                                .font(.footnote)
+                            Text("(" + String(self.restChosen.n_Ratings) + " ratings)")
+                                .foregroundColor(Color.secondary)
+                                .font(.footnote)
+                        } else {
+                            Text("No Ratings Yet")
+                                .foregroundColor(Color.secondary)
+                                .font(.footnote)
+                        }
                     }
-                }
+                }.frame(alignment: .leading)
                 Divider()
                 HStack(spacing: 10){
                     Button(action: {
@@ -142,10 +143,10 @@ struct MenuSelectionView: View {
                             column in
                             VStack(alignment: .leading, spacing: 15) {
                                 if column*2 < self.menuSelectionVM.featuredDishes.count {
-                                    PreviewDish(dish: self.menuSelectionVM.featuredDishes[column*2], restChosen: self.restChosen, mode: self.mode).frame(alignment: .top)
+                                    PreviewDish(dish: self.menuSelectionVM.featuredDishes[column*2], restChosen: self.restChosen).frame(alignment: .top)
                                 }
                                 if column*2+1 < self.menuSelectionVM.featuredDishes.count {
-                                    PreviewDish(dish: self.menuSelectionVM.featuredDishes[column*2+1], restChosen: self.restChosen, mode: self.mode)
+                                    PreviewDish(dish: self.menuSelectionVM.featuredDishes[column*2+1], restChosen: self.restChosen)
                                 }
                             }.frame(height: 180)
                         }
@@ -154,7 +155,7 @@ struct MenuSelectionView: View {
                 .padding(15)
                 .frame(height: 220)
                 Spacer()
-            }
+            }.padding(.top, 15)
             }.background(GradientView().edgesIgnoringSafeArea(.all))
             .navigationBarHidden(false)
         .navigationBarBackButtonHidden(true)
@@ -163,22 +164,8 @@ struct MenuSelectionView: View {
     }
 }
 
-//struct MenuSelectionView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        MenuSelectionView(restChosen: RestaurantFB.previewRest())
-//    }
-//}
-
-struct PreviewDish: View {
-    @State var dish: DishFB
-    @State var restChosen: RestaurantFB
-    var mode: Binding<PresentationMode>
-    
-    var body: some View {
-        NavigationLink(destination: DishDetailsView(dish: self.dish, restaurant: self.restChosen).navigationBarHidden(false)) {
-            FBURLImage(url: self.dish.coverPhotoURL, imageAspectRatio: .fill, imageWidth: 130, imageHeight: 80)
-                .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
-        }
+struct MapViewBottomView_Previews: PreviewProvider {
+    static var previews: some View {
+        MapViewBottomView(restChosen: RestaurantFB.previewRest())
     }
 }
-
