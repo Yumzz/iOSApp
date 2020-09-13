@@ -52,7 +52,7 @@ struct RestaurantCard: View {
                     HStack (alignment: .center , spacing: 5) {
                         if self.nbOfRatings > 0 {
 //                            StarRatingView(rating: .constant(Int(Float(self.ratingSum) / Float(self.nbOfRatings))), fontSize: 12)
-                            Image(systemName: "star.fill")
+                            Image("star_coral")
                                 .renderingMode(.original)
                                 .font(.system(size: 12))
                             VStack (alignment: .leading , spacing: 5) {

@@ -38,7 +38,7 @@ struct DishDetailsView: View {
     var body: some View {
         ZStack{
         VStack(alignment: .center) {
-            Spacer().frame(width: 0, height: -60)
+            Spacer().frame(width: UIScreen.main.bounds.width, height: -60)
             VStack(spacing: 20){
                 Text("\(dish.name)")
                     .font(.title)

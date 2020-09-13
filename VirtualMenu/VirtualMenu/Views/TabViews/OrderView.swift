@@ -14,9 +14,8 @@ struct OrderView: View {
     @State private var numbers = ["Current Selection","Past Orders"]
     
     @EnvironmentObject var order : OrderModel
-//    @ObservedObject var restViewModel = RestaurantDishViewModel()
-//    @ObservedObject var restDishVM = RestaurantDishViewModel()
     
+    @Environment(\.presentationMode) var mode: Binding<PresentationMode>
     
     @State private var showingAlert = false
     @State private var alertMessage = ""
@@ -116,6 +115,8 @@ struct OrderView: View {
                     print("Past Orders: \(self.order.pastOrders)")
                 }
         }
+        .background(GradientView().edgesIgnoringSafeArea(.top))
+
     }
 }
 

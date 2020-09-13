@@ -20,29 +20,7 @@ struct DishCard: View {
     
     var body: some View {
         Group {
-            HStack(alignment: .top, spacing: 20) {
-                Spacer()
-                    .frame(maxWidth: 0)
-                
-                VStack(alignment: .leading, spacing: 10) {
-                    Text(dishName).bold()
-                        .foregroundColor(Color.primary)
-                    
-                    Spacer()
-                        .frame(maxHeight: 0)
-                    
-                    Text(dishIngredients)
-                        .fixedSize(horizontal: false, vertical: true)
-                        .lineLimit(2)
-                        .foregroundColor(Color.secondary)
-                        .font(.footnote)
-                    
-                    Text(price)
-                        .foregroundColor(Color.primary)
-                }
-                
-                Spacer()
-                
+            HStack(alignment: .center, spacing: 20) {
                 if urlImage == nil {
                     Image(systemName: "square.fill")
                         .renderingMode(.original)
@@ -54,14 +32,30 @@ struct DishCard: View {
                     urlImage!
                     .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
                 }
+                Spacer()
+                    .frame(maxWidth: 0)
+                
+                VStack(alignment: .leading, spacing: 10) {
+                    Text(dishName).bold()
+                        .foregroundColor(Color.primary)
+
+                    Text(price)
+                        .foregroundColor(Color(UIColor().colorFromHex("#C4C4C4", 1)))
+                        .font(.system(size: 10))
+                }
+                
+                Spacer()
+                
                 
                 Spacer().frame(width: 0)
                 
             }
             .frame(maxWidth: .infinity, alignment: .leading)
-            .frame(height: 160)
-            .background(Color.backgroundColor(for: colorScheme))
-            .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
+            .frame(height: 70)
+            .background(Color(.white))
+
+            .cornerRadius(10)
+            .shadow(radius: 2)
         }
         .padding(.horizontal)
     }

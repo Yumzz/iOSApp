@@ -27,6 +27,7 @@ struct TextView: UIViewRepresentable {
         textView.layer.borderColor = UIColor.black.cgColor
         textView.layer.shadowOpacity = 0.5
         textView.backgroundColor = .white
+//        textView.frame(forAlignmentRect: CGRect(x: 0, y: 0, width: 300, height: 100))
         
         textView.delegate = context.coordinator
 //        textView.bo

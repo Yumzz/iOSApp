@@ -47,8 +47,8 @@ struct RestaurantMapView: View {
                                 .cornerRadius(10.0)
                                 .padding(.leading)
                         }
-                            RestaurantSearchbarView(strSearch: self.$strSearch)
-                                .padding([.leading])
+//                            RestaurantSearchbarView(strSearch: self.$strSearch)
+//                                .padding([.leading])
                         
                         Button(action: {
                             self.show = true
@@ -159,13 +159,13 @@ struct RestaurantMapView: View {
                                         .foregroundColor(.black)
                                         .padding(.bottom,15)
 
-                                        NavigationLink(destination: MenuSelectionView(restChosen: self.click.restChosen!).navigationBarHidden(false)){
-                                            Text("Menu")
-                                                .font(.custom("Open Sans", size: 20))
-                                                .foregroundColor(.black)
-                                                .foregroundColor(.black)
-                                                .padding(.bottom, 15)
-                                        }
+//                                        NavigationLink(destination: MenuSelectionView(restChosen: self.click.restChosen!).navigationBarHidden(false)){
+//                                            Text("Menu")
+//                                                .font(.custom("Open Sans", size: 20))
+//                                                .foregroundColor(.black)
+//                                                .foregroundColor(.black)
+//                                                .padding(.bottom, 15)
+//                                        }
                                     }.onTapGesture {
                                         self.click.isClicked = false
                                     }
