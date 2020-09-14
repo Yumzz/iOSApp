@@ -47,14 +47,14 @@ struct DishCard: View {
                 Spacer()
                 
                 
-                VStack(alignment: .leading, spacing: 10) {
-                    Text(dishName).bold()
-                        .foregroundColor(Color.primary)
-                    
-                    Text(price)
-                        .foregroundColor(Color.secondary)
-                }.frame(height: 70)
-                .padding(.leading, 5)
+//                VStack(alignment: .leading, spacing: 10) {
+//                    Text(dishName).bold()
+//                        .foregroundColor(Color.primary)
+//
+//                    Text(price)
+//                        .foregroundColor(Color.secondary)
+//                }.frame(height: 70)
+//                .padding(.leading, 5)
                 
             }
             .frame(maxWidth: .infinity, alignment: .leading)

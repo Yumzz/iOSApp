@@ -28,8 +28,15 @@ struct MenuSelectionView: View {
         ZStack{
             ScrollView{
             VStack(spacing: 10){
-                FBURLImage(url: self.restChosen.coverPhotoURL, imageWidth: 190, imageHeight: 133)
+                FBURLImage(url: self.restChosen.coverPhotoURL, imageWidth: 127, imageHeight: 133)
                     .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
+                    .padding(.top, 10)
+                    .padding(.bottom, 10)
+                    .padding(.leading, 30)
+                    .padding(.trailing, 30)
+                    .background(Color.white)
+                    .cornerRadius(10)
+                    .shadow(radius: 2)
                 HStack{
                     Text(self.restChosen.name)
                         .padding(.horizontal)
@@ -142,10 +149,10 @@ struct MenuSelectionView: View {
                             column in
                             VStack(alignment: .leading, spacing: 15) {
                                 if column*2 < self.menuSelectionVM.featuredDishes.count {
-                                    PreviewDish(dish: self.menuSelectionVM.featuredDishes[column*2], restChosen: self.restChosen, mode: self.mode).frame(alignment: .top)
+                                    PreviewDish(dish: self.menuSelectionVM.featuredDishes[column*2], restChosen: self.restChosen).frame(alignment: .top)
                                 }
                                 if column*2+1 < self.menuSelectionVM.featuredDishes.count {
-                                    PreviewDish(dish: self.menuSelectionVM.featuredDishes[column*2+1], restChosen: self.restChosen, mode: self.mode)
+                                    PreviewDish(dish: self.menuSelectionVM.featuredDishes[column*2+1], restChosen: self.restChosen)
                                 }
                             }.frame(height: 180)
                         }
@@ -172,7 +179,6 @@ struct MenuSelectionView: View {
 struct PreviewDish: View {
     @State var dish: DishFB
     @State var restChosen: RestaurantFB
-    var mode: Binding<PresentationMode>
     
     var body: some View {
         NavigationLink(destination: DishDetailsView(dish: self.dish, restaurant: self.restChosen).navigationBarHidden(false)) {

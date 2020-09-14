@@ -1,5 +1,5 @@
 //
-//  GradientUIView.swift
+//  AccountProfGradientView.swift
 //  VirtualMenu
 //
 //  Created by Rohan Tyagi on 9/11/20.

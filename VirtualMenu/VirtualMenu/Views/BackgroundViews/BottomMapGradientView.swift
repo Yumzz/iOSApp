@@ -7,3 +7,15 @@
 //
 
 import Foundation
+import UIKit
+import SwiftUI
+
+struct BottomMapGradientView: UIViewRepresentable {
+
+    func makeUIView(context: Context) -> UIView {
+        return BottomMapGradientUIView()
+    }
+
+    func updateUIView(_ uiView: UIView, context: Context) {
+    }
+}

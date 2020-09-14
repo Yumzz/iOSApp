@@ -85,7 +85,7 @@ struct DishReviewsView: View {
                         DishNavButton(strLabel: "Submit a Review").onTapGesture{
                             self.reviewClicked = true
                         }
-                    }.overlay(BottomSheetModal(display: self.$reviewClicked, backgroundColor: .constant(Color(UIColor().colorFromHex("#FFFFFF", 1))), rectangleColor: .constant(Color(UIColor().colorFromHex("#656565", 1)))) {
+                    }.overlay(ReviewsBottomSheetModal(display: self.$reviewClicked, backgroundColor: .constant(Color(UIColor().colorFromHex("#FFFFFF", 1))), rectangleColor: .constant(Color(UIColor().colorFromHex("#656565", 1)))) {
                                 ZStack{
                                     VStack(spacing: 20) {
                                         HStack{
@@ -96,11 +96,11 @@ struct DishReviewsView: View {
 
                                         TextView(text: self.$review, textStyle: self.$textStyle)
                                         .padding(.horizontal)
-                                        
+                                            .frame(width: UIScreen.main.bounds.width, height: 200)
 
                     //                        VStack(alignment: .leading){
                                         HStack{
-                                            Spacer().frame(width: UIScreen.main.bounds.width/3)
+//                                            Spacer().frame(width: UIScreen.main.bounds.width/3)
                                             PostReviewButton().onTapGesture {
                                                 self.show = true
                                                 let results = self.dishReviewVM.addReview(body: self.review, dish: self.dish, rest: self.restaurant, starRating: 5, userID: userProfile.userId, username: userProfile.fullName)

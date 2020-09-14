@@ -11,7 +11,7 @@ import SwiftUI
 
 struct BottomSheetModal<Content: View>: View {
 
-  private let modalHeight: CGFloat = 340
+  private let modalHeight: CGFloat = 600
   private let modalWidth: CGFloat = UIScreen.main.bounds.width
   private let modalCornerRadius: CGFloat = 10
   private let backgroundOpacity = 0.65
@@ -93,6 +93,78 @@ struct DragIndicator: View {
       .fill(rectangleColor)
       .frame(width: width, height: height)
       .cornerRadius(cornerRadius)
+  }
+}
+
+struct ReviewsBottomSheetModal<Content: View>: View {
+
+  private let modalHeight: CGFloat = 500
+  private let modalWidth: CGFloat = UIScreen.main.bounds.width
+  private let modalCornerRadius: CGFloat = 10
+  private let backgroundOpacity = 0.65
+  private let dragIndicatorVerticalPadding: CGFloat = 20
+
+  @State private var offset = CGSize.zero
+  @Binding var display: Bool
+  @Binding var backgroundColor: Color
+  @Binding var rectangleColor: Color
+
+  var content: () -> Content
+
+  var body: some View {
+    ZStack(alignment: .bottom) {
+      if display {
+        background
+        modal
+      }
+    }
+    .edgesIgnoringSafeArea(.all)
+    }
+
+  private var background: some View {
+    Color.black
+//      .fillParent()
+      .opacity(backgroundOpacity)
+      .animation(.spring())
+  }
+
+  private var modal: some View {
+    VStack {
+      indicator
+      self.content()
+    }
+    .frame(width: modalWidth, height: modalHeight, alignment: .top)
+    .background(backgroundColor)
+    .cornerRadius(modalCornerRadius)
+    .offset(y: -76)//offset.height)
+    .gesture(
+      DragGesture()
+        .onChanged { value in self.onChangedDragValueGesture(value) }
+        .onEnded { value in self.onEndedDragValueGesture(value) }
+    )
+    .transition(.move(edge: .bottom))
+  }
+
+  private var indicator: some View {
+    DragIndicator(rectangleColor: $rectangleColor)
+      .padding(.vertical, dragIndicatorVerticalPadding)
+  }
+
+  private func onChangedDragValueGesture(_ value: DragGesture.Value) {
+    guard value.translation.height > 0 else { return }
+    self.offset = value.translation
+  }
+
+  private func onEndedDragValueGesture(_ value: DragGesture.Value) {
+    guard value.translation.height >= self.modalHeight / 2 else {
+      self.offset = CGSize.zero
+      return
+    }
+
+    withAnimation {
+      self.display.toggle()
+      self.offset = CGSize.zero
+    }
   }
 }
 

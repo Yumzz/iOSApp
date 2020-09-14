@@ -48,6 +48,8 @@
 		3A632285250C3531001427F7 /* WhiteBackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A632284250C3531001427F7 /* WhiteBackButton.swift */; };
 		3A632287250D8893001427F7 /* AccountProfGradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A632286250D8893001427F7 /* AccountProfGradientView.swift */; };
 		3A632289250D893B001427F7 /* AccountProfGradientUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A632288250D893B001427F7 /* AccountProfGradientUIView.swift */; };
+		3A63228B250E03CA001427F7 /* BottomMapGradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A63228A250E03CA001427F7 /* BottomMapGradientView.swift */; };
+		3A63228D250E041E001427F7 /* BottomMapGradientUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A63228C250E041E001427F7 /* BottomMapGradientUIView.swift */; };
 		3A6477F224B68D060077EF30 /* UserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6477F124B68D060077EF30 /* UserProfile.swift */; };
 		3A87575324EC910A004ABECC /* PostReviewButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A87575224EC910A004ABECC /* PostReviewButton.swift */; };
 		3A987AD72480350C0021F6E4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A987AD62480350C0021F6E4 /* AppDelegate.swift */; };
@@ -191,6 +193,8 @@
 		3A632284250C3531001427F7 /* WhiteBackButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhiteBackButton.swift; sourceTree = "<group>"; };
 		3A632286250D8893001427F7 /* AccountProfGradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountProfGradientView.swift; sourceTree = "<group>"; };
 		3A632288250D893B001427F7 /* AccountProfGradientUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountProfGradientUIView.swift; sourceTree = "<group>"; };
+		3A63228A250E03CA001427F7 /* BottomMapGradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomMapGradientView.swift; sourceTree = "<group>"; };
+		3A63228C250E041E001427F7 /* BottomMapGradientUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomMapGradientUIView.swift; sourceTree = "<group>"; };
 		3A6477F124B68D060077EF30 /* UserProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfile.swift; sourceTree = "<group>"; };
 		3A87575224EC910A004ABECC /* PostReviewButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostReviewButton.swift; sourceTree = "<group>"; };
 		3A987AD32480350C0021F6E4 /* Yumzz.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Yumzz.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -409,6 +413,8 @@
 				3A632282250C1A7D001427F7 /* GradientUIView.swift */,
 				3A632286250D8893001427F7 /* AccountProfGradientView.swift */,
 				3A632288250D893B001427F7 /* AccountProfGradientUIView.swift */,
+				3A63228A250E03CA001427F7 /* BottomMapGradientView.swift */,
+				3A63228C250E041E001427F7 /* BottomMapGradientUIView.swift */,
 			);
 			path = BackgroundViews;
 			sourceTree = "<group>";
@@ -955,6 +961,7 @@
 				3ACAD174250AE39D00B24CEB /* SuggestRestaurantViewModel.swift in Sources */,
 				A777C3A424D3EC7A009658AA /* UserStore.swift in Sources */,
 				A7FE250824A841620007E5AD /* RestaurantMapView.swift in Sources */,
+				3A63228D250E041E001427F7 /* BottomMapGradientUIView.swift in Sources */,
 				3A632283250C1A7D001427F7 /* GradientUIView.swift in Sources */,
 				3A5633BE24F901E80059B603 /* SignInWithAppleDelegates.swift in Sources */,
 				A7912A2624CF82140052988C /* WhiteButton.swift in Sources */,
@@ -970,6 +977,7 @@
 				3AFA234824DCACEA00F90ED8 /* ReviewsButton.swift in Sources */,
 				3A5633C424F902630059B603 /* AuthState.swift in Sources */,
 				3A87575324EC910A004ABECC /* PostReviewButton.swift in Sources */,
+				3A63228B250E03CA001427F7 /* BottomMapGradientView.swift in Sources */,
 				3A5F685824FEFB5000F9B43D /* SaveOrderButton.swift in Sources */,
 				3A530DF324D9769100CBDE28 /* DishCategory.swift in Sources */,
 				3A4E2E3724D21CDC00C34DD8 /* Coordinator.swift in Sources */,
