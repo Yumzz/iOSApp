@@ -16,6 +16,8 @@ struct MapViewBottomView: View {
     @ObservedObject var menuSelectionVM: MenuSelectionViewModel
     
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
+    
+    @State private var showPopUp = false
 
     
     init(restChosen: RestaurantFB) {
@@ -42,7 +44,7 @@ struct MapViewBottomView: View {
                     HStack{
                         if self.restChosen.n_Ratings > 0 {
                             StarRatingView(rating: .constant(Int(Float(self.restChosen.ratingSum) / Float(self.restChosen.n_Ratings))), fontSize: 12)
-                            Text(String(Float(self.restChosen.ratingSum) / Float(self.restChosen.n_Ratings)))
+                            Text(String(format: "%.2f", Double(self.restChosen.ratingSum) / Double(self.restChosen.n_Ratings)))
                                 .foregroundColor(Color.secondary)
                                 .font(.footnote)
                             Text("(" + String(self.restChosen.n_Ratings) + " ratings)")
@@ -122,17 +124,19 @@ struct MapViewBottomView: View {
                         .shadow(radius: 2)
                     }
                 }
-                NavigationLink(destination: RatingView(restaurant: self.restChosen)){
+                Button(action: {
+                    self.showPopUp = true
+                }) {
                     HStack {
-                        Image(systemName: "square.and.pencil")
+                        Image(systemName:"square.and.pencil")
                             .font(.system(size: 18))
                         Text("Add Your Rating")
                             .fontWeight(.semibold)
                             .font(.system(size: 10))
                             .frame(width: 100)
                     }
-                    .foregroundColor(.red)
                     .padding()
+                    .foregroundColor(.red)
                     .background(Color.white)
                     .cornerRadius(10)
                     .shadow(radius: 2)
@@ -158,8 +162,25 @@ struct MapViewBottomView: View {
             }.padding(.top, 15)
             }.background(GradientView().edgesIgnoringSafeArea(.all))
             .navigationBarHidden(false)
-        .navigationBarBackButtonHidden(true)
-        .navigationBarItems(leading: WhiteBackButton(mode: self.mode))
+            .navigationBarBackButtonHidden(true)
+            .navigationBarItems(leading: WhiteBackButton(mode: self.mode))
+                
+            if $showPopUp.wrappedValue {
+                ZStack {
+                    Color.white
+                    VStack {
+                        RatingView(restaurant: self.restChosen, isOpen: self.$showPopUp)
+                        Button(action: {
+                            self.showPopUp = false
+                        }, label: {
+                            Text("No Thanks")
+                            .underline()
+                        })
+                    }.padding()
+                }
+                .frame(width: 350, height: 450)
+                .cornerRadius(20).shadow(radius: 20)
+            }
         }
     }
 }
