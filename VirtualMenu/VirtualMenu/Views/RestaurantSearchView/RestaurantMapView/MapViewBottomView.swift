@@ -29,19 +29,20 @@ struct MapViewBottomView: View {
         ZStack{
             ScrollView{
             VStack(spacing: 10){
-                VStack {
-                    FBURLImage(url: self.restChosen.coverPhotoURL, imageWidth: 190, imageHeight: 133)
-                        .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
+                VStack{
+//                    FBURLImage(url: self.restChosen.coverPhotoURL, imageWidth: 190, imageHeight: 133)
+//                        .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
                     HStack{
                         Text(self.restChosen.name)
                             .padding(.horizontal)
                             .foregroundColor(.black)
                             .font(.custom("Montserrat", size: 26))
-                    }.frame(alignment: .center)
+                    }
                     Text(self.restChosen.ethnicity)
                         .foregroundColor(Color.secondary)
                         .font(.footnote)
-                    HStack{
+                        
+                    HStack(spacing: 20){
                         if self.restChosen.n_Ratings > 0 {
                             StarRatingView(rating: .constant(Int(Float(self.restChosen.ratingSum) / Float(self.restChosen.n_Ratings))), fontSize: 12)
                             Text(String(format: "%.2f", Double(self.restChosen.ratingSum) / Double(self.restChosen.n_Ratings)))
@@ -56,9 +57,9 @@ struct MapViewBottomView: View {
                                 .font(.footnote)
                         }
                     }
-                }.frame(alignment: .leading)
+                }
                 Divider()
-                HStack(spacing: 10){
+                HStack(spacing: 30){
                     Button(action: {
                         let regionDistance:CLLocationDistance = 10000
                         let coordinates = CLLocationCoordinate2DMake(self.restChosen.coordinate.latitude, self.restChosen.coordinate.longitude)
@@ -145,7 +146,7 @@ struct MapViewBottomView: View {
                     HStack(spacing: 10) {
                         ForEach(0..<(self.menuSelectionVM.featuredDishes.count/2 + 1), id: \.self) {
                             column in
-                            VStack(alignment: .leading, spacing: 15) {
+                            HStack(alignment: .center, spacing: 15) {
                                 if column*2 < self.menuSelectionVM.featuredDishes.count {
                                     PreviewDish(dish: self.menuSelectionVM.featuredDishes[column*2], restChosen: self.restChosen).frame(alignment: .top)
                                 }
@@ -156,11 +157,11 @@ struct MapViewBottomView: View {
                         }
                     }
                 }
-                .padding(15)
-                .frame(height: 220)
+//                .padding(15)
+                .frame(height: 110)
                 Spacer()
             }.padding(.top, 15)
-            }.background(GradientView().edgesIgnoringSafeArea(.all))
+            }.background(BottomMapGradientView().edgesIgnoringSafeArea(.all))
             .navigationBarHidden(false)
             .navigationBarBackButtonHidden(true)
             .navigationBarItems(leading: WhiteBackButton(mode: self.mode))

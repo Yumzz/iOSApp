@@ -32,15 +32,29 @@ struct DishCard: View {
                     urlImage!
                     .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
                 }
+                Spacer()
+                    .frame(maxWidth: 0)
                 
                 VStack(alignment: .leading, spacing: 10) {
                     Text(dishName).bold()
                         .foregroundColor(Color.primary)
-                    
+
                     Text(price)
-                        .foregroundColor(Color.secondary)
-                }.frame(height: 70)
-                .padding(.leading, 5)
+                        .foregroundColor(Color(UIColor().colorFromHex("#C4C4C4", 1)))
+                        .font(.system(size: 10))
+                }
+                
+                Spacer()
+                
+                
+//                VStack(alignment: .leading, spacing: 10) {
+//                    Text(dishName).bold()
+//                        .foregroundColor(Color.primary)
+//
+//                    Text(price)
+//                        .foregroundColor(Color.secondary)
+//                }.frame(height: 70)
+//                .padding(.leading, 5)
                 
             }
             .frame(maxWidth: .infinity, alignment: .leading)

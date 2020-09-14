@@ -33,8 +33,6 @@ struct ListDishesView: View {
         print("List Dish Vm created")
         self.listDishVM = ListDishesViewModel(restaurant: self.restaurant)
                 
-//        print("categories: \(self.dishCategoriesVM.dishCategories)")
-                
     }
     
     var body: some View {
@@ -66,7 +64,7 @@ struct ListDishesView: View {
                                     .padding(.vertical, 10)
                                     .font(.system(size: 12))
                                     .scaledToFit()
-                                    .background(self.allClicked ? Color(UIColor().colorFromHex("#707070", 1)) : Color.white)
+                                    .background(self.dishCategoriesDisplayed.contains(dishCategory) ? Color(UIColor().colorFromHex("#707070", 1)) : Color.white)
                                     .foregroundColor(self.dishCategoriesDisplayed.contains(dishCategory) ? Color.white : Color.black)
                                     .cornerRadius(5)
                                     .onTapGesture {
@@ -107,6 +105,7 @@ struct ListDishesView: View {
                                     NavigationLink(destination:
                                         DishDetailsView(dish: dish, restaurant: self.restaurant).navigationBarHidden(false)
                                     ) {
+
                                         DishCard(urlImage: FBURLImage(url: dish.coverPhotoURL, imageAspectRatio: .fill, imageWidth: 80, imageHeight: 80), dishName: dish.name, dishIngredients: dish.description, price: self.listDishVM.formatPrice(price: dish.price))
                                     }
                                 }
@@ -138,6 +137,6 @@ struct ListDishesView_Previews: PreviewProvider {
         NavigationView{
             ListDishesView(restaurant:  RestaurantFB.previewRest())
         }
-        
+
     }
 }

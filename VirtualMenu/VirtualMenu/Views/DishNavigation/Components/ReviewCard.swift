@@ -20,7 +20,6 @@ struct ReviewCard: View {
     var body: some View {
         
         Group{
-        
             HStack(alignment: .center, spacing: 40) {
             
                 if urlImage == nil {
@@ -43,10 +42,13 @@ struct ReviewCard: View {
                         .font(.headline)
                 }
                 
-            }.frame(maxWidth: .infinity, alignment: .leading)
-            .frame(height: 100)
-            .background(Color.backgroundColor(for: colorScheme))
-            .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
+            }
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .frame(height: 70)
+                    .background(Color(.white))
+            
+                    .cornerRadius(10)
+                    .shadow(radius: 2)
         
         }
     }

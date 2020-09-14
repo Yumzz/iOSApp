@@ -39,10 +39,19 @@ struct RestaurantCard: View {
         Group {
             HStack(alignment: .center, spacing: 20) {
 
-                if urlImage != nil {
-                    urlImage!
-                        .frame(alignment: .leading)
+                if urlImage == nil {
+                    Image(systemName: "square.fill")
+                        .renderingMode(.original)
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 88, height: 88, alignment: .leading)
                 }
+                else {
+                    urlImage!
+                    .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
+                }
+                Spacer()
+                    .frame(maxWidth: 0)
                 
                 VStack(alignment: .leading, spacing: 10) {
                     Text(restaurantName).bold()
@@ -52,6 +61,7 @@ struct RestaurantCard: View {
                     HStack (alignment: .center , spacing: 5) {
                         if self.nbOfRatings > 0 {
 //                            StarRatingView(rating: .constant(Int(Float(self.ratingSum) / Float(self.nbOfRatings))), fontSize: 12)
+                          
                             Image(systemName: "star.fill")
                                 .font(.system(size: 12))
                                 .foregroundColor(Color.pink)

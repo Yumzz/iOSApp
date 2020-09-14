@@ -30,8 +30,15 @@ struct MenuSelectionView: View {
         ZStack{
             ScrollView{
             VStack(spacing: 10){
-                FBURLImage(url: self.restChosen.coverPhotoURL, imageWidth: 190, imageHeight: 133)
+                FBURLImage(url: self.restChosen.coverPhotoURL, imageWidth: 127, imageHeight: 133)
                     .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
+                    .padding(.top, 10)
+                    .padding(.bottom, 10)
+                    .padding(.leading, 30)
+                    .padding(.trailing, 30)
+                    .background(Color.white)
+                    .cornerRadius(10)
+                    .shadow(radius: 2)
                 HStack{
                     Text(self.restChosen.name)
                         .padding(.horizontal)
