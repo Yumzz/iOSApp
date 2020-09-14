@@ -85,22 +85,22 @@ struct DishReviewsView: View {
                         DishNavButton(strLabel: "Submit a Review").onTapGesture{
                             self.reviewClicked = true
                         }
-                    }.overlay(BottomSheetModal(display: self.$reviewClicked, backgroundColor: .constant(Color(UIColor().colorFromHex("#F88379", 1))), rectangleColor: .constant(Color(UIColor().colorFromHex("#FFFFFF", 1)))) {
+                    }.overlay(ReviewsBottomSheetModal(display: self.$reviewClicked, backgroundColor: .constant(Color(UIColor().colorFromHex("#FFFFFF", 1))), rectangleColor: .constant(Color(UIColor().colorFromHex("#656565", 1)))) {
                                 ZStack{
                                     VStack(spacing: 20) {
                                         HStack{
                                             Text("Write your review:")
-                                            .foregroundColor(Color(UIColor().colorFromHex("#FFFFFF", 1)))
+                                            .foregroundColor(Color(UIColor().colorFromHex("#707070", 1)))
                                             Spacer()
                                         }
 
                                         TextView(text: self.$review, textStyle: self.$textStyle)
                                         .padding(.horizontal)
-                                        
+                                            .frame(width: UIScreen.main.bounds.width, height: 200)
 
                     //                        VStack(alignment: .leading){
                                         HStack{
-                                            Spacer().frame(width: UIScreen.main.bounds.width/3)
+//                                            Spacer().frame(width: UIScreen.main.bounds.width/3)
                                             PostReviewButton().onTapGesture {
                                                 self.show = true
                                                 let results = self.dishReviewVM.addReview(body: self.review, dish: self.dish, rest: self.restaurant, starRating: 5, userID: userProfile.userId, username: userProfile.fullName)
@@ -165,51 +165,4 @@ struct DishReviewsView_Previews: PreviewProvider {
     }
 }
 
-struct MultiLineTFReview: UIViewRepresentable {
-    
-    @Binding var txt: String
 
-    func makeUIView(context: UIViewRepresentableContext<MultiLineTFReview>) -> MultiLineTFReview.UIViewType {
-        let tview = UITextView()
-        tview.layer.cornerRadius = 20.0
-        tview.font = .systemFont(ofSize: 16)
-        tview.isEditable = true
-        tview.isUserInteractionEnabled = true
-        tview.isScrollEnabled = true
-        tview.text = "Tell us anything you want"
-        tview.delegate = context.coordinator
-        tview.textColor = .black
-        tview.returnKeyType = .done
-        tview.resignFirstResponder()
-        tview.layer.borderWidth = 10
-        tview.layer.borderColor = UIColor.black.cgColor
-
-        tview.backgroundColor = .white
-        return tview
-    }
-
-    func updateUIView(_ uiView: UITextView, context: UIViewRepresentableContext<MultiLineTFReview>) {
-
-    }
-
-    func makeCoordinator() -> MultiLineTFReview.Coordinator {
-        return MultiLineTFReview.Coordinator(parent1: self)
-    }
-
-    class Coordinator: NSObject, UITextViewDelegate {
-
-        var parent: MultiLineTFReview
-
-        init(parent1: MultiLineTFReview) {
-            parent = parent1
-        }
-
-        func textViewDidChange(_ textView: UITextView) {
-            self.parent.txt = textView.text
-        }
-        func textViewDidBeginEditing(_ textView: UITextView) {
-            textView.text = ""
-            textView.textColor = .label
-        }
-    }
-}

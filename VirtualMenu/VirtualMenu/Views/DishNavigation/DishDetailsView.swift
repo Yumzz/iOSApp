@@ -38,12 +38,12 @@ struct DishDetailsView: View {
     var body: some View {
         ZStack{
         VStack(alignment: .center) {
-            Spacer().frame(width: 0, height: -60)
+            Spacer().frame(width: UIScreen.main.bounds.width, height: -60)
             VStack(spacing: 20){
                 Text("\(dish.name)")
                     .font(.title)
                     .font(.custom("Open Sans", size: 32))
-                FBURLImage(url: dish.coverPhotoURL, imageAspectRatio: .fill, imageWidth: 300, imageHeight: 180, owndimen: true)
+                FBURLImage(url: dish.coverPhotoURL, imageAspectRatio: .fill, imageWidth: 300, imageHeight: UIScreen.main.bounds.height/4, owndimen: true)
                     .cornerRadius(10)
                 Text("Price: " + DishFB.formatPrice(price: dish.price))
                     .foregroundColor(.black)

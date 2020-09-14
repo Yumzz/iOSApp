@@ -18,7 +18,6 @@ struct Resto: Identifiable {
     let score: Float
     let nbOfRatings: Int
 }
-let coloredNavAppearance = UINavigationBarAppearance()
 
 
 struct RestaurantSearchListView: View {
@@ -31,7 +30,7 @@ struct RestaurantSearchListView: View {
     
     @State var restCategoriesDisplayed: [RestCategory] = []
     
-//    @Environment(\.presentationMode) var mode: Binding<PresentationMode>
+    @Environment(\.presentationMode) var mode: Binding<PresentationMode>
     
     @State var allClicked = false
         
@@ -134,8 +133,8 @@ struct RestaurantSearchListView: View {
         }
     .background(GradientView().edgesIgnoringSafeArea(.top))
         .navigationBarTitle("Restaurants")
-//        .navigationBarBackButtonHidden(true)
-//        .navigationBarItems(leading: WhiteBackButton(mode: self.mode))
+        .navigationBarBackButtonHidden(true)
+        .navigationBarItems(leading: WhiteBackButton(mode: self.mode))
         .onAppear(){
             
                 self.allClicked = true

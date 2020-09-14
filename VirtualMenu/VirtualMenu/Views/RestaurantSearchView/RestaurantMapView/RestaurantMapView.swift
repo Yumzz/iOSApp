@@ -49,8 +49,8 @@ struct RestaurantMapView: View {
                                 .cornerRadius(10.0)
                                 .padding(.leading)
                         }
-                            RestaurantSearchbarView(strSearch: self.$strSearch)
-                                .padding([.leading])
+//                            RestaurantSearchbarView(strSearch: self.$strSearch)
+//                                .padding([.leading])
                         
                         Button(action: {
                             self.show = true
@@ -96,19 +96,19 @@ struct RestaurantMapView: View {
                         
                     .frame(maxWidth: .infinity)
                     .padding(.bottom, 25)
-                    if (self.click.isClicked) {
-                        BottomSheetView(isOpen: self.$bottomSheetShown, maxHeight: geometry.size.height*0.8) {
-                            if self.click.restChosen != nil {
-                                MapViewBottomView(restChosen: self.click.restChosen!)
-                            }
-                        }
-                    }
-                    
-//                    .overlay(
-//                        BottomSheetModal(display: self.$click.isClicked, backgroundColor: .constant(Color(UIColor().colorFromHex("#F88379", 1))), rectangleColor: .constant(Color.white)) {
-//                            MenuSelectionView(restChosen: self.click.restChosen!)
+//                    if (self.click.isClicked) {
+//                        BottomSheetView(isOpen: self.$bottomSheetShown, maxHeight: geometry.size.height*0.8) {
+//                            if self.click.restChosen != nil {
+//                                MapViewBottomView(restChosen: self.click.restChosen!)
+//                            }
 //                        }
-//                    )
+//                    }
+                    
+                    .overlay(
+                        BottomSheetModal(display: self.$click.isClicked, backgroundColor: .constant(Color(UIColor().colorFromHex("#FFFFFF", 1))), rectangleColor: .constant(Color(UIColor().colorFromHex("#656565", 1)))) {
+                            MapViewBottomView(restChosen: self.click.restChosen!)
+                        }
+                    )
                 }
             }
         }
