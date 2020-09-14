@@ -66,7 +66,7 @@ struct RestaurantCard: View {
                                 .font(.system(size: 12))
                                 .foregroundColor(Color.pink)
                             VStack (alignment: .leading , spacing: 5) {
-                                Text(String(Float(self.ratingSum) / Float(self.nbOfRatings)))
+                                Text(String(format: "%.2f", Double(self.ratingSum) / Double(self.nbOfRatings)))
                                     .foregroundColor(Color.secondary)
                                     .font(.footnote)
                             }

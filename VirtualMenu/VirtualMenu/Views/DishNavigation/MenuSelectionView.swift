@@ -14,6 +14,8 @@ struct MenuSelectionView: View {
     
     @State private var action: Int? = 0
     
+    @State private var showPopUp = false
+    
     @ObservedObject var menuSelectionVM: MenuSelectionViewModel
     
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
@@ -49,7 +51,7 @@ struct MenuSelectionView: View {
                 HStack{
                     if self.restChosen.n_Ratings > 0 {
                         StarRatingView(rating: .constant(Int(Float(self.restChosen.ratingSum) / Float(self.restChosen.n_Ratings))), fontSize: 12)
-                        Text(String(Float(self.restChosen.ratingSum) / Float(self.restChosen.n_Ratings)))
+                        Text(String(format: "%.2f", Double(self.restChosen.ratingSum) / Double(self.restChosen.n_Ratings)))
                             .foregroundColor(Color.secondary)
                             .font(.footnote)
                         Text("(" + String(self.restChosen.n_Ratings) + " ratings)")
@@ -128,21 +130,25 @@ struct MenuSelectionView: View {
                         .shadow(radius: 2)
                     }
                 }
-                NavigationLink(destination: RatingView(restaurant: self.restChosen)){
+                
+                Button(action: {
+                    self.showPopUp = true
+                }) {
                     HStack {
-                        Image(systemName: "square.and.pencil")
+                        Image(systemName:"square.and.pencil")
                             .font(.system(size: 18))
                         Text("Add Your Rating")
                             .fontWeight(.semibold)
                             .font(.system(size: 10))
                             .frame(width: 100)
                     }
-                    .foregroundColor(.red)
                     .padding()
+                    .foregroundColor(.red)
                     .background(Color.white)
                     .cornerRadius(10)
                     .shadow(radius: 2)
                 }
+                
                 ScrollView(.horizontal) {
                     HStack(spacing: 10) {
                         ForEach(0..<(self.menuSelectionVM.featuredDishes.count/2 + 1), id: \.self) {
@@ -164,17 +170,34 @@ struct MenuSelectionView: View {
             }
             }.background(GradientView().edgesIgnoringSafeArea(.all))
             .navigationBarHidden(false)
-        .navigationBarBackButtonHidden(true)
-        .navigationBarItems(leading: WhiteBackButton(mode: self.mode))
+            .navigationBarBackButtonHidden(true)
+            .navigationBarItems(leading: WhiteBackButton(mode: self.mode))
+            if $showPopUp.wrappedValue {
+                ZStack {
+                    Color.white
+                    VStack {
+                        RatingView(restaurant: self.restChosen, isOpen: self.$showPopUp)
+                        Button(action: {
+                            self.showPopUp = false
+                        }, label: {
+                            Text("No Thanks")
+                            .underline()
+                        })
+                    }.padding()
+                }
+                .frame(width: 350, height: 450)
+                .cornerRadius(20).shadow(radius: 20)
+            }
         }
     }
 }
 
-//struct MenuSelectionView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        MenuSelectionView(restChosen: RestaurantFB.previewRest())
-//    }
-//}
+
+struct MenuSelectionView_Previews: PreviewProvider {
+    static var previews: some View {
+        MenuSelectionView(restChosen: RestaurantFB.previewRest())
+    }
+}
 
 struct PreviewDish: View {
     @State var dish: DishFB
