@@ -12,6 +12,7 @@ import Firebase
 struct RatingView: View {
     var restaurant: RestaurantFB
     @Environment(\.presentationMode) var presentation
+    @Binding var isOpen: Bool
     @State var rating: Int = 0
     
     func submitRating() {
@@ -44,12 +45,12 @@ struct RatingView: View {
             StarRatingView(rating: $rating).padding()
             Button(action: {
                 self.submitRating()
-                self.presentation.wrappedValue.dismiss()
+                self.isOpen = false
             }) {
                 VStack {
                     Text("Submit")
                         .fontWeight(.semibold)
-                        .font(.system(size: 30))
+                        .font(.system(size: 20))
                 }
                 .padding()
                 .foregroundColor(.red)
@@ -64,7 +65,7 @@ struct RatingView: View {
 struct StarRatingView: View {
     @Binding var rating: Int
     
-    var fontSize: CGFloat = 50
+    var fontSize: CGFloat = 30
     var label = ""
 
     var maximumRating = 5

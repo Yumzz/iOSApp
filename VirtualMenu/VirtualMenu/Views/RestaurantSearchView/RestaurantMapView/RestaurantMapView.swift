@@ -15,7 +15,7 @@ struct RestaurantMapView: View {
     @State private var restaurants: [RestaurantFB] = [RestaurantFB]()
     @State var restChosen: RestaurantFB? = nil
     @State var isClicked = false
-    @State private var bottomSheetShown = false
+    @State private var bottomSheetOpen = true
     
     @State var region: [MKCoordinateRegion] = [MKCoordinateRegion]()
     
@@ -94,14 +94,23 @@ struct RestaurantMapView: View {
                         
                     .frame(maxWidth: .infinity)
                     .padding(.bottom, 25)
-                    if (self.click.isClicked) {
-                        BottomSheetView(isOpen: self.$bottomSheetShown, maxHeight: geometry.size.height*0.8) {
-                            if self.click.restChosen != nil {
-                                MapViewBottomView(restChosen: self.click.restChosen!)
-                            }
+
+//                     if (self.click.isClicked) {
+//                         BottomSheetView(isOpen: self.$bottomSheetShown, maxHeight: geometry.size.height*0.8) {
+//                             if self.click.restChosen != nil {
+//                                 MapViewBottomView(restChosen: self.click.restChosen!)
+//                             }
+//                         }
+//                     }
+                    
+
+                    
+                    BottomSheetView(isOpen: self.$bottomSheetOpen, display: self.$click.isClicked, maxHeight: geometry.size.height*0.8) {
+                        if self.click.restChosen != nil {
+                            MapViewBottomView(restChosen: self.click.restChosen!)
                         }
                     }
-                    
+                  
 //                    .overlay(
 //                        BottomSheetModal(display: self.$click.isClicked, backgroundColor: .constant(Color(UIColor().colorFromHex("#FFFFFF", 1))), rectangleColor: .constant(Color(UIColor().colorFromHex("#656565", 1)))) {
 //                            MapViewBottomView(restChosen: self.click.restChosen!)
