@@ -69,28 +69,53 @@ class LoginViewModel: ObservableObject {
         return ""
     }
 
+    func ridProfile(){
+        userProfile = UserProfile(userId: "", fullName: "", emailAddress: "", profilePicture: "", profPhoto: nil)
+    }
 
-    func loginUser(email: String, password: String, disp: DispatchGroup){
-        Auth.auth().signIn(withEmail: email, password: password){ result, error in
-            // print("signin attempt:String(describing:  \(res)ult)")
-            if(error != nil){
-                print(error!)
-                disp.leave()
-                disp.notify(queue: .main){
-                    self.alertMessage = "Your email or password is incorrect"
-                    self.alertTitle = "Sign in error"
+    func loginUser(email: String, password: String, disp: DispatchGroup? = nil, start: Bool? = false){
+        if(!email.isValidEmail || !password.isValidPassword){
+            self.alertMessage = "Your email or password is invalid"
+            self.alertTitle = "Sign in error"
+            return
+        }else{
+            print("signing in")
+            Auth.auth().signIn(withEmail: email, password: password){ result, error in
+                // print("signin attempt:String(describing:  \(res)ult)")
+                if(error != nil){
+                    print(error!)
+//                    if(start!){
+//                        disp!.leave()
+//                        disp?.notify(queue: .main){
+//                            self.alertMessage = "Your email or password is incorrect"
+//                            self.alertTitle = "Sign in error"
+//                        }
+//                    }
+//                    else{
+                        disp!.leave()
+                        disp!.notify(queue: .main){
+                            self.alertMessage = "Your email or password is incorrect"
+                            self.alertTitle = "Sign in error"
+                        }
+//                    }
                 }
-            }
-            else{
-                disp.leave()
-                disp.notify(queue: .main){
-                    self.updateProfile()
+                else{
+//                    if(start!){
+//                        disp!.leave()
+//                        self.updateProfile()
+//                    }
+//                    else{
+                        self.updateProfile(dispatch: disp)
+                        
+//                    }
                 }
             }
         }
     }
+
     
-    func updateProfile() {
+    func updateProfile(dispatch: DispatchGroup? = nil) {
+        
         let storage = Storage.storage()
         let imagesRef = storage.reference().child("profilephotos/\(Auth.auth().currentUser!.uid)")
         
@@ -132,16 +157,41 @@ class LoginViewModel: ObservableObject {
                     // Data for "profilephotos/\(uid).jpg" is returned
                     // print("data: \(data)")
                     userProfile.profilePhoto = UIImage(data: data!)!
+                    }
+                if(dispatch != nil){
+                print("leave")
+                dispatch!.leave()
                 }
             }
         }
         //        DispatchQueue.main.async {
         //        }
+        print("updated")
         print(userProfile.profilePhotoURL)
         print(userProfile.emailAddress)
         print(userProfile.fullName)
+        
     }
     
+    func getPhoto(dispatch: DispatchGroup){
+        let storage = Storage.storage()
+        let imagesRef = storage.reference().child("profilephotos/\(Auth.auth().currentUser!.uid)")
+        DispatchQueue.main.async {
+            imagesRef.getData(maxSize: 2 * 2048 * 2048) { data, error in
+                if let error = error {
+                    // Uh-oh, an error occurred!
+                    userProfile.profilePhoto = UIImage(imageLiteralResourceName: "profile_photo_edit")
+                    print(error.localizedDescription)
+                } else {
+                    // Data for "profilephotos/\(uid).jpg" is returned
+                    // print("data: \(data)")
+                    userProfile.profilePhoto = UIImage(data: data!)!
+                    }
+                print("leave")
+                dispatch.leave()
+            }
+        }
+    }
     
     func logginFb() {
         socialLogin.attemptLoginFb(completion: { result, error in

@@ -38,7 +38,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
     
     func scene(_ scene: UIScene, continue userActivity: NSUserActivity) {
-        let google = false
+//        let google = false
         guard userActivity.activityType == NSUserActivityTypeBrowsingWeb,
             let urlToOpen = userActivity.webpageURL
             else {
@@ -54,6 +54,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         print("here")
         
         let link = withURL.absoluteString
+        print("google: \(google)")
         if(!facebook && !google){
             print("facebook: \(facebook)")
             print("google: \(google)")
@@ -62,36 +63,29 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                     guard let email = UserDefaults.standard.value(forKey: "Email") as? String else { return false}
                     guard let password = UserDefaults.standard.value(forKey: "Password") as? String else { return false}
                     guard let name = UserDefaults.standard.value(forKey: "Name") as? String else { return false}
-                    let faveDishes = [String: [DocumentReference]]()
+//                    let faveDishes = [String: [DocumentReference]]()
                         
                     let disp = DispatchGroup()
                     disp.enter()
-                    Auth.auth().signIn(withEmail: email, link: link) { (dataResult, error) in
-                        if let error = error {
-                            print("Error \(error.localizedDescription)")
-                            //show alert to user
-                            return
-                        }
-                        else{
-                            guard dataResult != nil else{
-                                return
-                            }
-                            userProfile.emailAddress = email
-                            userProfile.fullName = name
-                            userProfile.userId = Auth.auth().currentUser!.uid
-                            
-        //                    userProfile.profilePhotoURL = result.user.photoURL!.absoluteString
-                            print("UserProfile: \(userProfile.userId)")
-                            disp.leave()
-                        }
+                Auth.auth().createUser(withEmail: email, password: password) { (res, err) in
+                    if(err != nil){
+                        print(err.debugDescription)
+                    }else{
+                        print(res?.additionalUserInfo)
+                        userProfile.emailAddress = email
+                        userProfile.fullName = name
+                        print("userid: \(Auth.auth().currentUser!.uid)")
+                        userProfile.userId = Auth.auth().currentUser!.uid
+                        disp.leave()
                     }
+                }
                     disp.notify(queue: .main){
                         let data = [
                                 "uid" : userProfile.userId,
                                  "email" : email,
                                  "password": password,
-                                 "username" : name,
-                                 "FavDishes": faveDishes
+                                 "username" : name
+//                                 "FavDishes": faveDishes
                                  ] as [String : Any]
 
                             Firestore.firestore().collection("User").addDocument(data: data, completion: {
@@ -113,13 +107,57 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         else if (facebook || google){
             //facebook - email sign in and link credential
             print("fb or google in")
+            //            var alrdyExists = false
+            //            let d = DispatchGroup()
+            //            d.enter()
+            //            Auth.auth().fetchSignInMethods(forEmail: email) { (methods, err) in
+            //                if(methods!.isEmpty){
+            //                    return
+            //                }
+            //                else{
+            //                    if(methods!.contains("password")){
+            //                        alrdyExists = true
+            //                        d.leave()
+            //                    }
+            //                }
+            //            }
+            //            d.notify(queue: .main){
+            //                if(alrdyExists){
+            //                    let des = DispatchGroup()
+            //                    var password = ""
+            ////                    password.document("User")
+            //                    des.enter()
+            //                    Firestore.firestore().collection("User").whereField("email", isEqualTo: email).getDocuments { (snap, err) in
+            //                        if err != nil {
+            //                            print(err.debugDescription)
+            //                        }else{
+            //                            for doc in snap!.documents {
+            //                                password = doc.get("password")! as! String
+            //                                des.leave()
+            //                            }
+            //                        }
+            //
+            //                    }
+            //                    des.leave()
+            //                    des.notify(queue: .main){
+            //                        Auth.auth().signIn(withEmail: email, password: password) { (res, err) in
+            //                            if(err == nil){
+            //                                Auth.auth().currentUser?.link(with: credential!, completion: { (res, err) in
+            //
+            //                                })
+            //                            }
+            //                        }
+            //                    }
+            //                }
+
+            //            }
             if(Auth.auth().isSignIn(withEmailLink: link)){
                 guard let email = UserDefaults.standard.value(forKey: "Email") as? String else { return false}
                 
 //                guard let name = UserDefaults.standard.value(forKey: "Name") as? String else { return false}
                 
-                let disp = DispatchGroup()
                 
+                let disp = DispatchGroup()
                 disp.enter()
                 Auth.auth().signIn(withEmail: email, link: link) { (dataResult, error) in
                     if let error = error {
@@ -129,8 +167,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                     }
                     else{
                         guard dataResult != nil else{
+                            print("no result")
                             return
                         }
+                        print("result")
+                        
                         userProfile.emailAddress = email
 //                        userProfile.fullName = name
                         userProfile.userId = Auth.auth().currentUser!.uid

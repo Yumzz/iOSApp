@@ -91,19 +91,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
 //                noUser = true
 //            }
 //        }
+        google = true
+        facebook = false
         
-        print("SignUp: \(signUp)")
+        print("google: \(credential.debugDescription)")
         if(signUp){
             //send confirmation email, go to app and link account with credential, save user info, and transition
 //            if(noUser){
-            google = true
-            facebook = false
+            //need to check if account already exists with this email
             let actionCode = ActionCodeSettings()
             actionCode.url = URL(string: "https://yumzzapp.page.link/connect")
             actionCode.handleCodeInApp = true
             actionCode.setIOSBundleID(Bundle.main.bundleIdentifier!)
             self.dispatch.enter()
-            
+            print(email)
             Auth.auth().sendSignInLink(toEmail: email, actionCodeSettings: actionCode) { (error) in
 //                            self.user.showOnboarding = false
                 if error != nil {
@@ -117,12 +118,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
             }
             self.dispatch.notify(queue: .main){
                 facebook = false
+                google = true
                 signUp = false
                 return
             }
         }
         if(login){
             print("login")
+            google = true
+            facebook = false
             Auth.auth().signIn(with: credential!) { (authResult, error) in
                 //authresult = Promise of UserCredential
                 if let error = error {
@@ -133,16 +137,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
                     userProfile.emailAddress = email
                     userProfile.fullName = fullName
                     userProfile.userId = Auth.auth().currentUser!.uid
-                    Auth.auth().fetchSignInMethods(forEmail: userProfile.emailAddress) { (methods, error) in
-                        if(methods!.count > 1){
-                            self.dispatch.enter()
-                            userProfile.getProfilePhoto(dispatch: self.dispatch)
-                            self.dispatch.notify(queue: .main){
-                                NotificationCenter.default.post(name: Notification.Name(rawValue: "NoMoreOnboard"), object: nil)
-                                return
+//                    Auth.auth().fetchSignInMethods(forEmail: userProfile.emailAddress) { (methods, error) in
+//                        if(methods!.count > 1){
+                    self.dispatch.enter()
+                    userProfile.getProfilePhoto(dispatch: self.dispatch)
+                    self.dispatch.notify(queue: .main){
+                    NotificationCenter.default.post(name: Notification.Name(rawValue: "NoMoreOnboard"), object: nil)
+                    return
                             }
-                        }
-                    }
+//                        }
+//                    }
                 }
                 return
                
@@ -162,6 +166,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
     func sign(_ signIn: GIDSignIn!, didDisconnectWith user: GIDGoogleUser!, withError error: Error!) {
         // Perform any operations when the user disconnects from app here.
         // ...
+        let firebaseAuth = Auth.auth()
+        do {
+              try firebaseAuth.signOut()
+        
+            } catch let signOutError as NSError {
+              print ("Error signing out: %@", signOutError)
+            }
+        self.user.isLogged = false
+        self.user.showOnboarding = true
     }
     
     
@@ -175,6 +188,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         // Called when the user discards a scene session.
         // If any sessions were discarded while the application was not running, this will be called shortly after application:didFinishLaunchingWithOptions.
         // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
+        NSLog("did it")
+    }
+    
+    func applicationWillTerminate(_ application: UIApplication) {
+        NSLog("did it")
+        let firebaseAuth = Auth.auth()
+            do {
+                defer {
+                    userProfile = UserProfile(userId: "", fullName: "", emailAddress: "", profilePicture: "", profPhoto: nil)
+                    NSLog(userProfile.emailAddress)
+                    self.user.isLogged = false
+                    self.user.showOnboarding = true
+                    NSLog("done")
+
+                }
+              try firebaseAuth.signOut()
+        
+            } catch let signOutError as NSError {
+              print ("Error signing out: %@", signOutError)
+            }
+
     }
 
 

@@ -6,8 +6,16 @@
 //  Copyright © 2020 Rohan Tyagi. All rights reserved.
 //
 
+import Foundation
 import SwiftUI
+import FirebaseStorage
 import Firebase
+import FirebaseFirestoreSwift
+import GoogleSignIn
+import FBSDKLoginKit
+import FBSDKCoreKit
+import AuthenticationServices
+import CryptoKit
 
 struct AccountProfileLoginView: View {
     
@@ -21,6 +29,8 @@ struct AccountProfileLoginView: View {
     @State var isFocused = false
     
     @State var showAlert = false
+    
+    @State private var showForgotPassword = false
     
     @ObservedObject var loginVM = LoginViewModel()
     
@@ -39,16 +49,16 @@ struct AccountProfileLoginView: View {
         VStack(spacing: 24) {
             
             Spacer()
-            
+
             Text("Log in to synchronize your preferences and keep track of your past orders")
                 .bold()
                 .fixedSize(horizontal: false, vertical: true)
                 .font(.subheadline)
-            
-            
-            
+
+
+
             VStack {
-                
+
                 HStack {
                     Image(systemName: "person.crop.circle.fill")
                         .foregroundColor(Color(#colorLiteral(red: 0.6549019608, green: 0.7137254902, blue: 0.862745098, alpha: 1)))
@@ -57,7 +67,7 @@ struct AccountProfileLoginView: View {
                         .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
                         .shadow(color: Color(#colorLiteral(red: 0.1647058824, green: 0.1882352941, blue: 0.3882352941, alpha: 1)).opacity(0.1), radius: 5, x: 0, y: 5)
                         .padding(.leading)
-                    
+
                     TextField("Email".uppercased(), text: $email)
                         .font(.subheadline)
                         .padding(.leading)
@@ -68,7 +78,7 @@ struct AccountProfileLoginView: View {
                             self.isFocused = true
                     }
                 }
-                
+
                 Divider().padding(.leading, 80)
                 
                 HStack {
@@ -79,7 +89,7 @@ struct AccountProfileLoginView: View {
                         .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
                         .shadow(color: Color(#colorLiteral(red: 0.1647058824, green: 0.1882352941, blue: 0.3882352941, alpha: 1)).opacity(0.1), radius: 5, x: 0, y: 5)
                         .padding(.leading)
-                    
+
                     SecureField("Password".uppercased(), text: $password)
                         .font(.subheadline)
                         .padding(.leading)
@@ -94,14 +104,20 @@ struct AccountProfileLoginView: View {
             .background(Color(UIColor.systemGray6))
             .clipShape(RoundedRectangle(cornerRadius: 30, style: .continuous))
             .shadow(color: Color.black.opacity(0.15), radius: 20, x: 0, y: 20)
-            
+
             Button(action: {
                 let dispatch = DispatchGroup()
+                dispatch.enter()
                 self.loginVM.loginUser(email: self.email, password: self.password, disp: dispatch)
-                if(self.loginVM.alertMessage != ""){
-                    self.alertMessage = self.loginVM.alertMessage
-                    self.alertTitle = self.loginVM.alertTitle
-                    self.showAlert.toggle()
+                dispatch.notify(queue: .main){
+                    if(self.loginVM.alertMessage != ""){
+                        self.alertMessage = self.loginVM.alertMessage
+                        self.alertTitle = self.loginVM.alertTitle
+                        self.showAlert.toggle()
+                    }
+                    else{
+                        self.user.isLogged = true
+                    }
                 }
             }) {
                 Text("Log in")
@@ -112,21 +128,22 @@ struct AccountProfileLoginView: View {
                     .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
                     .shadow(color: Color(#colorLiteral(red: 0, green: 0.7529411765, blue: 1, alpha: 1)).opacity(0.2), radius: 20, x: 0, y: 20)
             }
-            
-            
+
+
             Spacer()
-            
+
             Text("Don't have an account?")
                 .fixedSize(horizontal: false, vertical: true)
                 .font(.subheadline)
-            
+
             Button(action: {
+                self.user.showOnboarding = true
             }, label: {
                 NavigationLink(destination: SignUpView()) {
                     BlackButton(strLabel: "SIGN UP")
                 }
             })
-            
+
             Spacer()
             
         }
@@ -141,8 +158,10 @@ struct AccountProfileLoginView: View {
         .alert(isPresented: $showAlert, content: { self.alert })
         
     }
+        
     
 }
+
 
 struct Loginv_Previews: PreviewProvider {
     static var previews: some View {

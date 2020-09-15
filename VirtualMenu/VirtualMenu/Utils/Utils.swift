@@ -14,7 +14,7 @@ import PromiseKit
 
 struct Utils {
     
-    func uploadUserProfileImage(profileImage: UIImage) -> Promise<()> {
+    func uploadUserProfileImage(profileImage: UIImage, dispatch: DispatchGroup? = nil) -> Promise<()> {
         return Promise<()> { seal -> Void in
             
             // Use the auto id for the image name
@@ -102,6 +102,9 @@ struct Utils {
                     // Observe the upload status
                     uploadTask.observe(.success) { (snapshot) in
                         print("uploaded")
+                        if(dispatch != nil){
+                            dispatch!.leave()
+                        }
                     }
             }
         }

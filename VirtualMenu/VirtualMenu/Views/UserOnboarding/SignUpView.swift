@@ -76,10 +76,19 @@ struct SignUpView: View {
                     Button(action: {
                         let dispatch = DispatchGroup()
                         dispatch.enter()
-                        self.signUpVM.signUpUser(email: self.email, name: self.name, password: self.password, dispatch: dispatch)
-                        self.alertMessage = self.signUpVM.alertMessage
-                        self.alertTitle = self.signUpVM.alertTitle
-                        self.showAlert.toggle()
+                        google = false
+                        facebook = false
+                        print("sign up")
+                        let message = self.signUpVM.signUpUser(email: self.email, name: self.name, password: self.password, dispatch: dispatch)
+                        dispatch.notify(queue: .main){
+                            self.name = ""
+                            self.email = ""
+                            self.password = ""
+                            self.alertTitle = message.components(separatedBy: "|")[0]
+                            self.alertMessage = message.components(separatedBy: "|")[1]
+                            self.showAlert.toggle()
+                            
+                        }
                     })
                     {
                         NavigationLink(destination: AppView(), isActive: $createdAccount){
@@ -109,7 +118,14 @@ struct SignUpView: View {
                     
                     HStack{
                         Button(action: {
-                            self.signUpVM.socialLogin.attemptSignUpGoogle()
+                            let dispatch = DispatchGroup()
+                            dispatch.enter()
+                            self.signUpVM.socialLogin.attemptSignUpGoogle(dis: dispatch)
+                            dispatch.notify(queue: .main){
+                                self.alertMessage = "A confirmation email was sent to the email associated with the provided google account. Please click the link to sign in!"
+                                self.alertTitle = "Email Sent!"
+                                self.showAlert.toggle()
+                            }
                         }){
                             SocialMediaButton(imgName: "continue_with_google")
                             .frame(width: 100, height: 50)
@@ -122,7 +138,14 @@ struct SignUpView: View {
                         }
 
                         Button(action: {
-                            self.signUpVM.signUpFb()
+                            let dispatch = DispatchGroup()
+                            dispatch.enter()
+                            self.signUpVM.signUpFb(dispatch: dispatch)
+                            dispatch.notify(queue: .main){
+                                self.alertTitle = self.signUpVM.alertTitle
+                                self.alertMessage = self.signUpVM.alertMessage
+                                self.showAlert.toggle()
+                            }
                         }){
                             SocialMediaButton(imgName: "continue_with_facebook")
                             .frame(width: 100, height: 50)

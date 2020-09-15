@@ -14,33 +14,24 @@ class AccountProfileViewModel: ObservableObject {
     
     @State var signedOut = false
 
-    func changePhoto(inputImage: UIImage?){
-        guard let inputImage = inputImage else { return }
-        
-        //image = Image(uiImage: inputImage.circle!)
-        
-        userProfile.profilePhoto = inputImage
-        
-        let prom = Utils().uploadUserProfileImage(profileImage: inputImage)
-        
-        if(prom.result != nil){
-            return
-        }else{
-            print(prom.error!)
-        }
-    }
+//    func changePhoto(inputImage: UIImage?){
+//        guard let inputImage = inputImage else { return }
+//        
+//        //image = Image(uiImage: inputImage.circle!)
+//        
+//        userProfile.profilePhoto = inputImage
+//        
+//        let prom = Utils().uploadUserProfileImage(profileImage: inputImage)
+//        
+//        if(prom.result != nil){
+//            return
+//        }else{
+//            print(prom.error!)
+//        }
+//    }
     
-    func signOut(dispatch: DispatchGroup){
-        let firebaseAuth = Auth.auth()
-        do {
-            try firebaseAuth.signOut()
-            signedOut = true
-            dispatch.leave()
-
-        } catch let signOutError as NSError {
-            signedOut = false
-            print ("Error signing out: %@", signOutError)
-        }
+    func ridProfile(){
+        userProfile = UserProfile(userId: "", fullName: "", emailAddress: "", profilePicture: "", profPhoto: nil)
     }
     
 }
