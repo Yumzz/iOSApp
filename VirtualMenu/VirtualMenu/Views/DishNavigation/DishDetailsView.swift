@@ -43,7 +43,7 @@ struct DishDetailsView: View {
                 Text("\(dish.name)")
                     .font(.title)
                     .font(.custom("Open Sans", size: 32))
-                FBURLImage(url: dish.coverPhotoURL, imageAspectRatio: .fill, imageWidth: 300, imageHeight: UIScreen.main.bounds.height/4, owndimen: true)
+                FBURLImage(url: dish.coverPhotoURL, imageAspectRatio: .fill, imageWidth: 300, imageHeight: UIScreen.main.bounds.height/4)
                     .cornerRadius(10)
                 Text("Price: " + DishFB.formatPrice(price: dish.price))
                     .foregroundColor(.black)

@@ -45,7 +45,7 @@ struct DishReviewsView: View {
             }
             else{
                 HStack{
-                    FBURLImage(url: dish.coverPhotoURL, imageAspectRatio: .fill, imageWidth: 200, imageHeight: 100, owndimen: true)
+                    FBURLImage(url: dish.coverPhotoURL, imageAspectRatio: .fill, imageWidth: 200, imageHeight: 100)
                         .cornerRadius(10)
                     Text("\(self.dish.name)")
                         .font(.custom("Open Sans", size: 32))
