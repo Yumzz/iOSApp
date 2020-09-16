@@ -39,10 +39,19 @@ struct RestaurantCard: View {
         Group {
             HStack(alignment: .center, spacing: 20) {
 
-                if urlImage != nil {
-                    urlImage!
-                        .frame(alignment: .leading)
+                if urlImage == nil {
+                    Image(systemName: "square.fill")
+                        .renderingMode(.original)
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 88, height: 88, alignment: .leading)
                 }
+                else {
+                    urlImage!
+                    .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
+                }
+                Spacer()
+                    .frame(maxWidth: 0)
                 
                 VStack(alignment: .leading, spacing: 10) {
                     Text(restaurantName).bold()
@@ -52,11 +61,12 @@ struct RestaurantCard: View {
                     HStack (alignment: .center , spacing: 5) {
                         if self.nbOfRatings > 0 {
 //                            StarRatingView(rating: .constant(Int(Float(self.ratingSum) / Float(self.nbOfRatings))), fontSize: 12)
+                          
                             Image(systemName: "star.fill")
-                                .renderingMode(.original)
                                 .font(.system(size: 12))
+                                .foregroundColor(Color.pink)
                             VStack (alignment: .leading , spacing: 5) {
-                                Text(String(Float(self.ratingSum) / Float(self.nbOfRatings)))
+                                Text(String(format: "%.2f", Double(self.ratingSum) / Double(self.nbOfRatings)))
                                     .foregroundColor(Color.secondary)
                                     .font(.footnote)
                             }
@@ -75,13 +85,12 @@ struct RestaurantCard: View {
                             .foregroundColor(Color.secondary)
                             .font(.footnote)
                     }
-                }
+                }.padding(.leading, 5)
             }
 
             .frame(maxWidth: .infinity, alignment: .leading)
             .frame(height: 70)
             .background(Color(.white))
-
             .cornerRadius(10)
             .shadow(radius: 2)
         }

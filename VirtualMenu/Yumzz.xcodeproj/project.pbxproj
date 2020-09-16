@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		34370CC72500D59A00ECD88B /* MenuSelectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34370CC62500D59A00ECD88B /* MenuSelectionViewModel.swift */; };
+		3482C0CF250C95D300FC362D /* BottomSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3482C0CE250C95D300FC362D /* BottomSheetView.swift */; };
+		34911F02250DEAE400E56916 /* MapViewBottomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34911F01250DEAE400E56916 /* MapViewBottomView.swift */; };
 		34A5D663249BF6DF00E4FE9C /* DishDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34A5D662249BF6DF00E4FE9C /* DishDetailsView.swift */; };
 		34FCE2722507297F00329162 /* RatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34FCE2712507297F00329162 /* RatingView.swift */; };
 		3A13B6E024C1813D0006458B /* ContactUs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A13B6DF24C1813D0006458B /* ContactUs.swift */; };
@@ -44,6 +46,10 @@
 		3A632281250C19B9001427F7 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A632280250C19B9001427F7 /* GradientView.swift */; };
 		3A632283250C1A7D001427F7 /* GradientUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A632282250C1A7D001427F7 /* GradientUIView.swift */; };
 		3A632285250C3531001427F7 /* WhiteBackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A632284250C3531001427F7 /* WhiteBackButton.swift */; };
+		3A632287250D8893001427F7 /* AccountProfGradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A632286250D8893001427F7 /* AccountProfGradientView.swift */; };
+		3A632289250D893B001427F7 /* AccountProfGradientUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A632288250D893B001427F7 /* AccountProfGradientUIView.swift */; };
+		3A63228B250E03CA001427F7 /* BottomMapGradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A63228A250E03CA001427F7 /* BottomMapGradientView.swift */; };
+		3A63228D250E041E001427F7 /* BottomMapGradientUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A63228C250E041E001427F7 /* BottomMapGradientUIView.swift */; };
 		3A6477F224B68D060077EF30 /* UserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6477F124B68D060077EF30 /* UserProfile.swift */; };
 		3A87575324EC910A004ABECC /* PostReviewButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A87575224EC910A004ABECC /* PostReviewButton.swift */; };
 		3A987AD72480350C0021F6E4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A987AD62480350C0021F6E4 /* AppDelegate.swift */; };
@@ -148,6 +154,8 @@
 
 /* Begin PBXFileReference section */
 		34370CC62500D59A00ECD88B /* MenuSelectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuSelectionViewModel.swift; sourceTree = "<group>"; };
+		3482C0CE250C95D300FC362D /* BottomSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetView.swift; sourceTree = "<group>"; };
+		34911F01250DEAE400E56916 /* MapViewBottomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewBottomView.swift; sourceTree = "<group>"; };
 		34A5D662249BF6DF00E4FE9C /* DishDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DishDetailsView.swift; sourceTree = "<group>"; };
 		34FCE2712507297F00329162 /* RatingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingView.swift; sourceTree = "<group>"; };
 		3A13B6DF24C1813D0006458B /* ContactUs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactUs.swift; sourceTree = "<group>"; };
@@ -184,6 +192,10 @@
 		3A632280250C19B9001427F7 /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		3A632282250C1A7D001427F7 /* GradientUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientUIView.swift; sourceTree = "<group>"; };
 		3A632284250C3531001427F7 /* WhiteBackButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhiteBackButton.swift; sourceTree = "<group>"; };
+		3A632286250D8893001427F7 /* AccountProfGradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountProfGradientView.swift; sourceTree = "<group>"; };
+		3A632288250D893B001427F7 /* AccountProfGradientUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountProfGradientUIView.swift; sourceTree = "<group>"; };
+		3A63228A250E03CA001427F7 /* BottomMapGradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomMapGradientView.swift; sourceTree = "<group>"; };
+		3A63228C250E041E001427F7 /* BottomMapGradientUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomMapGradientUIView.swift; sourceTree = "<group>"; };
 		3A6477F124B68D060077EF30 /* UserProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfile.swift; sourceTree = "<group>"; };
 		3A87575224EC910A004ABECC /* PostReviewButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostReviewButton.swift; sourceTree = "<group>"; };
 		3A987AD32480350C0021F6E4 /* Yumzz.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Yumzz.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -401,6 +413,10 @@
 			children = (
 				3A632280250C19B9001427F7 /* GradientView.swift */,
 				3A632282250C1A7D001427F7 /* GradientUIView.swift */,
+				3A632286250D8893001427F7 /* AccountProfGradientView.swift */,
+				3A632288250D893B001427F7 /* AccountProfGradientUIView.swift */,
+				3A63228A250E03CA001427F7 /* BottomMapGradientView.swift */,
+				3A63228C250E041E001427F7 /* BottomMapGradientUIView.swift */,
 			);
 			path = BackgroundViews;
 			sourceTree = "<group>";
@@ -562,6 +578,7 @@
 				3A45AD8C24B3FE8800CF3A8F /* Constants.swift */,
 				3AF9926924A2B95C005446D8 /* InputValidation.swift */,
 				3AA9897524B517F00070FD97 /* Extensions.swift */,
+				3482C0CE250C95D300FC362D /* BottomSheetView.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -660,6 +677,7 @@
 				3A4E2E3524D21CB900C34DD8 /* MapCoordinator */,
 				A7FE250724A841620007E5AD /* RestaurantMapView.swift */,
 				A7FE250524A83C1D0007E5AD /* MapView.swift */,
+				34911F01250DEAE400E56916 /* MapViewBottomView.swift */,
 			);
 			path = RestaurantMapView;
 			sourceTree = "<group>";
@@ -917,6 +935,7 @@
 				3A4A0E72249EB94D0030635E /* ImagePicker.swift in Sources */,
 				3A4E2E3B24D21E8E00C34DD8 /* LocationManager.swift in Sources */,
 				3ABA90F324F640AE00695B06 /* SocialMediaButton.swift in Sources */,
+				34911F02250DEAE400E56916 /* MapViewBottomView.swift in Sources */,
 				3ACAD176250AE56C00B24CEB /* ContactUsViewModel.swift in Sources */,
 				3A45AD8D24B3FE8800CF3A8F /* Constants.swift in Sources */,
 				3ACAD182250AF07100B24CEB /* DishReviewsViewModel.swift in Sources */,
@@ -945,20 +964,24 @@
 				3ACAD174250AE39D00B24CEB /* SuggestRestaurantViewModel.swift in Sources */,
 				A777C3A424D3EC7A009658AA /* UserStore.swift in Sources */,
 				A7FE250824A841620007E5AD /* RestaurantMapView.swift in Sources */,
+				3A63228D250E041E001427F7 /* BottomMapGradientUIView.swift in Sources */,
 				3A632283250C1A7D001427F7 /* GradientUIView.swift in Sources */,
 				3A5633BE24F901E80059B603 /* SignInWithAppleDelegates.swift in Sources */,
 				A7912A2624CF82140052988C /* WhiteButton.swift in Sources */,
+				3482C0CF250C95D300FC362D /* BottomSheetView.swift in Sources */,
 				3A13B6E424C1816B0006458B /* ReportProblem.swift in Sources */,
 				A779ACAA250D4F7400146565 /* ImageCache.swift in Sources */,
 				3ACAD170250ACE2000B24CEB /* LoginViewModel.swift in Sources */,
 				3A4E2E4124D24B1D00C34DD8 /* RestaurantAnnotation.swift in Sources */,
 				A73FD46324919A1300A035AB /* ListDishesView.swift in Sources */,
+				3A632287250D8893001427F7 /* AccountProfGradientView.swift in Sources */,
 				3ABA90F924F71E7C00695B06 /* PinkBackButton.swift in Sources */,
 				3A987AD92480350C0021F6E4 /* SceneDelegate.swift in Sources */,
 				A73B1B6424B1162E00A8C6A8 /* OrderView.swift in Sources */,
 				3AFA234824DCACEA00F90ED8 /* ReviewsButton.swift in Sources */,
 				3A5633C424F902630059B603 /* AuthState.swift in Sources */,
 				3A87575324EC910A004ABECC /* PostReviewButton.swift in Sources */,
+				3A63228B250E03CA001427F7 /* BottomMapGradientView.swift in Sources */,
 				3A5F685824FEFB5000F9B43D /* SaveOrderButton.swift in Sources */,
 				3A530DF324D9769100CBDE28 /* DishCategory.swift in Sources */,
 				3A4E2E3724D21CDC00C34DD8 /* Coordinator.swift in Sources */,
@@ -1001,6 +1024,7 @@
 				3A4A0E70249EB9320030635E /* AccountProfileView.swift in Sources */,
 				3AFA234424DBA42E00F90ED8 /* OrderButton.swift in Sources */,
 				A73B1B6624B116CE00A8C6A8 /* FavoriteView.swift in Sources */,
+				3A632289250D893B001427F7 /* AccountProfGradientUIView.swift in Sources */,
 				3ACAD16E250AC7A600B24CEB /* SignUpViewModel.swift in Sources */,
 				3AF9927524A53AC0005446D8 /* SignUpView.swift in Sources */,
 			);

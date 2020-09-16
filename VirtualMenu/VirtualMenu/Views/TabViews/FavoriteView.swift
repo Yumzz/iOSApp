@@ -10,9 +10,12 @@ import SwiftUI
 
 struct FavoriteView: View {
     var body: some View {
-        VStack{
-            Text("My favorites")
-        }
+        ZStack{
+            VStack{
+                Text("My favorites")
+            }
+        }.background(GradientView().edgesIgnoringSafeArea(.top))
+
     }
 }
 

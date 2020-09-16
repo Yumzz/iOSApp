@@ -15,8 +15,8 @@ struct PostReviewButton: View {
     var body: some View {
         ZStack{
             RoundedRectangle(cornerRadius: 5)
-            .frame(width: 150, height: 55)
-                .foregroundColor(.black)
+            .frame(width: 100, height: 30)
+                .foregroundColor(Color(UIColor().colorFromHex("#F9958D", 1)))
                 .padding(.top, 0)
             Text(buttonText)
                 .foregroundColor(.white)

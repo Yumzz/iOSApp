@@ -74,7 +74,9 @@ struct ContactUs: View {
                     Alert(title: Text("Thank you for submitting"), message: Text("\(self.alertMessage)"), dismissButton: .default(Text("OK")))
                 }
                 Spacer()
+                
             }
+            
             .navigationBarTitle("")
             .navigationBarHidden(true)
 //            .blur(radius: self.show ? 15 : 0)
