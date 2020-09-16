@@ -58,6 +58,12 @@ struct AccountProfileView: View {
     
     var body: some View {
         ZStack{
+            if self.show{
+                GeometryReader{_ in
+                    Loader()
+                }.background(Color.black.opacity(0.45))
+            }
+            else{
             if user.isLogged {
                 VStack{
                     Spacer().frame(height: 20)
@@ -68,6 +74,11 @@ struct AccountProfileView: View {
                                     .resizable()
                                     .aspectRatio(contentMode: .fit)
                                     .frame(width: 80, height: 80)
+                                Button(action: {
+                                    self.showingImagePicker.toggle()
+                                }, label: {
+                                    Text("Edit Profile Photo")
+                                })
                             }
                             else{
                                 Image(uiImage: userProfile.profilePhoto!.circle!)
@@ -82,7 +93,6 @@ struct AccountProfileView: View {
                                 Spacer().frame(height: 15)
                                 Text(userProfile.fullName)
                                     .font(.custom("Open Sans-SemiBold", size: 30))
-                                
                             }
                         }
                         else{
@@ -125,16 +135,20 @@ struct AccountProfileView: View {
                         }
                         
                         Button(action: {
-                            let dispatch = DispatchGroup()
-                            dispatch.enter()
-                            self.accountVM.signOut(dispatch: dispatch)
-                            dispatch.notify(queue: .main){
-                                if(self.accountVM.signedOut){
-                                    print("signed out")
+                            self.show = true
+                            let firebaseAuth = Auth.auth()
+                            do {
+                                defer {
+                                    NSLog(Auth.auth().currentUser?.email! ?? "no user" )
+                                    self.accountVM.ridProfile()
+                                    NSLog(userProfile.emailAddress)
                                     self.user.isLogged = false
-                                    UserDefaults.standard.set(false, forKey: "isLogged")
-                                    self.user.showOnboarding = true
+                                    self.show = false
                                 }
+                              try firebaseAuth.signOut()
+                        
+                            } catch let signOutError as NSError {
+                              print ("Error signing out: %@", signOutError)
                             }
                         }){
                             Text("Sign Out")
@@ -159,6 +173,15 @@ struct AccountProfileView: View {
                 }
                 .onAppear(){
                     self.isNavigationBarHidden = true
+                    print("logged: \(self.user.isLogged)")
+                    if(self.image == nil){
+                        print("image: nill")
+                        print(userProfile.profilePhoto?.description)
+                        print(userProfile.userId)
+                    }
+                    else{
+                        print("image: not nil")
+                    }
                     
                 }
                 .onDisappear(){
@@ -169,23 +192,35 @@ struct AccountProfileView: View {
                 AccountProfileLoginView()
                     .navigationBarTitle("Log In to your account")
             }
+            }
         }.background(AccountProfGradientView().edgesIgnoringSafeArea(.all))
+        
         
     }
     
     func changePhoto(){
-        guard let inputImage = inputImage else { return }
-        
-        //image = Image(uiImage: inputImage.circle!)
-        
-        userProfile.profilePhoto = inputImage
-        
-        let prom = Utils().uploadUserProfileImage(profileImage: inputImage)
-        
-        if(prom.result != nil){
-            return
-        }else{
-            print(prom.error!)
+        if(inputImage != nil){
+            self.show = true
+            guard let inputImage = inputImage else { return }
+            
+            //image = Image(uiImage: inputImage.circle!)
+            
+            userProfile.profilePhoto = inputImage
+            
+            let dispatch = DispatchGroup()
+            
+            dispatch.enter()
+            
+            let prom = Utils().uploadUserProfileImage(profileImage: inputImage, dispatch: dispatch)
+                                
+            dispatch.notify(queue: .main){
+                if(prom.result != nil){
+                    return
+                }else{
+                    print(prom.result.debugDescription)
+                }
+                self.show = false
+            }
         }
     }
     

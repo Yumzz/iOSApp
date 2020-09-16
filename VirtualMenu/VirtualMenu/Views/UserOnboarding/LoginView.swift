@@ -37,7 +37,9 @@ struct LoginView: View {
     @State var loggedIn = false
     @State var showGoogle = false
     @State var showFB = false
-            
+    
+
+
     @EnvironmentObject var user: UserStore
     @ObservedObject var loginVM = LoginViewModel()
     
@@ -81,23 +83,35 @@ struct LoginView: View {
                     Button(action: {
                         let dispatch = DispatchGroup()
                         dispatch.enter()
+                        //do valid inputs and make move current user != nil if to account profile view
                         self.loginVM.loginUser(email: self.email, password: self.password, disp: dispatch)
-                        if(self.loginVM.alertMessage != ""){
-                            self.alertMessage = self.loginVM.alertMessage
-                            self.alertTitle = self.loginVM.alertTitle
-                            self.showAlert.toggle()
-                        }else{
-                            self.user.isLogged = true
-                            UserDefaults.standard.set(true, forKey: "isLogged")
-                            print(self.user.showOnboarding)
-                            self.user.showOnboarding = false
-                            print(self.user.showOnboarding)
-                            UserDefaults.standard.set(false, forKey: "showOnboarding")
+                        dispatch.notify(queue: .main){
+                            if(self.loginVM.alertMessage != ""){
+                                self.alertMsg = self.loginVM.alertMessage
+                                self.alertTitle = self.loginVM.alertTitle
+                                self.showAlert.toggle()
+                            }else{
+                                if(Auth.auth().currentUser != nil){
+                                    self.user.isLogged = true
+                                    UserDefaults.standard.set(true, forKey: "isLogged")
+                                    print(self.user.showOnboarding)
+                                    self.user.showOnboarding = false
+                                    print(self.user.showOnboarding)
+                                    UserDefaults.standard.set(false, forKey: "showOnboarding")
+                                }else{
+                                    print(userProfile.emailAddress)
+                                    self.alertMsg = "There is no such user"
+                                    self.alertTitle = "No User"
+                                    self.showAlert.toggle()
+                                }
+                            
+                            }
                         }
                     }) {
                         CoralButton(strLabel: "Sign in")
-                        
                     }
+                
+                
                     
                     VStack(alignment: .trailing) {
                         HStack {
@@ -164,11 +178,32 @@ struct LoginView: View {
                             SocialMediaButton(imgName: "continue_with_facebook")
                             .frame(width: 100, height: 50)
                         }
-                    }
+                }
                 
                 VStack(spacing: 20){
                     Button(action: {
-                            self.user.showOnboarding = false
+                        self.user.showOnboarding = false
+                        let firebaseAuth = Auth.auth()
+                        do {
+                            defer{
+                                self.loginVM.ridProfile()
+                                Auth.auth().signInAnonymously() { (authResult, error) in
+                                  // ...
+                                    print("anonymous")
+                                    if(error != nil){
+                                        print(error.debugDescription)
+                                    }
+                                    else{
+                                        print(authResult?.additionalUserInfo)
+                                    }
+                                }
+                            }
+                              try firebaseAuth.signOut()
+                        
+                            } catch let signOutError as NSError {
+                              print ("Error signing out: %@", signOutError)
+                            }
+                        self.user.isLogged = false
                     }){
                         GuestButton(strLabel: "Sign in as a Guest")
                     }
@@ -194,7 +229,7 @@ struct LoginView: View {
         }else{
                 AppView()
             }
-            }
+        }
         .onAppear(perform: {
             self.email = ""
             self.password = ""
@@ -244,7 +279,7 @@ struct LoginView: View {
                     print("no succ")
 
                     //send alert
-                    self.alertMessage = "\(error.localizedDescription)"
+                    self.alertMsg = "\(error.localizedDescription)"
                     self.alertTitle = "Error!"
     //                dispatch.leave()
                 }

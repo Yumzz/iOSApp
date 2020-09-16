@@ -8,6 +8,7 @@
 
 import SwiftUI
 import MapKit
+import Firebase
 
 struct RestaurantMapView: View {
     @State var strSearch: String = ""
@@ -44,10 +45,8 @@ struct RestaurantMapView: View {
                             
                             Text("List")
                                 .foregroundColor(Color(.white))
-                                .padding(8)
                                 .background(Color(UIColor().colorFromHex("#F88379", 1)))
                                 .cornerRadius(10.0)
-                                .padding(.leading)
                         }
 //                            RestaurantSearchbarView(strSearch: self.$strSearch)
 //                                .padding([.leading])
@@ -63,11 +62,10 @@ struct RestaurantMapView: View {
                         }){
                             Text("Near Me")
                             .foregroundColor(Color(.white))
-                            .padding(8)
                             .background(Color(UIColor().colorFromHex("#F88379", 1)))
                             .cornerRadius(10.0)
-                            .padding(.leading)
-                        }
+
+                        }.padding(.leading, UIScreen.main.bounds.width/1.3)
                         Spacer().frame(width: 10)
 
                     }
@@ -96,12 +94,23 @@ struct RestaurantMapView: View {
                         
                     .frame(maxWidth: .infinity)
                     .padding(.bottom, 25)
+
+//                     if (self.click.isClicked) {
+//                         BottomSheetView(isOpen: self.$bottomSheetShown, maxHeight: geometry.size.height*0.8) {
+//                             if self.click.restChosen != nil {
+//                                 MapViewBottomView(restChosen: self.click.restChosen!)
+//                             }
+//                         }
+//                     }
+                    
+
                     
                     BottomSheetView(isOpen: self.$bottomSheetOpen, display: self.$click.isClicked, maxHeight: geometry.size.height*0.8) {
                         if self.click.restChosen != nil {
                             MapViewBottomView(restChosen: self.click.restChosen!)
                         }
                     }
+                  
 //                    .overlay(
 //                        BottomSheetModal(display: self.$click.isClicked, backgroundColor: .constant(Color(UIColor().colorFromHex("#FFFFFF", 1))), rectangleColor: .constant(Color(UIColor().colorFromHex("#656565", 1)))) {
 //                            MapViewBottomView(restChosen: self.click.restChosen!)
@@ -113,6 +122,9 @@ struct RestaurantMapView: View {
         .navigationBarTitle("Map")
         .navigationBarHidden(self.isNavigationBarHidden)
         .onAppear(){
+            Auth.auth().fetchSignInMethods(forEmail: userProfile.emailAddress) { (methods, err) in
+                print(methods)
+            }
             self.isNavigationBarHidden = true
             let disp = DispatchGroup()
             if(self.restMapVM.allRests.isEmpty){

@@ -79,13 +79,21 @@ class SignUpViewModel: ObservableObject {
     }
 
 
-    func signUpUser(email: String, name: String, password: String, dispatch: DispatchGroup){
+    func signUpUser(email: String, name: String, password: String, dispatch: DispatchGroup) -> String{
+        print("here")
+        if(!email.isValidEmail){
+            return "Error" + "|" + "Not valid email!"
+        }
+        if(!password.isValidPassword){
+            return "Error" + "|" + "Not valid email!"
+        }
         let actionCode = ActionCodeSettings()
         actionCode.url = URL(string: "https://yumzzapp.page.link/connect")
         actionCode.handleCodeInApp = true
         actionCode.setIOSBundleID(Bundle.main.bundleIdentifier!)
         Auth.auth().sendSignInLink(toEmail: email, actionCodeSettings: actionCode) { (error) in
 //                            self.user.showOnboarding = false
+            
             if let error = error {
                 dispatch.leave()
                 dispatch.notify(queue: .main){
@@ -97,25 +105,34 @@ class SignUpViewModel: ObservableObject {
             UserDefaults.standard.set(email, forKey: "Email")
             UserDefaults.standard.set(name, forKey: "Name")
             UserDefaults.standard.set(password, forKey: "Password")
+            print("set")
+            self.alertMessage = "A confirmation email was sent to \(email). Please click the link to sign in!"
+            self.alertTitle = "Email Sent!"
             dispatch.leave()
-            dispatch.notify(queue: .main){
-                self.alertMessage = "A confirmation email was sent to \(email). Please click the link to sign in!"
-                self.alertTitle = "Email Sent!"
-            }
+            print("leave")
+            
         }
+        print("return: \(self.alertTitle)")
+        return "A confirmation email was sent to \(email). Please click the link to sign in!" + "|" + "Email Sent!"
     }
     
-   func signUpFb() {
-            socialLogin.attemptLoginFb(completion: { result, error in
+    func signUpFb(dispatch: DispatchGroup) {
+        facebook = true
+        google = false
+            socialLogin.attemptSignUpFb(completion: { result, error in
                 if(error == nil){
-                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: "NoMoreOnboard"), object: nil)
+                    print("attempt result")
+                    self.alertMessage = "A confirmation email was sent to the email associated with the provided facebook account. Please click the link to sign in!"
+                    self.alertTitle = "Email Sent!"
+                    dispatch.leave()
+                    
                 }else{
                     //create alert saying no account associated with this FB profile. Please use sign up page
                     self.alertMessage = "\(error!.localizedDescription)"
                     self.alertTitle = "Error!"
+                    dispatch.leave()
+
                 }
-                facebook = false
-                signUp = false
             })
         }
         
@@ -172,20 +189,23 @@ class SignUpViewModel: ObservableObject {
             func updateUIView(_ uiView: UIView, context: UIViewRepresentableContext<SocialLogin>) {
             }
             
-            func attemptSignUpGoogle() {
+            func attemptSignUpGoogle(dis: DispatchGroup) {
                 signUp = true
                 login = false
                 GIDSignIn.sharedInstance()?.presentingViewController = UIApplication.shared.windows.last?.rootViewController
                 GIDSignIn.sharedInstance()?.signIn()
+                dis.leave()
             }
             
-            func attemptLoginFb(completion: @escaping (_ result: LoginManagerLoginResult?, _ error: Error?) -> Void) {
+            func attemptSignUpFb(completion: @escaping (_ result: LoginManagerLoginResult?, _ error: Error?) -> Void) {
+                print("attempt signup")
                 let fbLoginManager: LoginManager = LoginManager()
                 fbLoginManager.logOut()
                 facebook = true
                 google = false
                 signUp = true
                 login = false
+                print("login")
                 fbLoginManager.logIn(permissions: ["email"], from: UIApplication.shared.windows.last?.rootViewController) { (result, error) -> Void in
                     // print("RESULT: '\(result)' ")
                     if error != nil {

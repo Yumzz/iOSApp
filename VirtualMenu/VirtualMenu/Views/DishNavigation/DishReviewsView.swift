@@ -78,7 +78,6 @@ struct DishReviewsView: View {
                                         .cornerRadius(10)
                                 }
                             }.frame(width: 330, height: 320, alignment: .center).cornerRadius(10)
-                            
                         }
                     }
                     HStack{
