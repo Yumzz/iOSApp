@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		34111054252262F10084975A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34111053252262F10084975A /* AppDelegate.swift */; };
+		34111056252262F10084975A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34111055252262F10084975A /* SceneDelegate.swift */; };
+		34111058252262F10084975A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34111057252262F10084975A /* ContentView.swift */; };
+		3411105A252262F20084975A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 34111059252262F20084975A /* Assets.xcassets */; };
+		3411105D252262F20084975A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3411105C252262F20084975A /* Preview Assets.xcassets */; };
+		34111060252262F20084975A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3411105E252262F20084975A /* LaunchScreen.storyboard */; };
+		34111065252262F20084975A /* YumzzAppClip.app in Embed App Clips */ = {isa = PBXBuildFile; fileRef = 34111051252262F10084975A /* YumzzAppClip.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		34370CC72500D59A00ECD88B /* MenuSelectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34370CC62500D59A00ECD88B /* MenuSelectionViewModel.swift */; };
 		3482C0CF250C95D300FC362D /* BottomSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3482C0CE250C95D300FC362D /* BottomSheetView.swift */; };
 		34911F02250DEAE400E56916 /* MapViewBottomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34911F01250DEAE400E56916 /* MapViewBottomView.swift */; };
@@ -136,6 +143,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		34111063252262F20084975A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3A987ACB2480350C0021F6E4 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 34111050252262F10084975A;
+			remoteInfo = YumzzAppClip;
+		};
 		3A987AEA2480350E0021F6E4 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 3A987ACB2480350C0021F6E4 /* Project object */;
@@ -152,7 +166,30 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		34111066252262F20084975A /* Embed App Clips */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(CONTENTS_FOLDER_PATH)/AppClips";
+			dstSubfolderSpec = 16;
+			files = (
+				34111065252262F20084975A /* YumzzAppClip.app in Embed App Clips */,
+			);
+			name = "Embed App Clips";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		34111051252262F10084975A /* YumzzAppClip.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YumzzAppClip.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		34111053252262F10084975A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		34111055252262F10084975A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		34111057252262F10084975A /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		34111059252262F20084975A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		3411105C252262F20084975A /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		3411105F252262F20084975A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		34111061252262F20084975A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		34111062252262F20084975A /* YumzzAppClip.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = YumzzAppClip.entitlements; sourceTree = "<group>"; };
 		34370CC62500D59A00ECD88B /* MenuSelectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuSelectionViewModel.swift; sourceTree = "<group>"; };
 		3482C0CE250C95D300FC362D /* BottomSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetView.swift; sourceTree = "<group>"; };
 		34911F01250DEAE400E56916 /* MapViewBottomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewBottomView.swift; sourceTree = "<group>"; };
@@ -285,6 +322,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		3411104E252262F10084975A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		3A987AD02480350C0021F6E4 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -313,6 +357,29 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		34111052252262F10084975A /* YumzzAppClip */ = {
+			isa = PBXGroup;
+			children = (
+				34111053252262F10084975A /* AppDelegate.swift */,
+				34111055252262F10084975A /* SceneDelegate.swift */,
+				34111057252262F10084975A /* ContentView.swift */,
+				34111059252262F20084975A /* Assets.xcassets */,
+				3411105E252262F20084975A /* LaunchScreen.storyboard */,
+				34111061252262F20084975A /* Info.plist */,
+				34111062252262F20084975A /* YumzzAppClip.entitlements */,
+				3411105B252262F20084975A /* Preview Content */,
+			);
+			path = YumzzAppClip;
+			sourceTree = "<group>";
+		};
+		3411105B252262F20084975A /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				3411105C252262F20084975A /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
 		3A13B6DE24C181150006458B /* AccountProfileViews */ = {
 			isa = PBXGroup;
 			children = (
@@ -427,6 +494,7 @@
 				3A987AD52480350C0021F6E4 /* VirtualMenu */,
 				3A987AEC2480350E0021F6E4 /* VirtualMenuTests */,
 				3A987AF72480350E0021F6E4 /* VirtualMenuUITests */,
+				34111052252262F10084975A /* YumzzAppClip */,
 				3A987AD42480350C0021F6E4 /* Products */,
 				7D43EDA24CF9AA630D4BB85D /* Pods */,
 				72573513B3F6B92305A269F4 /* Frameworks */,
@@ -440,6 +508,7 @@
 				3A987AD32480350C0021F6E4 /* Yumzz.app */,
 				3A987AE92480350E0021F6E4 /* VirtualMenuTests.xctest */,
 				3A987AF42480350E0021F6E4 /* VirtualMenuUITests.xctest */,
+				34111051252262F10084975A /* YumzzAppClip.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -715,6 +784,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		34111050252262F10084975A /* YumzzAppClip */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 34111069252262F20084975A /* Build configuration list for PBXNativeTarget "YumzzAppClip" */;
+			buildPhases = (
+				3411104D252262F10084975A /* Sources */,
+				3411104E252262F10084975A /* Frameworks */,
+				3411104F252262F10084975A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = YumzzAppClip;
+			productName = YumzzAppClip;
+			productReference = 34111051252262F10084975A /* YumzzAppClip.app */;
+			productType = "com.apple.product-type.application.on-demand-install-capable";
+		};
 		3A987AD22480350C0021F6E4 /* VirtualMenu */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 3A987AFD2480350E0021F6E4 /* Build configuration list for PBXNativeTarget "VirtualMenu" */;
@@ -725,10 +811,12 @@
 				3A987AD12480350C0021F6E4 /* Resources */,
 				06965020640BF12DE54DB5EE /* [CP] Embed Pods Frameworks */,
 				3CAE63D31637176FE7329664 /* [CP] Copy Pods Resources */,
+				34111066252262F20084975A /* Embed App Clips */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				34111064252262F20084975A /* PBXTargetDependency */,
 			);
 			name = VirtualMenu;
 			packageProductDependencies = (
@@ -781,10 +869,13 @@
 		3A987ACB2480350C0021F6E4 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1130;
+				LastSwiftUpdateCheck = 1200;
 				LastUpgradeCheck = 1130;
 				ORGANIZATIONNAME = "Rohan Tyagi";
 				TargetAttributes = {
+					34111050252262F10084975A = {
+						CreatedOnToolsVersion = 12.0.1;
+					};
 					3A987AD22480350C0021F6E4 = {
 						CreatedOnToolsVersion = 11.3.1;
 					};
@@ -817,11 +908,22 @@
 				3A987AD22480350C0021F6E4 /* VirtualMenu */,
 				3A987AE82480350E0021F6E4 /* VirtualMenuTests */,
 				3A987AF32480350E0021F6E4 /* VirtualMenuUITests */,
+				34111050252262F10084975A /* YumzzAppClip */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		3411104F252262F10084975A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				34111060252262F20084975A /* LaunchScreen.storyboard in Resources */,
+				3411105D252262F20084975A /* Preview Assets.xcassets in Resources */,
+				3411105A252262F20084975A /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		3A987AD12480350C0021F6E4 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -925,6 +1027,16 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		3411104D252262F10084975A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				34111054252262F10084975A /* AppDelegate.swift in Sources */,
+				34111056252262F10084975A /* SceneDelegate.swift in Sources */,
+				34111058252262F10084975A /* ContentView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		3A987ACF2480350C0021F6E4 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1051,6 +1163,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		34111064252262F20084975A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 34111050252262F10084975A /* YumzzAppClip */;
+			targetProxy = 34111063252262F20084975A /* PBXContainerItemProxy */;
+		};
 		3A987AEB2480350E0021F6E4 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 3A987AD22480350C0021F6E4 /* VirtualMenu */;
@@ -1064,6 +1181,14 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		3411105E252262F20084975A /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3411105F252262F20084975A /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
 		3A987AE12480350E0021F6E4 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -1075,6 +1200,52 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		34111067252262F20084975A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CODE_SIGN_ENTITLEMENTS = YumzzAppClip/YumzzAppClip.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_ASSET_PATHS = "\"YumzzAppClip/Preview Content\"";
+				DEVELOPMENT_TEAM = 3VUUCS34BU;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = YumzzAppClip/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.ARMenu.VirtualMenu.Clip;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		34111068252262F20084975A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CODE_SIGN_ENTITLEMENTS = YumzzAppClip/YumzzAppClip.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_ASSET_PATHS = "\"YumzzAppClip/Preview Content\"";
+				DEVELOPMENT_TEAM = 3VUUCS34BU;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = YumzzAppClip/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.ARMenu.VirtualMenu.Clip;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		3A987AFB2480350E0021F6E4 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1193,6 +1364,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = C434A62A431113BD967B4BFB /* Pods-VirtualMenu.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = VirtualMenu/VirtualMenu.entitlements;
 				CODE_SIGN_STYLE = Automatic;
@@ -1216,6 +1388,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 5282E935E7A89EA0ACB48A8D /* Pods-VirtualMenu.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = VirtualMenu/VirtualMenu.entitlements;
 				CODE_SIGN_STYLE = Automatic;
@@ -1322,6 +1495,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		34111069252262F20084975A /* Build configuration list for PBXNativeTarget "YumzzAppClip" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				34111067252262F20084975A /* Debug */,
+				34111068252262F20084975A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		3A987ACE2480350C0021F6E4 /* Build configuration list for PBXProject "Yumzz" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
