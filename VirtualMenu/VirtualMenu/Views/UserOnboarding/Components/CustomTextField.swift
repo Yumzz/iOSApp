@@ -10,6 +10,7 @@ import SwiftUI
 
 struct CustomTextField: View {
     
+    var field: String
     var strLabel: String
     
     @Binding var strField: String
@@ -18,7 +19,11 @@ struct CustomTextField: View {
     var uiKeyboardType: UIKeyboardType
     
     var body: some View {
+        
         VStack (spacing: 0) {
+            Text(field)
+                .padding(.trailing, (UIScreen.main.bounds.width * 40) / 55)
+                .font(.system(size: (UIScreen.main.bounds.width * 15) / 514, weight: .regular, design: .default))
             TextField(strLabel, text: $strField)
                 .frame(height: (UIScreen.main.bounds.width * 40) / 414, alignment: .center)
                 .padding(.leading, (UIScreen.main.bounds.width * 40) / 414)
@@ -28,8 +33,15 @@ struct CustomTextField: View {
                 .keyboardType(uiKeyboardType)
                 .autocapitalization(uiTextAutoCapitalizationType)
                 .foregroundColor(Color(UIColor().colorFromHex("#F88379", 1)))
-                .textFieldStyle(RoundedBorderTextFieldStyle())
-                .shadow(radius: 4)
+                
+            Divider()
+                .frame(width: UIScreen.main.bounds.width/1.2, height: 20, alignment: .leading)
+                .padding(.leading, (UIScreen.main.bounds.width * 40) / 414)
+                .padding(.trailing, (UIScreen.main.bounds.width * 40) / 414)
+                .foregroundColor(Color(UIColor().colorFromHex("000000", 1)))
+//                .textFieldStyle(RoundedBorderTextFieldStyle())
+                
+//                .shadow(radius: 4)
         }
     }
 }
@@ -37,6 +49,6 @@ struct CustomTextField: View {
 struct CustomTextField_Previews: PreviewProvider {
     
     static var previews: some View {
-        CustomTextField(strLabel: "Label", strField: .constant(""), uiTextAutoCapitalizationType: UITextAutocapitalizationType.none, uiKeyboardType: .alphabet)
+        CustomTextField(field: "Field", strLabel: "Label", strField: .constant(""), uiTextAutoCapitalizationType: UITextAutocapitalizationType.none, uiKeyboardType: .alphabet)
     }
 }

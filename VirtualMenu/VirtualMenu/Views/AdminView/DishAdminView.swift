@@ -32,10 +32,10 @@ struct DishAdminView: View {
                     .padding(.leading, (UIScreen.main.bounds.width * 10) / 414)
                     .padding(.trailing, (UIScreen.main.bounds.width * 10) / 414)
 //                CustomTextField(strLabel: "Description", strField: $description, uiTextAutoCapitalizationType: .none, uiKeyboardType: .emailAddress)
-                CustomTextField(strLabel: "Name", strField: $name, uiTextAutoCapitalizationType: .none, uiKeyboardType: .emailAddress)
-                    CustomTextField(strLabel: "Price", strField: $price, uiTextAutoCapitalizationType: .none, uiKeyboardType: .decimalPad)
-                CustomTextField(strLabel: "Restaurant", strField: $restaurant, uiTextAutoCapitalizationType: .none, uiKeyboardType: .emailAddress)
-                CustomTextField(strLabel: "Type", strField: $type, uiTextAutoCapitalizationType: .none, uiKeyboardType: .emailAddress)
+                    CustomTextField(field: "Name", strLabel: "Salmon", strField: $name, uiTextAutoCapitalizationType: .none, uiKeyboardType: .emailAddress)
+                    CustomTextField(field: "Price", strLabel: "$7.00", strField: $price, uiTextAutoCapitalizationType: .none, uiKeyboardType: .decimalPad)
+                    CustomTextField(field: "Restaurant", strLabel: "Fabio's Fish", strField: $restaurant, uiTextAutoCapitalizationType: .none, uiKeyboardType: .emailAddress)
+                    CustomTextField(field: "Type", strLabel: "Fish", strField: $type, uiTextAutoCapitalizationType: .none, uiKeyboardType: .emailAddress)
                 }
                                 
                 VStack{

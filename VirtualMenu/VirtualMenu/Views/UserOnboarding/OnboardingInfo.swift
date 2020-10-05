@@ -12,6 +12,8 @@ struct OnboardingInfo: View {
     var body: some View {
         ZStack{
             NavigationView{
+                ZStack{
+                    Color(UIColor().colorFromHex("#F3F1EE", 1)).edgesIgnoringSafeArea(.all)
                 VStack{
                     Spacer().frame(width: UIScreen.main.bounds.width, height: 0)
 
@@ -55,6 +57,7 @@ struct OnboardingInfo: View {
                     }
                     Spacer()
                     
+                }
                 }
 
         }.background(Color(UIColor().colorFromHex("#F3F1EE", 1)))

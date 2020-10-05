@@ -38,6 +38,8 @@ struct LoginView: View {
     @State var showGoogle = false
     @State var showFB = false
     
+    @Environment(\.presentationMode) var mode: Binding<PresentationMode>
+    
 
 
     @EnvironmentObject var user: UserStore
@@ -59,72 +61,35 @@ struct LoginView: View {
         ZStack {
         if user.showOnboarding {
         NavigationView{
-            VStack(spacing: 20) {
-                    VStack{
-                        Text("Yumzz")
-                        .font(.custom("Open Sans-SemiBold", size: 50))
-                        .foregroundColor(Color(UIColor().colorFromHex("#F88379", 1)))
-                        .bold()
-                        .padding(.leading, 0)
-                        
-                    }
-                    
+            ZStack{
+                Color(UIColor().colorFromHex("#F3F1EE", 1)).edgesIgnoringSafeArea(.all)
+            VStack{
+                VStack(spacing: 20){
                     Text("Login to your account")
-                    .font(.custom("Open Sans-SemiBold", size: 20))
-                    .foregroundColor(Color(UIColor().colorFromHex("#707070", 1)))
-                    .bold()
-                    .padding(.trailing, (UIScreen.main.bounds.width) / 3)
-                    
-                    
-                    CustomTextField(strLabel: "Email", strField: $email, uiTextAutoCapitalizationType: .none, uiKeyboardType: .emailAddress)
+                        .foregroundColor(Color(UIColor().colorFromHex("#3A3A3A", 1)))
+                        .font(.largeTitle).bold()
+                        .font(.system(size: 36))
+                        .padding(.leading, 40)
+                        .padding(.trailing, 40)
+                        .position(x: UIScreen.main.bounds.width/2, y: 20)
+                        
+                        
+                    CustomTextField(field: "Email", strLabel: "jonnyives@apple.com", strField: $email, uiTextAutoCapitalizationType: .none, uiKeyboardType: .emailAddress)
 
-                    CustomPasswordField(strLabel: "Password", password: $password)
-                    
-                    Button(action: {
-                        let dispatch = DispatchGroup()
-                        dispatch.enter()
-                        //do valid inputs and make move current user != nil if to account profile view
-                        self.loginVM.loginUser(email: self.email, password: self.password, disp: dispatch)
-                        dispatch.notify(queue: .main){
-                            if(self.loginVM.alertMessage != ""){
-                                self.alertMsg = self.loginVM.alertMessage
-                                self.alertTitle = self.loginVM.alertTitle
-                                self.showAlert.toggle()
-                            }else{
-                                if(Auth.auth().currentUser != nil){
-                                    self.user.isLogged = true
-                                    UserDefaults.standard.set(true, forKey: "isLogged")
-                                    print(self.user.showOnboarding)
-                                    self.user.showOnboarding = false
-                                    print(self.user.showOnboarding)
-                                    UserDefaults.standard.set(false, forKey: "showOnboarding")
-                                }else{
-                                    print(userProfile.emailAddress)
-                                    self.alertMsg = "There is no such user"
-                                    self.alertTitle = "No User"
-                                    self.showAlert.toggle()
-                                }
-                            
-                            }
-                        }
-                    }) {
-                        CoralButton(strLabel: "Sign in")
-                    }
-                
-                
-                    
-                    VStack(alignment: .trailing) {
+                    CustomPasswordField(field: "Password", strLabel: "••••••••••", password: $password)
+                        
+    //                VStack {
                         HStack {
-                            Spacer()
-                                .frame(height: 5)
+    //                        Spacer()
+    //                            .frame(height: 5)
                             
                             Button(action: {
                                 self.showForgotPassword = true
                             }) {
                                 Text("Forgot Password?")
-                                    .foregroundColor(.black)
-                                    .padding(.trailing, (UIScreen.main.bounds.width * 40) / 414)
-                                    .font(.system(size: (UIScreen.main.bounds.width * 15) / 414, weight: .bold, design: .default))
+                                    .foregroundColor(Color(UIColor().colorFromHex("#B4B4B4", 1)))
+    //                                .padding(.trailing, (UIScreen.main.bounds.width * 40) / 55)
+                                    .font(.system(size: 12, weight: .bold, design: .default))
                                 
                             }
                             .sheet(isPresented: self.$showForgotPassword) {
@@ -132,98 +97,70 @@ struct LoginView: View {
                                 //dismiss once confirmation alert is sent
                             }
                             
-                        }.padding(.trailing, (UIScreen.main.bounds.width * 10) / 414)
-                    }
+                        }
+                        .padding(.trailing, (UIScreen.main.bounds.width/1.8))
+    //                }
                     
-                    HStack{
-                        
-                        VStack{
-                            Divider()
-                                .padding(.leading, (UIScreen.main.bounds.width * 40) / 414)
-                                .frame(width: (UIScreen.main.bounds.width/2.3), height: 10, alignment: .leading)
-                            .foregroundColor(Color(UIColor().colorFromHex("#C4C4C4", 1)))
-                            
-                        }
-                        
-                        Text("Or")
-                            .foregroundColor(Color(UIColor().colorFromHex("#C4C4C4", 1)))
-                               
-                        
-                        VStack{
-                            Divider()
-                                .padding(.trailing, (UIScreen.main.bounds.width * 40) / 414)
-                                .frame(width: (UIScreen.main.bounds.width/2.3), height: 10, alignment: .trailing)
-                                .foregroundColor(Color(UIColor().colorFromHex("#C4C4C4", 1)))
-                        }
-                        
-                    }
                     
-                    HStack{
                         Button(action: {
-                            self.loginVM.socialLogin.attemptLoginGoogle()
-                        }){
-                            SocialMediaButton(imgName: "continue_with_google")
-                            .frame(width: 100, height: 50)
+                            let dispatch = DispatchGroup()
+                            dispatch.enter()
+                            //do valid inputs and make move current user != nil if to account profile view
+                            self.loginVM.loginUser(email: self.email, password: self.password, disp: dispatch)
+                            dispatch.notify(queue: .main){
+                                if(self.loginVM.alertMessage != ""){
+                                    self.alertMsg = self.loginVM.alertMessage
+                                    self.alertTitle = self.loginVM.alertTitle
+                                    self.showAlert.toggle()
+                                }else{
+                                    if(Auth.auth().currentUser != nil){
+                                        self.user.isLogged = true
+                                        UserDefaults.standard.set(true, forKey: "isLogged")
+                                        print(self.user.showOnboarding)
+                                        self.user.showOnboarding = false
+                                        print(self.user.showOnboarding)
+                                        UserDefaults.standard.set(false, forKey: "showOnboarding")
+                                    }else{
+                                        print(userProfile.emailAddress)
+                                        self.alertMsg = "There is no such user"
+                                        self.alertTitle = "No User"
+                                        self.showAlert.toggle()
+                                    }
+                                
+                                }
+                            }
+                        }) {
+                            OrangeButton(strLabel: "Login", width: 330, height: 48)
+                                .clipShape(RoundedRectangle(cornerRadius: 10, style: .circular))
                         }
-
-                        AppleSignInButton()
-                        .frame(width: 100, height: 50)
-                            .onTapGesture {
-                                self.showAppleLogin()
+                }
+                    
+                
+                Spacer()
+                
+                VStack(spacing: 20){
+                    
+                    AppleButton(width: 330, height: 48)
+                        .clipShape(RoundedRectangle(cornerRadius: 10, style: .circular))
+                        .onTapGesture {
+                            self.showAppleLogin()
                         }
-
-                        Button(action: {
+                    
+                    FacebookButton(width: 330, height: 48)
+                        .clipShape(RoundedRectangle(cornerRadius: 10, style: .circular))
+                        .onTapGesture {
                             self.loginVM.logginFb()
-                        }){
-                            SocialMediaButton(imgName: "continue_with_facebook")
-                            .frame(width: 100, height: 50)
+                        }
+                    
+                    GoogleButton(width: 330, height: 48)
+                        .clipShape(RoundedRectangle(cornerRadius: 10, style: .circular))
+                        .onTapGesture {
+                            self.loginVM.socialLogin.attemptLoginGoogle()
                         }
                 }
                 
-                VStack(spacing: 20){
-                    Button(action: {
-                        self.user.showOnboarding = false
-                        let firebaseAuth = Auth.auth()
-                        do {
-                            defer{
-                                self.loginVM.ridProfile()
-                                Auth.auth().signInAnonymously() { (authResult, error) in
-                                  // ...
-                                    print("anonymous")
-                                    if(error != nil){
-                                        print(error.debugDescription)
-                                    }
-                                    else{
-                                        print(authResult?.additionalUserInfo)
-                                    }
-                                }
-                            }
-                              try firebaseAuth.signOut()
-                        
-                            } catch let signOutError as NSError {
-                              print ("Error signing out: %@", signOutError)
-                            }
-                        self.user.isLogged = false
-                    }){
-                        GuestButton(strLabel: "Sign in as a Guest")
-                    }
-                        
-                    Button(action: {
-                    }, label: {
-                        NavigationLink(destination: SignUpView()) {
-                            HStack{
-                                    Text("Don't have an account?")
-                                    .foregroundColor(Color(UIColor().colorFromHex("#C4C4C4", 1)))
-                                    .font(.system(size: (UIScreen.main.bounds.width * 15) / 414, weight: .bold, design: .default))
-                                
-                                    Text("Sign Up")
-                                    .foregroundColor(Color(UIColor().colorFromHex("#F88379", 1)))
-                                    .font(.system(size: (UIScreen.main.bounds.width * 15) / 414, weight: .bold, design: .default))
-                                }
-                            }
-                        
-                    })
-                }
+                Spacer()
+            }
             }
             }
         }else{
@@ -239,7 +176,8 @@ struct LoginView: View {
             }
         })
         .navigationBarTitle("")
-        .navigationBarHidden(true)
+        .navigationBarBackButtonHidden(true)
+        .navigationBarItems(leading: BackButton(mode: self.mode))
         .alert(isPresented: $showAlert, content: { self.alert })
     }
         private func performExistingAccountFlows(){

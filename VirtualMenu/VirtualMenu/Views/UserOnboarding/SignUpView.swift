@@ -53,25 +53,26 @@ struct SignUpView: View {
     
     var body: some View {
         ZStack {
+            Color(UIColor().colorFromHex("#F3F1EE", 1)).edgesIgnoringSafeArea(.all)
+            Spacer().frame(width: UIScreen.main.bounds.width, height: 0)
             if user.showOnboarding {
-                VStack(spacing: 30) {
-                    Text("Yumzz")
-                    .font(.custom("Montserrat-SemiBold", size: 48))
-                    .foregroundColor(Color(UIColor().colorFromHex("#F88379", 1)))
-                    .bold()
+                VStack(spacing: 10) {
+//                    VStack{
+                        Text("Create your account")
+                            .foregroundColor(Color(UIColor().colorFromHex("#3A3A3A", 1)))
+                            .font(.largeTitle).bold()
+                            .font(.system(size: 36))
+                            .padding(.leading, 40)
+                            .padding(.trailing, 20)
+                            .position(x: UIScreen.main.bounds.width/2, y: 20)
+                        
+//                    }
                     
-                    Text("Create your account")
-                    .font(.custom("Montserrat-SemiBold", size: 20))
-                    .foregroundColor(Color(UIColor().colorFromHex("#707070", 1)))
-                    .bold()
-                    .padding(.trailing, (UIScreen.main.bounds.width) / 3)
-
+                    CustomTextField(field: "Name",strLabel: "Jonny Ives", strField: $name, uiTextAutoCapitalizationType: .words, uiKeyboardType: .default)
                     
-                    CustomTextField(strLabel: "Name", strField: $name, uiTextAutoCapitalizationType: .words, uiKeyboardType: .default)
+                    CustomTextField(field: "Email",strLabel: "jonnyives@apple.com", strField: $email, uiTextAutoCapitalizationType: .none, uiKeyboardType: .emailAddress)
                     
-                    CustomTextField(strLabel: "Email", strField: $email, uiTextAutoCapitalizationType: .none, uiKeyboardType: .emailAddress)
-                    
-                    CustomPasswordField(strLabel: "Password", password: $password)
+                    CustomPasswordField(field: "Password", strLabel: "••••••••••", password: $password)
                     
                     Button(action: {
                         let dispatch = DispatchGroup()
@@ -92,73 +93,53 @@ struct SignUpView: View {
                     })
                     {
                         NavigationLink(destination: AppView(), isActive: $createdAccount){
-                            CoralButton(strLabel: "Sign Up")
+                            OrangeButton(strLabel: "Sign Up", width: 330, height: 40)
+                                .clipShape(RoundedRectangle(cornerRadius: 10, style: .circular))
                         }.disabled(!self.createdAccount)
                     }
                     
-                    
-                    HStack {
+                    VStack(spacing: 20){
                         
-                        VStack {
-                            Divider()
-                                .padding(.leading, (UIScreen.main.bounds.width * 40) / 414)
-                                .frame(width: (UIScreen.main.bounds.width/2.3), height: 10, alignment: .leading)
-                            
-                        }
-                        
-                        Text("OR")
-                        
-                        VStack{
-                            Divider()
-                                .padding(.trailing, (UIScreen.main.bounds.width * 40) / 414)
-                                .frame(width: (UIScreen.main.bounds.width/2.3), height: 10, alignment: .trailing)
-                        }
-                        
-                    }
-                    
-                    HStack{
-                        Button(action: {
-                            let dispatch = DispatchGroup()
-                            dispatch.enter()
-                            self.signUpVM.socialLogin.attemptSignUpGoogle(dis: dispatch)
-                            dispatch.notify(queue: .main){
-                                self.alertMessage = "A confirmation email was sent to the email associated with the provided google account. Please click the link to sign in!"
-                                self.alertTitle = "Email Sent!"
-                                self.showAlert.toggle()
-                            }
-                        }){
-                            SocialMediaButton(imgName: "continue_with_google")
-                            .frame(width: 100, height: 50)
-                        }
-
-                        AppleSignInButton()
-                        .frame(width: 100, height: 50)
+                        AppleButton(width: 330, height: 48)
+                            .clipShape(RoundedRectangle(cornerRadius: 10, style: .circular))
                             .onTapGesture {
                                 self.showAppleLogin()
-                        }
-
-                        Button(action: {
-                            let dispatch = DispatchGroup()
-                            dispatch.enter()
-                            self.signUpVM.signUpFb(dispatch: dispatch)
-                            dispatch.notify(queue: .main){
-                                self.alertTitle = self.signUpVM.alertTitle
-                                self.alertMessage = self.signUpVM.alertMessage
-                                self.showAlert.toggle()
                             }
-                        }){
-                            SocialMediaButton(imgName: "continue_with_facebook")
-                            .frame(width: 100, height: 50)
-                        }.alert(isPresented: $showAlert) {
-                            Alert(title: Text("\(self.alertTitle)"), message: Text("\(self.alertMessage)"), dismissButton: .default(Text("OK")))
-                        }
+                        
+                        FacebookButton(width: 330, height: 48)
+                            .clipShape(RoundedRectangle(cornerRadius: 10, style: .circular))
+                            .onTapGesture {
+                                let dispatch = DispatchGroup()
+                                dispatch.enter()
+                                self.signUpVM.signUpFb(dispatch: dispatch)
+                                dispatch.notify(queue: .main){
+                                    self.alertTitle = self.signUpVM.alertTitle
+                                    self.alertMessage = self.signUpVM.alertMessage
+                                    self.showAlert.toggle()
+                                }
+                            }
+                        
+                        GoogleButton(width: 330, height: 48)
+                            .clipShape(RoundedRectangle(cornerRadius: 10, style: .circular))
+                            .onTapGesture {
+                                let dispatch = DispatchGroup()
+                                dispatch.enter()
+                                self.signUpVM.socialLogin.attemptSignUpGoogle(dis: dispatch)
+                                dispatch.notify(queue: .main){
+                                    self.alertMessage = "A confirmation email was sent to the email associated with the provided google account. Please click the link to sign in!"
+                                    self.alertTitle = "Email Sent!"
+                                    self.showAlert.toggle()
+                                }
+                            }
                     }
                     Spacer()
                 }
             }else{
                 AppView()
             }
-        }.onAppear(perform: {
+        }
+//        .background(Color(UIColor().colorFromHex("#F3F1EE", 1)))
+        .onAppear(perform: {
             NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: "NoMoreOnboard"), object: nil, queue: .main) { (Notification) in
                 self.user.showOnboarding = false
                 self.user.isLogged = true
@@ -166,7 +147,7 @@ struct SignUpView: View {
         })
         .navigationBarTitle("")
         .navigationBarBackButtonHidden(true)
-        .navigationBarItems(leading: PinkBackButton(mode: self.mode))
+        .navigationBarItems(leading: BackButton(mode: self.mode))
     }
     
     private func performExistingAccountFlows(){
