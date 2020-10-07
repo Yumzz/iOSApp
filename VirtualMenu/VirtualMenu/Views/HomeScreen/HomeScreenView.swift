@@ -37,9 +37,13 @@ struct HomeScreenView: View {
                     }.padding()
                     
                     ScrollView(.horizontal) {
-                        HStack(spacing: 10) {
+                        HStack(spacing: 30) {
                             ForEach(self.HomeScreenVM.allRestaurants, id:\.id) { restaurant in
-                                Text(restaurant.name)
+                                NavigationLink(
+                                    destination: RestaurantHomeView(restaurant: restaurant).navigationBarHidden(false)
+                                ) {
+                                    HSRestaurantCard(restaurant: restaurant)
+                                }
                             }
                         }
                     }.frame(height: 135).padding()
@@ -56,11 +60,20 @@ struct HSRestaurantCard: View {
     
     var body: some View {
         VStack {
-            FBURLImage(url: restaurant.coverPhotoURL, imageWidth: 175, imageHeight: 88)
-                .frame(width: 175, height: 88)
-                .clipShape(RoundedRectangle(cornerRadius: 10))
-            Text(restaurant.name).font(.system(size: 18, weight: .bold)).tracking(-0.41)
-            Text("$$ | Asian | 200m").font(.system(size: 12, weight: .semibold)).foregroundColor(Color(#colorLiteral(red: 0.7, green: 0.7, blue: 0.7, alpha: 1))).tracking(-0.41)
+            HStack {
+                FBURLImage(url: restaurant.coverPhotoURL, imageWidth: 175, imageHeight: 88)
+                    .frame(width: 175, height: 88)
+                    .clipShape(RoundedRectangle(cornerRadius: 10))
+                Spacer()
+            }
+            HStack{
+                Text(restaurant.name).foregroundColor(Color.black).font(.system(size: 18, weight: .bold)).tracking(-0.41)
+                Spacer()
+            }
+            HStack{
+                Text("$$ | Asian | 200m").font(.system(size: 12, weight: .semibold)).foregroundColor(Color(#colorLiteral(red: 0.7, green: 0.7, blue: 0.7, alpha: 1))).tracking(-0.41)
+                Spacer()
+            }
         }.frame(width: 175, height: 130)
     }
 }
