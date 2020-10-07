@@ -411,9 +411,9 @@
 			children = (
 				A7912A2424CF7DF70052988C /* Components */,
 				3A5633B824F9010A0059B603 /* SignInWithAppleHelpers */,
-				3AF9927424A53AC0005446D8 /* SignUpView.swift */,
 				3AF1BA83252A926900FAA9A0 /* OnboardingInfo.swift */,
 				3AF1BA95252A93F400FAA9A0 /* OnboardingInfo2.swift */,
+				3AF9927424A53AC0005446D8 /* SignUpView.swift */,
 				3AF9926424A2B7C9005446D8 /* LoginView.swift */,
 				3A4E2E1F24C6244600C34DD8 /* ForgotPassword.swift */,
 			);

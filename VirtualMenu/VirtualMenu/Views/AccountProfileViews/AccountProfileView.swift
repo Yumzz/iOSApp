@@ -14,26 +14,26 @@ import FirebaseFirestore
 
 struct ProfileButton: View {
     
-    var imageName: String
     var label: String
     
     var body: some View{
         Group {
-        HStack {
-            Image(imageName)
-                .resizable()
-                .shadow(radius: 10)
-                .frame(width: 40, height: 40)
-            VStack(alignment: .leading) {
-                Text(label)
-                    .font(.custom("Futura Bold", size: 18))
+            HStack(spacing: 60) {
+                VStack(alignment: .leading) {
+                    Text(label)
+                        .foregroundColor(Color(UIColor().colorFromHex("#000000", 1)))
+                        .font(.system(size: 24))
+                }
+                VStack(alignment: .trailing){
+                    Image("forward_button")
+                        .foregroundColor(Color(UIColor().colorFromHex("#FFFFFF", 1)))
+                }
             }
-        }
-        .frame(width: UIScreen.main.bounds.width/1.1, height: 55, alignment: .leading)
-        .background(Color(.white))
+            .frame(width: UIScreen.main.bounds.width/1.1, height: 55, alignment: .leading)
+            .background(Color(.white))
 
-        .cornerRadius(10)
-        .shadow(radius: 2)
+            .cornerRadius(10)
+//            .shadow(radius: 2)
         }
         .padding(.horizontal)
     }
@@ -57,31 +57,48 @@ struct AccountProfileView: View {
     @ObservedObject var accountVM = AccountProfileViewModel()
     
     var body: some View {
-        ZStack{
-            if self.show{
-                GeometryReader{_ in
-                    Loader()
-                }.background(Color.black.opacity(0.45))
-            }
-            else{
-            if user.isLogged {
-                VStack{
-                    Spacer().frame(height: 20)
-                    Group{
-                        if image ==  nil {
-                            if (userProfile.profilePhoto == nil){
-                                Image(systemName: "person.crop.circle")
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fit)
-                                    .frame(width: 80, height: 80)
-                                Button(action: {
-                                    self.showingImagePicker.toggle()
-                                }, label: {
-                                    Text("Edit Profile Photo")
-                                })
+        NavigationView{
+            ZStack{
+                Color(UIColor().colorFromHex("#F3F1EE", 1)).edgesIgnoringSafeArea(.all)
+    //            if self.show{
+    //                GeometryReader{_ in
+    //                    Loader()
+    //                }.background(Color.black.opacity(0.45))
+    //            }
+    //            else{
+    //            if user.isLogged {
+                    VStack{
+                        Spacer().frame(height: 20)
+                        Group{
+                            if image ==  nil {
+                                if (userProfile.profilePhoto == nil){
+                                    Image(systemName: "person.crop.circle")
+                                        .resizable()
+                                        .aspectRatio(contentMode: .fit)
+                                        .frame(width: 145, height: 145)
+                                    Button(action: {
+                                        self.showingImagePicker.toggle()
+                                    }, label: {
+                                        Text("Edit Profile Photo")
+                                    })
+                                }
+                                else{
+                                    Image(uiImage: userProfile.profilePhoto!.circle!)
+                                        .resizable()
+                                        .aspectRatio(contentMode: .fit)
+                                        .frame(width: 150, height: 150)
+                                    Button(action: {
+                                        self.showingImagePicker.toggle()
+                                    }, label: {
+                                        Text("Edit Profile Photo")
+                                    })
+                                    Spacer().frame(height: 15)
+                                    Text(userProfile.fullName)
+                                        .font(.custom("Open Sans-SemiBold", size: 30))
+                                }
                             }
                             else{
-                                Image(uiImage: userProfile.profilePhoto!.circle!)
+                                image?
                                     .resizable()
                                     .aspectRatio(contentMode: .fit)
                                     .frame(width: 150, height: 150)
@@ -95,106 +112,89 @@ struct AccountProfileView: View {
                                     .font(.custom("Open Sans-SemiBold", size: 30))
                             }
                         }
-                        else{
-                            image?
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .frame(width: 150, height: 150)
-                            Button(action: {
-                                self.showingImagePicker.toggle()
-                            }, label: {
-                                Text("Edit Profile Photo")
-                            })
-                            Spacer().frame(height: 15)
-                            Text(userProfile.fullName)
-                                .font(.custom("Open Sans-SemiBold", size: 30))
-                        }
-                    }
-                    VStack{
-                        Divider()
-                            .frame(width: (UIScreen.main.bounds.width/1.2), height: 10, alignment: .center)
-                        .foregroundColor(Color(UIColor().colorFromHex("#C4C4C4", 1)))
+    //                    VStack{
+    //                        Divider()
+    //                            .frame(width: (UIScreen.main.bounds.width/1.2), height: 10, alignment: .center)
+    //                        .foregroundColor(Color(UIColor().colorFromHex("#C4C4C4", 1)))
+    //
+    //                    }
                         
-                    }
-                    
-                    ScrollView {
+                        ScrollView {
 
-                        VStack(alignment: .leading, spacing: 20){
-                            NavigationLink(destination: ContactUs()) {
-                                ProfileButton(imageName: "contact_us", label: "Contact Us")
-                            }.buttonStyle(PlainButtonStyle())
+                            VStack(alignment: .leading, spacing: 10){
+                                
+                                NavigationLink(destination: ContactUs()) {
+                                    ProfileButton(label: "Contact Us")
+                                }.buttonStyle(PlainButtonStyle())
+                                
+                                
+                                NavigationLink(destination: ReportProblem()) {
+                                    ProfileButton(label: "Report Problem")
+                                }.buttonStyle(PlainButtonStyle())
+                                
+                                NavigationLink(destination: SuggestRestaurant()) {
+                                    ProfileButton(label: "Suggest Restaurant")
+                                }.buttonStyle(PlainButtonStyle())
+                            }
                             
+                            Spacer().frame(height: 20)
                             
-                            NavigationLink(destination: ReportProblem()) {
-                                ProfileButton(imageName: "report_problem", label: "Report Problem")
-                            }.buttonStyle(PlainButtonStyle())
+                            Button(action: {
+                                self.show = true
+                                let firebaseAuth = Auth.auth()
+                                do {
+                                    defer {
+                                        NSLog(Auth.auth().currentUser?.email! ?? "no user" )
+                                        self.accountVM.ridProfile()
+                                        NSLog(userProfile.emailAddress)
+                                        self.user.isLogged = false
+                                        self.show = false
+                                    }
+                                  try firebaseAuth.signOut()
                             
-                            NavigationLink(destination: SuggestRestaurant()) {
-                                ProfileButton(imageName: "suggest_restaurant", label: "Suggest Restaurant")
-                            }.buttonStyle(PlainButtonStyle())
+                                } catch let signOutError as NSError {
+                                  print ("Error signing out: %@", signOutError)
+                                }
+                            }){
+                                OrangeButton(strLabel: "Sign Out", width: 141, height: 48)
+                                    .foregroundColor(Color(UIColor().colorFromHex("#FFFFFF", 1)))
+                                    .clipShape(RoundedRectangle(cornerRadius: 10, style: .circular))
+                                }
+                        }
+                        Spacer()
+                    }
+                .navigationBarTitle("")
+                .navigationBarHidden(self.isNavigationBarHidden)
+                    .frame(maxWidth: .infinity)
+                    .sheet(isPresented: $showingImagePicker, onDismiss: self.changePhoto){ ImagePicker(image: self.$inputImage)
+                        .alert(isPresented: self.$showingAlert) {
+                            Alert(title: Text("Thank you for submitting"), message: Text("\(self.alertMessage)"), dismissButton: .default(Text("OK")))
+                        }
+                    }
+                    .onAppear(){
+                        self.isNavigationBarHidden = true
+                        print("logged: \(self.user.isLogged)")
+                        if(self.image == nil){
+                            print("image: nill")
+                            print(userProfile.profilePhoto?.description)
+                            print(userProfile.userId)
+                        }
+                        else{
+                            print("image: not nil")
                         }
                         
-                        Button(action: {
-                            self.show = true
-                            let firebaseAuth = Auth.auth()
-                            do {
-                                defer {
-                                    NSLog(Auth.auth().currentUser?.email! ?? "no user" )
-                                    self.accountVM.ridProfile()
-                                    NSLog(userProfile.emailAddress)
-                                    self.user.isLogged = false
-                                    self.show = false
-                                }
-                              try firebaseAuth.signOut()
-                        
-                            } catch let signOutError as NSError {
-                              print ("Error signing out: %@", signOutError)
-                            }
-                        }){
-                            Text("Sign Out")
-                                .foregroundColor(Color(UIColor().colorFromHex("#FFFFFF", 1)))
-                            .padding()
-                            }.background((Color(UIColor().colorFromHex("#F88379", 1))))
-                        .cornerRadius(10)
-                        
                     }
-                    
-                    
-                    
-                    Spacer()
-                }
-            .navigationBarTitle("")
-            .navigationBarHidden(self.isNavigationBarHidden)
-                .frame(maxWidth: .infinity)
-                .sheet(isPresented: $showingImagePicker, onDismiss: self.changePhoto){ ImagePicker(image: self.$inputImage)
-                    .alert(isPresented: self.$showingAlert) {
-                        Alert(title: Text("Thank you for submitting"), message: Text("\(self.alertMessage)"), dismissButton: .default(Text("OK")))
+                    .onDisappear(){
+                        self.isNavigationBarHidden = false
+                       
                     }
-                }
-                .onAppear(){
-                    self.isNavigationBarHidden = true
-                    print("logged: \(self.user.isLogged)")
-                    if(self.image == nil){
-                        print("image: nill")
-                        print(userProfile.profilePhoto?.description)
-                        print(userProfile.userId)
-                    }
-                    else{
-                        print("image: not nil")
-                    }
-                    
-                }
-                .onDisappear(){
-                    self.isNavigationBarHidden = false
-                   
-                }
-            } else {
-                AccountProfileLoginView()
-                    .navigationBarTitle("Log In to your account")
+    //            } else {
+    //                AccountProfileLoginView()
+    //                    .navigationBarTitle("Log In to your account")
+    //            }
+    //            }
             }
-            }
-        }.background(AccountProfGradientView().edgesIgnoringSafeArea(.all))
-        
+    }
         
     }
     

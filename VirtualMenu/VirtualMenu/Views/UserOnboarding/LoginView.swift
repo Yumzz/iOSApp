@@ -38,6 +38,7 @@ struct LoginView: View {
     @State var showGoogle = false
     @State var showFB = false
     
+    @State var isNavigationBarHidden: Bool = true
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
     
 
@@ -163,7 +164,7 @@ struct LoginView: View {
             }
             }
             }
-        }else{
+    }else{
                 AppView()
             }
         }

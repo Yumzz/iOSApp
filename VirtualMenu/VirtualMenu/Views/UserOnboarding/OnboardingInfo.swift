@@ -9,6 +9,8 @@
 import SwiftUI
 
 struct OnboardingInfo: View {
+    @State var isNavigationBarHidden: Bool = true
+
     var body: some View {
         ZStack{
             NavigationView{
@@ -59,10 +61,18 @@ struct OnboardingInfo: View {
                     
                 }
                 }
+                
 
-        }.background(Color(UIColor().colorFromHex("#F3F1EE", 1)))
-        
-    }.background(Color(UIColor().colorFromHex("#F3F1EE", 1)))
+        }.navigationBarTitle("")
+        .navigationBarHidden(self.isNavigationBarHidden)
+            .onAppear(){
+                self.isNavigationBarHidden = true
+            }
+            .onDisappear(){
+                self.isNavigationBarHidden = false
+               
+            }
+    }
         
     }
 }

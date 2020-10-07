@@ -11,7 +11,8 @@ import Firebase
 
 struct OnboardingInfo2: View {
     @State var loggedIn = false
-    
+    @State var isNavigationBarHidden: Bool = true
+
     @EnvironmentObject var user: UserStore
     @ObservedObject var loginVM = LoginViewModel()
 
@@ -21,7 +22,7 @@ struct OnboardingInfo2: View {
                 ZStack{
                     Color(UIColor().colorFromHex("#F3F1EE", 1)).edgesIgnoringSafeArea(.all)
                 VStack{
-                    Spacer().frame(width: UIScreen.main.bounds.width, height: 0)
+                    Spacer().frame(width: UIScreen.main.bounds.width, height: 80)
                     
                     VStack(spacing: 20){
                         Text("Welcome to Yumzz")
@@ -85,7 +86,15 @@ struct OnboardingInfo2: View {
                     Spacer()
                     
                 }
-                }
+                }.navigationBarTitle("")
+                .navigationBarHidden(self.isNavigationBarHidden)
+                    .onAppear(){
+                        self.isNavigationBarHidden = true
+                    }
+                    .onDisappear(){
+                        self.isNavigationBarHidden = false
+                       
+                    }
             }
             
 //            Spacer().fame(height: 80)
