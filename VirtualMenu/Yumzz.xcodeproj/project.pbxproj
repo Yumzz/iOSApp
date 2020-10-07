@@ -16,6 +16,8 @@
 		34111065252262F20084975A /* YumzzAppClip.app in Embed App Clips */ = {isa = PBXBuildFile; fileRef = 34111051252262F10084975A /* YumzzAppClip.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		34370CC72500D59A00ECD88B /* MenuSelectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34370CC62500D59A00ECD88B /* MenuSelectionViewModel.swift */; };
 		3482C0CF250C95D300FC362D /* BottomSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3482C0CE250C95D300FC362D /* BottomSheetView.swift */; };
+		34909E6F252D51E000B43D7B /* HomeScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34909E6E252D51E000B43D7B /* HomeScreenView.swift */; };
+		34909E75252D5D0500B43D7B /* HomeScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34909E74252D5D0500B43D7B /* HomeScreenViewModel.swift */; };
 		34911F02250DEAE400E56916 /* MapViewBottomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34911F01250DEAE400E56916 /* MapViewBottomView.swift */; };
 		34A5D663249BF6DF00E4FE9C /* DishDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34A5D662249BF6DF00E4FE9C /* DishDetailsView.swift */; };
 		34FCE2722507297F00329162 /* RatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34FCE2712507297F00329162 /* RatingView.swift */; };
@@ -199,6 +201,8 @@
 		34111062252262F20084975A /* YumzzAppClip.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = YumzzAppClip.entitlements; sourceTree = "<group>"; };
 		34370CC62500D59A00ECD88B /* MenuSelectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuSelectionViewModel.swift; sourceTree = "<group>"; };
 		3482C0CE250C95D300FC362D /* BottomSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetView.swift; sourceTree = "<group>"; };
+		34909E6E252D51E000B43D7B /* HomeScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreenView.swift; sourceTree = "<group>"; };
+		34909E74252D5D0500B43D7B /* HomeScreenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreenViewModel.swift; sourceTree = "<group>"; };
 		34911F01250DEAE400E56916 /* MapViewBottomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewBottomView.swift; sourceTree = "<group>"; };
 		34A5D662249BF6DF00E4FE9C /* DishDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DishDetailsView.swift; sourceTree = "<group>"; };
 		34FCE2712507297F00329162 /* RatingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingView.swift; sourceTree = "<group>"; };
@@ -392,6 +396,14 @@
 				3411105C252262F20084975A /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		34909E7A252D69A100B43D7B /* HomeScreen */ = {
+			isa = PBXGroup;
+			children = (
+				34909E6E252D51E000B43D7B /* HomeScreenView.swift */,
+			);
+			path = HomeScreen;
 			sourceTree = "<group>";
 		};
 		3A13B6DE24C181150006458B /* AccountProfileViews */ = {
@@ -725,6 +737,7 @@
 		A73B1B5924B0FDA800A8C6A8 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				34909E7A252D69A100B43D7B /* HomeScreen */,
 				3A63227F250C1973001427F7 /* BackgroundViews */,
 				3A4E2E2124C6841E00C34DD8 /* TabViews */,
 				3A13B6DE24C181150006458B /* AccountProfileViews */,
@@ -751,6 +764,7 @@
 				A779ACA9250D4F7400146565 /* ImageCache.swift */,
 				3A530DEE24D8E00100CBDE28 /* isClick.swift */,
 				3A4E2E3E24D2403300C34DD8 /* RestaurantDishViewModel.swift */,
+				34909E74252D5D0500B43D7B /* HomeScreenViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -1071,6 +1085,7 @@
 				3ABA90F324F640AE00695B06 /* SocialMediaButton.swift in Sources */,
 				34911F02250DEAE400E56916 /* MapViewBottomView.swift in Sources */,
 				3ACAD176250AE56C00B24CEB /* ContactUsViewModel.swift in Sources */,
+				34909E6F252D51E000B43D7B /* HomeScreenView.swift in Sources */,
 				3A45AD8D24B3FE8800CF3A8F /* Constants.swift in Sources */,
 				3ACAD182250AF07100B24CEB /* DishReviewsViewModel.swift in Sources */,
 				3A5633C824F90E080059B603 /* SignInWithApple.swift in Sources */,
@@ -1136,6 +1151,7 @@
 				3AF1BA8A252A92B500FAA9A0 /* OrangeButton.swift in Sources */,
 				A78531FA24DE312600F94C67 /* ImageLoader.swift in Sources */,
 				3A13B6EA24C197B30006458B /* RestaurantSearchLabel.swift in Sources */,
+				34909E75252D5D0500B43D7B /* HomeScreenViewModel.swift in Sources */,
 				A7F5506D24C1259100FAC1F0 /* RestaurantSearchbarView.swift in Sources */,
 				3A5633C624F9057D0059B603 /* AppleSignInButton.swift in Sources */,
 				3ACAD189250B161A00B24CEB /* RestCategory.swift in Sources */,
