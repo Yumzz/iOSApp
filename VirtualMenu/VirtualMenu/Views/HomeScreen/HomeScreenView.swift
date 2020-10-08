@@ -16,6 +16,7 @@ struct HomeScreenView: View {
     }
     
     var body: some View {
+        GeometryReader { geometry in
         NavigationView {
             ZStack {
                 ScrollView {
@@ -41,7 +42,7 @@ struct HomeScreenView: View {
                             HStack(spacing: 30) {
                                 ForEach(self.HomeScreenVM.allRestaurants, id:\.id) { restaurant in
                                     NavigationLink(
-                                        destination: RestaurantHomeView(restaurant: restaurant).navigationBarHidden(false)
+                                        destination: RestaurantHomeView(restaurant: restaurant).navigationBarHidden(true)
                                     ) {
                                         HSRestaurantCard(restaurant: restaurant)
                                     }
@@ -66,10 +67,12 @@ struct HomeScreenView: View {
                         }.frame(height: 135).padding()
                         
                         Spacer()
-                    }
-                }
+                    }.padding(.top, geometry.safeAreaInsets.top)
+                }.background(Color(red: 0.953, green: 0.945, blue: 0.933))
+                .edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
             }.navigationBarHidden(true).navigationBarTitle("")
         }
+    }
     }
 }
 
