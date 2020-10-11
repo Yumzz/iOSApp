@@ -15,6 +15,7 @@
 		34111060252262F20084975A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3411105E252262F20084975A /* LaunchScreen.storyboard */; };
 		34111065252262F20084975A /* YumzzAppClip.app in Embed App Clips */ = {isa = PBXBuildFile; fileRef = 34111051252262F10084975A /* YumzzAppClip.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		34370CC72500D59A00ECD88B /* MenuSelectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34370CC62500D59A00ECD88B /* MenuSelectionViewModel.swift */; };
+		343A44C0252E21FE00109C90 /* RestaurantHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 343A44BF252E21FE00109C90 /* RestaurantHomeView.swift */; };
 		3482C0CF250C95D300FC362D /* BottomSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3482C0CE250C95D300FC362D /* BottomSheetView.swift */; };
 		34909E6F252D51E000B43D7B /* HomeScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34909E6E252D51E000B43D7B /* HomeScreenView.swift */; };
 		34909E75252D5D0500B43D7B /* HomeScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34909E74252D5D0500B43D7B /* HomeScreenViewModel.swift */; };
@@ -201,6 +202,7 @@
 		34111061252262F20084975A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		34111062252262F20084975A /* YumzzAppClip.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = YumzzAppClip.entitlements; sourceTree = "<group>"; };
 		34370CC62500D59A00ECD88B /* MenuSelectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuSelectionViewModel.swift; sourceTree = "<group>"; };
+		343A44BF252E21FE00109C90 /* RestaurantHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantHomeView.swift; sourceTree = "<group>"; };
 		3482C0CE250C95D300FC362D /* BottomSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetView.swift; sourceTree = "<group>"; };
 		34909E6E252D51E000B43D7B /* HomeScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreenView.swift; sourceTree = "<group>"; };
 		34909E74252D5D0500B43D7B /* HomeScreenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreenViewModel.swift; sourceTree = "<group>"; };
@@ -398,6 +400,14 @@
 				3411105C252262F20084975A /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		343A44BE252E21DF00109C90 /* RestaurantHomeView */ = {
+			isa = PBXGroup;
+			children = (
+				343A44BF252E21FE00109C90 /* RestaurantHomeView.swift */,
+			);
+			path = RestaurantHomeView;
 			sourceTree = "<group>";
 		};
 		34909E7A252D69A100B43D7B /* HomeScreen */ = {
@@ -741,6 +751,7 @@
 		A73B1B5924B0FDA800A8C6A8 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				343A44BE252E21DF00109C90 /* RestaurantHomeView */,
 				34909E7A252D69A100B43D7B /* HomeScreen */,
 				3A63227F250C1973001427F7 /* BackgroundViews */,
 				3A4E2E2124C6841E00C34DD8 /* TabViews */,
@@ -1143,6 +1154,7 @@
 				3A5633C024F902070059B603 /* SignInWithAppleButton.swift in Sources */,
 				3AFA233E24DA01AC00F90ED8 /* MenuSelectionView.swift in Sources */,
 				3A530DEF24D8E00100CBDE28 /* isClick.swift in Sources */,
+				343A44C0252E21FE00109C90 /* RestaurantHomeView.swift in Sources */,
 				3AFA234A24DCB14B00F90ED8 /* DishReviewsView.swift in Sources */,
 				3ABA90F124F63DB500695B06 /* BlackButton.swift in Sources */,
 				3A4E2E3224D12D2500C34DD8 /* DishAdminView.swift in Sources */,
