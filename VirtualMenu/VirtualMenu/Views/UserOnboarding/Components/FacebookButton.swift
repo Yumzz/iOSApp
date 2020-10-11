@@ -27,6 +27,6 @@ struct FacebookButton: View {
 
            
         }
-        .background((Color(UIColor().colorFromHex("#1877F2", 1))))
+        .background(ColorManager.facebookBlue)
     }
 }

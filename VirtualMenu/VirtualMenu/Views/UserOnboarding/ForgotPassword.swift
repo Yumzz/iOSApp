@@ -19,7 +19,10 @@ struct ForgotPasswordView: View {
     @State var alertMessage = ""
     
     @ObservedObject var forgotPassword = ForgotPasswordViewModel()
+    @Environment(\.presentationMode) var mode: Binding<PresentationMode>
 
+    
+    @State var isNavigationBarHidden: Bool = true
     
     var alert: Alert {
         Alert(title: Text(""), message: Text(alertMsg), dismissButton: .default(Text("OK")))
@@ -28,41 +31,23 @@ struct ForgotPasswordView: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     var body: some View {
-        
-        NavigationView {
-            
-            ScrollView {
-                VStack {
-//                    Logo
-//                        .frame(width: 50, height: 50, alignment: .center)
-//                        .edgesIgnoringSafeArea(.top)
-                    Spacer(minLength: 80)
-                    Text("Forgot your password?")
-                        .font(.custom("Futura Bold", size: 24))
-                    Text("No problem, we'll send you a reset email link")
-                        .font(.custom("Open Sans", size: 12))
-                        .padding()
-                        .fixedSize(horizontal: false, vertical: true)
-                        .multilineTextAlignment(.leading)
-                    VStack {
-                        
-                        HStack {
-                            Image("ic_email")
-                                .padding(.leading, 20)
-                            
-                            TextField("Email", text: $email)
-                                .frame(height: 40, alignment: .center)
-                                .padding(.leading, 10)
-                                .padding(.trailing, 10)
-                                .font(.system(size: 15, weight: .regular, design: .default))
-                                .imageScale(.small)
-                                .keyboardType(.emailAddress)
-                                .autocapitalization(UITextAutocapitalizationType.none)
-                        }
-                      
-                    }
+        ZStack{
+            Color(#colorLiteral(red: 0.9725490196, green: 0.968627451, blue: 0.9607843137, alpha: 1)).edgesIgnoringSafeArea(.all)
+            Spacer().frame(width: UIScreen.main.bounds.width, height: 0)
+            VStack{
+                Text("Retrieve Your Account")
+                    .foregroundColor(ColorManager.textGray)
+                    .font(.largeTitle).bold()
+                    .font(.system(size: 36))
+                    .padding(.leading, 40)
+                    .padding(.trailing, 40)
+            }.position(x: UIScreen.main.bounds.width/2.5, y: 110)
+            VStack{
+
+                CustomTextField(field: "Email", strLabel: "jonnyives@apple.com", strField: $email, uiTextAutoCapitalizationType: .none, uiKeyboardType: .emailAddress)
                     
-                    Spacer(minLength: 20)
+                Spacer().frame(height: 30)
+
                     
                     Button(action: {
                         let val = self.forgotPassword.forgotPasswordValidInputs(email: self.email)
@@ -78,15 +63,33 @@ struct ForgotPasswordView: View {
                             self.showAlert.toggle()
                         }
                     }) {
-                        Text("Send Reset Link")
+                        OrangeButton(strLabel: "Reset your Password", width: 330, height: 48)
+                            .clipShape(RoundedRectangle(cornerRadius: 10, style: .circular))
                     }
-                    .alert(isPresented: $showingAlert) {
-                        Alert(title: Text("\(self.alertTitle)"), message: Text("\(self.alertMessage)"), dismissButton: .default(Text("OK")))
-                    }
-                }
+//                        .alert(isPresented: $showingAlert) {
+//                            Alert(title: Text("\(self.alertTitle)"), message: Text("\(self.alertMessage)"), dismissButton: .default(Text("OK")))
+//                        }
             }
-        }.alert(isPresented: $showAlert, content: { self.alert })
-    }
+            Spacer().frame(height: 120)
+
+        }
+
+        .alert(isPresented: $showAlert, content: { self.alert })
+        .navigationBarTitle("")
+        .navigationBarHidden(true)
+//            .onAppear(){
+//                self.isNavigationBarHidden = false
+//            }
+//            .onDisappear(){
+//                self.isNavigationBarHidden = false
+//
+//            }
+        .navigationBarItems(leading: BackButton(mode: self.mode))
+
+//        .navigationBarBackButtonHidden(true)
+//        .navigationBarTitle("")
+
+}
     
 }
 

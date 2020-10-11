@@ -43,7 +43,6 @@ struct SignUpView: View {
     @Environment(\.window) var window: UIWindow?
     @State var delegate: SignInWithAppleDelegates! = nil
     
-
     
     var alert: Alert {
         Alert(title: Text(""), message: Text(alertMsg), dismissButton: .default(Text("OK")))
@@ -53,18 +52,18 @@ struct SignUpView: View {
     
     var body: some View {
         ZStack {
-            Color(UIColor().colorFromHex("#F3F1EE", 1)).edgesIgnoringSafeArea(.all)
+            Color(#colorLiteral(red: 0.9725490196, green: 0.968627451, blue: 0.9607843137, alpha: 1)).edgesIgnoringSafeArea(.all)
             Spacer().frame(width: UIScreen.main.bounds.width, height: 0)
             if user.showOnboarding {
                 VStack(spacing: 10) {
 //                    VStack{
                         Text("Create your account")
-                            .foregroundColor(Color(UIColor().colorFromHex("#3A3A3A", 1)))
+                            .foregroundColor(ColorManager.textGray)
                             .font(.largeTitle).bold()
                             .font(.system(size: 36))
                             .padding(.leading, 40)
                             .padding(.trailing, 20)
-                            .position(x: UIScreen.main.bounds.width/2, y: 20)
+                            .position(x: UIScreen.main.bounds.width/2.5, y: 20)
                         
 //                    }
                     

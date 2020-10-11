@@ -63,11 +63,11 @@ struct LoginView: View {
         if user.showOnboarding {
         NavigationView{
             ZStack{
-                Color(UIColor().colorFromHex("#F3F1EE", 1)).edgesIgnoringSafeArea(.all)
+                Color(#colorLiteral(red: 0.9725490196, green: 0.968627451, blue: 0.9607843137, alpha: 1)).edgesIgnoringSafeArea(.all)
             VStack{
                 VStack(spacing: 20){
                     Text("Login to your account")
-                        .foregroundColor(Color(UIColor().colorFromHex("#3A3A3A", 1)))
+                        .foregroundColor(ColorManager.textGray)
                         .font(.largeTitle).bold()
                         .font(.system(size: 36))
                         .padding(.leading, 40)
@@ -81,23 +81,12 @@ struct LoginView: View {
                         
     //                VStack {
                         HStack {
-    //                        Spacer()
-    //                            .frame(height: 5)
-                            
-                            Button(action: {
-                                self.showForgotPassword = true
-                            }) {
-                                Text("Forgot Password?")
-                                    .foregroundColor(Color(UIColor().colorFromHex("#B4B4B4", 1)))
-    //                                .padding(.trailing, (UIScreen.main.bounds.width * 40) / 55)
-                                    .font(.system(size: 12, weight: .bold, design: .default))
-                                
-                            }
-                            .sheet(isPresented: self.$showForgotPassword) {
-                                ForgotPasswordView()
-                                //dismiss once confirmation alert is sent
-                            }
-                            
+                            NavigationLink(destination: ForgotPasswordView()){
+                                    Text("Forgot Password?")
+                                        .foregroundColor(Color(UIColor().colorFromHex("#B4B4B4", 1)))
+                                        .font(.system(size: 12, weight: .bold, design: .default))
+                                    
+                                }
                         }
                         .padding(.trailing, (UIScreen.main.bounds.width/1.8))
     //                }
@@ -127,7 +116,6 @@ struct LoginView: View {
                                         self.alertTitle = "No User"
                                         self.showAlert.toggle()
                                     }
-                                
                                 }
                             }
                         }) {
@@ -177,8 +165,15 @@ struct LoginView: View {
             }
         })
         .navigationBarTitle("")
-        .navigationBarBackButtonHidden(true)
+        .navigationBarHidden(true)
         .navigationBarItems(leading: BackButton(mode: self.mode))
+//            .onAppear(){
+//                self.isNavigationBarHidden = true
+//            }
+//            .onDisappear(){
+//                self.isNavigationBarHidden = false
+//
+//            }
         .alert(isPresented: $showAlert, content: { self.alert })
     }
         private func performExistingAccountFlows(){

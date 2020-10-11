@@ -25,6 +25,8 @@
 		3A0745BB252B020F000EF6BD /* FacebookButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0745BA252B020F000EF6BD /* FacebookButton.swift */; };
 		3A0745C1252B02BA000EF6BD /* GoogleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0745C0252B02BA000EF6BD /* GoogleButton.swift */; };
 		3A0745C7252B0871000EF6BD /* BackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0745C6252B0871000EF6BD /* BackButton.swift */; };
+		3A0745D525301CE5000EF6BD /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3A0745D425301CE5000EF6BD /* Colors.xcassets */; };
+		3A0745DB253021CB000EF6BD /* ColorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0745DA253021CB000EF6BD /* ColorManager.swift */; };
 		3A13B6E024C1813D0006458B /* ContactUs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A13B6DF24C1813D0006458B /* ContactUs.swift */; };
 		3A13B6E424C1816B0006458B /* ReportProblem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A13B6E324C1816B0006458B /* ReportProblem.swift */; };
 		3A13B6EA24C197B30006458B /* RestaurantSearchLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A13B6E924C197B30006458B /* RestaurantSearchLabel.swift */; };
@@ -77,7 +79,6 @@
 		3AA9897724B517F00070FD97 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA9897524B517F00070FD97 /* Extensions.swift */; };
 		3AA9897824B517F00070FD97 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA9897524B517F00070FD97 /* Extensions.swift */; };
 		3ABA90F124F63DB500695B06 /* BlackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ABA90F024F63DB500695B06 /* BlackButton.swift */; };
-		3ABA90F324F640AE00695B06 /* SocialMediaButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ABA90F224F640AE00695B06 /* SocialMediaButton.swift */; };
 		3ABA90F524F64EDE00695B06 /* GuestButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ABA90F424F64EDE00695B06 /* GuestButton.swift */; };
 		3ACAD16E250AC7A600B24CEB /* SignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACAD16D250AC7A600B24CEB /* SignUpViewModel.swift */; };
 		3ACAD170250ACE2000B24CEB /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACAD16F250ACE2000B24CEB /* LoginViewModel.swift */; };
@@ -210,6 +211,8 @@
 		3A0745BA252B020F000EF6BD /* FacebookButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FacebookButton.swift; sourceTree = "<group>"; };
 		3A0745C0252B02BA000EF6BD /* GoogleButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleButton.swift; sourceTree = "<group>"; };
 		3A0745C6252B0871000EF6BD /* BackButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackButton.swift; sourceTree = "<group>"; };
+		3A0745D425301CE5000EF6BD /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
+		3A0745DA253021CB000EF6BD /* ColorManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorManager.swift; sourceTree = "<group>"; };
 		3A13B6DF24C1813D0006458B /* ContactUs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactUs.swift; sourceTree = "<group>"; };
 		3A13B6E324C1816B0006458B /* ReportProblem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportProblem.swift; sourceTree = "<group>"; };
 		3A13B6E924C197B30006458B /* RestaurantSearchLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantSearchLabel.swift; sourceTree = "<group>"; };
@@ -267,7 +270,6 @@
 		3A987B0F2481511B0021F6E4 /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		3AA9897524B517F00070FD97 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		3ABA90F024F63DB500695B06 /* BlackButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlackButton.swift; sourceTree = "<group>"; };
-		3ABA90F224F640AE00695B06 /* SocialMediaButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialMediaButton.swift; sourceTree = "<group>"; };
 		3ABA90F424F64EDE00695B06 /* GuestButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuestButton.swift; sourceTree = "<group>"; };
 		3ACAD16D250AC7A600B24CEB /* SignUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
 		3ACAD16F250ACE2000B24CEB /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
@@ -554,6 +556,7 @@
 				3A987AD82480350C0021F6E4 /* SceneDelegate.swift */,
 				3AA9892824B5153A0070FD97 /* Fonts */,
 				3A987ADC2480350E0021F6E4 /* Assets.xcassets */,
+				3A0745D425301CE5000EF6BD /* Colors.xcassets */,
 				3A987AE12480350E0021F6E4 /* LaunchScreen.storyboard */,
 				3A987AE42480350E0021F6E4 /* Info.plist */,
 				3A987B0E248086D30021F6E4 /* VirtualMenu.entitlements */,
@@ -673,6 +676,7 @@
 				3AF9926724A2B918005446D8 /* Utils.swift */,
 				3A530DF024D8E07F00CBDE28 /* BottomSheetModal.swift */,
 				3A45AD8C24B3FE8800CF3A8F /* Constants.swift */,
+				3A0745DA253021CB000EF6BD /* ColorManager.swift */,
 				3AF9926924A2B95C005446D8 /* InputValidation.swift */,
 				3AA9897524B517F00070FD97 /* Extensions.swift */,
 				3482C0CE250C95D300FC362D /* BottomSheetView.swift */,
@@ -795,7 +799,6 @@
 				3A0745BA252B020F000EF6BD /* FacebookButton.swift */,
 				3A0745C0252B02BA000EF6BD /* GoogleButton.swift */,
 				3AF1BA8F252A92DD00FAA9A0 /* InvertedOrangeButton.swift */,
-				3ABA90F224F640AE00695B06 /* SocialMediaButton.swift */,
 				3ABA90F424F64EDE00695B06 /* GuestButton.swift */,
 				3A0745C6252B0871000EF6BD /* BackButton.swift */,
 				3A5633C524F9057D0059B603 /* AppleSignInButton.swift */,
@@ -975,6 +978,7 @@
 				3A987ADD2480350E0021F6E4 /* Assets.xcassets in Resources */,
 				A797EA6624B938D5005158FA /* Montserrat-ThinItalic.ttf in Resources */,
 				A797EA6224B938D5005158FA /* Montserrat-ExtraBold.ttf in Resources */,
+				3A0745D525301CE5000EF6BD /* Colors.xcassets in Resources */,
 				A797EA5924B938D5005158FA /* Montserrat-MediumItalic.ttf in Resources */,
 				A797EA6524B938D5005158FA /* Montserrat-Light.ttf in Resources */,
 				A797EA5B24B938D5005158FA /* Montserrat-Medium.ttf in Resources */,
@@ -1082,7 +1086,6 @@
 				3A4A0E72249EB94D0030635E /* ImagePicker.swift in Sources */,
 				3A0745C1252B02BA000EF6BD /* GoogleButton.swift in Sources */,
 				3A4E2E3B24D21E8E00C34DD8 /* LocationManager.swift in Sources */,
-				3ABA90F324F640AE00695B06 /* SocialMediaButton.swift in Sources */,
 				34911F02250DEAE400E56916 /* MapViewBottomView.swift in Sources */,
 				3ACAD176250AE56C00B24CEB /* ContactUsViewModel.swift in Sources */,
 				34909E6F252D51E000B43D7B /* HomeScreenView.swift in Sources */,
@@ -1163,6 +1166,7 @@
 				A7912A2824CF87260052988C /* CoralButton.swift in Sources */,
 				34370CC72500D59A00ECD88B /* MenuSelectionViewModel.swift in Sources */,
 				3A632281250C19B9001427F7 /* GradientView.swift in Sources */,
+				3A0745DB253021CB000EF6BD /* ColorManager.swift in Sources */,
 				A735992A24ECFDCF00584BFD /* AccountProfileLoginView.swift in Sources */,
 				3A4E2E2024C6244600C34DD8 /* ForgotPassword.swift in Sources */,
 				A735992824ECD83300584BFD /* AccountProfileViewModel.swift in Sources */,

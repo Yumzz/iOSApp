@@ -28,6 +28,6 @@ struct OrangeButton: View {
 
            
         }
-        .background((Color(UIColor().colorFromHex("#E05C28", 1))))
+        .background(ColorManager.yumzzOrange)
     }
 }

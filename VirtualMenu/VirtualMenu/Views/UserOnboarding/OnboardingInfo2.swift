@@ -20,7 +20,7 @@ struct OnboardingInfo2: View {
         ZStack{
             NavigationView{
                 ZStack{
-                    Color(UIColor().colorFromHex("#F3F1EE", 1)).edgesIgnoringSafeArea(.all)
+                    Color(#colorLiteral(red: 0.9725490196, green: 0.968627451, blue: 0.9607843137, alpha: 1)).edgesIgnoringSafeArea(.all)
                 VStack{
                     Spacer().frame(width: UIScreen.main.bounds.width, height: 80)
                     
@@ -87,14 +87,14 @@ struct OnboardingInfo2: View {
                     
                 }
                 }.navigationBarTitle("")
-                .navigationBarHidden(self.isNavigationBarHidden)
-                    .onAppear(){
-                        self.isNavigationBarHidden = true
-                    }
-                    .onDisappear(){
-                        self.isNavigationBarHidden = false
-                       
-                    }
+                .navigationBarHidden(true)
+//                    .onAppear(){
+//                        self.isNavigationBarHidden = true
+//                    }
+//                    .onDisappear(){
+//                        self.isNavigationBarHidden = false
+//
+//                    }
             }
             
 //            Spacer().fame(height: 80)

@@ -20,7 +20,7 @@ struct InvertedOrangeButton: View {
             HStack(spacing: 10) {
                                 
                 Text(strLabel)
-                           .foregroundColor(Color(UIColor().colorFromHex("#E05C28", 1)))
+                    .foregroundColor(ColorManager.yumzzOrange)
                                
             }
             .padding()
