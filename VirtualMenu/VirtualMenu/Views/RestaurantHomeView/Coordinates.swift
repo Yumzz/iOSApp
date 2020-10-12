@@ -9,7 +9,7 @@
 import SwiftUI
 import MapKit
 
-final class Coordinator: NSObject, MKMapViewDelegate {
+final class Coordinators: NSObject, MKMapViewDelegate {
     var locationManager = LocationManager()
     var control: MapView
     
