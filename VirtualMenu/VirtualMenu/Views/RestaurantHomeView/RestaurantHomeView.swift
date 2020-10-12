@@ -7,9 +7,11 @@
 //
 
 import SwiftUI
+import MapKit
 
 struct RestaurantHomeView: View {
     var restaurant: RestaurantFB
+    
     @ObservedObject var menuSelectionVM: MenuSelectionViewModel
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
@@ -95,6 +97,7 @@ struct RestaurantHomeView: View {
                     
                                 Spacer()
                             }.padding()
+                            
                             VStack{
                                 HStack{
                                     Text("Popular").font(.system(size: 24, weight: .semibold))
@@ -113,6 +116,23 @@ struct RestaurantHomeView: View {
                             }.frame(height: 135).padding()
                            
                         }.padding()
+                        NavigationLink(
+                            destination: RestaurantHomeView(restaurant: restaurant).navigationBarHidden(true)
+                        ) {
+                            HStack{
+                                Image(systemName: "list.bullet.rectangle")
+                                    .font(.system(size: 18))
+                                Text("See the Menu")
+                                    .font(.system(size: 16, weight: .semibold))
+                                    .font(.footnote)
+                                    .frame(width: 150)
+                            }
+                            .padding()
+                            .foregroundColor(Color.white)
+                            .background(Color(#colorLiteral(red: 0.88, green: 0.36, blue: 0.16, alpha: 1)))
+                            .cornerRadius(10)
+                            .frame(width: 345, height: 48)
+                            }
                     }
                 }
             }
