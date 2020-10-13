@@ -2,7 +2,7 @@
 //  DishDetailsView.swift
 //  VirtualMenu
 //
-//  Created by William Bai on 6/18/20.
+//  Created by Sally Gao on 10/12/20.
 //  Copyright © 2020 Rohan Tyagi. All rights reserved.
 //
 
@@ -21,6 +21,7 @@ struct DishDetailsView: View {
     let restaurant: RestaurantFB
     
     @EnvironmentObject var order : OrderModel
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     let dispatchG1 = DispatchGroup()
 
@@ -37,53 +38,90 @@ struct DishDetailsView: View {
     
     var body: some View {
         ZStack{
-        VStack(alignment: .center) {
-            Spacer().frame(width: UIScreen.main.bounds.width, height: -60)
-            VStack(spacing: 20){
-                Text("\(dish.name)")
-                    .font(.title)
-                    .font(.custom("Open Sans", size: 32))
-                FBURLImage(url: dish.coverPhotoURL, imageAspectRatio: .fill, imageWidth: 300, imageHeight: UIScreen.main.bounds.height/4)
-                    .cornerRadius(10)
-                Text("Price: " + DishFB.formatPrice(price: dish.price))
-                    .foregroundColor(.black)
-                    .font(.headline)
-                ScrollView{
-                    Text(dish.description)
-                        .fixedSize(horizontal: false, vertical: true)
-                        .padding(.bottom, 0)
-                }
-                DishNavButton(strLabel: "Add to Order").onTapGesture {
-                    //send info to POS
-                    if(!self.order.checkSameRest(dish: self.dish)){
-                        self.alertTitle = "Different Restaurant"
-                        self.alertMessage = "A new order has been started for \(self.restaurant.name)"
-                        self.showingAlert.toggle()
-                        self.order.newOrder(rest: self.restaurant)
-                    }else{
-                        self.alertTitle = "Dish Added"
-                        self.alertMessage = "A new dish has been added to your order. Check the order tab to see your entire order."
-                        self.showingAlert.toggle()
+            ScrollView{
+                VStack(spacing: 10){
+                    ZStack{
+                        FBURLImage(url: dish.coverPhotoURL, imageWidth: 375, imageHeight: 240)
+                        .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
+                        .padding(.bottom, 10)
+                        .padding(.leading, 30)
+                        .padding(.trailing, 30)
+                        .background(Color.white)
+                        .cornerRadius(10)
+                        .shadow(radius: 2)
+                        Button(action: {
+                                self.presentationMode.wrappedValue.dismiss()
+                                }) {
+                            Image(systemName: "arrow.left").foregroundColor(.black)
+                        }
                     }
-                    self.dispatchG1.enter()
-                    self.order.restChosen = self.restaurant
-                    self.order.addDish(dish: self.dish, rest: self.restaurant, dis: self.dispatchG1)
-                    self.dispatchG1.notify(queue: .main){
-//                        print("\(self.order.dishRestaurant[self.dish])")
+                    Spacer()
+                    ScrollView{
+                        VStack{
+                            HStack{
+                                Text(dish.name).font(.system(size: 24, weight: .semibold)).tracking(-0.41).padding(.leading, 40)
+                                Spacer()
+                                
+                            }
+                            HStack{
+                                RoundedRectangle(cornerRadius: 5)
+                                    .fill(Color(#colorLiteral(red: 0, green: 0.7333333492279053, blue: 0.4693332314491272, alpha: 1)))
+                                .frame(width: 45, height: 20)
+                                    .padding(.leading,40)
+                                Text("(298 reviews)").font(.system(size: 14, weight: .semibold)).tracking(-0.41)
+                                Spacer()
+                            }
+                            HStack{
+                                Text("Salmon, Rice, soy sauce, wasabi, sesame seeds").font(.system(size: 14, weight: .semibold)).foregroundColor(Color(#colorLiteral(red: 0.71, green: 0.71, blue: 0.71, alpha: 1))).tracking(-0.41).padding(.leading, 40)
+                                Spacer()
+                            }
+                           
+                        }.padding()
+                        Spacer()
+                        HStack{
+                            HStack{
+                                Image(systemName: "minus")
+                                    .font(.system(size: 18))
+                                    .foregroundColor(Color(#colorLiteral(red: 0.88, green: 0.36, blue: 0.16, alpha: 1)))
+                                Text("1")
+                                    .font(.system(size: 16, weight: .semibold))
+                                    .font(.footnote)
+                                    .foregroundColor(Color.black)
+                                    .frame(width: 30)
+                                Image(systemName: "plus")
+                                    .font(.system(size: 18))
+                                    .foregroundColor(Color(#colorLiteral(red: 0.88, green: 0.36, blue: 0.16, alpha: 1)))
+                            }
+                            .padding()
+                            .background(Color.white)
+                            .cornerRadius(10)
+                            .frame(width: 122, height: 48)
+                            HStack{
+                                Text("$17")
+                                    .font(.system(size: 16, weight: .semibold))
+                                    .font(.footnote)
+                                    .frame(width: 40)
+                                Image(systemName: "cart.fill.badge.plus")
+                                    .font(.system(size: 18))
+                                Text("Add to Cart")
+                                    .font(.system(size: 16, weight: .semibold))
+                                    .font(.footnote)
+                                    .frame(width: 100)
+                            }
+                            .padding()
+                            .foregroundColor(Color.white)
+                            .background(Color(#colorLiteral(red: 0.88, green: 0.36, blue: 0.16, alpha: 1)))
+                            .cornerRadius(10)
+                            .frame(width: 195, height: 48)
+                        }
                     }
-                }
-                .alert(isPresented: self.$showingAlert) {
-                    Alert(title: Text("\(self.alertTitle)"), message: Text("\(self.alertMessage)"), dismissButton: .default(Text("OK")))
-                }
-                NavigationLink(destination: DishReviewsView(isPresented: .constant(true), dish: self.dish, restaurant: self.restaurant)){
-                    ReviewsButton()
                 }
             }
-            .padding()
         }
-        }.background(GradientView().edgesIgnoringSafeArea(.all))
-        .navigationBarBackButtonHidden(true)
-        .navigationBarItems(leading: WhiteBackButton(mode: self.mode))
+        .background(Color(red: 0.953, green: 0.945, blue: 0.933))
+        .edgesIgnoringSafeArea(.all)
+        .navigationBarHidden(true)
+        .navigationBarTitle("")
     }
 }
 
