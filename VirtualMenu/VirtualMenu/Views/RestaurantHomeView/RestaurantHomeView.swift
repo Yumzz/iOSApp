@@ -117,7 +117,7 @@ struct RestaurantHomeView: View {
                            
                         }.padding()
                         NavigationLink(
-                            destination: RestaurantHomeView(restaurant: restaurant).navigationBarHidden(true)
+                            destination: ListDishesView(restaurant: self.restaurant).navigationBarHidden(true)
                         ) {
                             HStack{
                                 Image(systemName: "list.bullet.rectangle")
@@ -132,7 +132,7 @@ struct RestaurantHomeView: View {
                             .background(Color(#colorLiteral(red: 0.88, green: 0.36, blue: 0.16, alpha: 1)))
                             .cornerRadius(10)
                             .frame(width: 345, height: 48)
-                            }
+                        }
                     }
                 }
             }
