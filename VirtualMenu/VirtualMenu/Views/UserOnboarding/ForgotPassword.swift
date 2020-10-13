@@ -41,7 +41,7 @@ struct ForgotPasswordView: View {
                     .font(.system(size: 36))
                     .padding(.leading, 40)
                     .padding(.trailing, 40)
-            }.position(x: UIScreen.main.bounds.width/2.5, y: 110)
+            }.position(x: UIScreen.main.bounds.width/2.5, y: 20)
             VStack{
 
                 CustomTextField(field: "Email", strLabel: "jonnyives@apple.com", strField: $email, uiTextAutoCapitalizationType: .none, uiKeyboardType: .emailAddress)
@@ -74,17 +74,18 @@ struct ForgotPasswordView: View {
 
         }
 
-        .alert(isPresented: $showAlert, content: { self.alert })
+//        .alert(isPresented: $showAlert, content: { self.alert })
         .navigationBarTitle("")
-        .navigationBarHidden(true)
-//            .onAppear(){
-//                self.isNavigationBarHidden = false
-//            }
-//            .onDisappear(){
-//                self.isNavigationBarHidden = false
-//
-//            }
+        .navigationBarHidden(self.isNavigationBarHidden)
+        .navigationBarBackButtonHidden(true)
         .navigationBarItems(leading: BackButton(mode: self.mode))
+        .onAppear(){
+            self.isNavigationBarHidden = false
+        }
+        .onDisappear(){
+            self.isNavigationBarHidden = true
+
+        }
 
 //        .navigationBarBackButtonHidden(true)
 //        .navigationBarTitle("")

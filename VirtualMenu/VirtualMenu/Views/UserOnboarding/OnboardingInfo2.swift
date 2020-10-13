@@ -18,7 +18,7 @@ struct OnboardingInfo2: View {
 
     var body: some View {
         ZStack{
-            NavigationView{
+//            NavigationView{
                 ZStack{
                     Color(#colorLiteral(red: 0.9725490196, green: 0.968627451, blue: 0.9607843137, alpha: 1)).edgesIgnoringSafeArea(.all)
                 VStack{
@@ -53,7 +53,7 @@ struct OnboardingInfo2: View {
                                 .shadow(radius: 5)
                         }
                         
-                        NavigationLink(destination: AppView()){
+                        NavigationLink(destination: HomeScreenView()){
                             InvertedOrangeButton(strLabel: "Use app as a guest", width: 330, height: 48)
                                 .clipShape(RoundedRectangle(cornerRadius: 10, style: .circular))
                                 .shadow(radius: 5)
@@ -95,13 +95,12 @@ struct OnboardingInfo2: View {
 //                        self.isNavigationBarHidden = false
 //
 //                    }
-            }
+//            }
             
 //            Spacer().fame(height: 80)
 
         }.navigationTitle("")
         .navigationBarHidden(true)
-        .background(Color(UIColor().colorFromHex("#F3F1EE", 1)))
     }
 }
 

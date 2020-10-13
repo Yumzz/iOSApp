@@ -13,6 +13,9 @@ struct RestaurantHomeView: View {
     @ObservedObject var menuSelectionVM: MenuSelectionViewModel
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
+    @State var isNavigationBarHidden: Bool = true
+
+    
     init(restaurant: RestaurantFB) {
         self.restaurant = restaurant
         self.menuSelectionVM = MenuSelectionViewModel(restaurant: self.restaurant)
@@ -20,6 +23,7 @@ struct RestaurantHomeView: View {
     
     var body: some View {
         ZStack{
+            Color(#colorLiteral(red: 0.9725490196, green: 0.968627451, blue: 0.9607843137, alpha: 1)).edgesIgnoringSafeArea(.all)
             ScrollView{
                 VStack(spacing: 10){
                     ZStack{
@@ -31,11 +35,11 @@ struct RestaurantHomeView: View {
                         .background(Color.white)
                         .cornerRadius(10)
                         .shadow(radius: 2)
-                        Button(action: {
-                                self.presentationMode.wrappedValue.dismiss()
-                                }) {
-                            Image(systemName: "arrow.left").foregroundColor(.black)
-                        }
+//                        Button(action: {
+//                                self.presentationMode.wrappedValue.dismiss()
+//                                }) {
+//                            Image(systemName: "arrow.left").foregroundColor(.black)
+//                        }
                     }
                     Spacer()
                     ScrollView{
@@ -46,7 +50,7 @@ struct RestaurantHomeView: View {
                                 
                             }
                             HStack{
-                                Text("$$$ | Asian |200m | 9 am – 5 pm").font(.system(size: 14, weight: .semibold)).foregroundColor(Color(#colorLiteral(red: 0.77, green: 0.77, blue: 0.77, alpha: 1))).tracking(-0.41).padding(.leading, 40)
+                                Text("\(restaurant.price) | \(restaurant.ethnicity) |200m | 9 am – 5 pm").font(.system(size: 14, weight: .semibold)).foregroundColor(Color(#colorLiteral(red: 0.77, green: 0.77, blue: 0.77, alpha: 1))).tracking(-0.41).padding(.leading, 40)
                                 Spacer()
                             }
                             HStack{
@@ -111,16 +115,28 @@ struct RestaurantHomeView: View {
                                     }
                                 }
                             }.frame(height: 135).padding()
+                            NavigationLink(destination: ListDishesView(restaurant: self.restaurant).navigationBarHidden(false)){
+                                OrangeButton(strLabel: "See the Menu", width: 335, height: 48)
+                                    .clipShape(RoundedRectangle(cornerRadius: 10, style: .circular))
+                            }
                            
                         }.padding()
                     }
                 }
             }
         }
-        .background(Color(red: 0.953, green: 0.945, blue: 0.933))
+//        .background(Color(red: 0.953, green: 0.945, blue: 0.933))
         .edgesIgnoringSafeArea(.all)
-        .navigationBarHidden(true)
         .navigationBarTitle("")
+        .navigationBarBackButtonHidden(true)
+        .navigationBarHidden(self.isNavigationBarHidden)
+        .navigationBarItems(leading: WhiteBackButton(mode: self.presentationMode))
+            .onAppear(){
+                self.isNavigationBarHidden = false
+            }
+            .onDisappear(){
+                self.isNavigationBarHidden = true
+            }
     }
     
 }

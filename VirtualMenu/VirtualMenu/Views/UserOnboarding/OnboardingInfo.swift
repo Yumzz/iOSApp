@@ -8,8 +8,14 @@
 
 import SwiftUI
 
+extension AnyTransition {
+    static var moveAndFade: AnyTransition {
+        AnyTransition.slide
+    }
+}
+
 struct OnboardingInfo: View {
-    @State var isNavigationBarHidden: Bool = true
+//    @State var isNavigationBarHidden: Bool = true
 
     var body: some View {
         ZStack{

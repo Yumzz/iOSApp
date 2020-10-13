@@ -63,7 +63,7 @@ struct SignUpView: View {
                             .font(.system(size: 36))
                             .padding(.leading, 40)
                             .padding(.trailing, 20)
-                            .position(x: UIScreen.main.bounds.width/2.5, y: 20)
+                            .position(x: UIScreen.main.bounds.width/2, y: 20)
                         
 //                    }
                     

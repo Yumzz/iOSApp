@@ -37,8 +37,9 @@ struct DishDetailsView: View {
     
     var body: some View {
         ZStack{
+            Color(#colorLiteral(red: 0.9725490196, green: 0.968627451, blue: 0.9607843137, alpha: 1)).edgesIgnoringSafeArea(.all)
         VStack(alignment: .center) {
-            Spacer().frame(width: UIScreen.main.bounds.width, height: -60)
+//            Spacer().frame(width: UIScreen.main.bounds.width, height: -60)
             VStack(spacing: 20){
                 Text("\(dish.name)")
                     .font(.title)
@@ -81,7 +82,8 @@ struct DishDetailsView: View {
             }
             .padding()
         }
-        }.background(GradientView().edgesIgnoringSafeArea(.all))
+        }
+//        .background(GradientView().edgesIgnoringSafeArea(.all))
         .navigationBarBackButtonHidden(true)
         .navigationBarItems(leading: WhiteBackButton(mode: self.mode))
     }

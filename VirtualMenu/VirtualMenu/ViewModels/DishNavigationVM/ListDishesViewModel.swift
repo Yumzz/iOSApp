@@ -20,10 +20,9 @@ class ListDishesViewModel: ObservableObject {
     
     let dispatchGroup = DispatchGroup()
     
-
     
-    
-    init(restaurant: RestaurantFB) {
+    init(restaurant: RestaurantFB, dispatch: DispatchGroup) {
+        dispatch.enter()
         
         self.restaurant = restaurant
         
@@ -45,7 +44,7 @@ class ListDishesViewModel: ObservableObject {
             self.dishCategories.sort {
                 $0.name < $1.name
             }
-            
+            dispatch.leave()
         }
         
         

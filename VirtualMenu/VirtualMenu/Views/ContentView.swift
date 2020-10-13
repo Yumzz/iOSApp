@@ -19,7 +19,8 @@ struct ContentView: View {
     var body: some View {
         ZStack {
             if Auth.auth().currentUser != nil {
-                LoginView(loggedin: $loggedIn)
+                OnboardingInfo()
+//                LoginView(loggedin: $loggedIn)
             } else {
                //User Not logged in
                 OnboardingInfo()

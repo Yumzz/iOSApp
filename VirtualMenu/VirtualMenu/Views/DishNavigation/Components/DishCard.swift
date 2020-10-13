@@ -16,6 +16,8 @@ struct DishCard: View {
     var dishIngredients: String
     var price: String
     
+    @EnvironmentObject var order : OrderModel
+    
     @Environment (\.colorScheme) var colorScheme:ColorScheme
     
     var body: some View {
@@ -46,7 +48,7 @@ struct DishCard: View {
                 
                 Spacer()
                 
-                
+//                Button("+", action: self.order.addDish(dish: <#T##DishFB#>, rest: , dis: <#T##DispatchGroup#>))
 //                VStack(alignment: .leading, spacing: 10) {
 //                    Text(dishName).bold()
 //                        .foregroundColor(Color.primary)

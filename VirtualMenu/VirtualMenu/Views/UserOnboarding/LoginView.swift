@@ -51,7 +51,6 @@ struct LoginView: View {
 
     
     @State var loginSelection: Int? = nil
-    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     var alert: Alert {
         Alert(title: Text(alertTitle), message: Text(alertMsg), dismissButton: .default(Text("OK")))
@@ -61,7 +60,7 @@ struct LoginView: View {
     var body: some View {
         ZStack {
         if user.showOnboarding {
-        NavigationView{
+//        NavigationView{
             ZStack{
                 Color(#colorLiteral(red: 0.9725490196, green: 0.968627451, blue: 0.9607843137, alpha: 1)).edgesIgnoringSafeArea(.all)
             VStack{
@@ -108,6 +107,7 @@ struct LoginView: View {
                                         UserDefaults.standard.set(true, forKey: "isLogged")
                                         print(self.user.showOnboarding)
                                         self.user.showOnboarding = false
+                                        self.isNavigationBarHidden = true
                                         print(self.user.showOnboarding)
                                         UserDefaults.standard.set(false, forKey: "showOnboarding")
                                     }else{
@@ -150,11 +150,15 @@ struct LoginView: View {
                 
                 Spacer()
             }
-            }
-            }
+            }.navigationBarTitle("")
+            .navigationBarHidden(self.isNavigationBarHidden)
+//            }
     }else{
-                AppView()
-            }
+            HomeScreenView()
+                .onAppear(){
+                    self.isNavigationBarHidden = true
+                }
+    }
         }
         .onAppear(perform: {
             self.email = ""
@@ -165,15 +169,12 @@ struct LoginView: View {
             }
         })
         .navigationBarTitle("")
-        .navigationBarHidden(true)
+        .navigationBarHidden(self.isNavigationBarHidden)
+        .navigationBarBackButtonHidden(true)
         .navigationBarItems(leading: BackButton(mode: self.mode))
-//            .onAppear(){
-//                self.isNavigationBarHidden = true
-//            }
-//            .onDisappear(){
-//                self.isNavigationBarHidden = false
-//
-//            }
+            .onAppear(){
+                self.isNavigationBarHidden = false
+            }
         .alert(isPresented: $showAlert, content: { self.alert })
     }
         private func performExistingAccountFlows(){
@@ -209,6 +210,7 @@ struct LoginView: View {
     //                dispatch.leave()
                     self.user.showOnboarding = false
                     self.user.isLogged = true
+                    self.isNavigationBarHidden = true
                 case .failure(let error):
                     print("no succ")
 

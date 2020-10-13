@@ -14,83 +14,70 @@ struct ListDishesView: View {
     var restaurant: RestaurantFB
     
     @ObservedObject var listDishVM: ListDishesViewModel
-        
-    @State var dishesDisplayed: [DishFB] = []
-    
+            
     @State var isLoading = false
     
-    @State var dishCategoriesDisplayed: [DishCategory] = []
+    @State var dishCategoryClicked: DishCategory = DishCategory(isExpanded: false, dishes: [], name: "")
     
-    @State var allClicked = false
+    @State var dishes = [DishFB]()
+    
+    @State var dishCats = [DishCategory]()
     
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
     
+    let dispatchGroup = DispatchGroup()
+
     
     init(restaurant: RestaurantFB) {
         
         self.restaurant = restaurant
         
         print("List Dish Vm created")
-        self.listDishVM = ListDishesViewModel(restaurant: self.restaurant)
-                
+        
+        
+        self.listDishVM = ListDishesViewModel(restaurant: self.restaurant, dispatch: dispatchGroup)
+        
     }
     
     var body: some View {
         ZStack {
+            Color(#colorLiteral(red: 0.9725490196, green: 0.968627451, blue: 0.9607843137, alpha: 1)).edgesIgnoringSafeArea(.all)
             ScrollView {
+                ScrollViewReader{ scrollView in
                 VStack {
                     ScrollView(.horizontal, showsIndicators: false) {
+//                        ScrollViewReader{ scrollView in
                         HStack(spacing: 10){
-                            Text("View All")
-                                .padding(.horizontal, 20)
-                                .padding(.vertical, 10)
-                                .font(.system(size: 12))
-                                .background(self.allClicked ? Color(UIColor().colorFromHex("#707070", 1)) : Color.white)
-                                .foregroundColor(self.allClicked ? Color.white : Color.black)
-                            .cornerRadius(5)
-                            .onTapGesture {
-                                if(self.allClicked){
-                                    self.dishCategoriesDisplayed = []
-                                    self.allClicked = false
-                                }
-                                else{
-                                    self.dishCategoriesDisplayed = self.listDishVM.dishCategories
-                                    self.allClicked = true
-                                }
-                            }
-                            ForEach(self.listDishVM.dishCategories, id: \.name){ dishCategory in
+                            ForEach(self.dishCats, id: \.name){ dishCategory in
                                 Text("\(dishCategory.name)")
                                     .padding(.horizontal, 20)
                                     .padding(.vertical, 10)
                                     .font(.system(size: 12))
                                     .scaledToFit()
-                                    .background(self.dishCategoriesDisplayed.contains(dishCategory) ? Color(UIColor().colorFromHex("#707070", 1)) : Color.white)
-                                    .foregroundColor(self.dishCategoriesDisplayed.contains(dishCategory) ? Color.white : Color.black)
+                                    .background((self.dishCategoryClicked == dishCategory) ?
+                                                    ColorManager.yumzzOrange : ColorManager.offWhiteBack)
+                                    .foregroundColor((self.dishCategoryClicked == dishCategory) ?
+                                                        Color(UIColor().colorFromHex("#FFFFFF", 1)) : ColorManager.textGray)
                                     .cornerRadius(5)
                                     .onTapGesture {
-                                        if(self.allClicked){
-                                            self.dishCategoriesDisplayed.removeAll()
-                                            self.dishCategoriesDisplayed.append(dishCategory)
-                                            self.allClicked = false
-                                        }else{
-                                        if(self.dishCategoriesDisplayed.contains(dishCategory)){
-                                                if let index = self.dishCategoriesDisplayed.firstIndex(of: dishCategory) {
-                                                        self.dishCategoriesDisplayed.remove(at: index)
-                                                    }
-                                        }else{
-                                            self.dishCategoriesDisplayed.append(dishCategory)
+                                        if((self.dishCategoryClicked == dishCategory)){
+                                            self.dishCategoryClicked = DishCategory(isExpanded: false, dishes: [], name: "")
+                                        }
+                                        else{
+                                            self.dishCategoryClicked = dishCategory
+                                            scrollView.scrollTo(dishCategory)
                                         }
                                     }
                                 }
                                     
                             }
-                        }
+//                        }
 
                     }
                     
                     Spacer().frame(height: 20)
                     
-                    ForEach(self.dishCategoriesDisplayed, id: \.name){ dishCategory in
+                    ForEach(self.dishCats, id: \.name){ dishCategory in
                         VStack(alignment: .leading, spacing: 40) {
                             
                             Text("\(dishCategory.name)")
@@ -115,19 +102,20 @@ struct ListDishesView: View {
                     }
                     Spacer()
                 }
+                }
+            }
                 .frame(maxWidth: .infinity)
             }
-            
-        }.onAppear{
-            self.allClicked = true
+        .onAppear{
             print("appear")
-            self.dishCategoriesDisplayed = self.listDishVM.dishCategories
+            self.dispatchGroup.notify(queue: .main){
+                self.dishCats = self.listDishVM.dishCategories
+            }
             print("show dishcats")
         }
-        .background(GradientView().edgesIgnoringSafeArea(.top))
-        .navigationBarTitle("Dishes")
+        .navigationBarTitle("\(self.restaurant.name)")
         .navigationBarBackButtonHidden(true)
-        .navigationBarItems(leading: WhiteBackButton(mode: self.mode))
+        .navigationBarItems(leading: BackButton(mode: self.mode))
     }
 }
 
