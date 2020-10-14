@@ -18,12 +18,13 @@ struct ProfileButton: View {
     
     var body: some View{
         Group {
-            HStack(spacing: 60) {
+            HStack {
                 VStack(alignment: .leading) {
                     Text(label)
                         .foregroundColor(Color(UIColor().colorFromHex("#000000", 1)))
                         .font(.system(size: 24))
                 }
+                Spacer()
                 VStack(alignment: .trailing){
                     Image("forward_button")
                         .foregroundColor(Color(UIColor().colorFromHex("#FFFFFF", 1)))

@@ -118,14 +118,14 @@ struct RestaurantHomeView: View {
                                     }
                                 }
                             }.frame(height: 135).padding()
-                            NavigationLink(destination: ListDishesView(restaurant: self.restaurant).navigationBarHidden(false)){
-                                OrangeButton(strLabel: "See the Menu", width: 335, height: 48)
-                                    .clipShape(RoundedRectangle(cornerRadius: 10, style: .circular))
-                            }
+//                            NavigationLink(destination: ListDishesView(restaurant: self.restaurant).navigationBarHidden(false)){
+//                                OrangeButton(strLabel: "See the Menu", width: 335, height: 48)
+//                                    .clipShape(RoundedRectangle(cornerRadius: 10, style: .circular))
+//                            }
                            
                         }.padding()
                         NavigationLink(
-                            destination: ListDishesView(restaurant: self.restaurant).navigationBarHidden(true)
+                            destination: ListDishesView(restaurant: self.restaurant).navigationBarHidden(false)
                         ) {
                             HStack{
                                 Image(systemName: "list.bullet.rectangle")

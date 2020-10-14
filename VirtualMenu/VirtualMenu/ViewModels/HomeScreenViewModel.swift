@@ -44,11 +44,11 @@ class HomeScreenViewModel: ObservableObject {
                 for document in snapshot!.documents {
                     DispatchQueue.main.async {
                         let restaurant = RestaurantFB(snapshot: document)!
-                        if(self.checkInRadius(coordinate: document.get("location") as! GeoPoint)){
-                            DispatchQueue.main.async {
+//                        if(self.checkInRadius(coordinate: document.get("location") as! GeoPoint)){
+//                            DispatchQueue.main.async {
                                 self.allRestaurants.append(restaurant)
-                            }
-                        }
+//                            }
+//                        }
 //                        self.allRestaurants.append(restaurant)
                     }
                     if(document == snapshot!.documents.last){

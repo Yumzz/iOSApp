@@ -90,7 +90,7 @@ struct OrderView: View {
                                     NavigationLink(destination:
                                         DishDetailsView(dish: dish, restaurant: self.order.restChosen).navigationBarHidden(false)
                                     ) {
-                                        DishCard(urlImage: FBURLImage(url: dish.coverPhotoURL, imageAspectRatio: .fill), dishName: dish.name, dishIngredients: dish.description, price: self.order.formatPrice(price: dish.price))
+                                        DishPreviewCard(urlImage: FBURLImage(url: dish.coverPhotoURL, imageAspectRatio: .fill), dishName: dish.name, dishIngredients: dish.description, price: self.order.formatPrice(price: dish.price))
                                     }
                                 }
                             }

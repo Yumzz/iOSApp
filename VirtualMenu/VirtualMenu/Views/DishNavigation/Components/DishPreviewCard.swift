@@ -8,17 +8,13 @@
 
 import SwiftUI
 
-struct DishCard: View {
+struct DishPreviewCard: View {
     
     var urlImage:FBURLImage?
     
     var dishName: String
     var dishIngredients: String
     var price: String
-    
-    var rest: RestaurantFB
-    
-    var dish: DishFB
     
     let dispatchGroup = DispatchGroup()
     
@@ -58,30 +54,6 @@ struct DishCard: View {
                 
                 Spacer()
                 
-//                Button("+", action: (self.order.addDish(dish: self.dish, rest: self.rest, dis: self.dispatchGroup)))
-                Image("add_order")
-                    .onTapGesture {
-                        if(!self.order.checkSameRest(dish: self.dish)){
-                            self.alertTitle = "Different Restaurant"
-                            self.alertMessage = "A new order has been started for \(self.rest.name)"
-                            self.showingAlert.toggle()
-                            self.order.newOrder(rest: self.rest)
-                        }else{
-                            self.alertTitle = "Dish Added"
-                            self.alertMessage = "A new dish has been added to your order. Check the order tab to see your entire order."
-                            self.showingAlert.toggle()
-                        }
-                        self.order.restChosen = self.rest
-                        self.order.addDish(dish: self.dish, rest: self.rest, dis: self.dispatchGroup)
-                        self.dispatchGroup.notify(queue: .main){
-                            print("\(self.order.dishRestaurant[self.dish])")
-                        }
-                    }
-                    .alert(isPresented: self.$showingAlert) {
-                        Alert(title: Text("\(self.alertTitle)"), message: Text("\(self.alertMessage)"), dismissButton: .default(Text("OK")))
-                    }
-                
-                Spacer()
                 
 //                Button
                 
@@ -105,13 +77,13 @@ struct DishCard: View {
     }
 }
 
-struct DishCard_Previews: PreviewProvider {
+struct DishPreviewCard_Previews: PreviewProvider {
     static var previews: some View {
         
         Group {
-            DishCard(urlImage: nil, dishName: "Tomato Pasta", dishIngredients: "Pasta, Tomato Sauce", price: "$10", rest: RestaurantFB.previewRest(), dish: DishFB.previewDish()).colorScheme(.light)
+            DishPreviewCard(urlImage: nil, dishName: "Tomato Pasta", dishIngredients: "Pasta, Tomato Sauce", price: "$10").colorScheme(.light)
             
-            DishCard(urlImage: nil, dishName: "Calzone", dishIngredients: "Cream, onions, ham, olives, herbs, verylongingredientName", price: "$10", rest: RestaurantFB.previewRest(), dish: DishFB.previewDish()).colorScheme(.dark)
+            DishPreviewCard(urlImage: nil, dishName: "Calzone", dishIngredients: "Cream, onions, ham, olives, herbs, verylongingredientName", price: "$10").colorScheme(.dark)
         }
     }
 }
