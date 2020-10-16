@@ -61,16 +61,16 @@ struct RestaurantHomeView: View {
                                 }) {
                                     HStack {
                                         Image(systemName: "phone.fill")
-                                            .font(.system(size: 18))
+                                            .font(.system(size: 18, weight: .bold))
                                         Text("Call Restaurant")
-                                            .font(.system(size: 10))
+                                            .font(.system(size: 18,weight: .bold))
                                             .font(.footnote)
                                             .frame(width: 150)
                                     }
                                     .padding()
                                     .foregroundColor(Color(#colorLiteral(red: 0.88, green: 0.36, blue: 0.16, alpha: 1)))
                                     .background(Color.white)
-                                    .cornerRadius(20)
+                                    .cornerRadius(15)
                                     .frame(width: 150, height: 36)
                                 }.padding(.leading, 40)
                                 Spacer()
@@ -79,12 +79,12 @@ struct RestaurantHomeView: View {
                                 }) {
                                     HStack {
                                         Image(systemName: "qrcode.viewfinder")
-                                            .font(.system(size: 18))
+                                            .font(.system(size: 18, weight: .bold))
                                     }
                                     .padding()
                                     .foregroundColor(Color(#colorLiteral(red: 0.88, green: 0.36, blue: 0.16, alpha: 1)))
                                     .background(Color.white)
-                                    .cornerRadius(20)
+                                    .cornerRadius(15)
 
                                 }
                     
@@ -92,6 +92,35 @@ struct RestaurantHomeView: View {
                             }.padding()
                             
                             VStack{
+                                HStack(spacing: 10){
+                                    Button(action: {
+                                        let regionDistance:CLLocationDistance = 10000
+                                        let coordinates = CLLocationCoordinate2DMake(restaurant.coordinate.latitude, restaurant.coordinate.longitude)
+                                        let regionSpan = MKCoordinateRegion(center: coordinates, latitudinalMeters: regionDistance, longitudinalMeters: regionDistance)
+                                        let options = [
+                                            MKLaunchOptionsMapCenterKey: NSValue(mkCoordinate: regionSpan.center),
+                                            MKLaunchOptionsMapSpanKey: NSValue(mkCoordinateSpan: regionSpan.span)
+                                        ]
+                                        let placemark = MKPlacemark(coordinate: coordinates, addressDictionary: nil)
+                                        let mapItem = MKMapItem(placemark: placemark)
+                                        mapItem.name=restaurant.name
+                                        mapItem.openInMaps(launchOptions: options)
+                                    }) {
+                                        VStack {
+                                            Image(systemName: "arrow.uturn.right")
+                                                .font(.system(size: 18))
+                                            Text("Direction")
+                                                .fontWeight(.semibold)
+                                                .font(.system(size: 10))
+                                                .frame(width: 46)
+                                        }
+                                        .padding()
+                                        .foregroundColor(.red)
+                                        .background(Color.white)
+                                        .cornerRadius(10)
+                                        .shadow(radius: 2)
+                                    }
+                                }
                                 HStack{
                                     Text("Popular").font(.system(size: 24, weight: .semibold))
                                         .padding(.leading, 40)
