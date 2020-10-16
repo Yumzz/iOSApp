@@ -36,19 +36,18 @@ struct RestaurantHomeView: View {
                     VStack(spacing: 10){
                         VStack{
                             HStack{
-                                Text(restaurant.name).font(.system(size: 24, weight: .semibold)).tracking(-0.41).padding(.leading, 40)
+                                Text(restaurant.name).font(.system(size: 24, weight: .semibold)).tracking(-0.41)
                                 Spacer()
                                 
                             }
                             HStack{
-                                Text("\(restaurant.price) | \(restaurant.ethnicity) |200m | 9 am – 5 pm").font(.system(size: 14, weight: .semibold)).foregroundColor(Color(#colorLiteral(red: 0.77, green: 0.77, blue: 0.77, alpha: 1))).tracking(-0.41).padding(.leading, 40)
+                                Text("\(restaurant.price) | \(restaurant.ethnicity) |200m | 9 am – 5 pm").font(.system(size: 14, weight: .semibold)).foregroundColor(Color(#colorLiteral(red: 0.77, green: 0.77, blue: 0.77, alpha: 1))).tracking(-0.41)
                                 Spacer()
                             }
                             HStack{
                                 RoundedRectangle(cornerRadius: 5)
                                     .fill(Color(#colorLiteral(red: 0, green: 0.7333333492279053, blue: 0.4693332314491272, alpha: 1)))
                                 .frame(width: 45, height: 20)
-                                    .padding(.leading,40)
                                 Text("(298 reviews)").font(.system(size: 14, weight: .semibold)).tracking(-0.41)
                                 
                                 Spacer()
@@ -69,30 +68,10 @@ struct RestaurantHomeView: View {
                                     }
                                     .padding()
                                     .foregroundColor(Color(#colorLiteral(red: 0.88, green: 0.36, blue: 0.16, alpha: 1)))
-                                    .background(Color.white)
-                                    .cornerRadius(15)
-                                    .frame(width: 150, height: 36)
-                                }.padding(.leading, 40)
-                                Spacer()
-                                Button(action: {
-
-                                }) {
-                                    HStack {
-                                        Image(systemName: "qrcode.viewfinder")
-                                            .font(.system(size: 18, weight: .bold))
-                                    }
-                                    .padding()
-                                    .foregroundColor(Color(#colorLiteral(red: 0.88, green: 0.36, blue: 0.16, alpha: 1)))
-                                    .background(Color.white)
-                                    .cornerRadius(15)
-
+                                    .background(RoundedRectangle(cornerRadius: 15, style: .continuous).fill(Color.white).frame(height: 50))
                                 }
-                    
                                 Spacer()
-                            }.padding()
-                            
-                            VStack{
-                                HStack(spacing: 10){
+                                HStack{
                                     Button(action: {
                                         let regionDistance:CLLocationDistance = 10000
                                         let coordinates = CLLocationCoordinate2DMake(restaurant.coordinate.latitude, restaurant.coordinate.longitude)
@@ -110,20 +89,33 @@ struct RestaurantHomeView: View {
                                             Image(systemName: "arrow.uturn.right")
                                                 .font(.system(size: 18))
                                             Text("Direction")
-                                                .fontWeight(.semibold)
+                                                .fontWeight(.bold)
                                                 .font(.system(size: 10))
-                                                .frame(width: 46)
+                                                .frame(width: 50, height: 20)
                                         }
                                         .padding()
-                                        .foregroundColor(.red)
-                                        .background(Color.white)
-                                        .cornerRadius(10)
-                                        .shadow(radius: 2)
+                                        .foregroundColor(Color(#colorLiteral(red: 0.88, green: 0.36, blue: 0.16, alpha: 1)))
+                                        .background(RoundedRectangle(cornerRadius: 15, style: .continuous).fill(Color.white).frame(height: 50))
                                     }
                                 }
+//                                Button(action: {
+//
+//                                }) {
+//                                    HStack {
+//                                        Image(systemName: "qrcode.viewfinder")
+//                                            .font(.system(size: 18, weight: .bold))
+//                                    }
+//                                    .padding()
+//                                    .foregroundColor(Color(#colorLiteral(red: 0.88, green: 0.36, blue: 0.16, alpha: 1)))
+//                                    .background(Color.white)
+//                                    .cornerRadius(15)
+//
+//                                }
+                            }.padding(.top)
+                            
+                            VStack{
                                 HStack{
                                     Text("Popular").font(.system(size: 24, weight: .semibold))
-                                        .padding(.leading, 40)
                                     Spacer()
                                 }
                             }
@@ -139,10 +131,11 @@ struct RestaurantHomeView: View {
                                         }
                                     }
                                 }
-                            }.frame(height: 135).padding()
+                            }.frame(height: 150)
 
                            
                         }.padding()
+                        
                         NavigationLink(
                             destination: ListDishesView(restaurant: self.restaurant).navigationBarHidden(false)
                         ) {
@@ -198,7 +191,7 @@ struct PopularDishCard: View {
                 Spacer()
             }
         }.frame(width: 175, height: 150)
-        .padding(.leading, 10)
+        .padding(.leading, 5)
     }
 }
 

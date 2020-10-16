@@ -148,7 +148,8 @@ struct HSRestaurantCard: View {
                     Text("\(restaurant.price) | \(restaurant.ethnicity) | \(self.location) miles").font(.system(size: 12, weight: .semibold)).foregroundColor(Color(#colorLiteral(red: 0.7, green: 0.7, blue: 0.7, alpha: 1))).tracking(-0.41)
                     Spacer()
                 }
-            }.frame(width: 175, height: 130)
+            }.frame(width: 175, height: 150)
+            .padding(.leading, 5)
             .onAppear(){
                 print("loco:\(restaurant)")
 //                self.location = HomeScreenVM.getDistFromUser(coordinate: restaurant.coordinate)

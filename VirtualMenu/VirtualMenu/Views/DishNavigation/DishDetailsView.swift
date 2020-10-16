@@ -49,7 +49,7 @@ struct DishDetailsView: View {
                     VStack{
                         VStack{
                             HStack{
-                                Text(dish.name).font(.system(size: 24, weight: .semibold)).tracking(-0.41).padding(.leading, 40)
+                                Text(dish.name).font(.system(size: 24, weight: .semibold)).tracking(-0.41)
                                 Spacer()
                                 
                             }
@@ -57,12 +57,11 @@ struct DishDetailsView: View {
                                 RoundedRectangle(cornerRadius: 5)
                                     .fill(Color(#colorLiteral(red: 0, green: 0.7333333492279053, blue: 0.4693332314491272, alpha: 1)))
                                 .frame(width: 45, height: 20)
-                                    .padding(.leading,40)
                                 Text("(298 reviews)").font(.system(size: 14, weight: .semibold)).tracking(-0.41)
                                 Spacer()
                             }
                             HStack{
-                                Text("Salmon, Rice, soy sauce, wasabi, sesame seeds").font(.system(size: 14, weight: .semibold)).foregroundColor(Color(#colorLiteral(red: 0.71, green: 0.71, blue: 0.71, alpha: 1))).tracking(-0.41).padding(.leading, 40)
+                                Text("Salmon, Rice, soy sauce, wasabi, sesame seeds").font(.system(size: 14, weight: .semibold)).foregroundColor(Color(#colorLiteral(red: 0.71, green: 0.71, blue: 0.71, alpha: 1))).tracking(-0.41)
                                 Spacer()
                             }
                            
@@ -86,6 +85,7 @@ struct DishDetailsView: View {
                             .background(Color.white)
                             .cornerRadius(10)
                             .frame(width: 122, height: 48)
+                            Spacer()
                             NavigationLink(destination: ReviewOrder()){
                                 HStack{
                                     Text("$17")
@@ -105,7 +105,7 @@ struct DishDetailsView: View {
                                 .cornerRadius(10)
                                 .frame(width: 195, height: 48)
                             }
-                        }
+                        }.padding()
                     }
                     .background(RoundedRectangle(cornerRadius: /*@START_MENU_TOKEN@*/25.0/*@END_MENU_TOKEN@*/, style: /*@START_MENU_TOKEN@*/.continuous/*@END_MENU_TOKEN@*/).fill(Color(#colorLiteral(red: 0.9725490196, green: 0.968627451, blue: 0.9607843137, alpha: 1))))
                     .offset(y:200)
