@@ -21,7 +21,8 @@ class HomeScreenViewModel: ObservableObject {
     
     let proximity = 30
     
-    init() {
+    init(dispatch: DispatchGroup) {
+        dispatch.enter()
         self.dispatchGroup.enter()
         fetchRestaurantsFB()
         self.dispatchGroup.notify(queue: .main) {
@@ -29,10 +30,11 @@ class HomeScreenViewModel: ObservableObject {
 //            self.allRestaurants.sort {
 //                $0.name < $1.name
 //            }
-            
+            print("here at hsvm")
             self.allRestaurants.sort {
                 (self.getDistFromUser(coordinate: $0.coordinate)) < (self.getDistFromUser(coordinate: $1.coordinate))
             }
+            dispatch.leave()
         }
     }
     
@@ -46,10 +48,10 @@ class HomeScreenViewModel: ObservableObject {
                         let restaurant = RestaurantFB(snapshot: document)!
 //                        if(self.checkInRadius(coordinate: document.get("location") as! GeoPoint)){
 //                            DispatchQueue.main.async {
-                                self.allRestaurants.append(restaurant)
+//                                self.allRestaurants.append(restaurant)
 //                            }
 //                        }
-//                        self.allRestaurants.append(restaurant)
+                        self.allRestaurants.append(restaurant)
                     }
                     if(document == snapshot!.documents.last){
                         self.dispatchGroup.leave()

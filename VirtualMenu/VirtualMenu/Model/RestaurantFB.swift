@@ -76,7 +76,7 @@ struct RestaurantFB {
     init?(snapshot: QueryDocumentSnapshot){
        guard
            let name = snapshot.data()["Name"] as? String else {
-           print("no name")
+           print("no rest name")
            return nil
        }
 //        guard
@@ -84,8 +84,8 @@ struct RestaurantFB {
 //            print("dishes messed up")
 //            return nil
 //        }
-       guard
-           let featuredDishRefs = (snapshot.data()["FeaturedDishes"] as? [DocumentReference?]) else {
+        
+       guard let featuredDishRefs = (snapshot.data()["FeaturedDishes"] as? [DocumentReference?]) else {
            print("featured dishes messed up: \(name)")
            return nil
        }
@@ -131,12 +131,12 @@ struct RestaurantFB {
         }
         guard
             let ratingSum = snapshot.data()["RatingSum"] as? Int64 else {
-            print("no RatingSum")
+            print("no RatingSum: \(name)")
             return nil
         }
         guard
             let n_Ratings = snapshot.data()["N_Ratings"] as? Int64 else {
-            print("no RatingSum")
+            print("no n_rating")
             return nil
         }
        
@@ -164,7 +164,7 @@ struct RestaurantFB {
 
         guard
             let name = snapshot.data()["Name"] as? String else {
-                print("no name")
+                print("no rest name")
                 return nil
         }
 //        guard

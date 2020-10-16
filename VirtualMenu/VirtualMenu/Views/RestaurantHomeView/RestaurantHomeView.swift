@@ -14,6 +14,7 @@ struct RestaurantHomeView: View {
     
     @ObservedObject var menuSelectionVM: MenuSelectionViewModel
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    @EnvironmentObject var order : OrderModel
     
     @State var isNavigationBarHidden: Bool = true
 
@@ -118,28 +119,20 @@ struct RestaurantHomeView: View {
                                     }
                                 }
                             }.frame(height: 135).padding()
-//                            NavigationLink(destination: ListDishesView(restaurant: self.restaurant).navigationBarHidden(false)){
-//                                OrangeButton(strLabel: "See the Menu", width: 335, height: 48)
-//                                    .clipShape(RoundedRectangle(cornerRadius: 10, style: .circular))
-//                            }
                            
                         }.padding()
                         NavigationLink(
                             destination: ListDishesView(restaurant: self.restaurant).navigationBarHidden(false)
                         ) {
-                            HStack{
-                                Image(systemName: "list.bullet.rectangle")
-                                    .font(.system(size: 18))
-                                Text("See the Menu")
-                                    .font(.system(size: 16, weight: .semibold))
-                                    .font(.footnote)
-                                    .frame(width: 150)
+                            SeeMenuButton()
+                                .clipShape(RoundedRectangle(cornerRadius: 10, style: .circular))
+                        }
+                        Spacer()
+                        if(!self.order.dishesChosen.isEmpty){
+                            NavigationLink(destination: ReviewOrder().navigationBarTitle("").navigationBarHidden(true)){
+                                ViewCartButton(dishCount: self.order.dishesChosen.count)
+                                    .clipShape(RoundedRectangle(cornerRadius: 10, style: .circular))
                             }
-                            .padding()
-                            .foregroundColor(Color.white)
-                            .background(Color(#colorLiteral(red: 0.88, green: 0.36, blue: 0.16, alpha: 1)))
-                            .cornerRadius(10)
-                            .frame(width: 345, height: 48)
                         }
                     }
                 }

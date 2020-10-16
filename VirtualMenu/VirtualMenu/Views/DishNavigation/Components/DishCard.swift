@@ -22,9 +22,8 @@ struct DishCard: View {
     
     let dispatchGroup = DispatchGroup()
     
-    @State private var showingAlert = false
-    @State private var alertMessage = ""
-    @State private var alertTitle = ""
+//    @State private var alertMessage = ""
+//    @State private var alertTitle = ""
     
     @EnvironmentObject var order : OrderModel
     
@@ -58,30 +57,31 @@ struct DishCard: View {
                 
                 Spacer()
                 
-//                Button("+", action: (self.order.addDish(dish: self.dish, rest: self.rest, dis: self.dispatchGroup)))
                 Image("add_order")
                     .onTapGesture {
                         if(!self.order.checkSameRest(dish: self.dish)){
-                            self.alertTitle = "Different Restaurant"
-                            self.alertMessage = "A new order has been started for \(self.rest.name)"
-                            self.showingAlert.toggle()
+//                            self.alertTitle = "Different Restaurant"
+//                            self.alertMessage = "A new order has been started for \(self.rest.name)"
+//                            self.showingAlert.toggle()
                             self.order.newOrder(rest: self.rest)
                         }else{
-                            self.alertTitle = "Dish Added"
-                            self.alertMessage = "A new dish has been added to your order. Check the order tab to see your entire order."
-                            self.showingAlert.toggle()
+//                            self.alertTitle = "Dish Added"
+//                            self.alertMessage = "A new dish has been added to your order. Check the order tab to see your entire order."
+//                            self.showingAlert.toggle()
                         }
+                        self.dispatchGroup.enter()
                         self.order.restChosen = self.rest
                         self.order.addDish(dish: self.dish, rest: self.rest, dis: self.dispatchGroup)
                         self.dispatchGroup.notify(queue: .main){
-                            print("\(self.order.dishRestaurant[self.dish])")
+//                            print("\(self.order.dishRestaurant[self.dish])")
+                            NotificationCenter.default.post(name: Notification.Name(rawValue: "Alert"), object: nil)
                         }
                     }
-                    .alert(isPresented: self.$showingAlert) {
-                        Alert(title: Text("\(self.alertTitle)"), message: Text("\(self.alertMessage)"), dismissButton: .default(Text("OK")))
-                    }
+//                    .alert(isPresented: self.$showingAlert) {
+//                        Alert(title: Text("Added"))
+//                    }
                 
-                Spacer()
+                Spacer().frame(width: 5, height: 0)
                 
 //                Button
                 

@@ -46,6 +46,7 @@ class OrderModel: ObservableObject {
         dishRestaurant[dish] = rest
         dishesChosen.append(dish)
         self.totalAmount()
+        print("added")
         dis.leave()
     }
     

@@ -25,7 +25,7 @@ class LocationManager: NSObject {
     }
     func locationManager(_ manager: CLLocationManager,
                          didUpdateLocations locations: [CLLocation]){
-        self.location = locations[0]
+        self.location = locations[locations.count-1]
     }
 }
 

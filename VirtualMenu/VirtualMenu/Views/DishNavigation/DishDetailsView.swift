@@ -94,23 +94,25 @@ struct DishDetailsView: View {
                             .background(Color.white)
                             .cornerRadius(10)
                             .frame(width: 122, height: 48)
-                            HStack{
-                                Text("$17")
-                                    .font(.system(size: 16, weight: .semibold))
-                                    .font(.footnote)
-                                    .frame(width: 40)
-                                Image(systemName: "cart.fill.badge.plus")
-                                    .font(.system(size: 18))
-                                Text("Add to Cart")
-                                    .font(.system(size: 16, weight: .semibold))
-                                    .font(.footnote)
-                                    .frame(width: 100)
+                            NavigationLink(destination: ReviewOrder()){
+                                HStack{
+                                    Text("$17")
+                                        .font(.system(size: 16, weight: .semibold))
+                                        .font(.footnote)
+                                        .frame(width: 40)
+                                    Image(systemName: "cart.fill.badge.plus")
+                                        .font(.system(size: 18))
+                                    Text("Add to Cart")
+                                        .font(.system(size: 16, weight: .semibold))
+                                        .font(.footnote)
+                                        .frame(width: 100)
+                                }
+                                .padding()
+                                .foregroundColor(Color.white)
+                                .background(Color(#colorLiteral(red: 0.88, green: 0.36, blue: 0.16, alpha: 1)))
+                                .cornerRadius(10)
+                                .frame(width: 195, height: 48)
                             }
-                            .padding()
-                            .foregroundColor(Color.white)
-                            .background(Color(#colorLiteral(red: 0.88, green: 0.36, blue: 0.16, alpha: 1)))
-                            .cornerRadius(10)
-                            .frame(width: 195, height: 48)
                         }
                     }
                 }

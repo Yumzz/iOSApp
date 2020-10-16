@@ -33,6 +33,12 @@
 		3A13B6EA24C197B30006458B /* RestaurantSearchLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A13B6E924C197B30006458B /* RestaurantSearchLabel.swift */; };
 		3A13B6ED24C3D9FB0006458B /* SuggestRestaurant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A13B6EC24C3D9FB0006458B /* SuggestRestaurant.swift */; };
 		3A3DD56C253654CA00536D62 /* DishPreviewCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3DD56B253654C900536D62 /* DishPreviewCard.swift */; };
+		3A3DD57425380E1000536D62 /* ReviewOrder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3DD57325380E0F00536D62 /* ReviewOrder.swift */; };
+		3A3DD57F2538333100536D62 /* DishCardOrder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3DD57E2538333000536D62 /* DishCardOrder.swift */; };
+		3A3DD589253838A700536D62 /* ReceiptCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3DD588253838A700536D62 /* ReceiptCard.swift */; };
+		3A3DD58F2538396B00536D62 /* XButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3DD58E2538396B00536D62 /* XButton.swift */; };
+		3A3DD5952539378700536D62 /* ViewCartButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3DD5942539378600536D62 /* ViewCartButton.swift */; };
+		3A3DD59C2539405000536D62 /* SeeMenuButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3DD59B2539405000536D62 /* SeeMenuButton.swift */; };
 		3A45AD8D24B3FE8800CF3A8F /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A45AD8C24B3FE8800CF3A8F /* Constants.swift */; };
 		3A4A0E70249EB9320030635E /* AccountProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A4A0E6F249EB9320030635E /* AccountProfileView.swift */; };
 		3A4A0E72249EB94D0030635E /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A4A0E71249EB94D0030635E /* ImagePicker.swift */; };
@@ -221,6 +227,12 @@
 		3A13B6E924C197B30006458B /* RestaurantSearchLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantSearchLabel.swift; sourceTree = "<group>"; };
 		3A13B6EC24C3D9FB0006458B /* SuggestRestaurant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestRestaurant.swift; sourceTree = "<group>"; };
 		3A3DD56B253654C900536D62 /* DishPreviewCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DishPreviewCard.swift; sourceTree = "<group>"; };
+		3A3DD57325380E0F00536D62 /* ReviewOrder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewOrder.swift; sourceTree = "<group>"; };
+		3A3DD57E2538333000536D62 /* DishCardOrder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DishCardOrder.swift; sourceTree = "<group>"; };
+		3A3DD588253838A700536D62 /* ReceiptCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiptCard.swift; sourceTree = "<group>"; };
+		3A3DD58E2538396B00536D62 /* XButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XButton.swift; sourceTree = "<group>"; };
+		3A3DD5942539378600536D62 /* ViewCartButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewCartButton.swift; sourceTree = "<group>"; };
+		3A3DD59B2539405000536D62 /* SeeMenuButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeeMenuButton.swift; sourceTree = "<group>"; };
 		3A45AD8C24B3FE8800CF3A8F /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		3A4A0E6F249EB9320030635E /* AccountProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountProfileView.swift; sourceTree = "<group>"; };
 		3A4A0E71249EB94D0030635E /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
@@ -407,6 +419,7 @@
 		343A44BE252E21DF00109C90 /* RestaurantHomeView */ = {
 			isa = PBXGroup;
 			children = (
+				3A3DD59A2539402A00536D62 /* Components */,
 				343A44BF252E21FE00109C90 /* RestaurantHomeView.swift */,
 			);
 			path = RestaurantHomeView;
@@ -459,6 +472,34 @@
 				3A5633CB24FA33790059B603 /* Order.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		3A3DD57225380DDC00536D62 /* CartView */ = {
+			isa = PBXGroup;
+			children = (
+				3A3DD57D2538331600536D62 /* Components */,
+				3A3DD57325380E0F00536D62 /* ReviewOrder.swift */,
+			);
+			path = CartView;
+			sourceTree = "<group>";
+		};
+		3A3DD57D2538331600536D62 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				3A3DD57E2538333000536D62 /* DishCardOrder.swift */,
+				3A3DD5942539378600536D62 /* ViewCartButton.swift */,
+				3A3DD58E2538396B00536D62 /* XButton.swift */,
+				3A3DD588253838A700536D62 /* ReceiptCard.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		3A3DD59A2539402A00536D62 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				3A3DD59B2539405000536D62 /* SeeMenuButton.swift */,
+			);
+			path = Components;
 			sourceTree = "<group>";
 		};
 		3A4E2E2124C6841E00C34DD8 /* TabViews */ = {
@@ -754,6 +795,7 @@
 		A73B1B5924B0FDA800A8C6A8 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				3A3DD57225380DDC00536D62 /* CartView */,
 				343A44BE252E21DF00109C90 /* RestaurantHomeView */,
 				34909E7A252D69A100B43D7B /* HomeScreen */,
 				3A63227F250C1973001427F7 /* BackgroundViews */,
@@ -1128,6 +1170,7 @@
 				3A6477F224B68D060077EF30 /* UserProfile.swift in Sources */,
 				3A5633BC24F901B70059B603 /* SignInWithAppleManager.swift in Sources */,
 				A741C96024FB516000B7F406 /* CompleteOrderCard.swift in Sources */,
+				3A3DD589253838A700536D62 /* ReceiptCard.swift in Sources */,
 				3AF9926A24A2B95C005446D8 /* InputValidation.swift in Sources */,
 				3ACAD174250AE39D00B24CEB /* SuggestRestaurantViewModel.swift in Sources */,
 				A777C3A424D3EC7A009658AA /* UserStore.swift in Sources */,
@@ -1138,6 +1181,7 @@
 				A7912A2624CF82140052988C /* WhiteButton.swift in Sources */,
 				3482C0CF250C95D300FC362D /* BottomSheetView.swift in Sources */,
 				3A13B6E424C1816B0006458B /* ReportProblem.swift in Sources */,
+				3A3DD58F2538396B00536D62 /* XButton.swift in Sources */,
 				A779ACAA250D4F7400146565 /* ImageCache.swift in Sources */,
 				3ACAD170250ACE2000B24CEB /* LoginViewModel.swift in Sources */,
 				3A4E2E4124D24B1D00C34DD8 /* RestaurantAnnotation.swift in Sources */,
@@ -1158,6 +1202,7 @@
 				3A5633C024F902070059B603 /* SignInWithAppleButton.swift in Sources */,
 				3AFA233E24DA01AC00F90ED8 /* MenuSelectionView.swift in Sources */,
 				3A530DEF24D8E00100CBDE28 /* isClick.swift in Sources */,
+				3A3DD59C2539405000536D62 /* SeeMenuButton.swift in Sources */,
 				343A44C0252E21FE00109C90 /* RestaurantHomeView.swift in Sources */,
 				3AFA234A24DCB14B00F90ED8 /* DishReviewsView.swift in Sources */,
 				3ABA90F124F63DB500695B06 /* BlackButton.swift in Sources */,
@@ -1174,13 +1219,16 @@
 				A7F5506D24C1259100FAC1F0 /* RestaurantSearchbarView.swift in Sources */,
 				3A5633C624F9057D0059B603 /* AppleSignInButton.swift in Sources */,
 				3ACAD189250B161A00B24CEB /* RestCategory.swift in Sources */,
+				3A3DD5952539378700536D62 /* ViewCartButton.swift in Sources */,
 				C55FDD6524CABA2800CC8561 /* RestaurantFB.swift in Sources */,
 				3AA9897624B517F00070FD97 /* Extensions.swift in Sources */,
 				A77BC2F424DD2AE800ACAD84 /* RestaurantSearchListViewModel.swift in Sources */,
 				3AF1BA84252A926900FAA9A0 /* OnboardingInfo.swift in Sources */,
 				3ABA90F524F64EDE00695B06 /* GuestButton.swift in Sources */,
 				A7912A2824CF87260052988C /* CoralButton.swift in Sources */,
+				3A3DD57425380E1000536D62 /* ReviewOrder.swift in Sources */,
 				34370CC72500D59A00ECD88B /* MenuSelectionViewModel.swift in Sources */,
+				3A3DD57F2538333100536D62 /* DishCardOrder.swift in Sources */,
 				3A632281250C19B9001427F7 /* GradientView.swift in Sources */,
 				3A0745DB253021CB000EF6BD /* ColorManager.swift in Sources */,
 				A735992A24ECFDCF00584BFD /* AccountProfileLoginView.swift in Sources */,

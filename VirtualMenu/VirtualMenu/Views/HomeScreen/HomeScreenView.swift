@@ -12,9 +12,17 @@ struct HomeScreenView: View {
     @ObservedObject var HomeScreenVM : HomeScreenViewModel
     
     @State private var showAccount = false
+    
+    @State var restaurants = [RestaurantFB]()
+    
+    let dispatchGroup = DispatchGroup()
+    
+    @EnvironmentObject var order : OrderModel
+    
+    private var locationManager = LocationManager()
 
     init() {
-        self.HomeScreenVM = HomeScreenViewModel()
+        self.HomeScreenVM = HomeScreenViewModel(dispatch: dispatchGroup)
     }
     
     var body: some View {
@@ -59,7 +67,6 @@ struct HomeScreenView: View {
                             }
                         }.foregroundColor(Color(#colorLiteral(red: 0.88, green: 0.36, blue: 0.16, alpha: 1))).frame(alignment: .top).padding()
                             
-                        
                         HStack {
                             Text("Near you").font(.system(size: 24, weight: .semibold))
                             Spacer()
@@ -67,11 +74,11 @@ struct HomeScreenView: View {
                         
                         ScrollView(.horizontal) {
                             HStack(spacing: 30) {
-                                ForEach(self.HomeScreenVM.allRestaurants, id:\.id) { restaurant in
+                                ForEach(self.restaurants, id:\.id) { restaurant in
                                     NavigationLink(
                                         destination: RestaurantHomeView(restaurant: restaurant)
                                     ) {
-                                        HSRestaurantCard(restaurant: restaurant, HomeScreenVM: self.HomeScreenVM)
+                                        HSRestaurantCard(restaurant: restaurant, location: self.HomeScreenVM.getDistFromUser(coordinate: restaurant.coordinate))
                                     }
                                 }
                             }
@@ -83,22 +90,39 @@ struct HomeScreenView: View {
                         
                         ScrollView(.horizontal){
                             HStack(spacing: 30) {
-                                ForEach(self.HomeScreenVM.allRestaurants, id:\.id) { restaurant in
+                                ForEach(self.restaurants, id:\.id) { restaurant in
                                     NavigationLink(
                                         destination: RestaurantHomeView(restaurant: restaurant)
                                     ) {
-                                        HSRestaurantCard(restaurant: restaurant, HomeScreenVM: self.HomeScreenVM)
+                                        HSRestaurantCard(restaurant: restaurant, location: self.HomeScreenVM.getDistFromUser(coordinate: restaurant.coordinate))
                                     }
                                 }
                             }
                         }.frame(height: 135).padding()
+                        Spacer()
+                        
+                        if(!self.order.dishesChosen.isEmpty){
+                            NavigationLink(destination: ReviewOrder()){
+                                ViewCartButton(dishCount: self.order.dishesChosen.count)
+                                    .clipShape(RoundedRectangle(cornerRadius: 10, style: .circular))
+                            }
+                                
+                        }
                         
                         Spacer()
+
                     }.padding(.top, geometry.safeAreaInsets.top)
                 }
 //                .background(Color(red: 0.953, green: 0.945, blue: 0.933))
                 .edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
             }.navigationBarTitle("").navigationBarHidden(true)
+            .onAppear(){
+//                NotificationCenter.add
+                self.dispatchGroup.notify(queue: .main){
+                    print("appearing")
+                    self.restaurants = self.HomeScreenVM.allRestaurants
+                }
+            }
         }
     }
     }
@@ -106,7 +130,8 @@ struct HomeScreenView: View {
 
 struct HSRestaurantCard: View {
     var restaurant: RestaurantFB
-    var HomeScreenVM : HomeScreenViewModel
+//    var HomeScreenVM : HomeScreenViewModel
+    var location: Double
     
     var body: some View {
             VStack {
@@ -121,10 +146,14 @@ struct HSRestaurantCard: View {
                     Spacer()
                 }
                 HStack{
-                    Text("\(restaurant.price) | \(restaurant.ethnicity) | \(HomeScreenVM.getDistFromUser(coordinate: restaurant.coordinate)) miles").font(.system(size: 12, weight: .semibold)).foregroundColor(Color(#colorLiteral(red: 0.7, green: 0.7, blue: 0.7, alpha: 1))).tracking(-0.41)
+                    Text("\(restaurant.price) | \(restaurant.ethnicity) | \(self.location) miles").font(.system(size: 12, weight: .semibold)).foregroundColor(Color(#colorLiteral(red: 0.7, green: 0.7, blue: 0.7, alpha: 1))).tracking(-0.41)
                     Spacer()
                 }
             }.frame(width: 175, height: 130)
+            .onAppear(){
+                print("loco:\(restaurant)")
+//                self.location = HomeScreenVM.getDistFromUser(coordinate: restaurant.coordinate)
+            }
         }
 }
 

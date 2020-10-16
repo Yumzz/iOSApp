@@ -21,6 +21,7 @@ struct DishFB {
     var coverPhotoURL: String
     var restaurant: String
     var id: UUID
+    var options: [String:Float] = [String:Float]()
     
     var storage = Storage.storage()
     
@@ -40,7 +41,7 @@ struct DishFB {
     init?(snapshot: QueryDocumentSnapshot) {
         guard
             let name = snapshot.data()["Name"] as? String else {
-                print("no name")
+                print("no dish name:\(snapshot.data())")
                 return nil
         }
         guard let price = snapshot.data()["Price"] as? String else {
@@ -56,9 +57,10 @@ struct DishFB {
             return nil
         }
         guard let restau = snapshot.data()["Restaurant"] as? String else {
-            print("no rest")
+            print("no dishes' rest")
             return nil
         }
+
         self.id = UUID()
         self.ref = nil
         self.key = snapshot.documentID
@@ -66,17 +68,21 @@ struct DishFB {
         self.description = description
         
         self.price = (price as NSString).doubleValue
-        
-        
+//        self.options = self. options
         self.type = type
         self.restaurant = restau
         self.coverPhotoURL = "Restaurant/\(self.restaurant.lowercased())/dish/\(self.name.lowercased().replacingOccurrences(of: " ", with: "-"))/photo/Picture.jpg"
+        if(snapshot.get("options") != nil){
+            if let options = snapshot.data()["options"] as? [String:[String]]{
+                self.options = self.extractOptions(opts: options)
+            }
+        }
     }
     
     init?(snapshot: DocumentSnapshot) {
         guard
             let name = snapshot.data()?["Name"] as? String else {
-                print("no name")
+                print("no dish name: \(snapshot.data())")
                 return nil
         }
         guard let price = snapshot.data()?["Price"] as? String else {
@@ -92,7 +98,7 @@ struct DishFB {
             return nil
         }
         guard let restau = snapshot.data()?["Restaurant"] as? String else {
-            print("no rest")
+            print("no dishes' rest")
             return nil
         }
         self.id = UUID()
@@ -107,6 +113,11 @@ struct DishFB {
         self.type = type
         self.restaurant = restau
         self.coverPhotoURL = "Restaurant/\(self.restaurant.lowercased())/dish/\(self.name.lowercased().replacingOccurrences(of: " ", with: "-"))/photo/Picture.jpg"
+        if(snapshot.get("options") != nil){
+            if let options = snapshot.data()!["options"] as? [String:[String]]{
+                self.options = self.extractOptions(opts: options)
+            }
+        }
     }
     
     func toAnyObject() -> Any {
@@ -142,9 +153,24 @@ extension DishFB: Hashable {
                 x = x + "0"
                 print(x)
             }
+//            if(afterdeci.numOfNums() > 2){
+//
+//            }
         }
         print("x: \(x)")
         return x
+    }
+    
+    func extractOptions(opts: [String:[String]]) -> [String:Float]{
+        let names = opts["Name"]
+        let prices = opts["Price"]
+        var o = [String:Float]()
+        var i = 0
+        while i < names!.count{
+            o[names![i]] = Float(prices![i])
+            i = i + 1
+        }
+        return o
     }
     
 }

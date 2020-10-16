@@ -28,6 +28,9 @@ class MenuSelectionViewModel: ObservableObject {
                     if dish != nil {
                         self.featuredDishes.append(dish!)
                     }
+                    else{
+                        print("no featured dishes")
+                    }
                 }
             }
         }

@@ -1,5 +1,5 @@
 //
-//  BackButton.swift
+//  XButton.swift
 //  VirtualMenu
 //
 //  Created by Rohan Tyagi on 10/5/20.
@@ -8,13 +8,13 @@
 import Foundation
 import SwiftUI
 
-struct BackButton: View {
+struct XButton: View {
     var mode: Binding<PresentationMode>
     var body: some View {
         
         HStack{
             Button(action: goBack){
-                Image("back_button")
+                Image("x_button")
                     .renderingMode(.original)
             }
             

@@ -23,6 +23,12 @@ struct ListDishesView: View {
     
     @State var dishCats = [DishCategory]()
     
+    @State var showingAlert = false
+    
+    @State var dishesExist = false
+    
+    @EnvironmentObject var order : OrderModel
+
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
     
     let dispatchGroup = DispatchGroup()
@@ -42,7 +48,7 @@ struct ListDishesView: View {
     var body: some View {
         ZStack {
             Color(#colorLiteral(red: 0.9725490196, green: 0.968627451, blue: 0.9607843137, alpha: 1)).edgesIgnoringSafeArea(.all)
-            ScrollView {
+            ScrollView(.vertical) {
                 ScrollViewReader{ scrollView in
                 VStack {
                     ScrollView(.horizontal, showsIndicators: false) {
@@ -55,7 +61,7 @@ struct ListDishesView: View {
                                     .font(.system(size: 12))
                                     .scaledToFit()
                                     .background((self.dishCategoryClicked == dishCategory) ?
-                                                    ColorManager.yumzzOrange : ColorManager.offWhiteBack)
+                                                    ColorManager.yumzzOrange.clipShape(RoundedRectangle(cornerRadius: 10, style: .circular)) : ColorManager.offWhiteBack.clipShape(RoundedRectangle(cornerRadius: 10, style: .circular)))
                                     .foregroundColor((self.dishCategoryClicked == dishCategory) ?
                                                         Color(UIColor().colorFromHex("#FFFFFF", 1)) : ColorManager.textGray)
                                     .cornerRadius(5)
@@ -65,14 +71,15 @@ struct ListDishesView: View {
                                         }
                                         else{
                                             self.dishCategoryClicked = dishCategory
-                                            scrollView.scrollTo(dishCategory)
+                                            print(self.dishCats.firstIndex(of: dishCategory))
+                                            scrollView.scrollTo(self.dishCats.firstIndex(of: dishCategory), anchor: .top)
                                         }
                                     }
                                 }
                                     
                             }
 //                        }
-
+                        
                     }
                     
                     Spacer().frame(height: 20)
@@ -98,9 +105,15 @@ struct ListDishesView: View {
                                 }
                                 Spacer().frame(height: 20)
                             }
-                        }
+                        }.id(self.dishCats.firstIndex(of: dishCategory))
                     }
                     Spacer()
+                    if(!self.order.dishesChosen.isEmpty){
+                        NavigationLink(destination: ReviewOrder().navigationBarTitle("").navigationBarHidden(true)){
+                            ViewCartButton(dishCount: self.order.dishesChosen.count)
+                                .clipShape(RoundedRectangle(cornerRadius: 10, style: .circular))
+                        }
+                    }
                 }
                 }
             }
@@ -110,9 +123,21 @@ struct ListDishesView: View {
             print("appear")
             self.dispatchGroup.notify(queue: .main){
                 self.dishCats = self.listDishVM.dishCategories
+                
+                if(!self.order.dishesChosen.isEmpty){
+                    self.dishesExist = true
+                }
+                
+                NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: "Alert"), object: nil, queue: .main) { (Notification) in
+                    self.showingAlert.toggle()
+                }
             }
             print("show dishcats")
         }
+//        .alert(isPresented: $showingAlert){
+//            print("added")
+//            return Alert(title: Text("Added"))
+//        }
         .navigationBarTitle("\(self.restaurant.name)")
         .navigationBarBackButtonHidden(true)
         .navigationBarItems(leading: BackButton(mode: self.mode))
