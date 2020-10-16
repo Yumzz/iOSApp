@@ -19,10 +19,9 @@ struct HomeScreenView: View {
     
     var body: some View {
         GeometryReader { geometry in
-        NavigationView {
             ZStack {
                 Color(#colorLiteral(red: 0.9725490196, green: 0.968627451, blue: 0.9607843137, alpha: 1)).edgesIgnoringSafeArea(.all)
-                ScrollView {
+                ScrollView(.vertical) {
                     VStack {
                         HStack {
                             Text("Yumzz").font(.system(size: 36, weight: .bold)).frame(alignment: .leading)
@@ -66,7 +65,7 @@ struct HomeScreenView: View {
                         }.padding()
                         
                         ScrollView(.horizontal) {
-                            HStack(spacing: 30) {
+                            HStack(spacing: 20) {
                                 ForEach(self.HomeScreenVM.allRestaurants, id:\.id) { restaurant in
                                     NavigationLink(
                                         destination: RestaurantHomeView(restaurant: restaurant)
@@ -75,14 +74,14 @@ struct HomeScreenView: View {
                                     }
                                 }
                             }
-                        }.frame(height: 135).padding()
+                        }.frame(height: 150).padding()
                         HStack{
                             Text("Popular in Pleasanton").font(.system(size: 24, weight: .semibold))
                             Spacer()
                         }.padding()
                         
                         ScrollView(.horizontal){
-                            HStack(spacing: 30) {
+                            HStack(spacing: 20) {
                                 ForEach(self.HomeScreenVM.allRestaurants, id:\.id) { restaurant in
                                     NavigationLink(
                                         destination: RestaurantHomeView(restaurant: restaurant)
@@ -91,7 +90,7 @@ struct HomeScreenView: View {
                                     }
                                 }
                             }
-                        }.frame(height: 135).padding()
+                        }.frame(height: 150).padding()
                         
                         Spacer()
                     }.padding(.top, geometry.safeAreaInsets.top)
@@ -100,7 +99,7 @@ struct HomeScreenView: View {
                 .edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
             }.navigationBarTitle("").navigationBarHidden(true)
         }
-    }
+    
     }
 }
 
@@ -124,7 +123,8 @@ struct HSRestaurantCard: View {
                     Text("\(restaurant.price) | \(restaurant.ethnicity) | \(HomeScreenVM.getDistFromUser(coordinate: restaurant.coordinate)) miles").font(.system(size: 12, weight: .semibold)).foregroundColor(Color(#colorLiteral(red: 0.7, green: 0.7, blue: 0.7, alpha: 1))).tracking(-0.41)
                     Spacer()
                 }
-            }.frame(width: 175, height: 130)
+            }.frame(width: 175, height: 150)
+            .padding(.leading, 10)
         }
 }
 

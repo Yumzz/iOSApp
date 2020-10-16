@@ -11,13 +11,13 @@ import SwiftUI
 struct FBURLImage: View {
     @ObservedObject var imageLoader: ImageLoader
     
-    var aspectRatio: ContentMode = .fit
+    var aspectRatio: ContentMode = .fill
     var width = CGFloat()
     var height = CGFloat()
     
     let url: String
     
-    init(url: String, imageAspectRatio: ContentMode = .fit, imageWidth: CGFloat = 88, imageHeight: CGFloat = 88) {
+    init(url: String, imageAspectRatio: ContentMode = .fill, imageWidth: CGFloat = 88, imageHeight: CGFloat = 88) {
         self.url = url
         self.aspectRatio = imageAspectRatio
         self.width = imageWidth
