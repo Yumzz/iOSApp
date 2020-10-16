@@ -26,26 +26,14 @@ struct RestaurantHomeView: View {
     
     var body: some View {
         ZStack{
-            Color(#colorLiteral(red: 0.9725490196, green: 0.968627451, blue: 0.9607843137, alpha: 1)).edgesIgnoringSafeArea(.all)
-            ScrollView{
-                VStack(spacing: 10){
-                    ZStack{
+            Color(#colorLiteral(red: 0.9725490196, green: 0.968627451, blue: 0.9607843137, alpha: 1)).ignoresSafeArea(.all)
+            ScrollView(.vertical){
+                ZStack {
+                    VStack{
                         FBURLImage(url: restaurant.coverPhotoURL, imageWidth: 375, imageHeight: 240)
-                        .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
-                        .padding(.bottom, 10)
-                        .padding(.leading, 30)
-                        .padding(.trailing, 30)
-                        .background(Color.white)
-                        .cornerRadius(10)
-                        .shadow(radius: 2)
-//                        Button(action: {
-//                                self.presentationMode.wrappedValue.dismiss()
-//                                }) {
-//                            Image(systemName: "arrow.left").foregroundColor(.black)
-//                        }
+                        Spacer()
                     }
-                    Spacer()
-                    ScrollView{
+                    VStack(spacing: 10){
                         VStack{
                             HStack{
                                 Text(restaurant.name).font(.system(size: 24, weight: .semibold)).tracking(-0.41).padding(.leading, 40)
@@ -112,13 +100,18 @@ struct RestaurantHomeView: View {
                             }
                             
                             ScrollView(.horizontal) {
-                                HStack(spacing: 30) {
+                                HStack(spacing: 20) {
                                     ForEach(self.menuSelectionVM.featuredDishes, id: \.id){
                                         dish in
-                                        PopularDishCard(dish: dish)
+                                        NavigationLink(
+                                            destination: DishDetailsView(dish: dish, restaurant: self.restaurant).navigationBarHidden(false)
+                                        ) {
+                                            PopularDishCard(dish: dish)
+                                        }
                                     }
                                 }
                             }.frame(height: 135).padding()
+
                            
                         }.padding()
                         NavigationLink(
@@ -135,6 +128,8 @@ struct RestaurantHomeView: View {
                             }
                         }
                     }
+                    .background(RoundedRectangle(cornerRadius: /*@START_MENU_TOKEN@*/25.0/*@END_MENU_TOKEN@*/, style: /*@START_MENU_TOKEN@*/.continuous/*@END_MENU_TOKEN@*/).fill(Color(#colorLiteral(red: 0.9725490196, green: 0.968627451, blue: 0.9607843137, alpha: 1))))
+                    .offset(y:200)
                 }
             }
         }
@@ -173,7 +168,8 @@ struct PopularDishCard: View {
                 Text(String(dish.price)).font(.system(size: 12, weight: .semibold)).foregroundColor(Color(#colorLiteral(red: 0.7, green: 0.7, blue: 0.7, alpha: 1))).tracking(-0.41)
                 Spacer()
             }
-        }.frame(width: 175, height: 130)
+        }.frame(width: 175, height: 150)
+        .padding(.leading, 10)
     }
 }
 

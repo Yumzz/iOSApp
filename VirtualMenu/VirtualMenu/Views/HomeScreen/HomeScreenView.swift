@@ -27,10 +27,9 @@ struct HomeScreenView: View {
     
     var body: some View {
         GeometryReader { geometry in
-        NavigationView {
             ZStack {
                 Color(#colorLiteral(red: 0.9725490196, green: 0.968627451, blue: 0.9607843137, alpha: 1)).edgesIgnoringSafeArea(.all)
-                ScrollView {
+                ScrollView(.vertical) {
                     VStack {
                         HStack {
                             Text("Yumzz").font(.system(size: 36, weight: .bold)).frame(alignment: .leading)
@@ -82,15 +81,15 @@ struct HomeScreenView: View {
                                     }
                                 }
                             }
-                        }.frame(height: 135).padding()
+                        }.frame(height: 150).padding()
                         HStack{
                             Text("Popular in Pleasanton").font(.system(size: 24, weight: .semibold))
                             Spacer()
                         }.padding()
                         
                         ScrollView(.horizontal){
-                            HStack(spacing: 30) {
-                                ForEach(self.restaurants, id:\.id) { restaurant in
+                            HStack(spacing: 20) {
+                                ForEach(self.HomeScreenVM.allRestaurants, id:\.id) { restaurant in
                                     NavigationLink(
                                         destination: RestaurantHomeView(restaurant: restaurant)
                                     ) {
@@ -124,7 +123,7 @@ struct HomeScreenView: View {
                 }
             }
         }
-    }
+    
     }
 }
 
