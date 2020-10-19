@@ -51,7 +51,7 @@ struct DishDetailsView: View {
                     VStack(spacing: 0){
                         VStack{
                             HStack{
-                                Text(dish.name).font(.system(size: 24, weight: .semibold)).tracking(-0.41).padding(.leading, 40)
+                                Text(dish.name).font(.system(size: 24, weight: .semibold)).tracking(-0.41)
                                 Spacer()
                                 
                             }
@@ -60,12 +60,12 @@ struct DishDetailsView: View {
                                     .fill(Color(#colorLiteral(red: 0, green: 0.7333333492279053, blue: 0.4693332314491272, alpha: 1)))
                                     
                                 .frame(width: 45, height: 20)
-                                    .padding(.leading,40)
                                 Text("(298 reviews)").font(.system(size: 14, weight: .semibold)).tracking(-0.41)
                                 Spacer()
                             }
                             HStack{
                                 Text("\(dish.description)").font(.system(size: 14, weight: .semibold)).foregroundColor(Color(#colorLiteral(red: 0.71, green: 0.71, blue: 0.71, alpha: 1))).tracking(-0.41).padding(.leading, 40)
+
                                 Spacer()
                             }
                            
@@ -114,6 +114,7 @@ struct DishDetailsView: View {
                             .cornerRadius(10)
                             .frame(width: 122, height: 48)
 //                            NavigationLink(destination: ReviewOrder()){
+
                                 HStack{
                                     Text("$\(dish.price.removeZerosFromEnd())")
                                         .font(.system(size: 16, weight: .semibold))

@@ -182,6 +182,7 @@ struct HSRestaurantCard: View {
                 }
             }.frame(width: 175, height: 150)
             .padding(.leading, 10)
+
         }
 }
 

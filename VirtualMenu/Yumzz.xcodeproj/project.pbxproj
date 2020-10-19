@@ -100,8 +100,8 @@
 		3ACAD182250AF07100B24CEB /* DishReviewsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACAD181250AF07100B24CEB /* DishReviewsViewModel.swift */; };
 		3ACAD187250AF4B200B24CEB /* ListDishesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACAD186250AF4B200B24CEB /* ListDishesViewModel.swift */; };
 		3ACAD189250B161A00B24CEB /* RestCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACAD188250B161A00B24CEB /* RestCategory.swift */; };
-		3AE05F9824EF27550024F802 /* FacebookCore in Frameworks */ = {isa = PBXBuildFile; productRef = 3AE05F9724EF27550024F802 /* FacebookCore */; };
-		3AE05F9A24EF27550024F802 /* FacebookLogin in Frameworks */ = {isa = PBXBuildFile; productRef = 3AE05F9924EF27550024F802 /* FacebookLogin */; };
+		3AE05F9824EF27550024F802 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 3AE05F9724EF27550024F802 /* SwiftPackageProductDependency */; };
+		3AE05F9A24EF27550024F802 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 3AE05F9924EF27550024F802 /* SwiftPackageProductDependency */; };
 		3AE05F9F24EFB5DA0024F802 /* OrderCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE05F9E24EFB5DA0024F802 /* OrderCard.swift */; };
 		3AF1BA84252A926900FAA9A0 /* OnboardingInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF1BA83252A926900FAA9A0 /* OnboardingInfo.swift */; };
 		3AF1BA8A252A92B500FAA9A0 /* OrangeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF1BA89252A92B500FAA9A0 /* OrangeButton.swift */; };
@@ -116,6 +116,7 @@
 		3AFA234624DC9C2000F90ED8 /* DishReviewFB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFA234524DC9C2000F90ED8 /* DishReviewFB.swift */; };
 		3AFA234824DCACEA00F90ED8 /* ReviewsButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFA234724DCACEA00F90ED8 /* ReviewsButton.swift */; };
 		3AFA234A24DCB14B00F90ED8 /* DishReviewsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFA234924DCB14B00F90ED8 /* DishReviewsView.swift */; };
+		907A1B5615DA2ECD2B86A040 /* Pods_YumzzAppClip.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8EB6412A05486328564AE2B /* Pods_YumzzAppClip.framework */; };
 		A724364B24D4CFF200F8BBBB /* RestaurantCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = A724364A24D4CFF200F8BBBB /* RestaurantCard.swift */; };
 		A731EB0E2495AD2300B75D05 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A731EB0D2495AD2300B75D05 /* CloudKit.framework */; };
 		A735992824ECD83300584BFD /* AccountProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A735992724ECD83300584BFD /* AccountProfileViewModel.swift */; };
@@ -316,6 +317,7 @@
 		3AFA234724DCACEA00F90ED8 /* ReviewsButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewsButton.swift; sourceTree = "<group>"; };
 		3AFA234924DCB14B00F90ED8 /* DishReviewsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DishReviewsView.swift; sourceTree = "<group>"; };
 		6A57DC4EB94644FDAA69685F /* Pods_VirtualMenu.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VirtualMenu.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		727725753BE82E22F0ABD8E5 /* Pods-YumzzAppClip.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YumzzAppClip.release.xcconfig"; path = "Target Support Files/Pods-YumzzAppClip/Pods-YumzzAppClip.release.xcconfig"; sourceTree = "<group>"; };
 		A724364A24D4CFF200F8BBBB /* RestaurantCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantCard.swift; sourceTree = "<group>"; };
 		A731EB0D2495AD2300B75D05 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		A735992724ECD83300584BFD /* AccountProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountProfileViewModel.swift; sourceTree = "<group>"; };
@@ -357,7 +359,9 @@
 		C55FDD6424CABA2800CC8561 /* RestaurantFB.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestaurantFB.swift; sourceTree = "<group>"; };
 		C5CD0F2824AC4C6600F0A60D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		C5D0A16B24B1B6A300E44DF2 /* DishFB.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DishFB.swift; sourceTree = "<group>"; };
+		CF0B62667DFE24CEFE84A63E /* Pods-YumzzAppClip.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YumzzAppClip.debug.xcconfig"; path = "Target Support Files/Pods-YumzzAppClip/Pods-YumzzAppClip.debug.xcconfig"; sourceTree = "<group>"; };
 		F1F53C91FE06E71F63C2DF3D /* Pods-VirtualMenu.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VirtualMenu.debug.xcconfig"; path = "Target Support Files/Pods-VirtualMenu/Pods-VirtualMenu.debug.xcconfig"; sourceTree = "<group>"; };
+		F8EB6412A05486328564AE2B /* Pods_YumzzAppClip.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_YumzzAppClip.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FE827DAEC932927930315934 /* Pods-VirtualMenu.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VirtualMenu.release.xcconfig"; path = "Target Support Files/Pods-VirtualMenu/Pods-VirtualMenu.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -366,6 +370,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				907A1B5615DA2ECD2B86A040 /* Pods_YumzzAppClip.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -373,9 +378,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3AE05F9A24EF27550024F802 /* FacebookLogin in Frameworks */,
+				3AE05F9A24EF27550024F802 /* BuildFile in Frameworks */,
 				A731EB0E2495AD2300B75D05 /* CloudKit.framework in Frameworks */,
-				3AE05F9824EF27550024F802 /* FacebookCore in Frameworks */,
+				3AE05F9824EF27550024F802 /* BuildFile in Frameworks */,
 				D2A94C6DC337B2EEA9EEDEE8 /* Pods_VirtualMenu.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -776,6 +781,7 @@
 			children = (
 				A731EB0D2495AD2300B75D05 /* CloudKit.framework */,
 				6A57DC4EB94644FDAA69685F /* Pods_VirtualMenu.framework */,
+				F8EB6412A05486328564AE2B /* Pods_YumzzAppClip.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -785,6 +791,8 @@
 			children = (
 				F1F53C91FE06E71F63C2DF3D /* Pods-VirtualMenu.debug.xcconfig */,
 				FE827DAEC932927930315934 /* Pods-VirtualMenu.release.xcconfig */,
+				CF0B62667DFE24CEFE84A63E /* Pods-YumzzAppClip.debug.xcconfig */,
+				727725753BE82E22F0ABD8E5 /* Pods-YumzzAppClip.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -888,9 +896,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 34111069252262F20084975A /* Build configuration list for PBXNativeTarget "YumzzAppClip" */;
 			buildPhases = (
+				DF970492E6E6FCC36C51B11C /* [CP] Check Pods Manifest.lock */,
 				3411104D252262F10084975A /* Sources */,
 				3411104E252262F10084975A /* Frameworks */,
 				3411104F252262F10084975A /* Resources */,
+				2AB1E3AC52E117DAE6D6F5B1 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -920,8 +930,8 @@
 			);
 			name = VirtualMenu;
 			packageProductDependencies = (
-				3AE05F9724EF27550024F802 /* FacebookCore */,
-				3AE05F9924EF27550024F802 /* FacebookLogin */,
+				3AE05F9724EF27550024F802 /* SwiftPackageProductDependency */,
+				3AE05F9924EF27550024F802 /* SwiftPackageProductDependency */,
 			);
 			productName = VirtualMenu;
 			productReference = 3A987AD32480350C0021F6E4 /* Yumzz.app */;
@@ -999,7 +1009,7 @@
 			);
 			mainGroup = 3A987ACA2480350C0021F6E4;
 			packageReferences = (
-				3AE05F9624EF27550024F802 /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */,
+				3AE05F9624EF27550024F802 /* RemoteSwiftPackageReference */,
 			);
 			productRefGroup = 3A987AD42480350C0021F6E4 /* Products */;
 			projectDirPath = "";
@@ -1069,6 +1079,23 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		2AB1E3AC52E117DAE6D6F5B1 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-YumzzAppClip/Pods-YumzzAppClip-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-YumzzAppClip/Pods-YumzzAppClip-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-YumzzAppClip/Pods-YumzzAppClip-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		366F0559F753857314A26123 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1084,6 +1111,28 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-VirtualMenu/Pods-VirtualMenu-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		DF970492E6E6FCC36C51B11C /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-YumzzAppClip-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		E8BCAABA60C6B2EECCB8CE16 /* [CP] Check Pods Manifest.lock */ = {
@@ -1322,6 +1371,7 @@
 /* Begin XCBuildConfiguration section */
 		34111067252262F20084975A /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = CF0B62667DFE24CEFE84A63E /* Pods-YumzzAppClip.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -1345,6 +1395,7 @@
 		};
 		34111068252262F20084975A /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 727725753BE82E22F0ABD8E5 /* Pods-YumzzAppClip.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -1663,7 +1714,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		3AE05F9624EF27550024F802 /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */ = {
+		3AE05F9624EF27550024F802 /* RemoteSwiftPackageReference */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/facebook/facebook-ios-sdk";
 			requirement = {
@@ -1674,14 +1725,14 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		3AE05F9724EF27550024F802 /* FacebookCore */ = {
+		3AE05F9724EF27550024F802 /* SwiftPackageProductDependency */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 3AE05F9624EF27550024F802 /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */;
+			package = 3AE05F9624EF27550024F802 /* RemoteSwiftPackageReference */;
 			productName = FacebookCore;
 		};
-		3AE05F9924EF27550024F802 /* FacebookLogin */ = {
+		3AE05F9924EF27550024F802 /* SwiftPackageProductDependency */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 3AE05F9624EF27550024F802 /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */;
+			package = 3AE05F9624EF27550024F802 /* RemoteSwiftPackageReference */;
 			productName = FacebookLogin;
 		};
 /* End XCSwiftPackageProductDependency section */
