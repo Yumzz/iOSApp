@@ -21,8 +21,7 @@ struct DishFB {
     var coverPhotoURL: String
     var restaurant: String
     var id: UUID
-    var options: [String:Float] = [String:Float]()
-    
+    var options: [String:Float] = [String:Float]()    
     var storage = Storage.storage()
     
     init(name: String, key: String = "", description: String, price: Double, type: String, restaurant: String) {

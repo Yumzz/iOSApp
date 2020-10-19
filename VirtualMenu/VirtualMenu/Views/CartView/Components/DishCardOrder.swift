@@ -8,7 +8,12 @@ struct DishCardOrder: View {
     
     var count: Int
     var name: String
-    var price: Double
+    @State var price: Double
+    
+    var dish: DishFB
+    let dispatchGroup = DispatchGroup()
+    @EnvironmentObject var order : OrderModel
+
         
     @Environment (\.colorScheme) var colorScheme:ColorScheme
     
@@ -33,7 +38,27 @@ struct DishCardOrder: View {
                     Text(name).bold()
                         .foregroundColor(Color.primary)
                         .font(.system(size: 18))
-
+                    if(self.order.optsChosen[dish] != nil){
+                        ScrollView(.horizontal){
+                            HStack(spacing: 2){
+                                Text("Added:")
+                                    .font(.system(size: 10))
+                                ForEach(self.order.optsChosen[dish]!, id: \.self){ option in
+                                    if(option == self.order.optsChosen[dish]?.last){
+                                        Text(option)
+                                            .foregroundColor(Color.primary)
+                                            .font(.system(size: 10))
+                                    }
+                                    else{
+                                        Text("\(option),")
+                                            .foregroundColor(Color.primary)
+                                            .font(.system(size: 10))
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    
                 }
                 
                 Spacer()
@@ -45,8 +70,18 @@ struct DishCardOrder: View {
                     }
 //                .frame(height: 70)
 //                .padding(.leading, 5)
+                
+//                VStack {
+//                    XButtonDelete()
+//                        .onTapGesture {
+//                            self.dispatchGroup.enter()
+//                            self.order.deleteDish(dish: self.dish, dis: self.dispatchGroup)
+//                            self.dispatchGroup.notify(queue: .main){
 //
-                Spacer().frame(width: 5, height: 0)
+//                            }
+//                        }
+//                    }
+//
 
             }
             .frame(maxWidth: .infinity, alignment: .leading)
@@ -56,6 +91,13 @@ struct DishCardOrder: View {
             .shadow(radius: 2)
         }
         .padding(.horizontal)
+        .onAppear(){
+            if(self.order.optsChosen[dish] != nil){
+                for x in self.order.optsChosen[dish]!{
+                    self.price += Double(dish.options[x]!)
+                }
+            }
+        }
     }
 }
 

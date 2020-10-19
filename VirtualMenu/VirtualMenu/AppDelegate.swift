@@ -22,6 +22,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         FirebaseApp.configure()
+        
+        let firebaseAuth = Auth.auth()
+        do{
+        try firebaseAuth.signOut()
+        }
+        catch let signOutError as NSError {
+        print ("Error signing out: %@", signOutError)
+      }
                 
         GIDSignIn.sharedInstance().clientID = FirebaseApp.app()?.options.clientID
         GIDSignIn.sharedInstance().delegate = self

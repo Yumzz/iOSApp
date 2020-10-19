@@ -23,10 +23,10 @@ struct ListDishesView: View {
     
     @State var dishCats = [DishCategory]()
     
-    @State var showingAlert = false
+    @State var restname = ""
     
-    @State var dishesExist = false
-    
+    @State var isNavBarHidden = false
+        
     @EnvironmentObject var order : OrderModel
 
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
@@ -46,13 +46,46 @@ struct ListDishesView: View {
     }
     
     var body: some View {
+        Group {
+            if(!self.order.dishesChosen.isEmpty){
+                view.overlay(overlay, alignment: .bottom)
+                    .navigationBarTitle("\(self.restname)")
+                    .navigationBarBackButtonHidden(true)
+                    .navigationBarItems(leading: BackButton(mode: self.mode))
+                    .navigationBarHidden(self.isNavBarHidden)
+            } else {
+                 view
+                    .navigationBarHidden(self.isNavBarHidden)
+             }
+        }
+        .navigationBarHidden(self.isNavBarHidden)
+        .onDisappear(){
+            self.restname = ""
+            self.isNavBarHidden = true
+            
+        }
+        .onAppear(){
+            self.isNavBarHidden = false
+        }
+    }
+    
+    var overlay: some View {
+        VStack{
+            NavigationLink(destination: ReviewOrder().navigationTitle("").navigationBarHidden(true)){
+                ViewCartButton(dishCount: self.order.allDishes)
+                    .clipShape(RoundedRectangle(cornerRadius: 10, style: .circular))
+            }
+            Spacer().frame(width: 0, height: 10)
+        }
+    }
+    
+    var view: some View {
         ZStack {
             Color(#colorLiteral(red: 0.9725490196, green: 0.968627451, blue: 0.9607843137, alpha: 1)).edgesIgnoringSafeArea(.all)
             ScrollView(.vertical) {
                 ScrollViewReader{ scrollView in
                 VStack {
                     ScrollView(.horizontal, showsIndicators: false) {
-//                        ScrollViewReader{ scrollView in
                         HStack(spacing: 10){
                             ForEach(self.dishCats, id: \.name){ dishCategory in
                                 Text("\(dishCategory.name)")
@@ -78,7 +111,6 @@ struct ListDishesView: View {
                                 }
                                     
                             }
-//                        }
                         
                     }
                     
@@ -101,6 +133,7 @@ struct ListDishesView: View {
                                     ) {
 
                                         DishCard(urlImage: FBURLImage(url: dish.coverPhotoURL, imageAspectRatio: .fill, imageWidth: 80, imageHeight: 80), dishName: dish.name, dishIngredients: dish.description, price: self.listDishVM.formatPrice(price: dish.price), rest: self.restaurant, dish: dish)
+                                            
                                     }
                                 }
                                 Spacer().frame(height: 20)
@@ -108,39 +141,34 @@ struct ListDishesView: View {
                         }.id(self.dishCats.firstIndex(of: dishCategory))
                     }
                     Spacer()
-                    if(!self.order.dishesChosen.isEmpty){
-                        NavigationLink(destination: ReviewOrder().navigationBarTitle("").navigationBarHidden(true)){
-                            ViewCartButton(dishCount: self.order.dishesChosen.count)
-                                .clipShape(RoundedRectangle(cornerRadius: 10, style: .circular))
-                        }
-                    }
                 }
                 }
             }
                 .frame(maxWidth: .infinity)
             }
         .onAppear{
-            print("appear")
             self.dispatchGroup.notify(queue: .main){
                 self.dishCats = self.listDishVM.dishCategories
-                
-                if(!self.order.dishesChosen.isEmpty){
-                    self.dishesExist = true
-                }
-                
-                NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: "Alert"), object: nil, queue: .main) { (Notification) in
-                    self.showingAlert.toggle()
-                }
+                self.restname = self.restaurant.name
+                self.isNavBarHidden = false
+//                NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: "Alert"), object: nil, queue: .main) { (Notification) in
+//                    self.showingAlert.toggle()
+//                }
             }
-            print("show dishcats")
         }
+        .navigationBarTitle("\(self.restname)")
+        .navigationBarBackButtonHidden(true)
+        .navigationBarHidden(self.isNavBarHidden)
+        .navigationBarItems(leading: BackButton(mode: self.mode))
+//        .onDisappear(){
+//            self.restname = ""
+//            self.isNavBarHidden = true
+//        }
 //        .alert(isPresented: $showingAlert){
 //            print("added")
 //            return Alert(title: Text("Added"))
 //        }
-        .navigationBarTitle("\(self.restaurant.name)")
-        .navigationBarBackButtonHidden(true)
-        .navigationBarItems(leading: BackButton(mode: self.mode))
+
     }
 }
 

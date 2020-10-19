@@ -25,6 +25,7 @@ class LocationManager: NSObject {
     }
     func locationManager(_ manager: CLLocationManager,
                          didUpdateLocations locations: [CLLocation]){
+        print("location: \(locations[locations.count-1])")
         self.location = locations[locations.count-1]
     }
 }

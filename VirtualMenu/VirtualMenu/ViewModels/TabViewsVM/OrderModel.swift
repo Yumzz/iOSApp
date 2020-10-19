@@ -24,30 +24,65 @@ class OrderModel: ObservableObject {
     
     var pastOrders = [Order]()
     
-    
     //do i want these attributes to cause an update when they change
     var dishIndexes : [DishFB : Int] = [DishFB : Int]()
-    
-    var dishRestaurant : [DishFB : RestaurantFB] = [DishFB : RestaurantFB]()
+    var dishCounts : [DishFB : Int] = [DishFB : Int]()
+    var optsChosen: [DishFB: [String]] = [DishFB: [String]]()
+
+    var allDishes: Int
+//    var dishRestaurant : [DishFB : RestaurantFB] = [DishFB : RestaurantFB]()
     
     init() {
         //TODO: initialize to false if the user logged in before
         self.restChosen = RestaurantFB.previewRest()
         self.dishesChosen = [DishFB]()
         self.dishIndexes = [DishFB : Int]()
-        self.dishRestaurant = [DishFB : RestaurantFB]()
+        self.dishCounts = [DishFB : Int]()
+        self.allDishes = 0
         self.totalCost = 0.0
     }
 
     //func - add dish to order list
     func addDish(dish: DishFB, rest: RestaurantFB, dis: DispatchGroup){
         //need to check if same restaurant, if not then signify alert saying order created will be deleted and started over
-        dishIndexes[dish] = dishesChosen.count
-        dishRestaurant[dish] = rest
-        dishesChosen.append(dish)
-        self.totalAmount()
-        print("added")
-        dis.leave()
+        if(rest.name == self.restChosen.name || self.restChosen.name == ""){
+            self.allDishes += 1
+            if(dishCounts[dish] == nil){
+                print("added new")
+                dishIndexes[dish] = dishesChosen.count
+                dishesChosen.append(dish)
+                dishCounts[dish] = 1
+            }
+            else{
+                print("added same dish")
+                dishCounts[dish] = dishCounts[dish]! + 1
+            }
+            self.totalAmount()
+            if(self.optsChosen[dish] != nil){
+                for x in self.optsChosen[dish]!{
+                    self.totalCost += Double(dish.options[x]!)
+                }
+            }
+            print("added")
+            dis.leave()
+        }
+        else{
+            //need to delete order and start anew w new rest
+            print("old rest: \(self.restChosen)")
+            print("new rest: \(rest)")
+            self.newOrder(rest: rest)
+            self.allDishes = 1
+            dishIndexes[dish] = dishesChosen.count
+            dishesChosen.append(dish)
+            dishCounts[dish] = 1
+            self.totalAmount()
+            if(self.optsChosen[dish] != nil){
+                for x in self.optsChosen[dish]!{
+                    self.totalCost += Double(dish.options[x]!)
+                }
+            }
+            dis.leave()
+        }
     }
     
     func checkSameRest(dish: DishFB) -> Bool{
@@ -68,42 +103,51 @@ class OrderModel: ObservableObject {
 //        dishesChosen
 //        if(dishIndexes[dish])
         // print("dishIndexes: \(dishIndexes[dish])")
-        if(dishesChosen.count == 1){
+//        dis.leave()
+        if(allDishes == 1){
             dishesChosen.removeAll()
             dishIndexes.removeAll()
-            dishRestaurant.removeAll()
+            allDishes = 0
+            dishCounts.removeAll()
         }
         else{
-            var index = dishIndexes[dish]! + 1
-            dishesChosen.remove(at: dishIndexes[dish]!)
-            //every dish after this one needs to have dishIndex for them go down by 1 each
-            while index < dishesChosen.count {
-    //            dishIndexes[]
-    //            dishesChosen.get
-                let dish = dishesChosen[index]
-                dishIndexes[dish] = dishIndexes[dish]! - 1
-                index = index + 1
+            allDishes = allDishes - 1
+            dishCounts[dish] = dishCounts[dish]! - 1
+            if(dishCounts[dish] == 0){
+                var index = dishIndexes[dish]! + 1
+                //every dish after this one needs to have dishIndex for them go down by 1 each
+                while index < dishesChosen.count {
+        //            dishIndexes[]
+        //            dishesChosen.get
+                    let dish = dishesChosen[index]
+                    dishIndexes[dish] = dishIndexes[dish]! - 1
+                    index = index + 1
+                }
+                dishesChosen.remove(at: dishIndexes[dish]!)
+                dishIndexes.removeValue(forKey: dish)
+                dishCounts.removeValue(forKey: dish)
             }
-
-            dishIndexes.removeValue(forKey: dish)
-            dishRestaurant.removeValue(forKey: dish)
         }
+        
         self.totalAmount()
+        print("leave")
         dis.leave()
 //        let x = DishFB.formatPrice(price: self.totalCost - dish.price)
     }
     
     //func - total the amount
     func totalAmount(){
-        self.totalCost = 0.0
+        self.totalCost = 0.00
         for dish in self.dishesChosen{
-            self.totalCost = self.totalCost + dish.price
+//            print("price: \(dish.price)")
+            let x = self.totalCost + dish.price
+            self.totalCost = Double(round(1000*x)/1000)
         }
+//        print("total: \(self.totalCost)")
     }
     
     //func - get restaurant
     func getRestaurant(dish: DishFB) -> RestaurantFB{
-        self.restChosen = dishRestaurant[dish]!
         return self.restChosen
     }
     
@@ -111,7 +155,8 @@ class OrderModel: ObservableObject {
         self.restChosen = rest
         self.dishIndexes = [DishFB : Int]()
         self.dishesChosen = [DishFB]()
-        self.dishRestaurant = [DishFB : RestaurantFB]()
+        self.optsChosen.removeAll()
+        self.allDishes = 0
         self.totalCost = 0.0
     }
     

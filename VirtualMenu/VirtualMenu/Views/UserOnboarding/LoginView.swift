@@ -64,15 +64,14 @@ struct LoginView: View {
             ZStack{
                 Color(#colorLiteral(red: 0.9725490196, green: 0.968627451, blue: 0.9607843137, alpha: 1)).edgesIgnoringSafeArea(.all)
             VStack{
-                VStack(spacing: 20){
+                VStack(spacing: 10){
                     Text("Login to your account")
                         .foregroundColor(ColorManager.textGray)
                         .font(.largeTitle).bold()
                         .font(.system(size: 36))
                         .padding(.leading, 40)
                         .padding(.trailing, 40)
-                        .position(x: UIScreen.main.bounds.width/2, y: 20)
-                        
+                        .position(x: UIScreen.main.bounds.width/2.5, y: 20)
                         
                     CustomTextField(field: "Email", strLabel: "jonnyives@apple.com", strField: $email, uiTextAutoCapitalizationType: .none, uiKeyboardType: .emailAddress)
 
@@ -123,11 +122,10 @@ struct LoginView: View {
                                 .clipShape(RoundedRectangle(cornerRadius: 10, style: .circular))
                         }
                 }
-                    
                 
-                Spacer()
+                Spacer().frame(width: 0, height: 40)
                 
-                VStack(spacing: 20){
+                VStack(spacing: 10){
                     
                     AppleButton(width: 330, height: 48)
                         .clipShape(RoundedRectangle(cornerRadius: 10, style: .circular))
@@ -146,6 +144,7 @@ struct LoginView: View {
                         .onTapGesture {
                             self.loginVM.socialLogin.attemptLoginGoogle()
                         }
+                        .shadow(radius: 5)
                 }
                 
                 Spacer()
@@ -208,9 +207,15 @@ struct LoginView: View {
                     //already created a new account or signed in
                     print("success")
     //                dispatch.leave()
-                    self.user.showOnboarding = false
-                    self.user.isLogged = true
-                    self.isNavigationBarHidden = true
+                    let d = DispatchGroup()
+                    d.enter()
+                    self.loginVM.updateProfile(dispatch: d)
+                    d.notify(queue: .main){
+                        self.user.showOnboarding = false
+                        self.user.isLogged = true
+                        self.isNavigationBarHidden = true
+                    }
+                    
                 case .failure(let error):
                     print("no succ")
 

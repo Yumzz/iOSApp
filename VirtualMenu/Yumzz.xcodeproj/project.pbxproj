@@ -39,6 +39,7 @@
 		3A3DD58F2538396B00536D62 /* XButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3DD58E2538396B00536D62 /* XButton.swift */; };
 		3A3DD5952539378700536D62 /* ViewCartButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3DD5942539378600536D62 /* ViewCartButton.swift */; };
 		3A3DD59C2539405000536D62 /* SeeMenuButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3DD59B2539405000536D62 /* SeeMenuButton.swift */; };
+		3A3DD5A62539736A00536D62 /* OptionsCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3DD5A52539736A00536D62 /* OptionsCard.swift */; };
 		3A45AD8D24B3FE8800CF3A8F /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A45AD8C24B3FE8800CF3A8F /* Constants.swift */; };
 		3A4A0E70249EB9320030635E /* AccountProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A4A0E6F249EB9320030635E /* AccountProfileView.swift */; };
 		3A4A0E72249EB94D0030635E /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A4A0E71249EB94D0030635E /* ImagePicker.swift */; };
@@ -88,6 +89,7 @@
 		3AA9897824B517F00070FD97 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA9897524B517F00070FD97 /* Extensions.swift */; };
 		3ABA90F124F63DB500695B06 /* BlackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ABA90F024F63DB500695B06 /* BlackButton.swift */; };
 		3ABA90F524F64EDE00695B06 /* GuestButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ABA90F424F64EDE00695B06 /* GuestButton.swift */; };
+		3ABD6A80253AC1D40082681A /* XButtonDelete.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ABD6A7F253AC1D40082681A /* XButtonDelete.swift */; };
 		3ACAD16E250AC7A600B24CEB /* SignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACAD16D250AC7A600B24CEB /* SignUpViewModel.swift */; };
 		3ACAD170250ACE2000B24CEB /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACAD16F250ACE2000B24CEB /* LoginViewModel.swift */; };
 		3ACAD172250ADDEA00B24CEB /* ForgotPasswordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACAD171250ADDEA00B24CEB /* ForgotPasswordViewModel.swift */; };
@@ -233,6 +235,7 @@
 		3A3DD58E2538396B00536D62 /* XButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XButton.swift; sourceTree = "<group>"; };
 		3A3DD5942539378600536D62 /* ViewCartButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewCartButton.swift; sourceTree = "<group>"; };
 		3A3DD59B2539405000536D62 /* SeeMenuButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeeMenuButton.swift; sourceTree = "<group>"; };
+		3A3DD5A52539736A00536D62 /* OptionsCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionsCard.swift; sourceTree = "<group>"; };
 		3A45AD8C24B3FE8800CF3A8F /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		3A4A0E6F249EB9320030635E /* AccountProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountProfileView.swift; sourceTree = "<group>"; };
 		3A4A0E71249EB94D0030635E /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
@@ -287,6 +290,7 @@
 		3AA9897524B517F00070FD97 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		3ABA90F024F63DB500695B06 /* BlackButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlackButton.swift; sourceTree = "<group>"; };
 		3ABA90F424F64EDE00695B06 /* GuestButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuestButton.swift; sourceTree = "<group>"; };
+		3ABD6A7F253AC1D40082681A /* XButtonDelete.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XButtonDelete.swift; sourceTree = "<group>"; };
 		3ACAD16D250AC7A600B24CEB /* SignUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
 		3ACAD16F250ACE2000B24CEB /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		3ACAD171250ADDEA00B24CEB /* ForgotPasswordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewModel.swift; sourceTree = "<group>"; };
@@ -489,6 +493,7 @@
 				3A3DD57E2538333000536D62 /* DishCardOrder.swift */,
 				3A3DD5942539378600536D62 /* ViewCartButton.swift */,
 				3A3DD58E2538396B00536D62 /* XButton.swift */,
+				3ABD6A7F253AC1D40082681A /* XButtonDelete.swift */,
 				3A3DD588253838A700536D62 /* ReceiptCard.swift */,
 			);
 			path = Components;
@@ -761,6 +766,7 @@
 				3A3DD56B253654C900536D62 /* DishPreviewCard.swift */,
 				3A5F685524FE470C00F9B43D /* ReviewCard.swift */,
 				3A87575224EC910A004ABECC /* PostReviewButton.swift */,
+				3A3DD5A52539736A00536D62 /* OptionsCard.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -1203,6 +1209,7 @@
 				3AFA233E24DA01AC00F90ED8 /* MenuSelectionView.swift in Sources */,
 				3A530DEF24D8E00100CBDE28 /* isClick.swift in Sources */,
 				3A3DD59C2539405000536D62 /* SeeMenuButton.swift in Sources */,
+				3ABD6A80253AC1D40082681A /* XButtonDelete.swift in Sources */,
 				343A44C0252E21FE00109C90 /* RestaurantHomeView.swift in Sources */,
 				3AFA234A24DCB14B00F90ED8 /* DishReviewsView.swift in Sources */,
 				3ABA90F124F63DB500695B06 /* BlackButton.swift in Sources */,
@@ -1230,6 +1237,7 @@
 				34370CC72500D59A00ECD88B /* MenuSelectionViewModel.swift in Sources */,
 				3A3DD57F2538333100536D62 /* DishCardOrder.swift in Sources */,
 				3A632281250C19B9001427F7 /* GradientView.swift in Sources */,
+				3A3DD5A62539736A00536D62 /* OptionsCard.swift in Sources */,
 				3A0745DB253021CB000EF6BD /* ColorManager.swift in Sources */,
 				A735992A24ECFDCF00584BFD /* AccountProfileLoginView.swift in Sources */,
 				3A4E2E2024C6244600C34DD8 /* ForgotPassword.swift in Sources */,

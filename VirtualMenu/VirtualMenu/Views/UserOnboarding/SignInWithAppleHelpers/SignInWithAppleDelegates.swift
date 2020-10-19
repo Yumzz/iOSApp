@@ -57,26 +57,44 @@ extension SignInWithAppleDelegates: ASAuthorizationControllerDelegate {
             let credential = OAuthProvider.credential(withProviderID: "apple.com",
                                                       idToken: idTokenString,
                                                     rawNonce: nonce)
+            print("beforesignin")
             Auth.auth().signIn(with: credential) { (res, err) in
                 if let err = err {
                     print(err.localizedDescription)
                 }
-            }
-            if(signUp){
-                print("sign")
-                if let email = appleIdCredential.email, let name = appleIdCredential.fullName {
-                    UserDefaults.standard.set(email, forKey: "Email")
-                    UserDefaults.standard.set(name, forKey: "Name")
-                    print("register")
+                print("res")
+                if(signUp){
+                    print("sign")
+                    if let email = appleIdCredential.email, let name = appleIdCredential.fullName {
+                        UserDefaults.standard.set(email, forKey: "Email")
+                        UserDefaults.standard.set(name, forKey: "Name")
+                        print("register")
+                    }
+                    self.registerNewAccount(credential: appleIdCredential)
+                    signUp = false
                 }
-                registerNewAccount(credential: appleIdCredential)
-                signUp = false
+                if(login) {
+                    print("log")
+                    self.signInWithExistingAccount(credential: appleIdCredential)
+                    login = false
+                }
             }
-            if(login) {
-                print("log")
-                signInWithExistingAccount(credential: appleIdCredential)
-                login = false
-            }
+
+//            if(signUp){
+//                print("sign")
+//                if let email = appleIdCredential.email, let name = appleIdCredential.fullName {
+//                    UserDefaults.standard.set(email, forKey: "Email")
+//                    UserDefaults.standard.set(name, forKey: "Name")
+//                    print("register")
+//                }
+//                registerNewAccount(credential: appleIdCredential)
+//                signUp = false
+//            }
+//            if(login) {
+//                print("log")
+//                signInWithExistingAccount(credential: appleIdCredential)
+//                login = false
+//            }
             
             break
             

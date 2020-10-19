@@ -17,11 +17,14 @@ struct RestaurantHomeView: View {
     @EnvironmentObject var order : OrderModel
     
     @State var isNavigationBarHidden: Bool = true
+    
+    var distance: Double
 
     
-    init(restaurant: RestaurantFB) {
+    init(restaurant: RestaurantFB, distance: Double) {
         self.restaurant = restaurant
         self.menuSelectionVM = MenuSelectionViewModel(restaurant: self.restaurant)
+        self.distance = distance
     }
     
     var body: some View {
@@ -30,7 +33,7 @@ struct RestaurantHomeView: View {
             ScrollView(.vertical){
                 ZStack {
                     VStack{
-                        FBURLImage(url: restaurant.coverPhotoURL, imageWidth: 375, imageHeight: 240)
+                        FBURLImage(url: restaurant.coverPhotoURL, imageWidth: 375, imageHeight: 240).edgesIgnoringSafeArea(.top)
                         Spacer()
                     }
                     VStack(spacing: 10){
@@ -41,7 +44,7 @@ struct RestaurantHomeView: View {
                                 
                             }
                             HStack{
-                                Text("\(restaurant.price) | \(restaurant.ethnicity) |200m | 9 am – 5 pm").font(.system(size: 14, weight: .semibold)).foregroundColor(Color(#colorLiteral(red: 0.77, green: 0.77, blue: 0.77, alpha: 1))).tracking(-0.41).padding(.leading, 40)
+                                Text("\(restaurant.price) | \(restaurant.ethnicity) | \(self.distance.removeZerosFromEnd()) miles | \(self.restaurant.hour)").font(.system(size: 14, weight: .semibold)).foregroundColor(Color(#colorLiteral(red: 0.77, green: 0.77, blue: 0.77, alpha: 1))).tracking(-0.41).padding(.leading, 40)
                                 Spacer()
                             }
                             HStack{
@@ -121,15 +124,17 @@ struct RestaurantHomeView: View {
                                 .clipShape(RoundedRectangle(cornerRadius: 10, style: .circular))
                         }
                         Spacer()
-                        if(!self.order.dishesChosen.isEmpty){
-                            NavigationLink(destination: ReviewOrder().navigationBarTitle("").navigationBarHidden(true)){
-                                ViewCartButton(dishCount: self.order.dishesChosen.count)
-                                    .clipShape(RoundedRectangle(cornerRadius: 10, style: .circular))
-                            }
-                        }
+//                        if(!self.order.dishesChosen.isEmpty){
+//                            NavigationLink(destination: ReviewOrder().navigationBarTitle("").navigationBarHidden(true)){
+//                                ViewCartButton(dishCount: self.order.dishesChosen.count)
+//                                    .clipShape(RoundedRectangle(cornerRadius: 10, style: .circular))
+//                            }
+//                        }
+//                        Spacer().frame(width: 0, height: 40)
                     }
                     .background(RoundedRectangle(cornerRadius: /*@START_MENU_TOKEN@*/25.0/*@END_MENU_TOKEN@*/, style: /*@START_MENU_TOKEN@*/.continuous/*@END_MENU_TOKEN@*/).fill(Color(#colorLiteral(red: 0.9725490196, green: 0.968627451, blue: 0.9607843137, alpha: 1))))
                     .offset(y:200)
+                    Spacer().frame(width: 0, height: 40)
                 }
             }
         }

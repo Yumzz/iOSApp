@@ -130,7 +130,7 @@ class LoginViewModel: ObservableObject {
         userProfile.userId = Auth.auth().currentUser!.uid
         userProfile.emailAddress = Auth.auth().currentUser!.email!
 
-
+        
         let fb = Firestore.firestore()
         let ref = fb.collection("User")
         
@@ -197,7 +197,12 @@ class LoginViewModel: ObservableObject {
         socialLogin.attemptLoginFb(completion: { result, error in
             if(error == nil){
                 print("made it")
-                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "NoMoreOnboard"), object: nil)
+                let d = DispatchGroup()
+                d.enter()
+                self.updateProfile(dispatch: d)
+                d.notify(queue: .main){
+                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: "NoMoreOnboard"), object: nil)
+                }
             }else{
                 //create alert saying no account associated with this FB profile. Please use sign up page
                 //make case for the error that comes when above happens

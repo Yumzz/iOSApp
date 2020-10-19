@@ -57,6 +57,8 @@ struct AccountProfileView: View {
     @EnvironmentObject var user: UserStore
     @ObservedObject var accountVM = AccountProfileViewModel()
     
+    private var locationManager = LocationManager()
+    
     var body: some View {
         NavigationView{
             ZStack{
@@ -81,6 +83,7 @@ struct AccountProfileView: View {
                                         self.showingImagePicker.toggle()
                                     }, label: {
                                         Text("Edit Profile Photo")
+                                            .foregroundColor(ColorManager.textGray)
                                     })
                                 }
                                 else{
@@ -92,6 +95,7 @@ struct AccountProfileView: View {
                                         self.showingImagePicker.toggle()
                                     }, label: {
                                         Text("Edit Profile Photo")
+                                            .foregroundColor(ColorManager.textGray)
                                     })
                                     Spacer().frame(height: 15)
                                     Text(userProfile.fullName)
@@ -107,6 +111,7 @@ struct AccountProfileView: View {
                                     self.showingImagePicker.toggle()
                                 }, label: {
                                     Text("Edit Profile Photo")
+                                        .foregroundColor(ColorManager.textGray)
                                 })
                                 Spacer().frame(height: 15)
                                 Text(userProfile.fullName)
@@ -187,7 +192,6 @@ struct AccountProfileView: View {
                     }
                     .onDisappear(){
                         self.isNavigationBarHidden = false
-                       
                     }
     //            } else {
     //                AccountProfileLoginView()

@@ -19,6 +19,8 @@ struct ReviewOrder: View {
     
     @State var dishes: [DishFB] = [DishFB]()
     
+    let dispatchGroup = DispatchGroup()
+    
     var body: some View {
         ZStack{
             Color(#colorLiteral(red: 0.9725490196, green: 0.968627451, blue: 0.9607843137, alpha: 1)).edgesIgnoringSafeArea(.all)
@@ -38,7 +40,21 @@ struct ReviewOrder: View {
                     ScrollView{
                         ForEach(self.dishes, id: \.name){ dish in
         //                    Text("\(dish.name) - \(dishCounts[dish]!)")
-                            DishCardOrder(count: dishCounts[dish]!, name: dish.name, price: dish.price)
+                            HStack{
+                                DishCardOrder(count: dishCounts[dish]!, name: dish.name, price: dish.price, dish: dish)
+                                
+                                XButtonDelete()
+                                    .onTapGesture {
+                                        self.dispatchGroup.enter()
+                                        self.order.deleteDish(dish: dish, dis: self.dispatchGroup)
+                                        self.dispatchGroup.notify(queue: .main){
+                                            self.dishCounts = self.order.dishCounts
+                                            self.dishes = self.order.dishesChosen
+
+                                        }
+                                    }
+                                    .frame(width: 20, height: 20, alignment: .center)
+                            }
                             
                         }
                     }
@@ -48,7 +64,6 @@ struct ReviewOrder: View {
                     Text("Receipt")
                         .foregroundColor(ColorManager.textGray)
                         .font(.system(size: 24)).bold()
-                        
                     ReceiptCard(total: self.order.totalCost)
                 }
                 Spacer()
@@ -60,25 +75,17 @@ struct ReviewOrder: View {
                         .shadow(radius: 5)
                 }
                 Spacer()
-
-            }
+            }.navigationBarTitle("")
+            .navigationBarHidden(true)
+            .navigationBarBackButtonHidden(true)
 
         }.navigationBarTitle("")
         .navigationBarHidden(true)
         .navigationBarBackButtonHidden(true)
 //        .navigationBarItems(leading: BackButton(mode: self.mode))
         .onAppear(){
-            for x in self.order.dishesChosen{
-                if(dishCounts[x] != nil){
-                    ("dish added: \(x.name)")
-                    dishCounts[x] = dishCounts[x]! + 1
-                }
-                else{
-                    ("dish new: \(x.name)")
-                    dishes.append(x)
-                    dishCounts[x] = 1
-                }
-            }
+            self.dishCounts = self.order.dishCounts
+            self.dishes = self.order.dishesChosen
         }
     }
 }

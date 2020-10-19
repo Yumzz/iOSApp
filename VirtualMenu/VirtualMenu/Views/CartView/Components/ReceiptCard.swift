@@ -21,7 +21,7 @@ struct ReceiptCard: View {
                     Text("Subtotal")
                         .font(.system(size: 14)).bold()
 //                        .overlay(Text("\(count)"))
-                    Spacer().frame(width: UIScreen.main.bounds.size.width/1.7, height: 0)
+                    Spacer().frame(width: UIScreen.main.bounds.size.width/2, height: 0)
                     Text("\(DishFB.formatPrice(price: total))")
                 }
                 

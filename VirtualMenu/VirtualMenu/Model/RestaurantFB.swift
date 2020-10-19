@@ -12,6 +12,7 @@ import Firebase
 import FirebaseDatabase
 import MapKit
 
+
 struct RestaurantFB {
     //    let ref: DatabaseReference?
     let id: UUID
@@ -37,12 +38,13 @@ struct RestaurantFB {
 //    let photos: [CKAsset]?
 //    var model: CKRecord.Reference? = nil
 //    var reviews: [CKRecord.Reference]? = nil
+    var hour: String = " 9 am - 5 pm"
     var price: String
     var ratingSum: Int64
     var n_Ratings: Int64
     
     
-    init(name: String, key: String = "", description: String, averagePrice: Double, ethnicity: String, dishes: [DishFB], featuredDishRefs: [DocumentReference?], coordinate: GeoPoint, address: String, phone: String, price: String, ratingSum: Int64, n_Ratings: Int64) {
+    init(name: String, key: String = "", description: String, averagePrice: Double, ethnicity: String, dishes: [DishFB], featuredDishRefs: [DocumentReference?], coordinate: GeoPoint, address: String, phone: String, price: String, ratingSum: Int64, n_Ratings: Int64, hour: String) {
 //        self.ref = nil
         self.id = UUID()
         self.key = key
@@ -71,6 +73,7 @@ struct RestaurantFB {
         self.n_Ratings = n_Ratings
         self.price = price
         self.price = self.getDollaSigns(price: price)
+        self.hour = hour
     }
     
     init?(snapshot: QueryDocumentSnapshot){
@@ -156,6 +159,12 @@ struct RestaurantFB {
        self.n_Ratings = n_Ratings
        self.price = price
        self.price = self.getDollaSigns(price: price)
+        if(snapshot.get("hours") != nil){
+            if let hours = snapshot.data()["hours"] as? [String:String]{
+                let index = Calendar.current.component(.weekday, from: Date())
+                self.hour = hours[Calendar.current.weekdaySymbols[index - 1]]!
+            }
+        }
     }
     
     
@@ -229,6 +238,11 @@ struct RestaurantFB {
             print("no RatingSum")
             return nil
         }
+//        guard
+//            let hours = snapshot.data()["hours"] as? [String: String] else {
+//            print("no hours")
+//            return nil
+//        }
         
         self.id = UUID()
         self.key = snapshot.documentID
@@ -246,6 +260,12 @@ struct RestaurantFB {
         self.n_Ratings = n_Ratings
         self.price = price
         self.price = self.getDollaSigns(price: price)
+        if(snapshot.get("hours") != nil){
+            if let hours = snapshot.data()["hours"] as? [String:String]{
+                let index = Calendar.current.component(.weekday, from: Date())
+                self.hour = hours[Calendar.current.weekdaySymbols[index - 1]]!
+            }
+        }
     }
     
     func toAnyObject() -> Any {
@@ -255,7 +275,7 @@ struct RestaurantFB {
     }
     
     static func previewRest() -> RestaurantFB {
-        return RestaurantFB(name: "", description: "", averagePrice: 0.0, ethnicity: "", dishes: [], featuredDishRefs: [], coordinate: GeoPoint(latitude: 0.0, longitude: 0.0), address: "", phone: "", price: "Low", ratingSum: 5, n_Ratings: 1)
+        return RestaurantFB(name: "", description: "", averagePrice: 0.0, ethnicity: "", dishes: [], featuredDishRefs: [], coordinate: GeoPoint(latitude: 0.0, longitude: 0.0), address: "", phone: "", price: "Low", ratingSum: 5, n_Ratings: 1, hour: "")
     }
     
     func getDollaSigns(price: String) -> String{
