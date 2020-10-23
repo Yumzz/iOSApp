@@ -218,19 +218,19 @@ class RestaurantDishViewModel: ObservableObject {
         
     }
     
-    func categorizeDishes(dishes: [DishFB]) {
-        var typeToDishes: [String : [DishFB]] = [:]
-        for dish in dishes {
-            if (typeToDishes[dish.type] == nil) {
-                typeToDishes[dish.type] = [dish]
-            } else {
-                typeToDishes[dish.type]?.append(dish)
-            }
-        }
-        for (category, dishes) in typeToDishes {
-            self.sectionItems.append(DishCategory(isExpanded: true, dishes: dishes, name: category))
-        }
-    }
+//    func categorizeDishes(dishes: [DishFB]) {
+//        var typeToDishes: [String : [DishFB]] = [:]
+//        for dish in dishes {
+//            if (typeToDishes[dish.type] == nil) {
+//                typeToDishes[dish.type] = [dish]
+//            } else {
+//                typeToDishes[dish.type]?.append(dish)
+//            }
+//        }
+//        for (category, dishes) in typeToDishes {
+//            self.sectionItems.append(DishCategory(isExpanded: true, dishes: dishes, name: category))
+//        }
+//    }
     
     
     

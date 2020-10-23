@@ -31,6 +31,7 @@ struct DishDetailsView: View {
     @State private var alertMessage = ""
     @State private var alertTitle = ""
     
+    @State var addtapped = false
     @State var isNavigationBarHidden: Bool = true
     
     
@@ -58,13 +59,14 @@ struct DishDetailsView: View {
                             HStack{
                                 RoundedRectangle(cornerRadius: 5)
                                     .fill(Color(#colorLiteral(red: 0, green: 0.7333333492279053, blue: 0.4693332314491272, alpha: 1)))
+                                    .overlay(Text("4.5"))
                                     
                                 .frame(width: 45, height: 20)
                                 Text("(298 reviews)").font(.system(size: 14, weight: .semibold)).tracking(-0.41)
                                 Spacer()
                             }
                             HStack{
-                                Text("\(dish.description)").font(.system(size: 14, weight: .semibold)).foregroundColor(Color(#colorLiteral(red: 0.71, green: 0.71, blue: 0.71, alpha: 1))).tracking(-0.41).padding(.leading, 40)
+                                Text("\(dish.description)").font(.system(size: 14, weight: .semibold)).foregroundColor(Color(#colorLiteral(red: 0.71, green: 0.71, blue: 0.71, alpha: 1))).tracking(-0.41)
 
                                 Spacer()
                             }
@@ -79,10 +81,7 @@ struct DishDetailsView: View {
                                         .font(.system(size: 24))
                                 }
                                 VStack{
-                                    OptionsCard(options: dish.options, dish: dish)
-//                                        .onTapGesture {
-//                                            self.order.totalCost
-//                                        }
+                                    OptionsCard(options: dish.options, exclusive: dish.exclusive, dish: dish)
                                 }
                             }
                         }
@@ -142,7 +141,9 @@ struct DishDetailsView: View {
                                         self.order.addDish(dish: self.dish, rest: self.restaurant, dis: d)
                                         i += 1
                                     }
+                                    self.addtapped = true
                                 }
+                            
                         }
 //                        Spacer()
                     }
@@ -163,6 +164,12 @@ struct DishDetailsView: View {
             .onDisappear(){
                 self.isNavigationBarHidden = true
             }
+        .alert(isPresented: self.$addtapped){
+            print("added")
+//            self.addtapped = false
+            
+            return Alert(title: Text("Dish Added"))
+        }
     }
     
 //    var body: some View {

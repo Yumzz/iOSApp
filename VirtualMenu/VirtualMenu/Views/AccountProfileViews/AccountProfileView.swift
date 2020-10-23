@@ -150,11 +150,23 @@ struct AccountProfileView: View {
                                 let firebaseAuth = Auth.auth()
                                 do {
                                     defer {
-                                        NSLog(Auth.auth().currentUser?.email! ?? "no user" )
+                                        NSLog(Auth.auth().currentUser?.email! ?? "no user")
                                         self.accountVM.ridProfile()
                                         NSLog(userProfile.emailAddress)
-                                        self.user.isLogged = false
                                         self.show = false
+                                        Auth.auth().signInAnonymously() { (authResult, error) in
+                                          // ...
+                                            print("anonymous")
+                                            if(error != nil){
+                                                print(error.debugDescription)
+                                            }
+                                            else{
+                                                self.user.isLogged = true
+                                                self.user.showOnboarding = false
+                                                print("yes")
+                                                print(authResult?.additionalUserInfo)
+                                            }
+                                        }
                                     }
                                   try firebaseAuth.signOut()
                             

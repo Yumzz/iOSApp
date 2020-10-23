@@ -77,9 +77,6 @@ struct DishCard: View {
                             NotificationCenter.default.post(name: Notification.Name(rawValue: "Alert"), object: nil)
                         }
                     }
-//                    .alert(isPresented: self.$showingAlert) {
-//                        Alert(title: Text("Added"))
-//                    }
                 
                 Spacer().frame(width: 5, height: 0)
                 

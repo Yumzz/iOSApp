@@ -75,14 +75,13 @@ struct ReviewOrder: View {
                         .shadow(radius: 5)
                 }
                 Spacer()
-            }.navigationBarTitle("")
-            .navigationBarHidden(true)
-            .navigationBarBackButtonHidden(true)
+            }
 
         }.navigationBarTitle("")
         .navigationBarHidden(true)
         .navigationBarBackButtonHidden(true)
 //        .navigationBarItems(leading: BackButton(mode: self.mode))
+        .navigationBarTitleDisplayMode(.inline)
         .onAppear(){
             self.dishCounts = self.order.dishCounts
             self.dishes = self.order.dishesChosen

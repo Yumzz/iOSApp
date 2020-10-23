@@ -68,7 +68,7 @@ struct OnboardingInfo2: View {
                                             self.user.isLogged = true
                                             self.user.showOnboarding = false
                                             print("yes")
-                                            print(authResult?.additionalUserInfo)
+                                            print("yes: \(authResult?.additionalUserInfo)")
                                         }
                                     }
                                 }

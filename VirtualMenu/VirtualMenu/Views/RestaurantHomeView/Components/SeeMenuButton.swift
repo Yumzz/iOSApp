@@ -14,8 +14,8 @@ struct SeeMenuButton: View {
     var body: some View {
 //        Group {
             HStack{
-                Image(systemName: "list.bullet.rectangle")
-                    .font(.system(size: 18))
+//                Image(systemName: "list.bullet.rectangle")
+//                    .font(.system(size: 18))
 //                Spacer()
                 Text("See the Menu")
                     .font(.system(size: 16, weight: .semibold))
@@ -27,7 +27,7 @@ struct SeeMenuButton: View {
             .foregroundColor(Color.white)
             .background(Color(#colorLiteral(red: 0.88, green: 0.36, blue: 0.16, alpha: 1)))
             .cornerRadius(10)
-            .frame(width: 335, height: 50)
+            .frame(width: 160, height: 35)
 
            
 //        }

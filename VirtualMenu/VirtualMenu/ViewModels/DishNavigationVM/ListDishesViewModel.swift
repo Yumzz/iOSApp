@@ -71,8 +71,12 @@ class ListDishesViewModel: ObservableObject {
     
     func categorizeDishes(dishes: [DishFB]) {
         var typeToDishes = Dictionary<String, [DishFB]>()
+        var dishDescript = Dictionary<String, String>()
         
         for dish in dishes {
+            if dish.dishCatDescription != ""{
+                dishDescript[dish.type] = dish.dishCatDescription
+            }
             if typeToDishes[dish.type] == nil {
                 typeToDishes[dish.type] = [dish]
             } else {
@@ -81,7 +85,12 @@ class ListDishesViewModel: ObservableObject {
         }
         
         for (category, dishes) in typeToDishes {
-            dishCategories.append(DishCategory(isExpanded: true, dishes: dishes, name: category))
+            if dishDescript[category] != nil {
+                dishCategories.append(DishCategory(isExpanded: true, dishes: dishes, name: category, description: dishDescript[category]!))
+            }
+            else{
+                dishCategories.append(DishCategory(isExpanded: true, dishes: dishes, name: category, description: ""))
+            }
         }
     }
     

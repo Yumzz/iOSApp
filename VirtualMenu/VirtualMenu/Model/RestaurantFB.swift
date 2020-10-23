@@ -25,7 +25,7 @@ struct RestaurantFB {
     var coverPhotoURL: String
     
     var dishes: [DishFB]? = nil
-    var featuredDishRefs: [DocumentReference?]
+    var featuredDishRefs: [DocumentReference?] = [DocumentReference?]()
     
     let coordinate: GeoPoint
     let streetAddress: String
@@ -88,10 +88,10 @@ struct RestaurantFB {
 //            return nil
 //        }
         
-       guard let featuredDishRefs = (snapshot.data()["FeaturedDishes"] as? [DocumentReference?]) else {
-           print("featured dishes messed up: \(name)")
-           return nil
-       }
+//       guard let featuredDishRefs = (snapshot.data()["FeaturedDishes"] as? [DocumentReference?]) else {
+//           print("featured dishes messed up: \(name)")
+//           return nil
+//       }
        //dishes is an array of FIRDocumentReference in Firebase and is converted to ds, which is an array of DocumentReferences
        
 //       guard
@@ -133,13 +133,13 @@ struct RestaurantFB {
             return nil
         }
         guard
-            let ratingSum = snapshot.data()["RatingSum"] as? Int64 else {
-            print("no RatingSum: \(name)")
+            let n_Ratings = snapshot.data()["N_Ratings"] as? Int64 else {
+            print("no n_rating")
             return nil
         }
         guard
-            let n_Ratings = snapshot.data()["N_Ratings"] as? Int64 else {
-            print("no n_rating")
+            let ratingSum = snapshot.data()["RatingSum"] as? Int64 else {
+            print("no RatingSum: \(name)")
             return nil
         }
        
@@ -149,7 +149,6 @@ struct RestaurantFB {
        self.ethnicity = ethnicity
        self.coordinate = coordinate
        self.dishes = []
-       self.featuredDishRefs = featuredDishRefs
        self.id = UUID()
        self.coverPhotoURL = "Restaurant/\(self.name.lowercased())/\(self.name.lowercased())_cover.png"
        self.cityAddress = address.components(separatedBy: delimiter)[1] + (address.components(separatedBy: delimiter)[2]).components(separatedBy: " ")[0]
@@ -163,6 +162,12 @@ struct RestaurantFB {
             if let hours = snapshot.data()["hours"] as? [String:String]{
                 let index = Calendar.current.component(.weekday, from: Date())
                 self.hour = hours[Calendar.current.weekdaySymbols[index - 1]]!
+            }
+        }
+        if(snapshot.get("FeaturedDishes") != nil){
+            if let featuredDishes = snapshot.data()["FeaturedDishes"] as?
+                [DocumentReference] {
+                self.featuredDishRefs = featuredDishes
             }
         }
     }
@@ -183,11 +188,11 @@ struct RestaurantFB {
 //        }
 
         //dishes is an array of FIRDocumentReference in Firebase and is converted to ds, which is an array of DocumentReferences
-        guard
-            let featuredDishRefs = (snapshot.data()["FeaturedDishes"] as? [DocumentReference?]) else {
-            print("featured dishes messed up")
-            return nil
-        }
+//        guard
+//            let featuredDishRefs = (snapshot.data()["FeaturedDishes"] as? [DocumentReference?]) else {
+//            print("featured dishes messed up")
+//            return nil
+//        }
         
 //        guard
 //            let type = snapshot.data()["Type"] as? String else {
@@ -251,7 +256,6 @@ struct RestaurantFB {
         self.ethnicity = ethnicity
         self.coordinate = coordinate
         self.dishes = dishes
-        self.featuredDishRefs = featuredDishRefs
         self.cityAddress = address.components(separatedBy: delimiter)[1] + (address.components(separatedBy: delimiter)[2]).components(separatedBy: " ")[0]
         self.streetAddress = address.components(separatedBy: delimiter)[0]
         self.coverPhotoURL = "Restaurant/\(self.name.lowercased())/\(self.name.lowercased())_cover.png"
@@ -264,6 +268,11 @@ struct RestaurantFB {
             if let hours = snapshot.data()["hours"] as? [String:String]{
                 let index = Calendar.current.component(.weekday, from: Date())
                 self.hour = hours[Calendar.current.weekdaySymbols[index - 1]]!
+            }
+        }
+        if(snapshot.get("FeaturedDishes") != nil){
+            if let featuredDishes = snapshot.data()["FeaturedDishes"] as? [DocumentReference] {
+                self.featuredDishRefs = featuredDishes
             }
         }
     }

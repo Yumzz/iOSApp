@@ -60,6 +60,7 @@ struct HomeScreenView: View {
                         Spacer()
                         Image(systemName: "qrcode.viewfinder")
                             .font(.system(size: 24, weight: .bold)).padding()
+                        
                         if (userProfile.profilePhoto == nil){
                         Image(systemName: "person.crop.square.fill")
                             .resizable()
@@ -147,7 +148,9 @@ struct HomeScreenView: View {
                     if(self.cityRests[x.cityAddress] == nil){
                         self.cityRests[x.cityAddress] = []
                     }
-                    self.cityRests[x.cityAddress]!.append(x)
+                    if(!self.cityRests[x.cityAddress]!.contains(x)){
+                        self.cityRests[x.cityAddress]!.append(x)
+                    }
                     if(!cities.contains(x.cityAddress)){
                         self.cities.append(x.cityAddress)
                     }

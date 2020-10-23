@@ -21,8 +21,10 @@ struct DishFB {
     var coverPhotoURL: String
     var restaurant: String
     var id: UUID
-    var options: [String:Float] = [String:Float]()    
+    var options: [String:Float] = [String:Float]()
+    var exclusive: Bool = true
     var storage = Storage.storage()
+    var dishCatDescription: String = ""
     
     init(name: String, key: String = "", description: String, price: Double, type: String, restaurant: String) {
         self.ref = nil
@@ -75,6 +77,12 @@ struct DishFB {
             if let options = snapshot.data()["options"] as? [String:[String]]{
                 self.options = self.extractOptions(opts: options)
             }
+            if let exclusive = snapshot.data()["exclusive_opt"] as? Bool{
+                self.exclusive = exclusive
+            }
+        }
+        if(snapshot.get("dishCatDescript") != nil){
+            self.dishCatDescription = (snapshot.data()["dishCatDescript"] as? String)!
         }
     }
     
@@ -116,6 +124,12 @@ struct DishFB {
             if let options = snapshot.data()!["options"] as? [String:[String]]{
                 self.options = self.extractOptions(opts: options)
             }
+            if let exclusive = snapshot.data()!["exclusive_opt"] as? Bool{
+                self.exclusive = exclusive
+            }
+        }
+        if(snapshot.get("dishCatDescript") != nil){
+            self.dishCatDescription = (snapshot.data()!["dishCatDescript"] as? String)!
         }
     }
     

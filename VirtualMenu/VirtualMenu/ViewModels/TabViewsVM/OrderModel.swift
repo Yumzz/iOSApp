@@ -23,6 +23,8 @@ class OrderModel: ObservableObject {
     var dishReferences = [DocumentReference]()
     
     var pastOrders = [Order]()
+    var alertTitle: String = ""
+    var alertMessage: String = ""
     
     //do i want these attributes to cause an update when they change
     var dishIndexes : [DishFB : Int] = [DishFB : Int]()

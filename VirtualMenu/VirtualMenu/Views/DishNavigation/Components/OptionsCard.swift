@@ -14,6 +14,7 @@ struct OptionsCard: View {
     var options: [String: Float]
     @State var optNames: [String] = [String]()
     @State var color : [String: Color] = [String: Color]()
+    var exclusive: Bool
     
     @State var optCosts : Double = 0.0
     var dish: DishFB
@@ -47,9 +48,17 @@ struct OptionsCard: View {
                                 .foregroundColor(ColorManager.yumzzOrange)
                                 .onTapGesture {
                                     if(self.color[opt]! == Color.white){
+                                        if(exclusive){
+                                            if(!self.order.optsChosen.isEmpty){
+                                                if(!self.order.optsChosen[dish]!.isEmpty){
+                                                    self.order.optsChosen[dish]!.removeAll()
+                                                }
+                                            }
+                                            for x in self.color.keys{
+                                                self.color[x] = Color.white
+                                            }
+                                        }
                                         self.color[opt] = ColorManager.yumzzOrange
-//                                        self.optCosts += Double(options[opt]!)
-//                                        self.order.totalCost += Double(options[opt]!)
                                         if(self.order.optsChosen[dish] == nil){
                                             self.order.optsChosen[dish] = []
                                         }
@@ -62,16 +71,14 @@ struct OptionsCard: View {
                                         if(self.order.optsChosen[dish] == []){
                                             self.order.optsChosen[dish] = nil
                                         }
-//                                        self.optCosts -= Double(options[opt]!)
-//                                        self.order.totalCost -= Double(options[opt]!)
                                     }
                                 }
-                        }.padding()
+                        }
                     }
                     
                 }
             }.background(Color.white)
-            .frame(width: UIScreen.main.bounds.width/1.3, height: 200, alignment: .center)
+            .frame(width: UIScreen.main.bounds.width/1.3, height: 150, alignment: .center)
             .padding()
             
         }.onAppear(){

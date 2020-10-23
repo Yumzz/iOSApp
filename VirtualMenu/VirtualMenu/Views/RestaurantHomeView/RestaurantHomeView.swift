@@ -17,6 +17,7 @@ struct RestaurantHomeView: View {
     @EnvironmentObject var order : OrderModel
     
     @State var isNavigationBarHidden: Bool = true
+    @State var dishesChosen: Bool = false
     
     var distance: Double
 
@@ -37,16 +38,27 @@ struct RestaurantHomeView: View {
                         Spacer()
                     }
                     VStack(spacing: 10){
-                        VStack{
+                        VStack(alignment: .leading){
                             HStack{
                                 Text(restaurant.name).font(.system(size: 24, weight: .semibold)).tracking(-0.41)
                                 Spacer()
-                                
+                                Button(action: {
+                                    
+                                }) {
+                                    HStack {
+                                        Image(systemName: "qrcode.viewfinder")
+                                            .font(.system(size: 18, weight: .bold))
+                                    }
+                                    .padding()
+                                    .foregroundColor(Color(#colorLiteral(red: 0.88, green: 0.36, blue: 0.16, alpha: 1)))
+                                    .background(Color.white)
+                                    .cornerRadius(5)
+                                }
                             }
                             HStack{
-                                Text("\(restaurant.price) | \(restaurant.ethnicity) | \(self.distance.removeZerosFromEnd()) miles | \(self.restaurant.hour)").font(.system(size: 14, weight: .semibold)).foregroundColor(Color(#colorLiteral(red: 0.77, green: 0.77, blue: 0.77, alpha: 1))).tracking(-0.41).padding(.leading, 40)
-                                Spacer()
+                                Text("\(restaurant.price) | \(restaurant.ethnicity) | \(self.distance.removeZerosFromEnd()) miles | \(self.restaurant.hour)").font(.system(size: 14, weight: .semibold)).foregroundColor(Color(#colorLiteral(red: 0.77, green: 0.77, blue: 0.77, alpha: 1))).tracking(-0.41)
                             }
+                            
                             HStack{
                                 RoundedRectangle(cornerRadius: 5)
                                     .fill(Color(#colorLiteral(red: 0, green: 0.7333333492279053, blue: 0.4693332314491272, alpha: 1)))
@@ -54,12 +66,19 @@ struct RestaurantHomeView: View {
                                 Text("(298 reviews)").font(.system(size: 14, weight: .semibold)).tracking(-0.41)
                                 
                                 Spacer()
+                                
+                                NavigationLink(
+                                    destination: ListDishesView(restaurant: self.restaurant).navigationBarHidden(false)
+                                ) {
+                                    SeeMenuButton()
+                                        .clipShape(RoundedRectangle(cornerRadius: 10, style: .circular))
+                                }
                             }
+
                             HStack(spacing: 10){
                                 Button(action: {
                                     guard let number = URL(string: "tel://" + restaurant.phone) else { return }
                                 UIApplication.shared.open(number)
-
                                 }) {
                                     HStack {
                                         Image(systemName: "phone.fill")
@@ -101,19 +120,7 @@ struct RestaurantHomeView: View {
                                         .background(RoundedRectangle(cornerRadius: 15, style: .continuous).fill(Color.white).frame(height: 50))
                                     }
                                 }
-//                                Button(action: {
-//
-//                                }) {
-//                                    HStack {
-//                                        Image(systemName: "qrcode.viewfinder")
-//                                            .font(.system(size: 18, weight: .bold))
-//                                    }
-//                                    .padding()
-//                                    .foregroundColor(Color(#colorLiteral(red: 0.88, green: 0.36, blue: 0.16, alpha: 1)))
-//                                    .background(Color.white)
-//                                    .cornerRadius(15)
-//
-//                                }
+                                
                             }.padding(.top)
                             
                             VStack{
@@ -135,27 +142,18 @@ struct RestaurantHomeView: View {
                                     }
                                 }
                             }.frame(height: 150)
-
+                            
+                            if(self.dishesChosen){
+                                NavigationLink(destination: ReviewOrder()){
+                                    ViewCartButton(dishCount: self.order.dishesChosen.count)
+                                        .clipShape(RoundedRectangle(cornerRadius: 10, style: .circular))
+                                }
+                            }
                            
                         }.padding()
-                        
-                        NavigationLink(
-                            destination: ListDishesView(restaurant: self.restaurant).navigationBarHidden(false)
-                        ) {
-                            SeeMenuButton()
-                                .clipShape(RoundedRectangle(cornerRadius: 10, style: .circular))
-                        }
-                        Spacer()
-//                        if(!self.order.dishesChosen.isEmpty){
-//                            NavigationLink(destination: ReviewOrder().navigationBarTitle("").navigationBarHidden(true)){
-//                                ViewCartButton(dishCount: self.order.dishesChosen.count)
-//                                    .clipShape(RoundedRectangle(cornerRadius: 10, style: .circular))
-//                            }
-//                        }
-//                        Spacer().frame(width: 0, height: 40)
                     }
                     .background(RoundedRectangle(cornerRadius: /*@START_MENU_TOKEN@*/25.0/*@END_MENU_TOKEN@*/, style: /*@START_MENU_TOKEN@*/.continuous/*@END_MENU_TOKEN@*/).fill(Color(#colorLiteral(red: 0.9725490196, green: 0.968627451, blue: 0.9607843137, alpha: 1))))
-                    .offset(y:200)
+                    .offset(y:190)
                     Spacer().frame(width: 0, height: 40)
                 }
             }
@@ -166,12 +164,13 @@ struct RestaurantHomeView: View {
         .navigationBarBackButtonHidden(true)
         .navigationBarHidden(self.isNavigationBarHidden)
         .navigationBarItems(leading: WhiteBackButton(mode: self.presentationMode))
-            .onAppear(){
-                self.isNavigationBarHidden = false
-            }
-            .onDisappear(){
-                self.isNavigationBarHidden = true
-            }
+        .onAppear(){
+            self.isNavigationBarHidden = false
+            self.dishesChosen = !self.order.dishesChosen.isEmpty
+        }
+        .onDisappear(){
+            self.isNavigationBarHidden = true
+        }
     }
     
 }

@@ -17,7 +17,7 @@ struct ListDishesView: View {
             
     @State var isLoading = false
     
-    @State var dishCategoryClicked: DishCategory = DishCategory(isExpanded: false, dishes: [], name: "")
+    @State var dishCategoryClicked: DishCategory = DishCategory(isExpanded: false, dishes: [], name: "", description: "")
     
     @State var dishes = [DishFB]()
     
@@ -25,6 +25,8 @@ struct ListDishesView: View {
     
     @State var restname = ""
     
+    @State var addtapped = false
+    @State var showingAlert = false
     @State var isNavBarHidden = false
         
     @EnvironmentObject var order : OrderModel
@@ -53,20 +55,23 @@ struct ListDishesView: View {
                     .navigationBarBackButtonHidden(true)
                     .navigationBarItems(leading: BackButton(mode: self.mode))
                     .navigationBarHidden(self.isNavBarHidden)
+                    .onAppear(){
+//                        self.order.addtapped = true
+                        
+                    }
+                    .onDisappear(){
+                        print("disappear")
+                        self.restname = ""
+                        self.isNavBarHidden = true
+                        self.addtapped = false
+                        print("disappear, restname: \(self.restname), navbarhidden: \(self.isNavBarHidden)")
+                    }
             } else {
                  view
                     .navigationBarHidden(self.isNavBarHidden)
              }
         }
         .navigationBarHidden(self.isNavBarHidden)
-        .onDisappear(){
-            self.restname = ""
-            self.isNavBarHidden = true
-            
-        }
-        .onAppear(){
-            self.isNavBarHidden = false
-        }
     }
     
     var overlay: some View {
@@ -100,7 +105,7 @@ struct ListDishesView: View {
                                     .cornerRadius(5)
                                     .onTapGesture {
                                         if((self.dishCategoryClicked == dishCategory)){
-                                            self.dishCategoryClicked = DishCategory(isExpanded: false, dishes: [], name: "")
+                                            self.dishCategoryClicked = DishCategory(isExpanded: false, dishes: [], name: "", description: "")
                                         }
                                         else{
                                             self.dishCategoryClicked = dishCategory
@@ -117,12 +122,17 @@ struct ListDishesView: View {
                     Spacer().frame(height: 20)
                     
                     ForEach(self.dishCats, id: \.name){ dishCategory in
-                        VStack(alignment: .leading, spacing: 40) {
+                        VStack(alignment: .leading, spacing: 20) {
                             
                             Text("\(dishCategory.name)")
                                 .font(.title)
                                 .fontWeight(.semibold)
                                 .padding(.leading)
+                            
+                            if(dishCategory.description != ""){
+                                Text("\(dishCategory.description)")
+                                    .font(.system(size: 14, weight: .semibold)).foregroundColor(Color(#colorLiteral(red: 0.71, green: 0.71, blue: 0.71, alpha: 1))).tracking(-0.41)
+                            }
                             
                             VStack(spacing: 20){
                                 
@@ -143,7 +153,7 @@ struct ListDishesView: View {
                     Spacer()
                 }
                 }
-            }
+            }.navigationBarTitleDisplayMode(self.addtapped ? .inline : .automatic)
                 .frame(maxWidth: .infinity)
             }
         .onAppear{
@@ -151,24 +161,28 @@ struct ListDishesView: View {
                 self.dishCats = self.listDishVM.dishCategories
                 self.restname = self.restaurant.name
                 self.isNavBarHidden = false
-//                NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: "Alert"), object: nil, queue: .main) { (Notification) in
-//                    self.showingAlert.toggle()
-//                }
+                NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: "Alert"), object: nil, queue: .main) { (Notification) in
+                    self.addtapped = true
+                }
+                self.addtapped = false
             }
         }
         .navigationBarTitle("\(self.restname)")
         .navigationBarBackButtonHidden(true)
         .navigationBarHidden(self.isNavBarHidden)
         .navigationBarItems(leading: BackButton(mode: self.mode))
-//        .onDisappear(){
-//            self.restname = ""
-//            self.isNavBarHidden = true
-//        }
-//        .alert(isPresented: $showingAlert){
-//            print("added")
-//            return Alert(title: Text("Added"))
-//        }
-
+        .onDisappear(){
+            self.restname = ""
+            self.isNavBarHidden = true
+        }
+        
+        .alert(isPresented: self.$addtapped){
+            print("added")
+//            self.addtapped = false
+            
+            return Alert(title: Text("Dish Added"))
+        }
+        
     }
 }
 
