@@ -20,12 +20,15 @@ struct RestaurantHomeView: View {
     @State var dishesChosen: Bool = false
     
     var distance: Double
+    
+    var rating: Float
 
     
     init(restaurant: RestaurantFB, distance: Double) {
         self.restaurant = restaurant
         self.menuSelectionVM = MenuSelectionViewModel(restaurant: self.restaurant)
         self.distance = distance
+        self.rating = Float(self.restaurant.ratingSum) / Float(self.restaurant.n_Ratings)
     }
     
     var body: some View {
@@ -42,28 +45,32 @@ struct RestaurantHomeView: View {
                             HStack{
                                 Text(restaurant.name).font(.system(size: 24, weight: .semibold)).tracking(-0.41)
                                 Spacer()
-                                Button(action: {
-                                    
-                                }) {
-                                    HStack {
-                                        Image(systemName: "qrcode.viewfinder")
-                                            .font(.system(size: 18, weight: .bold))
-                                    }
-                                    .padding()
-                                    .foregroundColor(Color(#colorLiteral(red: 0.88, green: 0.36, blue: 0.16, alpha: 1)))
-                                    .background(Color.white)
-                                    .cornerRadius(5)
-                                }
+//                                Button(action: {
+//                                    
+//                                }) {
+//                                    HStack {
+//                                        Image(systemName: "qrcode.viewfinder")
+//                                            .font(.system(size: 18, weight: .bold))
+//                                    }
+//                                    .padding()
+//                                    .foregroundColor(Color(#colorLiteral(red: 0.88, green: 0.36, blue: 0.16, alpha: 1)))
+//                                    .background(Color.white)
+//                                    .cornerRadius(5)
+//                                }
                             }
                             HStack{
                                 Text("\(restaurant.price) | \(restaurant.ethnicity) | \(self.distance.removeZerosFromEnd()) miles | \(self.restaurant.hour)").font(.system(size: 14, weight: .semibold)).foregroundColor(Color(#colorLiteral(red: 0.77, green: 0.77, blue: 0.77, alpha: 1))).tracking(-0.41)
                             }
                             
                             HStack{
-                                RoundedRectangle(cornerRadius: 5)
-                                    .fill(Color(#colorLiteral(red: 0, green: 0.7333333492279053, blue: 0.4693332314491272, alpha: 1)))
-                                .frame(width: 45, height: 20)
-                                Text("(298 reviews)").font(.system(size: 14, weight: .semibold)).tracking(-0.41)
+                                ZStack {
+                                    RoundedRectangle(cornerRadius: 5)
+                                        .fill(Color(#colorLiteral(red: 0, green: 0.7333333492279053, blue: 0.4693332314491272, alpha: 1)))
+                                    .frame(width: 45, height: 20)
+                                    Text(String(self.rating)).foregroundColor(.white)
+                                        .font(.system(size: 12, weight: .semibold))
+                                }.frame(width: 45, height: 20)
+                                Text("(" + String(self.restaurant.n_Ratings) + " reviews)").font(.system(size: 14, weight: .semibold)).tracking(-0.41)
                                 
                                 Spacer()
                                 
