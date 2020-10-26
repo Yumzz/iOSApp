@@ -22,6 +22,7 @@
 		34909E75252D5D0500B43D7B /* HomeScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34909E74252D5D0500B43D7B /* HomeScreenViewModel.swift */; };
 		34911F02250DEAE400E56916 /* MapViewBottomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34911F01250DEAE400E56916 /* MapViewBottomView.swift */; };
 		34A5D663249BF6DF00E4FE9C /* DishDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34A5D662249BF6DF00E4FE9C /* DishDetailsView.swift */; };
+		34A966F2254691C200AD84CD /* RestaurantReviewFB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34A966F1254691C200AD84CD /* RestaurantReviewFB.swift */; };
 		34F39DA1253E357C00C30346 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3A987ADC2480350E0021F6E4 /* Assets.xcassets */; };
 		34FCE2722507297F00329162 /* RatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34FCE2712507297F00329162 /* RatingView.swift */; };
 		3A0745B5252B014D000EF6BD /* AppleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0745B4252B014C000EF6BD /* AppleButton.swift */; };
@@ -103,8 +104,8 @@
 		3ACAD182250AF07100B24CEB /* DishReviewsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACAD181250AF07100B24CEB /* DishReviewsViewModel.swift */; };
 		3ACAD187250AF4B200B24CEB /* ListDishesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACAD186250AF4B200B24CEB /* ListDishesViewModel.swift */; };
 		3ACAD189250B161A00B24CEB /* RestCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACAD188250B161A00B24CEB /* RestCategory.swift */; };
-		3AE05F9824EF27550024F802 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 3AE05F9724EF27550024F802 /* SwiftPackageProductDependency */; };
-		3AE05F9A24EF27550024F802 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 3AE05F9924EF27550024F802 /* SwiftPackageProductDependency */; };
+		3AE05F9824EF27550024F802 /* FacebookCore in Frameworks */ = {isa = PBXBuildFile; productRef = 3AE05F9724EF27550024F802 /* FacebookCore */; };
+		3AE05F9A24EF27550024F802 /* FacebookLogin in Frameworks */ = {isa = PBXBuildFile; productRef = 3AE05F9924EF27550024F802 /* FacebookLogin */; };
 		3AE05F9F24EFB5DA0024F802 /* OrderCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE05F9E24EFB5DA0024F802 /* OrderCard.swift */; };
 		3AF1BA84252A926900FAA9A0 /* OnboardingInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF1BA83252A926900FAA9A0 /* OnboardingInfo.swift */; };
 		3AF1BA8A252A92B500FAA9A0 /* OrangeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF1BA89252A92B500FAA9A0 /* OrangeButton.swift */; };
@@ -220,6 +221,7 @@
 		34909E74252D5D0500B43D7B /* HomeScreenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreenViewModel.swift; sourceTree = "<group>"; };
 		34911F01250DEAE400E56916 /* MapViewBottomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewBottomView.swift; sourceTree = "<group>"; };
 		34A5D662249BF6DF00E4FE9C /* DishDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DishDetailsView.swift; sourceTree = "<group>"; };
+		34A966F1254691C200AD84CD /* RestaurantReviewFB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantReviewFB.swift; sourceTree = "<group>"; };
 		34F39DA6253E58DF00C30346 /* YumzzRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = YumzzRelease.entitlements; sourceTree = "<group>"; };
 		34F39DA7253E58FB00C30346 /* YumzzAppClipRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = YumzzAppClipRelease.entitlements; sourceTree = "<group>"; };
 		34FCE2712507297F00329162 /* RatingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingView.swift; sourceTree = "<group>"; };
@@ -378,9 +380,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3AE05F9A24EF27550024F802 /* BuildFile in Frameworks */,
+				3AE05F9A24EF27550024F802 /* FacebookLogin in Frameworks */,
 				A731EB0E2495AD2300B75D05 /* CloudKit.framework in Frameworks */,
-				3AE05F9824EF27550024F802 /* BuildFile in Frameworks */,
+				3AE05F9824EF27550024F802 /* FacebookCore in Frameworks */,
 				2E1D4E991795E4ABF0205DD2 /* Pods_VirtualMenu.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -480,6 +482,7 @@
 				3ACAD188250B161A00B24CEB /* RestCategory.swift */,
 				3A6477F124B68D060077EF30 /* UserProfile.swift */,
 				3A5633CB24FA33790059B603 /* Order.swift */,
+				34A966F1254691C200AD84CD /* RestaurantReviewFB.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -928,8 +931,8 @@
 			);
 			name = VirtualMenu;
 			packageProductDependencies = (
-				3AE05F9724EF27550024F802 /* SwiftPackageProductDependency */,
-				3AE05F9924EF27550024F802 /* SwiftPackageProductDependency */,
+				3AE05F9724EF27550024F802 /* FacebookCore */,
+				3AE05F9924EF27550024F802 /* FacebookLogin */,
 			);
 			productName = VirtualMenu;
 			productReference = 3A987AD32480350C0021F6E4 /* Yumzz.app */;
@@ -1007,7 +1010,7 @@
 			);
 			mainGroup = 3A987ACA2480350C0021F6E4;
 			packageReferences = (
-				3AE05F9624EF27550024F802 /* RemoteSwiftPackageReference */,
+				3AE05F9624EF27550024F802 /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */,
 			);
 			productRefGroup = 3A987AD42480350C0021F6E4 /* Products */;
 			projectDirPath = "";
@@ -1256,6 +1259,7 @@
 				3A0745C7252B0871000EF6BD /* BackButton.swift in Sources */,
 				3ACAD187250AF4B200B24CEB /* ListDishesViewModel.swift in Sources */,
 				3A530DF124D8E07F00CBDE28 /* BottomSheetModal.swift in Sources */,
+				34A966F2254691C200AD84CD /* RestaurantReviewFB.swift in Sources */,
 				3A5633BA24F9014C0059B603 /* SignInWithAppleCoordinator.swift in Sources */,
 				A7FE250624A83C1D0007E5AD /* MapView.swift in Sources */,
 				3A0745BB252B020F000EF6BD /* FacebookButton.swift in Sources */,
@@ -1677,7 +1681,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		3AE05F9624EF27550024F802 /* RemoteSwiftPackageReference */ = {
+		3AE05F9624EF27550024F802 /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/facebook/facebook-ios-sdk";
 			requirement = {
@@ -1688,14 +1692,14 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		3AE05F9724EF27550024F802 /* SwiftPackageProductDependency */ = {
+		3AE05F9724EF27550024F802 /* FacebookCore */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 3AE05F9624EF27550024F802 /* RemoteSwiftPackageReference */;
+			package = 3AE05F9624EF27550024F802 /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */;
 			productName = FacebookCore;
 		};
-		3AE05F9924EF27550024F802 /* SwiftPackageProductDependency */ = {
+		3AE05F9924EF27550024F802 /* FacebookLogin */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 3AE05F9624EF27550024F802 /* RemoteSwiftPackageReference */;
+			package = 3AE05F9624EF27550024F802 /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */;
 			productName = FacebookLogin;
 		};
 /* End XCSwiftPackageProductDependency section */
