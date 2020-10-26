@@ -19,6 +19,8 @@ struct RestaurantHomeView: View {
     @State var isNavigationBarHidden: Bool = true
     @State var dishesChosen: Bool = false
     
+    @State private var reviewViewShown = false
+    
     var distance: Double
     
     var rating: Float
@@ -41,6 +43,11 @@ struct RestaurantHomeView: View {
                         Spacer()
                     }
                     VStack(spacing: 10){
+                        if (self.reviewViewShown) {
+                            RestaurantReviewView(shown: self.$reviewViewShown, menuSelectionVM: self.menuSelectionVM)
+                                .transition(.slide)
+                                .animation(.default)
+                        } else {
                         VStack(alignment: .leading){
                             HStack{
                                 Text(restaurant.name).font(.system(size: 24, weight: .semibold)).tracking(-0.41)
@@ -70,8 +77,11 @@ struct RestaurantHomeView: View {
                                     Text(String(self.rating)).foregroundColor(.white)
                                         .font(.system(size: 12, weight: .semibold))
                                 }.frame(width: 45, height: 20)
-                                Text("(" + String(self.restaurant.n_Ratings) + " reviews)").font(.system(size: 14, weight: .semibold)).tracking(-0.41)
-                                
+                                Button(action: {
+                                    self.reviewViewShown.toggle()
+                                }){
+                                    Text("(" + String(self.restaurant.n_Ratings) + " reviews)").font(.system(size: 14, weight: .semibold)).tracking(-0.41).underline()
+                                }
                                 Spacer()
                                 
                                 NavigationLink(
@@ -158,6 +168,7 @@ struct RestaurantHomeView: View {
                             }
                            
                         }.padding()
+                        }
                     }
                     .background(RoundedRectangle(cornerRadius: /*@START_MENU_TOKEN@*/25.0/*@END_MENU_TOKEN@*/, style: /*@START_MENU_TOKEN@*/.continuous/*@END_MENU_TOKEN@*/).fill(Color(#colorLiteral(red: 0.9725490196, green: 0.968627451, blue: 0.9607843137, alpha: 1))))
                     .offset(y:190)

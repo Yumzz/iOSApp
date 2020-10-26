@@ -11,10 +11,12 @@ import SwiftUI
 class MenuSelectionViewModel: ObservableObject {
     var restaurant: RestaurantFB
     @Published var featuredDishes = [DishFB]()
+    @Published var reviews = [RestaurantReviewFB]()
     
     init(restaurant: RestaurantFB) {
         self.restaurant = restaurant
         fetchFeaturedDishes()
+        fetchReviews()
     }
     
     func fetchFeaturedDishes() {
@@ -30,6 +32,25 @@ class MenuSelectionViewModel: ObservableObject {
                     }
                     else{
                         print("no featured dishes")
+                    }
+                }
+            }
+        }
+    }
+    
+    func fetchReviews() {
+        let reviewRefs = self.restaurant.reviews
+        for reviewRef in reviewRefs {
+            reviewRef!.getDocument{ (snapshot, error) in
+                if let error = error {
+                    print("Error getting reviews: \(error)")
+                } else {
+                    let review = RestaurantReviewFB.init(snapshot: snapshot!) ?? nil
+                    if review != nil {
+                        self.reviews.append(review!)
+                    }
+                    else{
+                        print("no reviews")
                     }
                 }
             }

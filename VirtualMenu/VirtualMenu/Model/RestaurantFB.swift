@@ -26,6 +26,7 @@ struct RestaurantFB {
     
     var dishes: [DishFB]? = nil
     var featuredDishRefs: [DocumentReference?] = [DocumentReference?]()
+    var reviews: [DocumentReference?] = [DocumentReference?]()
     
     let coordinate: GeoPoint
     let streetAddress: String
@@ -170,6 +171,11 @@ struct RestaurantFB {
                 self.featuredDishRefs = featuredDishes
             }
         }
+        if (snapshot.get("Reviews") != nil) {
+            if let reviews = snapshot.data()["Reviews"] as? [DocumentReference] {
+                self.reviews = reviews
+            }
+        }
     }
     
     
@@ -273,6 +279,11 @@ struct RestaurantFB {
         if(snapshot.get("FeaturedDishes") != nil){
             if let featuredDishes = snapshot.data()["FeaturedDishes"] as? [DocumentReference] {
                 self.featuredDishRefs = featuredDishes
+            }
+        }
+        if (snapshot.get("Reviews") != nil) {
+            if let reviews = snapshot.data()["Reviews"] as? [DocumentReference] {
+                self.reviews = reviews
             }
         }
     }
