@@ -102,7 +102,6 @@ struct RestaurantHomeView: View {
                                             .font(.system(size: 18, weight: .bold))
                                         Text("Call Restaurant")
                                             .font(.system(size: 18,weight: .bold))
-                                            .font(.footnote)
                                             .frame(width: 150)
                                     }
                                     .padding()

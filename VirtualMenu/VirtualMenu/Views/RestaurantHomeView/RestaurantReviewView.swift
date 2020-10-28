@@ -23,11 +23,38 @@ struct RestaurantReviewView: View {
                 }
                 Text("Ratings and Reviews")
                     .frame(maxWidth: .infinity, alignment: .center)
+                    .font(.system(size: 24,weight: .semibold))
                     
             }
+            .padding(.bottom)
+            
+            HStack{
+                Text("4.44")
+                    .font(.system(size: 48,weight: .bold))
+                    .frame(width:  120)
+                Spacer()
+                Button(action: {
+                    print("hello")
+                }){
+                    Text("+ Add Reviews").font(.system(size: 18, weight: .medium)).tracking(-0.41)
+                }.foregroundColor(Color(#colorLiteral(red: 0.88, green: 0.36, blue: 0.16, alpha: 1)))
+                
+            }
+            .padding()
+            
             ForEach(self.menuSelectionVM.reviews, id: \.id){
                 review in
-                Text(review.text)
+                VStack{
+                    HStack{
+                        Image(systemName: "person.circle.fill")
+                            .font(.system(size: 18, weight: .semibold))
+                            .foregroundColor(Color(#colorLiteral(red: 0.88, green: 0.36, blue: 0.16, alpha: 1)))
+                        Text("USERNAME")
+                        Spacer()
+                    }
+                    Text(review.text)
+                }
+                .padding()
             }
             Spacer()
         }.padding()
