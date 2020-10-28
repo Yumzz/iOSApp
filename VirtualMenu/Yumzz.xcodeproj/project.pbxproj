@@ -515,6 +515,7 @@
 		3A3DD59A2539402A00536D62 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				34FCE2712507297F00329162 /* RatingView.swift */,
 				3A3DD59B2539405000536D62 /* SeeMenuButton.swift */,
 			);
 			path = Components;
@@ -764,7 +765,6 @@
 				A73FD46224919A1300A035AB /* ListDishesView.swift */,
 				34A5D662249BF6DF00E4FE9C /* DishDetailsView.swift */,
 				3AFA234924DCB14B00F90ED8 /* DishReviewsView.swift */,
-				34FCE2712507297F00329162 /* RatingView.swift */,
 			);
 			path = DishNavigation;
 			sourceTree = "<group>";

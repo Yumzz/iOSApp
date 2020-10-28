@@ -30,18 +30,14 @@ struct RatingView: View {
     
     var body: some View {
         VStack(spacing: 10) {
-            FBURLImage(url: self.restaurant.coverPhotoURL, imageWidth: 220, imageHeight: 160)
-                .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
-            HStack{
-                Text(self.restaurant.name)
-                    .padding(.horizontal)
-                    .foregroundColor(.black)
-                    .font(.custom("Montserrat", size: 26))
-            }.frame(alignment: .center)
-            Text(self.restaurant.ethnicity)
-                .foregroundColor(Color.secondary)
-                .font(.footnote)
-            Divider()
+            HStack {
+                Spacer()
+                Button(action:{
+                    self.isOpen = false
+                }) {
+                    Image(systemName: "xmark")
+                }
+            }
             StarRatingView(rating: $rating).padding()
             Button(action: {
                 self.submitRating()

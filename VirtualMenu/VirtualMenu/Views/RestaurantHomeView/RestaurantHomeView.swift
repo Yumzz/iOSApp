@@ -20,6 +20,7 @@ struct RestaurantHomeView: View {
     @State var dishesChosen: Bool = false
     
     @State private var reviewViewShown = false
+    @State private var popUpShown = false
     
     var distance: Double
     
@@ -44,7 +45,7 @@ struct RestaurantHomeView: View {
                     }
                     VStack(spacing: 10){
                         if (self.reviewViewShown) {
-                            RestaurantReviewView(shown: self.$reviewViewShown, menuSelectionVM: self.menuSelectionVM)
+                            RestaurantReviewView(shown: self.$reviewViewShown, popUpShown: self.$popUpShown, menuSelectionVM: self.menuSelectionVM)
                                 .transition(.slide)
                                 .animation(.default)
                         } else {
@@ -173,6 +174,16 @@ struct RestaurantHomeView: View {
                     .offset(y:190)
                     Spacer().frame(width: 0, height: 40)
                 }
+            }
+            if self.popUpShown {
+                ZStack {
+                    Color.white
+                    VStack {
+                        RatingView(restaurant: self.restaurant, isOpen: self.$popUpShown)
+                    }.padding()
+                }
+                .frame(width: 329, height: 374)
+                .cornerRadius(20).shadow(radius: 20)
             }
         }
 //        .background(Color(red: 0.953, green: 0.945, blue: 0.933))

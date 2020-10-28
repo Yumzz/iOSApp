@@ -14,7 +14,7 @@ import MapKit
 
 
 struct RestaurantFB {
-    //    let ref: DatabaseReference?
+    var ref: DocumentReference? = nil
     let id: UUID
     let key: String
     let name: String
@@ -176,6 +176,7 @@ struct RestaurantFB {
                 self.reviews = reviews
             }
         }
+        self.ref = snapshot.reference
     }
     
     
@@ -286,6 +287,7 @@ struct RestaurantFB {
                 self.reviews = reviews
             }
         }
+        self.ref = snapshot.reference
     }
     
     func toAnyObject() -> Any {
