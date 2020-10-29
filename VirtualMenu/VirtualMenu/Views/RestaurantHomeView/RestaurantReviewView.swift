@@ -41,21 +41,28 @@ struct RestaurantReviewView: View {
                 }.foregroundColor(Color(#colorLiteral(red: 0.88, green: 0.36, blue: 0.16, alpha: 1)))
                 
             }
-            .padding()
+            .padding(.bottom)
             
             ForEach(self.menuSelectionVM.reviews, id: \.id){
                 review in
                 VStack{
                     HStack{
                         Image(systemName: "person.circle.fill")
-                            .font(.system(size: 18, weight: .semibold))
+                            .font(.system(size: 26, weight: .semibold))
                             .foregroundColor(Color(#colorLiteral(red: 0.88, green: 0.36, blue: 0.16, alpha: 1)))
                         Text("USERNAME")
+                            .font(.system(size: 14, weight: .semibold ))
+                        Spacer()
+                        Text("1 day ago")
+                            .font(.system(size: 14, weight: .semibold ))
+                            .foregroundColor(.gray)
+                    }
+                    HStack{
+                        Text(review.text)
                         Spacer()
                     }
-                    Text(review.text)
                 }
-                .padding()
+                .padding(.bottom)
             }
             Spacer()
         }.padding()

@@ -130,7 +130,7 @@ struct RestaurantHomeView: View {
                                             Text("Direction")
                                                 .fontWeight(.bold)
                                                 .font(.system(size: 18, weight: .bold))
-                                                .frame(width: 50, height: 20)
+                                                .frame(width: 80, height: 20)
                                         }
                                         .padding()
                                         .foregroundColor(Color(#colorLiteral(red: 0.88, green: 0.36, blue: 0.16, alpha: 1)))
