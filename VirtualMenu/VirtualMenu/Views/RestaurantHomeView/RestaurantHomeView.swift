@@ -19,13 +19,19 @@ struct RestaurantHomeView: View {
     @State var isNavigationBarHidden: Bool = true
     @State var dishesChosen: Bool = false
     
+    @State private var reviewViewShown = false
+    @State private var popUpShown = false
+    
     var distance: Double
+    
+    var rating: Float
 
     
     init(restaurant: RestaurantFB, distance: Double) {
         self.restaurant = restaurant
         self.menuSelectionVM = MenuSelectionViewModel(restaurant: self.restaurant)
         self.distance = distance
+        self.rating = Float(self.restaurant.ratingSum) / Float(self.restaurant.n_Ratings)
     }
     
     var body: some View {
@@ -38,33 +44,45 @@ struct RestaurantHomeView: View {
                         Spacer()
                     }
                     VStack(spacing: 10){
+                        if (self.reviewViewShown) {
+                            RestaurantReviewView(shown: self.$reviewViewShown, popUpShown: self.$popUpShown, menuSelectionVM: self.menuSelectionVM)
+                                .transition(.slide)
+                                .animation(.default)
+                        } else {
                         VStack(alignment: .leading){
                             HStack{
                                 Text(restaurant.name).font(.system(size: 24, weight: .semibold)).tracking(-0.41)
                                 Spacer()
-                                Button(action: {
-                                    
-                                }) {
-                                    HStack {
-                                        Image(systemName: "qrcode.viewfinder")
-                                            .font(.system(size: 18, weight: .bold))
-                                    }
-                                    .padding()
-                                    .foregroundColor(Color(#colorLiteral(red: 0.88, green: 0.36, blue: 0.16, alpha: 1)))
-                                    .background(Color.white)
-                                    .cornerRadius(5)
-                                }
+//                                Button(action: {
+//                                    
+//                                }) {
+//                                    HStack {
+//                                        Image(systemName: "qrcode.viewfinder")
+//                                            .font(.system(size: 18, weight: .bold))
+//                                    }
+//                                    .padding()
+//                                    .foregroundColor(Color(#colorLiteral(red: 0.88, green: 0.36, blue: 0.16, alpha: 1)))
+//                                    .background(Color.white)
+//                                    .cornerRadius(5)
+//                                }
                             }
                             HStack{
                                 Text("\(restaurant.price) | \(restaurant.ethnicity) | \(self.distance.removeZerosFromEnd()) miles | \(self.restaurant.hour)").font(.system(size: 14, weight: .semibold)).foregroundColor(Color(#colorLiteral(red: 0.77, green: 0.77, blue: 0.77, alpha: 1))).tracking(-0.41)
                             }
                             
                             HStack{
-                                RoundedRectangle(cornerRadius: 5)
-                                    .fill(Color(#colorLiteral(red: 0, green: 0.7333333492279053, blue: 0.4693332314491272, alpha: 1)))
-                                .frame(width: 45, height: 20)
-                                Text("(298 reviews)").font(.system(size: 14, weight: .semibold)).tracking(-0.41)
-                                
+                                ZStack {
+                                    RoundedRectangle(cornerRadius: 5)
+                                        .fill(Color(#colorLiteral(red: 0, green: 0.7333333492279053, blue: 0.4693332314491272, alpha: 1)))
+                                    .frame(width: 45, height: 20)
+                                    Text(String(self.rating)).foregroundColor(.white)
+                                        .font(.system(size: 12, weight: .semibold))
+                                }.frame(width: 45, height: 20)
+                                Button(action: {
+                                    self.reviewViewShown.toggle()
+                                }){
+                                    Text("(" + String(self.restaurant.n_Ratings) + " reviews)").font(.system(size: 14, weight: .semibold)).tracking(-0.41).underline()
+                                }
                                 Spacer()
                                 
                                 NavigationLink(
@@ -85,7 +103,6 @@ struct RestaurantHomeView: View {
                                             .font(.system(size: 18, weight: .bold))
                                         Text("Call Restaurant")
                                             .font(.system(size: 18,weight: .bold))
-                                            .font(.footnote)
                                             .frame(width: 150)
                                     }
                                     .padding()
@@ -112,8 +129,8 @@ struct RestaurantHomeView: View {
                                                 .font(.system(size: 18))
                                             Text("Direction")
                                                 .fontWeight(.bold)
-                                                .font(.system(size: 10))
-                                                .frame(width: 50, height: 20)
+                                                .font(.system(size: 18, weight: .bold))
+                                                .frame(width: 80, height: 20)
                                         }
                                         .padding()
                                         .foregroundColor(Color(#colorLiteral(red: 0.88, green: 0.36, blue: 0.16, alpha: 1)))
@@ -151,11 +168,22 @@ struct RestaurantHomeView: View {
                             }
                            
                         }.padding()
+                        }
                     }
                     .background(RoundedRectangle(cornerRadius: /*@START_MENU_TOKEN@*/25.0/*@END_MENU_TOKEN@*/, style: /*@START_MENU_TOKEN@*/.continuous/*@END_MENU_TOKEN@*/).fill(Color(#colorLiteral(red: 0.9725490196, green: 0.968627451, blue: 0.9607843137, alpha: 1))))
                     .offset(y:190)
                     Spacer().frame(width: 0, height: 40)
                 }
+            }
+            if self.popUpShown {
+                ZStack {
+                    Color.white
+                    VStack {
+                        RatingView(restaurant: self.restaurant, isOpen: self.$popUpShown)
+                    }.padding()
+                }
+                .frame(width: 329, height: 374)
+                .cornerRadius(20).shadow(radius: 20)
             }
         }
 //        .background(Color(red: 0.953, green: 0.945, blue: 0.933))

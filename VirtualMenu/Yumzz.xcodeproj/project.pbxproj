@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2E1D4E991795E4ABF0205DD2 /* Pods_VirtualMenu.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A258F7D44E665A6211B55F6D /* Pods_VirtualMenu.framework */; };
 		34111054252262F10084975A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34111053252262F10084975A /* AppDelegate.swift */; };
 		34111056252262F10084975A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34111055252262F10084975A /* SceneDelegate.swift */; };
 		34111058252262F10084975A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34111057252262F10084975A /* ContentView.swift */; };
@@ -21,6 +22,8 @@
 		34909E75252D5D0500B43D7B /* HomeScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34909E74252D5D0500B43D7B /* HomeScreenViewModel.swift */; };
 		34911F02250DEAE400E56916 /* MapViewBottomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34911F01250DEAE400E56916 /* MapViewBottomView.swift */; };
 		34A5D663249BF6DF00E4FE9C /* DishDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34A5D662249BF6DF00E4FE9C /* DishDetailsView.swift */; };
+		34A966F2254691C200AD84CD /* RestaurantReviewFB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34A966F1254691C200AD84CD /* RestaurantReviewFB.swift */; };
+		34A966F8254762EF00AD84CD /* RestaurantReviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34A966F7254762EF00AD84CD /* RestaurantReviewView.swift */; };
 		34F39DA1253E357C00C30346 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3A987ADC2480350E0021F6E4 /* Assets.xcassets */; };
 		34FCE2722507297F00329162 /* RatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34FCE2712507297F00329162 /* RatingView.swift */; };
 		3A0745B5252B014D000EF6BD /* AppleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0745B4252B014C000EF6BD /* AppleButton.swift */; };
@@ -65,7 +68,6 @@
 		3A5633CC24FA33790059B603 /* Order.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5633CB24FA33790059B603 /* Order.swift */; };
 		3A5633CE24FC8FE70059B603 /* OrderModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5633CD24FC8FE70059B603 /* OrderModel.swift */; };
 		3A5633D524FCED0C0059B603 /* DishNavButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5633D424FCED0C0059B603 /* DishNavButton.swift */; };
-		3A5B0D7B253E363700A0BE41 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3A987ADC2480350E0021F6E4 /* Assets.xcassets */; };
 		3A5B0DB8253FDD9B00A0BE41 /* MiniViewCartButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5B0DB7253FDD9B00A0BE41 /* MiniViewCartButton.swift */; };
 		3A5F685424FE230200F9B43D /* TextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5F685324FE230200F9B43D /* TextView.swift */; };
 		3A5F685624FE470C00F9B43D /* ReviewCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5F685524FE470C00F9B43D /* ReviewCard.swift */; };
@@ -119,7 +121,6 @@
 		3AFA234624DC9C2000F90ED8 /* DishReviewFB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFA234524DC9C2000F90ED8 /* DishReviewFB.swift */; };
 		3AFA234824DCACEA00F90ED8 /* ReviewsButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFA234724DCACEA00F90ED8 /* ReviewsButton.swift */; };
 		3AFA234A24DCB14B00F90ED8 /* DishReviewsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFA234924DCB14B00F90ED8 /* DishReviewsView.swift */; };
-		4367BF93A5EAF9A480C581C5 /* Pods_VirtualMenu.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A258F7D44E665A6211B55F6D /* Pods_VirtualMenu.framework */; };
 		A724364B24D4CFF200F8BBBB /* RestaurantCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = A724364A24D4CFF200F8BBBB /* RestaurantCard.swift */; };
 		A731EB0E2495AD2300B75D05 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A731EB0D2495AD2300B75D05 /* CloudKit.framework */; };
 		A735992824ECD83300584BFD /* AccountProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A735992724ECD83300584BFD /* AccountProfileViewModel.swift */; };
@@ -221,6 +222,8 @@
 		34909E74252D5D0500B43D7B /* HomeScreenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreenViewModel.swift; sourceTree = "<group>"; };
 		34911F01250DEAE400E56916 /* MapViewBottomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewBottomView.swift; sourceTree = "<group>"; };
 		34A5D662249BF6DF00E4FE9C /* DishDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DishDetailsView.swift; sourceTree = "<group>"; };
+		34A966F1254691C200AD84CD /* RestaurantReviewFB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantReviewFB.swift; sourceTree = "<group>"; };
+		34A966F7254762EF00AD84CD /* RestaurantReviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantReviewView.swift; sourceTree = "<group>"; };
 		34F39DA6253E58DF00C30346 /* YumzzRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = YumzzRelease.entitlements; sourceTree = "<group>"; };
 		34F39DA7253E58FB00C30346 /* YumzzAppClipRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = YumzzAppClipRelease.entitlements; sourceTree = "<group>"; };
 		34FCE2712507297F00329162 /* RatingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingView.swift; sourceTree = "<group>"; };
@@ -382,7 +385,7 @@
 				3AE05F9A24EF27550024F802 /* FacebookLogin in Frameworks */,
 				A731EB0E2495AD2300B75D05 /* CloudKit.framework in Frameworks */,
 				3AE05F9824EF27550024F802 /* FacebookCore in Frameworks */,
-				D2A94C6DC337B2EEA9EEDEE8 /* Pods_VirtualMenu.framework in Frameworks */,
+				2E1D4E991795E4ABF0205DD2 /* Pods_VirtualMenu.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -432,6 +435,7 @@
 			children = (
 				3A3DD59A2539402A00536D62 /* Components */,
 				343A44BF252E21FE00109C90 /* RestaurantHomeView.swift */,
+				34A966F7254762EF00AD84CD /* RestaurantReviewView.swift */,
 			);
 			path = RestaurantHomeView;
 			sourceTree = "<group>";
@@ -481,6 +485,7 @@
 				3ACAD188250B161A00B24CEB /* RestCategory.swift */,
 				3A6477F124B68D060077EF30 /* UserProfile.swift */,
 				3A5633CB24FA33790059B603 /* Order.swift */,
+				34A966F1254691C200AD84CD /* RestaurantReviewFB.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -510,6 +515,7 @@
 		3A3DD59A2539402A00536D62 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				34FCE2712507297F00329162 /* RatingView.swift */,
 				3A3DD59B2539405000536D62 /* SeeMenuButton.swift */,
 			);
 			path = Components;
@@ -759,7 +765,6 @@
 				A73FD46224919A1300A035AB /* ListDishesView.swift */,
 				34A5D662249BF6DF00E4FE9C /* DishDetailsView.swift */,
 				3AFA234924DCB14B00F90ED8 /* DishReviewsView.swift */,
-				34FCE2712507297F00329162 /* RatingView.swift */,
 			);
 			path = DishNavigation;
 			sourceTree = "<group>";
@@ -1226,6 +1231,7 @@
 				3ABA90F124F63DB500695B06 /* BlackButton.swift in Sources */,
 				3A4E2E3224D12D2500C34DD8 /* DishAdminView.swift in Sources */,
 				3A4E2E3F24D2403300C34DD8 /* RestaurantDishViewModel.swift in Sources */,
+				34A966F8254762EF00AD84CD /* RestaurantReviewView.swift in Sources */,
 				3ACAD178250AE6E400B24CEB /* ReportProblemViewModel.swift in Sources */,
 				3AF1BA90252A92DD00FAA9A0 /* InvertedOrangeButton.swift in Sources */,
 				3A13B6ED24C3D9FB0006458B /* SuggestRestaurant.swift in Sources */,
@@ -1257,6 +1263,7 @@
 				3A0745C7252B0871000EF6BD /* BackButton.swift in Sources */,
 				3ACAD187250AF4B200B24CEB /* ListDishesViewModel.swift in Sources */,
 				3A530DF124D8E07F00CBDE28 /* BottomSheetModal.swift in Sources */,
+				34A966F2254691C200AD84CD /* RestaurantReviewFB.swift in Sources */,
 				3A5633BA24F9014C0059B603 /* SignInWithAppleCoordinator.swift in Sources */,
 				A7FE250624A83C1D0007E5AD /* MapView.swift in Sources */,
 				3A0745BB252B020F000EF6BD /* FacebookButton.swift in Sources */,

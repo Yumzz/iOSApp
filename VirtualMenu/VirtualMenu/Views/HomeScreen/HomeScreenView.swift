@@ -53,16 +53,29 @@ struct HomeScreenView: View {
     GeometryReader { geometry in
         ZStack {
             Color(#colorLiteral(red: 0.9725490196, green: 0.968627451, blue: 0.9607843137, alpha: 1)).edgesIgnoringSafeArea(.all)
-            ScrollView(.vertical) {
-                VStack {
-                    HStack {
-                        Text("Yumzz").font(.system(size: 36, weight: .bold)).frame(alignment: .leading)
-                        Spacer()
-                        Image(systemName: "qrcode.viewfinder")
-                            .font(.system(size: 24, weight: .bold)).padding()
-                        
-                        if (userProfile.profilePhoto == nil){
-                        Image(systemName: "person.crop.square.fill")
+            VStack {
+                HStack {
+                    Text("Yumzz").font(.system(size: 36, weight: .bold)).frame(alignment: .leading)
+                    Spacer()
+                    Image(systemName: "qrcode.viewfinder")
+                        .font(.system(size: 24, weight: .bold)).padding()
+                    
+                    if (userProfile.profilePhoto == nil){
+                    Image(systemName: "person.crop.square.fill")
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                        .frame(width: 36, height: 36)
+                        .clipShape(RoundedRectangle(cornerRadius: 10))
+                        .onTapGesture {
+                            self.showAccount = true
+                        }
+                        .sheet(isPresented: self.$showAccount) {
+                            AccountProfileView()
+                            //dismiss once confirmation alert is sent
+                        }
+                    }
+                    else{
+                        Image(uiImage: userProfile.profilePhoto!.circle!)
                             .resizable()
                             .aspectRatio(contentMode: .fill)
                             .frame(width: 36, height: 36)
@@ -74,29 +87,16 @@ struct HomeScreenView: View {
                                 AccountProfileView()
                                 //dismiss once confirmation alert is sent
                             }
-                        }
-                        else{
-                            Image(uiImage: userProfile.profilePhoto!.circle!)
-                                .resizable()
-                                .aspectRatio(contentMode: .fill)
-                                .frame(width: 36, height: 36)
-                                .clipShape(RoundedRectangle(cornerRadius: 10))
-                                .onTapGesture {
-                                    self.showAccount = true
-                                }
-                                .sheet(isPresented: self.$showAccount) {
-                                    AccountProfileView()
-                                    //dismiss once confirmation alert is sent
-                                }
-                        }
-                    }.foregroundColor(Color(#colorLiteral(red: 0.88, green: 0.36, blue: 0.16, alpha: 1))).frame(alignment: .top).padding()
-                        
+                    }
+                }.foregroundColor(Color(#colorLiteral(red: 0.88, green: 0.36, blue: 0.16, alpha: 1))).frame(alignment: .top).padding()
+            ScrollView(.vertical, showsIndicators: false) {
+                VStack {
                     HStack {
                         Text("Near you").font(.system(size: 24, weight: .semibold))
                         Spacer()
                     }.padding()
                     
-                    ScrollView(.horizontal) {
+                    ScrollView(.horizontal, showsIndicators: false) {
                         HStack(spacing: 30) {
                             ForEach(self.restaurants, id:\.id) { restaurant in
 
@@ -116,7 +116,7 @@ struct HomeScreenView: View {
                             Spacer()
                         }.padding()
                     
-                    ScrollView(.horizontal){
+                    ScrollView(.horizontal, showsIndicators: false){
                         HStack(spacing: 30) {
                                 
                                 ForEach(self.cityRests[city]!, id:\.self) { rest in
@@ -135,8 +135,9 @@ struct HomeScreenView: View {
                     }
                     Spacer()
                     
-                }.padding(.top, geometry.safeAreaInsets.top)
+                }
             }
+            }.padding(.top, geometry.safeAreaInsets.top)
 //                .background(Color(red: 0.953, green: 0.945, blue: 0.933))
             .edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
         }.navigationBarTitle("").navigationBarHidden(true)

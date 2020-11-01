@@ -14,7 +14,7 @@ import MapKit
 
 
 struct RestaurantFB {
-    //    let ref: DatabaseReference?
+    var ref: DocumentReference? = nil
     let id: UUID
     let key: String
     let name: String
@@ -26,6 +26,7 @@ struct RestaurantFB {
     
     var dishes: [DishFB]? = nil
     var featuredDishRefs: [DocumentReference?] = [DocumentReference?]()
+    var reviews: [DocumentReference?] = [DocumentReference?]()
     
     let coordinate: GeoPoint
     let streetAddress: String
@@ -170,6 +171,12 @@ struct RestaurantFB {
                 self.featuredDishRefs = featuredDishes
             }
         }
+        if (snapshot.get("Reviews") != nil) {
+            if let reviews = snapshot.data()["Reviews"] as? [DocumentReference] {
+                self.reviews = reviews
+            }
+        }
+        self.ref = snapshot.reference
     }
     
     
@@ -275,6 +282,12 @@ struct RestaurantFB {
                 self.featuredDishRefs = featuredDishes
             }
         }
+        if (snapshot.get("Reviews") != nil) {
+            if let reviews = snapshot.data()["Reviews"] as? [DocumentReference] {
+                self.reviews = reviews
+            }
+        }
+        self.ref = snapshot.reference
     }
     
     func toAnyObject() -> Any {

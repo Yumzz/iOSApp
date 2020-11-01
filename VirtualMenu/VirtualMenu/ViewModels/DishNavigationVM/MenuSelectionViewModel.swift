@@ -7,14 +7,18 @@
 //
 
 import SwiftUI
+import Firebase
 
 class MenuSelectionViewModel: ObservableObject {
+    let db = Firestore.firestore()
     var restaurant: RestaurantFB
     @Published var featuredDishes = [DishFB]()
+    @Published var reviews = [RestaurantReviewFB]()
     
     init(restaurant: RestaurantFB) {
         self.restaurant = restaurant
         fetchFeaturedDishes()
+        fetchReviews()
     }
     
     func fetchFeaturedDishes() {
@@ -34,6 +38,50 @@ class MenuSelectionViewModel: ObservableObject {
                 }
             }
         }
+    }
+    
+    func fetchReviews() {
+        let reviewRefs = self.restaurant.reviews
+        for reviewRef in reviewRefs {
+            reviewRef!.getDocument{ (snapshot, error) in
+                if let error = error {
+                    print("Error getting reviews: \(error)")
+                } else {
+                    let review = RestaurantReviewFB.init(snapshot: snapshot!) ?? nil
+                    if review != nil {
+                        self.reviews.append(review!)
+                    }
+                    else{
+                        print("no reviews")
+                    }
+                }
+            }
+        }
+    }
+    
+    func publishReview(rating: Int64, text: String, user: UserProfile) {
+        let newReviewRef = db.collection("RestaurantReview").document()
+        newReviewRef.setData([
+            "Rating": rating,
+            "Text": text,
+            "Restaurant": self.restaurant.ref!,
+            "User": NSNull(),
+            "Date": Timestamp(date: Date())
+        ]) { err in
+            if let err = err {
+                print("Error writing document: \(err)")
+            } else {
+                print("Document successfully written!")
+            }
+        }
+        self.restaurant.ref?.updateData([
+            "RatingSum": FieldValue.increment(Int64(rating)),
+            "N_Ratings": FieldValue.increment(Int64(1)),
+            "Reviews": FieldValue.arrayUnion([newReviewRef])
+        ])
+        self.restaurant.ratingSum += rating
+        self.restaurant.n_Ratings += 1
+        self.restaurant.reviews.append(newReviewRef)
     }
     
 }

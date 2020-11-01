@@ -24,7 +24,7 @@ struct restaurantSearchLabel: View {
     }
 }
 
-struct SwiftUIView_Previews: PreviewProvider {
+struct restaurantSearchLabel_Previews: PreviewProvider {
     static var previews: some View {
         restaurantSearchLabel()
     }
