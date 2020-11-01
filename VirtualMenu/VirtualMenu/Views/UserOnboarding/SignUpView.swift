@@ -112,8 +112,10 @@ struct SignUpView: View {
                                 dispatch.enter()
                                 self.signUpVM.signUpFb(dispatch: dispatch)
                                 dispatch.notify(queue: .main){
-                                    self.alertTitle = self.signUpVM.alertTitle
-                                    self.alertMessage = self.signUpVM.alertMessage
+                                    self.alertTitle = self.signUpVM.returnAlertTitle()
+                                    self.alertMessage = self.signUpVM.returnAlertMessage()
+                                    print("wow: \(self.signUpVM.alertTitle)")
+                                    print("wow: \(self.signUpVM.alertMessage)")
                                     self.showAlert.toggle()
                                 }
                             }
@@ -147,6 +149,10 @@ struct SignUpView: View {
         .navigationBarTitle("")
         .navigationBarBackButtonHidden(true)
         .navigationBarItems(leading: BackButton(mode: self.mode))
+        .alert(isPresented: $showAlert) {
+            Alert(title: Text("\(self.alertTitle)"), message: Text("\(self.alertMessage)"), dismissButton: .default(Text("Got it!")))
+            }
+//        .alert(isPresented: $showAlert, content: { self.alert })
     }
     
     private func performExistingAccountFlows(){

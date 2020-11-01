@@ -94,9 +94,12 @@ struct LoginView: View {
                             let dispatch = DispatchGroup()
                             dispatch.enter()
                             //do valid inputs and make move current user != nil if to account profile view
+                            print("login")
                             self.loginVM.loginUser(email: self.email, password: self.password, disp: dispatch)
                             dispatch.notify(queue: .main){
+                                print("wowo: \(self.loginVM.alertMessage)")
                                 if(self.loginVM.alertMessage != ""){
+                                    print("here")
                                     self.alertMsg = self.loginVM.alertMessage
                                     self.alertTitle = self.loginVM.alertTitle
                                     self.showAlert.toggle()
@@ -110,7 +113,7 @@ struct LoginView: View {
                                         print(self.user.showOnboarding)
                                         UserDefaults.standard.set(false, forKey: "showOnboarding")
                                     }else{
-                                        print(userProfile.emailAddress)
+                                        print("email: \(userProfile.emailAddress)")
                                         self.alertMsg = "There is no such user"
                                         self.alertTitle = "No User"
                                         self.showAlert.toggle()
@@ -174,7 +177,10 @@ struct LoginView: View {
             .onAppear(){
                 self.isNavigationBarHidden = false
             }
-        .alert(isPresented: $showAlert, content: { self.alert })
+        .alert(isPresented: $showAlert){
+            Alert(title: Text("\(self.alertTitle)"), message: Text("\(self.alertMsg)"), dismissButton: .default(Text("Got it!")))
+//        .aler
+        }
     }
         private func performExistingAccountFlows(){
             let requests = [ASAuthorizationAppleIDProvider().createRequest(),
@@ -193,7 +199,6 @@ struct LoginView: View {
             ]
             performSignIn(using: [request])
             request.nonce = self.loginVM.sha256(nonce)
-
         }
 
         

@@ -16,8 +16,8 @@ import CryptoKit
 
 class SignUpViewModel: ObservableObject {
     
-    @State var alertMessage = ""
-    @State var alertTitle = ""
+    var alertMessage = ""
+    var alertTitle = ""
     @Environment(\.window) var window: UIWindow?
 
     @State var socialLogin = SocialLogin()
@@ -77,6 +77,14 @@ class SignUpViewModel: ObservableObject {
             }
         }
     }
+    
+    func returnAlertTitle() -> String{
+        return self.alertTitle
+    }
+    
+    func returnAlertMessage() -> String{
+        return self.alertMessage
+    }
 
 
     func signUpUser(email: String, name: String, password: String, dispatch: DispatchGroup) -> String{
@@ -124,9 +132,10 @@ class SignUpViewModel: ObservableObject {
                     print("attempt result")
                     self.alertMessage = "A confirmation email was sent to the email associated with the provided facebook account. Please click the link to sign in!"
                     self.alertTitle = "Email Sent!"
+                    print("signupfb: \(self.alertMessage)  | \(self.alertTitle)")
                     dispatch.leave()
-                    
-                }else{
+                }
+                else{
                     //create alert saying no account associated with this FB profile. Please use sign up page
                     self.alertMessage = "\(error!.localizedDescription)"
                     self.alertTitle = "Error!"

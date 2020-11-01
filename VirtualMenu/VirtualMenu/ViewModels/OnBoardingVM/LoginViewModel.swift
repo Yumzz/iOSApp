@@ -21,8 +21,8 @@ var userProfile: UserProfile = UserProfile(userId: "", fullName: "", emailAddres
 
 class LoginViewModel: ObservableObject {
 
-    @State var alertMessage = ""
-    @State var alertTitle = ""
+    var alertMessage = ""
+    var alertTitle = ""
     @Environment(\.window) var window: UIWindow?
 
     @State var socialLogin = SocialLogin()
@@ -73,11 +73,12 @@ class LoginViewModel: ObservableObject {
         userProfile = UserProfile(userId: "", fullName: "", emailAddress: "", profilePicture: "", profPhoto: nil)
     }
 
-    func loginUser(email: String, password: String, disp: DispatchGroup? = nil, start: Bool? = false){
+    func loginUser(email: String, password: String, disp: DispatchGroup? = nil){
         if(!email.isValidEmail || !password.isValidPassword){
+            print("invalid")
             self.alertMessage = "Your email or password is invalid"
             self.alertTitle = "Sign in error"
-            return
+            disp?.leave()
         }else{
             print("signing in")
             Auth.auth().signIn(withEmail: email, password: password){ result, error in
@@ -128,8 +129,11 @@ class LoginViewModel: ObservableObject {
         })
         
         userProfile.userId = Auth.auth().currentUser!.uid
-        userProfile.emailAddress = Auth.auth().currentUser!.email!
-
+        print("updatingggg")
+        print(Auth.auth().description)
+        print(Auth.auth().currentUser?.observationInfo)
+        userProfile.emailAddress = Auth.auth().currentUser!.email ?? ""
+        
         
         let fb = Firestore.firestore()
         let ref = fb.collection("User")

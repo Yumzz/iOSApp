@@ -92,7 +92,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
           //Google Credential -> Firebase credential
         credential = GoogleAuthProvider.credential(withIDToken: authentication.idToken,
                                                             accessToken: authentication.accessToken)
-          
+        
 //        var noUser = false
 //        Auth.auth().fetchSignInMethods(forEmail: email) { (methods, error) in
 //            if(error != nil){
