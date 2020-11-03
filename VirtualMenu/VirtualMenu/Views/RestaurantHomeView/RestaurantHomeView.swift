@@ -24,14 +24,14 @@ struct RestaurantHomeView: View {
     
     var distance: Double
     
-    var rating: Float
+    var rating: String = "5.0"
 
     
     init(restaurant: RestaurantFB, distance: Double) {
         self.restaurant = restaurant
         self.menuSelectionVM = MenuSelectionViewModel(restaurant: self.restaurant)
         self.distance = distance
-        self.rating = Float(self.restaurant.ratingSum) / Float(self.restaurant.n_Ratings)
+        self.rating = String(format: "%.1f", Float(self.menuSelectionVM.restaurant.ratingSum)/Float(self.menuSelectionVM.restaurant.n_Ratings))
     }
     
     var body: some View {
@@ -177,13 +177,15 @@ struct RestaurantHomeView: View {
             }
             if self.popUpShown {
                 ZStack {
-                    Color.white
+                    Color(#colorLiteral(red: 0.9725490196, green: 0.968627451, blue: 0.9607843137, alpha: 1))
                     VStack {
                         RatingView(restaurant: self.restaurant, isOpen: self.$popUpShown)
                     }.padding()
                 }
                 .frame(width: 329, height: 374)
                 .cornerRadius(20).shadow(radius: 20)
+                .transition(.slide)
+                .animation(.default)
             }
         }
 //        .background(Color(red: 0.953, green: 0.945, blue: 0.933))

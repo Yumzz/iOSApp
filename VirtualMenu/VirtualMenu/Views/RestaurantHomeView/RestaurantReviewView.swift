@@ -30,9 +30,8 @@ struct RestaurantReviewView: View {
             .padding(.bottom)
             
             HStack{
-                Text("4.44")
+                Text(String(format: "%.2f", Float(self.menuSelectionVM.restaurant.ratingSum)/Float(self.menuSelectionVM.restaurant.n_Ratings)))
                     .font(.system(size: 48,weight: .bold))
-                    .frame(width:  120)
                 Spacer()
                 Button(action: {
                     self.popUpShown = true
@@ -41,31 +40,84 @@ struct RestaurantReviewView: View {
                 }.foregroundColor(Color(#colorLiteral(red: 0.88, green: 0.36, blue: 0.16, alpha: 1)))
                 
             }
-            .padding(.bottom)
             
-            ForEach(self.menuSelectionVM.reviews, id: \.id){
-                review in
-                VStack{
-                    HStack{
-                        Image(systemName: "person.circle.fill")
-                            .font(.system(size: 26, weight: .semibold))
-                            .foregroundColor(Color(#colorLiteral(red: 0.88, green: 0.36, blue: 0.16, alpha: 1)))
-                        Text("USERNAME")
-                            .font(.system(size: 14, weight: .semibold ))
-                        Spacer()
-                        Text("1 day ago")
-                            .font(.system(size: 14, weight: .semibold ))
-                            .foregroundColor(.gray)
+            StarView(rating: Float(self.menuSelectionVM.restaurant.ratingSum)/Float(self.menuSelectionVM.restaurant.n_Ratings), fontSize: 20)
+            Text("(Based on " + String( self.menuSelectionVM.restaurant.n_Ratings) + " reviews)")
+                .foregroundColor(.secondary)
+            
+            .padding(.bottom)
+            if (self.menuSelectionVM.reviews.isEmpty) {
+                Text("No reviews yet. Add yours!")
+                    .frame(alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+            } else {
+                ForEach(self.menuSelectionVM.reviews, id: \.id){
+                    review in
+                    VStack{
+                        HStack{
+                            Image(systemName: "person.circle.fill")
+                                .font(.system(size: 30, weight: .semibold))
+                                .foregroundColor(Color(#colorLiteral(red: 0.88, green: 0.36, blue: 0.16, alpha: 1)))
+                            VStack {
+                                HStack {
+                                    Text("USERNAME")
+                                    .font(.system(size: 14, weight: .semibold ))
+                                    Spacer()
+                                }
+                                HStack {
+                                    StarView(rating: Float(review.rating))
+                                    Spacer()
+                                    Text("1 day ago")
+                                        .font(.system(size: 14, weight: .semibold ))
+                                        .foregroundColor(.gray)
+                                }
+                            }
+                        }.padding(.bottom, 10)
+                        HStack{
+                            Text(review.text)
+                            Spacer()
+                        }
                     }
-                    HStack{
-                        Text(review.text)
-                        Spacer()
-                    }
+                    .padding(.bottom, 25)
                 }
-                .padding(.bottom)
             }
             Spacer()
         }.padding()
+    }
+}
+
+struct StarView: View {
+    var rating: Float
+    
+    var fontSize: CGFloat = 16
+
+    var maximumRating = 5
+
+    var offImage = Image(systemName: "star")
+    var halfImage = Image(systemName: "star.lefthalf.fill")
+    var onImage = Image(systemName: "star.fill")
+
+    var offColor = Color.yellow
+    var onColor = Color.yellow
+    
+    func image(for number: Int) -> Image {
+        if number > Int(rating) {
+            if Float(number) - rating >= 0.5 && Float(number) - rating < 1 {
+                return halfImage
+            }
+            return offImage
+        } else {
+            return onImage
+        }
+    }
+    
+    var body: some View {
+        HStack {
+            ForEach(1..<maximumRating + 1) { number in
+                self.image(for: number)
+                    .font(.system(size: self.fontSize))
+                    .foregroundColor(number > Int(self.rating) ? self.offColor : self.onColor)
+            }
+        }
     }
 }
 

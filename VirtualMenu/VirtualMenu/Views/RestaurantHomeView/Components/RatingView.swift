@@ -14,6 +14,8 @@ struct RatingView: View {
     @Environment(\.presentationMode) var presentation
     @Binding var isOpen: Bool
     @State var rating: Int = 0
+    @State var reviewText: String = ""
+    @State var textStyle: UIFont.TextStyle = UIFont.TextStyle.body
     
     func submitRating() {
         let db = Firestore.firestore()
@@ -29,31 +31,75 @@ struct RatingView: View {
     }
     
     var body: some View {
-        VStack(spacing: 10) {
-            HStack {
+        ZStack {
+            Color(#colorLiteral(red: 0.9725490196, green: 0.968627451, blue: 0.9607843137, alpha: 1)).ignoresSafeArea(.all)
+            VStack(spacing: 10) {
+                HStack {
+                    Spacer()
+                    Button(action:{
+                        self.isOpen = false
+                    }) {
+                        Image(systemName: "xmark")
+                            .foregroundColor(.black)
+                    }
+                }
+                HStack {
+                    if (userProfile.profilePhoto == nil){
+                    Image(systemName: "person.crop.square.fill")
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                        .frame(width: 36, height: 36)
+                        .clipShape(RoundedRectangle(cornerRadius: 10))
+                    }
+                    else{
+                        Image(uiImage: userProfile.profilePhoto!.circle!)
+                            .resizable()
+                            .aspectRatio(contentMode: .fill)
+                            .frame(width: 36, height: 36)
+                            .clipShape(RoundedRectangle(cornerRadius: 10))
+                    }
+                    Text("USERNAME")
+                    Spacer()
+                }
+                HStack{
+                    StarRatingView(rating: $rating)
+                    Spacer()
+                }
+                TextView(text: self.$reviewText, textStyle: self.$textStyle)
+                    .cornerRadius(20)
+                    .border(Color.gray, width: 0.5)
+                    
+                HStack {
+                    Spacer()
+                    Button(action: {
+                        self.isOpen = false
+                    }) {
+                        VStack {
+                            Text ("Cancel")
+                                .fontWeight(.semibold)
+                                .font(.system(size: 16))
+                        }
+                        .padding()
+                        .foregroundColor(Color(#colorLiteral(red: 0.88, green: 0.36, blue: 0.16, alpha: 1)))
+                        .background(RoundedRectangle(cornerRadius: 10, style: .continuous).fill(Color.white).frame(width: 90, height: 30))
+                    }
+                    Button(action: {
+                        self.submitRating()
+                        self.isOpen = false
+                    }) {
+                        VStack {
+                            Text("Post")
+                                .fontWeight(.semibold)
+                                .font(.system(size: 16))
+                        }
+                        .padding()
+                        .foregroundColor(.white)
+                        .background(RoundedRectangle(cornerRadius: 10, style: .continuous).fill(Color(#colorLiteral(red: 0.88, green: 0.36, blue: 0.16, alpha: 1))).frame(width: 90, height: 30))
+                        .frame(width: 100, height: 30)
+                    }
+                }
                 Spacer()
-                Button(action:{
-                    self.isOpen = false
-                }) {
-                    Image(systemName: "xmark")
-                }
-            }
-            StarRatingView(rating: $rating).padding()
-            Button(action: {
-                self.submitRating()
-                self.isOpen = false
-            }) {
-                VStack {
-                    Text("Submit")
-                        .fontWeight(.semibold)
-                        .font(.system(size: 20))
-                }
-                .padding()
-                .foregroundColor(.red)
-                .background(Color.white)
-                .cornerRadius(30)
-            }
-            Spacer()
+            }.padding()
         }
     }
 }
@@ -66,15 +112,15 @@ struct StarRatingView: View {
 
     var maximumRating = 5
 
-    var offImage: Image?
+    var offImage = Image(systemName: "star")
     var onImage = Image(systemName: "star.fill")
 
-    var offColor = Color.gray
+    var offColor = Color.yellow
     var onColor = Color.yellow
     
     func image(for number: Int) -> Image {
         if number > rating {
-            return offImage ?? onImage
+            return offImage
         } else {
             return onImage
         }
