@@ -170,7 +170,7 @@ struct MapViewBottomView: View {
                 ZStack {
                     Color.white
                     VStack {
-                        RatingView(restaurant: self.restChosen, isOpen: self.$showPopUp)
+                        EmptyView()
                         Button(action: {
                             self.showPopUp = false
                         }, label: {

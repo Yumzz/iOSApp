@@ -69,16 +69,22 @@ class MenuSelectionViewModel: ObservableObject {
             "Date": Timestamp(date: Date())
         ]) { err in
             if let err = err {
-                print("Error writing document: \(err)")
+                print(err.localizedDescription)
             } else {
                 print("Document successfully written!")
             }
         }
-        self.restaurant.ref?.updateData([
+        db.collection("Restaurant").document(self.restaurant.key).updateData([
             "RatingSum": FieldValue.increment(Int64(rating)),
             "N_Ratings": FieldValue.increment(Int64(1)),
             "Reviews": FieldValue.arrayUnion([newReviewRef])
-        ])
+        ]) { err in
+            if let err = err {
+                print(err.localizedDescription)
+            } else {
+                print("Document successfully written2!")
+            }
+        }
         self.restaurant.ratingSum += rating
         self.restaurant.n_Ratings += 1
         self.restaurant.reviews.append(newReviewRef)

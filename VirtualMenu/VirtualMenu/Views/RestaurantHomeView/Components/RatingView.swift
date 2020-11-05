@@ -10,25 +10,12 @@ import SwiftUI
 import Firebase
 
 struct RatingView: View {
-    var restaurant: RestaurantFB
+    @ObservedObject var menuSelectionVM: MenuSelectionViewModel
     @Environment(\.presentationMode) var presentation
     @Binding var isOpen: Bool
     @State var rating: Int = 0
     @State var reviewText: String = ""
     @State var textStyle: UIFont.TextStyle = UIFont.TextStyle.body
-    
-    func submitRating() {
-        let db = Firestore.firestore()
-        db.collection("Restaurant").document(self.restaurant.key).updateData([
-            "RatingSum": FieldValue.increment(Int64(self.rating)),
-            "N_Ratings": FieldValue.increment(Int64(1))
-        ]) {(err) in
-            if let err = err {
-                print(err.localizedDescription)
-            }
-            print("Rating Successfully submitted")
-        }
-    }
     
     var body: some View {
         ZStack {
@@ -66,9 +53,6 @@ struct RatingView: View {
                     Spacer()
                 }
                 TextView(text: self.$reviewText, textStyle: self.$textStyle)
-                    .cornerRadius(20)
-                    .border(Color.gray, width: 0.5)
-                    
                 HStack {
                     Spacer()
                     Button(action: {
@@ -84,7 +68,7 @@ struct RatingView: View {
                         .background(RoundedRectangle(cornerRadius: 10, style: .continuous).fill(Color.white).frame(width: 90, height: 30))
                     }
                     Button(action: {
-                        self.submitRating()
+                        self.menuSelectionVM.publishReview(rating: Int64(self.rating), text: self.reviewText, user: userProfile)
                         self.isOpen = false
                     }) {
                         VStack {

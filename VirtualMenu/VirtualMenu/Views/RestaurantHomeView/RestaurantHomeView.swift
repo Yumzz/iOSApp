@@ -179,7 +179,7 @@ struct RestaurantHomeView: View {
                 ZStack {
                     Color(#colorLiteral(red: 0.9725490196, green: 0.968627451, blue: 0.9607843137, alpha: 1))
                     VStack {
-                        RatingView(restaurant: self.restaurant, isOpen: self.$popUpShown)
+                        RatingView(menuSelectionVM: self.menuSelectionVM, isOpen: self.$popUpShown)
                     }.padding()
                 }
                 .frame(width: 329, height: 374)

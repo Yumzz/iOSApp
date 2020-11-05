@@ -101,7 +101,7 @@ struct StarView: View {
     
     func image(for number: Int) -> Image {
         if number > Int(rating) {
-            if Float(number) - rating >= 0.5 && Float(number) - rating < 1 {
+            if Float(number) - rating <= 0.5 && Float(number) - rating < 1 {
                 return halfImage
             }
             return offImage

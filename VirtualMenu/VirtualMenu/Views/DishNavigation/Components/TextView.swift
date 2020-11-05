@@ -23,8 +23,9 @@ struct TextView: UIViewRepresentable {
         textView.isUserInteractionEnabled = true
         textView.isEditable = true
         textView.layer.masksToBounds = true
-        textView.layer.borderWidth = 3
-        textView.layer.borderColor = UIColor.black.cgColor
+        textView.layer.borderWidth = 0.5
+        textView.layer.borderColor = UIColor.gray.cgColor
+        textView.layer.cornerRadius = 10
         textView.layer.shadowOpacity = 0.5
         textView.backgroundColor = .white
         
