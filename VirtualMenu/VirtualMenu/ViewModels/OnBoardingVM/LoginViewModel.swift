@@ -80,8 +80,7 @@ class LoginViewModel: ObservableObject {
             self.alertTitle = "Sign in error"
             disp?.leave()
         }else{
-            print("signing in")
-            Auth.auth().signIn(withEmail: email, password: password){ result, error in
+            Auth.auth().signIn(withEmail: email, password: password.MD5){ result, error in
                 // print("signin attempt:String(describing:  \(res)ult)")
                 if(error != nil){
                     print(error!)
@@ -120,10 +119,6 @@ class LoginViewModel: ObservableObject {
         let storage = Storage.storage()
         let imagesRef = storage.reference().child("profilephotos/\(Auth.auth().currentUser!.uid)")
         
-        print(imagesRef.storage)
-        print(imagesRef.bucket)
-        print(imagesRef.name)
-        
         Utils().getUserProfileImgURL(userId: Auth.auth().currentUser!.uid, completionHandler: { (res) in
             userProfile.profilePhotoURL = res
         })
@@ -138,8 +133,8 @@ class LoginViewModel: ObservableObject {
         let fb = Firestore.firestore()
         let ref = fb.collection("User")
         
-        let query = ref.whereField("id", isEqualTo: userProfile.userId).whereField("email", isEqualTo: userProfile.emailAddress)
-                        
+        let query = ref.whereField("uid", isEqualTo: userProfile.userId).whereField("email", isEqualTo: userProfile.emailAddress)
+        
         query.getDocuments { (snapshot, error) in
         if let error = error {
             print("Error getting documents: \(error)")

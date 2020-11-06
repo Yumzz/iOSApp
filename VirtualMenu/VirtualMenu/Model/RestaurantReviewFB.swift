@@ -13,7 +13,7 @@ struct RestaurantReviewFB{
     let id = UUID()
     let rating: Int
     var restaurant: DocumentReference? = nil
-    var user: DocumentReference? = nil
+    var userID: String = ""
     let text: String
     let date: Date
     
@@ -36,9 +36,9 @@ struct RestaurantReviewFB{
         self.date = Date()
         //self.date = date
         
-        if (snapshot.get("User") != nil) {
-            if let user = snapshot.data()?["User"] as? DocumentReference {
-                self.user = user
+        if (snapshot.get("UserID") != nil) {
+            if let user = snapshot.data()?["UserID"] as? String {
+                self.userID = user
             }
         }
         if (snapshot.get("Restaurant") != nil) {

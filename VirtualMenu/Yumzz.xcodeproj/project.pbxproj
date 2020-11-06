@@ -32,6 +32,8 @@
 		3A0745C7252B0871000EF6BD /* BackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0745C6252B0871000EF6BD /* BackButton.swift */; };
 		3A0745D525301CE5000EF6BD /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3A0745D425301CE5000EF6BD /* Colors.xcassets */; };
 		3A0745DB253021CB000EF6BD /* ColorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0745DA253021CB000EF6BD /* ColorManager.swift */; };
+		3A10F61E2554D69A00E25BC6 /* QRScanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A10F61D2554D69A00E25BC6 /* QRScanViewController.swift */; };
+		3A10F6242554D6B900E25BC6 /* QRScanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A10F6232554D6B900E25BC6 /* QRScanView.swift */; };
 		3A13B6E024C1813D0006458B /* ContactUs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A13B6DF24C1813D0006458B /* ContactUs.swift */; };
 		3A13B6E424C1816B0006458B /* ReportProblem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A13B6E324C1816B0006458B /* ReportProblem.swift */; };
 		3A13B6EA24C197B30006458B /* RestaurantSearchLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A13B6E924C197B30006458B /* RestaurantSearchLabel.swift */; };
@@ -233,6 +235,8 @@
 		3A0745C6252B0871000EF6BD /* BackButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackButton.swift; sourceTree = "<group>"; };
 		3A0745D425301CE5000EF6BD /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 		3A0745DA253021CB000EF6BD /* ColorManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorManager.swift; sourceTree = "<group>"; };
+		3A10F61D2554D69A00E25BC6 /* QRScanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRScanViewController.swift; sourceTree = "<group>"; };
+		3A10F6232554D6B900E25BC6 /* QRScanView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRScanView.swift; sourceTree = "<group>"; };
 		3A13B6DF24C1813D0006458B /* ContactUs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactUs.swift; sourceTree = "<group>"; };
 		3A13B6E324C1816B0006458B /* ReportProblem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportProblem.swift; sourceTree = "<group>"; };
 		3A13B6E924C197B30006458B /* RestaurantSearchLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantSearchLabel.swift; sourceTree = "<group>"; };
@@ -444,6 +448,8 @@
 			isa = PBXGroup;
 			children = (
 				34909E6E252D51E000B43D7B /* HomeScreenView.swift */,
+				3A10F61D2554D69A00E25BC6 /* QRScanViewController.swift */,
+				3A10F6232554D6B900E25BC6 /* QRScanView.swift */,
 			);
 			path = HomeScreen;
 			sourceTree = "<group>";
@@ -1159,6 +1165,7 @@
 			files = (
 				3A5633CE24FC8FE70059B603 /* OrderModel.swift in Sources */,
 				3A5F685624FE470C00F9B43D /* ReviewCard.swift in Sources */,
+				3A10F6242554D6B900E25BC6 /* QRScanView.swift in Sources */,
 				3A5633CC24FA33790059B603 /* Order.swift in Sources */,
 				3A4A0E72249EB94D0030635E /* ImagePicker.swift in Sources */,
 				3A0745C1252B02BA000EF6BD /* GoogleButton.swift in Sources */,
@@ -1225,6 +1232,7 @@
 				3AFA233E24DA01AC00F90ED8 /* MenuSelectionView.swift in Sources */,
 				3A530DEF24D8E00100CBDE28 /* isClick.swift in Sources */,
 				3A3DD59C2539405000536D62 /* SeeMenuButton.swift in Sources */,
+				3A10F61E2554D69A00E25BC6 /* QRScanViewController.swift in Sources */,
 				3ABD6A80253AC1D40082681A /* XButtonDelete.swift in Sources */,
 				343A44C0252E21FE00109C90 /* RestaurantHomeView.swift in Sources */,
 				3AFA234A24DCB14B00F90ED8 /* DishReviewsView.swift in Sources */,

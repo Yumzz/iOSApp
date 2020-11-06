@@ -28,10 +28,12 @@ struct RestaurantHomeView: View {
 
     
     init(restaurant: RestaurantFB, distance: Double) {
+        print("init called: \(restaurant)")
         self.restaurant = restaurant
         self.menuSelectionVM = MenuSelectionViewModel(restaurant: self.restaurant)
         self.distance = distance
         self.rating = String(format: "%.1f", Float(self.menuSelectionVM.restaurant.ratingSum)/Float(self.menuSelectionVM.restaurant.n_Ratings))
+        print("init: \(self.rating)")
     }
     
     var body: some View {
@@ -140,25 +142,27 @@ struct RestaurantHomeView: View {
                                 
                             }.padding(.top)
                             
-                            VStack{
-                                HStack{
-                                    Text("Popular").font(.system(size: 24, weight: .semibold))
-                                    Spacer()
-                                }
-                            }
-                            
-                            ScrollView(.horizontal) {
-                                HStack(spacing: 20) {
-                                    ForEach(self.menuSelectionVM.featuredDishes, id: \.id){
-                                        dish in
-                                        NavigationLink(
-                                            destination: DishDetailsView(dish: dish, restaurant: self.restaurant).navigationBarHidden(false)
-                                        ) {
-                                            PopularDishCard(dish: dish)
-                                        }
+                            if(!self.menuSelectionVM.featuredDishes.isEmpty){
+                                VStack{
+                                    HStack{
+                                        Text("Popular").font(.system(size: 24, weight: .semibold))
+                                        Spacer()
                                     }
                                 }
-                            }.frame(height: 150)
+                                
+                                ScrollView(.horizontal) {
+                                    HStack(spacing: 20) {
+                                        ForEach(self.menuSelectionVM.featuredDishes, id: \.id){
+                                            dish in
+                                            NavigationLink(
+                                                destination: DishDetailsView(dish: dish, restaurant: self.restaurant).navigationBarHidden(false)
+                                            ) {
+                                                PopularDishCard(dish: dish)
+                                            }
+                                        }
+                                    }
+                                }.frame(height: 150)
+                            }
                             
                             if(self.dishesChosen){
                                 NavigationLink(destination: ReviewOrder()){

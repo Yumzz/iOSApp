@@ -39,8 +39,9 @@ class SignUpViewModel: ObservableObject {
             }
             else{
                 let db = Firestore.firestore()
-                db.collection("User").addDocument(data: ["email": email, "password": password, "username": name, "id": result!.user.uid]) {(error) in
+                db.collection("User").addDocument(data: ["email": email, "password": password, "username": name, "uid": result!.user.uid]) {(error) in
                     if error != nil {
+                        
                         bool = false
                     }
                     
@@ -70,7 +71,7 @@ class SignUpViewModel: ObservableObject {
             }
             else {
                 for document in snapshot!.documents {
-                    userProfile.userId = document.get("id") as! String
+                    userProfile.userId = document.get("uid") as! String
                     print("end dispatch")
                     dispatch.leave()
                 }
@@ -90,9 +91,6 @@ class SignUpViewModel: ObservableObject {
     func signUpUser(email: String, name: String, password: String, dispatch: DispatchGroup) -> String{
         print("here")
         if(!email.isValidEmail){
-            return "Error" + "|" + "Not valid email!"
-        }
-        if(!password.isValidPassword){
             return "Error" + "|" + "Not valid email!"
         }
         let actionCode = ActionCodeSettings()
@@ -118,7 +116,6 @@ class SignUpViewModel: ObservableObject {
             self.alertTitle = "Email Sent!"
             dispatch.leave()
             print("leave")
-            
         }
         print("return: \(self.alertTitle)")
         return "A confirmation email was sent to \(email). Please click the link to sign in!" + "|" + "Email Sent!"

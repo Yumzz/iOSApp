@@ -85,6 +85,11 @@ struct AccountProfileView: View {
                                         Text("Edit Profile Photo")
                                             .foregroundColor(ColorManager.textGray)
                                     })
+                                    Spacer().frame(height: 15)
+                                    if(userProfile.fullName != ""){
+                                        Text(userProfile.fullName)
+                                            .font(.custom("Open Sans-SemiBold", size: 30))
+                                    }
                                 }
                                 else{
                                     Image(uiImage: userProfile.profilePhoto!.circle!)
@@ -98,8 +103,10 @@ struct AccountProfileView: View {
                                             .foregroundColor(ColorManager.textGray)
                                     })
                                     Spacer().frame(height: 15)
-                                    Text(userProfile.fullName)
-                                        .font(.custom("Open Sans-SemiBold", size: 30))
+                                    if(userProfile.fullName != ""){
+                                        Text(userProfile.fullName)
+                                            .font(.custom("Open Sans-SemiBold", size: 30))
+                                    }
                                 }
                             }
                             else{

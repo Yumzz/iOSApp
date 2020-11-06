@@ -65,7 +65,7 @@ class MenuSelectionViewModel: ObservableObject {
             "Rating": rating,
             "Text": text,
             "Restaurant": self.restaurant.ref!,
-            "User": NSNull(),
+            "UserID": Auth.auth().currentUser?.uid ?? "",
             "Date": Timestamp(date: Date())
         ]) { err in
             if let err = err {
