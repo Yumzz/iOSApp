@@ -31,7 +31,26 @@ struct DishCard: View {
     
     var body: some View {
         Group {
-            HStack(alignment: .center, spacing: 20) {
+            HStack(alignment: .center, spacing: 10) {
+                
+                Spacer()
+                    .frame(width: 4)
+                
+                VStack(alignment: .leading, spacing: 10) {
+                    Text(dishName).bold()
+                        .foregroundColor(Color.primary)
+                    
+                    Text("description")
+                        .foregroundColor(Color.secondary)
+                        .font(.system(size: 14))
+                        
+                    Text(price)
+                        .foregroundColor(Color(UIColor().colorFromHex("#C4C4C4", 1)))
+                        .font(.system(size: 14))
+                }
+                
+                Spacer()
+                
                 if urlImage == nil {
                     Image(systemName: "square.fill")
                         .renderingMode(.original)
@@ -43,22 +62,19 @@ struct DishCard: View {
                     urlImage!
                     .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
                 }
-                Spacer()
-                    .frame(maxWidth: 0)
                 
-                VStack(alignment: .leading, spacing: 10) {
-                    Text(dishName).bold()
-                        .foregroundColor(Color.primary)
-
-                    Text(price)
-                        .foregroundColor(Color(UIColor().colorFromHex("#C4C4C4", 1)))
-                        .font(.system(size: 10))
+                Spacer().frame(width: 8, height: 0)
+                
+                ZStack {
+                    Rectangle()
+                        .fill(Color("YumzzOrange"))
+                        .frame(width: 20, height: 6)
+                    
+                    Rectangle()
+                        .fill(Color("YumzzOrange"))
+                        .frame(width: 6, height: 20)
                 }
-                
-                Spacer()
-                
-                Image("add_order")
-                    .onTapGesture {
+                .onTapGesture {
                         if(!self.order.checkSameRest(dish: self.dish)){
 //                            self.alertTitle = "Different Restaurant"
 //                            self.alertMessage = "A new order has been started for \(self.rest.name)"
@@ -73,30 +89,17 @@ struct DishCard: View {
                         self.order.restChosen = self.rest
                         self.order.addDish(dish: self.dish, rest: self.rest, dis: self.dispatchGroup)
                         self.dispatchGroup.notify(queue: .main){
-//                            print("\(self.order.dishRestaurant[self.dish])")
                             NotificationCenter.default.post(name: Notification.Name(rawValue: "Alert"), object: nil)
                         }
                     }
                 
-                Spacer().frame(width: 5, height: 0)
-                
-//                Button
-                
-//                VStack(alignment: .leading, spacing: 10) {
-//                    Text(dishName).bold()
-//                        .foregroundColor(Color.primary)
-//
-//                    Text(price)
-//                        .foregroundColor(Color.secondary)
-//                }.frame(height: 70)
-//                .padding(.leading, 5)
+                Spacer().frame(width: 15, height: 0)
                 
             }
             .frame(maxWidth: .infinity, alignment: .leading)
-            .frame(height: 70)
+            .frame(height: 112)
             .background(Color(.white))
             .cornerRadius(10)
-            .shadow(radius: 2)
         }
         .padding(.horizontal)
     }
