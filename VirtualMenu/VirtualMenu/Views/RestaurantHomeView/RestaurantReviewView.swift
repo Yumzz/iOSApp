@@ -54,9 +54,14 @@ struct RestaurantReviewView: View {
                     review in
                     VStack{
                         HStack{
-                            Image(systemName: "person.circle.fill")
-                                .font(.system(size: 30, weight: .semibold))
-                                .foregroundColor(Color(#colorLiteral(red: 0.88, green: 0.36, blue: 0.16, alpha: 1)))
+                            if (Utils().loadUserProfilePhoto(userId: review.userID) != nil) {
+                                Image(uiImage: Utils().loadUserProfilePhoto(userId: review.userID)!)
+                            }
+                            else {
+                                Image(systemName: "person.circle.fill")
+                                    .font(.system(size: 30, weight: .semibold))
+                                    .foregroundColor(Color(#colorLiteral(red: 0.88, green: 0.36, blue: 0.16, alpha: 1)))
+                            }
                             VStack {
                                 HStack {
                                     Text("USERNAME")

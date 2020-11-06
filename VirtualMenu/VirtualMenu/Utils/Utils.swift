@@ -114,7 +114,7 @@ struct Utils {
             
             // Get the rest of the user data
 //        DispatchQueue.main.async {
-        Database.database().reference().child("users").child(userId).observeSingleEvent(of: .value, with: { (snapshot) in
+        Database.database().reference().child("User").child(userId).observeSingleEvent(of: .value, with: { (snapshot) in
             
             // Get user value
             if let userValues = snapshot.value as? NSDictionary {
