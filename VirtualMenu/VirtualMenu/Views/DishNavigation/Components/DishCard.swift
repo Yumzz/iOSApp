@@ -40,7 +40,7 @@ struct DishCard: View {
                     Text(dishName).bold()
                         .foregroundColor(Color.primary)
                     
-                    Text("description")
+                    Text(dishIngredients)
                         .foregroundColor(Color.secondary)
                         .font(.system(size: 14))
                         
@@ -52,11 +52,7 @@ struct DishCard: View {
                 Spacer()
                 
                 if urlImage == nil {
-                    Image(systemName: "square.fill")
-                        .renderingMode(.original)
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(width: 88, height: 88, alignment: .leading)
+                    EmptyView
                 }
                 else {
                     urlImage!
