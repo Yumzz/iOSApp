@@ -12,6 +12,8 @@ struct HomeScreenView: View {
     @ObservedObject var HomeScreenVM : HomeScreenViewModel
     
     @State private var showAccount = false
+    @State private var qrCodeShow = false
+
     
     @State var restaurants = [RestaurantFB]()
     
@@ -59,6 +61,17 @@ struct HomeScreenView: View {
                     Spacer()
                     Image(systemName: "qrcode.viewfinder")
                         .font(.system(size: 24, weight: .bold)).padding()
+                        .onTapGesture{
+                            self.qrCodeShow = true
+                        }
+                        .sheet(isPresented: self.$qrCodeShow) {
+                            QRScanView(completion: { textPerPage in
+                                if let text = textPerPage?.joined(separator: "\n").trimmingCharacters(in: .whitespacesAndNewlines) {
+                                    print("wow: \(text)")
+                                }
+                            })
+                            //dismiss once confirmation alert is sent
+                        }
                     
                     if (userProfile.profilePhoto == nil){
                     Image(systemName: "person.crop.square.fill")

@@ -118,6 +118,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
                 if error != nil {
                   return
                 }
+                
                 UserDefaults.standard.set(email, forKey: "Email")
                 UserDefaults.standard.set(fullName, forKey: "Name")
                 userProfile.emailAddress = email

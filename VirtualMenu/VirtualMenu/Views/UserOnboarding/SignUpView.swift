@@ -79,16 +79,25 @@ struct SignUpView: View {
                         google = false
                         facebook = false
                         print("sign up")
-                        let message = self.signUpVM.signUpUser(email: self.email, name: self.name, password: self.password, dispatch: dispatch)
-                        dispatch.notify(queue: .main){
-                            self.name = ""
-                            self.email = ""
-                            self.password = ""
+                        var message = ""
+                        if(!password.isValidPassword){
+                            message = "Error" + "|" + "Not valid email!"
                             self.alertTitle = message.components(separatedBy: "|")[0]
                             self.alertMessage = message.components(separatedBy: "|")[1]
                             self.showAlert.toggle()
-                            
                         }
+                        else{
+                            message = self.signUpVM.signUpUser(email: self.email, name: self.name, password: self.password.MD5, dispatch: dispatch)
+                            dispatch.notify(queue: .main){
+                                self.name = ""
+                                self.email = ""
+                                self.password = ""
+                                self.alertTitle = message.components(separatedBy: "|")[0]
+                                self.alertMessage = message.components(separatedBy: "|")[1]
+                                self.showAlert.toggle()
+                            }
+                        }
+                        
                     })
                     {
                         NavigationLink(destination: AppView(), isActive: $createdAccount){

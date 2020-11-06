@@ -20,8 +20,6 @@ struct Utils {
             // Use the auto id for the image name
             // Generate a unique ID for the post and prepare the post database reference
             
-            
-            
             //what to do:
             //1) get user's id
             //2) post the image into profilephotos folder in DB bucket with their id as identifier
@@ -114,7 +112,7 @@ struct Utils {
             
             // Get the rest of the user data
 //        DispatchQueue.main.async {
-        Database.database().reference().child("users").child(userId).observeSingleEvent(of: .value, with: { (snapshot) in
+        Database.database().reference().child("User").child(userId).observeSingleEvent(of: .value, with: { (snapshot) in
             
             // Get user value
             if let userValues = snapshot.value as? NSDictionary {
@@ -126,9 +124,25 @@ struct Utils {
 //        }
     }
     
+    func loadName(userId: String) -> String{
+        var name = ""
+        Firestore.firestore().collection("User").getDocuments { (snapshot, error) in
+            if let error = error {
+                print("Error getting documents: \(error)")
+            } else {
+                for document in snapshot!.documents {
+                    if(document.get("uid") as! String == userId){
+                        name = document.get("username") as! String
+                        return
+                    }
+                }
+            }
+        }
+        return name
+    }
+    
     
     func loadUserProfilePhoto(userId: String) -> UIImage? {
-        
         print("loadcalled")
         var retImage: UIImage? = nil
         
