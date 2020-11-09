@@ -25,6 +25,10 @@ struct DishFB {
     var exclusive: Bool = true
     var storage = Storage.storage()
     var dishCatDescription: String = ""
+    var build: Bool = false
+    var buildOpts: [String:[String]] = [String:[String]]()
+    var buildPrice: [String: String] = [String: String]()
+    
     
     init(name: String, key: String = "", description: String, price: Double, type: String, restaurant: String) {
         self.ref = nil
@@ -83,6 +87,11 @@ struct DishFB {
         }
         if(snapshot.get("dishCatDescript") != nil){
             self.dishCatDescription = (snapshot.data()["dishCatDescript"] as? String)!
+        }
+        if(snapshot.get("buildOpts") != nil){
+            self.build = true
+            self.buildOpts = (snapshot.data()["buildOpts"] as? [String:[String]])!
+            self.buildPrice = (snapshot.data()["buildPrice"] as? [String:String])!
         }
     }
     

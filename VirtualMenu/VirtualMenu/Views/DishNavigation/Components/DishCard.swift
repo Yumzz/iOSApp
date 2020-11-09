@@ -52,7 +52,7 @@ struct DishCard: View {
                 Spacer()
                 
                 if urlImage == nil {
-                    EmptyView
+                    EmptyView()
                 }
                 else {
                     urlImage!

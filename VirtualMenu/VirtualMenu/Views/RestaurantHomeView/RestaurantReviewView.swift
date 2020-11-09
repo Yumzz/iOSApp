@@ -12,6 +12,7 @@ struct RestaurantReviewView: View {
     @Binding var shown: Bool
     @Binding var popUpShown: Bool
     @ObservedObject var menuSelectionVM: MenuSelectionViewModel
+    @State var reviewPhotos: [String: UIImage] = [String: UIImage]()
     
     var body: some View {
         VStack(alignment: .leading){
@@ -54,29 +55,41 @@ struct RestaurantReviewView: View {
                     review in
                     VStack{
                         HStack{
-                            if (Utils().loadUserProfilePhoto(userId: review.userID) != nil) {
-                                Image(uiImage: Utils().loadUserProfilePhoto(userId: review.userID)!)
+                            if (self.reviewPhotos[review.userID] != nil){
+                                Image(uiImage: self.reviewPhotos[review.userID]!)
+                                    .frame(width: 10, height: 10)
                             }
                             else {
                                 Image(systemName: "person.circle.fill")
-                                    .font(.system(size: 30, weight: .semibold))
                                     .foregroundColor(Color(#colorLiteral(red: 0.88, green: 0.36, blue: 0.16, alpha: 1)))
+                                    .frame(width: 10, height: 10)
                             }
                             VStack {
                                 HStack {
-                                    Text("USERNAME")
-                                    .font(.system(size: 14, weight: .semibold ))
-                                    Spacer()
+                                    if(self.menuSelectionVM.loadName(userId: review.userID) != ""){
+                                        Text("\(self.menuSelectionVM.loadName(userId: review.userID))")
+                                        .font(.system(size: 14, weight: .semibold ))
+                                        Spacer()
+                                    }
+                                    else{
+                                        Text("Anonymous")
+                                        .font(.system(size: 14, weight: .semibold ))
+                                        Spacer()
+                                    }
                                 }
                                 HStack {
                                     StarView(rating: Float(review.rating))
                                     Spacer()
+                                    //current day - when posted
                                     Text("1 day ago")
                                         .font(.system(size: 14, weight: .semibold ))
                                         .foregroundColor(.gray)
                                 }
                             }
                         }.padding(.bottom, 10)
+                        .onAppear(){
+                            print("woohoo")
+                        }
                         HStack{
                             Text(review.text)
                             Spacer()
@@ -87,6 +100,17 @@ struct RestaurantReviewView: View {
             }
             Spacer()
         }.padding()
+        .onAppear(){
+//            let disp = DispatchGroup()
+//            for x in self.menuSelectionVM.reviews{
+//                disp.enter()
+//                self.menuSelectionVM.getPhoto(dispatch: disp , id: x.userID)
+//                print("got")
+//                disp.notify(queue: .main){
+//                    self.reviewPhotos[x.userID] = self.menuSelectionVM.reviewPhoto
+//                }
+//            }
+        }
     }
 }
 

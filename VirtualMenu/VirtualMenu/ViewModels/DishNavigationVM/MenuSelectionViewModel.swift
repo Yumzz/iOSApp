@@ -12,11 +12,13 @@ import Firebase
 class MenuSelectionViewModel: ObservableObject {
     let db = Firestore.firestore()
     var restaurant: RestaurantFB
+    var reviewPhoto: UIImage?
     @Published var featuredDishes = [DishFB]()
     @Published var reviews = [RestaurantReviewFB]()
     
     init(restaurant: RestaurantFB) {
         self.restaurant = restaurant
+        self.reviewPhoto = nil
         fetchFeaturedDishes()
         fetchReviews()
     }
@@ -88,6 +90,47 @@ class MenuSelectionViewModel: ObservableObject {
         self.restaurant.ratingSum += rating
         self.restaurant.n_Ratings += 1
         self.restaurant.reviews.append(newReviewRef)
+    }
+    
+    func getPhoto(dispatch: DispatchGroup, id: String){
+        let storage = Storage.storage()
+        let imagesRef = storage.reference().child("profilephotos/\(id)")
+        var im: UIImage? = nil
+        DispatchQueue.global(qos: .background).async{
+            imagesRef.getData(maxSize: 2 * 2048 * 2048) { data, error in
+                if let error = error {
+                    // Uh-oh, an error occurred!
+//                    im = UIImage(imageLiteralResourceName: "profile_photo_edit")
+                    print(error.localizedDescription)
+                    self.reviewPhoto = im
+                    dispatch.leave()
+                } else {
+                    // Data for "profilephotos/\(uid).jpg" is returned
+                    // print("data: \(data)")
+                    print("made it here: \(id)")
+                    self.reviewPhoto = im
+                    dispatch.leave()
+                }
+                print("leave")
+            }
+        }
+    }
+    
+    func loadName(userId: String) -> String{
+        var name = ""
+        Firestore.firestore().collection("User").getDocuments { (snapshot, error) in
+            if let error = error {
+                print("Error getting documents: \(error)")
+            } else {
+                for document in snapshot!.documents {
+                    if(document.get("uid") as! String == userId){
+                        name = document.get("username") as! String
+                        return
+                    }
+                }
+            }
+        }
+        return name
     }
     
 }

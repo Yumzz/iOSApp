@@ -12,7 +12,7 @@ import SwiftUI
 
 struct QRScanView: UIViewControllerRepresentable {
 private let completionHandler: ([String]?) -> Void
- 
+
 init(completion: @escaping ([String]?) -> Void) {
     self.completionHandler = completion
 }

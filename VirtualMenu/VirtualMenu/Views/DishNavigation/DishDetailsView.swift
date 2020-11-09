@@ -85,6 +85,10 @@ struct DishDetailsView: View {
                                 }
                             }
                         }
+                        if(dish.build){
+                            
+                            
+                        }
                         HStack{
                             HStack{
                                 Image(systemName: "minus")
