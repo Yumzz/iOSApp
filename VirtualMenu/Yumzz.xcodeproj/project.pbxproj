@@ -14,6 +14,38 @@
 		3411105D252262F20084975A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3411105C252262F20084975A /* Preview Assets.xcassets */; };
 		34111060252262F20084975A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3411105E252262F20084975A /* LaunchScreen.storyboard */; };
 		34111065252262F20084975A /* YumzzAppClip.app in Embed App Clips */ = {isa = PBXBuildFile; fileRef = 34111051252262F10084975A /* YumzzAppClip.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		3431B99D255A345A0018AFB5 /* RestaurantHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 343A44BF252E21FE00109C90 /* RestaurantHomeView.swift */; };
+		3431B9A2255A345F0018AFB5 /* MenuSelectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34370CC62500D59A00ECD88B /* MenuSelectionViewModel.swift */; };
+		3431B9A7255A34670018AFB5 /* RestaurantFB.swift in Sources */ = {isa = PBXBuildFile; fileRef = C55FDD6424CABA2800CC8561 /* RestaurantFB.swift */; };
+		3431B9AC255A346E0018AFB5 /* DishFB.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5D0A16B24B1B6A300E44DF2 /* DishFB.swift */; };
+		3431B9B1255A34740018AFB5 /* DishCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A530DF224D9769100CBDE28 /* DishCategory.swift */; };
+		3431B9B6255A34800018AFB5 /* Order.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5633CB24FA33790059B603 /* Order.swift */; };
+		3431B9BB255A34820018AFB5 /* RestaurantReviewFB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34A966F1254691C200AD84CD /* RestaurantReviewFB.swift */; };
+		3431B9C9255A34A10018AFB5 /* SeeMenuButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3DD59B2539405000536D62 /* SeeMenuButton.swift */; };
+		3431B9CE255A34A70018AFB5 /* RestaurantReviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34A966F7254762EF00AD84CD /* RestaurantReviewView.swift */; };
+		3431B9D3255A34D00018AFB5 /* OrderModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5633CD24FC8FE70059B603 /* OrderModel.swift */; };
+		3431B9D8255A350A0018AFB5 /* WhiteBackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A632284250C3531001427F7 /* WhiteBackButton.swift */; };
+		3431B9DD255A35290018AFB5 /* FBURLImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7D0F78224DF6B4100197631 /* FBURLImage.swift */; };
+		3431B9E2255A35880018AFB5 /* ImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = A78531F924DE312600F94C67 /* ImageLoader.swift */; };
+		3431B9E7255A35A80018AFB5 /* DishDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34A5D662249BF6DF00E4FE9C /* DishDetailsView.swift */; };
+		3431B9EC255A35CE0018AFB5 /* ReviewOrder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3DD57325380E0F00536D62 /* ReviewOrder.swift */; };
+		3431B9F1255A35EF0018AFB5 /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = A779ACA9250D4F7400146565 /* ImageCache.swift */; };
+		3431B9F6255A35FC0018AFB5 /* ViewCartButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3DD5942539378600536D62 /* ViewCartButton.swift */; };
+		3431B9FB255A36110018AFB5 /* ColorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0745DA253021CB000EF6BD /* ColorManager.swift */; };
+		3431BA00255A36460018AFB5 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA9897524B517F00070FD97 /* Extensions.swift */; };
+		3431BA05255A365A0018AFB5 /* BuildCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A822727255A10B60002A233 /* BuildCard.swift */; };
+		3431BA0A255A36680018AFB5 /* XButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3DD58E2538396B00536D62 /* XButton.swift */; };
+		3431BA0F255A367E0018AFB5 /* ListDishesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACAD186250AF4B200B24CEB /* ListDishesViewModel.swift */; };
+		3431BA14255A36810018AFB5 /* ListDishesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A73FD46224919A1300A035AB /* ListDishesView.swift */; };
+		3431BA19255A36990018AFB5 /* OptionsCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3DD5A52539736A00536D62 /* OptionsCard.swift */; };
+		3431BA1E255A36AF0018AFB5 /* XButtonDelete.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ABD6A7F253AC1D40082681A /* XButtonDelete.swift */; };
+		3431BA23255A36B50018AFB5 /* DishCardOrder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3DD57E2538333000536D62 /* DishCardOrder.swift */; };
+		3431BA28255A36CE0018AFB5 /* BackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0745C6252B0871000EF6BD /* BackButton.swift */; };
+		3431BA2D255A36E80018AFB5 /* ReceiptCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3DD588253838A700536D62 /* ReceiptCard.swift */; };
+		3431BA32255A36FC0018AFB5 /* DishCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7FE996124F4A552006E5980 /* DishCard.swift */; };
+		3431BA37255A371B0018AFB5 /* OrangeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF1BA89252A92B500FAA9A0 /* OrangeButton.swift */; };
+		3431BA3C255A37220018AFB5 /* InvertedOrangeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF1BA8F252A92DD00FAA9A0 /* InvertedOrangeButton.swift */; };
+		3431BA57255A40B80018AFB5 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3431BA56255A40B80018AFB5 /* GoogleService-Info.plist */; };
 		34370CC72500D59A00ECD88B /* MenuSelectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34370CC62500D59A00ECD88B /* MenuSelectionViewModel.swift */; };
 		343A44C0252E21FE00109C90 /* RestaurantHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 343A44BF252E21FE00109C90 /* RestaurantHomeView.swift */; };
 		3482C0CF250C95D300FC362D /* BottomSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3482C0CE250C95D300FC362D /* BottomSheetView.swift */; };
@@ -218,6 +250,7 @@
 		3411105F252262F20084975A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		34111061252262F20084975A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		34111062252262F20084975A /* YumzzAppClip.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = YumzzAppClip.entitlements; sourceTree = "<group>"; };
+		3431BA56255A40B80018AFB5 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		34370CC62500D59A00ECD88B /* MenuSelectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuSelectionViewModel.swift; sourceTree = "<group>"; };
 		343A44BF252E21FE00109C90 /* RestaurantHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantHomeView.swift; sourceTree = "<group>"; };
 		3482C0CE250C95D300FC362D /* BottomSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetView.swift; sourceTree = "<group>"; };
@@ -420,6 +453,7 @@
 		34111052252262F10084975A /* YumzzAppClip */ = {
 			isa = PBXGroup;
 			children = (
+				3431BA56255A40B80018AFB5 /* GoogleService-Info.plist */,
 				34F39DA7253E58FB00C30346 /* YumzzAppClipRelease.entitlements */,
 				34111053252262F10084975A /* AppDelegate.swift */,
 				34111055252262F10084975A /* SceneDelegate.swift */,
@@ -1054,6 +1088,7 @@
 			files = (
 				34111060252262F20084975A /* LaunchScreen.storyboard in Resources */,
 				3411105D252262F20084975A /* Preview Assets.xcassets in Resources */,
+				3431BA57255A40B80018AFB5 /* GoogleService-Info.plist in Resources */,
 				34F39DA1253E357C00C30346 /* Assets.xcassets in Resources */,
 				3411105A252262F20084975A /* Assets.xcassets in Resources */,
 			);
@@ -1223,9 +1258,40 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3431B9FB255A36110018AFB5 /* ColorManager.swift in Sources */,
+				3431B9BB255A34820018AFB5 /* RestaurantReviewFB.swift in Sources */,
+				3431BA2D255A36E80018AFB5 /* ReceiptCard.swift in Sources */,
+				3431BA0F255A367E0018AFB5 /* ListDishesViewModel.swift in Sources */,
+				3431B9AC255A346E0018AFB5 /* DishFB.swift in Sources */,
+				3431B9C9255A34A10018AFB5 /* SeeMenuButton.swift in Sources */,
+				3431BA1E255A36AF0018AFB5 /* XButtonDelete.swift in Sources */,
+				3431BA37255A371B0018AFB5 /* OrangeButton.swift in Sources */,
+				3431B9D3255A34D00018AFB5 /* OrderModel.swift in Sources */,
+				3431B9EC255A35CE0018AFB5 /* ReviewOrder.swift in Sources */,
+				3431BA23255A36B50018AFB5 /* DishCardOrder.swift in Sources */,
+				3431B9CE255A34A70018AFB5 /* RestaurantReviewView.swift in Sources */,
+				3431BA32255A36FC0018AFB5 /* DishCard.swift in Sources */,
+				3431BA14255A36810018AFB5 /* ListDishesView.swift in Sources */,
+				3431B9A7255A34670018AFB5 /* RestaurantFB.swift in Sources */,
+				3431B9E2255A35880018AFB5 /* ImageLoader.swift in Sources */,
+				3431BA00255A36460018AFB5 /* Extensions.swift in Sources */,
+				3431BA28255A36CE0018AFB5 /* BackButton.swift in Sources */,
+				3431BA3C255A37220018AFB5 /* InvertedOrangeButton.swift in Sources */,
+				3431B9D8255A350A0018AFB5 /* WhiteBackButton.swift in Sources */,
+				3431B9F1255A35EF0018AFB5 /* ImageCache.swift in Sources */,
+				3431BA0A255A36680018AFB5 /* XButton.swift in Sources */,
+				3431B99D255A345A0018AFB5 /* RestaurantHomeView.swift in Sources */,
+				3431B9DD255A35290018AFB5 /* FBURLImage.swift in Sources */,
+				3431B9B6255A34800018AFB5 /* Order.swift in Sources */,
+				3431B9B1255A34740018AFB5 /* DishCategory.swift in Sources */,
 				34111054252262F10084975A /* AppDelegate.swift in Sources */,
 				34111056252262F10084975A /* SceneDelegate.swift in Sources */,
+				3431B9F6255A35FC0018AFB5 /* ViewCartButton.swift in Sources */,
 				34111058252262F10084975A /* ContentView.swift in Sources */,
+				3431B9E7255A35A80018AFB5 /* DishDetailsView.swift in Sources */,
+				3431B9A2255A345F0018AFB5 /* MenuSelectionViewModel.swift in Sources */,
+				3431BA19255A36990018AFB5 /* OptionsCard.swift in Sources */,
+				3431BA05255A365A0018AFB5 /* BuildCard.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1436,8 +1502,10 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 3.0;
+				NEW_SETTING = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ARMenu.VirtualMenu.Clip;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG APPCLIP";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1462,8 +1530,10 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 3.0;
+				NEW_SETTING = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ARMenu.VirtualMenu.Clip;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = APPCLIP;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

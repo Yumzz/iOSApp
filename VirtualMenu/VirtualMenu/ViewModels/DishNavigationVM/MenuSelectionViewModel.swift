@@ -61,6 +61,7 @@ class MenuSelectionViewModel: ObservableObject {
         }
     }
     
+    #if !APPCLIP
     func publishReview(rating: Int64, text: String, user: UserProfile) {
         let newReviewRef = db.collection("RestaurantReview").document()
         newReviewRef.setData([
@@ -91,6 +92,7 @@ class MenuSelectionViewModel: ObservableObject {
         self.restaurant.n_Ratings += 1
         self.restaurant.reviews.append(newReviewRef)
     }
+    #endif
     
     func getPhoto(dispatch: DispatchGroup, id: String){
         let storage = Storage.storage()

@@ -290,6 +290,108 @@ struct RestaurantFB {
         self.ref = snapshot.reference
     }
     
+    init?(snapshot: DocumentSnapshot){
+       guard
+           let name = snapshot.data()?["Name"] as? String else {
+           print("no rest name")
+           return nil
+       }
+//        guard
+//            (snapshot.data()["dishes"] as? [DocumentReference?]) != nil else {
+//            print("dishes messed up")
+//            return nil
+//        }
+        
+//       guard let featuredDishRefs = (snapshot.data()["FeaturedDishes"] as? [DocumentReference?]) else {
+//           print("featured dishes messed up: \(name)")
+//           return nil
+//       }
+       //dishes is an array of FIRDocumentReference in Firebase and is converted to ds, which is an array of DocumentReferences
+       
+//       guard
+//           let type = snapshot.data()["Type"] as? String else {
+//           print("no type")
+//           return nil
+//       }
+       
+       guard
+           let description = snapshot.data()?["description"] as? String else{
+               print("no description")
+               return nil
+       }
+       guard
+           let ethnicity = snapshot.data()?["Ethnicity"] as? String else {
+           print("no ethnicity")
+           return nil
+       }
+        guard
+            let address = snapshot.data()?["Address"] as? String else {
+            print("no address")
+            return nil
+        }
+
+       guard
+           let coordinate = snapshot.data()?["location"] as? GeoPoint else {
+           print("no coordinate")
+           return nil
+       }
+        
+        guard
+            let phone = snapshot.data()?["Phone"] as? String else {
+            print("no coordinate")
+            return nil
+        }
+        guard
+            let price = snapshot.data()?["price_range"] as? String else {
+            print("no coordinate")
+            return nil
+        }
+        guard
+            let n_Ratings = snapshot.data()?["N_Ratings"] as? Int64 else {
+            print("no n_rating")
+            return nil
+        }
+        guard
+            let ratingSum = snapshot.data()?["RatingSum"] as? Int64 else {
+            print("no RatingSum: \(name)")
+            return nil
+        }
+       
+       self.key = snapshot.documentID
+       self.name = name
+       self.description = description
+       self.ethnicity = ethnicity
+       self.coordinate = coordinate
+       self.dishes = []
+       self.id = UUID()
+       self.coverPhotoURL = "Restaurant/\(self.name.lowercased())/\(self.name.lowercased())_cover.png"
+       self.cityAddress = address.components(separatedBy: delimiter)[1] + (address.components(separatedBy: delimiter)[2]).components(separatedBy: " ")[0]
+       self.streetAddress = address.components(separatedBy: delimiter)[0]
+       self.phone = phone
+       self.ratingSum = ratingSum
+       self.n_Ratings = n_Ratings
+       self.price = price
+       self.price = self.getDollaSigns(price: price)
+        if(snapshot.get("hours") != nil){
+            if let hours = snapshot.data()?["hours"] as? [String:String]{
+                let index = Calendar.current.component(.weekday, from: Date())
+                self.hour = hours[Calendar.current.weekdaySymbols[index - 1]]!
+            }
+        }
+        if(snapshot.get("FeaturedDishes") != nil){
+            if let featuredDishes = snapshot.data()?["FeaturedDishes"] as?
+                [DocumentReference] {
+                self.featuredDishRefs = featuredDishes
+            }
+        }
+        if (snapshot.get("Reviews") != nil) {
+            if let reviews = snapshot.data()?["Reviews"] as? [DocumentReference] {
+                self.reviews = reviews
+            }
+        }
+        self.ref = snapshot.reference
+    }
+    
     func toAnyObject() -> Any {
         return [
             "name": name

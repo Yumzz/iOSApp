@@ -162,7 +162,7 @@ class OrderModel: ObservableObject {
         self.totalCost = 0.0
     }
     
-    
+    #if !APPCLIP
     func saveOrder(order: Order){
         let ds = DispatchGroup()
         print("save")
@@ -193,6 +193,7 @@ class OrderModel: ObservableObject {
             }
         }
     }
+    #endif
     
     func retrieveOrders(userID: String){
         let db = Firestore.firestore()

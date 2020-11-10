@@ -179,6 +179,7 @@ struct RestaurantHomeView: View {
                     Spacer().frame(width: 0, height: 40)
                 }
             }
+            #if !APPCLIP
             if self.popUpShown {
                 ZStack {
                     Color(#colorLiteral(red: 0.9725490196, green: 0.968627451, blue: 0.9607843137, alpha: 1))
@@ -191,6 +192,7 @@ struct RestaurantHomeView: View {
                 .transition(.slide)
                 .animation(.default)
             }
+            #endif
         }
 //        .background(Color(red: 0.953, green: 0.945, blue: 0.933))
         .edgesIgnoringSafeArea(.all)
