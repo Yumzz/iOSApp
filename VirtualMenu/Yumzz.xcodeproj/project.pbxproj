@@ -82,6 +82,7 @@
 		3A63228B250E03CA001427F7 /* BottomMapGradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A63228A250E03CA001427F7 /* BottomMapGradientView.swift */; };
 		3A63228D250E041E001427F7 /* BottomMapGradientUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A63228C250E041E001427F7 /* BottomMapGradientUIView.swift */; };
 		3A6477F224B68D060077EF30 /* UserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6477F124B68D060077EF30 /* UserProfile.swift */; };
+		3A822728255A10B60002A233 /* BuildCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A822727255A10B60002A233 /* BuildCard.swift */; };
 		3A87575324EC910A004ABECC /* PostReviewButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A87575224EC910A004ABECC /* PostReviewButton.swift */; };
 		3A987AD72480350C0021F6E4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A987AD62480350C0021F6E4 /* AppDelegate.swift */; };
 		3A987AD92480350C0021F6E4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A987AD82480350C0021F6E4 /* SceneDelegate.swift */; };
@@ -287,6 +288,7 @@
 		3A63228A250E03CA001427F7 /* BottomMapGradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomMapGradientView.swift; sourceTree = "<group>"; };
 		3A63228C250E041E001427F7 /* BottomMapGradientUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomMapGradientUIView.swift; sourceTree = "<group>"; };
 		3A6477F124B68D060077EF30 /* UserProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfile.swift; sourceTree = "<group>"; };
+		3A822727255A10B60002A233 /* BuildCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildCard.swift; sourceTree = "<group>"; };
 		3A87575224EC910A004ABECC /* PostReviewButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostReviewButton.swift; sourceTree = "<group>"; };
 		3A987AD32480350C0021F6E4 /* Yumzz.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Yumzz.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A987AD62480350C0021F6E4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -795,6 +797,7 @@
 				3A5F685524FE470C00F9B43D /* ReviewCard.swift */,
 				3A87575224EC910A004ABECC /* PostReviewButton.swift */,
 				3A3DD5A52539736A00536D62 /* OptionsCard.swift */,
+				3A822727255A10B60002A233 /* BuildCard.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -1251,6 +1254,7 @@
 				3A6477F224B68D060077EF30 /* UserProfile.swift in Sources */,
 				3A5633BC24F901B70059B603 /* SignInWithAppleManager.swift in Sources */,
 				A741C96024FB516000B7F406 /* CompleteOrderCard.swift in Sources */,
+				3A822728255A10B60002A233 /* BuildCard.swift in Sources */,
 				3A3DD589253838A700536D62 /* ReceiptCard.swift in Sources */,
 				3AF9926A24A2B95C005446D8 /* InputValidation.swift in Sources */,
 				3ACAD174250AE39D00B24CEB /* SuggestRestaurantViewModel.swift in Sources */,

@@ -85,8 +85,14 @@ struct DishDetailsView: View {
                                 }
                             }
                         }
-                        if(dish.build){
-                            
+                        if(!dish.buildOpts.isEmpty){
+                            HStack{
+                                Text("Build Your Own")
+                                    .font(.system(size: 24))
+                            }
+                            VStack{
+                                BuildCard(buildPrices: dish.buildPrice, typetoOpts: dish.buildOpts, exclusive: dish.buildExclusive, dish: dish)
+                            }
                             
                         }
                         HStack{
