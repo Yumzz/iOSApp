@@ -235,7 +235,7 @@ struct AccountProfileView: View {
             
             dispatch.enter()
             
-            let prom = Utils().uploadUserProfileImage(profileImage: inputImage, dispatch: dispatch)
+            let prom = Utils.uploadUserProfileImage(profileImage: inputImage, dispatch: dispatch)
                                 
             dispatch.notify(queue: .main){
                 if(prom.result != nil){

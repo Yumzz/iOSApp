@@ -6,13 +6,19 @@
 //  Copyright © 2020 Rohan Tyagi. All rights reserved.
 //
 
+import Foundation
 import SwiftUI
+import UIKit
+import Firebase
+import PromiseKit
 
 struct RestaurantReviewView: View {
     @Binding var shown: Bool
     @Binding var popUpShown: Bool
     @ObservedObject var menuSelectionVM: MenuSelectionViewModel
     @State var reviewPhotos: [String: UIImage] = [String: UIImage]()
+    @State var reviewNames: [String: String] = [String: String]()
+
     
     var body: some View {
         VStack(alignment: .leading){
@@ -39,7 +45,6 @@ struct RestaurantReviewView: View {
                 }){
                     Text("+ Add Reviews").font(.system(size: 18, weight: .medium)).tracking(-0.41)
                 }.foregroundColor(Color(#colorLiteral(red: 0.88, green: 0.36, blue: 0.16, alpha: 1)))
-                
             }
             
             StarView(rating: Float(self.menuSelectionVM.restaurant.ratingSum)/Float(self.menuSelectionVM.restaurant.n_Ratings), fontSize: 20)
@@ -57,7 +62,8 @@ struct RestaurantReviewView: View {
                         HStack{
                             if (self.reviewPhotos[review.userID] != nil){
                                 Image(uiImage: self.reviewPhotos[review.userID]!)
-                                    .frame(width: 10, height: 10)
+                                    .resizable()
+                                    .frame(width: 20, height: 20 )
                             }
                             else {
                                 Image(systemName: "person.circle.fill")
@@ -87,9 +93,8 @@ struct RestaurantReviewView: View {
                                 }
                             }
                         }.padding(.bottom, 10)
-                        .onAppear(){
-                            print("woohoo")
-                        }
+//                        .onAppear(){
+//                        }
                         HStack{
                             Text(review.text)
                             Spacer()
@@ -101,15 +106,18 @@ struct RestaurantReviewView: View {
             Spacer()
         }.padding()
         .onAppear(){
-//            let disp = DispatchGroup()
-//            for x in self.menuSelectionVM.reviews{
-//                disp.enter()
-//                self.menuSelectionVM.getPhoto(dispatch: disp , id: x.userID)
-//                print("got")
-//                disp.notify(queue: .main){
-//                    self.reviewPhotos[x.userID] = self.menuSelectionVM.reviewPhoto
-//                }
-//            }
+            let disp = DispatchGroup()
+            for x in self.menuSelectionVM.reviews{
+                disp.enter()
+                self.menuSelectionVM.getPhoto(dispatch: disp , id: x.userID)
+                print("got")
+                disp.notify(queue: .main){
+                    print("put in: \(self.menuSelectionVM.reviewPhoto.debugDescription)")
+                    self.reviewPhotos[x.userID] = self.menuSelectionVM.reviewPhoto?.circle
+                    print("dimensions of put in: \(self.reviewPhotos[x.userID]!.size)")
+                }
+                
+            }
         }
     }
 }

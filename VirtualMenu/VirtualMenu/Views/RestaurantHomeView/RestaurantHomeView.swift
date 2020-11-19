@@ -83,7 +83,7 @@ struct RestaurantHomeView: View {
                                 Button(action: {
                                     self.reviewViewShown.toggle()
                                 }){
-                                    Text("(" + String(self.restaurant.n_Ratings) + " reviews)").font(.system(size: 14, weight: .semibold)).tracking(-0.41).underline()
+                                    Text("(" + String(self.restaurant.n_Ratings) + " reviews)").font(.system(size: 14, weight: .semibold)).foregroundColor(Color(#colorLiteral(red: 0.91018188, green: 0.4465283751, blue: 0.2032583952, alpha: 1))).tracking(-0.41).underline()
                                 }
                                 Spacer()
                                 

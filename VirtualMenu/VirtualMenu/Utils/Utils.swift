@@ -12,9 +12,9 @@ import UIKit
 import Firebase
 import PromiseKit
 
-struct Utils {
+class Utils {
     
-    func uploadUserProfileImage(profileImage: UIImage, dispatch: DispatchGroup? = nil) -> Promise<()> {
+    static func uploadUserProfileImage(profileImage: UIImage, dispatch: DispatchGroup? = nil) -> Promise<()> {
         return Promise<()> { seal -> Void in
             
             // Use the auto id for the image name
@@ -108,7 +108,7 @@ struct Utils {
         }
         
         
-    func getUserProfileImgURL(userId: String, completionHandler: @escaping (String) -> Void) {
+    static func getUserProfileImgURL(userId: String, completionHandler: @escaping (String) -> Void) {
             
             // Get the rest of the user data
 //        DispatchQueue.main.async {
@@ -142,11 +142,11 @@ struct Utils {
     }
     
     
-    func loadUserProfilePhoto(userId: String) -> UIImage? {
+    static func loadUserProfilePhoto(userId: String) -> UIImage? {
         print("loadcalled")
         var retImage: UIImage? = nil
         
-        Utils().getUserProfileImgURL(userId: userId) { (profileImgURL) in
+        Utils.getUserProfileImgURL(userId: userId) { (profileImgURL) in
         if let url = URL(string: profileImgURL) {
             
             let downloadTask = URLSession.shared.dataTask(with: url, completionHandler: { (data, response, error) in

@@ -27,6 +27,7 @@ final class ImageLoader : ObservableObject {
     func loadImage(){
         
         if loadImageFromCache() {
+            print("urlfromcache: \(urlString)")
             return
         }
         
@@ -36,6 +37,7 @@ final class ImageLoader : ObservableObject {
     func loadImageFromUrl() {
         
         guard let urlString = urlString else {
+            print("guard failed in loadimfromurl: \(self.urlString)")
             return
         }
         
@@ -44,18 +46,19 @@ final class ImageLoader : ObservableObject {
         
         ref.downloadURL(completion: { (url, err) in
             if err != nil {
+                print("error downloading image: \(self.urlString)")
                 return
             }
             else{
                 ref.getData(maxSize: 1 * 2048 * 2048) { data, error in
                     
                     guard error == nil else {
-                        print("Error: \(error!)")
+                        print("Error: \(error!) + \(self.urlString)")
                         return
                     }
                     
                     guard let data = data else {
-                        print("No data found")
+                        print("No data found: \(self.urlString)")
                         return
                     }
                     

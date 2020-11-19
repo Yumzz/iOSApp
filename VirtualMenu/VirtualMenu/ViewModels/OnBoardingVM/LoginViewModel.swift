@@ -119,7 +119,7 @@ class LoginViewModel: ObservableObject {
         let storage = Storage.storage()
         let imagesRef = storage.reference().child("profilephotos/\(Auth.auth().currentUser!.uid)")
         
-        Utils().getUserProfileImgURL(userId: Auth.auth().currentUser!.uid, completionHandler: { (res) in
+        Utils.getUserProfileImgURL(userId: Auth.auth().currentUser!.uid, completionHandler: { (res) in
             userProfile.profilePhotoURL = res
         })
         

@@ -6,6 +6,7 @@
 //  Copyright © 2020 Rohan Tyagi. All rights reserved.
 //
 
+import Foundation
 import SwiftUI
 import Firebase
 
@@ -97,26 +98,99 @@ class MenuSelectionViewModel: ObservableObject {
     func getPhoto(dispatch: DispatchGroup, id: String){
         let storage = Storage.storage()
         let imagesRef = storage.reference().child("profilephotos/\(id)")
-        var im: UIImage? = nil
-        DispatchQueue.global(qos: .background).async{
             imagesRef.getData(maxSize: 2 * 2048 * 2048) { data, error in
                 if let error = error {
                     // Uh-oh, an error occurred!
 //                    im = UIImage(imageLiteralResourceName: "profile_photo_edit")
-                    print(error.localizedDescription)
-                    self.reviewPhoto = im
+                    print("wowza: \(error.localizedDescription)")
+                    self.reviewPhoto = nil
                     dispatch.leave()
                 } else {
                     // Data for "profilephotos/\(uid).jpg" is returned
                     // print("data: \(data)")
                     print("made it here: \(id)")
-                    self.reviewPhoto = im
+                    self.reviewPhoto = UIImage(data: data!)
                     dispatch.leave()
                 }
                 print("leave")
-            }
         }
     }
+    
+    static func loadUserProfilePhoto(userId: String) -> UIImage? {
+        print("loadcalled")
+        var retImage: UIImage? = nil
+        
+        self.getUserProfileImgURL(userId: userId) { (profileImgURL) in
+        if let url = URL(string: profileImgURL) {
+            
+            let downloadTask = URLSession.shared.dataTask(with: url, completionHandler: { (data, response, error) in
+                
+                if(error != nil){
+                    print(error?.localizedDescription ?? "error")
+                    
+                }
+                
+                guard let imageData = data else {
+                    return
+                }
+                
+                OperationQueue.main.addOperation {
+                    guard let image = UIImage(data: imageData) else { print("no image")
+                        return }
+                    retImage = image
+                    
+                }
+                
+            })
+            downloadTask.resume()
+            }
+//                  }
+          }
+        return retImage
+      }
+    
+    static func getUserProfileImgURL(userId: String, completionHandler: @escaping (String) -> Void) {
+            
+            // Get the rest of the user data
+//        DispatchQueue.main.async {
+        Database.database().reference().child("User").child(userId).observeSingleEvent(of: .value, with: { (snapshot) in
+            
+            // Get user value
+            if let userValues = snapshot.value as? NSDictionary {
+                
+//                if let userPhotoURL = userValues[] as? String {
+//                    completionHandler(userPhotoURL)
+//                }
+            }
+        })
+//        }
+    }
+    
+    
+    
+//    func getPhoto(dispatch: DispatchGroup, id: String) -> UIImage{
+//        let storage = Storage.storage()
+//        let imagesRef = storage.reference().child("profilephotos/\(id)")
+//        var im: UIImage? = nil
+//        DispatchQueue.global(qos: .background).async{
+//            imagesRef.getData(maxSize: 2 * 2048 * 2048) { data, error in
+//                if let error = error {
+//                    // Uh-oh, an error occurred!
+////                    im = UIImage(imageLiteralResourceName: "profile_photo_edit")
+//                    print(error.localizedDescription)
+//                    self.reviewPhoto = im
+//                    dispatch.leave()
+//                } else {
+//                    // Data for "profilephotos/\(uid).jpg" is returned
+//                    // print("data: \(data)")
+//                    print("made it here: \(id)")
+//                    self.reviewPhoto = im
+//                    dispatch.leave()
+//                }
+//                print("leave")
+//            }
+//        }
+//    }
     
     func loadName(userId: String) -> String{
         var name = ""

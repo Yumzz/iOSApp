@@ -8,6 +8,7 @@
 
 import Foundation
 import Firebase
+import SwiftUI
 
 struct RestaurantReviewFB{
     let id = UUID()

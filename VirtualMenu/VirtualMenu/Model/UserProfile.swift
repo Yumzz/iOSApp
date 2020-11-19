@@ -121,7 +121,7 @@ extension UserProfile: Hashable {
                     if let imageData = data {
                         // Finally convert that Data into an image and do what you wish with it.
                         userProfile.profilePhoto = UIImage(data: imageData)
-                        let prom = Utils().uploadUserProfileImage(profileImage: userProfile.profilePhoto!)
+                        let prom = Utils.uploadUserProfileImage(profileImage: userProfile.profilePhoto!)
                         if(prom.error != nil){
                             return
                         }
