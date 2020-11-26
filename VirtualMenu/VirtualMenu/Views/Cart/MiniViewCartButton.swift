@@ -17,7 +17,7 @@ struct MiniViewCartButton: View {
             HStack(spacing: 10) {
                 Image("cart")
                     .frame(width: 18, height: 15)
-                                
+                
                 
                 Text("View Cart")
                            .foregroundColor(Color(UIColor().colorFromHex("#FFFFFF", 1)))

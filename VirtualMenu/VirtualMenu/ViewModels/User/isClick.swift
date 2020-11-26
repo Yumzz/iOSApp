@@ -16,7 +16,7 @@ class isClick: ObservableObject {
     @Published var restChosen: RestaurantFB?
     @Published var numClicks: Int
     @Published var dishFound: DishFB?
-
+    
     
     init(){
         print("click made")

@@ -16,7 +16,7 @@ import FBSDKLoginKit
 import FBSDKCoreKit
 import AuthenticationServices
 import CryptoKit
-
+    
 struct AccountProfileLoginView: View {
     
     @State var email = ""
