@@ -70,7 +70,6 @@
 		3A3DD59C2539405000536D62 /* SeeMenuButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3DD59B2539405000536D62 /* SeeMenuButton.swift */; };
 		3A3DD5A62539736A00536D62 /* OptionsCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3DD5A52539736A00536D62 /* OptionsCard.swift */; };
 		3A3E1DDA256FC5F300812E67 /* MiniViewCartButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5B0DB7253FDD9B00A0BE41 /* MiniViewCartButton.swift */; };
-		3A3E1DE2256FC6AB00812E67 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A987B0F2481511B0021F6E4 /* ContentView.swift */; };
 		3A45AD8D24B3FE8800CF3A8F /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A45AD8C24B3FE8800CF3A8F /* Constants.swift */; };
 		3A4A0E70249EB9320030635E /* AccountProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A4A0E6F249EB9320030635E /* AccountProfileView.swift */; };
 		3A4A0E72249EB94D0030635E /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A4A0E71249EB94D0030635E /* ImagePicker.swift */; };
@@ -122,10 +121,20 @@
 		3ACAD189250B161A00B24CEB /* RestCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACAD188250B161A00B24CEB /* RestCategory.swift */; };
 		3AE05F9824EF27550024F802 /* FacebookCore in Frameworks */ = {isa = PBXBuildFile; productRef = 3AE05F9724EF27550024F802 /* FacebookCore */; };
 		3AE05F9A24EF27550024F802 /* FacebookLogin in Frameworks */ = {isa = PBXBuildFile; productRef = 3AE05F9924EF27550024F802 /* FacebookLogin */; };
+		3AEB32EF2572051A00A61C0E /* ColorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0745DA253021CB000EF6BD /* ColorManager.swift */; };
+		3AEB32F42572052500A61C0E /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA9897524B517F00070FD97 /* Extensions.swift */; };
+		3AEB32F92572055000A61C0E /* OrderModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5633CD24FC8FE70059B603 /* OrderModel.swift */; };
+		3AEB330C2572058900A61C0E /* WhiteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7912A2524CF82140052988C /* WhiteButton.swift */; };
+		3AEB33112572065A00A61C0E /* OrangeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF1BA89252A92B500FAA9A0 /* OrangeButton.swift */; };
+		3AEB33162572065C00A61C0E /* InvertedOrangeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF1BA8F252A92DD00FAA9A0 /* InvertedOrangeButton.swift */; };
+		3AEB331C2572092000A61C0E /* WhiteBackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AEB331B2572092000A61C0E /* WhiteBackButton.swift */; };
+		3AEB33212572099E00A61C0E /* WhiteBackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AEB331B2572092000A61C0E /* WhiteBackButton.swift */; };
 		3AF1BA84252A926900FAA9A0 /* OnboardingInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF1BA83252A926900FAA9A0 /* OnboardingInfo.swift */; };
 		3AF1BA8A252A92B500FAA9A0 /* OrangeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF1BA89252A92B500FAA9A0 /* OrangeButton.swift */; };
 		3AF1BA90252A92DD00FAA9A0 /* InvertedOrangeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF1BA8F252A92DD00FAA9A0 /* InvertedOrangeButton.swift */; };
 		3AF1BA96252A93F400FAA9A0 /* OnboardingInfo2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF1BA95252A93F400FAA9A0 /* OnboardingInfo2.swift */; };
+		3AF6D65A2572882A009E4240 /* BuildFB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF6D6592572882A009E4240 /* BuildFB.swift */; };
+		3AF6D65F257295CC009E4240 /* BuildFB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF6D6592572882A009E4240 /* BuildFB.swift */; };
 		3AF9926524A2B7C9005446D8 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF9926424A2B7C9005446D8 /* LoginView.swift */; };
 		3AF9926824A2B918005446D8 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF9926724A2B918005446D8 /* Utils.swift */; };
 		3AF9926A24A2B95C005446D8 /* InputValidation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF9926924A2B95C005446D8 /* InputValidation.swift */; };
@@ -310,10 +319,12 @@
 		3ACAD181250AF07100B24CEB /* DishReviewsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DishReviewsViewModel.swift; sourceTree = "<group>"; };
 		3ACAD186250AF4B200B24CEB /* ListDishesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListDishesViewModel.swift; sourceTree = "<group>"; };
 		3ACAD188250B161A00B24CEB /* RestCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestCategory.swift; sourceTree = "<group>"; };
+		3AEB331B2572092000A61C0E /* WhiteBackButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhiteBackButton.swift; sourceTree = "<group>"; };
 		3AF1BA83252A926900FAA9A0 /* OnboardingInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingInfo.swift; sourceTree = "<group>"; };
 		3AF1BA89252A92B500FAA9A0 /* OrangeButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrangeButton.swift; sourceTree = "<group>"; };
 		3AF1BA8F252A92DD00FAA9A0 /* InvertedOrangeButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvertedOrangeButton.swift; sourceTree = "<group>"; };
 		3AF1BA95252A93F400FAA9A0 /* OnboardingInfo2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingInfo2.swift; sourceTree = "<group>"; };
+		3AF6D6592572882A009E4240 /* BuildFB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildFB.swift; sourceTree = "<group>"; };
 		3AF9926424A2B7C9005446D8 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		3AF9926724A2B918005446D8 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		3AF9926924A2B95C005446D8 /* InputValidation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputValidation.swift; sourceTree = "<group>"; };
@@ -470,6 +481,7 @@
 			children = (
 				C55FDD6424CABA2800CC8561 /* RestaurantFB.swift */,
 				C5D0A16B24B1B6A300E44DF2 /* DishFB.swift */,
+				3AF6D6592572882A009E4240 /* BuildFB.swift */,
 				3AFA234524DC9C2000F90ED8 /* DishReviewFB.swift */,
 				3A530DF224D9769100CBDE28 /* DishCategory.swift */,
 				3ACAD188250B161A00B24CEB /* RestCategory.swift */,
@@ -896,6 +908,7 @@
 				3A3E1DA3256FBDE000812E67 /* SocialButton */,
 				3ABA90F424F64EDE00695B06 /* GuestButton.swift */,
 				3A0745C6252B0871000EF6BD /* BackButton.swift */,
+				3AEB331B2572092000A61C0E /* WhiteBackButton.swift */,
 				3A4E2E3C24D2275F00C34DD8 /* SearchBarButton.swift */,
 			);
 			path = Components;
@@ -1199,32 +1212,39 @@
 				3431BA0F255A367E0018AFB5 /* ListDishesViewModel.swift in Sources */,
 				3431B9AC255A346E0018AFB5 /* DishFB.swift in Sources */,
 				3431B9C9255A34A10018AFB5 /* SeeMenuButton.swift in Sources */,
+				3AEB33162572065C00A61C0E /* InvertedOrangeButton.swift in Sources */,
 				3431BA1E255A36AF0018AFB5 /* XButtonDelete.swift in Sources */,
 				3431B9EC255A35CE0018AFB5 /* ReviewOrder.swift in Sources */,
 				3431BA23255A36B50018AFB5 /* DishCardOrder.swift in Sources */,
 				3431B9CE255A34A70018AFB5 /* RestaurantReviewView.swift in Sources */,
 				3431BA32255A36FC0018AFB5 /* DishCard.swift in Sources */,
+				3AEB33212572099E00A61C0E /* WhiteBackButton.swift in Sources */,
 				3431BA14255A36810018AFB5 /* ListDishesView.swift in Sources */,
 				3431B9A7255A34670018AFB5 /* RestaurantFB.swift in Sources */,
 				3431B9E2255A35880018AFB5 /* ImageLoader.swift in Sources */,
 				3431BA28255A36CE0018AFB5 /* BackButton.swift in Sources */,
+				3AEB330C2572058900A61C0E /* WhiteButton.swift in Sources */,
 				3431B9F1255A35EF0018AFB5 /* ImageCache.swift in Sources */,
 				3A29A2C0255CDA9C005B8731 /* RestaurantReviewFB.swift in Sources */,
 				3431BA0A255A36680018AFB5 /* XButton.swift in Sources */,
 				3431B99D255A345A0018AFB5 /* RestaurantHomeView.swift in Sources */,
 				3431B9DD255A35290018AFB5 /* FBURLImage.swift in Sources */,
 				3431B9B6255A34800018AFB5 /* Order.swift in Sources */,
+				3AEB32F42572052500A61C0E /* Extensions.swift in Sources */,
 				3431B9B1255A34740018AFB5 /* DishCategory.swift in Sources */,
 				34111054252262F10084975A /* AppDelegate.swift in Sources */,
+				3AEB32EF2572051A00A61C0E /* ColorManager.swift in Sources */,
 				3A3E1DDA256FC5F300812E67 /* MiniViewCartButton.swift in Sources */,
+				3AEB32F92572055000A61C0E /* OrderModel.swift in Sources */,
 				34111056252262F10084975A /* SceneDelegate.swift in Sources */,
 				3431B9F6255A35FC0018AFB5 /* ViewCartButton.swift in Sources */,
 				34111058252262F10084975A /* ContentView.swift in Sources */,
+				3AEB33112572065A00A61C0E /* OrangeButton.swift in Sources */,
 				3431B9E7255A35A80018AFB5 /* DishDetailsView.swift in Sources */,
-				3A3E1DE2256FC6AB00812E67 /* ContentView.swift in Sources */,
 				3431B9A2255A345F0018AFB5 /* MenuSelectionViewModel.swift in Sources */,
 				3431BA19255A36990018AFB5 /* OptionsCard.swift in Sources */,
 				3431BA05255A365A0018AFB5 /* BuildCard.swift in Sources */,
+				3AF6D65F257295CC009E4240 /* BuildFB.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1272,6 +1292,7 @@
 				3A13B6E424C1816B0006458B /* ReportProblem.swift in Sources */,
 				3A3DD58F2538396B00536D62 /* XButton.swift in Sources */,
 				A779ACAA250D4F7400146565 /* ImageCache.swift in Sources */,
+				3AF6D65A2572882A009E4240 /* BuildFB.swift in Sources */,
 				3ACAD170250ACE2000B24CEB /* LoginViewModel.swift in Sources */,
 				A73FD46324919A1300A035AB /* ListDishesView.swift in Sources */,
 				3A987AD92480350C0021F6E4 /* SceneDelegate.swift in Sources */,
@@ -1323,6 +1344,7 @@
 				34A966F2254691C200AD84CD /* RestaurantReviewFB.swift in Sources */,
 				3A5633BA24F9014C0059B603 /* SignInWithAppleCoordinator.swift in Sources */,
 				3A0745BB252B020F000EF6BD /* FacebookButton.swift in Sources */,
+				3AEB331C2572092000A61C0E /* WhiteBackButton.swift in Sources */,
 				3AF9926524A2B7C9005446D8 /* LoginView.swift in Sources */,
 				A7912A2A24CF8EFE0052988C /* CustomPasswordField.swift in Sources */,
 				3A4A0E70249EB9320030635E /* AccountProfileView.swift in Sources */,

@@ -16,6 +16,7 @@ class ListDishesViewModel: ObservableObject {
 
     var restaurant: RestaurantFB
     var dishes = [DishFB]()
+    var builds = [BuildFB]()
     var dishCategories: [DishCategory] = []
     
     let dispatchGroup = DispatchGroup()
@@ -51,6 +52,7 @@ class ListDishesViewModel: ObservableObject {
     }
     
     func fetchDishesFB(name: String) {
+        //fetch dishes
         db.collection("Dish").whereField("Restaurant", isEqualTo: name).getDocuments { (snapshot, error) in
             if let error = error {
                 print("Error getting documents: \(error)")
@@ -63,6 +65,25 @@ class ListDishesViewModel: ObservableObject {
                         if(document == snapshot!.documents.last){
                             self.dispatchGroup.leave()
                         }
+                    }
+                }
+            }
+        }
+        //fetch build
+        db.collection("Build").whereField("Restaurant", isEqualTo: name).getDocuments { (snapshot, error) in
+            if let error = error {
+                print("Error getting documents: \(error)")
+            } else {
+                for document in snapshot!.documents {
+                    DispatchQueue.main.async {
+                        let build = BuildFB(snapshot: document)
+                        
+//                        let dish = DishFB(snapshot: document)!
+//                        self.dishes.append(dish)
+//
+//                        if(document == snapshot!.documents.last){
+//                            self.dispatchGroup.leave()
+//                        }
                     }
                 }
             }
@@ -91,6 +112,10 @@ class ListDishesViewModel: ObservableObject {
             else{
                 dishCategories.append(DishCategory(isExpanded: true, dishes: dishes, name: category, description: ""))
             }
+        }
+        
+        if !self.builds.isEmpty {
+            dishCategories.append(DishCategory(isExpanded: true, builds: self.builds, name: "Build", description: ""))
         }
     }
     

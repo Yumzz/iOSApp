@@ -168,7 +168,8 @@ struct MenuSelectionView: View {
                 .frame(height: 220)
                 Spacer()
             }
-            }.background(GradientView().edgesIgnoringSafeArea(.all))
+            }
+//            .background(GradientView().edgesIgnoringSafeArea(.all))
             .navigationBarHidden(false)
             .navigationBarBackButtonHidden(true)
             .navigationBarItems(leading: WhiteBackButton(mode: self.mode))

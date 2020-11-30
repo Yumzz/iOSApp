@@ -18,13 +18,13 @@ struct ListDishesView: View {
     @State var isLoading = false
     
     @State var dishCategoryClicked: DishCategory = DishCategory(isExpanded: false, dishes: [], name: "", description: "")
-    
-    @State var dishes = [DishFB]()
+        
+    @State var builds = [BuildFB]()
     
     @State var dishCats = [DishCategory]()
     
     @State var restname = ""
-    
+     
     @State var addtapped = false
     @State var showingAlert = false
     @State var isNavBarHidden = false
@@ -135,18 +135,32 @@ struct ListDishesView: View {
                             }
                             
                             VStack(spacing: 20){
-                                
-                                ForEach(dishCategory.dishes, id: \.id) {
-                                    dish in
-                                    NavigationLink(destination:
-                                        DishDetailsView(dish: dish, restaurant: self.restaurant).navigationBarHidden(false)
-                                    ) {
-
-                                        DishCard(urlImage: FBURLImage(url: dish.coverPhotoURL, imageAspectRatio: .fill, imageWidth: 80, imageHeight: 80), dishName: dish.name, dishIngredients: dish.description, price: self.listDishVM.formatPrice(price: dish.price), rest: self.restaurant, dish: dish)
-                                            
+                                if dishCategory.dishes == nil {
+                                    ForEach(dishCategory.builds, id: \.id) {
+                                        build in
+//                                        NavigationLink(destination:
+//                                            DishDetailsView(dish: dish, restaurant: self.restaurant).navigationBarHidden(false)
+//                                        ) {
+//
+//                                            DishCard(urlImage: FBURLImage(url: dish.coverPhotoURL, imageAspectRatio: .fill, imageWidth: 80, imageHeight: 80), dishName: dish.name, dishIngredients: dish.description, price: self.listDishVM.formatPrice(price: dish.price), rest: self.restaurant, dish: dish)
+//
+//                                        }
                                     }
+                                    Spacer().frame(height: 20)
                                 }
-                                Spacer().frame(height: 20)
+                                else {
+                                    ForEach(dishCategory.dishes, id: \.id) {
+                                        dish in
+                                        NavigationLink(destination:
+                                            DishDetailsView(dish: dish, restaurant: self.restaurant).navigationBarHidden(false)
+                                        ) {
+
+                                            DishCard(urlImage: FBURLImage(url: dish.coverPhotoURL, imageAspectRatio: .fill, imageWidth: 80, imageHeight: 80), dishName: dish.name, dishIngredients: dish.description, price: self.listDishVM.formatPrice(price: dish.price), rest: self.restaurant, dish: dish)
+                                                
+                                        }
+                                    }
+                                    Spacer().frame(height: 20)
+                                }
                             }
                         }.id(self.dishCats.firstIndex(of: dishCategory))
                     }
@@ -159,6 +173,8 @@ struct ListDishesView: View {
         .onAppear{
             self.dispatchGroup.notify(queue: .main){
                 self.dishCats = self.listDishVM.dishCategories
+                self.builds = self.listDishVM.builds
+                //must make build for each under build category
                 self.restname = self.restaurant.name
                 self.isNavBarHidden = false
                 NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: "Alert"), object: nil, queue: .main) { (Notification) in

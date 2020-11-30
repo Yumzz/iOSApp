@@ -100,7 +100,7 @@ struct SignUpView: View {
                         
                     })
                     {
-                        NavigationLink(destination: AppView(), isActive: $createdAccount){
+                        NavigationLink(destination: HomeScreenView(), isActive: $createdAccount){
                             OrangeButton(strLabel: "Sign Up", width: 330, height: 40)
                                 .clipShape(RoundedRectangle(cornerRadius: 10, style: .circular))
                         }.disabled(!self.createdAccount)
@@ -145,7 +145,7 @@ struct SignUpView: View {
                     Spacer()
                 }
             }else{
-                AppView()
+                HomeScreenView()
             }
         }
 //        .background(Color(UIColor().colorFromHex("#F3F1EE", 1)))

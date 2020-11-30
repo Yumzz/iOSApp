@@ -11,8 +11,7 @@ import UIKit
 import CryptoKit
 
 extension UIColor {
-        
-    
+      
     func colorFromHex(_ hex: String,_ alpha: CGFloat) -> UIColor {
         var hexstring = hex.trimmingCharacters(in: .whitespacesAndNewlines).uppercased()
         

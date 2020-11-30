@@ -16,7 +16,6 @@ struct HomeScreenView: View {
 
     
     @State var restaurants = [RestaurantFB]()
-    
     @State var cityRests = [String: [RestaurantFB]]()
     
     @State var cities = [String]()
@@ -159,6 +158,9 @@ struct HomeScreenView: View {
             self.dispatchGroup.notify(queue: .main){
                 self.restaurants = self.HomeScreenVM.allRestaurants
                 for x in self.restaurants {
+//                    let restSet = Set(arrayLiteral: cityRests[x.cityAddress].map({ $0.self }))
+//                    let r = Array(restSet)
+                    print("rest: \(x)")
                     if(self.cityRests[x.cityAddress] == nil){
                         self.cityRests[x.cityAddress] = []
                     }

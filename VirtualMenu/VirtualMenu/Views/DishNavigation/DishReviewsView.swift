@@ -52,34 +52,35 @@ struct DishReviewsView: View {
                 }
 
                 Spacer().frame(height: 30)
-                
+//                ScrollView{
                 VStack{
-                    ScrollView{
-                        if (self.reviews.count == 0) {
-                            Text("No reviews yet. Add yours!")
-                                    .frame(width: 330, height: 320, alignment: .center).cornerRadius(10)
-                        } else {
-                            ScrollView {
-                                ForEach(self.reviews, id: \.id) {
-                                    reviewuser in
-                                    VStack {
+                    
+                        ScrollView{
+                            if (self.reviews.count == 0) {
+                                Text("No reviews yet. Add yours!")
+                                        .frame(width: 330, height: 320, alignment: .center).cornerRadius(10)
+                            } else {
+                                ScrollView {
+                                    ForEach(self.reviews, id: \.id) {
+                                        reviewuser in
+                                        VStack {
 
-                                            if(reviewuser.userPhotoURL == ""){
-                                                ReviewCard(urlImage: nil, review: reviewuser.body)
-                                            }
-                                            else{
-                                                ReviewCard(urlImage: FBURLImage(url: reviewuser.userPhotoURL, imageAspectRatio: .fill), review: reviewuser.body)
-                                            }
+                                                if(reviewuser.userPhotoURL == ""){
+                                                    ReviewCard(urlImage: nil, review: reviewuser.body)
+                                                }
+                                                else{
+                                                    ReviewCard(urlImage: FBURLImage(url: reviewuser.userPhotoURL, imageAspectRatio: .fill), review: reviewuser.body)
+                                                }
+                                        }
+                                        .frame(
+                                            width: 300,
+                                            alignment: .topLeading
+                                        )
+                                            .cornerRadius(10)
                                     }
-                                    .frame(
-                                        width: 300,
-                                        alignment: .topLeading
-                                    )
-                                        .cornerRadius(10)
-                                }
-                            }.frame(width: 330, height: 320, alignment: .center).cornerRadius(10)
+                                }.frame(width: 330, height: 320, alignment: .center).cornerRadius(10)
+                            }
                         }
-                    }
                     HStack{
                         DishNavButton(strLabel: "Submit a Review").onTapGesture{
                             self.reviewClicked = true
@@ -139,6 +140,7 @@ struct DishReviewsView: View {
                     .frame(maxWidth: .infinity)
                     .padding(.bottom, 25)
                 }
+//                }
                 
             }
         }.onAppear {
@@ -151,7 +153,7 @@ struct DishReviewsView: View {
             }
         }
             
-        }.background(GradientView().edgesIgnoringSafeArea(.all))
+        }
         .navigationBarBackButtonHidden(true)
         .navigationBarItems(leading: WhiteBackButton(mode: self.mode))
         
