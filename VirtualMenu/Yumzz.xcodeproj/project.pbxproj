@@ -119,8 +119,8 @@
 		3ACAD182250AF07100B24CEB /* DishReviewsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACAD181250AF07100B24CEB /* DishReviewsViewModel.swift */; };
 		3ACAD187250AF4B200B24CEB /* ListDishesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACAD186250AF4B200B24CEB /* ListDishesViewModel.swift */; };
 		3ACAD189250B161A00B24CEB /* RestCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACAD188250B161A00B24CEB /* RestCategory.swift */; };
-		3AE05F9824EF27550024F802 /* FacebookCore in Frameworks */ = {isa = PBXBuildFile; productRef = 3AE05F9724EF27550024F802 /* FacebookCore */; };
-		3AE05F9A24EF27550024F802 /* FacebookLogin in Frameworks */ = {isa = PBXBuildFile; productRef = 3AE05F9924EF27550024F802 /* FacebookLogin */; };
+		3AE05F9824EF27550024F802 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 3AE05F9724EF27550024F802 /* SwiftPackageProductDependency */; };
+		3AE05F9A24EF27550024F802 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 3AE05F9924EF27550024F802 /* SwiftPackageProductDependency */; };
 		3AEB32EF2572051A00A61C0E /* ColorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0745DA253021CB000EF6BD /* ColorManager.swift */; };
 		3AEB32F42572052500A61C0E /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA9897524B517F00070FD97 /* Extensions.swift */; };
 		3AEB32F92572055000A61C0E /* OrderModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5633CD24FC8FE70059B603 /* OrderModel.swift */; };
@@ -178,7 +178,7 @@
 		C5CD0F2B24AC4C6600F0A60D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C5CD0F2824AC4C6600F0A60D /* GoogleService-Info.plist */; };
 		C5D0A16C24B1B6A300E44DF2 /* DishFB.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5D0A16B24B1B6A300E44DF2 /* DishFB.swift */; };
 		DE6D5DDB64F023C3E960E12D /* Pods_YumzzAppClip.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F1A62BDCBD69961643AEE623 /* Pods_YumzzAppClip.framework */; };
-		EF742DE3D7CD0978127C36A4 /* (null) in Frameworks */ = {isa = PBXBuildFile; };
+		EF742DE3D7CD0978127C36A4 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -383,10 +383,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3AE05F9A24EF27550024F802 /* FacebookLogin in Frameworks */,
+				3AE05F9A24EF27550024F802 /* BuildFile in Frameworks */,
 				A731EB0E2495AD2300B75D05 /* CloudKit.framework in Frameworks */,
-				3AE05F9824EF27550024F802 /* FacebookCore in Frameworks */,
-				EF742DE3D7CD0978127C36A4 /* (null) in Frameworks */,
+				3AE05F9824EF27550024F802 /* BuildFile in Frameworks */,
+				EF742DE3D7CD0978127C36A4 /* BuildFile in Frameworks */,
 				5DFDDF68EFBFD00B56D691FA /* Pods_VirtualMenu.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -926,6 +926,7 @@
 				3411104E252262F10084975A /* Frameworks */,
 				3411104F252262F10084975A /* Resources */,
 				AD0C599C9D2565F87570E202 /* [CP] Copy Pods Resources */,
+				5E365A70CA57E09D622E30A4 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -955,8 +956,8 @@
 			);
 			name = VirtualMenu;
 			packageProductDependencies = (
-				3AE05F9724EF27550024F802 /* FacebookCore */,
-				3AE05F9924EF27550024F802 /* FacebookLogin */,
+				3AE05F9724EF27550024F802 /* SwiftPackageProductDependency */,
+				3AE05F9924EF27550024F802 /* SwiftPackageProductDependency */,
 			);
 			productName = VirtualMenu;
 			productReference = 3A987AD32480350C0021F6E4 /* Yumzz.app */;
@@ -1034,7 +1035,7 @@
 			);
 			mainGroup = 3A987ACA2480350C0021F6E4;
 			packageReferences = (
-				3AE05F9624EF27550024F802 /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */,
+				3AE05F9624EF27550024F802 /* RemoteSwiftPackageReference */,
 			);
 			productRefGroup = 3A987AD42480350C0021F6E4 /* Products */;
 			projectDirPath = "";
@@ -1121,6 +1122,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-VirtualMenu/Pods-VirtualMenu-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		5E365A70CA57E09D622E30A4 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-YumzzAppClip/Pods-YumzzAppClip-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-YumzzAppClip/Pods-YumzzAppClip-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-YumzzAppClip/Pods-YumzzAppClip-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		62ECAB41F2B8C2CD667140D7 /* [CP] Check Pods Manifest.lock */ = {
@@ -1768,7 +1786,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		3AE05F9624EF27550024F802 /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */ = {
+		3AE05F9624EF27550024F802 /* RemoteSwiftPackageReference */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/facebook/facebook-ios-sdk";
 			requirement = {
@@ -1779,14 +1797,14 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		3AE05F9724EF27550024F802 /* FacebookCore */ = {
+		3AE05F9724EF27550024F802 /* SwiftPackageProductDependency */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 3AE05F9624EF27550024F802 /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */;
+			package = 3AE05F9624EF27550024F802 /* RemoteSwiftPackageReference */;
 			productName = FacebookCore;
 		};
-		3AE05F9924EF27550024F802 /* FacebookLogin */ = {
+		3AE05F9924EF27550024F802 /* SwiftPackageProductDependency */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 3AE05F9624EF27550024F802 /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */;
+			package = 3AE05F9624EF27550024F802 /* RemoteSwiftPackageReference */;
 			productName = FacebookLogin;
 		};
 /* End XCSwiftPackageProductDependency section */

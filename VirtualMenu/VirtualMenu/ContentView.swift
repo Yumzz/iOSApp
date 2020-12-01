@@ -18,7 +18,10 @@ struct ContentView: View {
     
     var body: some View {
         ZStack {
-            if Auth.auth().currentUser != nil {
+            let defaults = UserDefaults.standard
+            let loggedIn = defaults.bool(forKey: "loggedIn")
+            //if Auth.auth().currentUser != nil {
+            if loggedIn {
                 HomeScreenView()
 //                LoginView(loggedin: $loggedIn)
             } else {
