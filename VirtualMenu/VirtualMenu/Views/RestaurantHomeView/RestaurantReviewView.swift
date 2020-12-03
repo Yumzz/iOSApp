@@ -16,8 +16,7 @@ struct RestaurantReviewView: View {
     @Binding var shown: Bool
     @Binding var popUpShown: Bool
     @ObservedObject var menuSelectionVM: MenuSelectionViewModel
-    @State var reviewPhotos: [String: UIImage] = [String: UIImage]()
-    @State var reviewNames: [String: String] = [String: String]()
+    @State var reviewPhotos: [String: Bool] = [String: Bool]()
 
     
     var body: some View {
@@ -60,20 +59,29 @@ struct RestaurantReviewView: View {
                     review in
                     VStack{
                         HStack{
-                            if (self.reviewPhotos[review.userID] != nil){
-                                Image(uiImage: self.reviewPhotos[review.userID]!)
-                                    .resizable()
-                                    .frame(width: 20, height: 20 )
+                            if(review.photoURL != ""){
+                                FBURLImage(url: review.photoURL, imageAspectRatio: .fill, imageWidth: 20, imageHeight: 20, circle: true)
                             }
-                            else {
+                            else{
                                 Image(systemName: "person.circle.fill")
                                     .foregroundColor(Color(#colorLiteral(red: 0.88, green: 0.36, blue: 0.16, alpha: 1)))
                                     .frame(width: 10, height: 10)
                             }
+
+//                            if (self.reviewPhotos[review.userID] != nil){
+//                                Image(uiImage: self.reviewPhotos[review.userID]!)
+//                                    .resizable()
+//                                    .frame(width: 20, height: 20 )
+//                            }
+//                            else {
+//                                Image(systemName: "person.circle.fill")
+//                                    .foregroundColor(Color(#colorLiteral(red: 0.88, green: 0.36, blue: 0.16, alpha: 1)))
+//                                    .frame(width: 10, height: 10)
+//                            }
                             VStack {
                                 HStack {
-                                    if(self.menuSelectionVM.loadName(userId: review.userID) != ""){
-                                        Text("\(self.menuSelectionVM.loadName(userId: review.userID))")
+                                    if(review.name != ""){
+                                        Text("\(review.name)")
                                         .font(.system(size: 14, weight: .semibold ))
                                         Spacer()
                                     }
@@ -87,7 +95,7 @@ struct RestaurantReviewView: View {
                                     StarView(rating: Float(review.rating))
                                     Spacer()
                                     //current day - when posted
-                                    Text("1 day ago")
+                                    Text("\(review.date)")
                                         .font(.system(size: 14, weight: .semibold ))
                                         .foregroundColor(.gray)
                                 }
@@ -106,18 +114,24 @@ struct RestaurantReviewView: View {
             Spacer()
         }.padding()
         .onAppear(){
-            let disp = DispatchGroup()
-            for x in self.menuSelectionVM.reviews{
-                disp.enter()
-                self.menuSelectionVM.getPhoto(dispatch: disp , id: x.userID)
-                print("got")
-                disp.notify(queue: .main){
-                    print("put in: \(self.menuSelectionVM.reviewPhoto.debugDescription)")
-                    self.reviewPhotos[x.userID] = self.menuSelectionVM.reviewPhoto?.circle
-                    print("dimensions of put in: \(self.reviewPhotos[x.userID]!.size)")
-                }
-                
-            }
+//            let disp = DispatchGroup()
+//            for x in self.menuSelectionVM.reviews{
+//                disp.enter()
+//                self.menuSelectionVM.getPhoto(dispatch: disp , id: x.userID)
+//                print("got")
+//                disp.notify(queue: .main){
+//                    print("put in: \(self.menuSelectionVM.reviewPhoto.debugDescription)")
+//                    if(self.menuSelectionVM.reviewPhoto == nil){
+//                        print("no photo: \(x.name)")
+//                        self.reviewPhotos[x.userID] = nil
+//                    }
+//                    else{
+//                        self.reviewPhotos[x.userID] = self.menuSelectionVM.reviewPhoto?.circle
+//                        self.menuSelectionVM.reviewPhoto = nil
+//                    }
+//                    print("name \(x.name): size \(self.reviewPhotos.capacity)")
+//                }
+//            }
         }
     }
 }

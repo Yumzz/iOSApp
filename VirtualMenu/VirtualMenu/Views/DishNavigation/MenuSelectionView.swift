@@ -30,7 +30,7 @@ struct MenuSelectionView: View {
         ZStack{
             ScrollView{
             VStack(spacing: 10){
-                FBURLImage(url: self.restChosen.coverPhotoURL, imageWidth: 127, imageHeight: 133)
+                FBURLImage(url: self.restChosen.coverPhotoURL, imageWidth: 127, imageHeight: 133, circle: false)
                     .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
                     .padding(.top, 10)
                     .padding(.bottom, 10)
@@ -206,7 +206,7 @@ struct PreviewDish: View {
     
     var body: some View {
         NavigationLink(destination: DishDetailsView(dish: self.dish, restaurant: self.restChosen).navigationBarHidden(false)) {
-            FBURLImage(url: self.dish.coverPhotoURL, imageAspectRatio: .fill, imageWidth: 130, imageHeight: 80)
+            FBURLImage(url: self.dish.coverPhotoURL, imageAspectRatio: .fill, imageWidth: 130, imageHeight: 80, circle: false)
                 .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
         }
     }

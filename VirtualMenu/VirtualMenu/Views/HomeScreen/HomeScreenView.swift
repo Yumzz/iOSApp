@@ -186,7 +186,7 @@ struct HSRestaurantCard: View {
     var body: some View {
             VStack {
                 HStack {
-                    FBURLImage(url: restaurant.coverPhotoURL, imageWidth: 175, imageHeight: 88)
+                    FBURLImage(url: restaurant.coverPhotoURL, imageWidth: 175, imageHeight: 88, circle: false)
                         .frame(width: 175, height: 88)
                         .clipShape(RoundedRectangle(cornerRadius: 10))
                     Spacer()

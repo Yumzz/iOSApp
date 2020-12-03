@@ -21,9 +21,13 @@ struct AccountProfileLoginView: View {
     
     @State var email = ""
     @State var password = ""
+    @State var currentNonce: String? = ""
     
     @State private var alertMessage = ""
     @State private var alertTitle = ""
+    @Environment(\.window) var window: UIWindow?
+    @State var delegate: SignInWithAppleDelegates! = nil
+    @Environment(\.presentationMode) var mode: Binding<PresentationMode>
     
     ///Keyboard focus
     @State var isFocused = false
@@ -31,8 +35,10 @@ struct AccountProfileLoginView: View {
     @State var showAlert = false
     
     @State private var showForgotPassword = false
+    @State var alertMsg = ""
     
-    @ObservedObject var loginVM = LoginViewModel()
+    @ObservedObject var loginVM = AccountProfileLoginViewModel()
+    @State var isNavigationBarHidden: Bool = true
     
     @EnvironmentObject var user: UserStore
     
@@ -45,118 +51,170 @@ struct AccountProfileLoginView: View {
     }
     
     var body: some View {
-        
-        VStack(spacing: 24) {
-            
-            Spacer()
+        ZStack{
+                Color(#colorLiteral(red: 0.9725490196, green: 0.968627451, blue: 0.9607843137, alpha: 1)).edgesIgnoringSafeArea(.all)
+            VStack{
+                VStack(spacing: 10){
+                    Text("Login to your account")
+                        .foregroundColor(ColorManager.textGray)
+                        .font(.largeTitle).bold()
+                        .font(.system(size: 36))
+                        .padding(.leading, 40)
+                        .padding(.trailing, 40)
+                        .position(x: UIScreen.main.bounds.width/2.5, y: 10)
+                        
+                    CustomTextField(field: "Email", strLabel: "jonnyives@apple.com", strField: $email, uiTextAutoCapitalizationType: .none, uiKeyboardType: .emailAddress)
 
-            Text("Log in to synchronize your preferences and keep track of your past orders")
-                .bold()
-                .fixedSize(horizontal: false, vertical: true)
-                .font(.subheadline)
-
-
-
-            VStack {
-
-                HStack {
-                    Image(systemName: "person.crop.circle.fill")
-                        .foregroundColor(Color(#colorLiteral(red: 0.6549019608, green: 0.7137254902, blue: 0.862745098, alpha: 1)))
-                        .frame(width: 44, height: 44)
-                        .background(Color.white)
-                        .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
-                        .shadow(color: Color(#colorLiteral(red: 0.1647058824, green: 0.1882352941, blue: 0.3882352941, alpha: 1)).opacity(0.1), radius: 5, x: 0, y: 5)
-                        .padding(.leading)
-
-                    TextField("Email".uppercased(), text: $email)
-                        .font(.subheadline)
-                        .padding(.leading)
-                        .frame(height: 44)
-                        .keyboardType(.emailAddress)
-                        .autocapitalization(.none)
-                        .onTapGesture {
-                            self.isFocused = true
-                    }
+                    CustomPasswordField(field: "Password", strLabel: "••••••••••", password: $password)
+                        
+    //                VStack {
+                        HStack {
+                            NavigationLink(destination: ForgotPasswordView()){
+                                    Text("Forgot Password?")
+                                        .foregroundColor(Color(UIColor().colorFromHex("#B4B4B4", 1)))
+                                        .font(.system(size: 12, weight: .bold, design: .default))
+                                    
+                                }
+                        }
+                        .padding(.trailing, (UIScreen.main.bounds.width/1.8))
+    //                }
+                    
+                    
+                        Button(action: {
+                            let dispatch = DispatchGroup()
+                            dispatch.enter()
+                            //do valid inputs and make move current user != nil if to account profile view
+                            self.loginVM.loginUser(email: self.email, password: self.password, disp: dispatch)
+                            dispatch.notify(queue: .main){
+                                print("wowo: \(self.loginVM.alertMessage)")
+                                if(self.loginVM.alertMessage != ""){
+                                    print("here")
+                                    self.alertMsg = self.loginVM.alertMessage
+                                    self.alertTitle = self.loginVM.alertTitle
+                                    self.showAlert.toggle()
+                                }else{
+                                    if(Auth.auth().currentUser != nil){
+                                        self.user.isLogged = true
+                                        UserDefaults.standard.set(true, forKey: "isLogged")
+                                        print(self.user.showOnboarding)
+                                        self.user.showOnboarding = false
+                                        self.isNavigationBarHidden = true
+                                        print(self.user.showOnboarding)
+                                        UserDefaults.standard.set(false, forKey: "showOnboarding")
+                                    }else{
+                                        print("email: \(userProfile.emailAddress)")
+                                        self.alertMsg = "There is no such user"
+                                        self.alertTitle = "No User"
+                                        self.showAlert.toggle()
+                                    }
+                                }
+                            }
+                        }) {
+                            OrangeButton(strLabel: "Login", width: 330, height: 48)
+                                .clipShape(RoundedRectangle(cornerRadius: 10, style: .circular))
+                        }
                 }
-
-                Divider().padding(.leading, 80)
                 
-                HStack {
-                    Image(systemName: "lock.fill")
-                        .foregroundColor(Color(#colorLiteral(red: 0.6549019608, green: 0.7137254902, blue: 0.862745098, alpha: 1)))
-                        .frame(width: 44, height: 44)
-                        .background(Color.white)
-                        .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
-                        .shadow(color: Color(#colorLiteral(red: 0.1647058824, green: 0.1882352941, blue: 0.3882352941, alpha: 1)).opacity(0.1), radius: 5, x: 0, y: 5)
-                        .padding(.leading)
-
-                    SecureField("Password".uppercased(), text: $password)
-                        .font(.subheadline)
-                        .padding(.leading)
-                        .frame(height: 44)
+                Spacer().frame(width: 0, height: 40)
+                
+                VStack(spacing: 10){
+                    
+                    AppleButton(width: 330, height: 48)
+                        .clipShape(RoundedRectangle(cornerRadius: 10, style: .circular))
                         .onTapGesture {
-                            self.isFocused = true
-                    }
+                            self.showAppleLogin()
+                        }
+                    
+                    FacebookButton(width: 330, height: 48)
+                        .clipShape(RoundedRectangle(cornerRadius: 10, style: .circular))
+                        .onTapGesture {
+                            self.loginVM.logginFb()
+                        }
+                    
+                    GoogleButton(width: 330, height: 48)
+                        .clipShape(RoundedRectangle(cornerRadius: 10, style: .circular))
+                        .onTapGesture {
+                            self.loginVM.socialLogin.attemptLoginGoogle()
+                        }
+                        .shadow(radius: 5)
                 }
+                
+                Spacer()
             }
-            .frame(height: 136)
-            .frame(maxWidth: .infinity)
-            .background(Color(UIColor.systemGray6))
-            .clipShape(RoundedRectangle(cornerRadius: 30, style: .continuous))
-            .shadow(color: Color.black.opacity(0.15), radius: 20, x: 0, y: 20)
-
-            Button(action: {
-                let dispatch = DispatchGroup()
-                dispatch.enter()
-                self.loginVM.loginUser(email: self.email, password: self.password, disp: dispatch)
-                dispatch.notify(queue: .main){
-                    if(self.loginVM.alertMessage != ""){
-                        self.alertMessage = self.loginVM.alertMessage
-                        self.alertTitle = self.loginVM.alertTitle
-                        self.showAlert.toggle()
-                    }
-                    else{
-                        self.user.isLogged = true
-                    }
-                }
-            }) {
-                Text("Log in")
-                    .foregroundColor(.black)
-                    .bold()
-                    .frame(width: 120, height: 40)
-                    .background(Color(#colorLiteral(red: 0, green: 0.7529411765, blue: 1, alpha: 1)))
-                    .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
-                    .shadow(color: Color(#colorLiteral(red: 0, green: 0.7529411765, blue: 1, alpha: 1)).opacity(0.2), radius: 20, x: 0, y: 20)
             }
-
-
-            Spacer()
-
-            Text("Don't have an account?")
-                .fixedSize(horizontal: false, vertical: true)
-                .font(.subheadline)
-
-            Button(action: {
-                self.user.showOnboarding = true
-            }, label: {
-                NavigationLink(destination: SignUpView()) {
-                    BlackButton(strLabel: "SIGN UP")
-                }
-            })
-
-            Spacer()
-            
+//        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .navigationBarTitle("")
+        .navigationBarHidden(self.isNavigationBarHidden)
+        .navigationBarBackButtonHidden(true)
+        .navigationBarItems(leading: BackButton(mode: self.mode))
+        .onAppear(){
+            self.isNavigationBarHidden = false
         }
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .padding(.horizontal)
-        .animation(.spring())
-        .transition(.asymmetric(insertion: .slide, removal: .opacity))
-        .onTapGesture {
-            self.isFocused = false
-            self.hideKeyboard()
+        .onDisappear(){
+            self.isNavigationBarHidden = true
         }
+//        .animation(.spring())
+//        .transition(.asymmetric(insertion: .slide, removal: .opacity))
+//        .onTapGesture {
+//            self.isFocused = false
+//            self.hideKeyboard()
+//        }
         .alert(isPresented: $showAlert, content: { self.alert })
         
+    }
+    
+    private func performExistingAccountFlows(){
+        let requests = [ASAuthorizationAppleIDProvider().createRequest(),
+                        ASAuthorizationPasswordProvider().createRequest()
+        ]
+        performSignIn(using: requests)
+    }
+    
+    func showAppleLogin(){
+        let nonce = self.loginVM.randomNonceString()
+        currentNonce = nonce
+        let request = ASAuthorizationAppleIDProvider()
+        .createRequest()
+        request.requestedScopes = [
+            .fullName, .email
+        ]
+        performSignIn(using: [request])
+        request.nonce = self.loginVM.sha256(nonce)
+    }
+
+    
+    private func performSignIn(using requests: [ASAuthorizationRequest]){
+        login = true
+        signUp = false
+        print("yes")
+        delegate = SignInWithAppleDelegates(window: window, currentNonce: currentNonce!){ result in
+            switch result {
+            case .success(_):
+                //already created a new account or signed in
+                print("success")
+//                dispatch.leave()
+                let d = DispatchGroup()
+                d.enter()
+                self.loginVM.updateProfile(dispatch: d)
+                d.notify(queue: .main){
+                    self.user.showOnboarding = false
+                    self.user.isLogged = true
+                    self.isNavigationBarHidden = true
+                }
+                
+            case .failure(let error):
+                print("no succ")
+
+                //send alert
+                self.alertMsg = "\(error.localizedDescription)"
+                self.alertTitle = "Error!"
+//                dispatch.leave()
+            }
+        }
+        let controller = ASAuthorizationController(authorizationRequests: requests)
+        controller.delegate = delegate
+        controller.presentationContextProvider = delegate
+        controller.performRequests()
     }
         
     

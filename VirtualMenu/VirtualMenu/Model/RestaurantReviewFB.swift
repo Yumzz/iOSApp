@@ -16,7 +16,9 @@ struct RestaurantReviewFB{
     var restaurant: DocumentReference? = nil
     var userID: String = ""
     let text: String
-    let date: Date
+    let date: String
+    var name: String = ""
+    var photoURL: String = ""
     
     init?(snapshot: DocumentSnapshot) {
         guard let rating = snapshot.data()?["Rating"] as? Int else {
@@ -27,19 +29,25 @@ struct RestaurantReviewFB{
             print("no text")
             return nil
         }
-//        guard let date = snapshot.data()?["Date"] as? Date else {
-//            print("no date")
-//            return nil
-//        }
+        guard let date = snapshot.data()?["Date"] as? Timestamp else {
+            print("no date")
+            return nil
+        }
         
         self.rating = rating
         self.text = text
-        self.date = Date()
-        //self.date = date
-        
+        let d = Date(timeIntervalSince1970: TimeInterval(date.seconds))
+        let dateFormatter = DateFormatter()
+        dateFormatter.timeZone = TimeZone(abbreviation: "PST") //Set timezone that you want
+        dateFormatter.locale = NSLocale.current
+        dateFormatter.dateFormat = "MM/dd/yy" //Specify your format that you want
+        let strDate = dateFormatter.string(from: d)
+        self.date = strDate
         if (snapshot.get("UserID") != nil) {
             if let user = snapshot.data()?["UserID"] as? String {
+                print("reviewer: \(user) text: \(text)")
                 self.userID = user
+                self.photoURL = "profilephotos/\(user)"
             }
         }
         if (snapshot.get("Restaurant") != nil) {
@@ -47,6 +55,11 @@ struct RestaurantReviewFB{
                 self.restaurant = restaurant
             }
         }
-        
+        if (snapshot.get("Name") != nil) {
+            if let name = snapshot.data()?["Name"] as? String {
+                self.name = name
+            }
+        }
     }
+    
 }

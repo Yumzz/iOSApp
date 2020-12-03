@@ -17,8 +17,18 @@ struct DishCategory: Hashable {
     
     init(isExpanded: Bool, dishes: [DishFB]? = nil, builds: [BuildFB]? = nil, name: String, description: String) {
         self.isExpanded = isExpanded
-        self.dishes = dishes!
-        self.builds = builds!
+        if(dishes != nil){
+            self.dishes = dishes!
+        }
+        else{
+            self.dishes = []
+        }
+        if(builds != nil){
+            self.builds = builds!
+        }
+        else{
+            self.builds = []
+        }
         self.name = name
         self.id = UUID()
         self.description = description

@@ -63,9 +63,10 @@ struct SignUpView: View {
                             .font(.system(size: 36))
                             .padding(.leading, 40)
                             .padding(.trailing, 20)
-                            .position(x: UIScreen.main.bounds.width/2, y: 20)
+                            .position(x: UIScreen.main.bounds.width/2, y: 0)
                         
 //                    }
+                    Spacer().frame(width: UIScreen.main.bounds.width, height: 5)
                     
                     CustomTextField(field: "Name",strLabel: "Jonny Ives", strField: $name, uiTextAutoCapitalizationType: .words, uiKeyboardType: .default)
                     
@@ -106,8 +107,7 @@ struct SignUpView: View {
                         }.disabled(!self.createdAccount)
                     }
                     
-                    VStack(spacing: 20){
-                        
+                    VStack(spacing: 10){
                         AppleButton(width: 330, height: 48)
                             .clipShape(RoundedRectangle(cornerRadius: 10, style: .circular))
                             .onTapGesture {
@@ -149,6 +149,7 @@ struct SignUpView: View {
             }
         }
 //        .background(Color(UIColor().colorFromHex("#F3F1EE", 1)))
+        .keyboardAdaptive()
         .onAppear(perform: {
             NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: "NoMoreOnboard"), object: nil, queue: .main) { (Notification) in
                 self.user.showOnboarding = false

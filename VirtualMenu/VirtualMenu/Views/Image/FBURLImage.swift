@@ -16,13 +16,14 @@ struct FBURLImage: View {
     var height = CGFloat()
     
     let url: String
+    var circle: Bool
     
-    init(url: String, imageAspectRatio: ContentMode = .fill, imageWidth: CGFloat = 88, imageHeight: CGFloat = 88) {
+    init(url: String, imageAspectRatio: ContentMode = .fill, imageWidth: CGFloat = 88, imageHeight: CGFloat = 88, circle: Bool) {
         self.url = url
         self.aspectRatio = imageAspectRatio
         self.width = imageWidth
         self.height = imageHeight
-        
+        self.circle = circle
         imageLoader = ImageLoader(urlString: self.url)
     }
     
@@ -30,11 +31,20 @@ struct FBURLImage: View {
         
         Group {
             if (imageLoader.image != nil) {
-                Image(uiImage: imageLoader.image!)
-                    .renderingMode(.original)
-                    .resizable()
-                    .aspectRatio(contentMode: self.aspectRatio)
-                    .frame(width: self.width, height: self.height, alignment: .center)
+                if(circle){
+                    Image(uiImage: imageLoader.image!.circle!)
+                        .renderingMode(.original)
+                        .resizable()
+                        .aspectRatio(contentMode: self.aspectRatio)
+                        .frame(width: self.width, height: self.height, alignment: .center)
+                }
+                else{
+                    Image(uiImage: imageLoader.image!)
+                        .renderingMode(.original)
+                        .resizable()
+                        .aspectRatio(contentMode: self.aspectRatio)
+                        .frame(width: self.width, height: self.height, alignment: .center)
+                }
             } else {
                 Rectangle()
                     .frame(width: self.width, height: self.height, alignment: .center)
@@ -46,6 +56,6 @@ struct FBURLImage: View {
 
 struct FBURLImage_Previews: PreviewProvider {
     static var previews: some View {
-        FBURLImage(url: "")
+        FBURLImage(url: "", circle: false)
     }
 }

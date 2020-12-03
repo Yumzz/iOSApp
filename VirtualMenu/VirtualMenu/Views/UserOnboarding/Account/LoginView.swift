@@ -71,8 +71,9 @@ struct LoginView: View {
                         .font(.system(size: 36))
                         .padding(.leading, 40)
                         .padding(.trailing, 40)
-                        .position(x: UIScreen.main.bounds.width/2.5, y: 20)
-                        
+                        .position(x: UIScreen.main.bounds.width/2.5, y: 0)
+                        .padding(.bottom, 20)
+                                            
                     CustomTextField(field: "Email", strLabel: "jonnyives@apple.com", strField: $email, uiTextAutoCapitalizationType: .none, uiKeyboardType: .emailAddress)
 
                     CustomPasswordField(field: "Password", strLabel: "••••••••••", password: $password)
@@ -161,6 +162,7 @@ struct LoginView: View {
                 }
     }
         }
+        .keyboardAdaptive()
         .onAppear(perform: {
             self.email = ""
             self.password = ""

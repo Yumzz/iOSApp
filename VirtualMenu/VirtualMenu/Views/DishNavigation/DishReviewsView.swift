@@ -45,7 +45,7 @@ struct DishReviewsView: View {
             }
             else{
                 HStack{
-                    FBURLImage(url: dish.coverPhotoURL, imageAspectRatio: .fill, imageWidth: 200, imageHeight: 100)
+                    FBURLImage(url: dish.coverPhotoURL, imageAspectRatio: .fill, imageWidth: 200, imageHeight: 100, circle: false)
                         .cornerRadius(10)
                     Text("\(self.dish.name)")
                         .font(.custom("Open Sans", size: 32))
@@ -69,7 +69,7 @@ struct DishReviewsView: View {
                                                     ReviewCard(urlImage: nil, review: reviewuser.body)
                                                 }
                                                 else{
-                                                    ReviewCard(urlImage: FBURLImage(url: reviewuser.userPhotoURL, imageAspectRatio: .fill), review: reviewuser.body)
+                                                    ReviewCard(urlImage: FBURLImage(url: reviewuser.userPhotoURL, imageAspectRatio: .fill, circle: false), review: reviewuser.body)
                                                 }
                                         }
                                         .frame(

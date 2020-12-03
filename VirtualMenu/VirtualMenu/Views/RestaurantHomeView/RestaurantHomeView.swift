@@ -42,7 +42,7 @@ struct RestaurantHomeView: View {
             ScrollView(.vertical){
                 ZStack {
                     VStack{
-                        FBURLImage(url: restaurant.coverPhotoURL, imageWidth: 375, imageHeight: 240).edgesIgnoringSafeArea(.top)
+                        FBURLImage(url: restaurant.coverPhotoURL, imageWidth: 375, imageHeight: 240, circle: false).edgesIgnoringSafeArea(.top)
                         Spacer()
                     }
                     VStack(spacing: 10){
@@ -217,7 +217,7 @@ struct PopularDishCard: View {
     var body: some View {
         VStack {
             HStack {
-                FBURLImage(url: dish.coverPhotoURL, imageWidth: 175, imageHeight: 88)
+                FBURLImage(url: dish.coverPhotoURL, imageWidth: 175, imageHeight: 88, circle: false)
                     .frame(width: 175, height: 88)
                     .clipShape(RoundedRectangle(cornerRadius: 10))
                 Spacer()

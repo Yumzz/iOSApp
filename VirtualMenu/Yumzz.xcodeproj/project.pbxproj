@@ -135,6 +135,8 @@
 		3AF1BA96252A93F400FAA9A0 /* OnboardingInfo2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF1BA95252A93F400FAA9A0 /* OnboardingInfo2.swift */; };
 		3AF6D65A2572882A009E4240 /* BuildFB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF6D6592572882A009E4240 /* BuildFB.swift */; };
 		3AF6D65F257295CC009E4240 /* BuildFB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF6D6592572882A009E4240 /* BuildFB.swift */; };
+		3AF6D66F25784106009E4240 /* AccountProfileLoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF6D66E25784106009E4240 /* AccountProfileLoginViewModel.swift */; };
+		3AF6D6752578672E009E4240 /* Combine.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AF6D6742578672E009E4240 /* Combine.framework */; };
 		3AF9926524A2B7C9005446D8 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF9926424A2B7C9005446D8 /* LoginView.swift */; };
 		3AF9926824A2B918005446D8 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF9926724A2B918005446D8 /* Utils.swift */; };
 		3AF9926A24A2B95C005446D8 /* InputValidation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF9926924A2B95C005446D8 /* InputValidation.swift */; };
@@ -325,6 +327,8 @@
 		3AF1BA8F252A92DD00FAA9A0 /* InvertedOrangeButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvertedOrangeButton.swift; sourceTree = "<group>"; };
 		3AF1BA95252A93F400FAA9A0 /* OnboardingInfo2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingInfo2.swift; sourceTree = "<group>"; };
 		3AF6D6592572882A009E4240 /* BuildFB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildFB.swift; sourceTree = "<group>"; };
+		3AF6D66E25784106009E4240 /* AccountProfileLoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountProfileLoginViewModel.swift; sourceTree = "<group>"; };
+		3AF6D6742578672E009E4240 /* Combine.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Combine.framework; path = System/Library/Frameworks/Combine.framework; sourceTree = SDKROOT; };
 		3AF9926424A2B7C9005446D8 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		3AF9926724A2B918005446D8 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		3AF9926924A2B95C005446D8 /* InputValidation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputValidation.swift; sourceTree = "<group>"; };
@@ -383,6 +387,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3AF6D6752578672E009E4240 /* Combine.framework in Frameworks */,
 				3AE05F9A24EF27550024F802 /* FacebookLogin in Frameworks */,
 				A731EB0E2495AD2300B75D05 /* CloudKit.framework in Frameworks */,
 				3AE05F9824EF27550024F802 /* FacebookCore in Frameworks */,
@@ -791,6 +796,7 @@
 			isa = PBXGroup;
 			children = (
 				A735992724ECD83300584BFD /* AccountProfileViewModel.swift */,
+				3AF6D66E25784106009E4240 /* AccountProfileLoginViewModel.swift */,
 				3ACAD173250AE39D00B24CEB /* SuggestRestaurantViewModel.swift */,
 				3ACAD177250AE6E400B24CEB /* ReportProblemViewModel.swift */,
 				3ACAD175250AE56C00B24CEB /* ContactUsViewModel.swift */,
@@ -851,6 +857,7 @@
 		72573513B3F6B92305A269F4 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				3AF6D6742578672E009E4240 /* Combine.framework */,
 				3A10F67125550CEF00E25BC6 /* AppAuth.framework */,
 				A731EB0D2495AD2300B75D05 /* CloudKit.framework */,
 				8F4750A9F2FF6A260F5EE976 /* Pods_VirtualMenu.framework */,
@@ -1263,6 +1270,7 @@
 				34909E6F252D51E000B43D7B /* HomeScreenView.swift in Sources */,
 				3A45AD8D24B3FE8800CF3A8F /* Constants.swift in Sources */,
 				3ACAD182250AF07100B24CEB /* DishReviewsViewModel.swift in Sources */,
+				3AF6D66F25784106009E4240 /* AccountProfileLoginViewModel.swift in Sources */,
 				3A5633C824F90E080059B603 /* SignInWithApple.swift in Sources */,
 				3A5633C224F902280059B603 /* EnvironmentWindowKey.swift in Sources */,
 				3A13B6E024C1813D0006458B /* ContactUs.swift in Sources */,

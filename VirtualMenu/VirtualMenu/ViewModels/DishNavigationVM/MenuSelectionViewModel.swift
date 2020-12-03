@@ -13,7 +13,9 @@ import Firebase
 class MenuSelectionViewModel: ObservableObject {
     let db = Firestore.firestore()
     var restaurant: RestaurantFB
-    var reviewPhoto: UIImage?
+    @State var reviewPhoto: UIImage?
+    var reviewPhotos: [String: UIImage] = [String: UIImage]()
+
     @Published var featuredDishes = [DishFB]()
     @Published var reviews = [RestaurantReviewFB]()
     
@@ -22,6 +24,9 @@ class MenuSelectionViewModel: ObservableObject {
         self.reviewPhoto = nil
         fetchFeaturedDishes()
         fetchReviews()
+        self.reviews.sort {
+            $0.date < $1.date
+        }
     }
     
     func fetchFeaturedDishes() {
@@ -70,7 +75,8 @@ class MenuSelectionViewModel: ObservableObject {
             "Text": text,
             "Restaurant": self.restaurant.ref!,
             "UserID": Auth.auth().currentUser?.uid ?? "",
-            "Date": Timestamp(date: Date())
+            "Date": Timestamp(date: Date()),
+            "Name": user.fullName
         ]) { err in
             if let err = err {
                 print(err.localizedDescription)
@@ -115,6 +121,7 @@ class MenuSelectionViewModel: ObservableObject {
                 print("leave")
         }
     }
+    
     
     static func loadUserProfilePhoto(userId: String) -> UIImage? {
         print("loadcalled")

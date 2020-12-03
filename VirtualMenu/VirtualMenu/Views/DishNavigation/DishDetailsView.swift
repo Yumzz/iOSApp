@@ -46,7 +46,7 @@ struct DishDetailsView: View {
             ScrollView(.vertical){
                 ZStack {
                     VStack{
-                        FBURLImage(url:  dish.coverPhotoURL, imageWidth: 375, imageHeight: 240)
+                        FBURLImage(url:  dish.coverPhotoURL, imageWidth: 375, imageHeight: 240, circle: false)
                         Spacer()
                     }
                     VStack(spacing: 0){

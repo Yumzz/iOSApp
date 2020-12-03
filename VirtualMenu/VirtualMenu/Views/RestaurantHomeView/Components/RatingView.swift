@@ -45,7 +45,12 @@ struct RatingView: View {
                             .frame(width: 36, height: 36)
                             .clipShape(RoundedRectangle(cornerRadius: 10))
                     }
-                    Text("USERNAME")
+                    if (userProfile.fullName == ""){
+                        Text("Anonymous")
+                    }
+                    else{
+                        Text("\(userProfile.fullName)")
+                    }
                     Spacer()
                 }
                 HStack{

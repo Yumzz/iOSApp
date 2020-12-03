@@ -51,6 +51,8 @@ struct AccountProfileView: View {
     @State private var alertMessage = ""
     @State private var alertTitle = ""
     @State var show = false
+    @State var loggedIn = false
+
     
     @State var isNavigationBarHidden: Bool = true
     
@@ -151,40 +153,53 @@ struct AccountProfileView: View {
                             }
                             
                             Spacer().frame(height: 20)
-                            
-                            Button(action: {
-                                self.show = true
-                                let firebaseAuth = Auth.auth()
-                                do {
-                                    defer {
-                                        NSLog(Auth.auth().currentUser?.email! ?? "no user")
-                                        self.accountVM.ridProfile()
-                                        NSLog(userProfile.emailAddress)
-                                        self.show = false
-                                        Auth.auth().signInAnonymously() { (authResult, error) in
-                                          // ...
-                                            print("anonymous")
-                                            if(error != nil){
-                                                print(error.debugDescription)
-                                            }
-                                            else{
-                                                self.user.isLogged = true
-                                                self.user.showOnboarding = false
-                                                print("yes")
-                                                print(authResult?.additionalUserInfo)
+                            if(userProfile.userId == ""){
+                                NavigationLink(destination: AccountProfileLoginView()){
+                                    OrangeButton(strLabel: "Sign In", width: 141, height: 48)
+                                        .foregroundColor(Color(UIColor().colorFromHex("#FFFFFF", 1)))
+                                        .clipShape(RoundedRectangle(cornerRadius: 10, style: .circular))
+    //                                    .onTapGesture(){
+    //                                        self.user.isLogged = false
+    //                                        self.user.showOnboarding = true
+    //                                    }
+                                }
+                                
+                            }
+                            else{
+                                Button(action: {
+                                    self.show = true
+                                    let firebaseAuth = Auth.auth()
+                                    do {
+                                        defer {
+                                            NSLog(Auth.auth().currentUser?.email! ?? "no user")
+                                            self.accountVM.ridProfile()
+                                            NSLog(userProfile.emailAddress)
+                                            self.show = false
+                                            Auth.auth().signInAnonymously() { (authResult, error) in
+                                              // ...
+                                                print("anonymous")
+                                                if(error != nil){
+                                                    print(error.debugDescription)
+                                                }
+                                                else{
+                                                    self.user.isLogged = true
+                                                    self.user.showOnboarding = false
+                                                    print("yes")
+                                                    print(authResult?.additionalUserInfo)
+                                                }
                                             }
                                         }
+                                      try firebaseAuth.signOut()
+                                
+                                    } catch let signOutError as NSError {
+                                      print ("Error signing out: %@", signOutError)
                                     }
-                                  try firebaseAuth.signOut()
-                            
-                                } catch let signOutError as NSError {
-                                  print ("Error signing out: %@", signOutError)
-                                }
-                            }){
-                                OrangeButton(strLabel: "Sign Out", width: 141, height: 48)
-                                    .foregroundColor(Color(UIColor().colorFromHex("#FFFFFF", 1)))
-                                    .clipShape(RoundedRectangle(cornerRadius: 10, style: .circular))
-                                }
+                                }){
+                                    OrangeButton(strLabel: "Sign Out", width: 141, height: 48)
+                                        .foregroundColor(Color(UIColor().colorFromHex("#FFFFFF", 1)))
+                                        .clipShape(RoundedRectangle(cornerRadius: 10, style: .circular))
+                                    }
+                            }
                         }
                         Spacer()
                     }
@@ -198,14 +213,8 @@ struct AccountProfileView: View {
                     }
                     .onAppear(){
                         self.isNavigationBarHidden = true
-                        print("logged: \(self.user.isLogged)")
-                        if(self.image == nil){
-                            print("image: nill")
-                            print(userProfile.profilePhoto?.description)
-                            print(userProfile.userId)
-                        }
-                        else{
-                            print("image: not nil")
+                        if(userProfile.userId != ""){
+                            self.loggedIn = true
                         }
                         
                     }

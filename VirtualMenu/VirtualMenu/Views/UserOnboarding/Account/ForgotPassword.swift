@@ -73,7 +73,6 @@ struct ForgotPasswordView: View {
             Spacer().frame(height: 120)
 
         }
-
 //        .alert(isPresented: $showAlert, content: { self.alert })
         .navigationBarTitle("")
         .navigationBarHidden(self.isNavigationBarHidden)
