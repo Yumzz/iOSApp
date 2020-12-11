@@ -43,6 +43,7 @@ struct SignUpView: View {
     @Environment(\.window) var window: UIWindow?
     @State var delegate: SignInWithAppleDelegates! = nil
     
+    @GestureState private var dragOffset = CGSize.zero
     
     var alert: Alert {
         Alert(title: Text(""), message: Text(alertMsg), dismissButton: .default(Text("OK")))
@@ -163,6 +164,11 @@ struct SignUpView: View {
             Alert(title: Text("\(self.alertTitle)"), message: Text("\(self.alertMessage)"), dismissButton: .default(Text("Got it!")))
             }
 //        .alert(isPresented: $showAlert, content: { self.alert })
+        .gesture(DragGesture().updating($dragOffset, body: { (value, state, transaction) in
+            if(value.translation.width > 100) {
+                self.mode.wrappedValue.dismiss()
+            }
+        }))
     }
     
     private func performExistingAccountFlows(){

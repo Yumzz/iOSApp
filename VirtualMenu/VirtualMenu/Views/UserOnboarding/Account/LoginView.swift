@@ -52,6 +52,8 @@ struct LoginView: View {
     
     @State var loginSelection: Int? = nil
     
+    @GestureState private var dragOffset = CGSize.zero
+    
     var alert: Alert {
         Alert(title: Text(alertTitle), message: Text(alertMsg), dismissButton: .default(Text("OK")))
     }
@@ -181,6 +183,11 @@ struct LoginView: View {
         .alert(isPresented: $showAlert){
             Alert(title: Text("\(self.alertTitle)"), message: Text("\(self.alertMsg)"), dismissButton: .default(Text("Got it!")))
         }
+        .gesture(DragGesture().updating($dragOffset, body: { (value, state, transaction) in
+            if(value.translation.width > 100) {
+                self.mode.wrappedValue.dismiss()
+            }
+        }))
     }
         private func performExistingAccountFlows(){
             let requests = [ASAuthorizationAppleIDProvider().createRequest(),

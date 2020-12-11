@@ -25,6 +25,9 @@ struct RestaurantHomeView: View {
     var distance: Double
     
     var rating: String = "5.0"
+    
+    @GestureState private var dragOffset = CGSize.zero
+    @Environment(\.presentationMode) var mode: Binding<PresentationMode>
 
     
     init(restaurant: RestaurantFB, distance: Double) {
@@ -207,6 +210,11 @@ struct RestaurantHomeView: View {
         .onDisappear(){
             self.isNavigationBarHidden = true
         }
+        .gesture(DragGesture().updating($dragOffset, body: { (value, state, transaction) in
+            if(value.translation.width > 100) {
+                self.mode.wrappedValue.dismiss()
+            }
+        }))
     }
     
 }

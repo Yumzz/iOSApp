@@ -32,6 +32,7 @@ struct ListDishesView: View {
     @EnvironmentObject var order : OrderModel
 
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
+    @GestureState private var dragOffset = CGSize.zero
     
     let dispatchGroup = DispatchGroup()
 
@@ -198,6 +199,11 @@ struct ListDishesView: View {
             
             return Alert(title: Text("Dish Added"))
         }
+        .gesture(DragGesture().updating($dragOffset, body: { (value, state, transaction) in
+            if(value.translation.width > 100) {
+                self.mode.wrappedValue.dismiss()
+            }
+        }))
         
     }
 }

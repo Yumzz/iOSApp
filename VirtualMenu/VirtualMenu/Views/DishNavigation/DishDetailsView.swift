@@ -36,6 +36,7 @@ struct DishDetailsView: View {
     
     
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
+    @GestureState private var dragOffset = CGSize.zero
 
     
     //fetch reviews of dish on appear and have "Reviews" button pass info to new view of entire scroll view of it
@@ -180,6 +181,11 @@ struct DishDetailsView: View {
             
             return Alert(title: Text("Dish Added"))
         }
+        .gesture(DragGesture().updating($dragOffset, body: { (value, state, transaction) in
+            if(value.translation.width > 100) {
+                self.mode.wrappedValue.dismiss()
+            }
+        }))
     }
 }
 
