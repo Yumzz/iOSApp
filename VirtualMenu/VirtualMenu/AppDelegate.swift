@@ -148,12 +148,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
                     userProfile.userId = Auth.auth().currentUser!.uid
 //                    Auth.auth().fetchSignInMethods(forEmail: userProfile.emailAddress) { (methods, error) in
 //                        if(methods!.count > 1){
-                    self.dispatch.enter()
-                    userProfile.getProfilePhoto(dispatch: self.dispatch)
-                    self.dispatch.notify(queue: .main){
+//                    self.dispatch.enter()
+//                    userProfile.getProfilePhoto(dispatch: self.dispatch)
+//                    self.dispatch.notify(queue: .main){
                     NotificationCenter.default.post(name: Notification.Name(rawValue: "NoMoreOnboard"), object: nil)
                     return
-                            }
+//                            }
 //                        }
 //                    }
                 }

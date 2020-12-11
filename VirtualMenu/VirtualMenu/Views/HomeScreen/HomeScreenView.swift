@@ -72,7 +72,7 @@ struct HomeScreenView: View {
                             //dismiss once confirmation alert is sent
                         }
                     
-                    if (userProfile.profilePhoto == nil){
+                    if (userProfile.userId == ""){
                     Image(systemName: "person.crop.square.fill")
                         .resizable()
                         .aspectRatio(contentMode: .fill)
@@ -87,10 +87,7 @@ struct HomeScreenView: View {
                         }
                     }
                     else{
-                        Image(uiImage: userProfile.profilePhoto!.circle!)
-                            .resizable()
-                            .aspectRatio(contentMode: .fill)
-                            .frame(width: 36, height: 36)
+                        FBURLImage(url: "profilephotos/\(userProfile.userId)", imageWidth: 36, imageHeight: 36, circle: true)
                             .clipShape(RoundedRectangle(cornerRadius: 10))
                             .onTapGesture {
                                 self.showAccount = true
@@ -99,6 +96,11 @@ struct HomeScreenView: View {
                                 AccountProfileView()
                                 //dismiss once confirmation alert is sent
                             }
+//                        Image(uiImage: userProfile.profilePhoto!.circle!)
+//                            .resizable()
+//                            .aspectRatio(contentMode: .fill)
+//                            .frame(width: 36, height: 36)
+                            
                     }
                 }.foregroundColor(Color(#colorLiteral(red: 0.88, green: 0.36, blue: 0.16, alpha: 1))).frame(alignment: .top).padding()
             ScrollView(.vertical, showsIndicators: false) {

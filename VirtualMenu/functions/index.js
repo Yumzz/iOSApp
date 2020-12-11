@@ -152,6 +152,31 @@ exports.dishAdd = functions.https.onRequest((req, resp) => {
   });
 });
 
+exports.getRestaurant = functions.https.onRequest((req, resp) => {
+  cors(req, resp, () => {
+    let i = req.body.id;
+
+    admin
+      .firestore()
+      .collection("Restaurant")
+      .doc(i)
+      .get()
+      .then(function (doc) {
+        if (doc.exists) {
+          console.log("doc data: ", doc.data());
+          return doc.data();
+        } else {
+          console.log("doc not there");
+          return "";
+        }
+      })
+      .catch(function (error) {
+        console.log("error", error);
+        return error;
+      });
+  });
+});
+
 // exports.signOut = functions.https.onRequest((req, resp) => {
 //   cors(req, resp, () => {
 //     firebase

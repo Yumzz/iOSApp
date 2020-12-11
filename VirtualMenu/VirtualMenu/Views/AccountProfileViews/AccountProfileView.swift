@@ -94,10 +94,11 @@ struct AccountProfileView: View {
                                     }
                                 }
                                 else{
-                                    Image(uiImage: userProfile.profilePhoto!.circle!)
-                                        .resizable()
-                                        .aspectRatio(contentMode: .fit)
-                                        .frame(width: 150, height: 150)
+                                    FBURLImage(url: "profilephotos/\(userProfile.userId)", imageWidth: 150, imageHeight: 150, circle: true)
+//                                    Image(uiImage: userProfile.profilePhoto!.circle!)
+//                                        .resizable()
+//                                        .aspectRatio(contentMode: .fit)
+//                                        .frame(width: 150, height: 150)
                                     Button(action: {
                                         self.showingImagePicker.toggle()
                                     }, label: {

@@ -314,7 +314,7 @@ class LoginViewModel: ObservableObject {
                                     userProfile.userId = Auth.auth().currentUser!.uid
                                     dispatch.notify(queue: .main) {
                                         dispatch.enter()
-                                        userProfile.getProfilePhoto(dispatch: dispatch)
+//                                        userProfile.getProfilePhoto(dispatch: dispatch)
                                         dispatch.notify(queue: .main){
                                             completion(result, error)
                                             return
@@ -325,7 +325,7 @@ class LoginViewModel: ObservableObject {
                             Auth.auth().fetchSignInMethods(forEmail: userProfile.emailAddress) { (methods, error) in
                                 if(methods!.count > 1){
                                     dispatch.enter()
-                                    userProfile.getProfilePhoto(dispatch: dispatch)
+//                                    userProfile.getProfilePhoto(dispatch: dispatch)
                                     dispatch.notify(queue: .main){
                                         completion(result, error)
                                         return
