@@ -21,6 +21,38 @@ struct OptionsCard: View {
         
     @EnvironmentObject var order : OrderModel
     
+    @State var optSelected: [String: Bool] = [String:Bool]()
+    
+    
+    func toggle(opt: String) {
+        if(!self.optSelected[opt]!){
+            if(exclusive){
+                if(!self.order.optsChosen.isEmpty){
+                    if(!self.order.optsChosen[dish]!.isEmpty){
+                        self.order.optsChosen[dish]!.removeAll()
+                    }
+                }
+                for x in self.optSelected.keys{
+                    self.optSelected[x] = false
+                }
+            }
+            self.optSelected[opt] = true
+            if(self.order.optsChosen[dish] == nil){
+                self.order.optsChosen[dish] = []
+            }
+            self.order.optsChosen[dish]!.append(opt)
+        }
+        else{
+            self.optSelected[opt] = false
+            let x = self.order.optsChosen[dish]!.firstIndex(of: opt)!
+            self.order.optsChosen[dish]?.remove(at: x)
+            if(self.order.optsChosen[dish] == []){
+                self.order.optsChosen[dish] = nil
+            }
+        }
+    }
+    
+    
     var body: some View {
         ZStack{
             VStack{
@@ -41,38 +73,45 @@ struct OptionsCard: View {
                             }
                             Spacer()
                             
-                            RoundedRectangle.init(cornerRadius: 5)
-                                .fill(self.color[opt]!)
-                                .border(ColorManager.yumzzOrange)
-                                .frame(width: 32, height: 32)
-                                .foregroundColor(ColorManager.yumzzOrange)
-                                .onTapGesture {
-                                    if(self.color[opt]! == Color.white){
-                                        if(exclusive){
-                                            if(!self.order.optsChosen.isEmpty){
-                                                if(!self.order.optsChosen[dish]!.isEmpty){
-                                                    self.order.optsChosen[dish]!.removeAll()
-                                                }
-                                            }
-                                            for x in self.color.keys{
-                                                self.color[x] = Color.white
-                                            }
-                                        }
-                                        self.color[opt] = ColorManager.yumzzOrange
-                                        if(self.order.optsChosen[dish] == nil){
-                                            self.order.optsChosen[dish] = []
-                                        }
-                                        self.order.optsChosen[dish]!.append(opt)
-                                    }
-                                    else{
-                                        self.color[opt] = Color.white
-                                        let x = self.order.optsChosen[dish]!.firstIndex(of: opt)!
-                                        self.order.optsChosen[dish]?.remove(at: x)
-                                        if(self.order.optsChosen[dish] == []){
-                                            self.order.optsChosen[dish] = nil
-                                        }
-                                    }
-                                }
+                            Button(action: {self.toggle(opt: opt)}) {
+                                Image(systemName: self.optSelected[opt]! ? "checkmark.square" : "square")
+                                    .frame(width: 32, height: 32)
+                                    .foregroundColor(ColorManager.yumzzOrange)
+                                    .font(.system(size: 30))
+                            }
+                            
+//                            RoundedRectangle.init(cornerRadius: 5)
+//                                .fill(self.color[opt]!)
+//                                .border(ColorManager.yumzzOrange)
+//                                .frame(width: 32, height: 32)
+//                                .foregroundColor(ColorManager.yumzzOrange)
+//                                .onTapGesture {
+//                                    if(self.color[opt]! == Color.white){
+//                                        if(exclusive){
+//                                            if(!self.order.optsChosen.isEmpty){
+//                                                if(!self.order.optsChosen[dish]!.isEmpty){
+//                                                    self.order.optsChosen[dish]!.removeAll()
+//                                                }
+//                                            }
+//                                            for x in self.color.keys{
+//                                                self.color[x] = Color.white
+//                                            }
+//                                        }
+//                                        self.color[opt] = ColorManager.yumzzOrange
+//                                        if(self.order.optsChosen[dish] == nil){
+//                                            self.order.optsChosen[dish] = []
+//                                        }
+//                                        self.order.optsChosen[dish]!.append(opt)
+//                                    }
+//                                    else{
+//                                        self.color[opt] = Color.white
+//                                        let x = self.order.optsChosen[dish]!.firstIndex(of: opt)!
+//                                        self.order.optsChosen[dish]?.remove(at: x)
+//                                        if(self.order.optsChosen[dish] == []){
+//                                            self.order.optsChosen[dish] = nil
+//                                        }
+//                                    }
+//                                }
                         }
                     }
                     
@@ -86,6 +125,7 @@ struct OptionsCard: View {
                 print("options: \(x)")
                 self.optNames.append(x)
                 self.color[x] = Color.white
+                self.optSelected[x] = false
             }
         }
         .padding()
