@@ -30,23 +30,35 @@ class MenuSelectionViewModel: ObservableObject {
     }
     
     func fetchFeaturedDishes() {
-        let featuredDishRefs = self.restaurant.featuredDishRefs
-        for dishRef in featuredDishRefs {
-            dishRef!.getDocument { (snapshot, error) in
-                if let error = error {
-                    print("Error getting documents: \(error)")
-                } else {
-                    let dish = DishFB.init(snapshot: snapshot!) ?? nil
-                    if dish != nil {
-                        self.featuredDishes.append(dish!)
-                    }
-                    else{
-                        print("no featured dishes")
-                    }
+        let dishRef = db.collection("Dish").whereField("photoExists", isEqualTo: true).whereField("Restaurant", isEqualTo: "\(self.restaurant.name)")
+        dishRef.getDocuments { (qs, er) in
+            if let er = er {
+                        print("Error getting documents: \(er)")
+            } else {
+                for document in qs!.documents {
+                    print("eee\(document.documentID) => \(document.data())")
+                    self.featuredDishes.append(DishFB(snapshot: document)!)
                 }
             }
+            }
         }
-    }
+//        let featuredDishRefs = self.restaurant.featuredDishRefs
+//        for dishRef in featuredDishRefs {
+//            dishRef!.getDocument { (snapshot, error) in
+//                if let error = error {
+//                    print("Error getting documents: \(error)")
+//                } else {
+//                    let dish = DishFB.init(snapshot: snapshot!) ?? nil
+//                    if dish != nil {
+//                        self.featuredDishes.append(dish!)
+//                    }
+//                    else{
+//                        print("no featured dishes")
+//                    }
+//                }
+//            }
+//        }
+//    }
     
     func fetchReviews() {
         let reviewRefs = self.restaurant.reviews

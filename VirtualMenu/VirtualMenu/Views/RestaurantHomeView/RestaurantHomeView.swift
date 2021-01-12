@@ -50,9 +50,11 @@ struct RestaurantHomeView: View {
                     }
                     VStack(spacing: 10){
                         if (self.reviewViewShown) {
+                            #if !APPCLIP
                             RestaurantReviewView(shown: self.$reviewViewShown, popUpShown: self.$popUpShown, menuSelectionVM: self.menuSelectionVM)
                                 .transition(.slide)
                                 .animation(.default)
+                            #endif
                         } else {
                         VStack(alignment: .leading){
                             HStack{
@@ -167,11 +169,13 @@ struct RestaurantHomeView: View {
                                 }.frame(height: 150)
                             }
                             
-                            if(self.dishesChosen){
+                            if(self.dishesChosen || !self.order.buildsChosen.isEmpty){
+                                #if !APPCLIP
                                 NavigationLink(destination: ReviewOrder()){
-                                    ViewCartButton(dishCount: self.order.dishesChosen.count)
+                                    ViewCartButton(dishCount: self.order.allDishes)
                                         .clipShape(RoundedRectangle(cornerRadius: 10, style: .circular))
                                 }
+                                #endif
                             }
                            
                         }.padding()

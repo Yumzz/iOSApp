@@ -25,6 +25,8 @@ struct FBURLImage: View {
         self.height = imageHeight
         self.circle = circle
         imageLoader = ImageLoader(urlString: self.url)
+
+
     }
     
     var body: some View {

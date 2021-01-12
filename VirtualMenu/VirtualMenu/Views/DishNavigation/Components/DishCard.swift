@@ -51,8 +51,8 @@ struct DishCard: View {
                 
                 Spacer()
                 
-                if urlImage == nil {
-                    EmptyView()
+                if !dish.photoExists {
+                    EmptyView().foregroundColor(.white)
                 }
                 else {
                     urlImage!
@@ -61,6 +61,7 @@ struct DishCard: View {
                 
                 Spacer().frame(width: 8, height: 0)
                 
+                #if !APPCLIP
                 ZStack {
                     Rectangle()
                         .fill(Color("YumzzOrange"))
@@ -88,6 +89,7 @@ struct DishCard: View {
                             NotificationCenter.default.post(name: Notification.Name(rawValue: "Alert"), object: nil)
                         }
                     }
+                #endif
                 
                 Spacer().frame(width: 15, height: 0)
                 

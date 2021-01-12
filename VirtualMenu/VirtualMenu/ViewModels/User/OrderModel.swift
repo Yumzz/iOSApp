@@ -10,6 +10,7 @@ import SwiftUI
 import CloudKit
 import Firebase
 import MapKit
+import Foundation
 
 class OrderModel: ObservableObject {
 
@@ -17,6 +18,7 @@ class OrderModel: ObservableObject {
 
     @Published var restChosen: RestaurantFB = RestaurantFB.previewRest()
     @Published var dishesChosen: [DishFB] = []
+    @Published var buildsChosen: [BuildFB] = []
     
     @Published var totalCost: Double = 0.0
     
@@ -30,6 +32,11 @@ class OrderModel: ObservableObject {
     var dishIndexes : [DishFB : Int] = [DishFB : Int]()
     var dishCounts : [DishFB : Int] = [DishFB : Int]()
     var optsChosen: [DishFB: [String]] = [DishFB: [String]]()
+    
+    var buildIndexes : [BuildFB : Int] = [BuildFB : Int]()
+    var buildCounts : [BuildFB : Int] = [BuildFB : Int]()
+    var buildOptsChosen: [BuildFB: [String]] = [BuildFB: [String]]()
+    
 
     var allDishes: Int
 //    var dishRestaurant : [DishFB : RestaurantFB] = [DishFB : RestaurantFB]()
@@ -50,13 +57,11 @@ class OrderModel: ObservableObject {
         if(rest.name == self.restChosen.name || self.restChosen.name == ""){
             self.allDishes += 1
             if(dishCounts[dish] == nil){
-                print("added new")
                 dishIndexes[dish] = dishesChosen.count
                 dishesChosen.append(dish)
                 dishCounts[dish] = 1
             }
             else{
-                print("added same dish")
                 dishCounts[dish] = dishCounts[dish]! + 1
             }
             self.totalAmount()
@@ -65,13 +70,10 @@ class OrderModel: ObservableObject {
                     self.totalCost += Double(dish.options[x]!)
                 }
             }
-            print("added")
             dis.leave()
         }
         else{
             //need to delete order and start anew w new rest
-            print("old rest: \(self.restChosen)")
-            print("new rest: \(rest)")
             self.newOrder(rest: rest)
             self.allDishes = 1
             dishIndexes[dish] = dishesChosen.count
@@ -84,6 +86,29 @@ class OrderModel: ObservableObject {
                 }
             }
             dis.leave()
+        }
+    }
+    
+    func addBuildOwn(build: BuildFB, rest: RestaurantFB, dis: DispatchGroup, total: Double, optionsChosen: Set<String>){
+        if(rest.name == self.restChosen.name || self.restChosen.name == ""){
+            self.allDishes += 1
+            if(buildCounts[build] == nil){
+                buildIndexes[build] = buildCounts.count
+                buildsChosen.append(build)
+                buildCounts[build] = 1
+            }
+            else{
+                buildCounts[build] = buildCounts[build]! + 1
+            }
+            self.totalAmount()
+            if(!optionsChosen.isEmpty){
+                self.buildOptsChosen[build] = Array(optionsChosen)
+            }
+            dis.leave()
+        }
+        else{
+            self.newOrder(rest: rest)
+            self.allDishes = 1
         }
     }
     
@@ -145,6 +170,7 @@ class OrderModel: ObservableObject {
             let x = self.totalCost + dish.price
             self.totalCost = Double(round(1000*x)/1000)
         }
+        
 //        print("total: \(self.totalCost)")
     }
     

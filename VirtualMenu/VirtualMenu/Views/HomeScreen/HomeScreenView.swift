@@ -13,7 +13,7 @@ struct HomeScreenView: View {
     
     @State private var showAccount = false
     @State private var qrCodeShow = false
-
+ 
     
     @State var restaurants = [RestaurantFB]()
     @State var cityRests = [String: [RestaurantFB]]()
@@ -32,7 +32,7 @@ struct HomeScreenView: View {
     
     var body: some View {
         Group {
-            if(!self.order.dishesChosen.isEmpty){
+            if(!self.order.dishesChosen.isEmpty || !self.order.buildsChosen.isEmpty){
                 view.overlay(overlay, alignment: .bottom)
             } else {
                  view
@@ -43,7 +43,7 @@ struct HomeScreenView: View {
     var overlay: some View {
         VStack{
             NavigationLink(destination: ReviewOrder()){
-                ViewCartButton(dishCount: self.order.dishesChosen.count)
+                ViewCartButton(dishCount: self.order.allDishes)
                     .clipShape(RoundedRectangle(cornerRadius: 10, style: .circular))
             }
             Spacer().frame(width: 0, height: 10)

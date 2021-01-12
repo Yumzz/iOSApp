@@ -20,6 +20,7 @@ class ListDishesViewModel: ObservableObject {
     var dishCategories: [DishCategory] = []
     
     let dispatchGroup = DispatchGroup()
+    let dispatchGroup2 = DispatchGroup()
     
     
     init(restaurant: RestaurantFB, dispatch: DispatchGroup) {
@@ -28,27 +29,60 @@ class ListDishesViewModel: ObservableObject {
         self.restaurant = restaurant
         
         self.dispatchGroup.enter()
+        
+//        print("fetchDishesCalled: \(self.dishes.isEmpty)")
                 
         fetchDishesFB(name: restaurant.name)
         
         self.dispatchGroup.notify(queue: .main) {
 
-            self.dishes.sort {
-                $0.name < $1.name
-            }
-            print("sorting")
-                        
-            self.categorizeDishes(dishes: self.dishes)
+            self.dispatchGroup2.enter()
             
-            print("catted")
+            self.fetchBuildsFB(name: restaurant.name)
             
-            self.dishCategories.sort {
-                $0.name < $1.name
+            self.dispatchGroup2.notify(queue: .main){
+                self.dishes.sort {
+                    $0.name < $1.name
+                }
+                print("sorting")
+                            
+                self.categorizeDishes(dishes: self.dishes)
+                
+                print("catted")
+                
+                self.dishCategories.sort {
+                    $0.name < $1.name
+                }
+                dispatch.leave()
             }
-            dispatch.leave()
+            
         }
         
         
+    }
+    
+    func fetchBuildsFB(name: String) {
+        db.collection("Build").whereField("Restaurant", isEqualTo: name).getDocuments { (snapshot, error) in
+                    if let error = error {
+                        print("Error getting documents: \(error)")
+                    } else {
+                        if(!snapshot!.documents.isEmpty){
+                            for document in snapshot!.documents {
+                                DispatchQueue.main.async {
+                                    let build = BuildFB(snapshot: document)
+        
+                                    self.builds.append(build!)
+        
+                                    if(document == snapshot!.documents.last){
+                                        self.dispatchGroup2.leave()
+                                    }
+                                }
+                            }
+                        }else{
+                            self.dispatchGroup2.leave()
+                        }
+                    }
+                }
     }
     
     func fetchDishesFB(name: String) {
@@ -70,24 +104,27 @@ class ListDishesViewModel: ObservableObject {
             }
         }
         //fetch build
-        db.collection("Build").whereField("Restaurant", isEqualTo: name).getDocuments { (snapshot, error) in
-            if let error = error {
-                print("Error getting documents: \(error)")
-            } else {
-                for document in snapshot!.documents {
-                    DispatchQueue.main.async {
-                        let build = BuildFB(snapshot: document)
-                        
-//                        let dish = DishFB(snapshot: document)!
-//                        self.dishes.append(dish)
+//        db.collection("Build").whereField("Restaurant", isEqualTo: name).getDocuments { (snapshot, error) in
+//            if let error = error {
+//                print("Error getting documents: \(error)")
+//            } else {
+//                if(!snapshot!.documents.isEmpty){
+//                    for document in snapshot!.documents {
+//                        DispatchQueue.main.async {
+//                            let build = BuildFB(snapshot: document)
 //
-//                        if(document == snapshot!.documents.last){
-//                            self.dispatchGroup.leave()
+//                            self.builds.append(build!)
+//
+//                            if(document == snapshot!.documents.last){
+//                                self.dispatchGroup.leave()
+//                            }
 //                        }
-                    }
-                }
-            }
-        }
+//                    }
+//                }else{
+//                    self.dispatchGroup.leave()
+//                }
+//            }
+//        }
     }
     
     func categorizeDishes(dishes: [DishFB]) {
@@ -115,7 +152,10 @@ class ListDishesViewModel: ObservableObject {
         }
         
         if !self.builds.isEmpty {
-            dishCategories.append(DishCategory(isExpanded: true, builds: self.builds, name: "Build", description: ""))
+//            for b in self.builds {
+//                dishCategories.append(DishCategory(isExpanded: <#T##Bool#>, dishes: <#T##[DishFB]?#>, builds: <#T##[BuildFB]?#>, name: <#T##String#>, description: <#T##String#>))
+//            }
+            dishCategories.append(DishCategory(isExpanded: true, builds: self.builds, name: "Build Your Own", description: ""))
         }
     }
     

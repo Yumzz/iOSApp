@@ -25,6 +25,7 @@ struct DishFB {
     var exclusive: Bool = true
     var storage = Storage.storage()
     var dishCatDescription: String = ""
+    var photoExists = false
     
     
     init(name: String, key: String = "", description: String, price: Double, type: String, restaurant: String) {
@@ -85,6 +86,12 @@ struct DishFB {
         if(snapshot.get("dishCatDescript") != nil){
             self.dishCatDescription = (snapshot.data()["dishCatDescript"] as? String)!
         }
+        if(snapshot.get("photoExists") != nil){
+            self.photoExists = (snapshot.data()["photoExists"] as? Bool)!
+        }
+        else{
+            self.coverPhotoURL = ""
+        }
     }
     
     init?(snapshot: DocumentSnapshot) {
@@ -98,7 +105,7 @@ struct DishFB {
             return nil
         }
         guard let description = snapshot.data()?["Description"] as? String else {
-            print("no description")
+            print("no description: \(snapshot.data()?["Description"])")
             return nil
         }
         guard let type = snapshot.data()?["Type"] as? String else {
@@ -131,6 +138,12 @@ struct DishFB {
         }
         if(snapshot.get("dishCatDescript") != nil){
             self.dishCatDescription = (snapshot.data()!["dishCatDescript"] as? String)!
+        }
+        if(snapshot.get("photoExists") != nil){
+            self.photoExists = (snapshot.data()!["photoExists"] as? Bool)!
+        }
+        else{
+            self.coverPhotoURL = ""
         }
     }
     

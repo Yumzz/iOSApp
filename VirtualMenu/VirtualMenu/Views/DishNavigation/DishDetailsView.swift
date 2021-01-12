@@ -47,8 +47,14 @@ struct DishDetailsView: View {
             ScrollView(.vertical){
                 ZStack {
                     VStack{
-                        FBURLImage(url:  dish.coverPhotoURL, imageWidth: 375, imageHeight: 240, circle: false)
-                        Spacer()
+                        if(dish.photoExists){
+                            FBURLImage(url:  dish.coverPhotoURL, imageWidth: 375, imageHeight: 240, circle: false)
+                            Spacer()
+                        }
+                        else{
+                            RoundedRectangle(cornerSize: CGSize(width: 5, height: 5)).frame(width: 375, height: 240).foregroundColor(.black)
+                            Spacer()
+                        }
                     }
                     VStack(spacing: 0){
                         VStack{

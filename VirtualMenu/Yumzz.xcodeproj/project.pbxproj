@@ -21,22 +21,15 @@
 		3431B9B1255A34740018AFB5 /* DishCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A530DF224D9769100CBDE28 /* DishCategory.swift */; };
 		3431B9B6255A34800018AFB5 /* Order.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5633CB24FA33790059B603 /* Order.swift */; };
 		3431B9C9255A34A10018AFB5 /* SeeMenuButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3DD59B2539405000536D62 /* SeeMenuButton.swift */; };
-		3431B9CE255A34A70018AFB5 /* RestaurantReviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34A966F7254762EF00AD84CD /* RestaurantReviewView.swift */; };
 		3431B9DD255A35290018AFB5 /* FBURLImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7D0F78224DF6B4100197631 /* FBURLImage.swift */; };
 		3431B9E2255A35880018AFB5 /* ImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = A78531F924DE312600F94C67 /* ImageLoader.swift */; };
 		3431B9E7255A35A80018AFB5 /* DishDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34A5D662249BF6DF00E4FE9C /* DishDetailsView.swift */; };
-		3431B9EC255A35CE0018AFB5 /* ReviewOrder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3DD57325380E0F00536D62 /* ReviewOrder.swift */; };
 		3431B9F1255A35EF0018AFB5 /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = A779ACA9250D4F7400146565 /* ImageCache.swift */; };
-		3431B9F6255A35FC0018AFB5 /* ViewCartButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3DD5942539378600536D62 /* ViewCartButton.swift */; };
 		3431BA05255A365A0018AFB5 /* BuildCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A822727255A10B60002A233 /* BuildCard.swift */; };
-		3431BA0A255A36680018AFB5 /* XButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3DD58E2538396B00536D62 /* XButton.swift */; };
 		3431BA0F255A367E0018AFB5 /* ListDishesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACAD186250AF4B200B24CEB /* ListDishesViewModel.swift */; };
 		3431BA14255A36810018AFB5 /* ListDishesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A73FD46224919A1300A035AB /* ListDishesView.swift */; };
 		3431BA19255A36990018AFB5 /* OptionsCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3DD5A52539736A00536D62 /* OptionsCard.swift */; };
-		3431BA1E255A36AF0018AFB5 /* XButtonDelete.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ABD6A7F253AC1D40082681A /* XButtonDelete.swift */; };
-		3431BA23255A36B50018AFB5 /* DishCardOrder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3DD57E2538333000536D62 /* DishCardOrder.swift */; };
 		3431BA28255A36CE0018AFB5 /* BackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0745C6252B0871000EF6BD /* BackButton.swift */; };
-		3431BA2D255A36E80018AFB5 /* ReceiptCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3DD588253838A700536D62 /* ReceiptCard.swift */; };
 		3431BA32255A36FC0018AFB5 /* DishCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7FE996124F4A552006E5980 /* DishCard.swift */; };
 		3431BA57255A40B80018AFB5 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3431BA56255A40B80018AFB5 /* GoogleService-Info.plist */; };
 		34370CC72500D59A00ECD88B /* MenuSelectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34370CC62500D59A00ECD88B /* MenuSelectionViewModel.swift */; };
@@ -69,12 +62,10 @@
 		3A3DD5952539378700536D62 /* ViewCartButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3DD5942539378600536D62 /* ViewCartButton.swift */; };
 		3A3DD59C2539405000536D62 /* SeeMenuButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3DD59B2539405000536D62 /* SeeMenuButton.swift */; };
 		3A3DD5A62539736A00536D62 /* OptionsCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3DD5A52539736A00536D62 /* OptionsCard.swift */; };
-		3A3E1DDA256FC5F300812E67 /* MiniViewCartButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5B0DB7253FDD9B00A0BE41 /* MiniViewCartButton.swift */; };
 		3A45AD8D24B3FE8800CF3A8F /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A45AD8C24B3FE8800CF3A8F /* Constants.swift */; };
 		3A4A0E70249EB9320030635E /* AccountProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A4A0E6F249EB9320030635E /* AccountProfileView.swift */; };
 		3A4A0E72249EB94D0030635E /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A4A0E71249EB94D0030635E /* ImagePicker.swift */; };
 		3A4E2E2024C6244600C34DD8 /* ForgotPassword.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A4E2E1F24C6244600C34DD8 /* ForgotPassword.swift */; };
-		3A4E2E3224D12D2500C34DD8 /* DishAdminView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A4E2E3124D12D2500C34DD8 /* DishAdminView.swift */; };
 		3A4E2E3724D21CDC00C34DD8 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A4E2E3624D21CDC00C34DD8 /* Coordinator.swift */; };
 		3A4E2E3B24D21E8E00C34DD8 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A4E2E3A24D21E8E00C34DD8 /* LocationManager.swift */; };
 		3A4E2E3D24D2275F00C34DD8 /* SearchBarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A4E2E3C24D2275F00C34DD8 /* SearchBarButton.swift */; };
@@ -96,6 +87,15 @@
 		3A5F685424FE230200F9B43D /* TextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5F685324FE230200F9B43D /* TextView.swift */; };
 		3A5F685624FE470C00F9B43D /* ReviewCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5F685524FE470C00F9B43D /* ReviewCard.swift */; };
 		3A6477F224B68D060077EF30 /* UserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6477F124B68D060077EF30 /* UserProfile.swift */; };
+		3A6638E125844C6B00AC9C1A /* BuildOptsCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6638E025844C6B00AC9C1A /* BuildOptsCard.swift */; };
+		3A663915258882F500AC9C1A /* OrderModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5633CD24FC8FE70059B603 /* OrderModel.swift */; };
+		3A6D9C1D25AD2CB3008F0F1A /* ReceiptCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3DD588253838A700536D62 /* ReceiptCard.swift */; };
+		3A6D9C2225AD2CB5008F0F1A /* XButtonDelete.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ABD6A7F253AC1D40082681A /* XButtonDelete.swift */; };
+		3A6D9C2325AD2CB7008F0F1A /* XButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3DD58E2538396B00536D62 /* XButton.swift */; };
+		3A6D9C2425AD2CB9008F0F1A /* DishCardOrder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3DD57E2538333000536D62 /* DishCardOrder.swift */; };
+		3A6D9C2525AD2CBD008F0F1A /* MiniViewCartButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5B0DB7253FDD9B00A0BE41 /* MiniViewCartButton.swift */; };
+		3A6D9C2625AD2CBF008F0F1A /* ViewCartButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3DD5942539378600536D62 /* ViewCartButton.swift */; };
+		3A6D9C6A25AD41A2008F0F1A /* ReviewOrder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3DD57325380E0F00536D62 /* ReviewOrder.swift */; };
 		3A822728255A10B60002A233 /* BuildCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A822727255A10B60002A233 /* BuildCard.swift */; };
 		3A87575324EC910A004ABECC /* PostReviewButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A87575224EC910A004ABECC /* PostReviewButton.swift */; };
 		3A987AD72480350C0021F6E4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A987AD62480350C0021F6E4 /* AppDelegate.swift */; };
@@ -119,11 +119,10 @@
 		3ACAD182250AF07100B24CEB /* DishReviewsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACAD181250AF07100B24CEB /* DishReviewsViewModel.swift */; };
 		3ACAD187250AF4B200B24CEB /* ListDishesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACAD186250AF4B200B24CEB /* ListDishesViewModel.swift */; };
 		3ACAD189250B161A00B24CEB /* RestCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACAD188250B161A00B24CEB /* RestCategory.swift */; };
-		3AE05F9824EF27550024F802 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 3AE05F9724EF27550024F802 /* SwiftPackageProductDependency */; };
-		3AE05F9A24EF27550024F802 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 3AE05F9924EF27550024F802 /* SwiftPackageProductDependency */; };
+		3AE05F9824EF27550024F802 /* FacebookCore in Frameworks */ = {isa = PBXBuildFile; productRef = 3AE05F9724EF27550024F802 /* FacebookCore */; };
+		3AE05F9A24EF27550024F802 /* FacebookLogin in Frameworks */ = {isa = PBXBuildFile; productRef = 3AE05F9924EF27550024F802 /* FacebookLogin */; };
 		3AEB32EF2572051A00A61C0E /* ColorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0745DA253021CB000EF6BD /* ColorManager.swift */; };
 		3AEB32F42572052500A61C0E /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA9897524B517F00070FD97 /* Extensions.swift */; };
-		3AEB32F92572055000A61C0E /* OrderModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5633CD24FC8FE70059B603 /* OrderModel.swift */; };
 		3AEB330C2572058900A61C0E /* WhiteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7912A2524CF82140052988C /* WhiteButton.swift */; };
 		3AEB33112572065A00A61C0E /* OrangeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF1BA89252A92B500FAA9A0 /* OrangeButton.swift */; };
 		3AEB33162572065C00A61C0E /* InvertedOrangeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF1BA8F252A92DD00FAA9A0 /* InvertedOrangeButton.swift */; };
@@ -141,7 +140,6 @@
 		3AF9926824A2B918005446D8 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF9926724A2B918005446D8 /* Utils.swift */; };
 		3AF9926A24A2B95C005446D8 /* InputValidation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF9926924A2B95C005446D8 /* InputValidation.swift */; };
 		3AF9927524A53AC0005446D8 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF9927424A53AC0005446D8 /* SignUpView.swift */; };
-		3AFA233E24DA01AC00F90ED8 /* MenuSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFA233D24DA01AC00F90ED8 /* MenuSelectionView.swift */; };
 		3AFA234424DBA42E00F90ED8 /* OrderButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFA234324DBA42E00F90ED8 /* OrderButton.swift */; };
 		3AFA234624DC9C2000F90ED8 /* DishReviewFB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFA234524DC9C2000F90ED8 /* DishReviewFB.swift */; };
 		3AFA234824DCACEA00F90ED8 /* ReviewsButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFA234724DCACEA00F90ED8 /* ReviewsButton.swift */; };
@@ -180,7 +178,7 @@
 		C5CD0F2B24AC4C6600F0A60D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C5CD0F2824AC4C6600F0A60D /* GoogleService-Info.plist */; };
 		C5D0A16C24B1B6A300E44DF2 /* DishFB.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5D0A16B24B1B6A300E44DF2 /* DishFB.swift */; };
 		DE6D5DDB64F023C3E960E12D /* Pods_YumzzAppClip.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F1A62BDCBD69961643AEE623 /* Pods_YumzzAppClip.framework */; };
-		EF742DE3D7CD0978127C36A4 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; };
+		EF742DE3D7CD0978127C36A4 /* (null) in Frameworks */ = {isa = PBXBuildFile; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -291,6 +289,7 @@
 		3A5F685324FE230200F9B43D /* TextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextView.swift; sourceTree = "<group>"; };
 		3A5F685524FE470C00F9B43D /* ReviewCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewCard.swift; sourceTree = "<group>"; };
 		3A6477F124B68D060077EF30 /* UserProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfile.swift; sourceTree = "<group>"; };
+		3A6638E025844C6B00AC9C1A /* BuildOptsCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildOptsCard.swift; sourceTree = "<group>"; };
 		3A822727255A10B60002A233 /* BuildCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildCard.swift; sourceTree = "<group>"; };
 		3A87575224EC910A004ABECC /* PostReviewButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostReviewButton.swift; sourceTree = "<group>"; };
 		3A987AD32480350C0021F6E4 /* Yumzz.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Yumzz.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -390,8 +389,8 @@
 				3AF6D6752578672E009E4240 /* Combine.framework in Frameworks */,
 				3AE05F9A24EF27550024F802 /* FacebookLogin in Frameworks */,
 				A731EB0E2495AD2300B75D05 /* CloudKit.framework in Frameworks */,
-				3AE05F9824EF27550024F802 /* BuildFile in Frameworks */,
-				EF742DE3D7CD0978127C36A4 /* BuildFile in Frameworks */,
+				3AE05F9824EF27550024F802 /* FacebookCore in Frameworks */,
+				EF742DE3D7CD0978127C36A4 /* (null) in Frameworks */,
 				5DFDDF68EFBFD00B56D691FA /* Pods_VirtualMenu.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -849,6 +848,7 @@
 				3A5F685524FE470C00F9B43D /* ReviewCard.swift */,
 				3A87575224EC910A004ABECC /* PostReviewButton.swift */,
 				3A3DD5A52539736A00536D62 /* OptionsCard.swift */,
+				3A6638E025844C6B00AC9C1A /* BuildOptsCard.swift */,
 				3A822727255A10B60002A233 /* BuildCard.swift */,
 			);
 			path = Components;
@@ -963,8 +963,8 @@
 			);
 			name = VirtualMenu;
 			packageProductDependencies = (
-				3AE05F9724EF27550024F802 /* SwiftPackageProductDependency */,
-				3AE05F9924EF27550024F802 /* SwiftPackageProductDependency */,
+				3AE05F9724EF27550024F802 /* FacebookCore */,
+				3AE05F9924EF27550024F802 /* FacebookLogin */,
 			);
 			productName = VirtualMenu;
 			productReference = 3A987AD32480350C0021F6E4 /* Yumzz.app */;
@@ -1042,7 +1042,7 @@
 			);
 			mainGroup = 3A987ACA2480350C0021F6E4;
 			packageReferences = (
-				3AE05F9624EF27550024F802 /* RemoteSwiftPackageReference */,
+				3AE05F9624EF27550024F802 /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */,
 			);
 			productRefGroup = 3A987AD42480350C0021F6E4 /* Products */;
 			projectDirPath = "";
@@ -1233,15 +1233,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3431BA2D255A36E80018AFB5 /* ReceiptCard.swift in Sources */,
 				3431BA0F255A367E0018AFB5 /* ListDishesViewModel.swift in Sources */,
 				3431B9AC255A346E0018AFB5 /* DishFB.swift in Sources */,
+				3A6D9C1D25AD2CB3008F0F1A /* ReceiptCard.swift in Sources */,
 				3431B9C9255A34A10018AFB5 /* SeeMenuButton.swift in Sources */,
 				3AEB33162572065C00A61C0E /* InvertedOrangeButton.swift in Sources */,
-				3431BA1E255A36AF0018AFB5 /* XButtonDelete.swift in Sources */,
-				3431B9EC255A35CE0018AFB5 /* ReviewOrder.swift in Sources */,
-				3431BA23255A36B50018AFB5 /* DishCardOrder.swift in Sources */,
-				3431B9CE255A34A70018AFB5 /* RestaurantReviewView.swift in Sources */,
 				3431BA32255A36FC0018AFB5 /* DishCard.swift in Sources */,
 				3AEB33212572099E00A61C0E /* WhiteBackButton.swift in Sources */,
 				3431BA14255A36810018AFB5 /* ListDishesView.swift in Sources */,
@@ -1251,24 +1247,27 @@
 				3AEB330C2572058900A61C0E /* WhiteButton.swift in Sources */,
 				3431B9F1255A35EF0018AFB5 /* ImageCache.swift in Sources */,
 				3A29A2C0255CDA9C005B8731 /* RestaurantReviewFB.swift in Sources */,
-				3431BA0A255A36680018AFB5 /* XButton.swift in Sources */,
 				3431B99D255A345A0018AFB5 /* RestaurantHomeView.swift in Sources */,
 				3431B9DD255A35290018AFB5 /* FBURLImage.swift in Sources */,
 				3431B9B6255A34800018AFB5 /* Order.swift in Sources */,
 				3AEB32F42572052500A61C0E /* Extensions.swift in Sources */,
 				3431B9B1255A34740018AFB5 /* DishCategory.swift in Sources */,
 				34111054252262F10084975A /* AppDelegate.swift in Sources */,
+				3A6D9C2225AD2CB5008F0F1A /* XButtonDelete.swift in Sources */,
 				3AEB32EF2572051A00A61C0E /* ColorManager.swift in Sources */,
-				3A3E1DDA256FC5F300812E67 /* MiniViewCartButton.swift in Sources */,
-				3AEB32F92572055000A61C0E /* OrderModel.swift in Sources */,
+				3A6D9C6A25AD41A2008F0F1A /* ReviewOrder.swift in Sources */,
 				34111056252262F10084975A /* SceneDelegate.swift in Sources */,
-				3431B9F6255A35FC0018AFB5 /* ViewCartButton.swift in Sources */,
+				3A6D9C2325AD2CB7008F0F1A /* XButton.swift in Sources */,
 				34111058252262F10084975A /* ContentView.swift in Sources */,
 				3AEB33112572065A00A61C0E /* OrangeButton.swift in Sources */,
 				3431B9E7255A35A80018AFB5 /* DishDetailsView.swift in Sources */,
+				3A6D9C2625AD2CBF008F0F1A /* ViewCartButton.swift in Sources */,
 				3431B9A2255A345F0018AFB5 /* MenuSelectionViewModel.swift in Sources */,
+				3A6D9C2525AD2CBD008F0F1A /* MiniViewCartButton.swift in Sources */,
 				3431BA19255A36990018AFB5 /* OptionsCard.swift in Sources */,
 				3431BA05255A365A0018AFB5 /* BuildCard.swift in Sources */,
+				3A663915258882F500AC9C1A /* OrderModel.swift in Sources */,
+				3A6D9C2425AD2CB9008F0F1A /* DishCardOrder.swift in Sources */,
 				3AF6D65F257295CC009E4240 /* BuildFB.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1297,6 +1296,7 @@
 				3AFA234624DC9C2000F90ED8 /* DishReviewFB.swift in Sources */,
 				3A987B102481511B0021F6E4 /* ContentView.swift in Sources */,
 				34A5D663249BF6DF00E4FE9C /* DishDetailsView.swift in Sources */,
+				3A6638E125844C6B00AC9C1A /* BuildOptsCard.swift in Sources */,
 				3AF9926824A2B918005446D8 /* Utils.swift in Sources */,
 				3A4E2E3D24D2275F00C34DD8 /* SearchBarButton.swift in Sources */,
 				3A987AD72480350C0021F6E4 /* AppDelegate.swift in Sources */,
@@ -1331,7 +1331,6 @@
 				A7D0F78324DF6B4100197631 /* FBURLImage.swift in Sources */,
 				3A5B0DB8253FDD9B00A0BE41 /* MiniViewCartButton.swift in Sources */,
 				3A5633C024F902070059B603 /* SignInWithAppleButton.swift in Sources */,
-				3AFA233E24DA01AC00F90ED8 /* MenuSelectionView.swift in Sources */,
 				3A530DEF24D8E00100CBDE28 /* isClick.swift in Sources */,
 				3A3DD59C2539405000536D62 /* SeeMenuButton.swift in Sources */,
 				3A10F61E2554D69A00E25BC6 /* QRScanViewController.swift in Sources */,
@@ -1339,7 +1338,6 @@
 				343A44C0252E21FE00109C90 /* RestaurantHomeView.swift in Sources */,
 				3AFA234A24DCB14B00F90ED8 /* DishReviewsView.swift in Sources */,
 				3ABA90F124F63DB500695B06 /* BlackButton.swift in Sources */,
-				3A4E2E3224D12D2500C34DD8 /* DishAdminView.swift in Sources */,
 				3A4E2E3F24D2403300C34DD8 /* RestaurantDishViewModel.swift in Sources */,
 				34A966F8254762EF00AD84CD /* RestaurantReviewView.swift in Sources */,
 				3ACAD178250AE6E400B24CEB /* ReportProblemViewModel.swift in Sources */,
@@ -1446,7 +1444,7 @@
 				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CODE_SIGN_ENTITLEMENTS = YumzzAppClip/YumzzAppClip.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_ASSET_PATHS = "\"YumzzAppClip/Preview Content\"";
 				DEVELOPMENT_TEAM = 3VUUCS34BU;
 				ENABLE_PREVIEWS = YES;
@@ -1455,7 +1453,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.0;
+				MARKETING_VERSION = 4.0;
 				NEW_SETTING = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ARMenu.VirtualMenu.Clip;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1474,7 +1472,7 @@
 				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CODE_SIGN_ENTITLEMENTS = YumzzAppClip/YumzzAppClipRelease.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_ASSET_PATHS = "\"YumzzAppClip/Preview Content\"";
 				DEVELOPMENT_TEAM = 3VUUCS34BU;
 				ENABLE_PREVIEWS = YES;
@@ -1483,7 +1481,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.0;
+				MARKETING_VERSION = 4.0;
 				NEW_SETTING = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ARMenu.VirtualMenu.Clip;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1615,7 +1613,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = VirtualMenu/VirtualMenu.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_ASSET_PATHS = "\"VirtualMenu/Preview Content\"";
 				DEVELOPMENT_TEAM = 3VUUCS34BU;
 				ENABLE_PREVIEWS = YES;
@@ -1624,7 +1622,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.0;
+				MARKETING_VERSION = 4.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ARMenu.VirtualMenu;
 				PRODUCT_NAME = Yumzz;
 				SWIFT_INSTALL_OBJC_HEADER = NO;
@@ -1641,7 +1639,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = VirtualMenu/YumzzRelease.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_ASSET_PATHS = "\"VirtualMenu/Preview Content\"";
 				DEVELOPMENT_TEAM = 3VUUCS34BU;
 				ENABLE_PREVIEWS = YES;
@@ -1650,7 +1648,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.0;
+				MARKETING_VERSION = 4.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ARMenu.VirtualMenu;
 				PRODUCT_NAME = Yumzz;
 				SWIFT_INSTALL_OBJC_HEADER = NO;
@@ -1794,7 +1792,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		3AE05F9624EF27550024F802 /* RemoteSwiftPackageReference */ = {
+		3AE05F9624EF27550024F802 /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/facebook/facebook-ios-sdk";
 			requirement = {
@@ -1805,14 +1803,14 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		3AE05F9724EF27550024F802 /* SwiftPackageProductDependency */ = {
+		3AE05F9724EF27550024F802 /* FacebookCore */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 3AE05F9624EF27550024F802 /* RemoteSwiftPackageReference */;
+			package = 3AE05F9624EF27550024F802 /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */;
 			productName = FacebookCore;
 		};
-		3AE05F9924EF27550024F802 /* SwiftPackageProductDependency */ = {
+		3AE05F9924EF27550024F802 /* FacebookLogin */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 3AE05F9624EF27550024F802 /* RemoteSwiftPackageReference */;
+			package = 3AE05F9624EF27550024F802 /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */;
 			productName = FacebookLogin;
 		};
 /* End XCSwiftPackageProductDependency section */
