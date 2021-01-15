@@ -29,8 +29,12 @@ struct ListDishesView: View {
     @State var addWOSize = false
     @State var showingAlert = false
     @State var isNavBarHidden = false
+    
+    @State var appclip = false
         
+//    #if !APPCLIP
     @EnvironmentObject var order : OrderModel
+//    #endif
 
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
     @GestureState private var dragOffset = CGSize.zero
@@ -50,16 +54,16 @@ struct ListDishesView: View {
     
     var body: some View {
         Group {
+//            #if !APPCLIP
             if(!self.order.dishesChosen.isEmpty || !self.order.buildsChosen.isEmpty){
                 view.overlay(overlay, alignment: .bottom)
                     .navigationBarTitle("\(self.restname)")
                     .navigationBarBackButtonHidden(true)
                     .navigationBarItems(leading: BackButton(mode: self.mode))
                     .navigationBarHidden(self.isNavBarHidden)
-                    .onAppear(){
-//                        self.order.addtapped = true
-                        
-                    }
+//                    .onAppear(){
+//                        self.appclip = false
+//                    }
                     .onDisappear(){
                         print("disappear")
                         self.restname = ""
@@ -71,23 +75,39 @@ struct ListDishesView: View {
             } else {
                  view
                     .navigationBarHidden(self.isNavBarHidden)
+                    .onAppear(){
+                        self.appclip = false
+                    }
              }
+//            #else
+//            Group{
+//                view
+//                   .navigationBarHidden(self.isNavBarHidden)
+//                    .onAppear(){
+//                        self.appclip = true
+//                    }
+//            }
+//            #endif
         }
         .navigationBarHidden(self.isNavBarHidden)
     }
     
     var overlay: some View {
         VStack{
+//            #if !APPCLIP
             NavigationLink(destination: ReviewOrder().navigationTitle("").navigationBarHidden(true)){
                 ViewCartButton(dishCount: self.order.allDishes)
                     .clipShape(RoundedRectangle(cornerRadius: 10, style: .circular))
             }
             Spacer().frame(width: 0, height: 10)
+//            #endif
         }
     }
+
     
     
     var view: some View {
+//        EmptyView()
         ZStack {
             Color(#colorLiteral(red: 0.9725490196, green: 0.968627451, blue: 0.9607843137, alpha: 1)).edgesIgnoringSafeArea(.all)
             ScrollView(.vertical) {
@@ -116,26 +136,26 @@ struct ListDishesView: View {
                                         }
                                     }
                                 }
-                                    
+
                             }
-                        
+
                     }
-                    
+//
                     Spacer().frame(height: 20)
-                    
+//
                     ForEach(self.dishCats, id: \.name){ dishCategory in
                         VStack(alignment: .leading, spacing: 20) {
-                            
+
                             Text("\(dishCategory.name)")
                                 .font(.title)
                                 .fontWeight(.semibold)
                                 .padding(.leading)
-                            
+//
                             if(dishCategory.description != ""){
                                 Text("\(dishCategory.description)")
                                     .font(.system(size: 14, weight: .semibold)).foregroundColor(Color(#colorLiteral(red: 0.71, green: 0.71, blue: 0.71, alpha: 1))).tracking(-0.41)
                             }
-                            
+//
                             VStack(spacing: 20){
                                 if dishCategory.dishes.isEmpty {
                                     ForEach(dishCategory.builds, id: \.id) {
@@ -152,18 +172,27 @@ struct ListDishesView: View {
                                 }
                                 ForEach(dishCategory.dishes, id: \.id) {
                                     dish in
-                                    NavigationLink(destination:
-                                        DishDetailsView(dish: dish, restaurant: self.restaurant).navigationBarHidden(false)
-                                    ) {
-                                        if dish.photoExists{
-                                            DishCard(urlImage: FBURLImage(url: dish.coverPhotoURL, imageAspectRatio: .fill, imageWidth: 80, imageHeight: 80, circle: false), dishName: dish.name, dishIngredients: dish.description, price: self.listDishVM.formatPrice(price: dish.price), rest: self.restaurant, dish: dish)
-                                        }
-                                        else{
-                                            DishCard(urlImage: nil, dishName: dish.name, dishIngredients: dish.description, price: self.listDishVM.formatPrice(price: dish.price), rest: self.restaurant, dish: dish)
-                                        }
+////                                    VStack{
+//                                    if (!self.appclip) {
+//                                        #if !APPCLIP
 
-                                            
-                                    }
+//
+                                        NavigationLink(destination:
+                                            DishDetailsView(dish: dish, restaurant: self.restaurant).navigationBarHidden(false)
+                                        ) {
+                                            DishCard(urlImage: (dish.photoExists) ? (FBURLImage(url: dish.coverPhotoURL, imageAspectRatio: .fill, imageWidth: 80, imageHeight: 80, circle: false)) : nil, dishName: dish.name, dishIngredients: dish.description, price: self.listDishVM.formatPrice(price: dish.price), rest: self.restaurant, dish: dish)
+                                        }
+//                                        #endif
+//                                    }
+////                                    #else
+//                                    else{
+//                                        DishCard(urlImage: nil, dishName: dish.name, dishIngredients: dish.description, price: self.listDishVM.formatPrice(price: dish.price), rest: self.restaurant, dish: dish)
+//                                    }
+//
+////                                    #if APPCLIP
+//
+////                                    #endif
+////                                    }
                                 }
                                 Spacer().frame(height: 20)
                             }
@@ -208,12 +237,12 @@ struct ListDishesView: View {
                 return Alert(title: Text("Dish Added"))
             }
         }
-        .gesture(DragGesture().updating($dragOffset, body: { (value, state, transaction) in
+        .gesture(
+            DragGesture().updating($dragOffset, body: { (value, state, transaction) in
             if(value.translation.width > 100) {
                 self.mode.wrappedValue.dismiss()
             }
         }))
-        
     }
 }
 

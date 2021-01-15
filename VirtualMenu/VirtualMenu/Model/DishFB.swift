@@ -7,9 +7,11 @@
 //
 
 import Foundation
-import FirebaseFirestore
+//#if !APPCLIP
+//import FirebaseFirestore
 import Firebase
-import FirebaseDatabase
+//import FirebaseDatabase
+//#endif
 
 struct DishFB {
     let ref: DatabaseReference?

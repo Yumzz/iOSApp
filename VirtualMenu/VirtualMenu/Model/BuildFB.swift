@@ -7,9 +7,11 @@
 //
 
 import Foundation
+//#if !APPCLIP
 import FirebaseFirestore
 import Firebase
 import FirebaseDatabase
+//#endif
 
 struct BuildFB {
     let name: String

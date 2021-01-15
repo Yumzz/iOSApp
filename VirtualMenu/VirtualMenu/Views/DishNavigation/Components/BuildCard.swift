@@ -24,8 +24,9 @@ struct BuildCard: View {
 
     var rest: RestaurantFB
 
-    
+    #if !APPCLIP
     @EnvironmentObject var order : OrderModel
+    #endif
     
     var body: some View {
         ZStack {
@@ -209,6 +210,7 @@ struct BuildCard: View {
                         else{
                             //if size not clicked then show alert
                             // go through each clicked option and add up based on type clicked
+                            #if !APPCLIP
                             var i = 0
                             while i < self.count{
                                 self.d.enter()
@@ -218,6 +220,7 @@ struct BuildCard: View {
                                 }
                                 i += 1
                             }
+                            #endif
                             
                         }
                     }

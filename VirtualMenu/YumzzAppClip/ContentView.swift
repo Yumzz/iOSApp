@@ -7,31 +7,34 @@
 //
 
 import SwiftUI
-import Firebase
+//import Firebase
 
 struct ContentView: View {
-    @State var restaurant: RestaurantFB?
+//    @State var restaurant: RestaurantFB? = nil
     
     init() {
-        let db = Firestore.firestore()
-        let restaurantRef = db.collection("Restaurant").document("8mErR4vH8qjBBpb8sttN")
-        var rest: RestaurantFB? = nil
-        restaurantRef.getDocument { (document, error) in
-            if let document = document, document.exists {
-                rest = RestaurantFB(snapshot: document)!
-            } else {
-                print(error?.localizedDescription ?? "asdf")
-            }
-        }
-        self.restaurant = rest
+//        let db = Firestore.firestore()
+//        let restaurantRef = db.collection("Restaurant").document("8mErR4vH8qjBBpb8sttN")
+//        var rest: RestaurantFB? = nil
+//        restaurantRef.getDocument { (document, error) in
+//            if let document = document, document.exists {
+//                rest = RestaurantFB(snapshot: document)!
+//            } else {
+//                print(error?.localizedDescription ?? "asdf")
+//            }
+//        }
+//        self.restaurant = rest
     }
     
     var body: some View {
-        if self.restaurant == nil {
+//        if self.restaurant == nil {
+//            EmptyView()
+//        } else {
             EmptyView()
-        } else {
-            RestaurantHomeView(restaurant: self.restaurant!, distance: 10)
-        }
+            //having trouble with listdishesview w some sections
+//            ListDishesView(restaurant: self.restaurant!)
+//            RestaurantHomeView(restaurant: self.restaurant!, distance: 10)
+//        }
     }
 }
 

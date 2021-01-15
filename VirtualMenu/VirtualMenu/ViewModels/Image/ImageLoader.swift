@@ -8,8 +8,10 @@
 
 import Foundation
 import SwiftUI
+//#if !APPCLIP
 import Firebase
 import FirebaseFirestore
+//#endif
 
 final class ImageLoader : ObservableObject {
     

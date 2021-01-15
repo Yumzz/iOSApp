@@ -3,21 +3,21 @@ target 'VirtualMenu' do
     pod 'Instructions'
 end
 
-target 'YumzzAppClip' do
-  pod 'Firebase/Firestore'
-  pod 'Firebase/Storage'
-end
+# add the Firebase pod for Google Analytic
 
-# add the Firebase pod for Google Analytics
-pod 'Firebase/Analytics'
-pod 'Firebase/Core', :inhibit_warnings => true
-pod 'Firebase/Database', :inhibit_warnings => true
-pod 'Firebase/Auth', :inhibit_warnings => true
-pod 'Firebase/Firestore'
-pod 'FirebaseFirestoreSwift'
-pod 'Firebase/Storage'
-pod 'GoogleSignIn'
-pod "PromiseKit", "~> 6.8"
+    pod 'Firebase/Analytics'
+    pod 'Firebase/Core', :inhibit_warnings => true
+    pod 'Firebase/Database', :inhibit_warnings => true
+    pod 'Firebase/Auth', :inhibit_warnings => true
+    pod 'Firebase/Firestore'
+    pod 'FirebaseFirestoreSwift'
+    pod 'Firebase/Storage'
+    pod 'GoogleSignIn'
+    pod "PromiseKit", "~> 6.8"
+
+#target 'YumzzAppClip' do
+ #   pod 'Firebase'
+#end
 
 
 

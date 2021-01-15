@@ -10,8 +10,9 @@ import SwiftUI
 
 struct DishCard: View {
     
+    #if !APPCLIP
     var urlImage:FBURLImage?
-    
+    #endif
     var dishName: String
     var dishIngredients: String
     var price: String
@@ -25,7 +26,10 @@ struct DishCard: View {
 //    @State private var alertMessage = ""
 //    @State private var alertTitle = ""
     
+    
+    #if !APPCLIP
     @EnvironmentObject var order : OrderModel
+    #endif
     
     @Environment (\.colorScheme) var colorScheme:ColorScheme
     
@@ -51,6 +55,7 @@ struct DishCard: View {
                 
                 Spacer()
                 
+                #if !APPCLIP
                 if !dish.photoExists {
                     EmptyView().foregroundColor(.white)
                 }
@@ -58,6 +63,7 @@ struct DishCard: View {
                     urlImage!
                     .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
                 }
+                #endif
                 
                 Spacer().frame(width: 8, height: 0)
                 
@@ -103,13 +109,12 @@ struct DishCard: View {
     }
 }
 
-struct DishCard_Previews: PreviewProvider {
-    static var previews: some View {
-        
-        Group {
-            DishCard(urlImage: nil, dishName: "Tomato Pasta", dishIngredients: "Pasta, Tomato Sauce", price: "$10", rest: RestaurantFB.previewRest(), dish: DishFB.previewDish()).colorScheme(.light)
-            
-            DishCard(urlImage: nil, dishName: "Calzone", dishIngredients: "Cream, onions, ham, olives, herbs, verylongingredientName", price: "$10", rest: RestaurantFB.previewRest(), dish: DishFB.previewDish()).colorScheme(.dark)
-        }
-    }
-}
+//struct DishCard_Previews: PreviewProvider {
+//    static var previews: some View {
+//        Group {
+//            DishCard(urlImage: nil, dishName: "Tomato Pasta", dishIngredients: "Pasta, Tomato Sauce", price: "$10", rest: RestaurantFB.previewRest(), dish: DishFB.previewDish()).colorScheme(.light)
+//
+////            DishCard(urlImage: nil, dishName: "Calzone", dishIngredients: "Cream, onions, ham, olives, herbs, verylongingredientName", price: "$10", rest: RestaurantFB.previewRest(), dish: DishFB.previewDish()).colorScheme(.dark)
+//        }
+//    }
+//}

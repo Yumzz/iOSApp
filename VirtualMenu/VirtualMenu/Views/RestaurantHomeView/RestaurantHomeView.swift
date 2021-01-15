@@ -50,11 +50,11 @@ struct RestaurantHomeView: View {
                     }
                     VStack(spacing: 10){
                         if (self.reviewViewShown) {
-                            #if !APPCLIP
+//                            #if !APPCLIP
                             RestaurantReviewView(shown: self.$reviewViewShown, popUpShown: self.$popUpShown, menuSelectionVM: self.menuSelectionVM)
                                 .transition(.slide)
                                 .animation(.default)
-                            #endif
+//                            #endif
                         } else {
                         VStack(alignment: .leading){
                             HStack{
@@ -86,7 +86,9 @@ struct RestaurantHomeView: View {
                                         .font(.system(size: 12, weight: .semibold))
                                 }.frame(width: 45, height: 20)
                                 Button(action: {
+//                                    #if !APPCLIP
                                     self.reviewViewShown.toggle()
+//                                    #endif
                                 }){
                                     Text("(" + String(self.restaurant.n_Ratings) + " reviews)").font(.system(size: 14, weight: .semibold)).foregroundColor(Color(#colorLiteral(red: 0.91018188, green: 0.4465283751, blue: 0.2032583952, alpha: 1))).tracking(-0.41).underline()
                                 }
@@ -159,23 +161,29 @@ struct RestaurantHomeView: View {
                                     HStack(spacing: 20) {
                                         ForEach(self.menuSelectionVM.featuredDishes, id: \.id){
                                             dish in
+//                                            #if !APPCLIP
                                             NavigationLink(
                                                 destination: DishDetailsView(dish: dish, restaurant: self.restaurant).navigationBarHidden(false)
                                             ) {
                                                 PopularDishCard(dish: dish)
                                             }
+//                                            #endif
+                                            
+//                                            #if APPCLIP
+//                                            PopularDishCard(dish: dish)
+//                                            #endif
                                         }
                                     }
                                 }.frame(height: 150)
                             }
                             
                             if(self.dishesChosen || !self.order.buildsChosen.isEmpty){
-                                #if !APPCLIP
+//                                #if !APPCLIP
                                 NavigationLink(destination: ReviewOrder()){
                                     ViewCartButton(dishCount: self.order.allDishes)
                                         .clipShape(RoundedRectangle(cornerRadius: 10, style: .circular))
                                 }
-                                #endif
+//                                #endif
                             }
                            
                         }.padding()

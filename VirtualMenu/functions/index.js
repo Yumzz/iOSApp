@@ -164,15 +164,16 @@ exports.getRestaurant = functions.https.onRequest((req, resp) => {
       .then(function (doc) {
         if (doc.exists) {
           console.log("doc data: ", doc.data());
-          return doc.data();
+          resp.status(200).send(doc.data());
         } else {
           console.log("doc not there");
-          return "";
+          resp.status(500).send(`No doc for this rest exists`);
         }
+        return;
       })
       .catch(function (error) {
         console.log("error", error);
-        return error;
+        resp.status(500).send(error);
       });
   });
 });

@@ -7,31 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2E9E11058D3E0949B2DD3831 /* Pods_VirtualMenu.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 661F5D3C4AF39D2D3B985D46 /* Pods_VirtualMenu.framework */; };
 		34111054252262F10084975A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34111053252262F10084975A /* AppDelegate.swift */; };
 		34111056252262F10084975A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34111055252262F10084975A /* SceneDelegate.swift */; };
 		34111058252262F10084975A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34111057252262F10084975A /* ContentView.swift */; };
 		3411105A252262F20084975A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 34111059252262F20084975A /* Assets.xcassets */; };
 		3411105D252262F20084975A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3411105C252262F20084975A /* Preview Assets.xcassets */; };
-		34111060252262F20084975A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3411105E252262F20084975A /* LaunchScreen.storyboard */; };
 		34111065252262F20084975A /* YumzzAppClip.app in Embed App Clips */ = {isa = PBXBuildFile; fileRef = 34111051252262F10084975A /* YumzzAppClip.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		3431B99D255A345A0018AFB5 /* RestaurantHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 343A44BF252E21FE00109C90 /* RestaurantHomeView.swift */; };
-		3431B9A2255A345F0018AFB5 /* MenuSelectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34370CC62500D59A00ECD88B /* MenuSelectionViewModel.swift */; };
-		3431B9A7255A34670018AFB5 /* RestaurantFB.swift in Sources */ = {isa = PBXBuildFile; fileRef = C55FDD6424CABA2800CC8561 /* RestaurantFB.swift */; };
-		3431B9AC255A346E0018AFB5 /* DishFB.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5D0A16B24B1B6A300E44DF2 /* DishFB.swift */; };
-		3431B9B1255A34740018AFB5 /* DishCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A530DF224D9769100CBDE28 /* DishCategory.swift */; };
-		3431B9B6255A34800018AFB5 /* Order.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5633CB24FA33790059B603 /* Order.swift */; };
-		3431B9C9255A34A10018AFB5 /* SeeMenuButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3DD59B2539405000536D62 /* SeeMenuButton.swift */; };
-		3431B9DD255A35290018AFB5 /* FBURLImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7D0F78224DF6B4100197631 /* FBURLImage.swift */; };
-		3431B9E2255A35880018AFB5 /* ImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = A78531F924DE312600F94C67 /* ImageLoader.swift */; };
-		3431B9E7255A35A80018AFB5 /* DishDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34A5D662249BF6DF00E4FE9C /* DishDetailsView.swift */; };
-		3431B9F1255A35EF0018AFB5 /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = A779ACA9250D4F7400146565 /* ImageCache.swift */; };
-		3431BA05255A365A0018AFB5 /* BuildCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A822727255A10B60002A233 /* BuildCard.swift */; };
-		3431BA0F255A367E0018AFB5 /* ListDishesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACAD186250AF4B200B24CEB /* ListDishesViewModel.swift */; };
-		3431BA14255A36810018AFB5 /* ListDishesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A73FD46224919A1300A035AB /* ListDishesView.swift */; };
-		3431BA19255A36990018AFB5 /* OptionsCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3DD5A52539736A00536D62 /* OptionsCard.swift */; };
-		3431BA28255A36CE0018AFB5 /* BackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0745C6252B0871000EF6BD /* BackButton.swift */; };
-		3431BA32255A36FC0018AFB5 /* DishCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7FE996124F4A552006E5980 /* DishCard.swift */; };
-		3431BA57255A40B80018AFB5 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3431BA56255A40B80018AFB5 /* GoogleService-Info.plist */; };
 		34370CC72500D59A00ECD88B /* MenuSelectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34370CC62500D59A00ECD88B /* MenuSelectionViewModel.swift */; };
 		343A44C0252E21FE00109C90 /* RestaurantHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 343A44BF252E21FE00109C90 /* RestaurantHomeView.swift */; };
 		3482C0CF250C95D300FC362D /* BottomSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3482C0CE250C95D300FC362D /* BottomSheetView.swift */; };
@@ -40,7 +22,6 @@
 		34A5D663249BF6DF00E4FE9C /* DishDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34A5D662249BF6DF00E4FE9C /* DishDetailsView.swift */; };
 		34A966F2254691C200AD84CD /* RestaurantReviewFB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34A966F1254691C200AD84CD /* RestaurantReviewFB.swift */; };
 		34A966F8254762EF00AD84CD /* RestaurantReviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34A966F7254762EF00AD84CD /* RestaurantReviewView.swift */; };
-		34F39DA1253E357C00C30346 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3A987ADC2480350E0021F6E4 /* Assets.xcassets */; };
 		34FCE2722507297F00329162 /* RatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34FCE2712507297F00329162 /* RatingView.swift */; };
 		3A0745B5252B014D000EF6BD /* AppleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0745B4252B014C000EF6BD /* AppleButton.swift */; };
 		3A0745BB252B020F000EF6BD /* FacebookButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0745BA252B020F000EF6BD /* FacebookButton.swift */; };
@@ -53,7 +34,7 @@
 		3A13B6E024C1813D0006458B /* ContactUs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A13B6DF24C1813D0006458B /* ContactUs.swift */; };
 		3A13B6E424C1816B0006458B /* ReportProblem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A13B6E324C1816B0006458B /* ReportProblem.swift */; };
 		3A13B6ED24C3D9FB0006458B /* SuggestRestaurant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A13B6EC24C3D9FB0006458B /* SuggestRestaurant.swift */; };
-		3A29A2C0255CDA9C005B8731 /* RestaurantReviewFB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34A966F1254691C200AD84CD /* RestaurantReviewFB.swift */; };
+		3A30739D25B2115400D1C363 /* RestaurantFB.swift in Sources */ = {isa = PBXBuildFile; fileRef = C55FDD6424CABA2800CC8561 /* RestaurantFB.swift */; };
 		3A3DD56C253654CA00536D62 /* DishPreviewCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3DD56B253654C900536D62 /* DishPreviewCard.swift */; };
 		3A3DD57425380E1000536D62 /* ReviewOrder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3DD57325380E0F00536D62 /* ReviewOrder.swift */; };
 		3A3DD57F2538333100536D62 /* DishCardOrder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3DD57E2538333000536D62 /* DishCardOrder.swift */; };
@@ -83,19 +64,12 @@
 		3A5633CC24FA33790059B603 /* Order.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5633CB24FA33790059B603 /* Order.swift */; };
 		3A5633CE24FC8FE70059B603 /* OrderModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5633CD24FC8FE70059B603 /* OrderModel.swift */; };
 		3A5633D524FCED0C0059B603 /* DishNavButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5633D424FCED0C0059B603 /* DishNavButton.swift */; };
+		3A56346F25AFFF5700BAD47E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3431BA56255A40B80018AFB5 /* GoogleService-Info.plist */; };
 		3A5B0DB8253FDD9B00A0BE41 /* MiniViewCartButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5B0DB7253FDD9B00A0BE41 /* MiniViewCartButton.swift */; };
 		3A5F685424FE230200F9B43D /* TextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5F685324FE230200F9B43D /* TextView.swift */; };
 		3A5F685624FE470C00F9B43D /* ReviewCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5F685524FE470C00F9B43D /* ReviewCard.swift */; };
 		3A6477F224B68D060077EF30 /* UserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6477F124B68D060077EF30 /* UserProfile.swift */; };
 		3A6638E125844C6B00AC9C1A /* BuildOptsCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6638E025844C6B00AC9C1A /* BuildOptsCard.swift */; };
-		3A663915258882F500AC9C1A /* OrderModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5633CD24FC8FE70059B603 /* OrderModel.swift */; };
-		3A6D9C1D25AD2CB3008F0F1A /* ReceiptCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3DD588253838A700536D62 /* ReceiptCard.swift */; };
-		3A6D9C2225AD2CB5008F0F1A /* XButtonDelete.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ABD6A7F253AC1D40082681A /* XButtonDelete.swift */; };
-		3A6D9C2325AD2CB7008F0F1A /* XButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3DD58E2538396B00536D62 /* XButton.swift */; };
-		3A6D9C2425AD2CB9008F0F1A /* DishCardOrder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3DD57E2538333000536D62 /* DishCardOrder.swift */; };
-		3A6D9C2525AD2CBD008F0F1A /* MiniViewCartButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5B0DB7253FDD9B00A0BE41 /* MiniViewCartButton.swift */; };
-		3A6D9C2625AD2CBF008F0F1A /* ViewCartButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3DD5942539378600536D62 /* ViewCartButton.swift */; };
-		3A6D9C6A25AD41A2008F0F1A /* ReviewOrder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3DD57325380E0F00536D62 /* ReviewOrder.swift */; };
 		3A822728255A10B60002A233 /* BuildCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A822727255A10B60002A233 /* BuildCard.swift */; };
 		3A87575324EC910A004ABECC /* PostReviewButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A87575224EC910A004ABECC /* PostReviewButton.swift */; };
 		3A987AD72480350C0021F6E4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A987AD62480350C0021F6E4 /* AppDelegate.swift */; };
@@ -107,6 +81,9 @@
 		3A987AF92480350E0021F6E4 /* VirtualMenuUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A987AF82480350E0021F6E4 /* VirtualMenuUITests.swift */; };
 		3A987B102481511B0021F6E4 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A987B0F2481511B0021F6E4 /* ContentView.swift */; };
 		3AA9897624B517F00070FD97 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA9897524B517F00070FD97 /* Extensions.swift */; };
+		3AAFED4425AFB83800F34BAF /* Combine.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AF6D6742578672E009E4240 /* Combine.framework */; };
+		3AAFED4625AFB84000F34BAF /* FacebookLogin in Frameworks */ = {isa = PBXBuildFile; productRef = 3AAFED4525AFB84000F34BAF /* FacebookLogin */; };
+		3AAFED4825AFB85600F34BAF /* FacebookCore in Frameworks */ = {isa = PBXBuildFile; productRef = 3AAFED4725AFB85600F34BAF /* FacebookCore */; };
 		3ABA90F124F63DB500695B06 /* BlackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ABA90F024F63DB500695B06 /* BlackButton.swift */; };
 		3ABA90F524F64EDE00695B06 /* GuestButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ABA90F424F64EDE00695B06 /* GuestButton.swift */; };
 		3ABD6A80253AC1D40082681A /* XButtonDelete.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ABD6A7F253AC1D40082681A /* XButtonDelete.swift */; };
@@ -119,23 +96,13 @@
 		3ACAD182250AF07100B24CEB /* DishReviewsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACAD181250AF07100B24CEB /* DishReviewsViewModel.swift */; };
 		3ACAD187250AF4B200B24CEB /* ListDishesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACAD186250AF4B200B24CEB /* ListDishesViewModel.swift */; };
 		3ACAD189250B161A00B24CEB /* RestCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACAD188250B161A00B24CEB /* RestCategory.swift */; };
-		3AE05F9824EF27550024F802 /* FacebookCore in Frameworks */ = {isa = PBXBuildFile; productRef = 3AE05F9724EF27550024F802 /* FacebookCore */; };
-		3AE05F9A24EF27550024F802 /* FacebookLogin in Frameworks */ = {isa = PBXBuildFile; productRef = 3AE05F9924EF27550024F802 /* FacebookLogin */; };
-		3AEB32EF2572051A00A61C0E /* ColorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0745DA253021CB000EF6BD /* ColorManager.swift */; };
-		3AEB32F42572052500A61C0E /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA9897524B517F00070FD97 /* Extensions.swift */; };
-		3AEB330C2572058900A61C0E /* WhiteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7912A2524CF82140052988C /* WhiteButton.swift */; };
-		3AEB33112572065A00A61C0E /* OrangeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF1BA89252A92B500FAA9A0 /* OrangeButton.swift */; };
-		3AEB33162572065C00A61C0E /* InvertedOrangeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF1BA8F252A92DD00FAA9A0 /* InvertedOrangeButton.swift */; };
 		3AEB331C2572092000A61C0E /* WhiteBackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AEB331B2572092000A61C0E /* WhiteBackButton.swift */; };
-		3AEB33212572099E00A61C0E /* WhiteBackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AEB331B2572092000A61C0E /* WhiteBackButton.swift */; };
 		3AF1BA84252A926900FAA9A0 /* OnboardingInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF1BA83252A926900FAA9A0 /* OnboardingInfo.swift */; };
 		3AF1BA8A252A92B500FAA9A0 /* OrangeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF1BA89252A92B500FAA9A0 /* OrangeButton.swift */; };
 		3AF1BA90252A92DD00FAA9A0 /* InvertedOrangeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF1BA8F252A92DD00FAA9A0 /* InvertedOrangeButton.swift */; };
 		3AF1BA96252A93F400FAA9A0 /* OnboardingInfo2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF1BA95252A93F400FAA9A0 /* OnboardingInfo2.swift */; };
 		3AF6D65A2572882A009E4240 /* BuildFB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF6D6592572882A009E4240 /* BuildFB.swift */; };
-		3AF6D65F257295CC009E4240 /* BuildFB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF6D6592572882A009E4240 /* BuildFB.swift */; };
 		3AF6D66F25784106009E4240 /* AccountProfileLoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF6D66E25784106009E4240 /* AccountProfileLoginViewModel.swift */; };
-		3AF6D6752578672E009E4240 /* Combine.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AF6D6742578672E009E4240 /* Combine.framework */; };
 		3AF9926524A2B7C9005446D8 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF9926424A2B7C9005446D8 /* LoginView.swift */; };
 		3AF9926824A2B918005446D8 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF9926724A2B918005446D8 /* Utils.swift */; };
 		3AF9926A24A2B95C005446D8 /* InputValidation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF9926924A2B95C005446D8 /* InputValidation.swift */; };
@@ -144,8 +111,6 @@
 		3AFA234624DC9C2000F90ED8 /* DishReviewFB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFA234524DC9C2000F90ED8 /* DishReviewFB.swift */; };
 		3AFA234824DCACEA00F90ED8 /* ReviewsButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFA234724DCACEA00F90ED8 /* ReviewsButton.swift */; };
 		3AFA234A24DCB14B00F90ED8 /* DishReviewsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFA234924DCB14B00F90ED8 /* DishReviewsView.swift */; };
-		5DFDDF68EFBFD00B56D691FA /* Pods_VirtualMenu.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F4750A9F2FF6A260F5EE976 /* Pods_VirtualMenu.framework */; };
-		A731EB0E2495AD2300B75D05 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A731EB0D2495AD2300B75D05 /* CloudKit.framework */; };
 		A735992824ECD83300584BFD /* AccountProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A735992724ECD83300584BFD /* AccountProfileViewModel.swift */; };
 		A735992A24ECFDCF00584BFD /* AccountProfileLoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A735992924ECFDCF00584BFD /* AccountProfileLoginView.swift */; };
 		A73FD46324919A1300A035AB /* ListDishesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A73FD46224919A1300A035AB /* ListDishesView.swift */; };
@@ -174,11 +139,7 @@
 		A7FE996224F4A552006E5980 /* DishCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7FE996124F4A552006E5980 /* DishCard.swift */; };
 		C55FDD6524CABA2800CC8561 /* RestaurantFB.swift in Sources */ = {isa = PBXBuildFile; fileRef = C55FDD6424CABA2800CC8561 /* RestaurantFB.swift */; };
 		C5CD0F2924AC4C6600F0A60D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C5CD0F2824AC4C6600F0A60D /* GoogleService-Info.plist */; };
-		C5CD0F2A24AC4C6600F0A60D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C5CD0F2824AC4C6600F0A60D /* GoogleService-Info.plist */; };
-		C5CD0F2B24AC4C6600F0A60D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C5CD0F2824AC4C6600F0A60D /* GoogleService-Info.plist */; };
 		C5D0A16C24B1B6A300E44DF2 /* DishFB.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5D0A16B24B1B6A300E44DF2 /* DishFB.swift */; };
-		DE6D5DDB64F023C3E960E12D /* Pods_YumzzAppClip.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F1A62BDCBD69961643AEE623 /* Pods_YumzzAppClip.framework */; };
-		EF742DE3D7CD0978127C36A4 /* (null) in Frameworks */ = {isa = PBXBuildFile; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -220,8 +181,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		02FA9AB65351DC52511169C1 /* Pods-VirtualMenu.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VirtualMenu.debug.xcconfig"; path = "Target Support Files/Pods-VirtualMenu/Pods-VirtualMenu.debug.xcconfig"; sourceTree = "<group>"; };
-		2BE329480564055D4BCCA29C /* Pods-YumzzAppClip.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YumzzAppClip.release.xcconfig"; path = "Target Support Files/Pods-YumzzAppClip/Pods-YumzzAppClip.release.xcconfig"; sourceTree = "<group>"; };
 		34111051252262F10084975A /* YumzzAppClip.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YumzzAppClip.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		34111053252262F10084975A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		34111055252262F10084975A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -337,9 +296,8 @@
 		3AFA234524DC9C2000F90ED8 /* DishReviewFB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DishReviewFB.swift; sourceTree = "<group>"; };
 		3AFA234724DCACEA00F90ED8 /* ReviewsButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewsButton.swift; sourceTree = "<group>"; };
 		3AFA234924DCB14B00F90ED8 /* DishReviewsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DishReviewsView.swift; sourceTree = "<group>"; };
-		6D3F19380529752BEE43512E /* Pods-YumzzAppClip.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YumzzAppClip.debug.xcconfig"; path = "Target Support Files/Pods-YumzzAppClip/Pods-YumzzAppClip.debug.xcconfig"; sourceTree = "<group>"; };
-		8F4750A9F2FF6A260F5EE976 /* Pods_VirtualMenu.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VirtualMenu.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		996F4909F9997533C7A47D7E /* Pods-VirtualMenu.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VirtualMenu.release.xcconfig"; path = "Target Support Files/Pods-VirtualMenu/Pods-VirtualMenu.release.xcconfig"; sourceTree = "<group>"; };
+		661F5D3C4AF39D2D3B985D46 /* Pods_VirtualMenu.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VirtualMenu.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		84483D0B78AE0F0F84A8F245 /* Pods-VirtualMenu.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VirtualMenu.debug.xcconfig"; path = "Target Support Files/Pods-VirtualMenu/Pods-VirtualMenu.debug.xcconfig"; sourceTree = "<group>"; };
 		A731EB0D2495AD2300B75D05 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		A735992724ECD83300584BFD /* AccountProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountProfileViewModel.swift; sourceTree = "<group>"; };
 		A735992924ECFDCF00584BFD /* AccountProfileLoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountProfileLoginView.swift; sourceTree = "<group>"; };
@@ -370,7 +328,7 @@
 		C55FDD6424CABA2800CC8561 /* RestaurantFB.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestaurantFB.swift; sourceTree = "<group>"; };
 		C5CD0F2824AC4C6600F0A60D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		C5D0A16B24B1B6A300E44DF2 /* DishFB.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DishFB.swift; sourceTree = "<group>"; };
-		F1A62BDCBD69961643AEE623 /* Pods_YumzzAppClip.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_YumzzAppClip.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		EA19921D7296C5D8FC9FBFBA /* Pods-VirtualMenu.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VirtualMenu.release.xcconfig"; path = "Target Support Files/Pods-VirtualMenu/Pods-VirtualMenu.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -378,7 +336,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DE6D5DDB64F023C3E960E12D /* Pods_YumzzAppClip.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -386,12 +343,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3AF6D6752578672E009E4240 /* Combine.framework in Frameworks */,
-				3AE05F9A24EF27550024F802 /* FacebookLogin in Frameworks */,
-				A731EB0E2495AD2300B75D05 /* CloudKit.framework in Frameworks */,
-				3AE05F9824EF27550024F802 /* FacebookCore in Frameworks */,
-				EF742DE3D7CD0978127C36A4 /* (null) in Frameworks */,
-				5DFDDF68EFBFD00B56D691FA /* Pods_VirtualMenu.framework in Frameworks */,
+				3AAFED4625AFB84000F34BAF /* FacebookLogin in Frameworks */,
+				3AAFED4425AFB83800F34BAF /* Combine.framework in Frameworks */,
+				3AAFED4825AFB85600F34BAF /* FacebookCore in Frameworks */,
+				2E9E11058D3E0949B2DD3831 /* Pods_VirtualMenu.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -860,8 +815,7 @@
 				3AF6D6742578672E009E4240 /* Combine.framework */,
 				3A10F67125550CEF00E25BC6 /* AppAuth.framework */,
 				A731EB0D2495AD2300B75D05 /* CloudKit.framework */,
-				8F4750A9F2FF6A260F5EE976 /* Pods_VirtualMenu.framework */,
-				F1A62BDCBD69961643AEE623 /* Pods_YumzzAppClip.framework */,
+				661F5D3C4AF39D2D3B985D46 /* Pods_VirtualMenu.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -869,10 +823,8 @@
 		7D43EDA24CF9AA630D4BB85D /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				02FA9AB65351DC52511169C1 /* Pods-VirtualMenu.debug.xcconfig */,
-				996F4909F9997533C7A47D7E /* Pods-VirtualMenu.release.xcconfig */,
-				6D3F19380529752BEE43512E /* Pods-YumzzAppClip.debug.xcconfig */,
-				2BE329480564055D4BCCA29C /* Pods-YumzzAppClip.release.xcconfig */,
+				84483D0B78AE0F0F84A8F245 /* Pods-VirtualMenu.debug.xcconfig */,
+				EA19921D7296C5D8FC9FBFBA /* Pods-VirtualMenu.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -928,12 +880,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 34111069252262F20084975A /* Build configuration list for PBXNativeTarget "YumzzAppClip" */;
 			buildPhases = (
-				62ECAB41F2B8C2CD667140D7 /* [CP] Check Pods Manifest.lock */,
 				3411104D252262F10084975A /* Sources */,
 				3411104E252262F10084975A /* Frameworks */,
 				3411104F252262F10084975A /* Resources */,
-				AD0C599C9D2565F87570E202 /* [CP] Copy Pods Resources */,
-				5E365A70CA57E09D622E30A4 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -948,13 +897,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 3A987AFD2480350E0021F6E4 /* Build configuration list for PBXNativeTarget "VirtualMenu" */;
 			buildPhases = (
-				AD97449E2F8344B0F7C5FAE3 /* [CP] Check Pods Manifest.lock */,
+				793D23EB708318DF987BFCA6 /* [CP] Check Pods Manifest.lock */,
 				3A987ACF2480350C0021F6E4 /* Sources */,
 				3A987AD02480350C0021F6E4 /* Frameworks */,
 				3A987AD12480350C0021F6E4 /* Resources */,
 				34111066252262F20084975A /* Embed App Clips */,
-				2EC300FF0CCE7BC8A5E75A09 /* [CP] Embed Pods Frameworks */,
-				E586CDA819A2FB35320D4157 /* [CP] Copy Pods Resources */,
+				BCEF9D8752EBE7607B1C9145 /* [CP] Embed Pods Frameworks */,
+				80E891BD4966DEE0B5D27DA2 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -963,8 +912,8 @@
 			);
 			name = VirtualMenu;
 			packageProductDependencies = (
-				3AE05F9724EF27550024F802 /* FacebookCore */,
-				3AE05F9924EF27550024F802 /* FacebookLogin */,
+				3AAFED4525AFB84000F34BAF /* FacebookLogin */,
+				3AAFED4725AFB85600F34BAF /* FacebookCore */,
 			);
 			productName = VirtualMenu;
 			productReference = 3A987AD32480350C0021F6E4 /* Yumzz.app */;
@@ -1061,10 +1010,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				34111060252262F20084975A /* LaunchScreen.storyboard in Resources */,
+				3A56346F25AFFF5700BAD47E /* GoogleService-Info.plist in Resources */,
 				3411105D252262F20084975A /* Preview Assets.xcassets in Resources */,
-				3431BA57255A40B80018AFB5 /* GoogleService-Info.plist in Resources */,
-				34F39DA1253E357C00C30346 /* Assets.xcassets in Resources */,
 				3411105A252262F20084975A /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1099,7 +1046,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C5CD0F2A24AC4C6600F0A60D /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1107,87 +1053,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C5CD0F2B24AC4C6600F0A60D /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		2EC300FF0CCE7BC8A5E75A09 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-VirtualMenu/Pods-VirtualMenu-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-VirtualMenu/Pods-VirtualMenu-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-VirtualMenu/Pods-VirtualMenu-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		5E365A70CA57E09D622E30A4 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-YumzzAppClip/Pods-YumzzAppClip-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-YumzzAppClip/Pods-YumzzAppClip-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-YumzzAppClip/Pods-YumzzAppClip-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		62ECAB41F2B8C2CD667140D7 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-YumzzAppClip-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		AD0C599C9D2565F87570E202 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-YumzzAppClip/Pods-YumzzAppClip-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-YumzzAppClip/Pods-YumzzAppClip-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-YumzzAppClip/Pods-YumzzAppClip-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		AD97449E2F8344B0F7C5FAE3 /* [CP] Check Pods Manifest.lock */ = {
+		793D23EB708318DF987BFCA6 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1209,7 +1081,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		E586CDA819A2FB35320D4157 /* [CP] Copy Pods Resources */ = {
+		80E891BD4966DEE0B5D27DA2 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1226,6 +1098,23 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-VirtualMenu/Pods-VirtualMenu-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		BCEF9D8752EBE7607B1C9145 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-VirtualMenu/Pods-VirtualMenu-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-VirtualMenu/Pods-VirtualMenu-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-VirtualMenu/Pods-VirtualMenu-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -1233,42 +1122,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3431BA0F255A367E0018AFB5 /* ListDishesViewModel.swift in Sources */,
-				3431B9AC255A346E0018AFB5 /* DishFB.swift in Sources */,
-				3A6D9C1D25AD2CB3008F0F1A /* ReceiptCard.swift in Sources */,
-				3431B9C9255A34A10018AFB5 /* SeeMenuButton.swift in Sources */,
-				3AEB33162572065C00A61C0E /* InvertedOrangeButton.swift in Sources */,
-				3431BA32255A36FC0018AFB5 /* DishCard.swift in Sources */,
-				3AEB33212572099E00A61C0E /* WhiteBackButton.swift in Sources */,
-				3431BA14255A36810018AFB5 /* ListDishesView.swift in Sources */,
-				3431B9A7255A34670018AFB5 /* RestaurantFB.swift in Sources */,
-				3431B9E2255A35880018AFB5 /* ImageLoader.swift in Sources */,
-				3431BA28255A36CE0018AFB5 /* BackButton.swift in Sources */,
-				3AEB330C2572058900A61C0E /* WhiteButton.swift in Sources */,
-				3431B9F1255A35EF0018AFB5 /* ImageCache.swift in Sources */,
-				3A29A2C0255CDA9C005B8731 /* RestaurantReviewFB.swift in Sources */,
-				3431B99D255A345A0018AFB5 /* RestaurantHomeView.swift in Sources */,
-				3431B9DD255A35290018AFB5 /* FBURLImage.swift in Sources */,
-				3431B9B6255A34800018AFB5 /* Order.swift in Sources */,
-				3AEB32F42572052500A61C0E /* Extensions.swift in Sources */,
-				3431B9B1255A34740018AFB5 /* DishCategory.swift in Sources */,
 				34111054252262F10084975A /* AppDelegate.swift in Sources */,
-				3A6D9C2225AD2CB5008F0F1A /* XButtonDelete.swift in Sources */,
-				3AEB32EF2572051A00A61C0E /* ColorManager.swift in Sources */,
-				3A6D9C6A25AD41A2008F0F1A /* ReviewOrder.swift in Sources */,
 				34111056252262F10084975A /* SceneDelegate.swift in Sources */,
-				3A6D9C2325AD2CB7008F0F1A /* XButton.swift in Sources */,
+				3A30739D25B2115400D1C363 /* RestaurantFB.swift in Sources */,
 				34111058252262F10084975A /* ContentView.swift in Sources */,
-				3AEB33112572065A00A61C0E /* OrangeButton.swift in Sources */,
-				3431B9E7255A35A80018AFB5 /* DishDetailsView.swift in Sources */,
-				3A6D9C2625AD2CBF008F0F1A /* ViewCartButton.swift in Sources */,
-				3431B9A2255A345F0018AFB5 /* MenuSelectionViewModel.swift in Sources */,
-				3A6D9C2525AD2CBD008F0F1A /* MiniViewCartButton.swift in Sources */,
-				3431BA19255A36990018AFB5 /* OptionsCard.swift in Sources */,
-				3431BA05255A365A0018AFB5 /* BuildCard.swift in Sources */,
-				3A663915258882F500AC9C1A /* OrderModel.swift in Sources */,
-				3A6D9C2425AD2CB9008F0F1A /* DishCardOrder.swift in Sources */,
-				3AF6D65F257295CC009E4240 /* BuildFB.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1437,14 +1294,13 @@
 /* Begin XCBuildConfiguration section */
 		34111067252262F20084975A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6D3F19380529752BEE43512E /* Pods-YumzzAppClip.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CODE_SIGN_ENTITLEMENTS = YumzzAppClip/YumzzAppClip.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_ASSET_PATHS = "\"YumzzAppClip/Preview Content\"";
 				DEVELOPMENT_TEAM = 3VUUCS34BU;
 				ENABLE_PREVIEWS = YES;
@@ -1453,7 +1309,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 4.0;
+				MARKETING_VERSION = 5.0;
 				NEW_SETTING = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ARMenu.VirtualMenu.Clip;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1465,14 +1321,13 @@
 		};
 		34111068252262F20084975A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2BE329480564055D4BCCA29C /* Pods-YumzzAppClip.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CODE_SIGN_ENTITLEMENTS = YumzzAppClip/YumzzAppClipRelease.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_ASSET_PATHS = "\"YumzzAppClip/Preview Content\"";
 				DEVELOPMENT_TEAM = 3VUUCS34BU;
 				ENABLE_PREVIEWS = YES;
@@ -1481,7 +1336,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 4.0;
+				MARKETING_VERSION = 5.0;
 				NEW_SETTING = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ARMenu.VirtualMenu.Clip;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1607,22 +1462,23 @@
 		};
 		3A987AFE2480350E0021F6E4 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 02FA9AB65351DC52511169C1 /* Pods-VirtualMenu.debug.xcconfig */;
+			baseConfigurationReference = 84483D0B78AE0F0F84A8F245 /* Pods-VirtualMenu.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = VirtualMenu/VirtualMenu.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_ASSET_PATHS = "\"VirtualMenu/Preview Content\"";
 				DEVELOPMENT_TEAM = 3VUUCS34BU;
+				ENABLE_BITCODE = YES;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = VirtualMenu/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 4.0;
+				MARKETING_VERSION = 5.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ARMenu.VirtualMenu;
 				PRODUCT_NAME = Yumzz;
 				SWIFT_INSTALL_OBJC_HEADER = NO;
@@ -1633,22 +1489,23 @@
 		};
 		3A987AFF2480350E0021F6E4 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 996F4909F9997533C7A47D7E /* Pods-VirtualMenu.release.xcconfig */;
+			baseConfigurationReference = EA19921D7296C5D8FC9FBFBA /* Pods-VirtualMenu.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = VirtualMenu/YumzzRelease.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_ASSET_PATHS = "\"VirtualMenu/Preview Content\"";
 				DEVELOPMENT_TEAM = 3VUUCS34BU;
+				ENABLE_BITCODE = YES;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = VirtualMenu/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 4.0;
+				MARKETING_VERSION = 5.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ARMenu.VirtualMenu;
 				PRODUCT_NAME = Yumzz;
 				SWIFT_INSTALL_OBJC_HEADER = NO;
@@ -1803,15 +1660,15 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		3AE05F9724EF27550024F802 /* FacebookCore */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 3AE05F9624EF27550024F802 /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */;
-			productName = FacebookCore;
-		};
-		3AE05F9924EF27550024F802 /* FacebookLogin */ = {
+		3AAFED4525AFB84000F34BAF /* FacebookLogin */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 3AE05F9624EF27550024F802 /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */;
 			productName = FacebookLogin;
+		};
+		3AAFED4725AFB85600F34BAF /* FacebookCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3AE05F9624EF27550024F802 /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */;
+			productName = FacebookCore;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

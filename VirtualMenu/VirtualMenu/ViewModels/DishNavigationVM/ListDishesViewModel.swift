@@ -8,7 +8,9 @@
 
 import Foundation
 import SwiftUI
+//#if !APPCLIP
 import Firebase
+//#endif
 
 class ListDishesViewModel: ObservableObject {
     

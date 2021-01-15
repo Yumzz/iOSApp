@@ -7,13 +7,14 @@
 //
 
 import Foundation
-import FirebaseFirestore
+//import FirebaseFirestore
 import Firebase
-import FirebaseDatabase
+//import FirebaseDatabase
 import MapKit
 
 
 struct RestaurantFB {
+    
     var ref: DocumentReference? = nil
     let id: UUID
     let key: String
