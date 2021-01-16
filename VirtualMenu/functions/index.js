@@ -155,7 +155,6 @@ exports.dishAdd = functions.https.onRequest((req, resp) => {
 exports.getRestaurant = functions.https.onRequest((req, resp) => {
   cors(req, resp, () => {
     let i = req.body.id;
-
     admin
       .firestore()
       .collection("Restaurant")
@@ -164,16 +163,37 @@ exports.getRestaurant = functions.https.onRequest((req, resp) => {
       .then(function (doc) {
         if (doc.exists) {
           console.log("doc data: ", doc.data());
-          return doc.data();
+          resp.status(200).send(doc.data());
         } else {
           console.log("doc not there");
-          return "";
+          resp.status(500).send(`No doc for this rest exists`);
         }
+        return;
       })
       .catch(function (error) {
         console.log("error", error);
-        return error;
+        resp.status(500).send(error);
       });
+  });
+});
+
+exports.getDishes = functions.https.onRequest((req, resp) => {
+  cors(req, resp, () => {
+    let restaurandID = req.body.id;
+
+    admin
+      .firestore()
+      .collection("Dish")
+      .where("Restaurant", "==", restaurandID)
+      .get()
+      .then(querySnapshot => {
+        resp.status(200).send(querySnapshot.docs);
+        return;
+      })
+      .catch(function (error) {
+        console.log("error", error);
+        resp.status(500).send(error);
+      })
   });
 });
 
