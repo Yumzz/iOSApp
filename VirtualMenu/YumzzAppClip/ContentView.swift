@@ -10,9 +10,27 @@ import SwiftUI
 //import Firebase
 
 struct ContentView: View {
-//    @State var restaurant: RestaurantFB? = nil
+    @State var restaurant: RestaurantFB
     
     init() {
+        let url = URL(string: Constants.baseURL.api + "/getRestaurant")!
+        var request = URLRequest(url: url)
+        request.httpMethod = "GET"
+        let task = URLSession.shared.dataTask(with: url) {(data, response, error) in
+            if let error = error {
+                print("Error took place \(error)")
+                return
+            }
+            if let response = response as? HTTPURLResponse {
+                    print("Response HTTP Status code: \(response.statusCode)")
+                }
+            guard let data = data else { return }
+            let json = try? JSONSerialization.jsonObject(with: data, options: []) as? [String:Any]
+            self.restaurant = RestaurantFB(json: json!)
+        }
+        //create 
+        
+        
 //        let db = Firestore.firestore()
 //        let restaurantRef = db.collection("Restaurant").document("8mErR4vH8qjBBpb8sttN")
 //        var rest: RestaurantFB? = nil

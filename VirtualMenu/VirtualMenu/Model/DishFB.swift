@@ -14,7 +14,10 @@ import Firebase
 //#endif
 
 struct DishFB {
+    #if !APPCLIP
     let ref: DatabaseReference?
+    var storage = Storage.storage()
+    #endif
     let key: String
     let name: String
     let description: String
@@ -25,11 +28,10 @@ struct DishFB {
     var id: UUID
     var options: [String:Float] = [String:Float]()
     var exclusive: Bool = true
-    var storage = Storage.storage()
     var dishCatDescription: String = ""
     var photoExists = false
     
-    
+    #if !APPCLIP
     init(name: String, key: String = "", description: String, price: Double, type: String, restaurant: String) {
         self.ref = nil
         self.key = key
@@ -148,6 +150,36 @@ struct DishFB {
             self.coverPhotoURL = ""
         }
     }
+    #else
+    init?(json: [String:Any]){
+        guard let description = json["description"] as? String,
+              let name = json["Name"] as? String,
+              let price_range = json["price_range"] as? String,
+              let ethnicity = json["Ethnicity"] as? String,
+              let locationDict = json["location"] as? [String:Double],
+//              let latitude = locationDict["_latitude"] as? Double,
+//              let longitude = locationDict["_longitude"] as? Double,
+              let hours = json["hours"] as? [String:String],
+              let phone = json["Phone"] as? String,
+              let address = json["Address"] as? String,
+              let key = json["id"] as? String,
+              let num_ratings = json["N_Ratings"] as? Int64,
+              let rating_sum = json["RatingSum"] as? Int64
+        else {
+            print("initialization failed")
+            return nil
+        }
+        
+        self.id = UUID()
+//        self.key = key
+
+
+//              let location = CLLocation(latitude: (((locationDict["_latitude"])!)), longitude: ((locationDict["_longitude"])!)),
+              
+//              let location = CLLocation(latitude: (((json["location"]["_latitude"] as? Double)!)), longitude: ((json["location"]["_longitude"] as? Double)!))
+        
+    }
+    #endif
     
     func toAnyObject() -> Any {
         return [
