@@ -155,7 +155,6 @@ exports.dishAdd = functions.https.onRequest((req, resp) => {
 exports.getRestaurant = functions.https.onRequest((req, resp) => {
   cors(req, resp, () => {
     let i = req.body.id;
-
     admin
       .firestore()
       .collection("Restaurant")
@@ -175,6 +174,26 @@ exports.getRestaurant = functions.https.onRequest((req, resp) => {
         console.log("error", error);
         resp.status(500).send(error);
       });
+  });
+});
+
+exports.getDishes = functions.https.onRequest((req, resp) => {
+  cors(req, resp, () => {
+    let restaurandID = req.body.id;
+
+    admin
+      .firestore()
+      .collection("Dish")
+      .where("Restaurant", "==", restaurandID)
+      .get()
+      .then(querySnapshot => {
+        resp.status(200).send(querySnapshot.docs);
+        return;
+      })
+      .catch(function (error) {
+        console.log("error", error);
+        resp.status(500).send(error);
+      })
   });
 });
 
