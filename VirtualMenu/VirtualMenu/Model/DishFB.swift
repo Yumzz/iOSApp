@@ -7,18 +7,18 @@
 //
 
 import Foundation
-//#if !APPCLIP
+#if !APPCLIP
 //import FirebaseFirestore
 import Firebase
 //import FirebaseDatabase
-//#endif
+#endif
 
 struct DishFB {
     #if !APPCLIP
     let ref: DatabaseReference?
     var storage = Storage.storage()
-    #endif
     let key: String
+    #endif
     let name: String
     let description: String
     let price: Double
@@ -39,9 +39,8 @@ struct DishFB {
         self.description = description
         self.price = price
         self.type = type
-        self.coverPhotoURL = "Restaurant/\(restaurant.lowercased())/dish/\(name.lowercased().replacingOccurrences(of: " ", with: "-"))/photo/Picture.jpg"
         self.restaurant = restaurant
-        self.coverPhotoURL = "\(self.restaurant)/dish/\(self.name.lowercased().replacingOccurrences(of: " ", with: "-"))/photo/Picture.jpg"
+        self.coverPhotoURL = "\(self.restaurant.lowercased())/dish/\(self.name.lowercased().replacingOccurrences(of: " ", with: "-"))/photo/Picture.jpg"
         self.id = UUID()
     }
     
@@ -152,24 +151,26 @@ struct DishFB {
     }
     #else
     init?(json: [String:Any]){
-        guard let description = json["description"] as? String,
+        guard let description = json["Description"] as? String,
               let name = json["Name"] as? String,
-              let price_range = json["price_range"] as? String,
-              let ethnicity = json["Ethnicity"] as? String,
-              let locationDict = json["location"] as? [String:Double],
-//              let latitude = locationDict["_latitude"] as? Double,
-//              let longitude = locationDict["_longitude"] as? Double,
-              let hours = json["hours"] as? [String:String],
-              let phone = json["Phone"] as? String,
-              let address = json["Address"] as? String,
-              let key = json["id"] as? String,
-              let num_ratings = json["N_Ratings"] as? Int64,
-              let rating_sum = json["RatingSum"] as? Int64
+              let type = json["Type"] as? [String:String],
+              let restID = json["RestaurantID"] as? String,
+              let price = json["Price"] as? String,
+              let rest = json["Restaurant"] as? Int64
         else {
             print("initialization failed")
             return nil
         }
         
+        self.id = UUID()
+        
+//        self.key = key
+        self.name = name
+        self.description = description
+        self.price = price
+        self.type = type
+        self.coverPhotoURL = "Restaurant/\(restaurant.lowercased())/dish/\(name.lowercased().replacingOccurrences(of: " ", with: "-"))/photo/Picture.jpg"
+        self.restaurant = restaurant
         self.id = UUID()
 //        self.key = key
 

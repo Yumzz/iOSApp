@@ -179,21 +179,23 @@ exports.getRestaurant = functions.https.onRequest((req, resp) => {
 
 exports.getDishes = functions.https.onRequest((req, resp) => {
   cors(req, resp, () => {
+    var result = [];
     let restaurandID = req.body.id;
 
-    admin
+    return admin
       .firestore()
       .collection("Dish")
-      .where("Restaurant", "==", restaurandID)
+      .where("RestaurantID", "==", restaurandID)
       .get()
-      .then(querySnapshot => {
-        resp.status(200).send(querySnapshot.docs);
+      .then((querySnapshot) => {
+        querySnapshot.forEach((doc) => result.push(doc.data()));
+        resp.status(200).send(result);
         return;
       })
       .catch(function (error) {
         console.log("error", error);
         resp.status(500).send(error);
-      })
+      });
   });
 });
 

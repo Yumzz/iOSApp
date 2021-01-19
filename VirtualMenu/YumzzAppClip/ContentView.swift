@@ -11,6 +11,7 @@ import SwiftUI
 
 struct ContentView: View {
     @State var restaurant: RestaurantFB
+    @State var dishes: [DishFB]
     
     init() {
         let url = URL(string: Constants.baseURL.api + "/getRestaurant")!
@@ -28,6 +29,23 @@ struct ContentView: View {
             let json = try? JSONSerialization.jsonObject(with: data, options: []) as? [String:Any]
             self.restaurant = RestaurantFB(json: json!)
         }
+        let url2 = URL(string: Constants.baseURL.api + "/getDishes")!
+        var request2 = URLRequest(url: url2)
+        request2.httpMethod = "GET"
+        let task2 = URLSession.shared.dataTask(with: url2) {(data, response, error) in
+            if let error = error {
+                print("Error took place \(error)")
+                return
+            }
+            if let response = response as? HTTPURLResponse {
+                    print("Response HTTP Status code: \(response.statusCode)")
+                }
+            guard let data = data else { return }
+            let json = try? JSONSerialization.jsonObject(with: data, options: []) as? [String:Any]
+            //take data from json and create a dish from each
+            self.restaurant = RestaurantFB(json: json!)
+        }
+        
         //create 
         
         
@@ -48,7 +66,8 @@ struct ContentView: View {
 //        if self.restaurant == nil {
 //            EmptyView()
 //        } else {
-            EmptyView()
+        ListDishesView(restaurant: self.restaurant)
+        
             //having trouble with listdishesview w some sections
 //            ListDishesView(restaurant: self.restaurant!)
 //            RestaurantHomeView(restaurant: self.restaurant!, distance: 10)

@@ -7,7 +7,9 @@
 //
 
 import SwiftUI
+#if !APPCLIP
 import Firebase
+#endif
 
 struct ListDishesView: View {
         
@@ -32,9 +34,9 @@ struct ListDishesView: View {
     
     @State var appclip = false
         
-//    #if !APPCLIP
+    #if !APPCLIP
     @EnvironmentObject var order : OrderModel
-//    #endif
+    #endif
 
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
     @GestureState private var dragOffset = CGSize.zero
@@ -223,7 +225,7 @@ struct ListDishesView: View {
         .navigationBarTitle("\(self.restname)")
         .navigationBarBackButtonHidden(true)
         .navigationBarHidden(self.isNavBarHidden)
-        .navigationBarItems(leading: BackButton(mode: self.mode))
+        .navigationBarItems((self.appclip) ? (leading: BackButton(mode: self.mode)) : (EmptyView()))
         .onDisappear(){
             self.restname = ""
             self.isNavBarHidden = true

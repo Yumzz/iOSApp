@@ -23,6 +23,8 @@
 		34A966F2254691C200AD84CD /* RestaurantReviewFB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34A966F1254691C200AD84CD /* RestaurantReviewFB.swift */; };
 		34A966F8254762EF00AD84CD /* RestaurantReviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34A966F7254762EF00AD84CD /* RestaurantReviewView.swift */; };
 		34FCE2722507297F00329162 /* RatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34FCE2712507297F00329162 /* RatingView.swift */; };
+		3A0474CC25B4FEED00FFBBC9 /* ListDishesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A73FD46224919A1300A035AB /* ListDishesView.swift */; };
+		3A0474D125B5001A00FFBBC9 /* DishFB.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5D0A16B24B1B6A300E44DF2 /* DishFB.swift */; };
 		3A0745B5252B014D000EF6BD /* AppleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0745B4252B014C000EF6BD /* AppleButton.swift */; };
 		3A0745BB252B020F000EF6BD /* FacebookButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0745BA252B020F000EF6BD /* FacebookButton.swift */; };
 		3A0745C1252B02BA000EF6BD /* GoogleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0745C0252B02BA000EF6BD /* GoogleButton.swift */; };
@@ -445,8 +447,8 @@
 				C55FDD6424CABA2800CC8561 /* RestaurantFB.swift */,
 				C5D0A16B24B1B6A300E44DF2 /* DishFB.swift */,
 				3AF6D6592572882A009E4240 /* BuildFB.swift */,
-				3AFA234524DC9C2000F90ED8 /* DishReviewFB.swift */,
 				3A530DF224D9769100CBDE28 /* DishCategory.swift */,
+				3AFA234524DC9C2000F90ED8 /* DishReviewFB.swift */,
 				3ACAD188250B161A00B24CEB /* RestCategory.swift */,
 				3A6477F124B68D060077EF30 /* UserProfile.swift */,
 				3A5633CB24FA33790059B603 /* Order.swift */,
@@ -1128,12 +1130,14 @@
 			files = (
 				3A3073B525B2456300D1C363 /* ColorManager.swift in Sources */,
 				3A3073AB25B2229700D1C363 /* Extensions.swift in Sources */,
+				3A0474CC25B4FEED00FFBBC9 /* ListDishesView.swift in Sources */,
 				34111054252262F10084975A /* AppDelegate.swift in Sources */,
 				34111056252262F10084975A /* SceneDelegate.swift in Sources */,
 				3A3073A625B219E700D1C363 /* RestaurantFB.swift in Sources */,
 				34111058252262F10084975A /* ContentView.swift in Sources */,
 				3A3073B025B2456000D1C363 /* Constants.swift in Sources */,
 				3A3073B625B2456A00D1C363 /* Utils.swift in Sources */,
+				3A0474D125B5001A00FFBBC9 /* DishFB.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
