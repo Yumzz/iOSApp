@@ -199,6 +199,28 @@ exports.getDishes = functions.https.onRequest((req, resp) => {
   });
 });
 
+exports.getBuilds = functions.https.onRequest((req, resp) => {
+  cors(req, resp, () => {
+    var result = [];
+    let restaurandID = req.body.id;
+
+    return admin
+      .firestore()
+      .collection("Build")
+      .where("RestaurantID", "==", restaurandID)
+      .get()
+      .then((querySnapshot) => {
+        querySnapshot.forEach((doc) => result.push(doc.data()));
+        resp.status(200).send(result);
+        return;
+      })
+      .catch(function (error) {
+        console.log("error", error);
+        resp.status(500).send(error);
+      });
+  });
+});
+
 // exports.signOut = functions.https.onRequest((req, resp) => {
 //   cors(req, resp, () => {
 //     firebase

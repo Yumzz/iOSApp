@@ -153,10 +153,10 @@ struct DishFB {
     init?(json: [String:Any]){
         guard let description = json["Description"] as? String,
               let name = json["Name"] as? String,
-              let type = json["Type"] as? [String:String],
+              let type = json["Type"] as? String,
               let restID = json["RestaurantID"] as? String,
               let price = json["Price"] as? String,
-              let rest = json["Restaurant"] as? Int64
+              let rest = json["Restaurant"] as? String
         else {
             print("initialization failed")
             return nil
@@ -167,10 +167,11 @@ struct DishFB {
 //        self.key = key
         self.name = name
         self.description = description
-        self.price = price
+        let p = NSString(string: price)
+        self.price = p.doubleValue
         self.type = type
-        self.coverPhotoURL = "Restaurant/\(restaurant.lowercased())/dish/\(name.lowercased().replacingOccurrences(of: " ", with: "-"))/photo/Picture.jpg"
-        self.restaurant = restaurant
+        self.coverPhotoURL = "Restaurant/\(rest.lowercased())/dish/\(name.lowercased().replacingOccurrences(of: " ", with: "-"))/photo/Picture.jpg"
+        self.restaurant = rest
         self.id = UUID()
 //        self.key = key
 
@@ -199,7 +200,11 @@ extension DishFB: Hashable {
     }
     
     static func previewDish() -> DishFB {
+        #if !APPCLIP
         return DishFB(name: "", description: "", price: 0.0, type: "", restaurant: "")
+        #else
+        return DishFB(json: ["Description":"", "Name" : "", "Type" : "", "RestaurantID" : "", "Price":"", "Restaurant":""])!
+        #endif
     }
     
     

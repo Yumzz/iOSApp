@@ -64,7 +64,7 @@ class ListDishesViewModel: ObservableObject {
     }
     
     func fetchBuildsFB(name: String) {
-        db.collection("Build").whereField("Restaurant", isEqualTo: restaurant.id).getDocuments { (snapshot, error) in
+        db.collection("Build").whereField("RestaurantID", isEqualTo: restaurant.id).getDocuments { (snapshot, error) in
                     if let error = error {
                         print("Error getting documents: \(error)")
                     } else {
@@ -89,7 +89,7 @@ class ListDishesViewModel: ObservableObject {
     
     func fetchDishesFB(name: String) {
         //fetch dishes
-        db.collection("Dish").whereField("Restaurant", isEqualTo: restaurant.id).getDocuments { (snapshot, error) in
+        db.collection("Dish").whereField("RestaurantID", isEqualTo: restaurant.id).getDocuments { (snapshot, error) in
             if let error = error {
                 print("Error getting documents: \(error)")
             } else {

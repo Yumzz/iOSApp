@@ -7,11 +7,11 @@
 //
 
 import Foundation
-//#if !APPCLIP
+#if !APPCLIP
 import FirebaseFirestore
 import Firebase
 import FirebaseDatabase
-//#endif
+#endif
 
 struct BuildFB {
     let name: String
@@ -25,7 +25,7 @@ struct BuildFB {
     var typeOpt: [String] = []
     var sizePrice: [String: [String]]
     
-
+    #if !APPCLIP
     init(name: String, description: String, rest: String, addOns: [String:[String]], exclusiveOpts: [String:[String]], priceOpts:[String:[String: NSArray]], sizePrice: [String: [String]]) {
         self.name = name
         self.description = description
@@ -176,6 +176,39 @@ struct BuildFB {
         }
 
     }
+    #else
+    init?(json: [String:Any]){
+        guard
+            let name = json["Name"] as? String, let description = json["Description"] as? String, let rest = json["Restaurant"] as? String, let exclusiveopts = json["Exclusive-Opts"] as? [String:[String]], let priceopts = json["PriceOpts"] as? [String:[String: NSArray]], let sizeprice = json["SizePrice"] as? [String:[String]], let addons = json["Add-Ons"] as? [String:[String]]
+        else{
+            print("initialization failed")
+            return nil
+        }
+        self.name = name
+        self.description = description
+        self.rest = rest
+        self.addOns = addons
+        self.exclusiveOpts = exclusiveopts
+        self.id = UUID()
+        self.priceOpts = priceopts
+        self.sizePrice = sizeprice
+//        self.priceOpts = self.extractPrices(opts: priceopts)
+        for x in addOns.keys {
+            if(!self.typeOpt.contains(x)){
+                self.typeOpt.append(x)
+            }
+        }
+        for y in priceOpts.values {
+            for ya in y.keys {
+                if(!self.typePrice.contains(ya)){
+                    self.typePrice.append(ya)
+                }
+            }
+        }
+    }
+    
+    #endif
+
     
     func toAnyObject() -> Any {
         return [
@@ -194,7 +227,11 @@ extension BuildFB: Hashable {
     }
     
     static func previewBuild() -> BuildFB {
+        #if !APPCLIP
         return BuildFB(name: "", description: "", rest: "", addOns: ["":[""]], exclusiveOpts: ["":[""]], priceOpts: ["":["":[]]], sizePrice: ["":[""]])
+        #else
+        return BuildFB(json: ["Name": "", "Description": "", "Restaurant": "", "Add-Ons": [], "Exclusive-Opts" : [], "PriceOpts": [], "SizePrice": []])!
+        #endif
     }
     
 //    func extractPrices(opts: [String:[String: NSArray]]) -> [String:[String: [Float]]]{

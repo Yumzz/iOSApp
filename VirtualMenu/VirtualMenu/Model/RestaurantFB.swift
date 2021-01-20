@@ -19,7 +19,6 @@ struct RestaurantFB {
     
     #if !APPCLIP
     var ref: DocumentReference? = nil
-    var dishes: [DishFB]? = nil
     var featuredDishRefs: [DocumentReference?] = [DocumentReference?]()
     var reviews: [DocumentReference?] = [DocumentReference?]()
     let coordinate: GeoPoint
@@ -29,6 +28,8 @@ struct RestaurantFB {
     let id: UUID
     let key: String
     let name: String
+    var dishes: [DishFB]? = nil
+    var builds: [BuildFB]? = nil
     
     let description: String
     let ethnicity: String
@@ -54,7 +55,7 @@ struct RestaurantFB {
     
     
     #if !APPCLIP
-    init(name: String, key: String = "", description: String, averagePrice: Double, ethnicity: String, dishes: [DishFB], featuredDishRefs: [DocumentReference?], coordinate: GeoPoint, address: String, phone: String, price: String, ratingSum: Int64, n_Ratings: Int64, hour: String) {
+    init(name: String, key: String = "", description: String, ethnicity: String, dishes: [DishFB], featuredDishRefs: [DocumentReference?], coordinate: GeoPoint, address: String, phone: String, price: String, ratingSum: Int64, n_Ratings: Int64, hour: String) {
 //        self.ref = nil
         self.id = UUID()
         self.key = key
@@ -407,31 +408,74 @@ struct RestaurantFB {
         ]
     }
     
-    static func previewRest() -> RestaurantFB {
-        return RestaurantFB(name: "", description: "", averagePrice: 0.0, ethnicity: "", dishes: [], featuredDishRefs: [], coordinate: GeoPoint(latitude: 0.0, longitude: 0.0), address: "", phone: "", price: "Low", ratingSum: 5, n_Ratings: 1, hour: "")
-    }
     #else
 
     init?(json: [String:Any]){
-        guard let description = json["description"] as? String,
-              let name = json["Name"] as? String,
-              let price_range = json["price_range"] as? String,
-              let ethnicity = json["Ethnicity"] as? String,
-              let locationDict = json["location"] as? [String:Double],
+        guard let description = json["description"] as? String
+        else{
+            print("wow")
+            return nil
+        }
+             guard let name = json["Name"] as? String
+             else{
+                print("wow2")
+                return nil
+            }
+              guard let price_range = json["price_range"] as? String
+              else{
+                  print("wow3")
+                  return nil
+              }
+              guard let ethnicity = json["Ethnicity"] as? String
+              else{
+                  print("wow4")
+                  return nil
+              }
+        guard
+              let locationDict = json["location"] as? [String:Double]
+        else{
+            print("wow5")
+            return nil
+        }
 //              let latitude = locationDict["_latitude"] as? Double,
 //              let longitude = locationDict["_longitude"] as? Double,
-              let hours = json["hours"] as? [String:String],
-              let phone = json["Phone"] as? String,
-              let address = json["Address"] as? String,
-              let key = json["id"] as? String,
-              let num_ratings = json["N_Ratings"] as? Int64,
-              let rating_sum = json["RatingSum"] as? Int64
+            guard let hours = json["hours"] as? [String:String]
+            else{
+                print("wow6")
+                return nil
+            }
+        guard
+              let phone = json["Phone"] as? String
+        else{
+            print("wow7")
+            return nil
+        }
+             guard let address = json["Address"] as? String
+             else{
+                 print("wow8")
+                 return nil
+             }
+              guard let key = json["id"] as? String
+              else{
+                  print("wow9")
+                  return nil
+              }
+              guard let num_ratings = json["N_Ratings"] as? Int
+              else{
+                  print("wow10")
+                  return nil
+              }
+              guard let rating_sum = json["RatingSum"] as? Int
         else {
             print("initialization failed")
             return nil
         }
-        let index = Calendar.current.component(.weekday, from: Date())
-        self.hour = hours[Calendar.current.weekdaySymbols[index - 1]]!
+        if(hours[""] != ""){
+            let index = Calendar.current.component(.weekday, from: Date())
+            self.hour = hours[Calendar.current.weekdaySymbols[index - 1]]!
+        }else{
+            self.hour = ""
+        }
         
         self.id = UUID()
         self.key = key
@@ -441,19 +485,33 @@ struct RestaurantFB {
         self.ethnicity = ethnicity
 //        self.hours
         self.phone = phone
-
-        self.cityAddress = (address as AnyObject).components(separatedBy: delimiter)[1] + ((address as AnyObject).components(separatedBy: delimiter)[2]).components(separatedBy: " ")[0]
-        self.streetAddress = (address as AnyObject).components(separatedBy: delimiter)[0]
+        if(address != ""){
+            self.cityAddress = (address as AnyObject).components(separatedBy: delimiter)[1] + ((address as AnyObject).components(separatedBy: delimiter)[2]).components(separatedBy: " ")[0]
+            self.streetAddress = (address as AnyObject).components(separatedBy: delimiter)[0]
+        }else{
+            self.cityAddress = ""
+            self.streetAddress = ""
+        }
+        
         self.coverPhotoURL = "Restaurant/\(self.name.lowercased())/\(self.name.lowercased())_cover.png"
-        self.ratingSum = rating_sum
-        self.n_Ratings = num_ratings
+        self.ratingSum = Int64(rating_sum)
+        self.n_Ratings = Int64(num_ratings)
 //              let location = CLLocation(latitude: (((locationDict["_latitude"])!)), longitude: ((locationDict["_longitude"])!)),
               
 //              let location = CLLocation(latitude: (((json["location"]["_latitude"] as? Double)!)), longitude: ((json["location"]["_longitude"] as? Double)!))
         
     }
     
+    
     #endif
+    
+    static func previewRest() -> RestaurantFB {
+        #if !APPCLIP
+        return RestaurantFB(name: "", description: "", averagePrice: 0.0, ethnicity: "", dishes: [], featuredDishRefs: [], coordinate: GeoPoint(latitude: 0.0, longitude: 0.0), address: "", phone: "", price: "Low", ratingSum: 5, n_Ratings: 1, hour: "")
+        #else
+        return RestaurantFB(json: ["Name": "", "description": "", "price_range": "", "Ethnicity": "", "Address": "",  "Phone": "", "RatingSum": 5, "N_Ratings": 1, "hours": ["":""], "location": ["":0.0], "id": ""])!
+        #endif
+    }
     
     func getDollaSigns(price: String) -> String{
         var p = ""
