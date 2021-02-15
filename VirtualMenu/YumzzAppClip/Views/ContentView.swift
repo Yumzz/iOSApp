@@ -28,7 +28,7 @@ struct ContentView: View {
     
     var body: some View {
         ZStack{
-            if self.rest.hour == "" {
+            if self.viewModel.restaurant == nil {
                 EmptyView()
             }
             else{
@@ -37,8 +37,9 @@ struct ContentView: View {
         }
         .onAppear{
             self.dispatchGroup.notify(queue: .main){
-                    print("appear")
-                    self.rest = self.viewModel.restaurant!
+                print("appear")
+                self.rest = self.viewModel.restaurant!
+                print(self.rest.hour)
                 }
             }
 //        if self.restaurant == nil {

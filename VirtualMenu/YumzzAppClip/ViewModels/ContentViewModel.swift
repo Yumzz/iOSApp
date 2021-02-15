@@ -12,34 +12,48 @@ import Foundation
 class ContentViewModel: ObservableObject {
     
     @Published var restaurant: RestaurantFB? = nil
-    @Published var dishes: [DishFB]? = nil
+    let dishDispatch = DispatchGroup()
     
+    let buildDispatch = DispatchGroup()
+
     
     func fetchStuff(dis: DispatchGroup){
-        dis.enter()
         print("start fetch stuff")
-        let url = URL(string: Constants.baseURL.api + "/getRestaurant")!
+        let x = ["id":"Bd2fiejnVscgFrJJOidp"]
+        let jsonData = try? JSONSerialization.data(withJSONObject: x)
+
+        let url = URL(string: (Constants.baseURL.api + "/getRestaurant"))!
+        
+        print(url.absoluteString)
         var request = URLRequest(url: url)
-        request.httpMethod = "GET"
+        request.httpMethod = "POST"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.httpBody = jsonData
         print("before task")
-        _ = URLSession.shared.dataTask(with: request) {(data, response, error) in
+        let task1 = URLSession.shared.dataTask(with: request) {(data, response, error) in
             print("start task")
             if let error = error {
                 print("Error took place \(error)")
                 return
             }
             if let response = response as? HTTPURLResponse {
-                    print("Response HTTP Status code: \(response.statusCode)")
-                }
-            guard let data = data else { return }
+                print("Response HTTP Status code: \(response.statusCode)")
+            }
+            guard let data = data else { print("e"); return }
             let json = try? JSONSerialization.jsonObject(with: data, options: []) as? [String:Any]
             self.restaurant = RestaurantFB(json: json!)!
-            print("stop task")
+            print("\(self.restaurant)")
+            print("\(self.restaurant?.ethnicity)")
+            print("stop task: \(self.restaurant!.name)")
+            
         }
+        task1.resume()
         let url2 = URL(string: Constants.baseURL.api + "/getDishes")!
         var request2 = URLRequest(url: url2)
-        request2.httpMethod = "GET"
-        _ = URLSession.shared.dataTask(with: request2) {(data, response, error) in
+        request2.httpMethod = "POST"
+        request2.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request2.httpBody = jsonData
+        let task2 = URLSession.shared.dataTask(with: request2) {(data, response, error) in
             print("start task")
             if let error = error {
                 print("Error took place \(error)")
@@ -48,17 +62,21 @@ class ContentViewModel: ObservableObject {
             if let response = response as? HTTPURLResponse {
                     print("Response HTTP Status code: \(response.statusCode)")
                 }
-            
-            guard let data = data else { return }
-            let json = try? JSONSerialization.jsonObject(with: data, options: []) as? [[String:String]]
+
+            guard let data = data else { print("ee"); return }
+            let json = try? JSONSerialization.jsonObject(with: data, options: [])
             //take data from json and create a dish from each
-            self.createDishes(json: json!)
+//            self.dishDispatch.enter()
+            print("json1: \(json)")
             print("stop task")
         }
+        task2.resume()
         let url3 = URL(string: Constants.baseURL.api + "/getBuilds")!
         var request3 = URLRequest(url: url3)
-        request3.httpMethod = "GET"
-        _ = URLSession.shared.dataTask(with: request3) {(data, response, error) in
+        request3.httpMethod = "POST"
+        request3.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request3.httpBody = jsonData
+        let task3 = URLSession.shared.dataTask(with: request3) {(data, response, error) in
             if let error = error {
                 print("Error took place \(error)")
                 return
@@ -66,15 +84,22 @@ class ContentViewModel: ObservableObject {
             if let response = response as? HTTPURLResponse {
                     print("Response HTTP Status code: \(response.statusCode)")
                 }
-            
-            guard let data = data else { return }
+
+            guard let data = data else { print("ee3"); return }
             let json = try? JSONSerialization.jsonObject(with: data, options: []) as? [[String:String]]
+            print("json2:\(json)")
             //take data from json and create a dish from each
-            self.createBuilds(json: json!)
+        
+//            if(json != nil){
+//                self.createBuilds(json: json!)
+//            }
             print("stop task")
             print("finish fetch stuff")
+            
             dis.leave()
+
         }
+        task3.resume()
     }
     
     func createDishes(json: [[String:String]]){
@@ -84,6 +109,7 @@ class ContentViewModel: ObservableObject {
             }
             self.restaurant?.dishes!.append(DishFB(json: x)!)
         }
+        self.dishDispatch.leave()
     }
     func createBuilds(json: [[String:String]]){
         for x in json{

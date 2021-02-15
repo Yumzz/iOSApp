@@ -180,12 +180,12 @@ exports.getRestaurant = functions.https.onRequest((req, resp) => {
 exports.getDishes = functions.https.onRequest((req, resp) => {
   cors(req, resp, () => {
     var result = [];
-    let restaurandID = req.body.id;
+    let id = req.body.id;
 
     return admin
       .firestore()
       .collection("Dish")
-      .where("RestaurantID", "==", restaurandID)
+      .where("RestaurantID", "==", id)
       .get()
       .then((querySnapshot) => {
         querySnapshot.forEach((doc) => result.push(doc.data()));
@@ -202,12 +202,12 @@ exports.getDishes = functions.https.onRequest((req, resp) => {
 exports.getBuilds = functions.https.onRequest((req, resp) => {
   cors(req, resp, () => {
     var result = [];
-    let restaurandID = req.body.id;
+    let id = req.body.id;
 
     return admin
       .firestore()
       .collection("Build")
-      .where("RestaurantID", "==", restaurandID)
+      .where("RestaurantID", "==", id)
       .get()
       .then((querySnapshot) => {
         querySnapshot.forEach((doc) => result.push(doc.data()));
