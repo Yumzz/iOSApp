@@ -21,7 +21,18 @@ class ListDishesViewModel: ObservableObject {
         
         self.restaurant = restaurant
         
-        self.dispatchGroup.enter()
+        dispatch.enter()
+        
+        self.categorizeDishes(dishes: self.restaurant.dishes!)
+        
+        print("catted")
+        
+        self.dishCategories.sort {
+            $0.name < $1.name
+        }
+        dispatch.leave()
+        
+        
     }
     
     

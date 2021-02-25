@@ -11,14 +11,13 @@ import SwiftUI
 
 struct ContentView: View {
     @State var rest: RestaurantFB = RestaurantFB.previewRest()
-    @ObservedObject var viewModel = ContentViewModel()
+    @ObservedObject var viewModel : ContentViewModel
     
     let dispatchGroup = DispatchGroup()
     
-
     init(){
-        self.dispatchGroup.enter()
-        self.viewModel.fetchStuff(dis: dispatchGroup)
+        self.viewModel = ContentViewModel(dis: dispatchGroup)
+//        self.viewModel.fetchStuff(dis: dispatchGroup)
 //        self.dispatchGroup.notify(queue:.main){
 //            print("done")
 ////            self.saveRest(rest: self.viewModel.restaurant!)
@@ -28,8 +27,9 @@ struct ContentView: View {
     
     var body: some View {
         ZStack{
-            if self.viewModel.restaurant == nil {
-                EmptyView()
+            if self.rest.hour == "" {
+                Color(#colorLiteral(red: 0.9725490196, green: 0.968627451, blue: 0.9607843137, alpha: 1)).edgesIgnoringSafeArea(.all)
+
             }
             else{
                 ListDishesView(restaurant: self.rest)
@@ -39,7 +39,7 @@ struct ContentView: View {
             self.dispatchGroup.notify(queue: .main){
                 print("appear")
                 self.rest = self.viewModel.restaurant!
-                print(self.rest.hour)
+                print(self.rest.hour == "")
                 }
             }
 //        if self.restaurant == nil {

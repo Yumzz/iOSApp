@@ -15,7 +15,6 @@
 		3411105D252262F20084975A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3411105C252262F20084975A /* Preview Assets.xcassets */; };
 		34111065252262F20084975A /* YumzzAppClip.app in Embed App Clips */ = {isa = PBXBuildFile; fileRef = 34111051252262F10084975A /* YumzzAppClip.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		34370CC72500D59A00ECD88B /* MenuSelectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34370CC62500D59A00ECD88B /* MenuSelectionViewModel.swift */; };
-		343A44C0252E21FE00109C90 /* RestaurantHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 343A44BF252E21FE00109C90 /* RestaurantHomeView.swift */; };
 		3482C0CF250C95D300FC362D /* BottomSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3482C0CE250C95D300FC362D /* BottomSheetView.swift */; };
 		34909E6F252D51E000B43D7B /* HomeScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34909E6E252D51E000B43D7B /* HomeScreenView.swift */; };
 		34909E75252D5D0500B43D7B /* HomeScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34909E74252D5D0500B43D7B /* HomeScreenViewModel.swift */; };
@@ -96,6 +95,7 @@
 		3AAFED4425AFB83800F34BAF /* Combine.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AF6D6742578672E009E4240 /* Combine.framework */; };
 		3AAFED4625AFB84000F34BAF /* FacebookLogin in Frameworks */ = {isa = PBXBuildFile; productRef = 3AAFED4525AFB84000F34BAF /* FacebookLogin */; };
 		3AAFED4825AFB85600F34BAF /* FacebookCore in Frameworks */ = {isa = PBXBuildFile; productRef = 3AAFED4725AFB85600F34BAF /* FacebookCore */; };
+		3AB0DFBB25E77A9000B82A33 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3A0745D425301CE5000EF6BD /* Colors.xcassets */; };
 		3ABA90F124F63DB500695B06 /* BlackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ABA90F024F63DB500695B06 /* BlackButton.swift */; };
 		3ABA90F524F64EDE00695B06 /* GuestButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ABA90F424F64EDE00695B06 /* GuestButton.swift */; };
 		3ABD6A80253AC1D40082681A /* XButtonDelete.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ABD6A7F253AC1D40082681A /* XButtonDelete.swift */; };
@@ -109,14 +109,18 @@
 		3ACAD187250AF4B200B24CEB /* ListDishesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACAD186250AF4B200B24CEB /* ListDishesViewModel.swift */; };
 		3ACAD189250B161A00B24CEB /* RestCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACAD188250B161A00B24CEB /* RestCategory.swift */; };
 		3AEB331C2572092000A61C0E /* WhiteBackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AEB331B2572092000A61C0E /* WhiteBackButton.swift */; };
-		3AED7BC925CB336C00341E95 /* Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AED7BC825CB336C00341E95 /* Cache.swift */; };
-		3AED7BCF25CB532900341E95 /* CacheDishInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AED7BCE25CB532900341E95 /* CacheDishInfo.swift */; };
+		3AED7BDA25DF3C7800341E95 /* DishAdminFetchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AED7BD925DF3C7800341E95 /* DishAdminFetchView.swift */; };
+		3AED7BEF25DF565000341E95 /* RestaurantHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 343A44BF252E21FE00109C90 /* RestaurantHomeView.swift */; };
+		3AED7BF025DF565100341E95 /* ListDishesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A73FD46224919A1300A035AB /* ListDishesView.swift */; };
 		3AF1BA84252A926900FAA9A0 /* OnboardingInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF1BA83252A926900FAA9A0 /* OnboardingInfo.swift */; };
 		3AF1BA8A252A92B500FAA9A0 /* OrangeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF1BA89252A92B500FAA9A0 /* OrangeButton.swift */; };
 		3AF1BA90252A92DD00FAA9A0 /* InvertedOrangeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF1BA8F252A92DD00FAA9A0 /* InvertedOrangeButton.swift */; };
 		3AF1BA96252A93F400FAA9A0 /* OnboardingInfo2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF1BA95252A93F400FAA9A0 /* OnboardingInfo2.swift */; };
 		3AF6D65A2572882A009E4240 /* BuildFB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF6D6592572882A009E4240 /* BuildFB.swift */; };
 		3AF6D66F25784106009E4240 /* AccountProfileLoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF6D66E25784106009E4240 /* AccountProfileLoginViewModel.swift */; };
+		3AF77F6B25DFFEB0000F520F /* Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AED7BC825CB336C00341E95 /* Cache.swift */; };
+		3AF77F7025E00852000F520F /* CacheDishInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AED7BCE25CB532900341E95 /* CacheDishInfo.swift */; };
+		3AF77F7625E17F43000F520F /* CacheRestInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF77F7525E17F43000F520F /* CacheRestInfo.swift */; };
 		3AF9926524A2B7C9005446D8 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF9926424A2B7C9005446D8 /* LoginView.swift */; };
 		3AF9926824A2B918005446D8 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF9926724A2B918005446D8 /* Utils.swift */; };
 		3AF9926A24A2B95C005446D8 /* InputValidation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF9926924A2B95C005446D8 /* InputValidation.swift */; };
@@ -127,7 +131,6 @@
 		3AFA234A24DCB14B00F90ED8 /* DishReviewsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFA234924DCB14B00F90ED8 /* DishReviewsView.swift */; };
 		A735992824ECD83300584BFD /* AccountProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A735992724ECD83300584BFD /* AccountProfileViewModel.swift */; };
 		A735992A24ECFDCF00584BFD /* AccountProfileLoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A735992924ECFDCF00584BFD /* AccountProfileLoginView.swift */; };
-		A73FD46324919A1300A035AB /* ListDishesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A73FD46224919A1300A035AB /* ListDishesView.swift */; };
 		A777C3A424D3EC7A009658AA /* UserStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = A777C3A324D3EC7A009658AA /* UserStore.swift */; };
 		A779ACAA250D4F7400146565 /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = A779ACA9250D4F7400146565 /* ImageCache.swift */; };
 		A78531FA24DE312600F94C67 /* ImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = A78531F924DE312600F94C67 /* ImageLoader.swift */; };
@@ -299,6 +302,7 @@
 		3AEB331B2572092000A61C0E /* WhiteBackButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhiteBackButton.swift; sourceTree = "<group>"; };
 		3AED7BC825CB336C00341E95 /* Cache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cache.swift; sourceTree = "<group>"; };
 		3AED7BCE25CB532900341E95 /* CacheDishInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheDishInfo.swift; sourceTree = "<group>"; };
+		3AED7BD925DF3C7800341E95 /* DishAdminFetchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DishAdminFetchView.swift; sourceTree = "<group>"; };
 		3AF1BA83252A926900FAA9A0 /* OnboardingInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingInfo.swift; sourceTree = "<group>"; };
 		3AF1BA89252A92B500FAA9A0 /* OrangeButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrangeButton.swift; sourceTree = "<group>"; };
 		3AF1BA8F252A92DD00FAA9A0 /* InvertedOrangeButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvertedOrangeButton.swift; sourceTree = "<group>"; };
@@ -306,6 +310,7 @@
 		3AF6D6592572882A009E4240 /* BuildFB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildFB.swift; sourceTree = "<group>"; };
 		3AF6D66E25784106009E4240 /* AccountProfileLoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountProfileLoginViewModel.swift; sourceTree = "<group>"; };
 		3AF6D6742578672E009E4240 /* Combine.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Combine.framework; path = System/Library/Frameworks/Combine.framework; sourceTree = SDKROOT; };
+		3AF77F7525E17F43000F520F /* CacheRestInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheRestInfo.swift; sourceTree = "<group>"; };
 		3AF9926424A2B7C9005446D8 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		3AF9926724A2B918005446D8 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		3AF9926924A2B95C005446D8 /* InputValidation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputValidation.swift; sourceTree = "<group>"; };
@@ -633,6 +638,7 @@
 			isa = PBXGroup;
 			children = (
 				3A4E2E3124D12D2500C34DD8 /* DishAdminView.swift */,
+				3AED7BD925DF3C7800341E95 /* DishAdminFetchView.swift */,
 			);
 			path = AdminView;
 			sourceTree = "<group>";
@@ -811,6 +817,7 @@
 			isa = PBXGroup;
 			children = (
 				3AED7BCE25CB532900341E95 /* CacheDishInfo.swift */,
+				3AF77F7525E17F43000F520F /* CacheRestInfo.swift */,
 				3AED7BC825CB336C00341E95 /* Cache.swift */,
 			);
 			path = Cache;
@@ -1067,6 +1074,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3A56346F25AFFF5700BAD47E /* GoogleService-Info.plist in Resources */,
+				3AB0DFBB25E77A9000B82A33 /* Colors.xcassets in Resources */,
 				3411105D252262F20084975A /* Preview Assets.xcassets in Resources */,
 				3411105A252262F20084975A /* Assets.xcassets in Resources */,
 			);
@@ -1205,6 +1213,7 @@
 				3A5F685624FE470C00F9B43D /* ReviewCard.swift in Sources */,
 				3A10F6242554D6B900E25BC6 /* QRScanView.swift in Sources */,
 				3A5633CC24FA33790059B603 /* Order.swift in Sources */,
+				3AF77F6B25DFFEB0000F520F /* Cache.swift in Sources */,
 				3A4A0E72249EB94D0030635E /* ImagePicker.swift in Sources */,
 				3A0745C1252B02BA000EF6BD /* GoogleButton.swift in Sources */,
 				3A4E2E3B24D21E8E00C34DD8 /* LocationManager.swift in Sources */,
@@ -1220,8 +1229,8 @@
 				3A3DD56C253654CA00536D62 /* DishPreviewCard.swift in Sources */,
 				3AFA234624DC9C2000F90ED8 /* DishReviewFB.swift in Sources */,
 				3A987B102481511B0021F6E4 /* ContentView.swift in Sources */,
-				3AED7BC925CB336C00341E95 /* Cache.swift in Sources */,
 				34A5D663249BF6DF00E4FE9C /* DishDetailsView.swift in Sources */,
+				3AED7BEF25DF565000341E95 /* RestaurantHomeView.swift in Sources */,
 				3A6638E125844C6B00AC9C1A /* BuildOptsCard.swift in Sources */,
 				3AF9926824A2B918005446D8 /* Utils.swift in Sources */,
 				3A4E2E3D24D2275F00C34DD8 /* SearchBarButton.swift in Sources */,
@@ -1241,12 +1250,13 @@
 				3A5633BE24F901E80059B603 /* SignInWithAppleDelegates.swift in Sources */,
 				A7912A2624CF82140052988C /* WhiteButton.swift in Sources */,
 				3482C0CF250C95D300FC362D /* BottomSheetView.swift in Sources */,
+				3AF77F7025E00852000F520F /* CacheDishInfo.swift in Sources */,
+				3AED7BDA25DF3C7800341E95 /* DishAdminFetchView.swift in Sources */,
 				3A13B6E424C1816B0006458B /* ReportProblem.swift in Sources */,
 				3A3DD58F2538396B00536D62 /* XButton.swift in Sources */,
 				A779ACAA250D4F7400146565 /* ImageCache.swift in Sources */,
 				3AF6D65A2572882A009E4240 /* BuildFB.swift in Sources */,
 				3ACAD170250ACE2000B24CEB /* LoginViewModel.swift in Sources */,
-				A73FD46324919A1300A035AB /* ListDishesView.swift in Sources */,
 				3A987AD92480350C0021F6E4 /* SceneDelegate.swift in Sources */,
 				3AFA234824DCACEA00F90ED8 /* ReviewsButton.swift in Sources */,
 				3A5633C424F902630059B603 /* AuthState.swift in Sources */,
@@ -1261,7 +1271,6 @@
 				3A3DD59C2539405000536D62 /* SeeMenuButton.swift in Sources */,
 				3A10F61E2554D69A00E25BC6 /* QRScanViewController.swift in Sources */,
 				3ABD6A80253AC1D40082681A /* XButtonDelete.swift in Sources */,
-				343A44C0252E21FE00109C90 /* RestaurantHomeView.swift in Sources */,
 				3AFA234A24DCB14B00F90ED8 /* DishReviewsView.swift in Sources */,
 				3ABA90F124F63DB500695B06 /* BlackButton.swift in Sources */,
 				3A4E2E3F24D2403300C34DD8 /* RestaurantDishViewModel.swift in Sources */,
@@ -1277,12 +1286,14 @@
 				C55FDD6524CABA2800CC8561 /* RestaurantFB.swift in Sources */,
 				3AA9897624B517F00070FD97 /* Extensions.swift in Sources */,
 				3AF1BA84252A926900FAA9A0 /* OnboardingInfo.swift in Sources */,
+				3AED7BF025DF565100341E95 /* ListDishesView.swift in Sources */,
 				3ABA90F524F64EDE00695B06 /* GuestButton.swift in Sources */,
 				A7912A2824CF87260052988C /* CoralButton.swift in Sources */,
 				3A3DD57425380E1000536D62 /* ReviewOrder.swift in Sources */,
 				34370CC72500D59A00ECD88B /* MenuSelectionViewModel.swift in Sources */,
 				3A3DD57F2538333100536D62 /* DishCardOrder.swift in Sources */,
 				3A3DD5A62539736A00536D62 /* OptionsCard.swift in Sources */,
+				3AF77F7625E17F43000F520F /* CacheRestInfo.swift in Sources */,
 				3A0745DB253021CB000EF6BD /* ColorManager.swift in Sources */,
 				A735992A24ECFDCF00584BFD /* AccountProfileLoginView.swift in Sources */,
 				3A4E2E2024C6244600C34DD8 /* ForgotPassword.swift in Sources */,
@@ -1295,7 +1306,6 @@
 				3A5633BA24F9014C0059B603 /* SignInWithAppleCoordinator.swift in Sources */,
 				3A0745BB252B020F000EF6BD /* FacebookButton.swift in Sources */,
 				3AEB331C2572092000A61C0E /* WhiteBackButton.swift in Sources */,
-				3AED7BCF25CB532900341E95 /* CacheDishInfo.swift in Sources */,
 				3AF9926524A2B7C9005446D8 /* LoginView.swift in Sources */,
 				A7912A2A24CF8EFE0052988C /* CustomPasswordField.swift in Sources */,
 				3A4A0E70249EB9320030635E /* AccountProfileView.swift in Sources */,

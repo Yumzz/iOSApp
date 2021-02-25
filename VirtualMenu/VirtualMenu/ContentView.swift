@@ -23,10 +23,12 @@ struct ContentView: View {
             //if Auth.auth().currentUser != nil {
             if loggedIn {
                 HomeScreenView()
+//                DishAdminFetchView()
 //                LoginView(loggedin: $loggedIn)
             } else {
                //User Not logged in
                 OnboardingInfo()
+//                DishAdminFetchView()
             }
         }
     }

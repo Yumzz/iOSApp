@@ -7,9 +7,8 @@
 //
 
 import SwiftUI
-#if !APPCLIP
 import Firebase
-#endif
+
 
 struct ListDishesView: View {
         
@@ -34,9 +33,7 @@ struct ListDishesView: View {
     
     @State var appclip = false
         
-    #if !APPCLIP
     @EnvironmentObject var order : OrderModel
-    #endif
 
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
     @GestureState private var dragOffset = CGSize.zero
@@ -56,16 +53,12 @@ struct ListDishesView: View {
     
     var body: some View {
         Group {
-//            #if !APPCLIP
             if(!self.order.dishesChosen.isEmpty || !self.order.buildsChosen.isEmpty){
                 view.overlay(overlay, alignment: .bottom)
                     .navigationBarTitle("\(self.restname)")
                     .navigationBarBackButtonHidden(true)
                     .navigationBarItems(leading: BackButton(mode: self.mode))
                     .navigationBarHidden(self.isNavBarHidden)
-//                    .onAppear(){
-//                        self.appclip = false
-//                    }
                     .onDisappear(){
                         print("disappear")
                         self.restname = ""
@@ -77,39 +70,24 @@ struct ListDishesView: View {
             } else {
                  view
                     .navigationBarHidden(self.isNavBarHidden)
-                    .onAppear(){
-                        self.appclip = false
-                    }
              }
-//            #else
-//            Group{
-//                view
-//                   .navigationBarHidden(self.isNavBarHidden)
-//                    .onAppear(){
-//                        self.appclip = true
-//                    }
-//            }
-//            #endif
         }
         .navigationBarHidden(self.isNavBarHidden)
     }
     
     var overlay: some View {
         VStack{
-//            #if !APPCLIP
             NavigationLink(destination: ReviewOrder().navigationTitle("").navigationBarHidden(true)){
                 ViewCartButton(dishCount: self.order.allDishes)
                     .clipShape(RoundedRectangle(cornerRadius: 10, style: .circular))
             }
             Spacer().frame(width: 0, height: 10)
-//            #endif
         }
     }
 
     
     
     var view: some View {
-//        EmptyView()
         ZStack {
             Color(#colorLiteral(red: 0.9725490196, green: 0.968627451, blue: 0.9607843137, alpha: 1)).edgesIgnoringSafeArea(.all)
             ScrollView(.vertical) {
@@ -174,33 +152,18 @@ struct ListDishesView: View {
                                 }
                                 ForEach(dishCategory.dishes, id: \.id) {
                                     dish in
-////                                    VStack{
-//                                    if (!self.appclip) {
-//                                        #if !APPCLIP
-
-//
                                         NavigationLink(destination:
                                             DishDetailsView(dish: dish, restaurant: self.restaurant).navigationBarHidden(false)
                                         ) {
                                             DishCard(urlImage: (dish.photoExists) ? (FBURLImage(url: dish.coverPhotoURL, imageAspectRatio: .fill, imageWidth: 80, imageHeight: 80, circle: false)) : nil, dishName: dish.name, dishIngredients: dish.description, price: self.listDishVM.formatPrice(price: dish.price), rest: self.restaurant, dish: dish)
                                         }
-//                                        #endif
-//                                    }
-////                                    #else
-//                                    else{
-//                                        DishCard(urlImage: nil, dishName: dish.name, dishIngredients: dish.description, price: self.listDishVM.formatPrice(price: dish.price), rest: self.restaurant, dish: dish)
-//                                    }
-//
-////                                    #if APPCLIP
-//
-////                                    #endif
-////                                    }
+
                                 }
                                 Spacer().frame(height: 20)
                             }
                         }.id(self.dishCats.firstIndex(of: dishCategory))
                     }
-                    Spacer()
+//                    Spacer()
                 }
                 }
             }.navigationBarTitleDisplayMode(self.addtapped ? .inline : .automatic)
@@ -225,7 +188,6 @@ struct ListDishesView: View {
         .navigationBarTitle("\(self.restname)")
         .navigationBarBackButtonHidden(true)
         .navigationBarHidden(self.isNavBarHidden)
-        .navigationBarItems((self.appclip) ? (leading: BackButton(mode: self.mode)) : (EmptyView()))
         .onDisappear(){
             self.restname = ""
             self.isNavBarHidden = true
@@ -239,8 +201,8 @@ struct ListDishesView: View {
                 return Alert(title: Text("Dish Added"))
             }
         }
-        .gesture(
-            DragGesture().updating($dragOffset, body: { (value, state, transaction) in
+        
+        .gesture(DragGesture().updating($dragOffset, body: { (value, state, transaction) in
             if(value.translation.width > 100) {
                 self.mode.wrappedValue.dismiss()
             }
@@ -254,6 +216,5 @@ struct ListDishesView_Previews: PreviewProvider {
         NavigationView{
             ListDishesView(restaurant:  RestaurantFB.previewRest())
         }
-
     }
 }

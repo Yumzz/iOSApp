@@ -507,7 +507,7 @@ struct RestaurantFB {
     
     static func previewRest() -> RestaurantFB {
         #if !APPCLIP
-        return RestaurantFB(name: "", description: "", averagePrice: 0.0, ethnicity: "", dishes: [], featuredDishRefs: [], coordinate: GeoPoint(latitude: 0.0, longitude: 0.0), address: "", phone: "", price: "Low", ratingSum: 5, n_Ratings: 1, hour: "")
+        return RestaurantFB(name: "", description: "", ethnicity: "", dishes: [], featuredDishRefs: [], coordinate: GeoPoint(latitude: 0.0, longitude: 0.0), address: "", phone: "", price: "Low", ratingSum: 5, n_Ratings: 1, hour: "")
         #else
         return RestaurantFB(json: ["Name": "", "description": "", "price_range": "", "Ethnicity": "", "Address": "",  "Phone": "", "RatingSum": 5, "N_Ratings": 1, "hours": ["":""], "location": ["":0.0], "id": ""])!
         #endif

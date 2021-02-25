@@ -27,7 +27,7 @@ final class Cache<Key:Hashable, Value>{
     
     func insert(_ value: Value, forKey key: Key) {
             let date = dateProvider().addingTimeInterval(entryLifetime)
-            let entry = Entry(value: value, expirationDate: date)
+        let entry = Entry(key: key, value: value, expirationDate: date)
             wrapped.setObject(entry, forKey: WrappedKey(key))
             keyTracker.keys.insert(key)
         }
@@ -38,7 +38,7 @@ final class Cache<Key:Hashable, Value>{
             }
 
             guard dateProvider() < entry.expirationDate else {
-                // Discard values that have expired
+                //Discard values that have expired
                 removeValue(forKey: key)
                 return nil
             }
@@ -53,7 +53,7 @@ final class Cache<Key:Hashable, Value>{
 }
 
 private extension Cache {
-    final class WrappedKey: NSOBject {
+    final class WrappedKey: NSObject {
         let key: Key
         
         init(_ key:Key) {self.key = key}
@@ -92,10 +92,10 @@ private extension Cache {
             return entry
         }
 
-        func insert(_ entry: Entry) {
-            wrapped.setObject(entry, forKey: WrappedKey(entry.key))
-            keyTracker.keys.insert(entry.key)
-        }
+    func insert(_ entry: Entry) {
+        wrapped.setObject(entry, forKey: WrappedKey(entry.key))
+        keyTracker.keys.insert(entry.key)
+    }
 }
 
 private extension Cache {
@@ -141,7 +141,7 @@ final class RestLoader: ObservableObject {
             return handler(.success(cached))
         }
         else{
-        
+            
             let db = Firestore.firestore()
             let ref = db.collection("Restaurant").document(id)
             
@@ -157,7 +157,6 @@ final class RestLoader: ObservableObject {
         }
         }
     }
-}
 
 final class DishLoader: ObservableObject {
     typealias Handler = (Result<DishFB, Error>) -> Void
@@ -187,7 +186,10 @@ final class DishLoader: ObservableObject {
     }
 }
 
-extension Cache.Entry: Codable where Key: Codable, Value: Codable {
+extension Cache.Entry: Codable where Key: Codable, Value: Codable {}
+
+
+extension Cache: Codable where Key: Codable, Value: Codable {
     convenience init(from decoder: Decoder) throws {
             self.init()
 

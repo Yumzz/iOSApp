@@ -122,7 +122,7 @@ struct ListDishesView: View {
                                 }
                                 ForEach(dishCategory.dishes, id: \.id) {
                                     dish in
-//                                    Text(dish.name)
+                                    Text(dish.name)
                                     DishCard(dishName: dish.name, dishIngredients: dish.description, price: self.listDishVM.formatPrice(price: dish.price), rest: self.restaurant, dish: dish)
                                 }
                                 Spacer().frame(height: 20)
