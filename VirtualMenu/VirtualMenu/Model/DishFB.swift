@@ -119,6 +119,7 @@ struct DishFB {
             print("no dishes' rest")
             return nil
         }
+
         self.id = UUID()
         self.ref = nil
         self.key = snapshot.documentID

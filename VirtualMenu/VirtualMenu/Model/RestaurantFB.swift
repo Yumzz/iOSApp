@@ -25,7 +25,7 @@ struct RestaurantFB {
     #endif
 
     
-    let id: UUID
+    let id: String
     let key: String
     let name: String
     var dishes: [DishFB]? = nil
@@ -55,9 +55,9 @@ struct RestaurantFB {
     
     
     #if !APPCLIP
-    init(name: String, key: String = "", description: String, ethnicity: String, dishes: [DishFB], featuredDishRefs: [DocumentReference?], coordinate: GeoPoint, address: String, phone: String, price: String, ratingSum: Int64, n_Ratings: Int64, hour: String) {
+    init(name: String, key: String = "", description: String, ethnicity: String, dishes: [DishFB], featuredDishRefs: [DocumentReference?], coordinate: GeoPoint, address: String, phone: String, price: String, ratingSum: Int64, n_Ratings: Int64, hour: String, id: String) {
 //        self.ref = nil
-        self.id = UUID()
+        self.id = id
         self.key = key
         self.name = name
         
@@ -153,6 +153,11 @@ struct RestaurantFB {
             print("no RatingSum: \(name)")
             return nil
         }
+        guard
+            let id = snapshot.data()["id"] as? String else{
+                print("no id")
+                return nil
+        }
        
        self.key = snapshot.documentID
        self.name = name
@@ -160,7 +165,7 @@ struct RestaurantFB {
        self.ethnicity = ethnicity
        self.coordinate = coordinate
        self.dishes = []
-       self.id = UUID()
+       self.id = id
        self.coverPhotoURL = "Restaurant/\(self.name.lowercased())/\(self.name.lowercased())_cover.png"
        self.cityAddress = address.components(separatedBy: delimiter)[1] + (address.components(separatedBy: delimiter)[2]).components(separatedBy: " ")[0]
        self.streetAddress = address.components(separatedBy: delimiter)[0]
@@ -260,13 +265,18 @@ struct RestaurantFB {
             print("no RatingSum")
             return nil
         }
+        guard
+            let id = snapshot.data()["id"] as? String else{
+                print("no id")
+                return nil
+        }
 //        guard
 //            let hours = snapshot.data()["hours"] as? [String: String] else {
 //            print("no hours")
 //            return nil
 //        }
         
-        self.id = UUID()
+        self.id = id
         self.key = snapshot.documentID
         self.name = name
         self.description = description
@@ -323,7 +333,12 @@ struct RestaurantFB {
 //           print("no type")
 //           return nil
 //       }
-       
+        
+        guard
+            let id = snapshot.data()?["id"] as? String else{
+                print("no id")
+                return nil
+        }
        guard
            let description = snapshot.data()?["description"] as? String else{
                print("no description")
@@ -366,6 +381,7 @@ struct RestaurantFB {
             print("no RatingSum: \(name)")
             return nil
         }
+        
        
        self.key = snapshot.documentID
        self.name = name
@@ -373,7 +389,7 @@ struct RestaurantFB {
        self.ethnicity = ethnicity
        self.coordinate = coordinate
        self.dishes = []
-       self.id = UUID()
+       self.id = id
        self.coverPhotoURL = "Restaurant/\(self.name.lowercased())/\(self.name.lowercased())_cover.png"
        self.cityAddress = address.components(separatedBy: delimiter)[1] + (address.components(separatedBy: delimiter)[2]).components(separatedBy: " ")[0]
        self.streetAddress = address.components(separatedBy: delimiter)[0]
@@ -477,7 +493,7 @@ struct RestaurantFB {
             self.hour = ""
         }
         
-        self.id = UUID()
+        self.id = key
         self.key = key
         self.description = description
         self.name = name
@@ -507,7 +523,7 @@ struct RestaurantFB {
     
     static func previewRest() -> RestaurantFB {
         #if !APPCLIP
-        return RestaurantFB(name: "", description: "", ethnicity: "", dishes: [], featuredDishRefs: [], coordinate: GeoPoint(latitude: 0.0, longitude: 0.0), address: "", phone: "", price: "Low", ratingSum: 5, n_Ratings: 1, hour: "")
+        return RestaurantFB(name: "", description: "", ethnicity: "", dishes: [], featuredDishRefs: [], coordinate: GeoPoint(latitude: 0.0, longitude: 0.0), address: "", phone: "", price: "Low", ratingSum: 5, n_Ratings: 1, hour: "", id: "")
         #else
         return RestaurantFB(json: ["Name": "", "description": "", "price_range": "", "Ethnicity": "", "Address": "",  "Phone": "", "RatingSum": 5, "N_Ratings": 1, "hours": ["":""], "location": ["":0.0], "id": ""])!
         #endif

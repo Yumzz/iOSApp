@@ -46,7 +46,7 @@ struct ListDishesView: View {
         self.restaurant = restaurant
         
         print("List Dish Vm created")
-                
+        
         self.listDishVM = ListDishesViewModel(restaurant: self.restaurant, dispatch: dispatchGroup)
         
     }

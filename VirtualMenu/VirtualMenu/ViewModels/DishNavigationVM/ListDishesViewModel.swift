@@ -32,7 +32,7 @@ class ListDishesViewModel: ObservableObject {
         
         self.dispatchGroup.enter()
         
-//        print("fetchDishesCalled: \(self.dishes.isEmpty)")
+        print("fetchDishesCalled: \(self.dishes.isEmpty)")
                 
         fetchDishesFB(name: restaurant.name)
         
@@ -88,17 +88,23 @@ class ListDishesViewModel: ObservableObject {
     }
     
     func fetchDishesFB(name: String) {
+        print("fetch")
         //fetch dishes
-        db.collection("Dish").whereField("RestaurantID", isEqualTo: restaurant.id).getDocuments { (snapshot, error) in
+        //restaurant.id
+        print(self.restaurant.id)
+        db.collection("Dish").whereField("RestaurantID", isEqualTo: self.restaurant.id).getDocuments { (snapshot, error) in
             if let error = error {
                 print("Error getting documents: \(error)")
             } else {
                 for document in snapshot!.documents {
                     DispatchQueue.main.async {
+                        print("dish creation")
                         let dish = DishFB(snapshot: document)!
+                        print("dish made \(dish.id)")
                         self.dishes.append(dish)
                         
                         if(document == snapshot!.documents.last){
+                            print("finished fetching dishes")
                             self.dispatchGroup.leave()
                         }
                     }
