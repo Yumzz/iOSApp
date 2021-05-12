@@ -62,7 +62,7 @@ struct ListDishesView: View {
             Color(#colorLiteral(red: 0.9725490196, green: 0.968627451, blue: 0.9607843137, alpha: 1)).edgesIgnoringSafeArea(.all)
             ScrollView(.vertical) {
                 ScrollViewReader{ scrollView in
-                VStack {
+//                VStack {
                     ScrollView(.horizontal, showsIndicators: false) {
                         HStack(spacing: 10){
                             ForEach(self.dishCats, id: \.name){ dishCategory in
@@ -90,22 +90,22 @@ struct ListDishesView: View {
                             }
 
                     }
-//
+////
                     Spacer().frame(height: 20)
-//
+////
                     ForEach(self.dishCats, id: \.name){ dishCategory in
                         VStack(alignment: .leading, spacing: 20) {
-
+//
                             Text("\(dishCategory.name)")
                                 .font(.title)
                                 .fontWeight(.semibold)
                                 .padding(.leading)
-//
+////
                             if(dishCategory.description != ""){
                                 Text("\(dishCategory.description)")
                                     .font(.system(size: 14, weight: .semibold)).foregroundColor(Color(#colorLiteral(red: 0.71, green: 0.71, blue: 0.71, alpha: 1))).tracking(-0.41)
                             }
-////
+//////
                             VStack(spacing: 20){
                                 if dishCategory.dishes.isEmpty {
                                     ForEach(dishCategory.builds, id: \.id) {
@@ -123,14 +123,14 @@ struct ListDishesView: View {
                                 ForEach(dishCategory.dishes, id: \.id) {
                                     dish in
                                     Text(dish.name)
-                                    DishCard(dishName: dish.name, dishIngredients: dish.description, price: self.listDishVM.formatPrice(price: dish.price), rest: self.restaurant, dish: dish)
+                                    DishCard(dishName: dish.name, dishIngredients: dish.description, price: self.listDishVM.formatPrice(price: dish.price), singPrice: dish.options.isEmpty, rest: self.restaurant, dish: dish)
                                 }
                                 Spacer().frame(height: 20)
                             }
                         }.id(self.dishCats.firstIndex(of: dishCategory))
                     }
                     Spacer()
-                }
+//                }
                 }
             }.navigationBarTitleDisplayMode(self.addtapped ? .inline : .automatic)
                 .frame(maxWidth: .infinity)
@@ -161,10 +161,10 @@ struct ListDishesView: View {
         .alert(isPresented: self.$addtapped){
             print("added")
             if(self.addWOSize){
-                return Alert(title: Text("Please choose Size"))
+                return Alert(title: Text("Dish Added"))
             }
             else{
-                return Alert(title: Text("Dish Added"))
+                return Alert(title: Text("Please choose Size"))
             }
         }
         .gesture(

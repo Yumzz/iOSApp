@@ -19,6 +19,7 @@ struct HomeScreenView: View {
     @State var cityRests = [String: [RestaurantFB]]()
     
     @State var cities = [String]()
+    @State private var recButtonClicked = false
     
     let dispatchGroup = DispatchGroup()
     
@@ -30,14 +31,40 @@ struct HomeScreenView: View {
         self.HomeScreenVM = HomeScreenViewModel(dispatch: dispatchGroup)
     }
     
+    
     var body: some View {
         Group {
             if(!self.order.dishesChosen.isEmpty || !self.order.buildsChosen.isEmpty){
-                view.overlay(overlay, alignment: .bottom)
+                if(self.recButtonClicked){
+                    view.overlay(overlay, alignment: .bottom)
+                }
+                else{
+                    view.overlay(overlay, alignment: .bottom)
+                        .overlay(recButt, alignment: .bottomLeading)
+                }
+                
             } else {
-                 view
+                if(self.recButtonClicked){
+                    view
+                }
+                else{
+                    view
+                       .overlay(recButt, alignment: .bottomLeading)
+                }
              }
-         }
+            if self.recButtonClicked {
+                ZStack {
+                    Color(#colorLiteral(red: 0.9725490196, green: 0.968627451, blue: 0.9607843137, alpha: 1))
+                    VStack {
+                        RecView(isOpen: self.$recButtonClicked)
+                    }.padding()
+                }
+                .frame(width: 329, height: 374)
+                .cornerRadius(20).shadow(radius: 20)
+                .transition(.slide)
+                .animation(.default)
+            }
+        }
     }
     
     var overlay: some View {
@@ -47,6 +74,17 @@ struct HomeScreenView: View {
                     .clipShape(RoundedRectangle(cornerRadius: 10, style: .circular))
             }
             Spacer().frame(width: 0, height: 10)
+        }
+    }
+    
+    var recButt: some View {
+        VStack{
+            RecButton()
+                .onTapGesture {
+                    self.recButtonClicked = true
+                }
+            
+            Spacer().frame(width: 0, height: (!self.order.dishesChosen.isEmpty || !self.order.buildsChosen.isEmpty) ? 70 : 10)
         }
     }
     

@@ -104,7 +104,7 @@ struct DishCardOrder: View {
 struct DishCardOrder_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            DishCard(urlImage: nil, dishName: "Tomato Pasta", dishIngredients: "Pasta, Tomato Sauce", price: "$10", rest: RestaurantFB.previewRest(), dish: DishFB.previewDish()).colorScheme(.light)
+            DishCard(urlImage: nil, dishName: "Tomato Pasta", dishIngredients: "Pasta, Tomato Sauce", price: "$10", singPrice: true, rest: RestaurantFB.previewRest(), dish: DishFB.previewDish()).colorScheme(.light)
         }
     }
 }

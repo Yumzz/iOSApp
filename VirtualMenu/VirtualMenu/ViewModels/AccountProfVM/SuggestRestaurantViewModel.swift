@@ -65,3 +65,4 @@ class SuggestRestaurantViewModel: ObservableObject{
         return [result, title]
     }
 }
+

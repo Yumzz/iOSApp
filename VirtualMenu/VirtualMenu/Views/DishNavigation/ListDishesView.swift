@@ -155,7 +155,7 @@ struct ListDishesView: View {
                                         NavigationLink(destination:
                                             DishDetailsView(dish: dish, restaurant: self.restaurant).navigationBarHidden(false)
                                         ) {
-                                            DishCard(urlImage: (dish.photoExists) ? (FBURLImage(url: dish.coverPhotoURL, imageAspectRatio: .fill, imageWidth: 80, imageHeight: 80, circle: false)) : nil, dishName: dish.name, dishIngredients: dish.description, price: self.listDishVM.formatPrice(price: dish.price), rest: self.restaurant, dish: dish)
+                                            DishCard(urlImage: (dish.photoExists) ? (FBURLImage(url: dish.coverPhotoURL, imageAspectRatio: .fill, imageWidth: 80, imageHeight: 80, circle: false)) : nil, dishName: dish.name, dishIngredients: dish.description, price: self.listDishVM.formatPrice(price: dish.price), singPrice:dish.options.isEmpty, rest: self.restaurant, dish: dish)
                                         }
 
                                 }
@@ -188,6 +188,7 @@ struct ListDishesView: View {
         .navigationBarTitle("\(self.restname)")
         .navigationBarBackButtonHidden(true)
         .navigationBarHidden(self.isNavBarHidden)
+        .navigationBarItems(leading: BackButton(mode: self.mode))
         .onDisappear(){
             self.restname = ""
             self.isNavBarHidden = true

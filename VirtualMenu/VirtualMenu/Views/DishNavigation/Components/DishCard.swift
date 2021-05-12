@@ -16,7 +16,7 @@ struct DishCard: View {
     var dishName: String
     var dishIngredients: String
     var price: String
-    
+    var singPrice: Bool
     var rest: RestaurantFB
     
     var dish: DishFB
@@ -78,6 +78,7 @@ struct DishCard: View {
                         .frame(width: 6, height: 20)
                 }
                 .onTapGesture {
+                        print("added")
                         if(!self.order.checkSameRest(dish: self.dish)){
 //                            self.alertTitle = "Different Restaurant"
 //                            self.alertMessage = "A new order has been started for \(self.rest.name)"
@@ -92,7 +93,7 @@ struct DishCard: View {
                         self.order.restChosen = self.rest
                         self.order.addDish(dish: self.dish, rest: self.rest, dis: self.dispatchGroup)
                         self.dispatchGroup.notify(queue: .main){
-                            NotificationCenter.default.post(name: Notification.Name(rawValue: "Alert"), object: nil)
+                            NotificationCenter.default.post(name: Notification.Name(rawValue: "Alert"), object: singPrice)
                         }
                     }
                 #endif
