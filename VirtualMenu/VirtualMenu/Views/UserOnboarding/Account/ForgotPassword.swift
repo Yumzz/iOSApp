@@ -44,7 +44,7 @@ struct ForgotPasswordView: View {
             }.position(x: UIScreen.main.bounds.width/2.5, y: 20)
             VStack{
 
-                CustomTextField(field: "Email", strLabel: "jonnyives@apple.com", strField: $email, uiTextAutoCapitalizationType: .none, uiKeyboardType: .emailAddress)
+                CustomTextField(field: "Email", strLabel: "jonnyives@apple.com", strField: $email, uiTextAutoCapitalizationType: .none, uiKeyboardType: .emailAddress).foregroundColor(.black)
                     
                 Spacer().frame(height: 30)
 

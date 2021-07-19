@@ -25,6 +25,7 @@ struct BuildFB {
     var typeOpt: [String] = []
     var sizePrice: [String: [String]]
     
+    
     #if !APPCLIP
     init(name: String, description: String, rest: String, addOns: [String:[String]], exclusiveOpts: [String:[String]], priceOpts:[String:[String: NSArray]], sizePrice: [String: [String]]) {
         self.name = name

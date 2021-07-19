@@ -53,6 +53,9 @@ class QRScanViewController: UIViewController, AVCaptureMetadataOutputObjectsDele
         view.layer.addSublayer(previewLayer)
 
         captureSession.startRunning()
+        
+        createScanningIndicator()
+        createScanningFrame() 
     }
 
     func failed() {
@@ -90,7 +93,90 @@ class QRScanViewController: UIViewController, AVCaptureMetadataOutputObjectsDele
 
         dismiss(animated: true)
     }
+    
+//
+    func createScanningIndicator() {
 
+        let height: CGFloat = 15
+        let opacity: Float = 0.4
+        let topColor = UIColor.green.withAlphaComponent(0)
+        let bottomColor = UIColor.green
+
+        let layer = CAGradientLayer()
+        layer.colors = [topColor.cgColor, bottomColor.cgColor]
+        
+        
+        layer.opacity = opacity
+
+        let squareWidth = view.frame.width * 0.6
+        let xOffset = view.frame.width * 0.2
+        let yOffset = view.frame.midY - (squareWidth / 2)
+        layer.frame = CGRect(x: xOffset, y: yOffset, width: squareWidth, height: height)
+        
+        
+        self.view.layer.insertSublayer(layer, above: previewLayer)
+        
+
+        let initialYPosition = layer.position.y
+        let finalYPosition = initialYPosition + squareWidth - height
+        let duration: CFTimeInterval = 2
+
+        let animation = CABasicAnimation(keyPath: "position.y")
+        animation.fromValue = initialYPosition as NSNumber
+        animation.toValue = finalYPosition as NSNumber
+        animation.duration = duration
+        animation.repeatCount = .infinity
+        animation.isRemovedOnCompletion = false
+
+        layer.add(animation, forKey: nil)
+    }
+    
+    func createScanningFrame() {
+                
+        let lineLength: CGFloat = 15
+        let squareWidth = view.frame.width * 0.6
+        let topLeftPosX = view.frame.width * 0.2
+        let topLeftPosY = view.frame.midY - (squareWidth / 2)
+        let btmLeftPosY = view.frame.midY + (squareWidth / 2)
+        let btmRightPosX = view.frame.midX + (squareWidth / 2)
+        let topRightPosX = view.frame.width * 0.8
+        
+        let path = UIBezierPath()
+        
+        //top left
+        path.move(to: CGPoint(x: topLeftPosX, y: topLeftPosY + lineLength))
+        path.addLine(to: CGPoint(x: topLeftPosX, y: topLeftPosY))
+        path.addLine(to: CGPoint(x: topLeftPosX + lineLength, y: topLeftPosY))
+
+        //bottom left
+        path.move(to: CGPoint(x: topLeftPosX, y: btmLeftPosY - lineLength))
+        path.addLine(to: CGPoint(x: topLeftPosX, y: btmLeftPosY))
+        path.addLine(to: CGPoint(x: topLeftPosX + lineLength, y: btmLeftPosY))
+
+        //bottom right
+        path.move(to: CGPoint(x: btmRightPosX - lineLength, y: btmLeftPosY))
+        path.addLine(to: CGPoint(x: btmRightPosX, y: btmLeftPosY))
+        path.addLine(to: CGPoint(x: btmRightPosX, y: btmLeftPosY - lineLength))
+
+        //top right
+        path.move(to: CGPoint(x: topRightPosX, y: topLeftPosY + lineLength))
+        path.addLine(to: CGPoint(x: topRightPosX, y: topLeftPosY))
+        path.addLine(to: CGPoint(x: topRightPosX - lineLength, y: topLeftPosY))
+        
+        
+        let shape = CAShapeLayer()
+
+            shape.path = path.cgPath
+            shape.strokeColor = UIColor.white.cgColor
+            shape.lineWidth = 3
+            shape.fillColor = UIColor.clear.cgColor
+
+      
+            view.layer.insertSublayer(shape, above: previewLayer)
+        
+    
+        }
+//
     func found(code: String) {
         print("code: \(code)")
     }

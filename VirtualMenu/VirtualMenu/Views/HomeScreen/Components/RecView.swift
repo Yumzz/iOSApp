@@ -38,7 +38,7 @@ struct RecView: View {
                             else{
                                 numChoose(attribute: attr, range: 4)
                             }
-                        }
+                        }.foregroundColor(.black)
                         
                     }
                 }
@@ -70,7 +70,7 @@ struct numChoose: View {
             Picker("", selection: $num){
                 
                 ForEach(0...range, id:\.self){
-                    Text("\($0)")
+                    Text("\($0)").foregroundColor(.black)
                 }
             }.frame(width: 40, height: 30).clipped()
         }

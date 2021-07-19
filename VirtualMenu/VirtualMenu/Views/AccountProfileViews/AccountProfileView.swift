@@ -140,16 +140,16 @@ struct AccountProfileView: View {
                             VStack(alignment: .leading, spacing: 10){
                                 
                                 NavigationLink(destination: ContactUs()) {
-                                    ProfileButton(label: "Contact Us")
+                                    ProfileButton(label: "  Contact Us")
                                 }.buttonStyle(PlainButtonStyle())
                                 
                                 
                                 NavigationLink(destination: ReportProblem()) {
-                                    ProfileButton(label: "Report Problem")
+                                    ProfileButton(label: "  Report Problem")
                                 }.buttonStyle(PlainButtonStyle())
                                 
                                 NavigationLink(destination: SuggestRestaurant()) {
-                                    ProfileButton(label: "Suggest Restaurant")
+                                    ProfileButton(label: "  Suggest Restaurant")
                                 }.buttonStyle(PlainButtonStyle())
                             }
                             

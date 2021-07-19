@@ -48,10 +48,14 @@ struct ListDishesView: View {
         print("List Dish Vm created")
         
         self.listDishVM = ListDishesViewModel(restaurant: self.restaurant, dispatch: dispatchGroup)
+        UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor: UIColor.init(.black)]
         
     }
     
+    
     var body: some View {
+    
+        
         Group {
             if(!self.order.dishesChosen.isEmpty || !self.order.buildsChosen.isEmpty){
                 view.overlay(overlay, alignment: .bottom)
@@ -86,8 +90,8 @@ struct ListDishesView: View {
     }
 
     
-    
     var view: some View {
+        
         ZStack {
             Color(#colorLiteral(red: 0.9725490196, green: 0.968627451, blue: 0.9607843137, alpha: 1)).edgesIgnoringSafeArea(.all)
             ScrollView(.vertical) {
@@ -130,10 +134,14 @@ struct ListDishesView: View {
                                 .font(.title)
                                 .fontWeight(.semibold)
                                 .padding(.leading)
+                                .foregroundColor(.black)
+                
 //
                             if(dishCategory.description != ""){
                                 Text("\(dishCategory.description)")
-                                    .font(.system(size: 14, weight: .semibold)).foregroundColor(Color(#colorLiteral(red: 0.71, green: 0.71, blue: 0.71, alpha: 1))).tracking(-0.41)
+                                    .font(.system(size: 14, weight: .semibold))
+                                    .foregroundColor(Color(#colorLiteral(red: 0.71, green: 0.71, blue: 0.71, alpha: 1)))
+                                    .tracking(-0.41)
                             }
 //
                             VStack(spacing: 20){
@@ -144,8 +152,12 @@ struct ListDishesView: View {
                                             .font(.title)
                                             .fontWeight(.semibold)
                                             .padding(.leading)
+                                            .foregroundColor(.black)
                                         Text("\(build.description)")
-                                            .font(.system(size: 14, weight: .semibold)).foregroundColor(Color(#colorLiteral(red: 0.71, green: 0.71, blue: 0.71, alpha: 1))).tracking(-0.41)
+                                            .font(.system(size: 14, weight: .semibold))
+                                            .foregroundColor(Color(#colorLiteral(red: 0.71, green: 0.71, blue: 0.71, alpha: 1)))
+                                            .tracking(-0.41)
+                                            .padding(.horizontal)
                                         BuildCard(build: build, rest: self.restaurant)
                                     }
                                     Spacer().frame(height: 20)
@@ -157,7 +169,6 @@ struct ListDishesView: View {
                                         ) {
                                             DishCard(urlImage: (dish.photoExists) ? (FBURLImage(url: dish.coverPhotoURL, imageAspectRatio: .fill, imageWidth: 80, imageHeight: 80, circle: false)) : nil, dishName: dish.name, dishIngredients: dish.description, price: self.listDishVM.formatPrice(price: dish.price), singPrice:dish.options.isEmpty, rest: self.restaurant, dish: dish)
                                         }
-
                                 }
                                 Spacer().frame(height: 20)
                             }
@@ -167,7 +178,7 @@ struct ListDishesView: View {
                 }
                 }
             }.navigationBarTitleDisplayMode(self.addtapped ? .inline : .automatic)
-                .frame(maxWidth: .infinity)
+            .frame(maxWidth: .infinity)
             }
         .onAppear{
             self.dispatchGroup.notify(queue: .main){
@@ -210,6 +221,7 @@ struct ListDishesView: View {
         }))
     }
 }
+
 
 
 struct ListDishesView_Previews: PreviewProvider {

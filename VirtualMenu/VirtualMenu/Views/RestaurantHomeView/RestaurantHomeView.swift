@@ -58,7 +58,7 @@ struct RestaurantHomeView: View {
                         } else {
                         VStack(alignment: .leading){
                             HStack{
-                                Text(restaurant.name).font(.system(size: 24, weight: .semibold)).tracking(-0.41)
+                                Text(restaurant.name).font(.system(size: 24, weight: .semibold)).tracking(-0.41).foregroundColor(.black)
                                 Spacer()
 //                                Button(action: {
 //                                    
@@ -152,7 +152,7 @@ struct RestaurantHomeView: View {
                             if(!self.menuSelectionVM.featuredDishes.isEmpty){
                                 VStack{
                                     HStack{
-                                        Text("Popular").font(.system(size: 24, weight: .semibold))
+                                        Text("Popular").font(.system(size: 24, weight: .semibold)).foregroundColor(.black)
                                         Spacer()
                                     }
                                 }

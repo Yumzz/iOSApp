@@ -61,7 +61,9 @@ struct AccountProfileLoginView: View {
                         .font(.system(size: 36))
                         .padding(.leading, 40)
                         .padding(.trailing, 40)
-                        .position(x: UIScreen.main.bounds.width/2.5, y: 10)
+                        .padding(.vertical)
+//                    Spacer()
+//                        .position(x: UIScreen.main.bounds.width/2.5, y: 10)
                         
                     CustomTextField(field: "Email", strLabel: "jonnyives@apple.com", strField: $email, uiTextAutoCapitalizationType: .none, uiKeyboardType: .emailAddress)
 
@@ -141,6 +143,7 @@ struct AccountProfileLoginView: View {
                 
                 Spacer()
             }
+            
             }
 //        .frame(maxWidth: .infinity, maxHeight: .infinity)
         .navigationBarTitle("")

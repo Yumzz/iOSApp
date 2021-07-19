@@ -34,6 +34,7 @@ struct BuildCard: View {
                 Text("Select Size:")
                     .font(.subheadline)
                     .fontWeight(.semibold)
+                    .foregroundColor(.black)
                     
                 HStack{
                     ForEach(self.build.typePrice, id: \.self){
@@ -43,6 +44,7 @@ struct BuildCard: View {
                             .padding(.horizontal, 20)
                             .padding(.vertical, 10)
                             .font(.subheadline)
+                            .foregroundColor(.black)
                             .onTapGesture {
                                 print(type)
                             }
@@ -52,6 +54,7 @@ struct BuildCard: View {
                                 Text("\(size): $\(self.build.sizePrice[type]![self.build.exclusiveOpts[type]!.firstIndex(of: size)!])")
                                     .padding(.horizontal, 20)
                                     .padding(.vertical, 10)
+                                    .foregroundColor(.black)
                                     .font(.subheadline)
                                     .background(((self.typeClicked == type) && (self.sizeClicked == size)) ? ColorManager.yumzzOrange.clipShape(RoundedRectangle(cornerRadius: 10, style: .circular)) : ColorManager.offWhiteBack.clipShape(RoundedRectangle(cornerRadius: 10, style: .circular)))
                                     .onTapGesture {
@@ -78,17 +81,20 @@ struct BuildCard: View {
                 Text("Select Options:")
                     .font(.subheadline)
                     .fontWeight(.semibold)
+                    .foregroundColor(.black)
                 ForEach(self.build.typeOpt, id: \.self){
                     opt in
                     HStack{
                         Text("\(opt)")
                                 .font(.title)
                                 .fontWeight(.semibold)
+                                .foregroundColor(.black)
                         ForEach(self.build.typePrice, id: \.self){
                             type in
                             StyledText(verbatim: "\(type): +\(self.build.priceOpts[opt]![type]!.componentsJoined(by: "/"))")
                             .style(.highlight(), ranges: { self.indexPrice == -1 ? [$0.range(of: " " )!] :(self.typeClicked == type ? [$0.range(of: "\(self.build.priceOpts[opt]![self.typeClicked]![self.indexPrice])")!] : [$0.range(of: " " )!]
                                     ) })
+                                .foregroundColor(.gray)
                         }
                     }
                     
@@ -97,7 +103,7 @@ struct BuildCard: View {
                         ForEach(self.build.addOns[opt]!, id: \.self){
                             option in
                             HStack{
-                                Text("\(option)")
+                                Text("\(option)").foregroundColor(.black)
 
                                 Spacer()
                                 

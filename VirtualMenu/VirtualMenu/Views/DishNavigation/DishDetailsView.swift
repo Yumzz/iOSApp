@@ -60,16 +60,17 @@ struct DishDetailsView: View {
                         VStack{
                             HStack{
                                 Text(dish.name).font(.system(size: 24, weight: .semibold)).tracking(-0.41)
+                                    .foregroundColor(.black)
                                 Spacer()
                                 
                             }
                             HStack{
                                 RoundedRectangle(cornerRadius: 5)
                                     .fill(Color(#colorLiteral(red: 0, green: 0.7333333492279053, blue: 0.4693332314491272, alpha: 1)))
-                                    .overlay(Text("4.5"))
+                                    .overlay(Text("4.5").foregroundColor(.black))
                                     
                                 .frame(width: 45, height: 20)
-                                Text("(298 reviews)").font(.system(size: 14, weight: .semibold)).tracking(-0.41)
+                                Text("(298 reviews)").font(.system(size: 14, weight: .semibold)).tracking(-0.41).foregroundColor(.black)
                                 Spacer()
                             }
                             HStack{
