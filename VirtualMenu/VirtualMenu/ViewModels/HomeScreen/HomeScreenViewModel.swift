@@ -78,7 +78,7 @@ class HomeScreenViewModel: ObservableObject {
         //d = d x 0.00062137 in miles
 
         if(locationManager.location != nil){
-            
+
             let lat1 = coordinate.latitude * Double.pi/180
             let lat2 = locationManager.location!.coordinate.latitude * Double.pi/180
             

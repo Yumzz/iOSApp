@@ -51,7 +51,7 @@ struct DishFB {
                 return nil
         }
         guard let price = snapshot.data()["Price"] as? String else {
-            print("no price")
+            print("no price: \(name)")
             return nil
         }
         guard let description = snapshot.data()["Description"] as? String else {

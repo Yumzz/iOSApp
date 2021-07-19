@@ -138,7 +138,9 @@ struct ListDishesView: View {
         .onAppear{
             self.dispatchGroup.notify(queue: .main){
                 self.dishCats = self.listDishVM.dishCategories
-                self.builds = self.restaurant.builds!
+                if self.restaurant.builds != nil {
+                    self.builds = self.restaurant.builds!
+                }
                 //must make build for each under build category
                 self.restname = self.restaurant.name
                 self.isNavBarHidden = false

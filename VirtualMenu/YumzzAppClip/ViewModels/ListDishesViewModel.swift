@@ -60,7 +60,7 @@ class ListDishesViewModel: ObservableObject {
             }
         }
         
-        if !self.restaurant.builds!.isEmpty {
+        if self.restaurant.builds != nil {
 //            for b in self.builds {
 //                dishCategories.append(DishCategory(isExpanded: <#T##Bool#>, dishes: <#T##[DishFB]?#>, builds: <#T##[BuildFB]?#>, name: <#T##String#>, description: <#T##String#>))
 //            }
