@@ -29,7 +29,7 @@ struct RestaurantFB {
     let key: String
     let name: String
     var dishes: [DishFB]? = nil
-    var builds: [BuildFB]? = nil
+    var builds: [BuildFB]? = []
     
     let description: String
     let ethnicity: String

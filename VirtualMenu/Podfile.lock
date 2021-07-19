@@ -355,6 +355,14 @@ PODS:
     - GTMSessionFetcher/Core (= 1.5.0)
   - Instructions (2.0.0)
   - leveldb-library (1.22)
+  - MQTTClient (0.15.3):
+    - MQTTClient/Core (= 0.15.3)
+  - MQTTClient/Core (0.15.3):
+    - MQTTClient/Manager
+    - MQTTClient/Min
+  - MQTTClient/Manager (0.15.3):
+    - MQTTClient/Min
+  - MQTTClient/Min (0.15.3)
   - nanopb (1.30906.0):
     - nanopb/decode (= 1.30906.0)
     - nanopb/encode (= 1.30906.0)
@@ -381,6 +389,7 @@ DEPENDENCIES:
   - FirebaseFirestoreSwift
   - GoogleSignIn
   - Instructions
+  - MQTTClient
   - PromiseKit (~> 6.8)
 
 SPEC REPOS:
@@ -408,6 +417,7 @@ SPEC REPOS:
     - GTMSessionFetcher
     - Instructions
     - leveldb-library
+    - MQTTClient
     - nanopb
     - PromiseKit
     - PromisesObjC
@@ -436,10 +446,11 @@ SPEC CHECKSUMS:
   GTMSessionFetcher: b3503b20a988c4e20cc189aa798fd18220133f52
   Instructions: debf9cedeaf8d095108fd35d2c54b97ccf769e65
   leveldb-library: 55d93ee664b4007aac644a782d11da33fba316f7
+  MQTTClient: 0dfa04e789479c2e461786464969895c1fcb0875
   nanopb: 59317e09cf1f1a0af72f12af412d54edf52603fc
   PromiseKit: 28fda91c973cc377875d8c0ea4f973013c05b6db
   PromisesObjC: 8c196f5a328c2cba3e74624585467a557dcb482f
 
-PODFILE CHECKSUM: 4876b86b89d227bcd49597c2ac07e297d23ccd71
+PODFILE CHECKSUM: 4900da58e56dcc001aabc0b4c476248b50aa2b2f
 
 COCOAPODS: 1.10.0

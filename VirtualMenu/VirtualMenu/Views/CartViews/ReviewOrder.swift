@@ -8,6 +8,7 @@
 
 import Foundation
 import SwiftUI
+import MQTTClient
 
 
 struct ReviewOrder: View {
@@ -18,6 +19,8 @@ struct ReviewOrder: View {
     @State var dishCounts: [DishFB:Int] = [DishFB:Int]()
     
     @State var dishes: [DishFB] = [DishFB]()
+    @State var dishReceipts: [(String, Double)] = [(String, Double)]()
+    @State private var sendPrinterOrder = false
     
     let dispatchGroup = DispatchGroup()
     
@@ -71,8 +74,20 @@ struct ReviewOrder: View {
                 HStack{
                     OrangeButton(strLabel: "Call a Waiter", width: 167.5, height: 48)
                         .clipShape(RoundedRectangle(cornerRadius: 10, style: .circular))
-                    InvertedOrangeButton(strLabel: "Add to Order", width: 167.5, height: 48).clipShape(RoundedRectangle(cornerRadius: 10, style: .circular))
+                    InvertedOrangeButton(strLabel: "Send Order", width: 167.5, height: 48).clipShape(RoundedRectangle(cornerRadius: 10, style: .circular))
                         .shadow(radius: 5)
+                        .onTapGesture {
+                            self.sendPrinterOrder = true
+//                            for d in self.dishes{
+//                                let dishTuple: (String, Double) = (d.name, d.price)
+//                                self.dishReceipts.append(dishTuple)
+//                                if(d == self.dishes.last){
+//                                    print("before sent to mqtt: \(self.dishReceipts)")
+//                                    self.sendPrinterOrder = true
+//                                    print("sendorder: \(self.sendPrinterOrder)")
+//                                }
+//                            }
+                        }
                 }
                 Spacer()
             }
@@ -85,6 +100,13 @@ struct ReviewOrder: View {
         .onAppear(){
             self.dishCounts = self.order.dishCounts
             self.dishes = self.order.dishesChosen
+            //create notification center observer
+            NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: "OrderSent"), object: nil, queue: .main) { (Notification) in
+                self.order.orderSent()
+            }
+        }
+        .sheet(isPresented: $sendPrinterOrder){
+            ClientConnection(dishes: self.dishes)
         }
     }
 }

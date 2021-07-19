@@ -8,21 +8,23 @@
 
 import SwiftUI
 import CloudKit
+#if !APPCLIP
 import Firebase
+#endif
 import MapKit
 import Foundation
 
 class OrderModel: ObservableObject {
 
+    #if !APPCLIP
     let db = Firestore.firestore()
-
+    var dishReferences = [DocumentReference]()
+    #endif
     @Published var restChosen: RestaurantFB = RestaurantFB.previewRest()
     @Published var dishesChosen: [DishFB] = []
     @Published var buildsChosen: [BuildFB] = []
     
     @Published var totalCost: Double = 0.0
-    
-    var dishReferences = [DocumentReference]()
     
     var pastOrders = [Order]()
     var alertTitle: String = ""
@@ -188,6 +190,10 @@ class OrderModel: ObservableObject {
         self.totalCost = 0.0
     }
     
+    func printOrder(order: Order){
+        
+    }
+    
     #if !APPCLIP
     func saveOrder(order: Order){
         let ds = DispatchGroup()
@@ -219,7 +225,6 @@ class OrderModel: ObservableObject {
             }
         }
     }
-    #endif
     
     func retrieveOrders(userID: String){
         let db = Firestore.firestore()
@@ -286,6 +291,20 @@ class OrderModel: ObservableObject {
             }
         }
       }
+    
+    func orderSent(){
+        self.pastOrders.append(Order(dishes: self.dishesChosen, totalPrice: self.totalCost, rest: self.restChosen.name))
+        self.dishesChosen = []
+        self.buildsChosen = []
+        self.dishIndexes = [DishFB : Int]()
+        self.dishCounts = [DishFB : Int]()
+        self.optsChosen = [DishFB: [String]]()
+        self.buildCounts = [BuildFB : Int]()
+        self.buildIndexes = [BuildFB : Int]()
+        self.buildOptsChosen = [BuildFB: [String]]()
+    }
+    
+    #endif
     
     func formatPrice(price: Double) -> String {
         var x =  "$" + (price.truncatingRemainder(dividingBy: 1) == 0 ? String(format: "%.2f", price) : String(price))

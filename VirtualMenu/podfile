@@ -14,6 +14,7 @@ end
     pod 'Firebase/Storage'
     pod 'GoogleSignIn'
     pod "PromiseKit", "~> 6.8"
+    pod 'MQTTClient'
 
 #target 'YumzzAppClip' do
  #   pod 'Firebase'
