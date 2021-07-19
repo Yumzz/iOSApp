@@ -78,6 +78,7 @@ class HomeScreenViewModel: ObservableObject {
         //d = d x 0.00062137 in miles
 
         if(locationManager.location != nil){
+            
             let lat1 = coordinate.latitude * Double.pi/180
             let lat2 = locationManager.location!.coordinate.latitude * Double.pi/180
             
@@ -93,10 +94,12 @@ class HomeScreenViewModel: ObservableObject {
             let c = 2 * atan2(sqrt(a), sqrt(1-a))
             
             var d = Double(Eradius) * c
+            print("first d:", d)
             
     //        return Double(d)
             
             d = Double(d * 0.00062137)
+            print("second d:", d)
             
             return Double(Double(round(100*d)/100).removeZerosFromEnd())!
         }
