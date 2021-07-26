@@ -4,6 +4,8 @@
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
+	<key>NSCameraUsageDescription</key>
+	<string>Please scan QR Code to pull up Menu</string>
 	<key>CFBundleDisplayName</key>
 	<string>Yumzz</string>
 	<key>CFBundleExecutable</key>

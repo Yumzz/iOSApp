@@ -15,13 +15,13 @@ struct ContentView: View {
     
     let dispatchGroup = DispatchGroup()
     
-    init(){
-        self.viewModel = ContentViewModel(dis: dispatchGroup)
+    init(id: String){
+        self.viewModel = ContentViewModel(dis: dispatchGroup, id: id)
 //        self.viewModel.fetchStuff(dis: dispatchGroup)
 //        self.dispatchGroup.notify(queue:.main){
 //            print("done")
 ////            self.saveRest(rest: self.viewModel.restaurant!)
-//        }
+//       }
     }
     
     
@@ -29,7 +29,6 @@ struct ContentView: View {
         ZStack{
             if self.rest.hour == "" {
                 Color(#colorLiteral(red: 0.9725490196, green: 0.968627451, blue: 0.9607843137, alpha: 1)).edgesIgnoringSafeArea(.all)
-
             }
             else{
                 ListDishesView(restaurant: self.rest)
@@ -57,6 +56,6 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        ContentView(id: "")
     }
 }

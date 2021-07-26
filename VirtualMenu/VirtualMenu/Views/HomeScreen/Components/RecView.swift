@@ -14,6 +14,7 @@ struct RecView: View {
     var attributes = ["Spiciness", "Oiliness", "Saltiness", "Sweetness", "Temperature", "Vegan", "Vegetarian"]
     var recViewModel = RecViewModel()
     var matchGiven: Bool = false
+    @State private var tasteprofile = [0,0,0,0,0,0,0]
     
     var body: some View {
         ZStack {
@@ -33,10 +34,10 @@ struct RecView: View {
                     VStack {
                         ForEach(self.attributes, id: \.self){ attr in
                             if(attr == "Vegan" || attr == "Vegetarian"){
-                                numChoose(attribute: attr, range: 1)
+                                numChoose(attribute: attr, range: 1, tasteProf: self.$tasteprofile)
                             }
                             else{
-                                numChoose(attribute: attr, range: 4)
+                                numChoose(attribute: attr, range: 4, tasteProf: self.$tasteprofile)
                             }
                         }.foregroundColor(.black)
                         
@@ -45,7 +46,8 @@ struct RecView: View {
                 VStack{
                     MatchMeButton()
                         .onTapGesture {
-                            self.recViewModel.getRecommendation(tp: [])
+                            self.recViewModel.getRecommendation(tp: tasteprofile)
+                            
                         }
                 }
                 
@@ -60,15 +62,16 @@ struct numChoose: View {
     @State private var num = 1
     var attribute: String
     var range: Int
+    @Binding var tasteProf: [Int]
+    var attrToIndex = ["Spiciness": 0 , "Oiliness": 1, "Saltiness": 2, "Sweetness": 3, "Temperature": 4, "Vegan": 5, "Vegetarian": 6]
     
     var body: some View {
         
         HStack{
-            Text(attribute + " level: \(num)")
+            Text(attribute + " level: \(tasteProf[attrToIndex[attribute]!])")
             
             Spacer().frame(width: 30)
-            Picker("", selection: $num){
-                
+            Picker("", selection: $tasteProf[attrToIndex[attribute]!]){
                 ForEach(0...range, id:\.self){
                     Text("\($0)").foregroundColor(.black)
                 }

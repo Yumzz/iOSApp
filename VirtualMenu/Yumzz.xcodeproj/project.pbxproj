@@ -81,6 +81,13 @@
 		3A6477F224B68D060077EF30 /* UserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6477F124B68D060077EF30 /* UserProfile.swift */; };
 		3A6638E125844C6B00AC9C1A /* BuildOptsCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6638E025844C6B00AC9C1A /* BuildOptsCard.swift */; };
 		3A822728255A10B60002A233 /* BuildCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A822727255A10B60002A233 /* BuildCard.swift */; };
+		3A8745B126798B07000FC3CA /* QRScanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A8745B026798B07000FC3CA /* QRScanViewController.swift */; };
+		3A8745B726798B23000FC3CA /* QRScanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A8745B626798B23000FC3CA /* QRScanView.swift */; };
+		3A8745BD26798D93000FC3CA /* StartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A8745BC26798D93000FC3CA /* StartView.swift */; };
+		3A8745DD2680484F000FC3CA /* Order.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5633CB24FA33790059B603 /* Order.swift */; };
+		3A8745E2268049C2000FC3CA /* OrderModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5633CD24FC8FE70059B603 /* OrderModel.swift */; };
+		3A8745E726804EBE000FC3CA /* OrderButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFA234324DBA42E00F90ED8 /* OrderButton.swift */; };
+		3A874624268AEECE000FC3CA /* ClientViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A874623268AEECE000FC3CA /* ClientViewController.swift */; };
 		3A87575324EC910A004ABECC /* PostReviewButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A87575224EC910A004ABECC /* PostReviewButton.swift */; };
 		3A987AD72480350C0021F6E4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A987AD62480350C0021F6E4 /* AppDelegate.swift */; };
 		3A987AD92480350C0021F6E4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A987AD82480350C0021F6E4 /* SceneDelegate.swift */; };
@@ -92,8 +99,8 @@
 		3A987B102481511B0021F6E4 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A987B0F2481511B0021F6E4 /* ContentView.swift */; };
 		3AA9897624B517F00070FD97 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA9897524B517F00070FD97 /* Extensions.swift */; };
 		3AAFED4425AFB83800F34BAF /* Combine.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AF6D6742578672E009E4240 /* Combine.framework */; };
-		3AAFED4625AFB84000F34BAF /* FacebookLogin in Frameworks */ = {isa = PBXBuildFile; productRef = 3AAFED4525AFB84000F34BAF /* FacebookLogin */; };
-		3AAFED4825AFB85600F34BAF /* FacebookCore in Frameworks */ = {isa = PBXBuildFile; productRef = 3AAFED4725AFB85600F34BAF /* FacebookCore */; };
+		3AAFED4625AFB84000F34BAF /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 3AAFED4525AFB84000F34BAF /* SwiftPackageProductDependency */; };
+		3AAFED4825AFB85600F34BAF /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 3AAFED4725AFB85600F34BAF /* SwiftPackageProductDependency */; };
 		3AB0DFBB25E77A9000B82A33 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3A0745D425301CE5000EF6BD /* Colors.xcassets */; };
 		3ABA90F124F63DB500695B06 /* BlackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ABA90F024F63DB500695B06 /* BlackButton.swift */; };
 		3ABA90F524F64EDE00695B06 /* GuestButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ABA90F424F64EDE00695B06 /* GuestButton.swift */; };
@@ -132,7 +139,7 @@
 		3AFA234624DC9C2000F90ED8 /* DishReviewFB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFA234524DC9C2000F90ED8 /* DishReviewFB.swift */; };
 		3AFA234824DCACEA00F90ED8 /* ReviewsButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFA234724DCACEA00F90ED8 /* ReviewsButton.swift */; };
 		3AFA234A24DCB14B00F90ED8 /* DishReviewsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFA234924DCB14B00F90ED8 /* DishReviewsView.swift */; };
-		9BA3F1960379137AF58E02AC /* Pods_VirtualMenu.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E8B12CB43024877097D48E3 /* Pods_VirtualMenu.framework */; };
+		4447782213DF6A6038996665 /* Pods_VirtualMenu.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 132C3CFB4DCAE69A577678CE /* Pods_VirtualMenu.framework */; };
 		A735992824ECD83300584BFD /* AccountProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A735992724ECD83300584BFD /* AccountProfileViewModel.swift */; };
 		A735992A24ECFDCF00584BFD /* AccountProfileLoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A735992924ECFDCF00584BFD /* AccountProfileLoginView.swift */; };
 		A777C3A424D3EC7A009658AA /* UserStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = A777C3A324D3EC7A009658AA /* UserStore.swift */; };
@@ -202,8 +209,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		1E8B12CB43024877097D48E3 /* Pods_VirtualMenu.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VirtualMenu.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		20FF32DDAFEACF1641470A85 /* Pods-VirtualMenu.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VirtualMenu.release.xcconfig"; path = "Target Support Files/Pods-VirtualMenu/Pods-VirtualMenu.release.xcconfig"; sourceTree = "<group>"; };
+		132C3CFB4DCAE69A577678CE /* Pods_VirtualMenu.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VirtualMenu.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		34111051252262F10084975A /* YumzzAppClip.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YumzzAppClip.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		34111053252262F10084975A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		34111055252262F10084975A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -276,6 +282,10 @@
 		3A6477F124B68D060077EF30 /* UserProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfile.swift; sourceTree = "<group>"; };
 		3A6638E025844C6B00AC9C1A /* BuildOptsCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildOptsCard.swift; sourceTree = "<group>"; };
 		3A822727255A10B60002A233 /* BuildCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildCard.swift; sourceTree = "<group>"; };
+		3A8745B026798B07000FC3CA /* QRScanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRScanViewController.swift; sourceTree = "<group>"; };
+		3A8745B626798B23000FC3CA /* QRScanView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRScanView.swift; sourceTree = "<group>"; };
+		3A8745BC26798D93000FC3CA /* StartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartView.swift; sourceTree = "<group>"; };
+		3A874623268AEECE000FC3CA /* ClientViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientViewController.swift; sourceTree = "<group>"; };
 		3A87575224EC910A004ABECC /* PostReviewButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostReviewButton.swift; sourceTree = "<group>"; };
 		3A987AD32480350C0021F6E4 /* Yumzz.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Yumzz.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A987AD62480350C0021F6E4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -357,10 +367,11 @@
 		A797EA5824B938D5005158FA /* Montserrat-ThinItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-ThinItalic.ttf"; sourceTree = "<group>"; };
 		A7D0F78224DF6B4100197631 /* FBURLImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBURLImage.swift; sourceTree = "<group>"; };
 		A7FE996124F4A552006E5980 /* DishCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DishCard.swift; sourceTree = "<group>"; };
-		C4E1932C549FBD7C86C68FEF /* Pods-VirtualMenu.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VirtualMenu.debug.xcconfig"; path = "Target Support Files/Pods-VirtualMenu/Pods-VirtualMenu.debug.xcconfig"; sourceTree = "<group>"; };
+		BB52383FA1F880A6489AF3A8 /* Pods-VirtualMenu.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VirtualMenu.release.xcconfig"; path = "Target Support Files/Pods-VirtualMenu/Pods-VirtualMenu.release.xcconfig"; sourceTree = "<group>"; };
 		C55FDD6424CABA2800CC8561 /* RestaurantFB.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestaurantFB.swift; sourceTree = "<group>"; };
 		C5CD0F2824AC4C6600F0A60D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		C5D0A16B24B1B6A300E44DF2 /* DishFB.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DishFB.swift; sourceTree = "<group>"; };
+		E8EE1CC6702AEEDEC35BCB5C /* Pods-VirtualMenu.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VirtualMenu.debug.xcconfig"; path = "Target Support Files/Pods-VirtualMenu/Pods-VirtualMenu.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -375,10 +386,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3AAFED4625AFB84000F34BAF /* FacebookLogin in Frameworks */,
+				3AAFED4625AFB84000F34BAF /* BuildFile in Frameworks */,
 				3AAFED4425AFB83800F34BAF /* Combine.framework in Frameworks */,
-				3AAFED4825AFB85600F34BAF /* FacebookCore in Frameworks */,
-				9BA3F1960379137AF58E02AC /* Pods_VirtualMenu.framework in Frameworks */,
+				3AAFED4825AFB85600F34BAF /* BuildFile in Frameworks */,
+				4447782213DF6A6038996665 /* Pods_VirtualMenu.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -681,6 +692,9 @@
 				34111055252262F10084975A /* SceneDelegate.swift */,
 				3A5C04A125B76654001BBBC8 /* ListDishesView.swift */,
 				34111057252262F10084975A /* ContentView.swift */,
+				3A8745BC26798D93000FC3CA /* StartView.swift */,
+				3A8745B026798B07000FC3CA /* QRScanViewController.swift */,
+				3A8745B626798B23000FC3CA /* QRScanView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -692,6 +706,14 @@
 				3A5C04A725B7670B001BBBC8 /* ListDishesViewModel.swift */,
 			);
 			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		3A874622268AEE3C000FC3CA /* PrinterConnection */ = {
+			isa = PBXGroup;
+			children = (
+				3A874623268AEECE000FC3CA /* ClientViewController.swift */,
+			);
+			path = PrinterConnection;
 			sourceTree = "<group>";
 		};
 		3A987ACA2480350C0021F6E4 = {
@@ -896,7 +918,7 @@
 				3AF6D6742578672E009E4240 /* Combine.framework */,
 				3A10F67125550CEF00E25BC6 /* AppAuth.framework */,
 				A731EB0D2495AD2300B75D05 /* CloudKit.framework */,
-				1E8B12CB43024877097D48E3 /* Pods_VirtualMenu.framework */,
+				132C3CFB4DCAE69A577678CE /* Pods_VirtualMenu.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -904,8 +926,8 @@
 		7D43EDA24CF9AA630D4BB85D /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				C4E1932C549FBD7C86C68FEF /* Pods-VirtualMenu.debug.xcconfig */,
-				20FF32DDAFEACF1641470A85 /* Pods-VirtualMenu.release.xcconfig */,
+				E8EE1CC6702AEEDEC35BCB5C /* Pods-VirtualMenu.debug.xcconfig */,
+				BB52383FA1F880A6489AF3A8 /* Pods-VirtualMenu.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -931,6 +953,7 @@
 		A73B1B5D24B0FF4100A8C6A8 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				3A874622268AEE3C000FC3CA /* PrinterConnection */,
 				3AED7BC725CB329600341E95 /* Cache */,
 				3ACAD180250AF03C00B24CEB /* DishNavigationVM */,
 				3ACAD17A250AE7D600B24CEB /* AccountProfVM */,
@@ -980,13 +1003,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 3A987AFD2480350E0021F6E4 /* Build configuration list for PBXNativeTarget "VirtualMenu" */;
 			buildPhases = (
-				775DE00F8FF2142B3A732802 /* [CP] Check Pods Manifest.lock */,
+				85993A8066FE203DB2E6980A /* [CP] Check Pods Manifest.lock */,
 				3A987ACF2480350C0021F6E4 /* Sources */,
 				3A987AD02480350C0021F6E4 /* Frameworks */,
 				3A987AD12480350C0021F6E4 /* Resources */,
 				34111066252262F20084975A /* Embed App Clips */,
-				BD84032CDDF9AEBFA8CC6C61 /* [CP] Embed Pods Frameworks */,
-				0030D5BA1C286AF23373A1A0 /* [CP] Copy Pods Resources */,
+				F95F815C0BAC369F41D53DD6 /* [CP] Embed Pods Frameworks */,
+				66219D6589228C2072859574 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -995,8 +1018,8 @@
 			);
 			name = VirtualMenu;
 			packageProductDependencies = (
-				3AAFED4525AFB84000F34BAF /* FacebookLogin */,
-				3AAFED4725AFB85600F34BAF /* FacebookCore */,
+				3AAFED4525AFB84000F34BAF /* SwiftPackageProductDependency */,
+				3AAFED4725AFB85600F34BAF /* SwiftPackageProductDependency */,
 			);
 			productName = VirtualMenu;
 			productReference = 3A987AD32480350C0021F6E4 /* Yumzz.app */;
@@ -1074,7 +1097,7 @@
 			);
 			mainGroup = 3A987ACA2480350C0021F6E4;
 			packageReferences = (
-				3AE05F9624EF27550024F802 /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */,
+				3AE05F9624EF27550024F802 /* RemoteSwiftPackageReference */,
 			);
 			productRefGroup = 3A987AD42480350C0021F6E4 /* Products */;
 			projectDirPath = "";
@@ -1143,7 +1166,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		0030D5BA1C286AF23373A1A0 /* [CP] Copy Pods Resources */ = {
+		66219D6589228C2072859574 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1160,7 +1183,7 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-VirtualMenu/Pods-VirtualMenu-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		775DE00F8FF2142B3A732802 /* [CP] Check Pods Manifest.lock */ = {
+		85993A8066FE203DB2E6980A /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1182,7 +1205,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		BD84032CDDF9AEBFA8CC6C61 /* [CP] Embed Pods Frameworks */ = {
+		F95F815C0BAC369F41D53DD6 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1207,17 +1230,23 @@
 			buildActionMask = 2147483647;
 			files = (
 				3A5C04AD25B76F6C001BBBC8 /* BuildCard.swift in Sources */,
+				3A8745BD26798D93000FC3CA /* StartView.swift in Sources */,
+				3A8745DD2680484F000FC3CA /* Order.swift in Sources */,
 				3A5C049725B75F75001BBBC8 /* BuildFB.swift in Sources */,
 				3A5C04B725B770A1001BBBC8 /* OptionsCard.swift in Sources */,
 				3A5C04B225B76FB6001BBBC8 /* DishCard.swift in Sources */,
+				3A8745B726798B23000FC3CA /* QRScanView.swift in Sources */,
 				3A3073B525B2456300D1C363 /* ColorManager.swift in Sources */,
 				3A5C04A225B76654001BBBC8 /* ListDishesView.swift in Sources */,
 				3A3073AB25B2229700D1C363 /* Extensions.swift in Sources */,
+				3A8745E2268049C2000FC3CA /* OrderModel.swift in Sources */,
 				34111054252262F10084975A /* AppDelegate.swift in Sources */,
 				34111056252262F10084975A /* SceneDelegate.swift in Sources */,
 				3A3073A625B219E700D1C363 /* RestaurantFB.swift in Sources */,
+				3A8745E726804EBE000FC3CA /* OrderButton.swift in Sources */,
 				3A5C049225B75D84001BBBC8 /* ContentViewModel.swift in Sources */,
 				3A5C049C25B764AD001BBBC8 /* DishCategory.swift in Sources */,
+				3A8745B126798B07000FC3CA /* QRScanViewController.swift in Sources */,
 				34111058252262F10084975A /* ContentView.swift in Sources */,
 				3A3073B025B2456000D1C363 /* Constants.swift in Sources */,
 				3A0474D125B5001A00FFBBC9 /* DishFB.swift in Sources */,
@@ -1327,6 +1356,7 @@
 				3A530DF124D8E07F00CBDE28 /* BottomSheetModal.swift in Sources */,
 				34A966F2254691C200AD84CD /* RestaurantReviewFB.swift in Sources */,
 				3A5633BA24F9014C0059B603 /* SignInWithAppleCoordinator.swift in Sources */,
+				3A874624268AEECE000FC3CA /* ClientViewController.swift in Sources */,
 				3A0745BB252B020F000EF6BD /* FacebookButton.swift in Sources */,
 				3AEB331C2572092000A61C0E /* WhiteBackButton.swift in Sources */,
 				3AF9926524A2B7C9005446D8 /* LoginView.swift in Sources */,
@@ -1566,7 +1596,7 @@
 		};
 		3A987AFE2480350E0021F6E4 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C4E1932C549FBD7C86C68FEF /* Pods-VirtualMenu.debug.xcconfig */;
+			baseConfigurationReference = E8EE1CC6702AEEDEC35BCB5C /* Pods-VirtualMenu.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -1595,7 +1625,7 @@
 		};
 		3A987AFF2480350E0021F6E4 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 20FF32DDAFEACF1641470A85 /* Pods-VirtualMenu.release.xcconfig */;
+			baseConfigurationReference = BB52383FA1F880A6489AF3A8 /* Pods-VirtualMenu.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -1757,7 +1787,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		3AE05F9624EF27550024F802 /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */ = {
+		3AE05F9624EF27550024F802 /* RemoteSwiftPackageReference */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/facebook/facebook-ios-sdk";
 			requirement = {
@@ -1768,14 +1798,14 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		3AAFED4525AFB84000F34BAF /* FacebookLogin */ = {
+		3AAFED4525AFB84000F34BAF /* SwiftPackageProductDependency */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 3AE05F9624EF27550024F802 /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */;
+			package = 3AE05F9624EF27550024F802 /* RemoteSwiftPackageReference */;
 			productName = FacebookLogin;
 		};
-		3AAFED4725AFB85600F34BAF /* FacebookCore */ = {
+		3AAFED4725AFB85600F34BAF /* SwiftPackageProductDependency */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 3AE05F9624EF27550024F802 /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */;
+			package = 3AE05F9624EF27550024F802 /* RemoteSwiftPackageReference */;
 			productName = FacebookCore;
 		};
 /* End XCSwiftPackageProductDependency section */

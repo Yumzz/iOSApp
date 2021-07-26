@@ -62,7 +62,7 @@ struct RestaurantReviewView: View {
                         HStack{
                             if(review.photoURL != ""){
                                 FBURLImage(url: review.photoURL, imageAspectRatio: .fill, imageWidth: 20, imageHeight: 20, circle: true)
-                            }
+                            }   
                             else{
                                 Image(systemName: "person.circle.fill")
                                     .foregroundColor(Color(#colorLiteral(red: 0.88, green: 0.36, blue: 0.16, alpha: 1)))

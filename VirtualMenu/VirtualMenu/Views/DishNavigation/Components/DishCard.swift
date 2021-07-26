@@ -27,9 +27,9 @@ struct DishCard: View {
 //    @State private var alertTitle = ""
     
     
-    #if !APPCLIP
+//    #if !APPCLIP
     @EnvironmentObject var order : OrderModel
-    #endif
+//    #endif
     
     @Environment (\.colorScheme) var colorScheme:ColorScheme
     
@@ -69,7 +69,7 @@ struct DishCard: View {
                 
                 Spacer().frame(width: 8, height: 0)
                 
-                #if !APPCLIP
+//                #if !APPCLIP
                 ZStack {
                     Rectangle()
                         .fill(Color("YumzzOrange"))
@@ -98,7 +98,7 @@ struct DishCard: View {
                             NotificationCenter.default.post(name: Notification.Name(rawValue: "Alert"), object: singPrice)
                         }
                     }
-                #endif
+//                #endif
                 
                 Spacer().frame(width: 15, height: 0)
                 

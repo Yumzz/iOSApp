@@ -73,6 +73,7 @@ class ListDishesViewModel: ObservableObject {
                                     let build = BuildFB(snapshot: document)
         
                                     self.builds.append(build!)
+                                    print("build created for: \(name)" )
         
                                     if(document == snapshot!.documents.last){
                                         self.dispatchGroup2.leave()
@@ -159,6 +160,7 @@ class ListDishesViewModel: ObservableObject {
         }
         
         if !self.builds.isEmpty {
+            
 //            for b in self.builds {
 //                dishCategories.append(DishCategory(isExpanded: <#T##Bool#>, dishes: <#T##[DishFB]?#>, builds: <#T##[BuildFB]?#>, name: <#T##String#>, description: <#T##String#>))
 //            }
