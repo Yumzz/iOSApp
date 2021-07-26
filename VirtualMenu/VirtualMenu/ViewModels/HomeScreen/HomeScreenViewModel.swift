@@ -97,10 +97,12 @@ class HomeScreenViewModel: ObservableObject {
             let c = 2 * atan2(sqrt(a), sqrt(1-a))
             
             var d = Double(Eradius) * c
+            print("first d:", d)
             
     //        return Double(d)
             
             d = Double(d * 0.00062137)
+            print("second d:", d)
             
             return Double(Double(round(100*d)/100).removeZerosFromEnd())!
         }
