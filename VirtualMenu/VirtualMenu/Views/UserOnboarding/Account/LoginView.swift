@@ -73,12 +73,12 @@ struct LoginView: View {
                         .font(.system(size: 36))
                         .padding(.leading, 40)
                         .padding(.trailing, 40)
-                        .position(x: UIScreen.main.bounds.width/2.5, y: 0)
-                        .padding(.bottom, 20)
+//                        .position(x: UIScreen.main.bounds.width/2.5, y: 0)
+                        .padding(.vertical)
                                             
-                    CustomTextField(field: "Email", strLabel: "jonnyives@apple.com", strField: $email, uiTextAutoCapitalizationType: .none, uiKeyboardType: .emailAddress)
+                    CustomTextField(field: "Email", strLabel: "jonnyives@apple.com", strField: $email, uiTextAutoCapitalizationType: .none, uiKeyboardType: .emailAddress).foregroundColor(.black)
 
-                    CustomPasswordField(field: "Password", strLabel: "••••••••••", password: $password)
+                    CustomPasswordField(field: "Password", strLabel: "••••••••••", password: $password).foregroundColor(.black)
                         
     //                VStack {
                         HStack {

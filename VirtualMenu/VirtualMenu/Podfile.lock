@@ -347,10 +347,20 @@ PODS:
   - gRPC-Core/Interface (1.28.2)
   - GTMAppAuth (1.2.2):
     - AppAuth/Core (~> 1.4)
+<<<<<<< HEAD
     - GTMSessionFetcher/Core (~> 1.5)
   - GTMSessionFetcher/Core (1.6.1)
   - Instructions (2.1.0)
   - leveldb-library (1.22.1)
+=======
+    - GTMSessionFetcher (~> 1.4)
+  - GTMSessionFetcher (1.5.0):
+    - GTMSessionFetcher/Full (= 1.5.0)
+  - GTMSessionFetcher/Core (1.5.0)
+  - GTMSessionFetcher/Full (1.5.0):
+    - GTMSessionFetcher/Core (= 1.5.0)
+  - Instructions (2.0.0)
+  - leveldb-library (1.22)
   - MQTTClient (0.15.3):
     - MQTTClient/Core (= 0.15.3)
   - MQTTClient/Core (0.15.3):
@@ -359,6 +369,7 @@ PODS:
   - MQTTClient/Manager (0.15.3):
     - MQTTClient/Min
   - MQTTClient/Min (0.15.3)
+>>>>>>> 67f2af0beab027305f0e2d668a94168706d8b9f9
   - nanopb (1.30906.0):
     - nanopb/decode (= 1.30906.0)
     - nanopb/encode (= 1.30906.0)
@@ -438,15 +449,22 @@ SPEC CHECKSUMS:
   GoogleUtilities: 7f2f5a07f888cdb145101d6042bc4422f57e70b3
   "gRPC-C++": 13d8ccef97d5c3c441b7e3c529ef28ebee86fad2
   gRPC-Core: 4afa11bfbedf7cdecd04de535a9e046893404ed5
+<<<<<<< HEAD
   GTMAppAuth: ad5c2b70b9a8689e1a04033c9369c4915bfcbe89
   GTMSessionFetcher: 36689134877faeb055b27dfa4ccc9ceaa42e029e
   Instructions: 2465e321dde23f7c8fc26fe8efddf605df80dfba
   leveldb-library: 50c7b45cbd7bf543c81a468fe557a16ae3db8729
+=======
+  GTMAppAuth: 197a8dabfea5d665224aa00d17f164fc2248dab9
+  GTMSessionFetcher: b3503b20a988c4e20cc189aa798fd18220133f52
+  Instructions: debf9cedeaf8d095108fd35d2c54b97ccf769e65
+  leveldb-library: 55d93ee664b4007aac644a782d11da33fba316f7
   MQTTClient: 0dfa04e789479c2e461786464969895c1fcb0875
+>>>>>>> 67f2af0beab027305f0e2d668a94168706d8b9f9
   nanopb: 59317e09cf1f1a0af72f12af412d54edf52603fc
   PromiseKit: 3b2b6995e51a954c46dbc550ce3da44fbfb563c5
   PromisesObjC: 3113f7f76903778cf4a0586bd1ab89329a0b7b97
 
-PODFILE CHECKSUM: 51291bdbe160155d950d9e2b0acb6aa70bc84ddb
+PODFILE CHECKSUM: 4900da58e56dcc001aabc0b4c476248b50aa2b2f
 
 COCOAPODS: 1.8.4

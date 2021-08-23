@@ -27,7 +27,7 @@ struct DishCardOrder: View {
                         .frame(width: 24, height: 24)
                         .foregroundColor(Color(#colorLiteral(red: 0.8549019608, green: 0.8549019608, blue: 0.8549019608, alpha: 1)))
                         .cornerRadius(10)
-                        .overlay(Text("\(count)"))
+                        .overlay(Text("\(count)").foregroundColor(.black))
                 }
                 
                 
@@ -36,7 +36,7 @@ struct DishCardOrder: View {
 //
                 VStack {
                     Text(name).bold()
-                        .foregroundColor(Color.primary)
+                        .foregroundColor(.black)
                         .font(.system(size: 18))
                     if(self.order.optsChosen[dish] != nil){
                         ScrollView(.horizontal){
@@ -46,12 +46,12 @@ struct DishCardOrder: View {
                                 ForEach(self.order.optsChosen[dish]!, id: \.self){ option in
                                     if(option == self.order.optsChosen[dish]?.last){
                                         Text(option)
-                                            .foregroundColor(Color.primary)
+                                            .foregroundColor(.black)
                                             .font(.system(size: 10))
                                     }
                                     else{
                                         Text("\(option),")
-                                            .foregroundColor(Color.primary)
+                                            .foregroundColor(.black)
                                             .font(.system(size: 10))
                                     }
                                 }
@@ -65,9 +65,11 @@ struct DishCardOrder: View {
 //
                 VStack {
                     Text("$\(price.removeZerosFromEnd())")
-                        .foregroundColor(Color.primary)
+                        .foregroundColor(.black)
                         .font(.system(size: 18)).bold()
                     }
+                
+                Spacer()
 //                .frame(height: 70)
 //                .padding(.leading, 5)
                 

@@ -27,6 +27,7 @@ struct BuildFB {
     var individCost: Bool = false
     var individualCosts: [String:[String]] = ["":[]]
     
+    
     #if !APPCLIP
     init(name: String, description: String, rest: String, addOns: [String:[String]], exclusiveOpts: [String:[String]], priceOpts:[String:[String: NSArray]], sizePrice: [String: [String]], individualCost: Bool, individCosts: [String:[String]]) {
         self.name = name

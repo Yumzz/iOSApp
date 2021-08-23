@@ -39,7 +39,7 @@ struct RecView: View {
                             else{
                                 numChoose(attribute: attr, range: 4, tasteProf: self.$tasteprofile)
                             }
-                        }
+                        }.foregroundColor(.black)
                         
                     }
                 }
@@ -73,7 +73,7 @@ struct numChoose: View {
             Spacer().frame(width: 30)
             Picker("", selection: $tasteProf[attrToIndex[attribute]!]){
                 ForEach(0...range, id:\.self){
-                    Text("\($0)")
+                    Text("\($0)").foregroundColor(.black)
                 }
             }.frame(width: 40, height: 30).clipped()
         }

@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2E9E11058D3E0949B2DD3831 /* Pods_VirtualMenu.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 661F5D3C4AF39D2D3B985D46 /* Pods_VirtualMenu.framework */; };
+		124E97207671223F234E733A /* Pods_VirtualMenu.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F51205A9C5DE8A47CF82878 /* Pods_VirtualMenu.framework */; };
 		34111054252262F10084975A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34111053252262F10084975A /* AppDelegate.swift */; };
 		34111056252262F10084975A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34111055252262F10084975A /* SceneDelegate.swift */; };
 		34111058252262F10084975A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34111057252262F10084975A /* ContentView.swift */; };
@@ -100,8 +100,8 @@
 		3A987B102481511B0021F6E4 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A987B0F2481511B0021F6E4 /* ContentView.swift */; };
 		3AA9897624B517F00070FD97 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA9897524B517F00070FD97 /* Extensions.swift */; };
 		3AAFED4425AFB83800F34BAF /* Combine.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AF6D6742578672E009E4240 /* Combine.framework */; };
-		3AAFED4625AFB84000F34BAF /* FacebookLogin in Frameworks */ = {isa = PBXBuildFile; productRef = 3AAFED4525AFB84000F34BAF /* FacebookLogin */; };
-		3AAFED4825AFB85600F34BAF /* FacebookCore in Frameworks */ = {isa = PBXBuildFile; productRef = 3AAFED4725AFB85600F34BAF /* FacebookCore */; };
+		3AAFED4625AFB84000F34BAF /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 3AAFED4525AFB84000F34BAF /* SwiftPackageProductDependency */; };
+		3AAFED4825AFB85600F34BAF /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 3AAFED4725AFB85600F34BAF /* SwiftPackageProductDependency */; };
 		3AB0DFBB25E77A9000B82A33 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3A0745D425301CE5000EF6BD /* Colors.xcassets */; };
 		3ABA90F124F63DB500695B06 /* BlackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ABA90F024F63DB500695B06 /* BlackButton.swift */; };
 		3ABA90F524F64EDE00695B06 /* GuestButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ABA90F424F64EDE00695B06 /* GuestButton.swift */; };
@@ -339,8 +339,8 @@
 		3AFA234524DC9C2000F90ED8 /* DishReviewFB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DishReviewFB.swift; sourceTree = "<group>"; };
 		3AFA234724DCACEA00F90ED8 /* ReviewsButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewsButton.swift; sourceTree = "<group>"; };
 		3AFA234924DCB14B00F90ED8 /* DishReviewsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DishReviewsView.swift; sourceTree = "<group>"; };
-		661F5D3C4AF39D2D3B985D46 /* Pods_VirtualMenu.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VirtualMenu.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		84483D0B78AE0F0F84A8F245 /* Pods-VirtualMenu.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VirtualMenu.debug.xcconfig"; path = "Target Support Files/Pods-VirtualMenu/Pods-VirtualMenu.debug.xcconfig"; sourceTree = "<group>"; };
+		48568AED61E9E2DE9A7F10DB /* Pods-VirtualMenu.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VirtualMenu.release.xcconfig"; path = "Target Support Files/Pods-VirtualMenu/Pods-VirtualMenu.release.xcconfig"; sourceTree = "<group>"; };
+		5F51205A9C5DE8A47CF82878 /* Pods_VirtualMenu.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VirtualMenu.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A731EB0D2495AD2300B75D05 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		A735992724ECD83300584BFD /* AccountProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountProfileViewModel.swift; sourceTree = "<group>"; };
 		A735992924ECFDCF00584BFD /* AccountProfileLoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountProfileLoginView.swift; sourceTree = "<group>"; };
@@ -371,7 +371,7 @@
 		C55FDD6424CABA2800CC8561 /* RestaurantFB.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestaurantFB.swift; sourceTree = "<group>"; };
 		C5CD0F2824AC4C6600F0A60D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		C5D0A16B24B1B6A300E44DF2 /* DishFB.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DishFB.swift; sourceTree = "<group>"; };
-		EA19921D7296C5D8FC9FBFBA /* Pods-VirtualMenu.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VirtualMenu.release.xcconfig"; path = "Target Support Files/Pods-VirtualMenu/Pods-VirtualMenu.release.xcconfig"; sourceTree = "<group>"; };
+		E586039BBF88D1BA86D139E2 /* Pods-VirtualMenu.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VirtualMenu.debug.xcconfig"; path = "Target Support Files/Pods-VirtualMenu/Pods-VirtualMenu.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -386,10 +386,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3AAFED4625AFB84000F34BAF /* FacebookLogin in Frameworks */,
+				3AAFED4625AFB84000F34BAF /* BuildFile in Frameworks */,
 				3AAFED4425AFB83800F34BAF /* Combine.framework in Frameworks */,
-				3AAFED4825AFB85600F34BAF /* FacebookCore in Frameworks */,
-				2E9E11058D3E0949B2DD3831 /* Pods_VirtualMenu.framework in Frameworks */,
+				3AAFED4825AFB85600F34BAF /* BuildFile in Frameworks */,
+				124E97207671223F234E733A /* Pods_VirtualMenu.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -918,7 +918,7 @@
 				3AF6D6742578672E009E4240 /* Combine.framework */,
 				3A10F67125550CEF00E25BC6 /* AppAuth.framework */,
 				A731EB0D2495AD2300B75D05 /* CloudKit.framework */,
-				661F5D3C4AF39D2D3B985D46 /* Pods_VirtualMenu.framework */,
+				5F51205A9C5DE8A47CF82878 /* Pods_VirtualMenu.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -926,8 +926,8 @@
 		7D43EDA24CF9AA630D4BB85D /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				84483D0B78AE0F0F84A8F245 /* Pods-VirtualMenu.debug.xcconfig */,
-				EA19921D7296C5D8FC9FBFBA /* Pods-VirtualMenu.release.xcconfig */,
+				E586039BBF88D1BA86D139E2 /* Pods-VirtualMenu.debug.xcconfig */,
+				48568AED61E9E2DE9A7F10DB /* Pods-VirtualMenu.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -1003,13 +1003,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 3A987AFD2480350E0021F6E4 /* Build configuration list for PBXNativeTarget "VirtualMenu" */;
 			buildPhases = (
-				793D23EB708318DF987BFCA6 /* [CP] Check Pods Manifest.lock */,
+				D6DCFF1FC2E25D3B124E6C4A /* [CP] Check Pods Manifest.lock */,
 				3A987ACF2480350C0021F6E4 /* Sources */,
 				3A987AD02480350C0021F6E4 /* Frameworks */,
 				3A987AD12480350C0021F6E4 /* Resources */,
 				34111066252262F20084975A /* Embed App Clips */,
-				BCEF9D8752EBE7607B1C9145 /* [CP] Embed Pods Frameworks */,
-				80E891BD4966DEE0B5D27DA2 /* [CP] Copy Pods Resources */,
+				ABD8BFBD7928310D4DE7DB07 /* [CP] Embed Pods Frameworks */,
+				DC4056D663B6E7BDFA0B34E6 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1018,8 +1018,8 @@
 			);
 			name = VirtualMenu;
 			packageProductDependencies = (
-				3AAFED4525AFB84000F34BAF /* FacebookLogin */,
-				3AAFED4725AFB85600F34BAF /* FacebookCore */,
+				3AAFED4525AFB84000F34BAF /* SwiftPackageProductDependency */,
+				3AAFED4725AFB85600F34BAF /* SwiftPackageProductDependency */,
 			);
 			productName = VirtualMenu;
 			productReference = 3A987AD32480350C0021F6E4 /* Yumzz.app */;
@@ -1097,7 +1097,7 @@
 			);
 			mainGroup = 3A987ACA2480350C0021F6E4;
 			packageReferences = (
-				3AE05F9624EF27550024F802 /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */,
+				3AE05F9624EF27550024F802 /* RemoteSwiftPackageReference */,
 			);
 			productRefGroup = 3A987AD42480350C0021F6E4 /* Products */;
 			projectDirPath = "";
@@ -1166,7 +1166,24 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		793D23EB708318DF987BFCA6 /* [CP] Check Pods Manifest.lock */ = {
+		ABD8BFBD7928310D4DE7DB07 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-VirtualMenu/Pods-VirtualMenu-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-VirtualMenu/Pods-VirtualMenu-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-VirtualMenu/Pods-VirtualMenu-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D6DCFF1FC2E25D3B124E6C4A /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1188,7 +1205,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		80E891BD4966DEE0B5D27DA2 /* [CP] Copy Pods Resources */ = {
+		DC4056D663B6E7BDFA0B34E6 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1203,23 +1220,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-VirtualMenu/Pods-VirtualMenu-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		BCEF9D8752EBE7607B1C9145 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-VirtualMenu/Pods-VirtualMenu-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-VirtualMenu/Pods-VirtualMenu-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-VirtualMenu/Pods-VirtualMenu-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -1596,10 +1596,11 @@
 		};
 		3A987AFE2480350E0021F6E4 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 84483D0B78AE0F0F84A8F245 /* Pods-VirtualMenu.debug.xcconfig */;
+			baseConfigurationReference = E586039BBF88D1BA86D139E2 /* Pods-VirtualMenu.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = NO;
 				CODE_SIGN_ENTITLEMENTS = VirtualMenu/VirtualMenu.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -1608,6 +1609,7 @@
 				ENABLE_BITCODE = YES;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = VirtualMenu/Info.plist;
+				LD_QUOTE_LINKER_ARGUMENTS_FOR_COMPILER_DRIVER = YES;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1623,10 +1625,11 @@
 		};
 		3A987AFF2480350E0021F6E4 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = EA19921D7296C5D8FC9FBFBA /* Pods-VirtualMenu.release.xcconfig */;
+			baseConfigurationReference = 48568AED61E9E2DE9A7F10DB /* Pods-VirtualMenu.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = NO;
 				CODE_SIGN_ENTITLEMENTS = VirtualMenu/YumzzRelease.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -1635,6 +1638,7 @@
 				ENABLE_BITCODE = YES;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = VirtualMenu/Info.plist;
+				LD_QUOTE_LINKER_ARGUMENTS_FOR_COMPILER_DRIVER = YES;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1783,7 +1787,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		3AE05F9624EF27550024F802 /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */ = {
+		3AE05F9624EF27550024F802 /* RemoteSwiftPackageReference */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/facebook/facebook-ios-sdk";
 			requirement = {
@@ -1794,14 +1798,14 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		3AAFED4525AFB84000F34BAF /* FacebookLogin */ = {
+		3AAFED4525AFB84000F34BAF /* SwiftPackageProductDependency */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 3AE05F9624EF27550024F802 /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */;
+			package = 3AE05F9624EF27550024F802 /* RemoteSwiftPackageReference */;
 			productName = FacebookLogin;
 		};
-		3AAFED4725AFB85600F34BAF /* FacebookCore */ = {
+		3AAFED4725AFB85600F34BAF /* SwiftPackageProductDependency */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 3AE05F9624EF27550024F802 /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */;
+			package = 3AE05F9624EF27550024F802 /* RemoteSwiftPackageReference */;
 			productName = FacebookCore;
 		};
 /* End XCSwiftPackageProductDependency section */

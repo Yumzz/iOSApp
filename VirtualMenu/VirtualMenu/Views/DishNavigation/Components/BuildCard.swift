@@ -40,9 +40,11 @@ struct BuildCard: View {
                             .padding(.horizontal, 20)
                             .padding(.vertical, 10)
                             .font(.subheadline)
+                            .foregroundColor(.black)
                             .onTapGesture {
                                 print(type)
                             }
+
                             ForEach(self.build.addOns[type]!, id: \.self){
                                  option in
                                 HStack{
@@ -148,11 +150,13 @@ struct BuildCard: View {
                     }
                 }
             }
+
             else{
                 VStack{
                     Text("Select Size:")
                         .font(.subheadline)
                         .fontWeight(.semibold)
+                        .foregroundColor(.black)
                         
                     HStack{
                         ForEach(self.build.typePrice, id: \.self){
@@ -165,6 +169,7 @@ struct BuildCard: View {
                                 .onTapGesture {
                                     print(type)
                                 }
+                                .foregroundColor(.black)
                                 ForEach(self.build.exclusiveOpts[type]!, id: \.self){
                                     size in
     //                                HStack{
@@ -172,6 +177,7 @@ struct BuildCard: View {
                                         .padding(.horizontal, 20)
                                         .padding(.vertical, 10)
                                         .font(.subheadline)
+                                        .foregroundColor(.black)
                                         .background(((self.typeClicked == type) && (self.sizeClicked == size)) ? ColorManager.yumzzOrange.clipShape(RoundedRectangle(cornerRadius: 10, style: .circular)) : ColorManager.offWhiteBack.clipShape(RoundedRectangle(cornerRadius: 10, style: .circular)))
                                         .onTapGesture {
                                             self.addOnClicked.removeAll()
@@ -182,6 +188,7 @@ struct BuildCard: View {
                                                 self.total = 0.00
     //                                            self.total -= Double(self.build.sizePrice[type]![self.build.exclusiveOpts[type]!.firstIndex(of: size)!])!
                                             }
+                                            
                                             else{
                                                 self.total = Double(self.build.sizePrice[type]![self.build.exclusiveOpts[type]!.firstIndex(of: size)!])!
                                                 self.sizeClicked = size
@@ -197,17 +204,20 @@ struct BuildCard: View {
                     Text("Select Options:")
                         .font(.subheadline)
                         .fontWeight(.semibold)
+                        .foregroundColor(.black)
                     ForEach(self.build.typeOpt, id: \.self){
                         opt in
                         HStack{
                             Text("\(opt)")
                                     .font(.title)
                                     .fontWeight(.semibold)
+                                .foregroundColor(.black)
                             ForEach(self.build.typePrice, id: \.self){
                                 type in
                                 StyledText(verbatim: "\(type): +\(self.build.priceOpts[opt]![type]!.componentsJoined(by: "/"))")
                                 .style(.highlight(), ranges: { self.indexPrice == -1 ? [$0.range(of: " " )!] :(self.typeClicked == type ? [$0.range(of: "\(self.build.priceOpts[opt]![self.typeClicked]![self.indexPrice])")!] : [$0.range(of: " " )!]
                                         ) })
+                                    .foregroundColor(.black)
                             }
                         }
                         
@@ -217,6 +227,7 @@ struct BuildCard: View {
                                 option in
                                 HStack{
                                     Text("\(option)")
+                                        .foregroundColor(.black)
 
                                     Spacer()
                                     

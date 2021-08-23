@@ -64,16 +64,18 @@ struct SignUpView: View {
                             .font(.system(size: 36))
                             .padding(.leading, 40)
                             .padding(.trailing, 20)
-                            .position(x: UIScreen.main.bounds.width/2, y: 0)
+                            .padding(.vertical)
+//                            .position(x: UIScreen.main.bounds.width/2, y: 0)
                         
 //                    }
-                    Spacer().frame(width: UIScreen.main.bounds.width, height: 5)
+//                    Spacer()
+//                    Spacer().frame(width: UIScreen.main.bounds.width, height: 5)
                     
-                    CustomTextField(field: "Name",strLabel: "Jonny Ives", strField: $name, uiTextAutoCapitalizationType: .words, uiKeyboardType: .default)
+                    CustomTextField(field: "Name",strLabel: "Jonny Ives", strField: $name, uiTextAutoCapitalizationType: .words, uiKeyboardType: .default).foregroundColor(.black)
                     
-                    CustomTextField(field: "Email",strLabel: "jonnyives@apple.com", strField: $email, uiTextAutoCapitalizationType: .none, uiKeyboardType: .emailAddress)
+                    CustomTextField(field: "Email",strLabel: "jonnyives@apple.com", strField: $email, uiTextAutoCapitalizationType: .none, uiKeyboardType: .emailAddress).foregroundColor(.black)
                     
-                    CustomPasswordField(field: "Password", strLabel: "••••••••••", password: $password)
+                    CustomPasswordField(field: "Password", strLabel: "••••••••••", password: $password).foregroundColor(.black)
                     
                     Button(action: {
                         let dispatch = DispatchGroup()

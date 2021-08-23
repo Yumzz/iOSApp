@@ -31,13 +31,14 @@ struct RestaurantReviewView: View {
                 Text("Ratings and Reviews")
                     .frame(maxWidth: .infinity, alignment: .center)
                     .font(.system(size: 24,weight: .semibold))
+                    .foregroundColor(.black)
                     
             }
             .padding(.bottom)
             
             HStack{
                 Text(String(format: "%.2f", Float(self.menuSelectionVM.restaurant.ratingSum)/Float(self.menuSelectionVM.restaurant.n_Ratings)))
-                    .font(.system(size: 48,weight: .bold))
+                    .font(.system(size: 48,weight: .bold)).foregroundColor(.black)
                 Spacer()
                 Button(action: {
                     self.popUpShown = true
@@ -48,12 +49,12 @@ struct RestaurantReviewView: View {
             
             StarView(rating: Float(self.menuSelectionVM.restaurant.ratingSum)/Float(self.menuSelectionVM.restaurant.n_Ratings), fontSize: 20)
             Text("(Based on " + String( self.menuSelectionVM.restaurant.n_Ratings) + " reviews)")
-                .foregroundColor(.secondary)
+                .foregroundColor(.gray)
             
             .padding(.bottom)
             if (self.menuSelectionVM.reviews.isEmpty) {
                 Text("No reviews yet. Add yours!")
-                    .frame(alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                    .frame(alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/).foregroundColor(.black)
             } else {
                 ForEach(self.menuSelectionVM.reviews, id: \.id){
                     review in
@@ -61,7 +62,7 @@ struct RestaurantReviewView: View {
                         HStack{
                             if(review.photoURL != ""){
                                 FBURLImage(url: review.photoURL, imageAspectRatio: .fill, imageWidth: 20, imageHeight: 20, circle: true)
-                            }
+                            }   
                             else{
                                 Image(systemName: "person.circle.fill")
                                     .foregroundColor(Color(#colorLiteral(red: 0.88, green: 0.36, blue: 0.16, alpha: 1)))
@@ -83,11 +84,13 @@ struct RestaurantReviewView: View {
                                     if(review.name != ""){
                                         Text("\(review.name)")
                                         .font(.system(size: 14, weight: .semibold ))
+                                        .foregroundColor(.black)
                                         Spacer()
                                     }
                                     else{
                                         Text("Anonymous")
                                         .font(.system(size: 14, weight: .semibold ))
+                                        .foregroundColor(.black)
                                         Spacer()
                                     }
                                 }
@@ -105,6 +108,7 @@ struct RestaurantReviewView: View {
 //                        }
                         HStack{
                             Text(review.text)
+                                .foregroundColor(.black)
                             Spacer()
                         }
                     }

@@ -144,7 +144,7 @@ struct HomeScreenView: View {
             ScrollView(.vertical, showsIndicators: false) {
                 VStack {
                     HStack {
-                        Text("Near you").font(.system(size: 24, weight: .semibold))
+                        Text("Near you").font(.system(size: 24, weight: .semibold)).foregroundColor(.black)
                         Spacer()
                     }.padding()
                     
@@ -164,7 +164,7 @@ struct HomeScreenView: View {
                     ForEach(self.cities, id:\.self) { city in
                         
                         HStack{
-                            Text("Popular in \(city)").font(.system(size: 24, weight: .semibold))
+                            Text("Popular in \(city)").font(.system(size: 24, weight: .semibold)).foregroundColor(.black)
                             Spacer()
                         }.padding()
                     
@@ -232,7 +232,7 @@ struct HSRestaurantCard: View {
                     Spacer()
                 }
                 HStack{
-                    Text(restaurant.name).foregroundColor(Color.black).font(.system(size: 18, weight: .bold)).tracking(-0.41)
+                    Text(restaurant.name).font(.system(size: 18, weight: .bold)).tracking(-0.41).foregroundColor(.black)
                     Spacer()
                 }
                 HStack{

@@ -42,10 +42,12 @@ struct DishCard: View {
                 
                 VStack(alignment: .leading, spacing: 10) {
                     Text(dishName).bold()
-                        .foregroundColor(Color.primary)
+//                        .foregroundColor(Color.primary)
+                        .foregroundColor(.black)
                     
                     Text(dishIngredients)
-                        .foregroundColor(Color.secondary)
+//                        .foregroundColor(Color.secondary)
+                        .foregroundColor(.gray)
                         .font(.system(size: 14))
                         
                     Text(price)

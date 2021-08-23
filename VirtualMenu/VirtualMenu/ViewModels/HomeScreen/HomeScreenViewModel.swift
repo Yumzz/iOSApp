@@ -76,28 +76,33 @@ class HomeScreenViewModel: ObservableObject {
         //
         //        const d = R * c; in meters
         //d = d x 0.00062137 in miles
-
+        print("blah\(locationManager.location)")
         if(locationManager.location != nil){
-            print("helloworld")
+
             let lat1 = coordinate.latitude * Double.pi/180
             let lat2 = locationManager.location!.coordinate.latitude * Double.pi/180
-            
+//            print("blah\(lat1)")
+//            print("blah\(lat2)")
             let long1 = coordinate.longitude
             let long2 = locationManager.location!.coordinate.longitude
-            
+//            print("blah\(long1)")
+//            print("blah\(long2)")
             let deltaLat = (lat2 - lat1) * Double.pi/180
             let deltaLong = (long2 - long1) * Double.pi/180
-            
+//            print("blah\(deltaLat)")
+//            print("blah\(deltaLong)")
             let a = sin(deltaLat/2) * sin(deltaLat/2) + cos(long1) * cos(long2) * sin(deltaLong/2) * sin(deltaLong/2)
             
             
             let c = 2 * atan2(sqrt(a), sqrt(1-a))
             
             var d = Double(Eradius) * c
+            print("first d:", d)
             
     //        return Double(d)
             
             d = Double(d * 0.00062137)
+            print("second d:", d)
             
             return Double(Double(round(100*d)/100).removeZerosFromEnd())!
         }

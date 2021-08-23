@@ -27,13 +27,17 @@ struct ReviewOrder: View {
     var body: some View {
         ZStack{
             Color(#colorLiteral(red: 0.9725490196, green: 0.968627451, blue: 0.9607843137, alpha: 1)).edgesIgnoringSafeArea(.all)
-            VStack{
+            VStack(alignment: .leading){
                 HStack{
+                 
                     XButton(mode: self.mode)
-                    Spacer().frame(width: 53, height: 0)
+//                    Spacer()
+//                    Spacer().frame(width: 53, height: 0)
                     Text("Review Order")
+                        .frame(maxWidth: .infinity, alignment: .center)
                         .foregroundColor(ColorManager.textGray)
-                        .font(.system(size: 24)).bold()
+                        .font(.system(size: 24, weight: .bold))
+//                    Spacer()
                 }
                 
                 VStack{
@@ -57,7 +61,10 @@ struct ReviewOrder: View {
                                         }
                                     }
                                     .frame(width: 20, height: 20, alignment: .center)
+                                
+                                Spacer().frame(width:20)
                             }
+                            
                             
                         }
                     }
@@ -71,6 +78,7 @@ struct ReviewOrder: View {
                 }
                 Spacer()
                 
+
                 HStack{
                     OrangeButton(strLabel: "Call a Waiter", width: 167.5, height: 48)
                         .clipShape(RoundedRectangle(cornerRadius: 10, style: .circular))

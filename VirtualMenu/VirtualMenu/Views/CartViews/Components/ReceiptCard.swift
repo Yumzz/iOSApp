@@ -16,33 +16,42 @@ struct ReceiptCard: View {
     
     var body: some View {
         Group {
-            VStack(alignment: .center, spacing: 2) {
+            VStack(alignment: .leading, spacing: 2) {
                 HStack{
+                    Spacer().frame(width: 5, height: 0)
                     Text("Subtotal")
-                        .font(.system(size: 14)).bold()
+                        .font(.system(size: 14)).bold().foregroundColor(.black)
 //                        .overlay(Text("\(count)"))
-                    Spacer().frame(width: UIScreen.main.bounds.size.width/2, height: 0)
-                    Text("\(DishFB.formatPrice(price: total))")
+//                    Spacer().frame(width: UIScreen.main.bounds.size.width/2, height: 0)
+                    Spacer()
+                    Text("\(DishFB.formatPrice(price: total))").foregroundColor(.black)
+                    Spacer().frame(width: 5, height: 0)
                 }
                 
                 HStack{
+                    Spacer().frame(width: 5, height: 0)
                     Text("Tax & Fees")
-                        .font(.system(size: 14)).bold()
+                        .font(.system(size: 14)).bold().foregroundColor(.black)
 //                        .overlay(Text("\(count)"))
-                    Spacer().frame(width: UIScreen.main.bounds.size.width/2, height: 0)
-                    Text("\(DishFB.formatPrice(price: tax))")
-
+//                    Spacer().frame(width: UIScreen.main.bounds.size.width/2, height: 0)
+                    Spacer()
+                    Text("\(DishFB.formatPrice(price: tax))").foregroundColor(.black)
+                    Spacer().frame(width: 5, height: 0)
                 }
                 
                 Divider().frame(width: (UIScreen.main.bounds.width/1.2), height: 10, alignment: .leading)
                     .foregroundColor(Color.black)
                 
                 HStack{
+                    Spacer().frame(width: 5, height: 0)
                     Text("Total")
-                        .font(.system(size: 14)).bold()
+                        .font(.system(size: 14)).bold().foregroundColor(.black)
 //                        .overlay(Text("\(count)"))
-                    Spacer().frame(width: UIScreen.main.bounds.size.width/1.7, height: 0)
-                    Text("\(DishFB.formatPrice(price: tax + total))")
+                    Spacer()
+//                    Spacer().frame(width: UIScreen.main.bounds.size.width/1.7, height: 0)
+                    Text("\(DishFB.formatPrice(price: tax + total))").foregroundColor(.black)
+                    Spacer().frame(width: 5, height: 0)
+
 
                 }
                 
