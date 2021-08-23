@@ -117,6 +117,11 @@ struct AccountProfileView: View {
                                     .resizable()
                                     .aspectRatio(contentMode: .fit)
                                     .frame(width: 150, height: 150)
+                                    .onAppear(){
+                                        print("hihihihihihihi\(image.debugDescription)")
+//                                        image = nil
+//                                        print("qwertyuiop\(image.debugDescription)")
+                                    }
                                 Button(action: {
                                     self.showingImagePicker.toggle()
                                 }, label: {
@@ -233,13 +238,16 @@ struct AccountProfileView: View {
     }
     
     func changePhoto(){
+        print("asdfghjkl")
         if(inputImage != nil){
             self.show = true
             guard let inputImage = inputImage else { return }
             
-            //image = Image(uiImage: inputImage.circle!)
+            image = Image(uiImage: inputImage.circle!)
             
+            print("before\(userProfile.profilePhoto.debugDescription)")
             userProfile.profilePhoto = inputImage
+            print("after\(userProfile.profilePhoto.debugDescription)")
             
             let dispatch = DispatchGroup()
             
@@ -254,6 +262,7 @@ struct AccountProfileView: View {
                     print(prom.result.debugDescription)
                 }
                 self.show = false
+                
             }
         }
     }

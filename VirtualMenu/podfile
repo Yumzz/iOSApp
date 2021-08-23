@@ -15,6 +15,10 @@ end
     pod 'GoogleSignIn'
     pod "PromiseKit", "~> 6.8"
     pod 'MQTTClient'
+    pod 'FBSDKCoreKit'
+    pod 'FBSDKLoginKit'
+    pod 'FBSDKShareKit'
+
 
 #target 'YumzzAppClip' do
  #   pod 'Firebase'

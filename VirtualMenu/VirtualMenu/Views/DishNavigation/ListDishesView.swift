@@ -207,11 +207,13 @@ struct ListDishesView: View {
         .alert(isPresented: self.$addtapped){
             print("added")
             if(self.addWOSize){
-                return Alert(title: Text("Please choose Size"))
-            }
-            else{
                 return Alert(title: Text("Dish Added"))
             }
+            else{
+                return Alert(title: Text("Please choose Size"))
+            }
+            
+            
         }
         
         .gesture(DragGesture().updating($dragOffset, body: { (value, state, transaction) in

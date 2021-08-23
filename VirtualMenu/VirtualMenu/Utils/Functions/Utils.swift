@@ -43,6 +43,8 @@ class Utils {
                 return
             }
             
+
+            
             // Create the file metadata
             let metadata = StorageMetadata()
             metadata.contentType = "image/jpeg"

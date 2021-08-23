@@ -43,7 +43,7 @@ struct ReviewOrder: View {
                 VStack{
                     Text("Your Order at \(self.order.restChosen.name)")
                         .foregroundColor(ColorManager.textGray)
-                        .font(.system(size: 24)).bold()
+                        .font(.system(size: 24)).bold().padding(.horizontal)
                     ScrollView{
                         ForEach(self.dishes, id: \.name){ dish in
         //                    Text("\(dish.name) - \(dishCounts[dish]!)")
@@ -82,6 +82,7 @@ struct ReviewOrder: View {
                 HStack{
                     OrangeButton(strLabel: "Call a Waiter", width: 167.5, height: 48)
                         .clipShape(RoundedRectangle(cornerRadius: 10, style: .circular))
+                    Spacer()
                     InvertedOrangeButton(strLabel: "Send Order", width: 167.5, height: 48).clipShape(RoundedRectangle(cornerRadius: 10, style: .circular))
                         .shadow(radius: 5)
                         .onTapGesture {
@@ -96,7 +97,7 @@ struct ReviewOrder: View {
 //                                }
 //                            }
                         }
-                }
+                }.padding(.horizontal)
                 Spacer()
             }
 

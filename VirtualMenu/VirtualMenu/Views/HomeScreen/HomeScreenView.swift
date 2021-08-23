@@ -130,6 +130,9 @@ struct HomeScreenView: View {
                             .onTapGesture {
                                 self.showAccount = true
                             }
+                            .onAppear(){
+                                print("zxcvbnm\(userProfile.profilePhoto.debugDescription)")
+                            }
                             .sheet(isPresented: self.$showAccount) {
                                 AccountProfileView()
                                 //dismiss once confirmation alert is sent

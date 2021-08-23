@@ -62,8 +62,8 @@ struct SignUpView: View {
                             .foregroundColor(ColorManager.textGray)
                             .font(.largeTitle).bold()
                             .font(.system(size: 36))
-                            .padding(.leading, 40)
-                            .padding(.trailing, 20)
+//                            .padding(.leading, 40)
+//                            .padding(.trailing, 20)
                             .padding(.vertical)
 //                            .position(x: UIScreen.main.bounds.width/2, y: 0)
                         
@@ -84,13 +84,13 @@ struct SignUpView: View {
                         facebook = false
                         print("sign up")
                         var message = ""
-                        if(!password.isValidPassword){
-                            message = "Error" + "|" + "Not valid email!"
-                            self.alertTitle = message.components(separatedBy: "|")[0]
-                            self.alertMessage = message.components(separatedBy: "|")[1]
-                            self.showAlert.toggle()
-                        }
-                        else{
+//                        if(!password.isValidPassword){
+//                            message = "Error" + "|" + "Not valid email!"
+//                            self.alertTitle = message.components(separatedBy: "|")[0]
+//                            self.alertMessage = message.components(separatedBy: "|")[1]
+//                            self.showAlert.toggle()
+//                        }
+//                        else{
                             message = self.signUpVM.signUpUser(email: self.email, name: self.name, password: self.password.MD5, dispatch: dispatch)
                             dispatch.notify(queue: .main){
                                 self.name = ""
@@ -99,7 +99,7 @@ struct SignUpView: View {
                                 self.alertTitle = message.components(separatedBy: "|")[0]
                                 self.alertMessage = message.components(separatedBy: "|")[1]
                                 self.showAlert.toggle()
-                            }
+//                            }
                         }
                         
                     })
