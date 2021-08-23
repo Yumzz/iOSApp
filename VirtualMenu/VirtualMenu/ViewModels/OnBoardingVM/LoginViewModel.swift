@@ -74,12 +74,12 @@ class LoginViewModel: ObservableObject {
     }
 
     func loginUser(email: String, password: String, disp: DispatchGroup? = nil){
-        if(!email.isValidEmail || !password.isValidPassword){
-            print("invalid")
-            self.alertMessage = "Your email or password is invalid"
-            self.alertTitle = "Sign in error"
-            disp?.leave()
-        }else{
+//        if(!email.isValidEmail || !password.isValidPassword){
+//            print("invalid")
+//            self.alertMessage = "Your email or password is invalid"
+//            self.alertTitle = "Sign in error"
+//            disp?.leave()
+//        }else{
             Auth.auth().signIn(withEmail: email, password: password.MD5){ result, error in
                 // print("signin attempt:String(describing:  \(res)ult)")
                 if(error != nil){
@@ -110,7 +110,7 @@ class LoginViewModel: ObservableObject {
 //                    }
                 }
             }
-        }
+//        }
     }
 
     

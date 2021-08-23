@@ -32,6 +32,8 @@ class SignUpViewModel: ObservableObject {
         //        if self.isValidInputs() {
         print("valid")
         var bool = true
+//        Auth.auth().currentUser?.email
+        
         Auth.auth().createUser(withEmail: email, password: password){
             (result, error) in
             if (error != nil){
@@ -90,9 +92,9 @@ class SignUpViewModel: ObservableObject {
 
     func signUpUser(email: String, name: String, password: String, dispatch: DispatchGroup) -> String{
         print("here")
-        if(!email.isValidEmail){
-            return "Error" + "|" + "Not valid email!"
-        }
+//        if(!email.isValidEmail){
+//            return "Error" + "|" + "Not valid email!"
+//        }
         let actionCode = ActionCodeSettings()
         actionCode.url = URL(string: "https://yumzzapp.page.link/connect")
         actionCode.handleCodeInApp = true
@@ -114,9 +116,11 @@ class SignUpViewModel: ObservableObject {
             print("set")
             self.alertMessage = "A confirmation email was sent to \(email). Please click the link to sign in!"
             self.alertTitle = "Email Sent!"
+            self.createUser(email: email, password: password, name: name)
             dispatch.leave()
             print("leave")
         }
+        
         print("return: \(self.alertTitle)")
         return "A confirmation email was sent to \(email). Please click the link to sign in!" + "|" + "Email Sent!"
     }
