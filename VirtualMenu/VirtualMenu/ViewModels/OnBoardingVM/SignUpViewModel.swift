@@ -32,6 +32,8 @@ class SignUpViewModel: ObservableObject {
         //        if self.isValidInputs() {
         print("valid")
         var bool = true
+//        Auth.auth().currentUser?.email
+        
         Auth.auth().createUser(withEmail: email, password: password){
             (result, error) in
             if (error != nil){
@@ -120,6 +122,7 @@ class SignUpViewModel: ObservableObject {
             
             print("leave")
         }
+        
         print("return: \(self.alertTitle)")
         return "A confirmation email was sent to \(email). Please click the link to sign in!" + "|" + "Email Sent!"
     }

@@ -30,6 +30,8 @@ struct DishFB {
     var exclusive: Bool = true
     var dishCatDescription: String = ""
     var photoExists = false
+//  if there is an or in a sentence - you can choose one of them
+    var choices: [Int:[String]] = [0:[""]]
     
     #if !APPCLIP
     init(name: String, key: String = "", description: String, price: Double, type: String, restaurant: String) {
@@ -42,6 +44,14 @@ struct DishFB {
         self.restaurant = restaurant
         self.coverPhotoURL = "\(self.restaurant.lowercased())/dish/\(self.name.lowercased().replacingOccurrences(of: " ", with: "-"))/photo/Picture.jpg"
         self.id = UUID()
+        let descriptcomponents = description.components(separatedBy: ". ")
+        for dcomponent in descriptcomponents {
+            if (dcomponent.contains("or")){
+                print(dcomponent)
+            }
+            
+        }
+        
     }
     
     init?(snapshot: QueryDocumentSnapshot) {
@@ -72,6 +82,13 @@ struct DishFB {
         self.key = snapshot.documentID
         self.name = name
         self.description = description
+        let descriptcomponents = description.components(separatedBy: ". ")
+        for dcomponent in descriptcomponents {
+            if (dcomponent.contains("or")){
+                print(dcomponent)
+            }
+            
+        }
         
         self.price = (price as NSString).doubleValue
 //        self.options = self. options
@@ -125,6 +142,13 @@ struct DishFB {
         self.key = snapshot.documentID
         self.name = name
         self.description = description
+        let descriptcomponents = description.components(separatedBy: ". ")
+        for dcomponent in descriptcomponents {
+            if (dcomponent.contains("or")){
+                print(dcomponent)
+            }
+            
+        }
         
         self.price = (price as NSString).doubleValue
         
@@ -168,6 +192,15 @@ struct DishFB {
 //        self.key = key
         self.name = name
         self.description = description
+        let descriptcomponents = description.components(separatedBy: ". ")
+        var sentencenum = 0
+        for dcomponent in descriptcomponents {
+            sentencenum = sentencenum + 1
+            if (dcomponent.contains(" or ")){
+                print(dcomponent)
+            }
+        }
+        
         let p = NSString(string: price)
         self.price = p.doubleValue
         self.type = type

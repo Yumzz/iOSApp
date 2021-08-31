@@ -99,8 +99,9 @@ struct SignUpView: View {
                                 self.alertTitle = message.components(separatedBy: "|")[0]
                                 self.alertMessage = message.components(separatedBy: "|")[1]
                                 self.showAlert.toggle()
-//                            }
-                        }
+                                
+                            }
+
                         
                     })
                     {
@@ -226,3 +227,4 @@ struct SignUpView_Previews: PreviewProvider {
         }
     }
 }
+

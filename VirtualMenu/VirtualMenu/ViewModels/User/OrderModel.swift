@@ -302,6 +302,7 @@ class OrderModel: ObservableObject {
         self.buildCounts = [BuildFB : Int]()
         self.buildIndexes = [BuildFB : Int]()
         self.buildOptsChosen = [BuildFB: [String]]()
+        self.allDishes = 0
     }
     
     #endif

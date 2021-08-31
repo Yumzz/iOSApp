@@ -105,12 +105,12 @@ class LoginViewModel: ObservableObject {
 //                        self.updateProfile()
 //                    }
 //                    else{
+                
                         self.updateProfile(dispatch: disp)
-                        
+                    }
 //                    }
                 }
-//            }
-        }
+
     }
 
     
@@ -348,6 +348,6 @@ class LoginViewModel: ObservableObject {
                 }
             }
         }
-        
     }
+    
 }

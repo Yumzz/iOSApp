@@ -115,7 +115,7 @@ struct ReviewOrder: View {
             }
         }
         .sheet(isPresented: $sendPrinterOrder){
-            ClientConnection(dishes: self.dishes)
+            ClientConnection(dishes: self.dishes, quantity: self.order.dishCounts, rest: self.order.restChosen)
         }
     }
 }

@@ -35,7 +35,9 @@ class ClientViewController: UIViewController {
     let MQTT_PORT: UInt32 = 1883
     
     var dishes: [DishFB] = []
-    var dishesReceipt: [(String, Double)] = []
+    var dishInfo: [(String, Double, Int)] = []
+    var tableNum: String = ""
+    var rest: RestaurantFB = RestaurantFB.previewRest()
     
 //    @IBOutlet private weak var button: CircularButton!
 //    @IBOutlet private weak var statusLabel: UILabel!
@@ -71,9 +73,15 @@ class ClientViewController: UIViewController {
                 case .connected:
                     self.subscribe()
                     //topic needs to be dynamic for each printer - topic = raspberry/{name of rest}
-                    self.publishMessage("\(self.dishesReceipt)", onTopic: "raspberry/vics")
-                    self.loadingPrinterConnection = false
-                    print("wwwwww")
+                    print("ask about table num")
+                    let dispatch = DispatchGroup()
+                    dispatch.enter()
+                    self.alertAboutTable(d: dispatch)
+                    print("done asking about table num")
+                    dispatch.notify(queue: .main){
+                        self.publishMessage(" \(userProfile.fullName); \(self.dishInfo); \(self.tableNum)", onTopic: "raspberry/vics")
+                        self.loadingPrinterConnection = false
+                    }
             //need to dismiss the review order view as well and
 //                    self.statusLabel.text = "Connected"
 //                    self.button.isEnabled = true
@@ -98,6 +106,39 @@ class ClientViewController: UIViewController {
             }
         }
     }
+    
+    func alertAboutTable(d: DispatchGroup) {
+        //Step : 1
+        let alert = UIAlertController(title: "Table number needed", message: "Please Input table number above QR code on table", preferredStyle: UIAlertController.Style.alert )
+        //Step : 2
+        let save = UIAlertAction(title: "Send Order", style: .default) { (alertAction) in
+                let textField = alert.textFields![0] as UITextField
+            
+            if textField.text != "" {
+                        //Read TextFields text data
+                print(textField.text!)
+                print("Table number : \(textField.text!)")
+                self.tableNum = textField.text!
+                d.leave()
+            } else {
+                print("TF 1 is Empty...")
+            }
+            
+        }
+        
+        alert.addTextField { (textField) in
+                textField.placeholder = "Enter your table number"
+                textField.textColor = .red
+            }
+        
+        alert.addAction(save)
+            //Cancel action
+        let cancel = UIAlertAction(title: "Cancel", style: .default) { (alertAction) in }
+        alert.addAction(cancel)
+        
+        self.present(alert, animated:true, completion: nil)
+        
+    }
 
     private func subscribe() {
         self.session?.subscribe(toTopic: "raspberry/vics", at: .exactlyOnce) { error, result in
@@ -107,8 +148,11 @@ class ClientViewController: UIViewController {
     }
     
     private func publishMessage(_ message: String, onTopic topic: String) {
+        print("publishing message after asking about table")
         session?.publishData(message.data(using: .utf8, allowLossyConversion: false), onTopic: topic, retain: false, qos: .exactlyOnce)
+        print("published message after asking about table")
     }
+    
     
 }
 
@@ -133,20 +177,23 @@ extension ClientViewController: MQTTSessionManagerDelegate, MQTTSessionDelegate 
 
 struct ClientConnection: UIViewControllerRepresentable {
     var dishes: [DishFB]
+    var quantity: [DishFB:Int]
+    var rest: RestaurantFB
     //add paramter of dishes and pass it through to viewcontroller to send as a message to printer to print
     typealias UIViewControllerType = ClientViewController
     func makeUIViewController(context: UIViewControllerRepresentableContext<ClientConnection>) -> ClientViewController {
-//            code
+//            code 
         let connection = ClientViewController()
         connection.dishes = self.dishes
-        var dishesReceipt: [(String, Double)] = []
+        connection.rest = rest
+        var dishInfo: [(String, Double, Int)] = []
         for d in self.dishes{
             //take data for each dish and make into a tuple of (Name, Price)
-            let dishTuple: (String, Double) = (d.name, d.price)
-            dishesReceipt.append(dishTuple)
+            let dishTuple: (String, Double, Int) = (d.name, d.price, quantity[d]!)
+            dishInfo.append(dishTuple)
             
             if(d == self.dishes.last){
-                connection.dishesReceipt = dishesReceipt
+                connection.dishInfo = dishInfo
                 return connection
             }
         }
