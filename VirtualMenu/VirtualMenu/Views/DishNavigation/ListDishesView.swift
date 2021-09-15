@@ -54,8 +54,6 @@ struct ListDishesView: View {
     
     
     var body: some View {
-    
-        
         Group {
             if(!self.order.dishesChosen.isEmpty || !self.order.buildsChosen.isEmpty){
                 view.overlay(overlay, alignment: .bottom)

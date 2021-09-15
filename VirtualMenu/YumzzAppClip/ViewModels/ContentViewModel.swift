@@ -8,6 +8,7 @@
 
 import Foundation
 
+var userProfile: UserProfile = UserProfile(userId: "", fullName: "", emailAddress: "", profilePicture: "", profPhoto: nil)
 
 class ContentViewModel: ObservableObject {
     
@@ -101,11 +102,11 @@ class ContentViewModel: ObservableObject {
             if let response = response as? HTTPURLResponse {
                 print("Response HTTP Status code: \(response.statusCode)")
             }
-            guard let data = data else { print("e"); return }
+            guard let data = data else { print("wowzerrrrr"); return }
             let json = try? JSONSerialization.jsonObject(with: data, options: []) as? [String:Any]
             print("start rest")
             self.restaurant = RestaurantFB(json: json!)!
-            print("\(self.restaurant)")
+            print("wowowwo: \(self.restaurant)")
             print("\(self.restaurant?.ethnicity)")
             print("stop task: \(self.restaurant!.name)")
             self.restDispatch.leave()
@@ -204,7 +205,7 @@ class ContentViewModel: ObservableObject {
             if(self.restaurant?.dishes == nil){
                 self.restaurant?.dishes = []
             }
-            print("new dish")
+            print("new dish: \(x)")
             self.restaurant?.dishes!.append(DishFB(json: x)!)
         }
         print("done")

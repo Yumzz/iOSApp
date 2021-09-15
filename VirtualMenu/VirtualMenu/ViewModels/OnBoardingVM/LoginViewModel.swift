@@ -280,7 +280,17 @@ class LoginViewModel: ObservableObject {
             
             fbLoginManager.logIn(permissions: ["email"], from: UIApplication.shared.windows.last?.rootViewController) { (result, error) -> Void in
                 // print("RESULT: '\(result)' ")
-
+//                switch result?.authenticationToken {
+//                case .failed(let error):
+//                    print("error")
+//                    return
+//                case .cancelled:
+//                    print("result cancelled")
+//                    return
+//                case .success(_, _, let accessToken):
+//                    print(accessToken)
+//
+//                }
                 if error != nil {
                     print("error")
                     return
@@ -290,7 +300,9 @@ class LoginViewModel: ObservableObject {
                 }
                 
                 if(!result!.isCancelled){
-                    let credential = FacebookAuthProvider.credential(withAccessToken: AccessToken.current!.tokenString)
+                    let credential = FacebookAuthProvider.credential(withAccessToken: result!.token!.tokenString)
+                    
+//                    AccessToken.current!.tokenString
                     
                     Auth.auth().signIn(with: credential) { (authResult, error) in
                         //authresult = Promise of UserCredential

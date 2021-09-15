@@ -1,24 +1,23 @@
 use_frameworks!
-target 'VirtualMenu' do
-    pod 'Instructions'
-end
 
 # add the Firebase pod for Google Analytic
 
+target 'VirtualMenu' do
     pod 'Firebase/Analytics'
+    pod 'Instructions'
     pod 'Firebase/Core', :inhibit_warnings => true
     pod 'Firebase/Database', :inhibit_warnings => true
     pod 'Firebase/Auth', :inhibit_warnings => true
     pod 'Firebase/Firestore'
     pod 'FirebaseFirestoreSwift'
     pod 'Firebase/Storage'
-    pod 'GoogleSignIn'
-    pod "PromiseKit", "~> 6.8"
+    pod 'GoogleSignIn', '5.0.0'
+    pod 'PromiseKit', '6.15.3'
     pod 'MQTTClient'
-    pod 'FBSDKCoreKit'
-    pod 'FBSDKLoginKit'
-    pod 'FBSDKShareKit'
-
+    pod 'FBSDKLoginKit', '9.3.0'
+    pod 'FBSDKCoreKit', '9.3.0'
+    pod 'SquarePointOfSaleSDK'
+end
 
 #target 'YumzzAppClip' do
  #   pod 'Firebase'
@@ -32,6 +31,11 @@ post_install do |installer|
       end
     end
   end
+end
+
+target 'YumzzAppClip' do
+     pod 'MQTTClient'
+     pod 'SquarePointOfSaleSDK'
 end
 
 

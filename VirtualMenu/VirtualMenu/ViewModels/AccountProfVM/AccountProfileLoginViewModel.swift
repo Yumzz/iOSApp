@@ -194,7 +194,7 @@ class AccountProfileLoginViewModel: ObservableObject {
                 }
                 
                 if(!result!.isCancelled){
-                    let credential = FacebookAuthProvider.credential(withAccessToken: AccessToken.current!.tokenString)
+                    let credential = FacebookAuthProvider.credential(withAccessToken: result!.token!.tokenString)
                     
                     Auth.auth().signIn(with: credential) { (authResult, error) in
                         //authresult = Promise of UserCredential

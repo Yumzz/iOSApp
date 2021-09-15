@@ -79,12 +79,13 @@ struct HomeScreenView: View {
     
     var recButt: some View {
         VStack{
-            RecButton()
-                .onTapGesture {
-                    self.recButtonClicked = true
-                }
-            
-            Spacer().frame(width: 0, height: (!self.order.dishesChosen.isEmpty || !self.order.buildsChosen.isEmpty) ? 70 : 10)
+            EmptyView()
+//            RecButton()
+//                .onTapGesture {
+//                    self.recButtonClicked = true
+//                }
+//
+//            Spacer().frame(width: 0, height: (!self.order.dishesChosen.isEmpty || !self.order.buildsChosen.isEmpty) ? 70 : 10)
         }
     }
     

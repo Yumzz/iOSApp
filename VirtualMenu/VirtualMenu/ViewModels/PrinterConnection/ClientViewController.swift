@@ -70,6 +70,7 @@ class ClientViewController: UIViewController {
 //        let view = UIHostingController(rootView: <#T##_#>)
         DispatchQueue.main.async {
             switch clientStatus {
+            //have to switch between callwaiter and printer
                 case .connected:
                     self.subscribe()
                     //topic needs to be dynamic for each printer - topic = raspberry/{name of rest}
@@ -143,6 +144,7 @@ class ClientViewController: UIViewController {
     private func subscribe() {
         self.session?.subscribe(toTopic: "raspberry/vics", at: .exactlyOnce) { error, result in
             print("subscribe result error \(String(describing: error)) result \(result!)")
+            //need to run connection to POS on raspberry pi as a python script
         }
         print("port: \(self.session?.port)")
     }
@@ -150,6 +152,7 @@ class ClientViewController: UIViewController {
     private func publishMessage(_ message: String, onTopic topic: String) {
         print("publishing message after asking about table")
         session?.publishData(message.data(using: .utf8, allowLossyConversion: false), onTopic: topic, retain: false, qos: .exactlyOnce)
+        
         print("published message after asking about table")
     }
     
@@ -220,5 +223,31 @@ struct PrintConnectionUI: View {
                 }
                 Spacer().frame(width: UIScreen.main.bounds.width, height: 100)
             }
+    }
+}
+
+struct Loader: View {
+    
+    @State var animate = false
+    var body: some View {
+        
+        VStack{
+            Circle()
+                .trim(from: 0, to: 0.8)
+                .stroke(AngularGradient(gradient: .init(colors: [Color(UIColor().colorFromHex("#F88379", 1)), Color(UIColor().colorFromHex("#FFFFFF", 1))]), center: .center), style: StrokeStyle(lineWidth: 8, lineCap: .round))
+                .frame(width: 45, height: 45)
+                .rotationEffect(.init(degrees: self.animate ? 360 : 0))
+                .animation(Animation.linear(duration: 0.7).repeatForever(autoreverses: false))
+            
+            Text("Please Wait...").padding(.top)
+            
+        }
+        .background(Color.white)
+        .cornerRadius(15)
+            
+        .onAppear {
+            self.animate.toggle()
+        }
+        
     }
 }

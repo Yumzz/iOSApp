@@ -6,9 +6,11 @@
 //  Copyright © 2020 Rohan Tyagi. All rights reserved.
 //
 
+#if !APPCLIP
 import Firebase
-import SwiftUI
 import PromiseKit
+#endif
+import SwiftUI
 
 struct UserProfile {
     var userId: String = ""
@@ -19,8 +21,9 @@ struct UserProfile {
     var favRests: [String:DishFB] = [String:DishFB]()
    
     // MARK: - Firebase Keys
-    
+    #if !APPCLIP
     var storage = Storage.storage()
+    #endif
     
     enum UserInfoKey {
         static let email = "email"
@@ -46,6 +49,8 @@ struct UserProfile {
         self = UserProfile(userId: userId, fullName: fullname, emailAddress: emailAddress, profilePicture: photoURL, profPhoto: self.profilePhoto!)
     }
     
+    
+    #if !APPCLIP
     init?(snapshot: QueryDocumentSnapshot) {
         guard let name = snapshot.data()["username"] as? String else {
             return nil
@@ -69,6 +74,7 @@ struct UserProfile {
         self.profilePhotoURL = profPhotoURL
         self.profilePhoto = profPhoto
     }
+    #endif
 }
 
 extension UserProfile: Hashable {
@@ -80,6 +86,7 @@ extension UserProfile: Hashable {
         hasher.combine(userId)
     }
     
+    #if !APPCLIP
     func getProfilePhoto(dispatch: DispatchGroup) {
         var image: UIImage?
         let imagesRef = storage.reference().child("profilephotos/\(self.userId)")
@@ -181,7 +188,7 @@ extension UserProfile: Hashable {
         self.favRests = map
     }
     
-    
+    #endif
     
 }
     

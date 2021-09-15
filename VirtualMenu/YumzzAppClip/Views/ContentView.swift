@@ -41,6 +41,7 @@ struct ContentView: View {
                 print(self.rest.hour == "")
                 }
             }
+        .onContinueUserActivity(NSUserActivityTypeBrowsingWeb, perform: handleUserActivity)
 //        if self.restaurant == nil {
                 
 //        } else {
@@ -52,6 +53,17 @@ struct ContentView: View {
 //        }
         
     }
+}
+
+func handleUserActivity(_ userActivity: NSUserActivity){
+    
+    guard let incomingURL = userActivity.webpageURL,
+          let components = NSURLComponents(url: incomingURL, resolvingAgainstBaseURL: true),
+          let _ = components.queryItems
+    else{
+        return
+    }
+    
 }
 
 struct ContentView_Previews: PreviewProvider {

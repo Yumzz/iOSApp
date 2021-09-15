@@ -48,8 +48,13 @@ struct DishDetailsView: View {
                 ZStack {
                     VStack{
                         if(dish.photoExists){
+                            #if !APPCLIP
                             FBURLImage(url:  dish.coverPhotoURL, imageWidth: 375, imageHeight: 240, circle: false)
                             Spacer()
+                            #else
+                            RoundedRectangle(cornerSize: CGSize(width: 5, height: 5)).frame(width: 375, height: 240).foregroundColor(.black)
+                            Spacer()
+                            #endif
                         }
                         else{
                             RoundedRectangle(cornerSize: CGSize(width: 5, height: 5)).frame(width: 375, height: 240).foregroundColor(.black)
@@ -178,6 +183,7 @@ struct DishDetailsView: View {
         .navigationBarItems(leading: WhiteBackButton(mode: self.presentationMode))
             .onAppear(){
                 self.isNavigationBarHidden = false
+                print("yessiririririr")
             }
             .onDisappear(){
                 self.isNavigationBarHidden = true

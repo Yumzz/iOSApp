@@ -5,8 +5,15 @@
 //  Created by Rohan Tyagi on 1/19/21.
 //  Copyright © 2021 Rohan Tyagi. All rights reserved.
 //
-
 import SwiftUI
+
+enum ActiveSheet: Identifiable {
+    case first, second
+
+    var id: Int {
+        hashValue
+    }
+}
 
 struct ListDishesView: View {
         
@@ -21,6 +28,7 @@ struct ListDishesView: View {
     @State var builds = [BuildFB]()
     
     @State var dishCats = [DishCategory]()
+    @State var dishChosen: DishFB = DishFB.previewDish()
     
     @State var restname = ""
      
@@ -29,6 +37,10 @@ struct ListDishesView: View {
     @State var showingAlert = false
     @State var isNavBarHidden = false
             
+    @State private var showSheet2 = false
+    @State private var activeSheet: ActiveSheet?
+    
+    @EnvironmentObject var order : OrderModel
 
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
     @GestureState private var dragOffset = CGSize.zero
@@ -48,10 +60,25 @@ struct ListDishesView: View {
     
     var body: some View {
         Group {
-                 view
-                    .navigationBarHidden(self.isNavBarHidden)
+            if(!self.order.dishesChosen.isEmpty || !self.order.buildsChosen.isEmpty){
+                view.overlay(overlay, alignment: .bottom)
+            }else {
+                view
+            }
+        }.navigationBarHidden(self.isNavBarHidden)
+                    
+    }
+    
+    var overlay: some View {
+        VStack{
+                ViewCartButton(dishCount: self.order.allDishes)
+                    .onTapGesture{
+                        self.activeSheet = .second
+                        self.showSheet2 = true
+                    }
+                    .clipShape(RoundedRectangle(cornerRadius: 10, style: .circular))
+            Spacer().frame(width: 0, height: 10)
         }
-        .navigationBarHidden(self.isNavBarHidden)
     }
 
     
@@ -122,8 +149,12 @@ struct ListDishesView: View {
                                 }
                                 ForEach(dishCategory.dishes, id: \.id) {
                                     dish in
-                                    Text(dish.name)
                                     DishCard(dishName: dish.name, dishIngredients: dish.description, price: self.listDishVM.formatPrice(price: dish.price), singPrice: dish.options.isEmpty, rest: self.restaurant, dish: dish)
+                                        .onTapGesture{
+                                            self.dishChosen = dish
+                                            self.activeSheet = .first
+                                            self.showSheet2 = true
+                                        }
                                 }
                                 Spacer().frame(height: 20)
                             }
@@ -135,6 +166,14 @@ struct ListDishesView: View {
             }.navigationBarTitleDisplayMode(self.addtapped ? .inline : .automatic)
                 .frame(maxWidth: .infinity)
             }
+        .sheet(isPresented: $showSheet2){
+            if(self.activeSheet == .first){
+                DishDetailsView(dish: self.dishChosen, restaurant: self.restaurant)
+            }
+            else{
+                ReviewOrder()
+            }
+        }
         .onAppear{
             self.dispatchGroup.notify(queue: .main){
                 self.dishCats = self.listDishVM.dishCategories
@@ -187,3 +226,4 @@ struct ListDishesView_Previews: PreviewProvider {
 
     }
 }
+

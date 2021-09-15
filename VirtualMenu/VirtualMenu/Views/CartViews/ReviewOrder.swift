@@ -29,8 +29,9 @@ struct ReviewOrder: View {
             Color(#colorLiteral(red: 0.9725490196, green: 0.968627451, blue: 0.9607843137, alpha: 1)).edgesIgnoringSafeArea(.all)
             VStack(alignment: .leading){
                 HStack{
-                 
+                    #if !APPCLIP
                     XButton(mode: self.mode)
+                    #endif
 //                    Spacer()
 //                    Spacer().frame(width: 53, height: 0)
                     Text("Review Order")
@@ -79,6 +80,7 @@ struct ReviewOrder: View {
                 Spacer()
                 
 
+                #if !APPCLIP
                 HStack{
                     OrangeButton(strLabel: "Call a Waiter", width: 167.5, height: 48)
                         .clipShape(RoundedRectangle(cornerRadius: 10, style: .circular))
@@ -87,17 +89,19 @@ struct ReviewOrder: View {
                         .shadow(radius: 5)
                         .onTapGesture {
                             self.sendPrinterOrder = true
-//                            for d in self.dishes{
-//                                let dishTuple: (String, Double) = (d.name, d.price)
-//                                self.dishReceipts.append(dishTuple)
-//                                if(d == self.dishes.last){
-//                                    print("before sent to mqtt: \(self.dishReceipts)")
-//                                    self.sendPrinterOrder = true
-//                                    print("sendorder: \(self.sendPrinterOrder)")
-//                                }
-//                            }
                         }
                 }.padding(.horizontal)
+                #else
+                HStack{
+                    InvertedOrangeButton(strLabel: "Send Order", width: UIScreen.main.bounds.width - 40, height: 48).clipShape(RoundedRectangle(cornerRadius: 10, style: .circular))
+                    .shadow(radius: 5)
+                    .onTapGesture {
+                        self.sendPrinterOrder = true
+                    }
+            }.padding(.horizontal)
+
+                
+                #endif
                 Spacer()
             }
 

@@ -227,7 +227,7 @@ class SignUpViewModel: ObservableObject {
                         print("result cancelled")
                     }else if(!result!.isCancelled){
                         //create a userProfile based on FB info
-                        credential = FacebookAuthProvider.credential(withAccessToken: AccessToken.current!.tokenString)
+                        credential = FacebookAuthProvider.credential(withAccessToken: result!.token!.tokenString)
                         
                         print("success Get user information.")
                         

@@ -2,7 +2,7 @@
 //  DishCard.swift
 //  VirtualMenu
 //
-//  Created by Valentin Porcellini on 31/07/2020.
+//  Created by Rohan Tyagi on 31/07/2020.
 //  Copyright © 2020 Rohan Tyagi. All rights reserved.
 //
 
@@ -65,9 +65,9 @@ struct DishCard: View {
                     urlImage!
                     .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
                 }
-                #endif
                 
                 Spacer().frame(width: 8, height: 0)
+                #endif
                 
 //                #if !APPCLIP
                 ZStack {

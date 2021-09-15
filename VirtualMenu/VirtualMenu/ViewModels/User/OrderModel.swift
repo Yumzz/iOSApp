@@ -194,6 +194,19 @@ class OrderModel: ObservableObject {
         
     }
     
+    func orderSent(){
+        self.pastOrders.append(Order(dishes: self.dishesChosen, totalPrice: self.totalCost, rest: self.restChosen.name))
+        self.dishesChosen = []
+        self.buildsChosen = []
+        self.dishIndexes = [DishFB : Int]()
+        self.dishCounts = [DishFB : Int]()
+        self.optsChosen = [DishFB: [String]]()
+        self.buildCounts = [BuildFB : Int]()
+        self.buildIndexes = [BuildFB : Int]()
+        self.buildOptsChosen = [BuildFB: [String]]()
+        self.allDishes = 0
+    }
+    
     #if !APPCLIP
     func saveOrder(order: Order){
         let ds = DispatchGroup()
@@ -291,19 +304,6 @@ class OrderModel: ObservableObject {
             }
         }
       }
-    
-    func orderSent(){
-        self.pastOrders.append(Order(dishes: self.dishesChosen, totalPrice: self.totalCost, rest: self.restChosen.name))
-        self.dishesChosen = []
-        self.buildsChosen = []
-        self.dishIndexes = [DishFB : Int]()
-        self.dishCounts = [DishFB : Int]()
-        self.optsChosen = [DishFB: [String]]()
-        self.buildCounts = [BuildFB : Int]()
-        self.buildIndexes = [BuildFB : Int]()
-        self.buildOptsChosen = [BuildFB: [String]]()
-        self.allDishes = 0
-    }
     
     #endif
     
