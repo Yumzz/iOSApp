@@ -67,7 +67,8 @@ struct LoginView: View {
                 Color(#colorLiteral(red: 0.9725490196, green: 0.968627451, blue: 0.9607843137, alpha: 1)).edgesIgnoringSafeArea(.all)
             VStack{
                 VStack(spacing: 10){
-                    Text("Login to your account")
+                    Spacer().frame(width: UIScreen.main.bounds.width, height: 60)
+                    Text("Login and enjoy")
                         .foregroundColor(ColorManager.textGray)
                         .font(.largeTitle).bold()
                         .font(.system(size: 36))
@@ -75,7 +76,6 @@ struct LoginView: View {
                         .padding(.trailing, 40)
 //                        .position(x: UIScreen.main.bounds.width/2.5, y: 0)
                         .padding(.vertical)
-                                            
                     CustomTextField(field: "Email", strLabel: "jonnyives@apple.com", strField: $email, uiTextAutoCapitalizationType: .none, uiKeyboardType: .emailAddress).foregroundColor(.black)
 
                     CustomPasswordField(field: "Password", strLabel: "••••••••••", password: $password).foregroundColor(.black)
@@ -156,6 +156,7 @@ struct LoginView: View {
             }
             }.navigationBarTitle("")
             .navigationBarHidden(self.isNavigationBarHidden)
+            .edgesIgnoringSafeArea([.top, .bottom])
 //            }
     }else{
             HomeScreenView()
@@ -188,6 +189,7 @@ struct LoginView: View {
                 self.mode.wrappedValue.dismiss()
             }
         }))
+    
     }
         private func performExistingAccountFlows(){
             let requests = [ASAuthorizationAppleIDProvider().createRequest(),

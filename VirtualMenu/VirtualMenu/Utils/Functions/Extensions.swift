@@ -88,10 +88,15 @@ extension Double {
 
 
 extension String {
-var MD5: String {
-        let computed = Insecure.MD5.hash(data: self.data(using: .utf8)!)
-        return computed.map { String(format: "%02hhx", $0) }.joined()
+    var MD5: String {
+            let computed = Insecure.MD5.hash(data: self.data(using: .utf8)!)
+            return computed.map { String(format: "%02hhx", $0) }.joined()
+        }
+
+    var isNumber: Bool {
+        return !isEmpty && rangeOfCharacter(from: CharacterSet.decimalDigits.inverted) == nil
     }
+    
 }
 
 extension Publishers {

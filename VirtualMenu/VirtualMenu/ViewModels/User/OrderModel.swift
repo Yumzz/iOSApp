@@ -39,6 +39,8 @@ class OrderModel: ObservableObject {
     var buildCounts : [BuildFB : Int] = [BuildFB : Int]()
     var buildOptsChosen: [BuildFB: [String]] = [BuildFB: [String]]()
     
+    var dishChoice : [DishFB: String] = [DishFB.previewDish(): ""]
+    //["Substitute": 0, "Choice of": 1, "Add": 2]
 
     var allDishes: Int
 //    var dishRestaurant : [DishFB : RestaurantFB] = [DishFB : RestaurantFB]()
@@ -205,6 +207,7 @@ class OrderModel: ObservableObject {
         self.buildIndexes = [BuildFB : Int]()
         self.buildOptsChosen = [BuildFB: [String]]()
         self.allDishes = 0
+        //save past order to firebase
     }
     
     #if !APPCLIP
@@ -223,13 +226,16 @@ class OrderModel: ObservableObject {
                 }else{
                     for document in snap!.documents {
                         self.dishReferences.append(document.reference)
-                        ds.leave()
+                        if(document == snap.documents.last){
+                            ds.leave()
+                        }
                     }
                 }
             }
             ds.notify(queue: .main){
                 if(d == order.dishes.last){
-                    let data = ["dishes": self.dishReferences, "userId": userProfile.userId, "rest": self.restChosen.name] as [String : Any]
+                    let da = Date()
+                    let data = ["dishes": self.dishReferences, "userId": userProfile.userId, "rest": self.restChosen.name, "time": da] as [String : Any]
                     db.collection("Order").addDocument(data: data)
                     self.dishReferences = [DocumentReference]()
     //                                self.addOrder(ref: reference)
@@ -243,7 +249,8 @@ class OrderModel: ObservableObject {
         let db = Firestore.firestore()
         let orderQuery = db.collection("Order").whereField("userId", isEqualTo: userID)
         let ds = DispatchGroup()
-        var orderss : Set<[DocumentReference]> = Set<[DocumentReference]>()
+//        var dishes : Set<[DocumentReference]> = Set<[DocumentReference]>()
+        var orders : [([DocumentReference], TimeInterval, String)] = [([DocumentReference](), TimeInterval(0), "")]
         //1. go through each order for this user
         //2. construct each order with its' list of dishes
         //3. add all orders to prevOrders
@@ -256,15 +263,18 @@ class OrderModel: ObservableObject {
                 for doc in snap!.documents {
                     //int to dish list and send that to function afet ds.notify?
                     let dishes: [DocumentReference] = doc.data()["dishes"] as! [DocumentReference]
+                    let time: Date = doc.data()["time"] as! Date
+                    let rest: String = doc.data()["rest"] as! String
                     //need to create order
-                    orderss.insert(dishes)
+                    
+                    orders.insert(dishes, time, rest)
                     if(doc == snap!.documents.last){
                         ds.leave()
                         ds.notify(queue: .main){
                             print("got all orders")
                             let ds2 = DispatchGroup()
-                            print(orderss)
-                            self.makeOrder(orders: orderss, ds2: ds2)
+                            print(orders)
+                            self.makeOrder(orders: dishes, ds2: ds2)
                             print(self.pastOrders)
                         }
                     }
@@ -275,9 +285,9 @@ class OrderModel: ObservableObject {
         
     }
     
-    func makeOrder(orders: Set<[DocumentReference]>, ds2: DispatchGroup){
+    func makeOrder(dishes: [DocumentReference], time: Date, ds2: DispatchGroup){
 //        var order = Order(dishes: [], totalPrice: 0.0)
-        for ord in orders {
+        for ord in dishes {
             var order = Order(dishes: [], totalPrice: 0.0, rest: "")
             ds2.enter()
             for d in ord {
@@ -314,4 +324,11 @@ class OrderModel: ObservableObject {
         }
         return x
     }
+}
+
+func getDateOnly(fromTimeStamp timestamp: TimeInterval) -> String {
+  let dayTimePeriodFormatter = DateFormatter()
+  dayTimePeriodFormatter.timeZone = TimeZone.current
+  dayTimePeriodFormatter.dateFormat = "MMMM dd, yyyy - h:mm:ss a z"
+  return dayTimePeriodFormatter.string(from: Date(timeIntervalSince1970: timestamp))
 }

@@ -2,7 +2,7 @@
 // ClientViewController.swift
 //  VirtualMenu
 //
-//  Created by Rohan Tyagi on 6/28/21.
+//  Created by Rohan Tyagi on 10/11/21.
 //  Copyright © 2021 Rohan Tyagi. All rights reserved.
 //
 
@@ -28,16 +28,13 @@ import MQTTClient
 //    }
 //}
 
-class ClientViewController: UIViewController {
+class WaiterViewController: UIViewController {
     //need to make this connect to printer and send dishes to printer to print
 
     let MQTT_HOST = "broker.emqx.io" // or IP address e.g. "192.168.0.194"
     let MQTT_PORT: UInt32 = 1883
     
-    var dishes: [DishFB] = []
-    var dishInfo: [(String, Double, Int, String)] = []
-    var tableNum: String = ""
-    var rest: RestaurantFB = RestaurantFB.previewRest()
+    var num: Int = 0
     
 //    @IBOutlet private weak var button: CircularButton!
 //    @IBOutlet private weak var statusLabel: UILabel!
@@ -80,7 +77,8 @@ class ClientViewController: UIViewController {
                     self.alertAboutTable(d: dispatch)
                     print("done asking about table num")
                     dispatch.notify(queue: .main){
-                        self.publishMessage(" \(userProfile.fullName); \(self.dishInfo); \(self.tableNum)", onTopic: "raspberry/vics")
+                        print("okkk \(self.num)")
+                        self.publishMessage("\(self.num)", onTopic: "raspberry/vics-callwaiter")
                         self.loadingPrinterConnection = false
                     }
             //need to dismiss the review order view as well and
@@ -88,7 +86,7 @@ class ClientViewController: UIViewController {
 //                    self.button.isEnabled = true
                 case .connecting,
                      .created:
-                    let host = UIHostingController(rootView: PrintConnectionUI(connecting: false))
+                    let host = UIHostingController(rootView: WaiterConnectionUI(connecting: false))
                     guard let hostView = host.view else {return}
                     hostView.translatesAutoresizingMaskIntoConstraints = false
                     self.view.addSubview(hostView)
@@ -112,14 +110,17 @@ class ClientViewController: UIViewController {
         //Step : 1
         let alert = UIAlertController(title: "Table number needed", message: "Please Input table number above QR code on table", preferredStyle: UIAlertController.Style.alert )
         //Step : 2
-        let save = UIAlertAction(title: "Send Order", style: .default) { (alertAction) in
+        let save = UIAlertAction(title: "Call Waiter", style: .default) { (alertAction) in
                 let textField = alert.textFields![0] as UITextField
             
             if textField.text != "" {
                         //Read TextFields text data
                 print(textField.text!)
                 print("Table number : \(textField.text!)")
-                self.tableNum = textField.text!
+                var txt = textField.text!
+                if txt.isNumber {
+                    self.num = Int(txt)!
+                }
                 d.leave()
             } else {
                 print("TF 1 is Empty...")
@@ -142,7 +143,7 @@ class ClientViewController: UIViewController {
     }
 
     private func subscribe() {
-        self.session?.subscribe(toTopic: "raspberry/vics", at: .exactlyOnce) { error, result in
+        self.session?.subscribe(toTopic: "raspberry/vics-callwaiter", at: .exactlyOnce) { error, result in
             print("subscribe result error \(String(describing: error)) result \(result!)")
             //need to run connection to POS on raspberry pi as a python script
         }
@@ -150,7 +151,7 @@ class ClientViewController: UIViewController {
     }
     
     private func publishMessage(_ message: String, onTopic topic: String) {
-        print("publishing message after asking about table")
+        print("publishing message after asking about table \(self.num)")
         session?.publishData(message.data(using: .utf8, allowLossyConversion: false), onTopic: topic, retain: false, qos: .exactlyOnce)
         
         print("published message after asking about table")
@@ -159,7 +160,7 @@ class ClientViewController: UIViewController {
     
 }
 
-extension ClientViewController: MQTTSessionManagerDelegate, MQTTSessionDelegate {
+extension WaiterViewController: MQTTSessionManagerDelegate, MQTTSessionDelegate {
 
     func newMessage(_ session: MQTTSession!, data: Data!, onTopic topic: String!, qos: MQTTQosLevel, retained: Bool, mid: UInt32) {
         if let msg = String(data: data, encoding: .utf8) {
@@ -178,56 +179,32 @@ extension ClientViewController: MQTTSessionManagerDelegate, MQTTSessionDelegate 
     
 }
 
-struct ClientConnection: UIViewControllerRepresentable {
-    var dishes: [DishFB]
-    var quantity: [DishFB:Int]
-    var rest: RestaurantFB
-    @EnvironmentObject var order : OrderModel
+struct WaiterConnection: UIViewControllerRepresentable {
+    func updateUIViewController(_ uiViewController: WaiterViewController, context: UIViewControllerRepresentableContext<WaiterConnection>) {
+        print("wow")
+    }
+    
+//    var num: Int
+//    @EnvironmentObject var order : OrderModel
     //add paramter of dishes and pass it through to viewcontroller to send as a message to printer to print
-    typealias UIViewControllerType = ClientViewController
-    func makeUIViewController(context: UIViewControllerRepresentableContext<ClientConnection>) -> ClientViewController {
-//            code 
-        let connection = ClientViewController()
-        connection.dishes = self.dishes
-        connection.rest = rest
-        var dishInfo: [(String, Double, Int, String)] = []
-        for d in self.dishes{
-            //take data for each dish and make into a tuple of (Name, Price)
-//            print(self.order.dishChoice[d]!)
-            let dishTuple: (String, Double, Int, String)
-            if(self.order.dishChoice[d] == nil){
-//                print("yessss: \(self.order.dishChoice[d])
-                dishTuple = (d.name, d.price, quantity[d]!, "")
-            }
-            else{
-                print("yessss: \(self.order.dishChoice[d]!)")
-                dishTuple = (d.name, d.price, quantity[d]!, self.order.dishChoice[d]!)
-            }
-            dishInfo.append(dishTuple)
-            
-            if(d == self.dishes.last){
-                connection.dishInfo = dishInfo
-                return connection
-            }
-        }
-        
+    typealias UIViewControllerType = WaiterViewController
+    func makeUIViewController(context: UIViewControllerRepresentableContext<WaiterConnection>) -> WaiterViewController {
+//            code
+        let connection = WaiterViewController()
+//        connection.num = num
         return connection
         }
 
-        func updateUIViewController(_ uiViewController: ClientViewController, context: UIViewControllerRepresentableContext<ClientConnection>) {
-//            code
-            print("yes")
-        }
 }
 
-struct PrintConnectionUI: View {
+struct WaiterConnectionUI: View {
     @State var connecting: Bool
     
     var body: some View {
             ZStack{
                 Spacer().frame(width: UIScreen.main.bounds.width, height: 100)
                 VStack{
-                    Text("Sending order to kitchen")
+                    Text("Calling Waiter")
                     Spacer().frame(width: UIScreen.main.bounds.width, height: 50)
                     Loader(animate: connecting)
                 }
@@ -236,28 +213,28 @@ struct PrintConnectionUI: View {
     }
 }
 
-struct Loader: View {
-    
-    @State var animate = false
-    var body: some View {
-        
-        VStack{
-            Circle()
-                .trim(from: 0, to: 0.8)
-                .stroke(AngularGradient(gradient: .init(colors: [Color(UIColor().colorFromHex("#F88379", 1)), Color(UIColor().colorFromHex("#FFFFFF", 1))]), center: .center), style: StrokeStyle(lineWidth: 8, lineCap: .round))
-                .frame(width: 45, height: 45)
-                .rotationEffect(.init(degrees: self.animate ? 360 : 0))
-                .animation(Animation.linear(duration: 0.7).repeatForever(autoreverses: false))
-            
-            Text("Please Wait...").padding(.top)
-            
-        }
-        .background(Color.white)
-        .cornerRadius(15)
-            
-        .onAppear {
-            self.animate.toggle()
-        }
-        
-    }
-}
+//struct Loader: View {
+//
+//    @State var animate = false
+//    var body: some View {
+//
+//        VStack{
+//            Circle()
+//                .trim(from: 0, to: 0.8)
+//                .stroke(AngularGradient(gradient: .init(colors: [Color(UIColor().colorFromHex("#F88379", 1)), Color(UIColor().colorFromHex("#FFFFFF", 1))]), center: .center), style: StrokeStyle(lineWidth: 8, lineCap: .round))
+//                .frame(width: 45, height: 45)
+//                .rotationEffect(.init(degrees: self.animate ? 360 : 0))
+//                .animation(Animation.linear(duration: 0.7).repeatForever(autoreverses: false))
+//
+//            Text("Please Wait...").padding(.top)
+//
+//        }
+//        .background(Color.white)
+//        .cornerRadius(15)
+//
+//        .onAppear {
+//            self.animate.toggle()
+//        }
+//
+//    }
+//}

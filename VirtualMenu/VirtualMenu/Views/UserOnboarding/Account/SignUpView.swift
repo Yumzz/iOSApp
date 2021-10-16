@@ -54,10 +54,10 @@ struct SignUpView: View {
     var body: some View {
         ZStack {
             Color(#colorLiteral(red: 0.9725490196, green: 0.968627451, blue: 0.9607843137, alpha: 1)).edgesIgnoringSafeArea(.all)
-            Spacer().frame(width: UIScreen.main.bounds.width, height: 0)
             if user.showOnboarding {
                 VStack(spacing: 10) {
 //                    VStack{
+                    Spacer().frame(width: UIScreen.main.bounds.width, height: 60)
                         Text("Create your account")
                             .foregroundColor(ColorManager.textGray)
                             .font(.largeTitle).bold()
@@ -66,6 +66,7 @@ struct SignUpView: View {
 //                            .padding(.trailing, 20)
                             .padding(.vertical)
 //                            .position(x: UIScreen.main.bounds.width/2, y: 0)
+//                    Spacer()
                         
 //                    }
 //                    Spacer()
@@ -172,6 +173,7 @@ struct SignUpView: View {
                 self.mode.wrappedValue.dismiss()
             }
         }))
+        .edgesIgnoringSafeArea([.top, .bottom])
     }
     
     private func performExistingAccountFlows(){

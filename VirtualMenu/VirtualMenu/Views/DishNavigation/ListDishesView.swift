@@ -8,6 +8,9 @@
 
 import SwiftUI
 import Firebase
+import Foundation
+import Combine
+
 
 
 struct ListDishesView: View {
@@ -23,11 +26,14 @@ struct ListDishesView: View {
     @State var builds = [BuildFB]()
     
     @State var dishCats = [DishCategory]()
+    @State var dishChosen = DishFB.previewDish()
     
     @State var restname = ""
      
     @State var addtapped = false
     @State var addWOSize = false
+    
+    @State var addo = false
     @State var showingAlert = false
     @State var isNavBarHidden = false
     
@@ -185,10 +191,18 @@ struct ListDishesView: View {
                 //must make build for each under build category
                 self.restname = self.restaurant.name
                 self.isNavBarHidden = false
-                NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: "Alert"), object: nil, queue: .main) { (Notification) in
-                    print("added")
-                    self.addWOSize = Notification.object! as! Bool
+//                NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: "Alert"), object: nil, queue: .main) { (Notification) in
+//                    print("added1")
+//                    self.addWOSize = Notification.object! as! Bool
+//                    self.addtapped = true
+//                }
+                NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: "Special Instruction"), object: nil, queue: .main) { (Notification) in
+                    var tup = Notification.object! as! (DishFB, Bool)
+                    self.dishChosen = tup.0
+                    print("added2")
+                    self.addo = true
                     self.addtapped = true
+                    self.addWOSize = tup.1
                 }
                 self.addWOSize = false
                 self.addtapped = false
@@ -202,17 +216,35 @@ struct ListDishesView: View {
             self.restname = ""
             self.isNavBarHidden = true
         }
-        .alert(isPresented: self.$addtapped){
-            print("added")
-            if(self.addWOSize){
-                return Alert(title: Text("Dish Added"))
-            }
-            else{
-                return Alert(title: Text("Please choose Size"))
-            }
-            
-            
-        }
+//        .alert(isPresented: self.$addtapped){
+//            print("added")
+//            if(self.addWOSize){
+//                return Alert(title: Text("Dish Added"))
+//            }
+//            else{
+//                return Alert(title: Text("Please choose Size"))
+//            }
+//
+//
+//        }
+        .alert(isPresented: $addo, TextFieldAlert(title: "Any Special Instructions?", message: "\(self.dishChosen.name) - \(self.dishChosen.description)") { (text) in
+                    if text != nil {
+                        print(text)
+                        if((self.order.dishChoice[self.dishChosen]?.isEmpty) != nil){
+                            self.order.dishChoice[self.dishChosen] = ""
+                        }
+                        self.order.dishChoice[self.dishChosen] = text!
+                        print(self.order.dishChoice[self.dishChosen])
+//                        self.saveGroup(text: text!)
+                        self.addtapped = true
+                    }
+                    print("alert here now")
+                    self.addtapped = true
+                })
+//        .onAppear(){
+//                    print("cart here now")
+//                    self.isNavBarHidden = false
+//                }
         
         .gesture(DragGesture().updating($dragOffset, body: { (value, state, transaction) in
             if(value.translation.width > 100) {

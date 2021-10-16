@@ -14,7 +14,7 @@ struct Order: Hashable {
     var totalPrice: Double
     var rest: String
     var id: UUID = UUID()
-    
+    var time: Date = Date()
 }
 
 extension Order {

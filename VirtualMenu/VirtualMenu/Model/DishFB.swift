@@ -31,7 +31,9 @@ struct DishFB {
     var dishCatDescription: String = ""
     var photoExists = false
 //  if there is an or in a sentence - you can choose one of them
-    var choices: [Int:[String]] = [0:[""]]
+    // add - choices
+    // substitute - a for b
+    var choices: [String:[String:[String]]] = ["":["":[""]]]
     
     #if !APPCLIP
     init(name: String, key: String = "", description: String, price: Double, type: String, restaurant: String) {
@@ -112,6 +114,12 @@ struct DishFB {
         else{
             self.coverPhotoURL = ""
         }
+        if(snapshot.get("choices") != nil){
+            print(snapshot.data()["choices"])
+            self.choices = ((snapshot.data()["choices"] as? [String:[String:[String]]])!)
+//            print("hello: \(self.choices)")
+            
+        }
     }
     
     init?(snapshot: DocumentSnapshot) {
@@ -173,6 +181,10 @@ struct DishFB {
         else{
             self.coverPhotoURL = ""
         }
+        if(snapshot.get("choices") != nil){
+            self.choices = (snapshot.data()!["choices"] as? [String:[String:[String]]])!
+            print("hello: \(self.choices)")
+        }
     }
     #else
     init?(json: [String:Any]){
@@ -185,6 +197,17 @@ struct DishFB {
         else {
             print("initialization failed")
             return nil
+        }
+        
+        guard let choices = json["choices"] as? [String:[String:[String]]] else {
+            print("no choices")
+            let choices = ["":[""]]
+            return nil
+        }
+        
+        if(choices != ["":["":[""]]]){
+            print(choices)
+            self.choices = choices
         }
         
         self.id = UUID()

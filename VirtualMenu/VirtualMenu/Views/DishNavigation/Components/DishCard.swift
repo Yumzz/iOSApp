@@ -87,6 +87,7 @@ struct DishCard: View {
 //                            self.showingAlert.toggle()
                             self.order.newOrder(rest: self.rest)
                         }else{
+//                            self.order.
 //                            self.alertTitle = "Dish Added"
 //                            self.alertMessage = "A new dish has been added to your order. Check the order tab to see your entire order."
 //                            self.showingAlert.toggle()
@@ -94,8 +95,13 @@ struct DishCard: View {
                         self.dispatchGroup.enter()
                         self.order.restChosen = self.rest
                         self.order.addDish(dish: self.dish, rest: self.rest, dis: self.dispatchGroup)
+                        //ask for side choice here
                         self.dispatchGroup.notify(queue: .main){
-                            NotificationCenter.default.post(name: Notification.Name(rawValue: "Alert"), object: singPrice)
+                            NotificationCenter.default.post(name: Notification.Name(rawValue: "Special Instruction"), object: (dish, singPrice))
+//                            NotificationCenter.default.post(name: Notification.Name(rawValue: "Alert"), object: singPrice)
+//                            if !dish.choices.isEmpty{
+//
+//                            }
                         }
                     }
 //                #endif

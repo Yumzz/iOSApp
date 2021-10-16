@@ -15,14 +15,13 @@ struct ContentView: View {
     
     let dispatchGroup = DispatchGroup()
     
+    let ds = DispatchGroup()
+    
     init(id: String){
         self.viewModel = ContentViewModel(dis: dispatchGroup, id: id)
 //        self.viewModel.fetchStuff(dis: dispatchGroup)
-//        self.dispatchGroup.notify(queue:.main){
-//            print("done")
-////            self.saveRest(rest: self.viewModel.restaurant!)
-//       }
     }
+    
     
     
     var body: some View {
@@ -41,29 +40,8 @@ struct ContentView: View {
                 print(self.rest.hour == "")
                 }
             }
-        .onContinueUserActivity(NSUserActivityTypeBrowsingWeb, perform: handleUserActivity)
-//        if self.restaurant == nil {
-                
-//        } else {
-//        ListDishesView(restaurant: self.viewModel.restaurant)
-        
-            //having trouble with listdishesview w some sections
-//            ListDishesView(restaurant: self.restaurant!)
-//            RestaurantHomeView(restaurant: self.restaurant!, distance: 10)
-//        }
         
     }
-}
-
-func handleUserActivity(_ userActivity: NSUserActivity){
-    
-    guard let incomingURL = userActivity.webpageURL,
-          let components = NSURLComponents(url: incomingURL, resolvingAgainstBaseURL: true),
-          let _ = components.queryItems
-    else{
-        return
-    }
-    
 }
 
 struct ContentView_Previews: PreviewProvider {

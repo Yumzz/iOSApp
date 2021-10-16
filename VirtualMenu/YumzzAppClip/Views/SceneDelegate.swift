@@ -12,6 +12,7 @@ import SwiftUI
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
+    @State private var idstring : String = ""
 
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
@@ -20,7 +21,28 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
 
         // Create the SwiftUI view that provides the window contents.
-        let contentView = StartView()
+        let contentView = ContentView(id: idstring)
+            .onContinueUserActivity(NSUserActivityTypeBrowsingWeb){ userActivity in
+                guard let incomingURL = userActivity.webpageURL,
+                      let components = NSURLComponents(url: incomingURL, resolvingAgainstBaseURL: true),
+                      let _ = components.queryItems
+                else{
+                    return
+                }
+                switch components.path {
+                        case "/restaurant":
+                            if let queryItems = components.queryItems,
+                               let restId = queryItems.first(where: { $0.name == "id" })?.value {
+            //    /restaurant?id={id}
+            //                    let dispatchGroup = DispatchGroup()
+        //                        type(of: self).init(id: restId)
+                                self.idstring = restId
+                            }
+                        default:
+                            break
+                    }
+                
+            }
         let order = OrderModel()
 //        let user = UserStore()
 

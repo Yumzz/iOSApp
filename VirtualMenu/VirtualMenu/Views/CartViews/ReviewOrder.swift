@@ -20,7 +20,9 @@ struct ReviewOrder: View {
     
     @State var dishes: [DishFB] = [DishFB]()
     @State var dishReceipts: [(String, Double)] = [(String, Double)]()
+    @State private var IoT = false
     @State private var sendPrinterOrder = false
+    @State private var callWaiter = false
     
     let dispatchGroup = DispatchGroup()
     
@@ -84,11 +86,16 @@ struct ReviewOrder: View {
                 HStack{
                     OrangeButton(strLabel: "Call a Waiter", width: 167.5, height: 48)
                         .clipShape(RoundedRectangle(cornerRadius: 10, style: .circular))
+                        .onTapGesture {
+                            self.callWaiter = true
+                            self.IoT = true
+                        }
                     Spacer()
                     InvertedOrangeButton(strLabel: "Send Order", width: 167.5, height: 48).clipShape(RoundedRectangle(cornerRadius: 10, style: .circular))
                         .shadow(radius: 5)
                         .onTapGesture {
                             self.sendPrinterOrder = true
+                            self.IoT = true
                         }
                 }.padding(.horizontal)
                 #else
@@ -97,6 +104,7 @@ struct ReviewOrder: View {
                     .shadow(radius: 5)
                     .onTapGesture {
                         self.sendPrinterOrder = true
+                        self.IoT = true
                     }
             }.padding(.horizontal)
 
@@ -117,9 +125,22 @@ struct ReviewOrder: View {
             NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: "OrderSent"), object: nil, queue: .main) { (Notification) in
                 self.order.orderSent()
             }
+            NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: "WaiterCalled"), object: nil, queue: .main) { (Notification) in
+//                self.order.orderSent()
+                print("wow")
+            }
         }
-        .sheet(isPresented: $sendPrinterOrder){
-            ClientConnection(dishes: self.dishes, quantity: self.order.dishCounts, rest: self.order.restChosen)
+        .sheet(isPresented: $IoT){
+            if(self.sendPrinterOrder){
+                ClientConnection(dishes: self.dishes, quantity: self.order.dishCounts, rest: self.order.restChosen)
+            }
+            #if !APPCLIP
+                if(self.callWaiter){
+                    WaiterConnection()
+                }
+            #endif
+            
+//            ClientConnection(dishes: self.dishes, quantity: self.order.dishCounts, rest: self.order.restChosen)
         }
     }
 }

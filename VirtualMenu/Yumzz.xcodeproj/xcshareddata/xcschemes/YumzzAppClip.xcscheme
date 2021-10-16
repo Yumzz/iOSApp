@@ -53,8 +53,8 @@
       <EnvironmentVariables>
          <EnvironmentVariable
             key = "_XCAppClipURL"
-            value = "https://example.com"
-            isEnabled = "NO">
+            value = "https://yumzzmenu.com/restaurant?id= a1Lwu7xEFrhDh9wnVpCP"
+            isEnabled = "YES">
          </EnvironmentVariable>
       </EnvironmentVariables>
    </LaunchAction>

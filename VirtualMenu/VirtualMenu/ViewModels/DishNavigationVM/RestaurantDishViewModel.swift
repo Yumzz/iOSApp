@@ -252,20 +252,26 @@ class RestaurantDishViewModel: ObservableObject {
         
         let lat1 = coordinate.latitude * Double.pi/180
         let lat2 = locationManager.location!.coordinate.latitude * Double.pi/180
-        
-        let long1 = coordinate.longitude
-        let long2 = locationManager.location!.coordinate.longitude
-        
+        print("lat1: \(lat1)")
+        print("lat2: \(lat2)")
+        let long1 = coordinate.longitude * Double.pi/180
+        let long2 = locationManager.location!.coordinate.longitude * Double.pi/180
+        print("long1: \(long1)")
+        print("long2: \(long2)")
         let deltaLat = (lat2 - lat1) * Double.pi/180
         let deltaLong = (long2 - long1) * Double.pi/180
-        
+        print("deltalat: \(deltaLat)")
+        print("deltalong: \(deltaLong)")
         let a = sin(deltaLat/2) * sin(deltaLat/2) + cos(long1) * cos(long2) * sin(deltaLong/2) * sin(deltaLong/2)
-        
+        print("a: \(a)")
         
         let c = 2 * atan2(sqrt(a), sqrt(1-a))
+        print("c: \(c)")
         
         let d = Double(Eradius) * c
+        print("d: \(d)")
         
+        print("distance: \(Double(d * 0.00062137))")
         return Double(d * 0.00062137)
     }
     
