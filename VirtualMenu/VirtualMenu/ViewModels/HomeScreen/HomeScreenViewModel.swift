@@ -76,7 +76,7 @@ class HomeScreenViewModel: ObservableObject {
         //
         //        const d = R * c; in meters
         //d = d x 0.00062137 in miles
-        print("blah\(locationManager.location)")
+//        print("blah\(locationManager.location)")
         if(locationManager.location != nil){
 
             let theta1 = coordinate.latitude * Double.pi/180
@@ -98,7 +98,7 @@ class HomeScreenViewModel: ObservableObject {
             return Double(Double(round(100*d)/100).removeZerosFromEnd())!
         }
         else{
-            print("check: \(locationManager.location)")
+//            print("check: \(locationManager.location)")
             return 0.0
         }
 

@@ -171,7 +171,7 @@ struct ListDishesView: View {
                                         NavigationLink(destination:
                                             DishDetailsView(dish: dish, restaurant: self.restaurant).navigationBarHidden(false)
                                         ) {
-                                            DishCard(urlImage: (dish.photoExists) ? (FBURLImage(url: dish.coverPhotoURL, imageAspectRatio: .fill, imageWidth: 80, imageHeight: 80, circle: false)) : nil, dishName: dish.name, dishIngredients: dish.description, price: self.listDishVM.formatPrice(price: dish.price), singPrice:dish.options.isEmpty, rest: self.restaurant, dish: dish)
+                                            DishCard(urlImage: (dish.photoExists) ? (FBURLImage(url: dish.coverPhotoURL.replacingOccurrences(of: "\\", with: ""), imageAspectRatio: .fill, imageWidth: 80, imageHeight: 80, circle: false)) : nil, dishName: dish.name, dishIngredients: dish.description, price: self.listDishVM.formatPrice(price: dish.price), singPrice:dish.options.isEmpty, rest: self.restaurant, dish: dish)
                                         }
                                 }
                                 Spacer().frame(height: 20)
@@ -185,6 +185,7 @@ struct ListDishesView: View {
             .frame(maxWidth: .infinity)
             }
         .onAppear{
+            print("aaaaa: \(userProfile.userId)")
             self.dispatchGroup.notify(queue: .main){
                 self.dishCats = self.listDishVM.dishCategories
                 self.builds = self.listDishVM.builds
@@ -200,6 +201,7 @@ struct ListDishesView: View {
                     var tup = Notification.object! as! (DishFB, Bool)
                     self.dishChosen = tup.0
                     print("added2")
+//                    self.dishChosen.description = self.dishChosen.description.sidesFixed(str: self.dishChosen.description, dishcat: self.dishCats)
                     self.addo = true
                     self.addtapped = true
                     self.addWOSize = tup.1
@@ -233,7 +235,8 @@ struct ListDishesView: View {
                         if((self.order.dishChoice[self.dishChosen]?.isEmpty) != nil){
                             self.order.dishChoice[self.dishChosen] = ""
                         }
-                        self.order.dishChoice[self.dishChosen] = text!
+                        var newText = text?.replacingOccurrences(of: ";", with: ",")
+                        self.order.dishChoice[self.dishChosen] = newText!
                         print(self.order.dishChoice[self.dishChosen])
 //                        self.saveGroup(text: text!)
                         self.addtapped = true

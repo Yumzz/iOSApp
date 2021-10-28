@@ -76,7 +76,7 @@ struct AccountProfileView: View {
                         Spacer().frame(height: 20)
                         Group{
                             if image ==  nil {
-                                if (userProfile.profilePhoto == nil){
+                                if (userProfile.userId == ""){
                                     Image(systemName: "person.crop.circle")
                                         .resizable()
                                         .aspectRatio(contentMode: .fit)
@@ -155,6 +155,10 @@ struct AccountProfileView: View {
                                 
                                 NavigationLink(destination: SuggestRestaurant()) {
                                     ProfileButton(label: "  Suggest Restaurant")
+                                }.buttonStyle(PlainButtonStyle())
+                                
+                                NavigationLink(destination: PastOrders()) {
+                                    ProfileButton(label: "  Past Orders")
                                 }.buttonStyle(PlainButtonStyle())
                             }
                             

@@ -4,7 +4,6 @@
 //
 //  Created by Rohan Tyagi on 8/28/20.
 //  Copyright © 2020 Rohan Tyagi. All rights reserved.
-//
 
 import Foundation
 import SwiftUI
@@ -13,8 +12,9 @@ struct Order: Hashable {
     var dishes: [DishFB]
     var totalPrice: Double
     var rest: String
-    var id: UUID = UUID()
+    var id: String = ""
     var time: Date = Date()
+    var specialInstruc: String = ""
 }
 
 extension Order {
@@ -24,5 +24,9 @@ extension Order {
 
     func hash(into hasher: inout Hasher) {
         hasher.combine(id)
+    }
+    
+    static func previewOrder() -> Order {
+        return Order(dishes: [DishFB.previewDish()], totalPrice: 0.00, rest: "", id: "", time: Date(), specialInstruc: "")
     }
 }

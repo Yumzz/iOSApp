@@ -13,40 +13,77 @@ import Combine
 
 struct PastOrders: View {
     
-    @ObservedObject var listDishVM: PastOrdersViewModel
+    @ObservedObject var pastOrdersVM: PastOrdersViewModel
     
-    var pastOrders: [Order] = []
+    @State var pastOrders: [Order] = []
     
+    let dispatchGroup = DispatchGroup()
+    
+    @Environment(\.presentationMode) var mode: Binding<PresentationMode>
+    @EnvironmentObject var order : OrderModel
+
+    @State var isNavBarHidden = false
+    @GestureState private var dragOffset = CGSize.zero
+
+
     
     init() {
         
-        var id = userProfile.userId
-        
         print("Past Orders Vm created")
         
-        self.listDishVM = PastOrdersViewModel()
+        self.dispatchGroup.enter()
         
-//        self.pastOrders = self.listDishVM.
+        self.pastOrdersVM = PastOrdersViewModel(dispatch: self.dispatchGroup)
         
     }
+
 
 
     var body: some View {
         ZStack {
             Color(#colorLiteral(red: 0.9725490196, green: 0.968627451, blue: 0.9607843137, alpha: 1)).edgesIgnoringSafeArea(.all)
-            ScrollView(.vertical) {
-                
-//                ForEach(0...9, id: \.self){ dishCategory in
-//
-//
-//
-//                }
-                
+            if !self.pastOrders.isEmpty {
+                ScrollView(.vertical) {
+                    ForEach(self.pastOrders, id: \.self){ pOrder in
+                        OrderCard(order: pOrder)
+                        
+                        Spacer().frame(height: 20)
+                    }
+                    
+                }
             }
-        }
+            else{
+                Text("No past orders... go make one!")
+            }
             
+        }.onAppear{
+//            print("past orders: \(self.pastOrders)")
+            self.isNavBarHidden = false
+            NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: "PastOrders"), object: nil, queue: .main) { (Notification) in
+                self.pastOrders = Notification.object as! [Order]
+            }
+//            self.dispatchGroup.notify(queue: .main){
+////                print("past orders: \(self.pastOrders)")
+////                print("yaaaaa")
+//                self.pastOrders = self.pastOrdersVM.pastOrders
+//                
+//            }
+        }
+        .navigationBarTitle("Past Orders")
+        .navigationBarBackButtonHidden(true)
+        .navigationBarHidden(self.isNavBarHidden)
+        .navigationBarItems(leading: BackButton(mode: self.mode))
+        .onDisappear(){
+            self.isNavBarHidden = true
+        }
+        .gesture(DragGesture().updating($dragOffset, body: { (value, state, transaction) in
+            if(value.translation.width > 100) {
+                self.mode.wrappedValue.dismiss()
+            }
+        }))
             
     }
 
 
 }
+

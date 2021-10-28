@@ -80,7 +80,7 @@ class LoginViewModel: ObservableObject {
 //            self.alertTitle = "Sign in error"
 //            disp?.leave()
 //        }else{
-            Auth.auth().signIn(withEmail: email, password: password.MD5){ result, error in
+            Auth.auth().signIn(withEmail: email, password: password){ result, error in
                 // print("signin attempt:String(describing:  \(res)ult)")
                 if(error != nil){
                     print(error!)

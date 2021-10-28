@@ -16,14 +16,14 @@ import Firebase
 struct DishFB {
     #if !APPCLIP
     let ref: DatabaseReference?
-    var storage = Storage.storage()
+    var storage = Storage.storage().reference()
     let key: String
     #endif
     let name: String
-    let description: String
+    var description: String
     let price: Double
     let type: String
-    var coverPhotoURL: String
+    var coverPhotoURL: String = ""
     var restaurant: String
     var id: UUID
     var options: [String:Float] = [String:Float]()
@@ -45,6 +45,10 @@ struct DishFB {
         self.type = type
         self.restaurant = restaurant
         self.coverPhotoURL = "\(self.restaurant.lowercased())/dish/\(self.name.lowercased().replacingOccurrences(of: " ", with: "-"))/photo/Picture.jpg"
+//        if(storage.child("Restaurant/\(self.coverPhotoURL)") != nil){
+//            print("no image exists")
+//            self.photoExists = true
+//        }
         self.id = UUID()
         let descriptcomponents = description.components(separatedBy: ". ")
         for dcomponent in descriptcomponents {
@@ -53,6 +57,23 @@ struct DishFB {
             }
             
         }
+//        let y = storage.child("Restaurant/\(self.restaurant.lowercased().replacingOccurrences(of: "\\", with: ""))/dish/\(self.name.lowercased().replacingOccurrences(of: " ", with: "-"))/photo/Picture.jpg".replacingOccurrences(of: "\\", with: ""))
+        var exist = false
+        var url = ""
+//        y.getMetadata {
+//            metadata, error in
+//              if let error = error {
+//                // Uh-oh, an error occurred!
+//                print("no photoexists variable: \(name)")
+//              } else {
+//                // Metadata now contains the metadata for 'images/forest.jpg'
+//                print("photoexists variable: \(name)")
+//                exist = true
+//                url = "Restaurant/\(restaurant.lowercased())/dish/\(name.lowercased().replacingOccurrences(of: " ", with: "-"))/photo/Picture.jpg"
+//              }
+//            }
+        self.coverPhotoURL = url
+        self.photoExists = exist
         
     }
     
@@ -78,7 +99,10 @@ struct DishFB {
             print("no dishes' rest")
             return nil
         }
-
+//        if(storage.child("Restaurant/\(self.coverPhotoURL)") != nil){
+//            print("no image exists")
+//            self.photoExists = true
+//        }
         self.id = UUID()
         self.ref = nil
         self.key = snapshot.documentID
@@ -93,10 +117,8 @@ struct DishFB {
         }
         
         self.price = (price as NSString).doubleValue
-//        self.options = self. options
         self.type = type
         self.restaurant = restau
-        self.coverPhotoURL = "Restaurant/\(self.restaurant.lowercased())/dish/\(self.name.lowercased().replacingOccurrences(of: " ", with: "-"))/photo/Picture.jpg"
         if(snapshot.get("options") != nil){
             if let options = snapshot.data()["options"] as? [String:[String]]{
                 self.options = self.extractOptions(opts: options)
@@ -110,15 +132,51 @@ struct DishFB {
         }
         if(snapshot.get("photoExists") != nil){
             self.photoExists = (snapshot.data()["photoExists"] as? Bool)!
+            if(self.photoExists){
+                
+            }
         }
         else{
+            print("name of no image exists: \(name)")
             self.coverPhotoURL = ""
+            self.photoExists = false
         }
         if(snapshot.get("choices") != nil){
             print(snapshot.data()["choices"])
             self.choices = ((snapshot.data()["choices"] as? [String:[String:[String]]])!)
-//            print("hello: \(self.choices)")
+        }
+        if(snapshot.get("photoExists") != nil){
+            print("photoexists variable: \(name)")
+            self.photoExists = (snapshot.data()["photoExists"] as? Bool)!
+            if self.photoExists {
+                self.coverPhotoURL = "Restaurant/\(self.restaurant.lowercased())/dish/\(self.name.lowercased().replacingOccurrences(of: " ", with: "-"))/photo/Picture.jpg"
+                print("image exists: \(name)")
+                self.photoExists = true
+            }
+            else{
+                self.coverPhotoURL = ""
+                self.photoExists = false
+            }
             
+        }
+        else{
+//            let y = storage.child("Restaurant/\(self.restaurant.lowercased())/dish/\(self.name.lowercased().replacingOccurrences(of: " ", with: "-"))/photo/Picture.jpg".replacingOccurrences(of: "\\", with: ""))
+            var exist = false
+            var url = ""
+//            y.getMetadata {
+//                metadata, error in
+//                  if let error = error {
+//                    // Uh-oh, an error occurred!
+//                    print("no photoexists variable: \(name)")
+//                  } else {
+//                    // Metadata now contains the metadata for 'images/forest.jpg'
+//                    print("photoexists variable1: \(name)")
+//                    exist = true
+//                    url = "Restaurant/\(restau.lowercased())/dish/\(name.lowercased().replacingOccurrences(of: " ", with: "-"))/photo/Picture.jpg"
+//                  }
+//                }
+            self.coverPhotoURL = url
+            self.photoExists = exist
         }
     }
     
@@ -163,7 +221,6 @@ struct DishFB {
         
         self.type = type
         self.restaurant = restau
-        self.coverPhotoURL = "Restaurant/\(self.restaurant.lowercased())/dish/\(self.name.lowercased().replacingOccurrences(of: " ", with: "-"))/photo/Picture.jpg"
         if(snapshot.get("options") != nil){
             if let options = snapshot.data()!["options"] as? [String:[String]]{
                 self.options = self.extractOptions(opts: options)
@@ -177,15 +234,100 @@ struct DishFB {
         }
         if(snapshot.get("photoExists") != nil){
             self.photoExists = (snapshot.data()!["photoExists"] as? Bool)!
+            self.coverPhotoURL = "Restaurant/\(self.restaurant.lowercased())/dish/\(self.name.lowercased().replacingOccurrences(of: " ", with: "-"))/photo/Picture.jpg"
+            print("image exists: \(name)")
+            self.photoExists = true
+            print("photoexists variable: \(name)")
         }
         else{
-            self.coverPhotoURL = ""
+//            let y = storage.child("Restaurant/\(self.restaurant.lowercased())/dish/\(self.name.lowercased().replacingOccurrences(of: " ", with: "-"))/photo/Picture.jpg".replacingOccurrences(of: "\\", with: ""))
+            var exist = false
+            var url = ""
+//            y.getMetadata {
+//                metadata, error in
+//                  if let error = error {
+//                    // Uh-oh, an error occurred!
+//                    print("no photoexists: \(name)")
+//                    exist = false
+//                  } else {
+//                    // Metadata now contains the metadata for 'images/forest.jpg'
+//                    print("photoexists variable2: \(name)")
+//                    exist = true
+//                    url = "Restaurant/\(restau.lowercased())/dish/\(name.lowercased().replacingOccurrences(of: " ", with: "-"))/photo/Picture.jpg"
+//                  }
+//                }
+            self.coverPhotoURL = url
+            self.photoExists = exist
         }
+
         if(snapshot.get("choices") != nil){
             self.choices = (snapshot.data()!["choices"] as? [String:[String:[String]]])!
             print("hello: \(self.choices)")
         }
+//        else{
+//            print("no image exists")
+//            self.photoExists = false
+//        }
     }
+    
+    init?(json: [String:Any], dis: DispatchGroup){
+        print("here in dishfb")
+        guard let description = json["Description"] as? String,
+              let name = json["Name"] as? String,
+              let type = json["Type"] as? String,
+              let restID = json["RestaurantID"] as? String,
+              let price = json["Price"] as? String,
+              let rest = json["Restaurant"] as? String
+        else {
+            print("initialization failed")
+            return nil
+        }
+        
+        self.id = UUID()
+        self.name = name
+        self.description = description
+        let descriptcomponents = description.components(separatedBy: ". ")
+        var sentencenum = 0
+        for dcomponent in descriptcomponents {
+            sentencenum = sentencenum + 1
+            if (dcomponent.contains(" or ")){
+                print(dcomponent)
+            }
+        }
+        
+        let p = NSString(string: price)
+        self.price = p.doubleValue
+        self.type = type
+        self.restaurant = rest
+        self.id = UUID()
+        self.ref = DatabaseReference()
+        self.key = ""
+//        print("Restaurant/\(self.restaurant.lowercased())/dish/\(self.name.lowercased().replacingOccurrences(of: " ", with: "-"))/photo/Picture.jpg")
+        let y = storage.child("Restaurant/\(self.restaurant.lowercased())/dish/\(self.name.lowercased().replacingOccurrences(of: " ", with: "-"))/photo/Picture.jpg".replacingOccurrences(of: "\\", with: ""))
+        var exist = false
+        var url = ""
+//        y.getMetadata {
+//            metadata, error in
+//              if let error = error {
+//                // Uh-oh, an error occurred!
+//                print("no photoexists: \(name)")
+//                exist = false
+//              } else {
+//                // Metadata now contains the metadata for 'images/forest.jpg'
+//                print("photoexists variable2: \(name)")
+//                exist = true
+//                url = "Restaurant/\(rest.lowercased())/dish/\(name.lowercased().replacingOccurrences(of: " ", with: "-"))/photo/Picture.jpg"
+//              }
+//            }
+        self.coverPhotoURL = url
+        self.photoExists = exist
+
+        print("name of dish: \(self.name)")
+        dis.leave()
+        
+    }
+    
+    
     #else
     init?(json: [String:Any]){
         guard let description = json["Description"] as? String,
@@ -227,7 +369,8 @@ struct DishFB {
         let p = NSString(string: price)
         self.price = p.doubleValue
         self.type = type
-        self.coverPhotoURL = "Restaurant/\(rest.lowercased())/dish/\(name.lowercased().replacingOccurrences(of: " ", with: "-"))/photo/Picture.jpg"
+        self.coverPhotoURL = "Restaurant/\(rest.lowercased())/dish/\(name.lowercased().replacingOccurrences(of: " ", with: "-"))/photo/Picture.jpg".replacingOccurrences(of: "//", with: "")
+        print("Restaurant/\(self.coverPhotoURL)")
         self.restaurant = rest
         self.id = UUID()
 //        self.key = key

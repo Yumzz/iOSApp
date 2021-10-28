@@ -39,8 +39,9 @@ class OrderModel: ObservableObject {
     var buildCounts : [BuildFB : Int] = [BuildFB : Int]()
     var buildOptsChosen: [BuildFB: [String]] = [BuildFB: [String]]()
     
-    var dishChoice : [DishFB: String] = [DishFB.previewDish(): ""]
+    @State var dishChoice : [DishFB: String] = [DishFB.previewDish(): ""]
     //["Substitute": 0, "Choice of": 1, "Add": 2]
+    var currentOrder: Order = Order.previewOrder()
 
     var allDishes: Int
 //    var dishRestaurant : [DishFB : RestaurantFB] = [DishFB : RestaurantFB]()
@@ -87,8 +88,11 @@ class OrderModel: ObservableObject {
             if(self.optsChosen[dish] != nil){
                 for x in self.optsChosen[dish]!{
                     self.totalCost += Double(dish.options[x]!)
+//                    self.currentOrder.specialInstruc[dish] = self.order.dishChoice[dish]
                 }
             }
+            self.currentOrder.dishes = self.dishesChosen
+            
             dis.leave()
         }
     }
@@ -190,11 +194,9 @@ class OrderModel: ObservableObject {
         self.optsChosen.removeAll()
         self.allDishes = 0
         self.totalCost = 0.0
+        self.currentOrder = Order(dishes: self.dishesChosen, totalPrice: self.totalCost, rest: rest.name)
     }
     
-    func printOrder(order: Order){
-        
-    }
     
     func orderSent(){
         self.pastOrders.append(Order(dishes: self.dishesChosen, totalPrice: self.totalCost, rest: self.restChosen.name))
@@ -207,6 +209,7 @@ class OrderModel: ObservableObject {
         self.buildIndexes = [BuildFB : Int]()
         self.buildOptsChosen = [BuildFB: [String]]()
         self.allDishes = 0
+        self.currentOrder = Order.previewOrder()
         //save past order to firebase
     }
     
@@ -226,7 +229,7 @@ class OrderModel: ObservableObject {
                 }else{
                     for document in snap!.documents {
                         self.dishReferences.append(document.reference)
-                        if(document == snap.documents.last){
+                        if(document == snap!.documents.last){
                             ds.leave()
                         }
                     }
@@ -234,23 +237,23 @@ class OrderModel: ObservableObject {
             }
             ds.notify(queue: .main){
                 if(d == order.dishes.last){
-                    let da = Date()
-                    let data = ["dishes": self.dishReferences, "userId": userProfile.userId, "rest": self.restChosen.name, "time": da] as [String : Any]
+                    let data = ["dishes": self.dishReferences, "userId": userProfile.userId, "rest": self.restChosen.name, "time": order.time, "instruct": order.specialInstruc, "totalPrice": String(order.totalPrice)] as [String : Any]
                     db.collection("Order").addDocument(data: data)
                     self.dishReferences = [DocumentReference]()
     //                                self.addOrder(ref: reference)
-                    self.retrieveOrders(userID: userProfile.userId)
+//                    self.retrieveOrders(userID: userProfile.userId)
                 }
             }
         }
     }
     
-    func retrieveOrders(userID: String){
+    func retrieveOrders(userID: String, dispatch: DispatchGroup){
+//        dispatch.enter()
         let db = Firestore.firestore()
         let orderQuery = db.collection("Order").whereField("userId", isEqualTo: userID)
         let ds = DispatchGroup()
 //        var dishes : Set<[DocumentReference]> = Set<[DocumentReference]>()
-        var orders : [([DocumentReference], TimeInterval, String)] = [([DocumentReference](), TimeInterval(0), "")]
+        var orders : [Order] = [Order.previewOrder()]
         //1. go through each order for this user
         //2. construct each order with its' list of dishes
         //3. add all orders to prevOrders
@@ -265,17 +268,38 @@ class OrderModel: ObservableObject {
                     let dishes: [DocumentReference] = doc.data()["dishes"] as! [DocumentReference]
                     let time: Date = doc.data()["time"] as! Date
                     let rest: String = doc.data()["rest"] as! String
+                    let specInstruct: String = doc.data()["instruct"] as! String
+                    let total: String = doc.data()["totalPrice"] as! String
                     //need to create order
+                    var diss: [DishFB] = []
+                    for d in dishes {
+                        d.getDocument{ (document, error) in
+                            if let document = document, document.exists {
+                                let a = document.data()
+//                                DishFB(
+                                let c = DishFB(json: a!, dis: dispatch)
+                                dispatch.notify(queue: .main){
+                                    diss.append(c!)
+                                }
+                            }
+                            else{
+                                print("Document does not exist")
+                            }
+//                            diss.append(DishFB(snapshot: document.data())!)
+                            
+                        }
+                    }
                     
-                    orders.insert(dishes, time, rest)
+                    orders.insert(Order(dishes: diss, totalPrice: Double(total)!, rest: rest, id: doc.documentID, time: time, specialInstruc: specInstruct), at: orders.count)
                     if(doc == snap!.documents.last){
                         ds.leave()
                         ds.notify(queue: .main){
                             print("got all orders")
                             let ds2 = DispatchGroup()
                             print(orders)
-                            self.makeOrder(orders: dishes, ds2: ds2)
+//                            self.makeOrder(orders: dishes, ds2: ds2)
                             print(self.pastOrders)
+                            dispatch.leave()
                         }
                     }
                 }
@@ -285,35 +309,34 @@ class OrderModel: ObservableObject {
         
     }
     
-    func makeOrder(dishes: [DocumentReference], time: Date, ds2: DispatchGroup){
-//        var order = Order(dishes: [], totalPrice: 0.0)
-        for ord in dishes {
-            var order = Order(dishes: [], totalPrice: 0.0, rest: "")
-            ds2.enter()
-            for d in ord {
-                d.getDocument { (snap2, err2) in
-                    if let err2 = err2 {
-                        print(err2.localizedDescription)
-                    }
-                    else{
-                        let price = Double(snap2!.data()!["Price"] as! String)
-                        let dish = DishFB(name: snap2!.data()!["Name"] as! String, description: snap2!.data()!["Description"] as! String, price: price!, type: snap2!.data()!["Type"] as! String, restaurant: snap2!.data()!["Restaurant"] as! String)
-                        order.dishes.append(dish)
-                        order.totalPrice = order.totalPrice + dish.price
-                        
-                        if(d == ord.last){
-                            order.rest = snap2!.data()!["Restaurant"] as! String
-                            ds2.leave()
-                            ds2.notify(queue: .main){
-                                self.pastOrders.append(order)
-                                print(self.pastOrders)
-                            }
-                        }
-                    }
-                }
-            }
-        }
-      }
+//    func makeOrder(dishes: [DocumentReference], time: Date, ds2: DispatchGroup){
+//        var order = Order(dishes: [], totalPrice: 0.0, rest: "", time: Date(), specialInstruc: "")
+//        for ord in dishes {
+//            ds2.enter()
+//            for d in ord {
+//                d.getDocument { (snap2, err2) in
+//                    if let err2 = err2 {
+//                        print(err2.localizedDescription)
+//                    }
+//                    else{
+//                        let price = Double(snap2!.data()!["Price"] as! String)
+//                        let dish = DishFB(name: snap2!.data()!["Name"] as! String, description: snap2!.data()!["Description"] as! String, price: price!, type: snap2!.data()!["Type"] as! String, restaurant: snap2!.data()!["Restaurant"] as! String)
+//                        order.dishes.append(dish)
+//                        order.totalPrice = order.totalPrice + dish.price
+//
+//                        if(d == ord.last){
+//                            order.rest = snap2!.data()!["Restaurant"] as! String
+//                            ds2.leave()
+//                            ds2.notify(queue: .main){
+//                                self.pastOrders.append(order)
+//                                print(self.pastOrders)
+//                            }
+//                        }
+//                    }
+//                }
+//            }
+//        }
+//      }
     
     #endif
     

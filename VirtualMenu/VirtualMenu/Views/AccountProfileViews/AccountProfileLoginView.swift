@@ -55,7 +55,7 @@ struct AccountProfileLoginView: View {
                 Color(#colorLiteral(red: 0.9725490196, green: 0.968627451, blue: 0.9607843137, alpha: 1)).edgesIgnoringSafeArea(.all)
             VStack{
                 VStack(spacing: 10){
-                    Text("Login to your account")
+                    Text("Login and enjoy!")
                         .foregroundColor(ColorManager.textGray)
                         .font(.largeTitle).bold()
                         .font(.system(size: 36))
@@ -150,6 +150,7 @@ struct AccountProfileLoginView: View {
         .navigationBarHidden(self.isNavigationBarHidden)
         .navigationBarBackButtonHidden(true)
         .navigationBarItems(leading: BackButton(mode: self.mode))
+        .edgesIgnoringSafeArea([.top, .bottom])
         .onAppear(){
             self.isNavigationBarHidden = false
         }

@@ -34,21 +34,36 @@ extension UIColor {
 }
 
 extension UIImage {
-var circle: UIImage? {
-  let square = CGSize(width: min(size.width, size.height), height: min(size.width, size.height))
-  //let square = CGSize(width: 36, height: 36)
-  let imageView = UIImageView(frame: CGRect(origin: CGPoint(x: 0, y: 0), size: square))
-  imageView.contentMode = .scaleAspectFill
-  imageView.image = self
-  imageView.layer.cornerRadius = square.width / 2
-  imageView.layer.masksToBounds = true
-  UIGraphicsBeginImageContext(imageView.bounds.size)
-  guard let context = UIGraphicsGetCurrentContext() else { return nil }
-  imageView.layer.render(in: context)
-  let result = UIGraphicsGetImageFromCurrentImageContext()
-  UIGraphicsEndImageContext()
-  return result
-}
+    var circle: UIImage? {
+      let square = CGSize(width: min(size.width, size.height), height: min(size.width, size.height))
+      //let square = CGSize(width: 36, height: 36)
+      let imageView = UIImageView(frame: CGRect(origin: CGPoint(x: 0, y: 0), size: square))
+      imageView.contentMode = .scaleAspectFill
+      imageView.image = self
+      imageView.layer.cornerRadius = square.width / 2
+      imageView.layer.masksToBounds = true
+      UIGraphicsBeginImageContext(imageView.bounds.size)
+      guard let context = UIGraphicsGetCurrentContext() else { return nil }
+      imageView.layer.render(in: context)
+      let result = UIGraphicsGetImageFromCurrentImageContext()
+      UIGraphicsEndImageContext()
+      return result
+    }
+    enum JPEGQuality: CGFloat {
+        case lowest  = 0
+        case low     = 0.25
+        case medium  = 0.5
+        case high    = 0.75
+        case highest = 1
+    }
+
+        /// Returns the data for the specified image in JPEG format.
+        /// If the image object’s underlying image data has been purged, calling this function forces that data to be reloaded into memory.
+        /// - returns: A data object containing the JPEG data, or nil if there was a problem generating the data. This function may return nil if the image has no data or if the underlying CGImageRef contains data in an unsupported bitmap format.
+    func jpeg(_ jpegQuality: JPEGQuality) -> Data? {
+        return jpegData(compressionQuality: jpegQuality.rawValue)
+    }
+    
 }
 
 extension UITabBar {
@@ -95,6 +110,24 @@ extension String {
 
     var isNumber: Bool {
         return !isEmpty && rangeOfCharacter(from: CharacterSet.decimalDigits.inverted) == nil
+    }
+    
+    func sidesFixed(str: String, dishcat: [DishCategory]) -> String{
+        print("here")
+        if str.contains("choice of side") {
+            print("contains")
+            let results = dishcat.filter { $0.name == "Sides" }
+            let results2 = dishcat.filter { $0.name == "Sidelines" }
+            print("results: \(results)")
+            print("results2: \(results2)")
+            if(!results.isEmpty){
+                str.replacingOccurrences(of: "choice of side", with: "choice of \(results)")
+            }
+            if(!results2.isEmpty){
+                str.replacingOccurrences(of: "choice of side", with: "choice of \(results2)")
+            }
+        }
+        return str
     }
     
 }
@@ -249,3 +282,5 @@ extension StyledText {
 extension TextStyle {
     static func highlight() -> TextStyle { .foregroundColor(ColorManager.yumzzOrange) }
 }
+
+

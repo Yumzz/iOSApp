@@ -34,7 +34,7 @@ class WaiterViewController: UIViewController {
     let MQTT_HOST = "broker.emqx.io" // or IP address e.g. "192.168.0.194"
     let MQTT_PORT: UInt32 = 1883
     
-    var num: Int = 0
+    var num: String = ""
     
 //    @IBOutlet private weak var button: CircularButton!
 //    @IBOutlet private weak var statusLabel: UILabel!
@@ -118,9 +118,10 @@ class WaiterViewController: UIViewController {
                 print(textField.text!)
                 print("Table number : \(textField.text!)")
                 var txt = textField.text!
-                if txt.isNumber {
-                    self.num = Int(txt)!
-                }
+//                if txt.isNumber {
+//                    self.num = String(txt)
+//                }
+                self.num = txt
                 d.leave()
             } else {
                 print("TF 1 is Empty...")
@@ -172,7 +173,7 @@ extension WaiterViewController: MQTTSessionManagerDelegate, MQTTSessionDelegate 
         print("delivered")
         DispatchQueue.main.async {
             self.completion?()
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "OrderSent"), object: nil)
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "WaiterCalled"), object: nil)
             self.dismiss(animated: true)
         }
     }

@@ -30,14 +30,22 @@ class MenuSelectionViewModel: ObservableObject {
     }
     
     func fetchFeaturedDishes() {
-        let dishRef = db.collection("Dish").whereField("photoExists", isEqualTo: true).whereField("Restaurant", isEqualTo: "\(self.restaurant.name)")
+        let dishRef = db.collection("Dish").whereField("photoExists", isEqualTo: true).whereField("Restaurant", isEqualTo: "\(self.restaurant.name)").limit(to: 2)
+        var count = 0
         dishRef.getDocuments { (qs, er) in
             if let er = er {
                         print("Error getting documents: \(er)")
             } else {
                 for document in qs!.documents {
-                    print("eee\(document.documentID) => \(document.data())")
-                    self.featuredDishes.append(DishFB(snapshot: document)!)
+                    if(count == 2){
+                        return
+                    }
+                    else{
+                        print("eee\(document.documentID) => \(document.data())")
+                        self.featuredDishes.append(DishFB(snapshot: document)!)
+                    }
+                    count += 1
+                    print("counttt: \(count)")
                 }
             }
             }

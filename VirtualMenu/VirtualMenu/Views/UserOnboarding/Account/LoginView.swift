@@ -38,6 +38,9 @@ struct LoginView: View {
     @State var showGoogle = false
     @State var showFB = false
     
+    @State var showBanner:Bool = true
+    @State var bannerData: BannerModifier.BannerData = BannerModifier.BannerData(title: "Plant a Tree", detail: "For every person that signs up with email and password, we will plant a tree!")
+    
     @State var isNavigationBarHidden: Bool = true
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
     
@@ -68,7 +71,7 @@ struct LoginView: View {
             VStack{
                 VStack(spacing: 10){
                     Spacer().frame(width: UIScreen.main.bounds.width, height: 60)
-                    Text("Login and enjoy")
+                    Text("Login and enjoy!")
                         .foregroundColor(ColorManager.textGray)
                         .font(.largeTitle).bold()
                         .font(.system(size: 36))
@@ -153,7 +156,7 @@ struct LoginView: View {
                 }
                 
                 Spacer()
-            }
+            }.banner(data: $bannerData, show: $showBanner)
             }.navigationBarTitle("")
             .navigationBarHidden(self.isNavigationBarHidden)
             .edgesIgnoringSafeArea([.top, .bottom])
@@ -170,6 +173,7 @@ struct LoginView: View {
             self.email = ""
             self.password = ""
             NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: "NoMoreOnboard"), object: nil, queue: .main) { (Notification) in
+                print("here")
                 self.user.showOnboarding = false
                 self.user.isLogged = true
             }

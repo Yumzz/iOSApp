@@ -20,6 +20,7 @@ var facebook = false
 var google = false
 var credential: AuthCredential? = nil
 
+
 struct SignUpView: View {
     
     @State var email: String = ""
@@ -33,6 +34,8 @@ struct SignUpView: View {
     @State var showAlert = false
     @State var showDetails = false
     @State var currentNonce: String? = ""
+    @State var showBanner:Bool = true
+    @State var bannerData: BannerModifier.BannerData = BannerModifier.BannerData(title: "Plant a Tree", detail: "For every person that signs up with email and password, we will plant a tree!")
 
     
     @State var createdAccount = false
@@ -92,16 +95,19 @@ struct SignUpView: View {
 //                            self.showAlert.toggle()
 //                        }
 //                        else{
-                            message = self.signUpVM.signUpUser(email: self.email, name: self.name, password: self.password.MD5, dispatch: dispatch)
-                            dispatch.notify(queue: .main){
-                                self.name = ""
-                                self.email = ""
-                                self.password = ""
-                                self.alertTitle = message.components(separatedBy: "|")[0]
-                                self.alertMessage = message.components(separatedBy: "|")[1]
-                                self.showAlert.toggle()
-                                
-                            }
+                        message = self.signUpVM.signUpUser(email: self.email, name: self.name, password: self.password, dispatch: dispatch)
+                        self.name = ""
+                        self.email = ""
+                        self.password = ""
+                        self.alertTitle = message.components(separatedBy: "|")[0]
+                        self.alertMessage = message.components(separatedBy: "|")[1]
+                        self.showAlert.toggle()
+                        dispatch.notify(queue: .main){
+                            print("done")
+                            
+                            user.showOnboarding = false
+                            
+                        }
 
                         
                     })
@@ -148,7 +154,7 @@ struct SignUpView: View {
                             }
                     }
                     Spacer()
-                }
+                }.banner(data: $bannerData, show: $showBanner)
             }else{
                 HomeScreenView()
             }

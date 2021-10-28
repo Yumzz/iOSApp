@@ -28,12 +28,25 @@ final class ImageLoader : ObservableObject {
     
     func loadImage(){
         
-        if loadImageFromCache() {
-            print("urlfromcache: \(urlString)")
-            return
+        DispatchQueue.main.async { [self] in
+            if(imageCache.get(forKey: self.urlString!) != nil){
+                print("cached image")
+                self.image = imageCache.get(forKey: self.urlString!)
+            }
+            else{
+                if loadImageFromCache() {
+                    print("urlfromcache: \(urlString)")
+                    return
+                }
+                else{
+                    print("made here")
+                    loadImageFromUrl()
+
+                }
+            }
+            
+            
         }
-        
-        loadImageFromUrl()
     }
     
     func loadImageFromUrl() {
@@ -44,46 +57,72 @@ final class ImageLoader : ObservableObject {
         }
         
         let storage = Storage.storage()
-        let ref = storage.reference().child(urlString)
-        
-        ref.downloadURL(completion: { (url, err) in
-            if err != nil {
-                print("error downloading image: \(self.urlString)")
-                return
-            }
-            else{
-                ref.getData(maxSize: 1 * 2048 * 2048) { data, error in
-                    
-                    guard error == nil else {
-                        print("Error: \(error!) + \(self.urlString)")
-                        return
+        self.urlString = urlString
+        print("greg: \(self.urlString)")
+        let ref = storage.reference().child(self.urlString!)
+        if((self.imageCache.get(forKey: self.urlString!)) != nil){
+            print("tried to get from url but was alreadty cached!!!: \(self.urlString)")
+            self.image = self.imageCache.get(forKey: self.urlString!)
+        }
+        else{
+            ref.downloadURL(completion: { (url, err) in
+                if err != nil {
+                    print(url)
+                    print("error downloading image: \(self.urlString)")
+                    return
+                }
+                else{
+                    if((self.imageCache.get(forKey: self.urlString!)) != nil){
+                        print("almost retrieved even though not necessary")
+                        self.image = self.imageCache.get(forKey: self.urlString!)
                     }
-                    
-                    guard let data = data else {
-                        print("No data found: \(self.urlString)")
-                        return
-                    }
-                    
-                    DispatchQueue.main.async {
+                    else{
+                    ref.getData(maxSize: 1 * 2048 * 2048) { data, error in
                         
-                        guard let loadedImage = UIImage(data: data) else {
+                        guard error == nil else {
+                            print("Error: \(error!) + \(self.urlString)")
                             return
                         }
-                        self.imageCache.set(forKey: self.urlString!, image: loadedImage)
-                        self.image = loadedImage
+                        
+                        guard let data = data else {
+                            print("No data found: \(self.urlString)")
+                            return
+                        }
+                        
+                        DispatchQueue.main.async {
+                            
+                            if(self.imageCache.get(forKey: self.urlString!) != nil){
+                                print("retrieved even though not necessary")
+                                self.image = self.imageCache.get(forKey: self.urlString!)
+                            }
+                            else{
+                                guard let loadedImage = UIImage(data: data)?.jpeg(.lowest) else {
+                                    return
+                                }
+                                guard let im = UIImage(data: loadedImage) else{
+                                    return
+                                }
+                                self.imageCache.set(forKey: self.urlString!, image: im)
+                                print("load: \(loadedImage)  \(self.urlString)")
+                                self.image = im
+                            }
+                        }
+                    }
                     }
                 }
-            }
-            return
-        })
+                return
+            })
+        }
     }
     
     func loadImageFromCache() -> Bool {
         guard let urlString = self.urlString else {
+            print("string does not exit")
             return false
         }
         
         guard let cacheImage = imageCache.get(forKey: urlString) else {
+            print("not cached: \(self.urlString)")
             return false
         }
         

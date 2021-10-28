@@ -58,14 +58,11 @@ struct DishCard: View {
                 Spacer()
                 
                 #if !APPCLIP
-                if !dish.photoExists {
-                    EmptyView().foregroundColor(.white)
-                }
-                else {
+                if dish.photoExists{
                     urlImage!
                     .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
                 }
-                
+
                 Spacer().frame(width: 8, height: 0)
                 #endif
                 

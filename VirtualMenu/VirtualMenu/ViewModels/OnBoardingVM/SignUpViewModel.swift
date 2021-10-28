@@ -28,7 +28,7 @@ class SignUpViewModel: ObservableObject {
 
     let db = Firestore.firestore()
     
-    func createUser(email: String, password: String, name: String) -> Bool{
+    func createUser(email: String, password: String, name: String, dp: DispatchGroup) -> Bool{
         //        if self.isValidInputs() {
         print("valid")
         var bool = true
@@ -39,13 +39,22 @@ class SignUpViewModel: ObservableObject {
             if (error != nil){
                 print("aaaaaaa\(error)")
                 bool = false
+                if((error?.localizedDescription.contains("already in use")) != nil){
+                    self.alertTitle = "Already in use"
+                    self.alertMessage = "This email already exists with us. Please reset password from login page to continue!"
+                }
+                
             }
             else{
                 let db = Firestore.firestore()
-                db.collection("User").addDocument(data: ["email": email, "password": password, "username": name, "uid": result!.user.uid]) {(error) in
+                db.collection("User").addDocument(data: ["email": email, "password": password.MD5, "username": name, "uid": result!.user.uid]) {(error) in
                     if error != nil {
                         
                         bool = false
+                    }
+                    else{
+                        print("finished creating user")
+                        dp.leave()
                     }
                     
                 }
@@ -100,9 +109,9 @@ class SignUpViewModel: ObservableObject {
         actionCode.url = URL(string: "https://yumzzapp.page.link/connect")
         actionCode.handleCodeInApp = true
         actionCode.setIOSBundleID(Bundle.main.bundleIdentifier!)
+        print("before link sent")
         Auth.auth().sendSignInLink(toEmail: email, actionCodeSettings: actionCode) { (error) in
 //                            self.user.showOnboarding = false
-            
             if let error = error {
                 dispatch.leave()
                 dispatch.notify(queue: .main){
@@ -114,13 +123,17 @@ class SignUpViewModel: ObservableObject {
             UserDefaults.standard.set(email, forKey: "Email")
             UserDefaults.standard.set(name, forKey: "Name")
             UserDefaults.standard.set(password, forKey: "Password")
-            print("set")
+            print("sent email and set user defaults")
             self.alertMessage = "A confirmation email was sent to \(email). Please click the link to sign in!"
             self.alertTitle = "Email Sent!"
-            self.createUser(email: email, password: password, name: name)
-            dispatch.leave()
+            let dp = DispatchGroup()
+            dp.enter()
+            let result = self.createUser(email: email, password: password, name: name, dp: dp)
+            dp.notify(queue: .main){
+                print("leave")
+                dispatch.leave()
+            }
             
-            print("leave")
         }
         
         print("return: \(self.alertTitle)")

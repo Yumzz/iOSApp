@@ -52,13 +52,18 @@ struct ForgotPasswordView: View {
                     Button(action: {
                         let val = self.forgotPassword.forgotPasswordValidInputs(email: self.email)
                         if (val == "") {
+                            self.email = ""
+                            self.alertTitle = "Email was sent"
+                            self.alertMsg = "Use email to reset password"
+                            self.showAlert.toggle()
                             let x = self.forgotPassword.passwordReset(email: self.email)
                             if(x == ""){
-                                self.alertMsg = "Email was sent"
+                                self.alertTitle = "Email was sent"
                                 self.showAlert.toggle()
                             }
                         }
                         else{
+                            self.alertTitle = "Email unable to be sent"
                             self.alertMsg = val
                             self.showAlert.toggle()
                         }
@@ -85,6 +90,9 @@ struct ForgotPasswordView: View {
             self.isNavigationBarHidden = true
 
         }
+        .alert(isPresented: $showAlert) {
+            Alert(title: Text("\(self.alertTitle)"), message: Text("\(self.alertMsg)"), dismissButton: .default(Text("Got it!")))
+            }
 
 //        .navigationBarBackButtonHidden(true)
 //        .navigationBarTitle("")

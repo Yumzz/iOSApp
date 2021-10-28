@@ -23,6 +23,8 @@ struct ReviewOrder: View {
     @State private var IoT = false
     @State private var sendPrinterOrder = false
     @State private var callWaiter = false
+    @State var changeInstructions = false
+    @State var dish: DishFB = DishFB.previewDish()
     
     let dispatchGroup = DispatchGroup()
     
@@ -30,42 +32,99 @@ struct ReviewOrder: View {
         ZStack{
             Color(#colorLiteral(red: 0.9725490196, green: 0.968627451, blue: 0.9607843137, alpha: 1)).edgesIgnoringSafeArea(.all)
             VStack(alignment: .leading){
-                HStack{
-                    #if !APPCLIP
-                    XButton(mode: self.mode)
-                    #endif
-//                    Spacer()
-//                    Spacer().frame(width: 53, height: 0)
-                    Text("Review Order")
-                        .frame(maxWidth: .infinity, alignment: .center)
-                        .foregroundColor(ColorManager.textGray)
-                        .font(.system(size: 24, weight: .bold))
-//                    Spacer()
-                }
-                
                 VStack{
-                    Text("Your Order at \(self.order.restChosen.name)")
-                        .foregroundColor(ColorManager.textGray)
-                        .font(.system(size: 24)).bold().padding(.horizontal)
-                    ScrollView{
+                    HStack{
+                        BackButton(mode: self.mode)
+//                        #if !APPCLIP
+//                        XButton(mode: self.mode)
+//                        #endif
+                        Text("Your Order")
+                            .foregroundColor(ColorManager.textGray)
+                            .font(.system(size: 24)).bold().padding(.horizontal)
+                    }
+                    ScrollView(.vertical){
                         ForEach(self.dishes, id: \.name){ dish in
         //                    Text("\(dish.name) - \(dishCounts[dish]!)")
-                            HStack{
-                                DishCardOrder(count: dishCounts[dish]!, name: dish.name, price: dish.price, dish: dish)
-                                
-                                XButtonDelete()
-                                    .onTapGesture {
-                                        self.dispatchGroup.enter()
-                                        self.order.deleteDish(dish: dish, dis: self.dispatchGroup)
-                                        self.dispatchGroup.notify(queue: .main){
-                                            self.dishCounts = self.order.dishCounts
-                                            self.dishes = self.order.dishesChosen
+                            VStack{
+                                HStack{
+                                    DishCardOrder(count: dishCounts[dish]!, name: dish.name, price: dish.price, dish: dish)
+                                    
+                                    XButtonDelete()
+                                        .onTapGesture {
+                                            self.dispatchGroup.enter()
+                                            self.order.deleteDish(dish: dish, dis: self.dispatchGroup)
+                                            self.dispatchGroup.notify(queue: .main){
+                                                self.dishCounts = self.order.dishCounts
+                                                self.dishes = self.order.dishesChosen
 
+                                            }
                                         }
+                                        .frame(width: 20, height: 20, alignment: .center)
+                                    
+    //                                Spacer().frame(width:20)
+                                }
+                                VStack{
+                                    Group{
+                                        if(self.order.optsChosen[dish] != nil){
+                                        HStack(alignment: .center){
+    //                                        if(self.order.optsChosen[dish] != nil){
+                                                ScrollView(.horizontal){
+                                                    HStack(alignment: .center, spacing: 2){
+                                                        Text("Added:")
+                                                            .font(.system(size: 10))
+                                                        ForEach(self.order.optsChosen[dish]!, id: \.self){ option in
+                                                            if(option == self.order.optsChosen[dish]?.last){
+                                                                Text(option)
+                                                                    .foregroundColor(.white)
+                                                                    .font(.system(size: 10))
+                                                            }
+                                                            else{
+                                                                Text("\(option),")
+                                                                    .foregroundColor(.black)
+                                                                    .font(.system(size: 10))
+                                                            }
+                                                        }
+                                                    }
+                                                }
+    //                                        }
+                                        }
+                                        .frame(maxWidth: UIScreen.main.bounds.width/2, alignment: .leading)
+                                        .frame(height: 20)
+                                        .background(ColorManager.textGray)
+                                        .cornerRadius(10)
+                                        .shadow(radius: 2)
+    //                                    .scaledToFit()
+                                        }
+                                        
                                     }
-                                    .frame(width: 20, height: 20, alignment: .center)
-                                
-                                Spacer().frame(width:20)
+    //                                Group {
+                                    if(self.order.dishChoice[dish]! != ""){
+                                        HStack(alignment: .center){
+    //                                        if(self.order.dishChoice[dish]! != ""){
+                                            ScrollView(.horizontal){
+                                                HStack(alignment: .center, spacing: 2){
+                                                    Text("Instructions: \(self.order.dishChoice[dish]!)")
+                                                        .font(.system(size: 10)).foregroundColor(.white).background(ColorManager.yumzzOrange)
+                                                }
+                                            }
+                                            Image(systemName: "pencil")
+                                                .onTapGesture{
+                                                    self.dish = dish
+                                                    self.changeInstructions = true
+                                                }
+//                                                .colorScheme(ColorManager.yumzzOrange)
+//                                                .fixedSize(horizontal: 10, vertical: 10)
+    //                                        }
+                                        }.frame(maxWidth: UIScreen.main.bounds.width/2, alignment: .leading)
+                                        .frame(height: 20)
+                                        .background(ColorManager.textGray)
+                                        .cornerRadius(10)
+                                        .shadow(radius: 2)
+                                        
+    //                                    .scaledToFit()
+    //                                }
+                                    }
+                                }
                             }
                             
                             
@@ -113,7 +172,8 @@ struct ReviewOrder: View {
                 Spacer()
             }
 
-        }.navigationBarTitle("")
+        }
+        .navigationBarTitle("Review \(self.order.restChosen.name) Order")
         .navigationBarHidden(true)
         .navigationBarBackButtonHidden(true)
 //        .navigationBarItems(leading: BackButton(mode: self.mode))
@@ -142,6 +202,22 @@ struct ReviewOrder: View {
             
 //            ClientConnection(dishes: self.dishes, quantity: self.order.dishCounts, rest: self.order.restChosen)
         }
+        .alert(isPresented: $changeInstructions, TextFieldAlert(title: "Edit Special Instructions?", message: "\(self.dish.name) - \(self.dish.description)") { (text) in
+                    if text != nil {
+                        print(text)
+                        if((self.order.dishChoice[self.dish]?.isEmpty) != nil){
+                            self.order.dishChoice[self.dish] = ""
+                        }
+                        var newText = text?.replacingOccurrences(of: ";", with: ",")
+                        self.order.dishChoice[self.dish] = newText!
+                        
+                        print(self.order.dishChoice[self.dish])
+//                        self.saveGroup(text: text!)
+//                        self.addtapped = true
+                    }
+                    print("alert here now")
+//                    self.addtapped = true
+                })
     }
 }
 
