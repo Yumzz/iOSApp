@@ -51,6 +51,21 @@ class WaiterViewController: UIViewController {
         self.transport.host = MQTT_HOST
         self.transport.port = MQTT_PORT
         session?.transport = transport
+        print("view model call waiter")
+        NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: "CallWait"), object: nil, queue: .main) { [self] (Notification) in
+//                        self.pastOrders = Notification.object as! [Order]
+            var text = Notification.object as! String
+            //parse out table num
+            let d = DispatchGroup()
+            d.enter()
+            self.num = getQueryStringParameter(url: text, param: "table", d: d)!
+            d.notify(queue: .main){
+                print("yaaa: \(self.num)")
+                self.publishMessage("\(self.num)", onTopic: "raspberry/vics-callwaiter")
+            }
+//                        self.loadingPrinterConnection = false
+        }
+//                        self.loadingPrinterConnection = false
         
         updateUI(for: self.session?.status ?? .created)
         session?.connect() { error in
@@ -72,21 +87,21 @@ class WaiterViewController: UIViewController {
                     self.subscribe()
                     //topic needs to be dynamic for each printer - topic = raspberry/{name of rest}
                     print("ask about table num")
-                    let dispatch = DispatchGroup()
-                    dispatch.enter()
-                    self.alertAboutTable(d: dispatch)
+//                    let dispatch = DispatchGroup()
+//                    dispatch.enter()
+//                    self.alertAboutTable(d: dispatch)
                     print("done asking about table num")
-                    dispatch.notify(queue: .main){
-                        print("okkk \(self.num)")
-                        self.publishMessage("\(self.num)", onTopic: "raspberry/vics-callwaiter")
-                        self.loadingPrinterConnection = false
-                    }
+//                    dispatch.notify(queue: .main){
+//                        print("okkk \(self.num)")
+//                        self.publishMessage("\(self.num)", onTopic: "raspberry/vics-callwaiter")
+//                        self.loadingPrinterConnection = false
+//                    }
             //need to dismiss the review order view as well and
 //                    self.statusLabel.text = "Connected"
 //                    self.button.isEnabled = true
                 case .connecting,
                      .created:
-                    let host = UIHostingController(rootView: WaiterConnectionUI(connecting: false))
+                    let host = UIHostingController(rootView: WaiterConnectionUI())
                     guard let hostView = host.view else {return}
                     hostView.translatesAutoresizingMaskIntoConstraints = false
                     self.view.addSubview(hostView)
@@ -106,42 +121,58 @@ class WaiterViewController: UIViewController {
         }
     }
     
-    func alertAboutTable(d: DispatchGroup) {
-        //Step : 1
-        let alert = UIAlertController(title: "Table number needed", message: "Please Input table number above QR code on table", preferredStyle: UIAlertController.Style.alert )
-        //Step : 2
-        let save = UIAlertAction(title: "Call Waiter", style: .default) { (alertAction) in
-                let textField = alert.textFields![0] as UITextField
-            
-            if textField.text != "" {
-                        //Read TextFields text data
-                print(textField.text!)
-                print("Table number : \(textField.text!)")
-                var txt = textField.text!
-//                if txt.isNumber {
-//                    self.num = String(txt)
-//                }
-                self.num = txt
-                d.leave()
-            } else {
-                print("TF 1 is Empty...")
-            }
-            
-        }
-        
-        alert.addTextField { (textField) in
-                textField.placeholder = "Enter your table number"
-                textField.textColor = .red
-            }
-        
-        alert.addAction(save)
-            //Cancel action
-        let cancel = UIAlertAction(title: "Cancel", style: .default) { (alertAction) in }
-        alert.addAction(cancel)
-        
-        self.present(alert, animated:true, completion: nil)
+    func getQueryStringParameter(url: String, param: String, d: DispatchGroup) -> String? {
+      print("url: \(url)")
+        var x = ""
+//        guard let url = URLComponents(string: url) else { x = ""; return}
+        print("url pre: \(url)")
+
+        guard let url = URL(string: url) else { return ""}
+        var components = URLComponents(
+            url: url,
+            resolvingAgainstBaseURL: false
+        )!
+//
+        d.leave()
+        return components.queryItems?.first(where: { $0.name == param })?.value!
         
     }
+//    func alertAboutTable(d: DispatchGroup) {
+//        //Step : 1
+//        let alert = UIAlertController(title: "Table number needed", message: "Please Input table number above QR code on table", preferredStyle: UIAlertController.Style.alert )
+//        //Step : 2
+//        let save = UIAlertAction(title: "Call Waiter", style: .default) { (alertAction) in
+//                let textField = alert.textFields![0] as UITextField
+//
+//            if textField.text != "" {
+//                        //Read TextFields text data
+//                print(textField.text!)
+//                print("Table number : \(textField.text!)")
+//                var txt = textField.text!
+////                if txt.isNumber {
+////                    self.num = String(txt)
+////                }
+//                self.num = txt
+//                d.leave()
+//            } else {
+//                print("TF 1 is Empty...")
+//            }
+//
+//        }
+//
+//        alert.addTextField { (textField) in
+//                textField.placeholder = "Enter your table number"
+//                textField.textColor = .red
+//            }
+//
+//        alert.addAction(save)
+//            //Cancel action
+//        let cancel = UIAlertAction(title: "Cancel", style: .default) { (alertAction) in }
+//        alert.addAction(cancel)
+//
+//        self.present(alert, animated:true, completion: nil)
+//
+//    }
 
     private func subscribe() {
         self.session?.subscribe(toTopic: "raspberry/vics-callwaiter", at: .exactlyOnce) { error, result in
@@ -199,18 +230,25 @@ struct WaiterConnection: UIViewControllerRepresentable {
 }
 
 struct WaiterConnectionUI: View {
-    @State var connecting: Bool
+//    @State var connecting: Bool
     
     var body: some View {
             ZStack{
-                Spacer().frame(width: UIScreen.main.bounds.width, height: 100)
-                VStack{
-                    Text("Calling Waiter")
-                    Spacer().frame(width: UIScreen.main.bounds.width, height: 50)
-                    Loader(animate: connecting)
-                }
-                Spacer().frame(width: UIScreen.main.bounds.width, height: 100)
-            }
+                QRScanView(completion: { textPerPage in
+                    print("ask: \(textPerPage)")
+                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: "PrintInfo"), object: textPerPage)
+                    if let text = textPerPage?.joined(separator: "\n").trimmingCharacters(in: .whitespacesAndNewlines) {
+                        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "PrintInfo"), object: text)
+                    }
+                })
+//                Spacer().frame(width: UIScreen.main.bounds.width, height: 100)
+//                VStack{
+//                    Text("Calling Waiter")
+//                    Spacer().frame(width: UIScreen.main.bounds.width, height: 50)
+//                    Loader(animate: connecting)
+//                }
+//                Spacer().frame(width: UIScreen.main.bounds.width, height: 100)
+            }.frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
     }
 }
 

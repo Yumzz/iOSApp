@@ -26,6 +26,8 @@ struct ReviewOrder: View {
     @State var changeInstructions = false
     @State var dish: DishFB = DishFB.previewDish()
     
+    @State var choice : [DishFB: String] = [DishFB.previewDish(): ""]
+    
     let dispatchGroup = DispatchGroup()
     
     var body: some View {
@@ -103,8 +105,8 @@ struct ReviewOrder: View {
     //                                        if(self.order.dishChoice[dish]! != ""){
                                             ScrollView(.horizontal){
                                                 HStack(alignment: .center, spacing: 2){
-                                                    Text("Instructions: \(self.order.dishChoice[dish]!)")
-                                                        .font(.system(size: 10)).foregroundColor(.white).background(ColorManager.yumzzOrange)
+                                                    Text("Instructions: \(self.choice[dish]!)")
+                                                        .font(.system(size: 10)).foregroundColor(.white)
                                                 }
                                             }
                                             Image(systemName: "pencil")
@@ -112,12 +114,13 @@ struct ReviewOrder: View {
                                                     self.dish = dish
                                                     self.changeInstructions = true
                                                 }
+                                                .background(ColorManager.yumzzOrange)
 //                                                .colorScheme(ColorManager.yumzzOrange)
 //                                                .fixedSize(horizontal: 10, vertical: 10)
     //                                        }
                                         }.frame(maxWidth: UIScreen.main.bounds.width/2, alignment: .leading)
                                         .frame(height: 20)
-                                        .background(ColorManager.textGray)
+                                        .background(ColorManager.yumzzOrange)
                                         .cornerRadius(10)
                                         .shadow(radius: 2)
                                         
@@ -181,6 +184,7 @@ struct ReviewOrder: View {
         .onAppear(){
             self.dishCounts = self.order.dishCounts
             self.dishes = self.order.dishesChosen
+            self.choice = self.order.dishChoice
             //create notification center observer
             NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: "OrderSent"), object: nil, queue: .main) { (Notification) in
                 self.order.orderSent()
@@ -214,6 +218,7 @@ struct ReviewOrder: View {
                         print(self.order.dishChoice[self.dish])
 //                        self.saveGroup(text: text!)
 //                        self.addtapped = true
+                        self.choice = self.order.dishChoice
                     }
                     print("alert here now")
 //                    self.addtapped = true

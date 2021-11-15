@@ -10,9 +10,9 @@ import SwiftUI
 
 struct DishCard: View {
     
-    #if !APPCLIP
-    var urlImage:FBURLImage?
-    #endif
+//    #if !APPCLIP
+//    var urlImage:FBURLImage?
+//    #endif
     var dishName: String
     var dishIngredients: String
     var price: String
@@ -41,9 +41,18 @@ struct DishCard: View {
                     .frame(width: 4)
                 
                 VStack(alignment: .leading, spacing: 10) {
-                    Text(dishName).bold()
-//                        .foregroundColor(Color.primary)
-                        .foregroundColor(.black)
+//                    if dish.photoExists {
+//                        Text(dishName + "- Tap for Pic").bold()
+    //                        .foregroundColor(Color.primary)
+//                            .foregroundColor(.black)
+//                    }
+//                    else{
+                    HStack{
+                        Text(dishName).bold()
+//                            .foregroundColor(Color.primary)
+                            .foregroundColor(.black)
+                        TagCard(dish: dish)
+                    }
                     
                     Text(dishIngredients)
 //                        .foregroundColor(Color.secondary)
@@ -57,14 +66,14 @@ struct DishCard: View {
                 
                 Spacer()
                 
-                #if !APPCLIP
-                if dish.photoExists{
-                    urlImage!
-                    .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
-                }
-
-                Spacer().frame(width: 8, height: 0)
-                #endif
+//                #if !APPCLIP
+//                if dish.photoExists{
+//                    urlImage!
+//                    .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
+//                }
+//
+//                Spacer().frame(width: 8, height: 0)
+//                #endif
                 
 //                #if !APPCLIP
                 ZStack {

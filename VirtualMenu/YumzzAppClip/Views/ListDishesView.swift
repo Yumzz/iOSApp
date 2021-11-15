@@ -176,6 +176,7 @@ struct ListDishesView: View {
             }
         }
         .onAppear{
+            
             self.dispatchGroup.notify(queue: .main){
                 self.dishCats = self.listDishVM.dishCategories
                 if self.restaurant.builds != nil {
@@ -183,6 +184,7 @@ struct ListDishesView: View {
                 }
                 //must make build for each under build category
                 self.restname = self.restaurant.name
+                print("ask: \(self.restname)")
                 self.isNavBarHidden = false
                 NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: "Alert"), object: nil, queue: .main) { (Notification) in
                     print("added")

@@ -21,7 +21,13 @@ struct StartView: View {
             }
         }).onAppear(){
             NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: "RestId"), object: nil, queue: .main) { (tt) in
-                self.id = tt.object as! String
+                let i = tt.object as! String
+                guard let url = URL(string: i) else {return}
+                var components = URLComponents(
+                    url: url,
+                    resolvingAgainstBaseURL: false
+                )!
+                self.id = (components.queryItems?.first(where: { $0.name == "restaurant" })?.value!)!
             }
         }
         }

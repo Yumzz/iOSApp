@@ -33,6 +33,7 @@
 		3A13B6E024C1813D0006458B /* ContactUs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A13B6DF24C1813D0006458B /* ContactUs.swift */; };
 		3A13B6E424C1816B0006458B /* ReportProblem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A13B6E324C1816B0006458B /* ReportProblem.swift */; };
 		3A13B6ED24C3D9FB0006458B /* SuggestRestaurant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A13B6EC24C3D9FB0006458B /* SuggestRestaurant.swift */; };
+		3A168CA12733C8B500BE8B8F /* TagCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5A363C273375DA006445AF /* TagCard.swift */; };
 		3A2A00A3271924F6009FC3CD /* PastOrders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A2A00A2271924F6009FC3CD /* PastOrders.swift */; };
 		3A2A00A9271928C0009FC3CD /* PastOrdersViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A2A00A8271928C0009FC3CD /* PastOrdersViewModel.swift */; };
 		3A2A00B0271B9E5E009FC3CD /* OrderCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A2A00AF271B9E5E009FC3CD /* OrderCard.swift */; };
@@ -85,6 +86,7 @@
 		3A57D64A26E1758800A47F95 /* MiniViewCartButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5B0DB7253FDD9B00A0BE41 /* MiniViewCartButton.swift */; };
 		3A57D64F26E175FA00A47F95 /* BackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0745C6252B0871000EF6BD /* BackButton.swift */; };
 		3A57D65926E17F8A00A47F95 /* WhiteBackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AEB331B2572092000A61C0E /* WhiteBackButton.swift */; };
+		3A5A363D273375DA006445AF /* TagCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5A363C273375DA006445AF /* TagCard.swift */; };
 		3A5B0DB8253FDD9B00A0BE41 /* MiniViewCartButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5B0DB7253FDD9B00A0BE41 /* MiniViewCartButton.swift */; };
 		3A5C049225B75D84001BBBC8 /* ContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5C049125B75D84001BBBC8 /* ContentViewModel.swift */; };
 		3A5C049725B75F75001BBBC8 /* BuildFB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF6D6592572882A009E4240 /* BuildFB.swift */; };
@@ -301,6 +303,7 @@
 		3A5633CB24FA33790059B603 /* Order.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Order.swift; sourceTree = "<group>"; };
 		3A5633CD24FC8FE70059B603 /* OrderModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderModel.swift; sourceTree = "<group>"; };
 		3A5633D424FCED0C0059B603 /* DishNavButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DishNavButton.swift; sourceTree = "<group>"; };
+		3A5A363C273375DA006445AF /* TagCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagCard.swift; sourceTree = "<group>"; };
 		3A5B0DB7253FDD9B00A0BE41 /* MiniViewCartButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiniViewCartButton.swift; sourceTree = "<group>"; };
 		3A5C049125B75D84001BBBC8 /* ContentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewModel.swift; sourceTree = "<group>"; };
 		3A5C04A725B7670B001BBBC8 /* ListDishesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListDishesViewModel.swift; sourceTree = "<group>"; };
@@ -956,6 +959,7 @@
 			isa = PBXGroup;
 			children = (
 				3AFA234324DBA42E00F90ED8 /* OrderButton.swift */,
+				3A5A363C273375DA006445AF /* TagCard.swift */,
 				3AFA234724DCACEA00F90ED8 /* ReviewsButton.swift */,
 				3A5633D424FCED0C0059B603 /* DishNavButton.swift */,
 				3A5F685324FE230200F9B43D /* TextView.swift */,
@@ -1371,6 +1375,7 @@
 				3AB996AE26E82B93006D3340 /* DishDetailsView.swift in Sources */,
 				3A51EA60271BD54600D89A24 /* Order.swift in Sources */,
 				3AA768E426E1884E00613837 /* Navigation.swift in Sources */,
+				3A168CA12733C8B500BE8B8F /* TagCard.swift in Sources */,
 				3A5C04A825B7670B001BBBC8 /* ListDishesViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1409,6 +1414,7 @@
 				3A987AD72480350C0021F6E4 /* AppDelegate.swift in Sources */,
 				3A0745B5252B014D000EF6BD /* AppleButton.swift in Sources */,
 				3A5633D524FCED0C0059B603 /* DishNavButton.swift in Sources */,
+				3A5A363D273375DA006445AF /* TagCard.swift in Sources */,
 				A7912A2324CF7DED0052988C /* CustomTextField.swift in Sources */,
 				A7FE996224F4A552006E5980 /* DishCard.swift in Sources */,
 				3ACAD172250ADDEA00B24CEB /* ForgotPasswordViewModel.swift in Sources */,

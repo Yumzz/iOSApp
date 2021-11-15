@@ -25,9 +25,9 @@ struct SeeMenuButton: View {
             }
             .padding()
             .foregroundColor(Color.white)
+            .cornerRadius(40)
+            .frame(width: (19 * UIScreen.main.bounds.width)/20, height: 35)
             .background(Color(#colorLiteral(red: 0.88, green: 0.36, blue: 0.16, alpha: 1)))
-            .cornerRadius(10)
-            .frame(width: 160, height: 35)
 
            
 //        }

@@ -49,13 +49,13 @@ struct RestaurantHomeView: View {
                         Spacer()
                     }
                     VStack(spacing: 10){
-                        if (self.reviewViewShown) {
-//                            #if !APPCLIP
-                            RestaurantReviewView(shown: self.$reviewViewShown, popUpShown: self.$popUpShown, menuSelectionVM: self.menuSelectionVM)
-                                .transition(.slide)
-                                .animation(.default)
-//                            #endif
-                        } else {
+//                        if (self.reviewViewShown) {
+////                            #if !APPCLIP
+//                            RestaurantReviewView(shown: self.$reviewViewShown, popUpShown: self.$popUpShown, menuSelectionVM: self.menuSelectionVM)
+//                                .transition(.slide)
+//                                .animation(.default)
+////                            #endif
+//                        } else {
                         VStack(alignment: .leading){
                             HStack{
                                 Text(restaurant.name).font(.system(size: 24, weight: .semibold)).tracking(-0.41).foregroundColor(.black)
@@ -78,27 +78,28 @@ struct RestaurantHomeView: View {
                             }
                             
                             HStack{
-                                ZStack {
-                                    RoundedRectangle(cornerRadius: 5)
-                                        .fill(Color(#colorLiteral(red: 0, green: 0.7333333492279053, blue: 0.4693332314491272, alpha: 1)))
-                                    .frame(width: 45, height: 20)
-                                    Text(String(self.rating)).foregroundColor(.white)
-                                        .font(.system(size: 12, weight: .semibold))
-                                }.frame(width: 45, height: 20)
-                                Button(action: {
-//                                    #if !APPCLIP
-                                    self.reviewViewShown.toggle()
-//                                    #endif
-                                }){
-                                    Text("(" + String(self.restaurant.n_Ratings) + " reviews)").font(.system(size: 14, weight: .semibold)).foregroundColor(Color(#colorLiteral(red: 0.91018188, green: 0.4465283751, blue: 0.2032583952, alpha: 1))).tracking(-0.41).underline()
-                                }
-                                Spacer()
+//                                ZStack {
+//                                    RoundedRectangle(cornerRadius: 5)
+//                                        .fill(Color(#colorLiteral(red: 0, green: 0.7333333492279053, blue: 0.4693332314491272, alpha: 1)))
+//                                    .frame(width: 45, height: 20)
+//                                    Text(String(self.rating)).foregroundColor(.white)
+//                                        .font(.system(size: 12, weight: .semibold))
+//                                }.frame(width: 45, height: 20)
+//                                Button(action: {
+////                                    #if !APPCLIP
+//                                    self.reviewViewShown.toggle()
+////                                    #endif
+//                                }){
+//                                    Text("(" + String(self.restaurant.n_Ratings) + " reviews)").font(.system(size: 14, weight: .semibold)).foregroundColor(Color(#colorLiteral(red: 0.91018188, green: 0.4465283751, blue: 0.2032583952, alpha: 1))).tracking(-0.41).underline()
+//                                }
+//                                Spacer()
                                 
                                 NavigationLink(
                                     destination: ListDishesView(restaurant: self.restaurant).navigationBarHidden(false)
                                 ) {
                                     SeeMenuButton()
-                                        .clipShape(RoundedRectangle(cornerRadius: 10, style: .circular))
+                                        .clipShape(RoundedRectangle(cornerRadius: 40, style: .circular))
+                                        
                                 }
                             }
 
@@ -187,7 +188,7 @@ struct RestaurantHomeView: View {
                             }
                            
                         }.padding()
-                        }
+//                        }
                     }
                     .background(RoundedRectangle(cornerRadius: /*@START_MENU_TOKEN@*/25.0/*@END_MENU_TOKEN@*/, style: /*@START_MENU_TOKEN@*/.continuous/*@END_MENU_TOKEN@*/).fill(Color(#colorLiteral(red: 0.9725490196, green: 0.968627451, blue: 0.9607843137, alpha: 1))))
                     .offset(y:190)
@@ -216,6 +217,7 @@ struct RestaurantHomeView: View {
         .navigationBarHidden(self.isNavigationBarHidden)
         .navigationBarItems(leading: WhiteBackButton(mode: self.presentationMode))
         .onAppear(){
+            print("ask: \(self.distance)")
             self.isNavigationBarHidden = false
             self.dishesChosen = !self.order.dishesChosen.isEmpty
         }

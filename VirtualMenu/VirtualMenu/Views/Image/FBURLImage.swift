@@ -24,6 +24,7 @@ struct FBURLImage: View {
         self.width = imageWidth
         self.height = imageHeight
         self.circle = circle
+        
         imageLoader = ImageLoader(urlString: self.url.replacingOccurrences(of: "\\", with: ""))
 
 

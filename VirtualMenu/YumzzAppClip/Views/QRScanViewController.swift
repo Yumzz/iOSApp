@@ -95,8 +95,11 @@ class QRScanViewController: UIViewController, AVCaptureMetadataOutputObjectsDele
     func found(code: String) {
         print("code: \(code)")
         self.string = code
+//        print("code: \(code)")
+//        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "PrintInfo"), object: self.string)
+//        print("code: \(self.string)")
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "RestId"), object: self.string)
-        print("string: \(self.string)")
+//        print("string: \(self.string)")
     }
 
     override var prefersStatusBarHidden: Bool {

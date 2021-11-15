@@ -40,7 +40,7 @@ struct DishReviewsView: View {
             if self.show{
                 GeometryReader{_ in
                     
-                    Loader()
+//                    Loader()
                 }.background(Color.black.opacity(0.45))
             }
             else{

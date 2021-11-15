@@ -20,17 +20,18 @@ class MenuSelectionViewModel: ObservableObject {
     @Published var reviews = [RestaurantReviewFB]()
     
     init(restaurant: RestaurantFB) {
+        print("view model menu select")
         self.restaurant = restaurant
         self.reviewPhoto = nil
         fetchFeaturedDishes()
-        fetchReviews()
-        self.reviews.sort {
-            $0.date < $1.date
-        }
+//        fetchReviews()
+//        self.reviews.sort {
+//            $0.date < $1.date
+//        }
     }
     
     func fetchFeaturedDishes() {
-        let dishRef = db.collection("Dish").whereField("photoExists", isEqualTo: true).whereField("Restaurant", isEqualTo: "\(self.restaurant.name)").limit(to: 2)
+        let dishRef = db.collection("Dish").whereField("photoExists", isEqualTo: true).whereField("Restaurant", isEqualTo: "\(self.restaurant.name)").limit(to: 4)
         var count = 0
         dishRef.getDocuments { (qs, er) in
             if let er = er {
@@ -41,11 +42,14 @@ class MenuSelectionViewModel: ObservableObject {
                         return
                     }
                     else{
-                        print("eee\(document.documentID) => \(document.data())")
-                        self.featuredDishes.append(DishFB(snapshot: document)!)
+                        if(!(document.data()["Type"] as! String).lowercased().contains("side")){
+                            print("eee\(document.documentID) => \(document.data())")
+                            self.featuredDishes.append(DishFB(snapshot: document)!)
+                            count += 1
+                            print("counttt: \(count)")
+                        }
                     }
-                    count += 1
-                    print("counttt: \(count)")
+    
                 }
             }
             }

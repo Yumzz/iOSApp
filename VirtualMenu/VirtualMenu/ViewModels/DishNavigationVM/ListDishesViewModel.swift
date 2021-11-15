@@ -27,7 +27,7 @@ class ListDishesViewModel: ObservableObject {
     
     init(restaurant: RestaurantFB, dispatch: DispatchGroup) {
         dispatch.enter()
-        
+        print("view model list dishes")
         self.restaurant = restaurant
         
         self.dispatchGroup.enter()

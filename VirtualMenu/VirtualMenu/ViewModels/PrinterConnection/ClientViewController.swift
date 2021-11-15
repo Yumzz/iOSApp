@@ -46,14 +46,36 @@ class ClientViewController: UIViewController {
     fileprivate var session = MQTTSession()
     fileprivate var completion: (()->())?
     
-    var loadingPrinterConnection = false
+//    var loadingPrinterConnection = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.session?.delegate = self
+        
+//        QRScanViewController()
         self.transport.host = MQTT_HOST
         self.transport.port = MQTT_PORT
         session?.transport = transport
+        print("view model print order")
+//        self.presentingViewController = QRScanViewController()
+        NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: "PrintInfo"), object: nil, queue: .main) { [self] (Notification) in
+//                        self.pastOrders = Notification.object as! [Order]
+            print("asked and gotten")
+            var text = Notification.object as! String
+            //parse out table num
+            print("ask: \(text)")
+            let dispatch = DispatchGroup()
+            dispatch.enter()
+            print("enter")
+            self.tableNum = getQueryStringParameter(url: text, param: "table", d: dispatch)!
+//            let tab = text.queryItems?.first(where: { $0.name == "table" })?.value
+            dispatch.notify(queue: .main){
+            print("ask: \(self.tableNum)")
+//            self.tableNum = getQueryStringParameter(url: text, param: "table", d: dispatch)!
+            self.publishMessage(" \(userProfile.fullName); \(self.dishInfo); \(self.tableNum)", onTopic: "raspberry/vics")
+            }
+//                        self.loadingPrinterConnection = false
+        }
         
         updateUI(for: self.session?.status ?? .created)
         session?.connect() { error in
@@ -67,35 +89,32 @@ class ClientViewController: UIViewController {
     }
     
     private func updateUI(for clientStatus: MQTTSessionStatus) {
-//        let view = UIHostingController(rootView: <#T##_#>)
         DispatchQueue.main.async {
             switch clientStatus {
             //have to switch between callwaiter and printer
                 case .connected:
                     self.subscribe()
                     //topic needs to be dynamic for each printer - topic = raspberry/{name of rest}
-                    print("ask about table num")
-                    let dispatch = DispatchGroup()
-                    dispatch.enter()
-                    self.alertAboutTable(d: dispatch)
-                    print("done asking about table num")
-                    dispatch.notify(queue: .main){
-                        self.publishMessage(" \(userProfile.fullName); \(self.dishInfo); \(self.tableNum)", onTopic: "raspberry/vics")
-                        self.loadingPrinterConnection = false
-                    }
+//                    print("ask about table num")
+//                    self.alertAboutTable(d: dispatch)
+//                    print("done asking about table num")
+//                    dispatch.notify(queue: .main){
+                    
+//                    }
             //need to dismiss the review order view as well and
 //                    self.statusLabel.text = "Connected"
 //                    self.button.isEnabled = true
                 case .connecting,
                      .created:
-                    let host = UIHostingController(rootView: PrintConnectionUI(connecting: false))
+                    let host = UIHostingController(rootView: PrintConnectionUI())
                     guard let hostView = host.view else {return}
                     hostView.translatesAutoresizingMaskIntoConstraints = false
                     self.view.addSubview(hostView)
                     hostView.center = self.view.center
+//                    host.view = QRScanViewController()
 //                    hostView.centerYAnchor
                     
-                    self.loadingPrinterConnection = true
+//                    self.loadingPrinterConnection = true
                     print("trying to connect")
 //                    self.statusLabel.text = "Trying to connect..."
 //                    self.button.isEnabled = false
@@ -108,38 +127,55 @@ class ClientViewController: UIViewController {
         }
     }
     
-    func alertAboutTable(d: DispatchGroup) {
-        //Step : 1
-        let alert = UIAlertController(title: "Table number needed", message: "Please Input table number above QR code on table", preferredStyle: UIAlertController.Style.alert )
-        //Step : 2
-        let save = UIAlertAction(title: "Send Order", style: .default) { (alertAction) in
-                let textField = alert.textFields![0] as UITextField
-            
-            if textField.text != "" {
-                        //Read TextFields text data
-                print(textField.text!)
-                print("Table number : \(textField.text!)")
-                self.tableNum = textField.text!
-                d.leave()
-            } else {
-                print("TF 1 is Empty...")
-            }
-            
-        }
-        
-        alert.addTextField { (textField) in
-                textField.placeholder = "Enter your table number"
-                textField.textColor = .red
-            }
-        
-        alert.addAction(save)
-            //Cancel action
-        let cancel = UIAlertAction(title: "Cancel", style: .default) { (alertAction) in }
-        alert.addAction(cancel)
-        
-        self.present(alert, animated:true, completion: nil)
+    func getQueryStringParameter(url: String, param: String, d: DispatchGroup) -> String? {
+      print("url: \(url)")
+        var x = ""
+//        guard let url = URLComponents(string: url) else { x = ""; return}
+        print("url pre: \(url)")
+
+        guard let url = URL(string: url) else { return ""}
+        var components = URLComponents(
+            url: url,
+            resolvingAgainstBaseURL: false
+        )!
+//
+        d.leave()
+        return components.queryItems?.first(where: { $0.name == param })?.value!
         
     }
+    
+//    func alertAboutTable(d: DispatchGroup) {
+//        //Step : 1
+//        let alert = UIAlertController(title: "Table number needed", message: "Please Input table number above QR code on table", preferredStyle: UIAlertController.Style.alert )
+//        //Step : 2
+//        let save = UIAlertAction(title: "Send Order", style: .default) { (alertAction) in
+//                let textField = alert.textFields![0] as UITextField
+//
+//            if textField.text != "" {
+//                        //Read TextFields text data
+//                print(textField.text!)
+//                print("Table number : \(textField.text!)")
+//                self.tableNum = textField.text!
+//                d.leave()
+//            } else {
+//                print("TF 1 is Empty...")
+//            }
+//
+//        }
+//
+//        alert.addTextField { (textField) in
+//                textField.placeholder = "Enter your table number"
+//                textField.textColor = .red
+//            }
+//
+//        alert.addAction(save)
+//            //Cancel action
+//        let cancel = UIAlertAction(title: "Cancel", style: .default) { (alertAction) in }
+//        alert.addAction(cancel)
+//
+//        self.present(alert, animated:true, completion: nil)
+//
+//    }
 
     private func subscribe() {
         self.session?.subscribe(toTopic: "raspberry/vics", at: .exactlyOnce) { error, result in
@@ -221,43 +257,56 @@ struct ClientConnection: UIViewControllerRepresentable {
 }
 
 struct PrintConnectionUI: View {
-    @State var connecting: Bool
-    
+//    @State var connecting: Bool
+    @State var string: String = ""
     var body: some View {
             ZStack{
-                Spacer().frame(width: UIScreen.main.bounds.width, height: 100)
-                VStack{
-                    Text("Sending order to kitchen")
-                    Spacer().frame(width: UIScreen.main.bounds.width, height: 50)
-                    Loader(animate: connecting)
-                }
-                Spacer().frame(width: UIScreen.main.bounds.width, height: 100)
-            }
+                QRScanView(completion: { textPerPage in
+                    print("aa: \(textPerPage)")
+//                    print("ask: \(text)")
+                    if let text = textPerPage?.joined(separator: "\n").trimmingCharacters(in: .whitespacesAndNewlines) {
+                        print("ask: \(text)")
+//                        self.string = text
+//                        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "PrintInfo"), object: self.string)
+//                        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "PrintInfo"), object: self.string)
+                    }
+                   
+                })
+//                Spacer().frame(width: UIScreen.main.bounds.width, height: 100)
+//                VStack{
+//                    Text("Sending order to kitchen")
+//                    Spacer().frame(width: UIScreen.main.bounds.width, height: 50)
+//                    Loader(animate: connecting)
+//                }
+//                Spacer().frame(width: UIScreen.main.bounds.width, height: 100)
+            }.frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
+//            .onAppear(){
+//            }
     }
 }
 
-struct Loader: View {
-    
-    @State var animate = false
-    var body: some View {
-        
-        VStack{
-            Circle()
-                .trim(from: 0, to: 0.8)
-                .stroke(AngularGradient(gradient: .init(colors: [Color(UIColor().colorFromHex("#F88379", 1)), Color(UIColor().colorFromHex("#FFFFFF", 1))]), center: .center), style: StrokeStyle(lineWidth: 8, lineCap: .round))
-                .frame(width: 45, height: 45)
-                .rotationEffect(.init(degrees: self.animate ? 360 : 0))
-                .animation(Animation.linear(duration: 0.7).repeatForever(autoreverses: false))
-            
-            Text("Please Wait...").padding(.top)
-            
-        }
-        .background(Color.white)
-        .cornerRadius(15)
-            
-        .onAppear {
-            self.animate.toggle()
-        }
-        
-    }
-}
+//struct Loader: View {
+//
+//    @State var animate = false
+//    var body: some View {
+//
+//        VStack{
+//            Circle()
+//                .trim(from: 0, to: 0.8)
+//                .stroke(AngularGradient(gradient: .init(colors: [Color(UIColor().colorFromHex("#F88379", 1)), Color(UIColor().colorFromHex("#FFFFFF", 1))]), center: .center), style: StrokeStyle(lineWidth: 8, lineCap: .round))
+//                .frame(width: 45, height: 45)
+//                .rotationEffect(.init(degrees: self.animate ? 360 : 0))
+//                .animation(Animation.linear(duration: 0.7).repeatForever(autoreverses: false))
+//
+//            Text("Please Wait...").padding(.top)
+//
+//        }
+//        .background(Color.white)
+//        .cornerRadius(15)
+//
+//        .onAppear {
+//            self.animate.toggle()
+//        }
+//
+//    }
+//}

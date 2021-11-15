@@ -116,7 +116,7 @@ class PastOrdersViewModel: ObservableObject{
     
     init(dispatch: DispatchGroup){
         self.fetchPastOrders(disp: dispatch)
-        
+        print("view model past orders")
     }
     
     

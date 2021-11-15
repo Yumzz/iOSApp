@@ -30,6 +30,8 @@ struct DishFB {
     var exclusive: Bool = true
     var dishCatDescription: String = ""
     var photoExists = false
+    var tp_tags : [String] = [""]
+    var tp_nums : [Int] = [0]
 //  if there is an or in a sentence - you can choose one of them
     // add - choices
     // substitute - a for b
@@ -103,6 +105,12 @@ struct DishFB {
 //            print("no image exists")
 //            self.photoExists = true
 //        }
+        if(snapshot.get("taste_profile") != nil){
+            let taste = (snapshot.data()["taste_profile"] as? [Int])!
+            let taste_tags = (snapshot.data()["tp_tags"] as? [String])!
+            self.tp_tags = taste_tags
+            self.tp_nums = taste
+        }
         self.id = UUID()
         self.ref = nil
         self.key = snapshot.documentID
@@ -202,6 +210,21 @@ struct DishFB {
             print("no dishes' rest")
             return nil
         }
+        if(snapshot.get("taste_profile") != nil){
+            guard let taste = snapshot.data()?["taste_profile"] as? [Int] else {
+                print("no taste_profile")
+                return nil
+            }
+            guard let taste_tags = snapshot.data()?["tp_tags"] as? [String] else {
+                print("no tp_tags")
+                return nil
+            }
+//            let taste = (snapshot.data()!["taste_profile"] as? [String])!
+//            let taste_tags = (snapshot.data()!["tp_tags"] as? [String])!
+            self.tp_tags = taste_tags
+            self.tp_nums = taste
+        }
+        
 
         self.id = UUID()
         self.ref = nil
@@ -381,6 +404,60 @@ struct DishFB {
 //              let location = CLLocation(latitude: (((json["location"]["_latitude"] as? Double)!)), longitude: ((json["location"]["_longitude"] as? Double)!))
         
     }
+    
+    init?(json: [String:Any], dis: DispatchGroup){
+        guard let description = json["Description"] as? String,
+              let name = json["Name"] as? String,
+              let type = json["Type"] as? String,
+              let restID = json["RestaurantID"] as? String,
+              let price = json["Price"] as? String,
+              let rest = json["Restaurant"] as? String
+        else {
+            print("initialization failed")
+            return nil
+        }
+        
+        guard let choices = json["choices"] as? [String:[String:[String]]] else {
+            print("no choices")
+            let choices = ["":[""]]
+            return nil
+        }
+        
+        if(choices != ["":["":[""]]]){
+            print(choices)
+            self.choices = choices
+        }
+        
+        self.id = UUID()
+        
+//        self.key = key
+        self.name = name
+        self.description = description
+        let descriptcomponents = description.components(separatedBy: ". ")
+        var sentencenum = 0
+        for dcomponent in descriptcomponents {
+            sentencenum = sentencenum + 1
+            if (dcomponent.contains(" or ")){
+                print(dcomponent)
+            }
+        }
+        
+        let p = NSString(string: price)
+        self.price = p.doubleValue
+        self.type = type
+        self.coverPhotoURL = "Restaurant/\(rest.lowercased())/dish/\(name.lowercased().replacingOccurrences(of: " ", with: "-"))/photo/Picture.jpg".replacingOccurrences(of: "//", with: "")
+        print("Restaurant/\(self.coverPhotoURL)")
+        self.restaurant = rest
+        self.id = UUID()
+        dis.leave()
+//        self.key = key
+
+
+//              let location = CLLocation(latitude: (((locationDict["_latitude"])!)), longitude: ((locationDict["_longitude"])!)),
+              
+//              let location = CLLocation(latitude: (((json["location"]["_latitude"] as? Double)!)), longitude: ((json["location"]["_longitude"] as? Double)!))
+        
+    }
     #endif
     
     func toAnyObject() -> Any {
@@ -403,7 +480,8 @@ extension DishFB: Hashable {
         #if !APPCLIP
         return DishFB(name: "", description: "", price: 0.0, type: "", restaurant: "")
         #else
-        return DishFB(json: ["Description":"", "Name" : "", "Type" : "", "RestaurantID" : "", "Price":"", "Restaurant":""])!
+        let x =  DishFB(json: ["Description":"", "Name" : "", "Type" : "", "RestaurantID" : "", "Price":"", "Restaurant":""])
+        return x!
         #endif
     }
     

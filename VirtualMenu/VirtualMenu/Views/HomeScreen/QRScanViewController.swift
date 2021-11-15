@@ -179,6 +179,23 @@ class QRScanViewController: UIViewController, AVCaptureMetadataOutputObjectsDele
 //
     func found(code: String) {
         print("code: \(code)")
+//        self.string = code
+        //check if callwaiter or send to printer
+        if(code.contains("call")){
+            print("callwait code: \(code)")
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "CallWait"), object: code)
+        }
+        if(code.contains("print")){
+            print("printorder code: \(code)")
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "PrintInfo"), object: code)
+        }
+        if(code.contains("home")){
+            print("gotorestview: \(code)")
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "ChooseRest"), object: code)
+        }
+        //
+
+        print("code: \(code)")
     }
 
     override var prefersStatusBarHidden: Bool {

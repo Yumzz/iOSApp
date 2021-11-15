@@ -18,7 +18,7 @@ struct ListDishesView: View {
     var restaurant: RestaurantFB
     
     @ObservedObject var listDishVM: ListDishesViewModel
-            
+    
     @State var isLoading = false
     
     @State var dishCategoryClicked: DishCategory = DishCategory(isExpanded: false, dishes: [], name: "", description: "")
@@ -171,7 +171,7 @@ struct ListDishesView: View {
                                         NavigationLink(destination:
                                             DishDetailsView(dish: dish, restaurant: self.restaurant).navigationBarHidden(false)
                                         ) {
-                                            DishCard(urlImage: (dish.photoExists) ? (FBURLImage(url: dish.coverPhotoURL.replacingOccurrences(of: "\\", with: ""), imageAspectRatio: .fill, imageWidth: 80, imageHeight: 80, circle: false)) : nil, dishName: dish.name, dishIngredients: dish.description, price: self.listDishVM.formatPrice(price: dish.price), singPrice:dish.options.isEmpty, rest: self.restaurant, dish: dish)
+                                            DishCard(dishName: dish.name, dishIngredients: dish.description, price: self.listDishVM.formatPrice(price: dish.price), singPrice:dish.options.isEmpty, rest: self.restaurant, dish: dish)
                                         }
                                 }
                                 Spacer().frame(height: 20)

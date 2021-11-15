@@ -36,6 +36,7 @@ class SignUpViewModel: ObservableObject {
         
         Auth.auth().createUser(withEmail: email, password: password){
             (result, error) in
+            print("created with pass: \(password)")
             if (error != nil){
                 print("aaaaaaa\(error)")
                 bool = false

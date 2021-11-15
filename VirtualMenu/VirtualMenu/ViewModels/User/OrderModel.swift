@@ -39,7 +39,7 @@ class OrderModel: ObservableObject {
     var buildCounts : [BuildFB : Int] = [BuildFB : Int]()
     var buildOptsChosen: [BuildFB: [String]] = [BuildFB: [String]]()
     
-    @State var dishChoice : [DishFB: String] = [DishFB.previewDish(): ""]
+    var dishChoice : [DishFB: String] = [DishFB.previewDish(): ""]
     //["Substitute": 0, "Choice of": 1, "Add": 2]
     var currentOrder: Order = Order.previewOrder()
 

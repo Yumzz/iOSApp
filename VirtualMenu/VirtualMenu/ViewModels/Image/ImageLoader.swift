@@ -50,6 +50,7 @@ final class ImageLoader : ObservableObject {
     }
     
     func loadImageFromUrl() {
+        DispatchQueue.main.async { [self] in
         
         guard let urlString = urlString else {
             print("guard failed in loadimfromurl: \(self.urlString)")
@@ -113,9 +114,12 @@ final class ImageLoader : ObservableObject {
                 return
             })
         }
+        }
     }
     
     func loadImageFromCache() -> Bool {
+        
+        
         guard let urlString = self.urlString else {
             print("string does not exit")
             return false
@@ -126,8 +130,12 @@ final class ImageLoader : ObservableObject {
             return false
         }
         
-        self.image = cacheImage
+        DispatchQueue.main.async {
+            self.image = cacheImage
+            
+        }
         return true
+        
     }
     
 }

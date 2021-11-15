@@ -40,7 +40,7 @@ struct OnboardingInfo: View {
 
                             
                         
-                        Text("Choose your food quickly and safely from the app")
+                        Text("Choose your food quickly and safely from the app. Signed up users can also call a waiter to their table.")
                             .foregroundColor(ColorManager.textGray)
                             .font(.system(size: 18))
                             .font(.subheadline)

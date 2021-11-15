@@ -11,7 +11,7 @@
 	<key>com.apple.developer.associated-domains</key>
 	<array>
 		<string>applinks:yumzzapp.page.link</string>
-		<string>appclips:yumzz-appclip.web.app</string>
+		<string>appclips:yummz-appclip.web.app</string>
 		<string>applinks:yumzzmenu.com</string>
 	</array>
 	<key>com.apple.developer.icloud-services</key>
