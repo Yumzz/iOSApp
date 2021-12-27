@@ -11,46 +11,63 @@ struct DishCardOrder: View {
     @State var price: Double
     
     var dish: DishFB
+    var dark: Bool = false
     let dispatchGroup = DispatchGroup()
     @EnvironmentObject var order : OrderModel
-
-        
-    @Environment (\.colorScheme) var colorScheme:ColorScheme
     
+
     var body: some View {
         ZStack{
             VStack{
                 Group {
-                    HStack(alignment: .center, spacing: 20) {
+                    HStack(alignment: .center, spacing: 10) {
                         Spacer().frame(width: 5, height: 0)
 
-                        VStack{
-                            Rectangle()
-                                .frame(width: 24, height: 24)
-                                .foregroundColor(Color(#colorLiteral(red: 0.8549019608, green: 0.8549019608, blue: 0.8549019608, alpha: 1)))
-                                .cornerRadius(10)
-                                .overlay(Text("\(count)").foregroundColor(.black))
-                        }
-                        
-                        
-                        Spacer()
-                            .frame(maxWidth: 0)
+//                        VStack{
+//                            Rectangle()
+//                                .frame(width: 24, height: 24)
+//                                .foregroundColor(Color(#colorLiteral(red: 0.8549019608, green: 0.8549019608, blue: 0.8549019608, alpha: 1)))
+//                                .cornerRadius(10)
+//                                .overlay(Text("\(count)").foregroundColor(.black))
+//                        }
+                        (Text("\(count)").foregroundColor(dark ? .white : .black))
+                            .font(.system(size: 14))
+//                        Spacer()
+//                            .frame(maxWidth: 0)
         //
                         VStack {
                             ScrollView(.horizontal){
                                 Text(name).bold()
-                                    .foregroundColor(.black)
-                                    .font(.system(size: 18))
+                                    .foregroundColor(dark ? .white : .black)
+                                    .font(.system(size: 14))
                             }
                         }
 //                        .scaledToFit()
                         Spacer()
         //
-                        VStack {
-                            Text("$\(price.removeZerosFromEnd())")
-                                .foregroundColor(.black)
-                                .font(.system(size: 18)).bold()
+                        if(String(dish.price).components(separatedBy: ".")[1].count < 2){
+                            if(String(dish.price).components(separatedBy: ".")[1].count < 1){
+                                Text(String(dish.price) + "00").foregroundColor(dark ? .white : .black)
+                                    .font(.system(size: 14)).bold()
+                                Spacer()
                             }
+                            else{
+                                Text(String(dish.price) + "0").foregroundColor(dark ? .white : .black)
+                                    .font(.system(size: 14)).bold()
+                                Spacer()
+                            }
+                        }
+                        else{
+                            Text(String(dish.price))
+                                .foregroundColor(dark ? .white : .black)
+                                .font(.system(size: 14)).bold()
+                            Spacer()
+                        }
+//                        VStack {
+//                            Text("$\(price.removeZerosFromEnd())")
+//                                .foregroundColor(.black)
+//                                .font(.system(size: 18)).bold()
+//                            }
                         
                         Spacer()
         //                .frame(height: 70)
@@ -71,7 +88,7 @@ struct DishCardOrder: View {
                     }
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .frame(height: 55)
-                    .background(Color(.white))
+                    .background(dark ? ColorManager.blackest : Color(.white))
                     .cornerRadius(10)
                     .shadow(radius: 2)
 //                    .scaledToFit()

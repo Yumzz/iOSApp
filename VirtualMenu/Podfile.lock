@@ -233,8 +233,6 @@ PODS:
     - FBSDKLoginKit/Login (= 9.3.0)
   - FBSDKLoginKit/Login (9.3.0):
     - FBSDKCoreKit (~> 9.3.0)
-  - Firebase/Analytics (6.34.0):
-    - Firebase/Core
   - Firebase/Auth (6.34.0):
     - Firebase/CoreOnly
     - FirebaseAuth (~> 6.9.2)
@@ -389,7 +387,6 @@ PODS:
 DEPENDENCIES:
   - FBSDKCoreKit (= 9.3.0)
   - FBSDKLoginKit (= 9.3.0)
-  - Firebase/Analytics
   - Firebase/Auth
   - Firebase/Core
   - Firebase/Database
@@ -467,6 +464,6 @@ SPEC CHECKSUMS:
   PromisesObjC: 3113f7f76903778cf4a0586bd1ab89329a0b7b97
   SquarePointOfSaleSDK: 4cf96f9702f56171b3e9f8615acadf97879062f5
 
-PODFILE CHECKSUM: 6f912b3ca4400417f20703d84d032e39b732db75
+PODFILE CHECKSUM: e592675b86bbc9d00cda18b928f46315e7749273
 
 COCOAPODS: 1.10.0

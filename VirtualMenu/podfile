@@ -3,7 +3,7 @@ use_frameworks!
 # add the Firebase pod for Google Analytic
 
 target 'VirtualMenu' do
-    pod 'Firebase/Analytics'
+#    pod 'Firebase/Analytics'
     pod 'Instructions'
     pod 'Firebase/Core', :inhibit_warnings => true
     pod 'Firebase/Database', :inhibit_warnings => true
@@ -23,6 +23,7 @@ end
  #   pod 'Firebase'
 #end
 
+
 post_install do |installer|
   installer.generated_projects.each do |project|
     project.targets.each do |target|
@@ -33,9 +34,13 @@ post_install do |installer|
   end
 end
 
-target 'YumzzAppClip' do
-     pod 'MQTTClient'
-     pod 'SquarePointOfSaleSDK'
+#target 'YumzzAppClip' do
+ #    pod 'MQTTClient'
+ #    pod 'SquarePointOfSaleSDK'
+#end
+
+target 'YumzzClip' do
+ pod 'MQTTClient'
 end
 
 

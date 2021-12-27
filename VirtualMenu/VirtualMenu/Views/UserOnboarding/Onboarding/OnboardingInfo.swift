@@ -16,12 +16,14 @@ extension AnyTransition {
 
 struct OnboardingInfo: View {
 //    @State var isNavigationBarHidden: Bool = true
+    @Environment (\.colorScheme) var colorScheme : ColorScheme
 
     var body: some View {
         ZStack{
             NavigationView{
                 ZStack{
-                    Color(#colorLiteral(red: 0.9725490196, green: 0.968627451, blue: 0.9607843137, alpha: 1)).edgesIgnoringSafeArea(.all)
+                    Color(colorScheme == .dark ? ColorManager.darkBack : #colorLiteral(red: 0.9725490196, green: 0.968627451, blue: 0.9607843137, alpha: 1)).edgesIgnoringSafeArea(.all)
+//                    Color(colorScheme == .dark ? Color("black") as! CGColor : Color(#colorLiteral(red: 0.9725490196, green: 0.968627451, blue: 0.9607843137, alpha: 1)) as! CGColor).edgesIgnoringSafeArea(.all)
                 VStack{
                     Spacer().frame(width: UIScreen.main.bounds.width, height: 0)
 
@@ -31,7 +33,7 @@ struct OnboardingInfo: View {
     //                        .frame(width: UIScreen.main.bounds.width/1.3, height: 374)
                         
                         Text("Order food from local restaurants")
-                            .foregroundColor(ColorManager.textGray)
+                            .foregroundColor(colorScheme == .dark ? ColorManager.white : ColorManager.black)
                             .font(.largeTitle).bold()
                             .font(.system(size: 36))
                             .padding(.leading, 40)
@@ -40,8 +42,8 @@ struct OnboardingInfo: View {
 
                             
                         
-                        Text("Choose your food quickly and safely from the app. Signed up users can also call a waiter to their table.")
-                            .foregroundColor(ColorManager.textGray)
+                        Text("Choose your food quickly and call your waiter safely from the app!")
+                            .foregroundColor(colorScheme == .dark ? ColorManager.white : ColorManager.black)
                             .font(.system(size: 18))
                             .font(.subheadline)
                             .padding(.leading, 40)
@@ -53,7 +55,7 @@ struct OnboardingInfo: View {
                     VStack(alignment: .leading){
 
                         NavigationLink(destination: OnboardingInfo2()){
-                            OrangeButton(strLabel: "Get Started", width: 141, height: 48)
+                            OrangeButton(strLabel: "Get Started", width: 141, height: 48, dark: colorScheme == .dark)
                                 .clipShape(RoundedRectangle(cornerRadius: 10, style: .circular))
                         }
                     }

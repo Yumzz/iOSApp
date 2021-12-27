@@ -19,6 +19,8 @@ struct BuildCard: View {
     @State var indexPrice: Int = -1
     @State var count: Int = 1
     @State var total = 0.00
+//    var dark: Bool = false
+    @Environment (\.colorScheme) var colorScheme : ColorScheme
     
     var d = DispatchGroup()
 
@@ -39,16 +41,24 @@ struct BuildCard: View {
                         Text("\(type)")
                             .padding(.horizontal, 20)
                             .padding(.vertical, 10)
-                            .font(.subheadline)
-                            .foregroundColor(.black)
-                            .onTapGesture {
-                                print(type)
-                            }
-
+//                            .font(.subheadline)
+                            .foregroundColor(colorScheme == .dark ? .white : .black)
+                            .font(Font.headline.weight(.bold))
+                            .font(.system(size: 24))
+//                            .onTapGesture {
+//                                print(type)
+//                            }
+//                        ZStack{
+                        VStack{
                             ForEach(self.build.addOns[type]!, id: \.self){
                                  option in
                                 HStack{
-                                    Text("\(option): $\(((Double) (self.build.individualCosts[type]![((Int) (self.build.addOns[type]!.firstIndex(of: option)!))])!).removeZerosFromEnd())")
+                                    Text("\(option): $" + String.priceFix(price: (self.build.individualCosts[type]![((Int) (self.build.addOns[type]!.firstIndex(of: option)!))])))
+                                        .foregroundColor(.black)
+//
+                                    
+                                        
+//                                    Text("\(option): $\(((Double) (self.build.individualCosts[type]![((Int) (self.build.addOns[type]!.firstIndex(of: option)!))])!).removeZerosFromEnd())")
 
                                     Spacer()
                                     
@@ -76,11 +86,26 @@ struct BuildCard: View {
                                         }
                                 
                                 
-                            }
+                                }
+                                
+//                                .background(colorScheme == .dark ? Color.black : Color.white)
+//                        .frame(height: 112)
+                                
+//
+//                        .cornerRadius(10)
                             
                         }
+//                            .background(dark ? Color.white : Color.white)
+                        
+                        }
+                        .padding(.horizontal)
+                        .background(colorScheme == .dark ? ColorManager.offWhiteBack : Color.white)
+//                        .frame(height: CGFloat((self.build.addOns[type]!.count))*32)
+                        .cornerRadius(10)
+                        
                         
                     }
+                        
                     HStack{
                         HStack{
                             Image(systemName: "minus")
@@ -111,7 +136,7 @@ struct BuildCard: View {
         //                            NavigationLink(destination: ReviewOrder()){
 
                             HStack{
-                                Text("$\(self.total.removeZerosFromEnd())")
+                                Text("$\(String.priceFix(price: String (self.total + build.basePrice)))")
                                     .font(.system(size: 16, weight: .semibold))
                                     .font(.footnote)
                                     .frame(width: 100)
@@ -147,7 +172,7 @@ struct BuildCard: View {
                                 }
                             }
                         
-                    }
+                    }.cornerRadius(10)
                 }
             }
 
@@ -358,7 +383,7 @@ struct BuildCard: View {
                 }
                 }
             }
-        }
+        }.cornerRadius(10)
     }
 }
 

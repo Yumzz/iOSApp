@@ -67,15 +67,15 @@ extension UIImage {
 }
 
 extension UITabBar {
-func tabsVisiblty(_ isVisiblty: Bool = true){
-    if isVisiblty {
-        self.isHidden = false
-        self.layer.zPosition = 0
-    } else {
-        self.isHidden = true
-        self.layer.zPosition = -1
+    func tabsVisiblty(_ isVisiblty: Bool = true){
+        if isVisiblty {
+            self.isHidden = false
+            self.layer.zPosition = 0
+        } else {
+            self.isHidden = true
+            self.layer.zPosition = -1
+        }
     }
-}
 }
 
 
@@ -87,6 +87,21 @@ extension String {
     
     func numOfNums() -> Int{
         self.numberOfOccurrences("0") + self.numberOfOccurrences("1") + self.numberOfOccurrences("2") + self.numberOfOccurrences("3") + self.numberOfOccurrences("4") + self.numberOfOccurrences("5") + self.numberOfOccurrences("6") + self.numberOfOccurrences("7") + self.numberOfOccurrences("8") + self.numberOfOccurrences("9")
+    }
+    
+//    public func
+    static func priceFix(price: String) -> String {
+        if(price.components(separatedBy: ".")[1].count < 2){
+            if(price.components(separatedBy: ".")[1].count < 1){
+                return price + "00"
+            }
+            else{
+                return price + "0"
+            }
+        }
+        else{
+            return price
+        }
     }
     
 }
@@ -130,6 +145,8 @@ extension String {
         return str
     }
     
+    
+    
 }
 
 extension Publishers {
@@ -164,7 +181,7 @@ struct KeyboardAdaptive: ViewModifier {
                 .onReceive(Publishers.keyboardHeight) { keyboardHeight in
                     let keyboardTop = geometry.frame(in: .global).height - keyboardHeight
                     let focusedTextInputBottom = UIResponder.currentFirstResponder?.globalFrame?.maxY ?? 0
-                    self.bottomPadding = max(0, focusedTextInputBottom - keyboardTop - geometry.safeAreaInsets.bottom)
+                    self.bottomPadding = max(0, focusedTextInputBottom - keyboardTop - geometry.safeAreaInsets.bottom + 40)
             }
             .animation(.easeOut(duration: 0.16))
         }

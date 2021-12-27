@@ -20,6 +20,7 @@ struct DishCard: View {
     var rest: RestaurantFB
     
     var dish: DishFB
+    var dark: Bool = false
     
     let dispatchGroup = DispatchGroup()
     
@@ -50,18 +51,34 @@ struct DishCard: View {
                     HStack{
                         Text(dishName).bold()
 //                            .foregroundColor(Color.primary)
-                            .foregroundColor(.black)
-                        TagCard(dish: dish)
+                            .foregroundColor(dark ? .white : .black)
+//                        TagCard(dish: dish, dark: dark)
                     }
                     
-                    Text(dishIngredients)
-//                        .foregroundColor(Color.secondary)
-                        .foregroundColor(.gray)
-                        .font(.system(size: 14))
-                        
-                    Text(price)
-                        .foregroundColor(Color(UIColor().colorFromHex("#C4C4C4", 1)))
-                        .font(.system(size: 14))
+                    if(dish.description != ""){
+                        Text(dishIngredients)
+    //                        .foregroundColor(Color.secondary)
+                            .foregroundColor(dark ? .white : .gray)
+                            .font(.system(size: 14))
+                    }
+                    
+                    if(String(dish.price).components(separatedBy: ".")[1].count < 2){
+                        if(String(dish.price).components(separatedBy: ".")[1].count < 1){
+                            Text(String(dish.price) + "00").font(.system(size: 12, weight: .semibold)).foregroundColor(dark ? ColorManager.darkModeOrange : Color(#colorLiteral(red: 0.7, green: 0.7, blue: 0.7, alpha: 1))).tracking(-0.41)
+                            Spacer()
+                        }
+                        else{
+                            Text(String(dish.price) + "0").font(.system(size: 12, weight: .semibold)).foregroundColor(dark ? .white : Color(#colorLiteral(red: 0.7, green: 0.7, blue: 0.7, alpha: 1))).tracking(-0.41)
+                            Spacer()
+                        }
+                    }
+                    else{
+                        Text(String(dish.price)).font(.system(size: 12, weight: .semibold)).foregroundColor(dark ? .white : Color(#colorLiteral(red: 0.7, green: 0.7, blue: 0.7, alpha: 1))).tracking(-0.41)
+                        Spacer()
+                    }
+//                    Text(price.numOfNums() < 4 ? (price.numOfNums() < 3 ? price + "00" : price + "0") : price)
+//                        .foregroundColor(Color(UIColor().colorFromHex("#C4C4C4", 1)))
+//                        .font(.system(size: 14))
                 }
                 
                 Spacer()
@@ -78,15 +95,15 @@ struct DishCard: View {
 //                #if !APPCLIP
                 ZStack {
                     Rectangle()
-                        .fill(Color("YumzzOrange"))
+                        .fill(dark ? ColorManager.darkModeOrange : Color("YumzzOrange"))
                         .frame(width: 20, height: 6)
                     
                     Rectangle()
-                        .fill(Color("YumzzOrange"))
+                        .fill(dark ? ColorManager.darkModeOrange : Color("YumzzOrange"))
                         .frame(width: 6, height: 20)
                 }
                 .onTapGesture {
-                        print("added")
+                        print("added haha")
                         if(!self.order.checkSameRest(dish: self.dish)){
 //                            self.alertTitle = "Different Restaurant"
 //                            self.alertMessage = "A new order has been started for \(self.rest.name)"
@@ -99,10 +116,12 @@ struct DishCard: View {
 //                            self.showingAlert.toggle()
                         }
                         self.dispatchGroup.enter()
+                        print("added to order haha")
                         self.order.restChosen = self.rest
                         self.order.addDish(dish: self.dish, rest: self.rest, dis: self.dispatchGroup)
                         //ask for side choice here
                         self.dispatchGroup.notify(queue: .main){
+                            print("posted special instruction haha")
                             NotificationCenter.default.post(name: Notification.Name(rawValue: "Special Instruction"), object: (dish, singPrice))
 //                            NotificationCenter.default.post(name: Notification.Name(rawValue: "Alert"), object: singPrice)
 //                            if !dish.choices.isEmpty{
@@ -117,8 +136,9 @@ struct DishCard: View {
             }
             .frame(maxWidth: .infinity, alignment: .leading)
             .frame(height: 112)
-            .background(Color(.white))
+            .background(dark ? Color(.black) : Color(.white))
             .cornerRadius(10)
+            
         }
         .padding(.horizontal)
     }

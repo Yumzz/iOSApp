@@ -20,10 +20,11 @@ class ForgotPasswordViewModel: ObservableObject {
             if(error != nil){
                 string = "Error. Email could not be sent to provided address."
             }
-            else{                
+            else{
                 string = ""
             }
         }
+//        print("valnoerror")
         return string
     }
     

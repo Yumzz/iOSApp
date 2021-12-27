@@ -26,6 +26,7 @@ struct BuildFB {
     var sizePrice: [String: [String]] = ["": []]
     var individCost: Bool = false
     var individualCosts: [String:[String]] = ["":[]]
+    var basePrice: Double = 0.00
     
     
     #if !APPCLIP
@@ -58,6 +59,7 @@ struct BuildFB {
     }
     
     init?(snapshot: QueryDocumentSnapshot) {
+        print("building build")
         let individCost = snapshot.data()["individualCost"] as? Bool
         guard
             let name = snapshot.data()["Name"] as? String else {
@@ -108,6 +110,11 @@ struct BuildFB {
                 print("no size price:\(snapshot.data())")
                 return nil
         }
+        guard
+            let basePrice = snapshot.data()["BasePrice"] as? Int else {
+                print("no base price:\(snapshot.data())")
+                return nil
+        }
         self.name = name
         self.description = description
         self.rest = rest
@@ -115,7 +122,7 @@ struct BuildFB {
         self.id = UUID()
 
         self.individCost = individCost!
-
+        self.basePrice = Double(basePrice)
 //        self.priceOpts = self.extractPrices(opts: priceopts)
         for x in addOns.keys {
             if(!self.typeOpt.contains(x)){
@@ -131,6 +138,7 @@ struct BuildFB {
     }
     
     init?(snapshot: DocumentSnapshot) {
+        print("building build")
         let individCost = snapshot.data()!["individualCost"] as? Bool
 
         guard
@@ -180,13 +188,18 @@ struct BuildFB {
                 print("no size price:\(snapshot.data())")
                 return nil
         }
+        guard
+            let basePrice = snapshot.data()?["BasePrice"] as? Int else {
+                print("no base price:\(snapshot.data())")
+                return nil
+        }
         
         self.name = name
         self.description = description
         self.rest = rest
         self.addOns = addons
         self.id = UUID()
-
+        self.basePrice = Double(basePrice)
         self.individCost = individCost!
 //        self.priceOpts = self.extractPrices(opts: priceopts)
         for x in addOns.keys {
@@ -229,7 +242,11 @@ struct BuildFB {
             }
 
         }
-        
+        guard
+            let basePrice = json["BasePrice"] as? Int else {
+                print("no base price")
+                return nil
+        }
 //        let exclusiveopts = json["Exclusive-Opts"] as? [String:[String]], let priceopts = json["PriceOpts"] as? [String:[String: NSArray]], let sizeprice = json["SizePrice"] as? [String:[String]]
         self.name = name
         self.description = description

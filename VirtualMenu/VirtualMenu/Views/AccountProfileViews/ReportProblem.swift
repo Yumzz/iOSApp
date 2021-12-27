@@ -16,6 +16,8 @@ struct ReportProblem: View {
     @State private var alertMessage = ""
     @State private var alertTitle = ""
     @State private var textStyle = UIFont.TextStyle.body
+    @Environment (\.colorScheme) var colorScheme : ColorScheme
+
 
     
     @ObservedObject var reportVM = ReportProblemViewModel()
@@ -26,6 +28,7 @@ struct ReportProblem: View {
                 VStack (alignment: .leading) {
                     Text("What did we mess up on?")
                         .font(.custom("Futura Bold", size: 22))
+                        .foregroundColor((colorScheme == .dark) ? .white : ColorManager.yumzzOrange)
                     Spacer()
                         .frame(height: CGFloat(30))
                 }
@@ -33,6 +36,7 @@ struct ReportProblem: View {
                     Text("Where should we email you back?")
                         .padding(.leading, (UIScreen.main.bounds.width * 10) / 414)
                         .padding(.trailing, (UIScreen.main.bounds.width * 10) / 414)
+                        .foregroundColor(colorScheme == .dark ? .white : ColorManager.yumzzOrange)
                     TextField("Email", text: $email)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
                         .padding(.leading, (UIScreen.main.bounds.width * 10) / 414)
@@ -44,6 +48,7 @@ struct ReportProblem: View {
                     Text("What is your name?")
                         .padding(.leading, (UIScreen.main.bounds.width * 10) / 414)
                         .padding(.trailing, (UIScreen.main.bounds.width * 10) / 414)
+                        .foregroundColor(colorScheme == .dark ? .white : ColorManager.yumzzOrange)
                     TextField("Name", text: $name)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
                         .padding(.leading, (UIScreen.main.bounds.width * 10) / 414)
@@ -65,6 +70,7 @@ struct ReportProblem: View {
                     self.showingAlert.toggle()
                 }) {
                     Text("Send")
+                        .foregroundColor(colorScheme == .dark ? .white : ColorManager.yumzzOrange)
                 }
                 .alert(isPresented: $showingAlert) {
                     Alert(title: Text("Thank you for submitting"), message: Text("\(self.alertMessage)"), dismissButton: .default(Text("OK")))

@@ -11,7 +11,7 @@ import SwiftUI
 //#if !APPCLIP
 import Firebase
 //#endif
-
+var dishCache = Cache<String, DishFB>()
 class ListDishesViewModel: ObservableObject {
     
     let db = Firestore.firestore()
@@ -23,6 +23,7 @@ class ListDishesViewModel: ObservableObject {
     
     let dispatchGroup = DispatchGroup()
     let dispatchGroup2 = DispatchGroup()
+
     
     
     init(restaurant: RestaurantFB, dispatch: DispatchGroup) {
@@ -39,8 +40,8 @@ class ListDishesViewModel: ObservableObject {
         self.dispatchGroup.notify(queue: .main) {
 
             self.dispatchGroup2.enter()
-            
-            self.fetchBuildsFB(name: restaurant.name)
+            print("builds pre")
+            self.fetchBuildsFB(id: restaurant.id)
             
             self.dispatchGroup2.notify(queue: .main){
                 self.dishes.sort {
@@ -62,18 +63,21 @@ class ListDishesViewModel: ObservableObject {
         
     }
     
-    func fetchBuildsFB(name: String) {
-        db.collection("Build").whereField("RestaurantID", isEqualTo: restaurant.id).getDocuments { (snapshot, error) in
+    func fetchBuildsFB(id: String) {
+        print("build: \(id)")
+        db.collection("Build").whereField("RestaurantID", isEqualTo: id).getDocuments { (snapshot, error) in
                     if let error = error {
                         print("Error getting documents: \(error)")
                     } else {
+                        print("build \(snapshot?.documents)")
                         if(!snapshot!.documents.isEmpty){
+                            print("build exists")
                             for document in snapshot!.documents {
                                 DispatchQueue.main.async {
                                     let build = BuildFB(snapshot: document)
         
                                     self.builds.append(build!)
-                                    print("build created for: \(name)" )
+//                                    print("build created for: \(name)" )
         
                                     if(document == snapshot!.documents.last){
                                         self.dispatchGroup2.leave()
@@ -91,6 +95,7 @@ class ListDishesViewModel: ObservableObject {
         print("fetch")
         //fetch dishes
         //restaurant.id
+        //cache dishes
         print(self.restaurant.id)
         db.collection("Dish").whereField("RestaurantID", isEqualTo: self.restaurant.id.trim).getDocuments { (snapshot, error) in
             if let error = error {
@@ -99,41 +104,43 @@ class ListDishesViewModel: ObservableObject {
                 for document in snapshot!.documents {
                     DispatchQueue.main.async {
                         print("dish creation")
-                        let dish = DishFB(snapshot: document)!
-                        print("dish made \(dish.id)")
-                        self.dishes.append(dish)
-                        
-                        if(document == snapshot!.documents.last){
-                            print("finished fetching dishes")
-                            self.dispatchGroup.leave()
+                        let n = document.data()["Name"] as! String
+                        if(dishCache.value(forKey: n) != nil){
+                            print("dish get \(n)")
+                            self.dishes.append(dishCache.value(forKey: n)!)
+                        }
+                        else{
+                            let dish = DishFB(snapshot: document)!
+                            print("dish made \(dish.id)")
+                            dishCache.insert(dish, forKey: dish.name)
+                            self.dishes.append(dish)
+                            
+                            if(document == snapshot!.documents.last){
+                                print("finished fetching dishes")
+                                self.dispatchGroup.leave()
+                            }
                         }
                     }
                 }
             }
         }
-        //fetch build
-//        db.collection("Build").whereField("Restaurant", isEqualTo: name).getDocuments { (snapshot, error) in
-//            if let error = error {
-//                print("Error getting documents: \(error)")
-//            } else {
-//                if(!snapshot!.documents.isEmpty){
-//                    for document in snapshot!.documents {
-//                        DispatchQueue.main.async {
-//                            let build = BuildFB(snapshot: document)
-//
-//                            self.builds.append(build!)
-//
-//                            if(document == snapshot!.documents.last){
-//                                self.dispatchGroup.leave()
-//                            }
-//                        }
-//                    }
-//                }else{
-//                    self.dispatchGroup.leave()
-//                }
-//            }
-//        }
     }
+//    if(self.cache.value(forKey: n) != nil){
+//        print("dish get \(n)")
+//        self.dishes.append(self.cache.value(forKey: n)!)
+//    }
+//    else{
+//        print("dish creation")
+//        let dish = DishFB(snapshot: document)!
+//        print("dish made \(dish.id)")
+//        self.dishes.append(dish)
+//        self.cache.insert(dish, forKey: dish.name)
+//
+//        if(document == snapshot!.documents.last){
+//            print("finished fetching dishes")
+//            self.dispatchGroup.leave()
+//        }
+//    }
     
     func categorizeDishes(dishes: [DishFB]) {
         var typeToDishes = Dictionary<String, [DishFB]>()

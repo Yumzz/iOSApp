@@ -28,13 +28,17 @@ struct HomeScreenView: View {
     @State var cityRests = [String: [RestaurantFB]]()
     
     @State var cities = [String]()
-    @State private var recButtonClicked = false
+    @State private var waitButtonClicked = false
     
     @State var rest = RestaurantFB.previewRest()
     @State private var restChosen = false
+    @State private var callWaiter = false
+    @State private var IoT = false
+    @State var orderRevNeed = false
+    
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
     @GestureState private var dragOffset = CGSize.zero
-
+    @Environment (\.colorScheme) var colorScheme : ColorScheme
 
     
     @State private var activeSheet: ActiveSheet?
@@ -54,34 +58,40 @@ struct HomeScreenView: View {
     var body: some View {
         Group {
             if(!self.order.dishesChosen.isEmpty || !self.order.buildsChosen.isEmpty){
-                if(self.recButtonClicked){
-                    view.overlay(overlay, alignment: .bottom)
+                if(self.waitButtonClicked){
+                    view.overlay(WaiterConnection(rest: self.order.restChosen), alignment: .bottom)
                 }
                 else{
                     view.overlay(overlay, alignment: .bottom)
-                        .overlay(recButt, alignment: .bottomLeading)
+//                        .overlay(waitButt, alignment: (self.order.dishesChosen || !self.order.buildsChosen.isEmpty) ? .topTrailing : .bottomLeading)
+                        .overlay(waitButt, alignment: .topTrailing)
                 }
                 
             } else {
-                if(self.recButtonClicked){
+                if(self.waitButtonClicked){
                     view
                 }
                 else{
                     view
-                       .overlay(recButt, alignment: .bottomLeading)
+                       .overlay(waitButt, alignment: .bottomLeading)
                 }
              }
-            if self.recButtonClicked {
-                ZStack {
-                    Color(#colorLiteral(red: 0.9725490196, green: 0.968627451, blue: 0.9607843137, alpha: 1))
-                    VStack {
-                        RecView(isOpen: self.$recButtonClicked)
-                    }.padding()
+            if self.waitButtonClicked {
+                view.sheet(isPresented: self.$waitButtonClicked){
+                    WaiterConnection(rest: self.order.restChosen)
                 }
-                .frame(width: 329, height: 374)
-                .cornerRadius(20).shadow(radius: 20)
-                .transition(.slide)
-                .animation(.default)
+                
+//                ZStack {
+//                    Color(#colorLiteral(red: 0.9725490196, green: 0.968627451, blue: 0.9607843137, alpha: 1))
+//                    VStack {
+//                        WaiterConnection()
+////                        RecView(isOpen: self.$recButtonClicked)
+//                    }.padding()
+//                }
+//                .frame(width: 329, height: 374)
+//                .cornerRadius(20).shadow(radius: 20)
+//                .transition(.slide)
+//                .animation(.default)
             }
         }
     }
@@ -96,14 +106,28 @@ struct HomeScreenView: View {
         }
     }
     
-    var recButt: some View {
+    var waitButt: some View {
         VStack{
-            EmptyView()
+            if(!self.order.dishesChosen.isEmpty || !self.order.buildsChosen.isEmpty){
+                Spacer().frame(height: 100)
+            }
+//            EmptyView()
+            OrangeButton(strLabel: "Call a Waiter", width: 167.5, height: 48, dark: colorScheme == .dark)
+                .clipShape(RoundedRectangle(cornerRadius: 10, style: .circular))
+                .onTapGesture {
+                    self.callWaiter = true
+                    self.IoT = true
+                    self.waitButtonClicked = true
+                }
+            Spacer().frame(height: 20)
 //            RecButton()
 //                .onTapGesture {
 //                    self.recButtonClicked = true
 //                }
 //
+            if(self.order.dishesChosen != [] || !self.order.buildsChosen.isEmpty){
+                Spacer().frame(height: 20)
+            }
 //            Spacer().frame(width: 0, height: (!self.order.dishesChosen.isEmpty || !self.order.buildsChosen.isEmpty) ? 70 : 10)
         }
     }
@@ -128,32 +152,34 @@ struct HomeScreenView: View {
         }
         else{
             ZStack {
-                Color(#colorLiteral(red: 0.9725490196, green: 0.968627451, blue: 0.9607843137, alpha: 1)).edgesIgnoringSafeArea(.all)
+                Color(colorScheme == .dark ? ColorManager.darkBack : #colorLiteral(red: 0.9725490196, green: 0.968627451, blue: 0.9607843137, alpha: 1)).edgesIgnoringSafeArea(.all)
                 VStack {
                     HStack {
                         Text("Yumzz").font(.system(size: 36, weight: .bold)).frame(alignment: .leading)
+                            .foregroundColor(colorScheme == .dark ? .white : ColorManager.yumzzOrange)
                         Spacer()
                         Image(systemName: "qrcode.viewfinder")
                             .font(.system(size: 24, weight: .bold)).padding()
+                            .foregroundColor(colorScheme == .dark ? ColorManager.darkModeOrange : ColorManager.yumzzOrange)
                             .onTapGesture{
                                 self.activeSheet = .second
                                 self.qrCodeShow = true
                                 self.qrCodeShow2 = false
                             }
                         
-                        if (userProfile.userId == ""){
-                        Image(systemName: "person.crop.square.fill")
-                            .resizable()
-                            .aspectRatio(contentMode: .fill)
-                            .frame(width: 36, height: 36)
-                            .clipShape(RoundedRectangle(cornerRadius: 10))
-                            .onTapGesture {
-                                self.showAccount = true
-                            }
-                            .sheet(isPresented: self.$showAccount) {
-                                AccountProfileView()
-                                //dismiss once confirmation alert is sent
-                            }
+                        if (userProfile.profilePhotoURL == ""){
+                            Image(systemName: "person.crop.square.fill")
+                                .resizable()
+                                .aspectRatio(contentMode: .fill)
+                                .frame(width: 36, height: 36)
+                                .clipShape(RoundedRectangle(cornerRadius: 10))
+                                .onTapGesture {
+                                    self.showAccount = true
+                                }
+                                .sheet(isPresented: self.$showAccount) {
+                                    AccountProfileView()
+                                    //dismiss once confirmation alert is sent
+                                }
                         }
                         else{
                             FBURLImage(url: "profilephotos/\(userProfile.userId)", imageWidth: 36, imageHeight: 36, circle: true)
@@ -174,11 +200,11 @@ struct HomeScreenView: View {
     //                            .frame(width: 36, height: 36)
                                 
                         }
-                    }.foregroundColor(Color(#colorLiteral(red: 0.88, green: 0.36, blue: 0.16, alpha: 1))).frame(alignment: .top).padding()
+                    }.foregroundColor(colorScheme == .dark ? ColorManager.darkModeOrange : Color(#colorLiteral(red: 0.88, green: 0.36, blue: 0.16, alpha: 1))).frame(alignment: .top).padding()
                 ScrollView(.vertical, showsIndicators: false) {
                     VStack {
                         HStack {
-                            Text("Near you").font(.system(size: 24, weight: .semibold)).foregroundColor(.black)
+                            Text("Near you").font(.system(size: 24, weight: .semibold)).foregroundColor(colorScheme == .dark ? .white : .black)
                             Spacer()
                         }.padding()
                         
@@ -189,7 +215,7 @@ struct HomeScreenView: View {
                                     NavigationLink(
                                         destination: RestaurantHomeView(restaurant: restaurant, distance: self.HomeScreenVM.getDistFromUser(coordinate: restaurant.coordinate))
                                     ) {
-                                        HSRestaurantCard(restaurant: restaurant, location: self.HomeScreenVM.getDistFromUser(coordinate: restaurant.coordinate))
+                                        HSRestaurantCard(restaurant: restaurant, location: self.HomeScreenVM.getDistFromUser(coordinate: restaurant.coordinate),dark: colorScheme == .dark)
                                     }
                                 }
                             }
@@ -199,7 +225,7 @@ struct HomeScreenView: View {
                         ForEach(self.cities, id:\.self) { city in
                             
                             HStack{
-                                Text("Popular in \(city)").font(.system(size: 24, weight: .semibold)).foregroundColor(.black)
+                                Text("Popular in \(city)").font(.system(size: 24, weight: .semibold)).foregroundColor(colorScheme == .dark ? .white : .black)
                                 Spacer()
                             }.padding()
                         
@@ -211,7 +237,7 @@ struct HomeScreenView: View {
                                         NavigationLink(
                                             destination: RestaurantHomeView(restaurant: rest, distance: self.HomeScreenVM.getDistFromUser(coordinate: rest.coordinate))
                                         ) {
-                                            HSRestaurantCard(restaurant: rest, location: self.HomeScreenVM.getDistFromUser(coordinate: rest.coordinate))
+                                            HSRestaurantCard(restaurant: rest, location: self.HomeScreenVM.getDistFromUser(coordinate: rest.coordinate), dark: colorScheme == .dark)
                                         }
 
 
@@ -240,6 +266,24 @@ struct HomeScreenView: View {
                         
                     }
                 }
+//                This for order review iteration
+//                .alert(isPresented: $orderRevNeed, TextFieldAlert(title: "How was Your Last Order?", message: "How") { (text) in
+//                            if text != nil {
+//                                print(text)
+//                                if((self.order.dishChoice[self.dish]?.isEmpty) != nil){
+//                                    self.order.dishChoice[self.dish] = ""
+//                                }
+//                                var newText = text?.replacingOccurrences(of: ";", with: ",")
+//                                self.order.dishChoice[self.dish] = newText!
+//
+//                                print(self.order.dishChoice[self.dish])
+//        //                        self.saveGroup(text: text!)
+//        //                        self.addtapped = true
+//                                self.choice = self.order.dishChoice
+//                            }
+//                            print("alert here now")
+//        //                    self.addtapped = true
+//                        })
                 .navigationBarTitle("").navigationBarHidden(true)
                 .onAppear(){
                     self.dispatchGroup.notify(queue: .main){
@@ -294,7 +338,19 @@ struct HomeScreenView: View {
                                 self.cities.append(x.cityAddress)
                             }
                         }
-                        
+                        if(userProfile.userId != ""){
+                            //order review add iteration
+                            //need to check if most recnt order exists without review
+//                            let prev = HomeScreenVM.checkPrevOrder(userID: userProfile.userId)
+//                            if prev.1 {
+                                //pop up about alert
+                                
+//                            }
+//                            if prev[1]{
+//                                
+//                            }
+                            
+                        }
                     }
                 }
             }
@@ -326,6 +382,7 @@ struct HSRestaurantCard: View {
     var restaurant: RestaurantFB
 //    var HomeScreenVM : HomeScreenViewModel
     var location: Double
+    var dark: Bool = false
     
     var body: some View {
             VStack {
@@ -336,11 +393,11 @@ struct HSRestaurantCard: View {
                     Spacer()
                 }
                 HStack{
-                    Text(restaurant.name).font(.system(size: 18, weight: .bold)).tracking(-0.41).foregroundColor(.black)
+                    Text(restaurant.name).font(.system(size: 18, weight: .bold)).tracking(-0.41).foregroundColor(dark ? .white : .black)
                     Spacer()
                 }
                 HStack{
-                    Text("\(restaurant.price) | \(restaurant.ethnicity) | \(self.location.removeZerosFromEnd()) miles").font(.system(size: 12, weight: .semibold)).foregroundColor(Color(#colorLiteral(red: 0.7, green: 0.7, blue: 0.7, alpha: 1))).tracking(-0.41)
+                    Text("\(restaurant.price) | \(restaurant.ethnicity) | \(self.location.removeZerosFromEnd()) miles").font(.system(size: 12, weight: .semibold)).foregroundColor(dark ? .white : Color(#colorLiteral(red: 0.7, green: 0.7, blue: 0.7, alpha: 1))).tracking(-0.41)
                     Spacer()
                 }
             }.frame(width: 175, height: 150)

@@ -15,8 +15,6 @@ struct ContentView: View {
     
     let dispatchGroup = DispatchGroup()
     
-    let ds = DispatchGroup()
-    
     init(id: String){
         self.viewModel = ContentViewModel(dis: dispatchGroup, id: id)
 //        self.viewModel.fetchStuff(dis: dispatchGroup)
@@ -42,6 +40,17 @@ struct ContentView: View {
             }
         
     }
+}
+
+func handleUserActivity(_ userActivity: NSUserActivity){
+    
+    guard let incomingURL = userActivity.webpageURL,
+          let components = NSURLComponents(url: incomingURL, resolvingAgainstBaseURL: true),
+          let _ = components.queryItems
+    else{
+        return
+    }
+    
 }
 
 struct ContentView_Previews: PreviewProvider {

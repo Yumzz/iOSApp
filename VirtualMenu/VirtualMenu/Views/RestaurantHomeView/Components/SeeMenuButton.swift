@@ -14,13 +14,13 @@ struct SeeMenuButton: View {
     var body: some View {
 //        Group {
             HStack{
-//                Image(systemName: "list.bullet.rectangle")
-//                    .font(.system(size: 18))
-//                Spacer()
+                Image(systemName: "list.bullet")
+                    .font(.system(size: 16))
+                Spacer().frame(width: 5)
                 Text("See the Menu")
                     .font(.system(size: 16, weight: .semibold))
                     .font(.footnote)
-                    .frame(width: 150)
+//                    .frame(width: 150)
 //                Spacer()
             }
             .padding()

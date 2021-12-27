@@ -17,6 +17,9 @@ class ImageCache {
     func set(forKey: String, image: UIImage) {
         cache.setObject(image, forKey: NSString(string: forKey))
     }
+    func reset(){
+        cache.removeAllObjects()
+    }
 }
 
 extension ImageCache {

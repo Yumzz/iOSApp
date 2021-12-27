@@ -8,7 +8,9 @@
 import Foundation
 import SwiftUI
 
+
 struct Order: Hashable {
+    //need to add reviews to this
     var dishes: [DishFB]
     var totalPrice: Double
     var rest: String
@@ -29,4 +31,5 @@ extension Order {
     static func previewOrder() -> Order {
         return Order(dishes: [DishFB.previewDish()], totalPrice: 0.00, rest: "", id: "", time: Date(), specialInstruc: "")
     }
+
 }

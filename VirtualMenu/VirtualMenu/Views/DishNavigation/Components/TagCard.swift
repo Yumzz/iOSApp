@@ -13,6 +13,7 @@ struct TagCard: View {
     
     var dish: DishFB
     var card: Bool = true
+    var dark: Bool = false
     
     
     var body: some View {
@@ -61,11 +62,11 @@ struct TagCard: View {
             }
             .padding()
             .onAppear(){
-                print("\(dish.name): spice: \(dish.tp_nums[0])")
+                print("\(dish.name): tp_nums: \(dish.tp_nums)")
             }
 //            .foregroundColor(Color.white)
            
 //        }
-        .background(card ? Color.white : ColorManager.offWhiteBack)
+        .background(card ? (dark ? ColorManager.blackest : Color.white) : ((dark ? Color(ColorManager.darkBack) : ColorManager.offWhiteBack)))
     }
 }

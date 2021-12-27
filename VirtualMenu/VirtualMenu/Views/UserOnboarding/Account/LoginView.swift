@@ -43,6 +43,7 @@ struct LoginView: View {
     
     @State var isNavigationBarHidden: Bool = true
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
+    @Environment (\.colorScheme) var colorScheme : ColorScheme
     
 
 
@@ -67,27 +68,27 @@ struct LoginView: View {
         if user.showOnboarding {
 //        NavigationView{
             ZStack{
-                Color(#colorLiteral(red: 0.9725490196, green: 0.968627451, blue: 0.9607843137, alpha: 1)).edgesIgnoringSafeArea(.all)
+                Color(colorScheme == .dark ? ColorManager.darkBack : #colorLiteral(red: 0.9725490196, green: 0.968627451, blue: 0.9607843137, alpha: 1)).edgesIgnoringSafeArea(.all)
             VStack{
                 VStack(spacing: 10){
                     Spacer().frame(width: UIScreen.main.bounds.width, height: 60)
                     Text("Login and enjoy!")
-                        .foregroundColor(ColorManager.textGray)
+                        .foregroundColor(colorScheme == .dark ? .white : ColorManager.textGray)
                         .font(.largeTitle).bold()
                         .font(.system(size: 36))
                         .padding(.leading, 40)
                         .padding(.trailing, 40)
 //                        .position(x: UIScreen.main.bounds.width/2.5, y: 0)
                         .padding(.vertical)
-                    CustomTextField(field: "Email", strLabel: "jonnyives@apple.com", strField: $email, uiTextAutoCapitalizationType: .none, uiKeyboardType: .emailAddress).foregroundColor(.black)
+                    CustomTextField(field: "Email", strLabel: "jonnyives@apple.com", dark: colorScheme == .dark, strField: $email, uiTextAutoCapitalizationType: .none, uiKeyboardType: .emailAddress).foregroundColor(colorScheme == .dark ? .white : .black)
 
-                    CustomPasswordField(field: "Password", strLabel: "••••••••••", password: $password).foregroundColor(.black)
+                    CustomPasswordField(field: "Password", strLabel: "••••••••••", dark: colorScheme == .dark, password: $password).foregroundColor(colorScheme == .dark ? .white : .black)
                         
     //                VStack {
                         HStack {
                             NavigationLink(destination: ForgotPasswordView()){
                                     Text("Forgot Password?")
-                                        .foregroundColor(Color(UIColor().colorFromHex("#B4B4B4", 1)))
+                                        .foregroundColor(colorScheme == .dark ? .white : Color(UIColor().colorFromHex("#B4B4B4", 1)) )
                                         .font(.system(size: 12, weight: .bold, design: .default))
                                     
                                 }
@@ -101,6 +102,8 @@ struct LoginView: View {
                             dispatch.enter()
                             //do valid inputs and make move current user != nil if to account profile view
                             self.loginVM.loginUser(email: self.email, password: self.password, disp: dispatch)
+                            self.email = ""
+                            self.password = ""
                             dispatch.notify(queue: .main){
                                 print("wowo: \(self.loginVM.alertMessage)")
                                 if(self.loginVM.alertMessage != ""){
@@ -126,7 +129,7 @@ struct LoginView: View {
                                 }
                             }
                         }) {
-                            OrangeButton(strLabel: "Login", width: 330, height: 48)
+                            OrangeButton(strLabel: "Login", width: 330, height: 48, dark: colorScheme == .dark)
                                 .clipShape(RoundedRectangle(cornerRadius: 10, style: .circular))
                         }
                 }
@@ -165,6 +168,8 @@ struct LoginView: View {
             HomeScreenView()
                 .onAppear(){
                     self.isNavigationBarHidden = true
+                    
+                    
                 }
     }
         }
@@ -181,7 +186,7 @@ struct LoginView: View {
         .navigationBarTitle("")
         .navigationBarHidden(self.isNavigationBarHidden)
         .navigationBarBackButtonHidden(true)
-        .navigationBarItems(leading: BackButton(mode: self.mode))
+        .navigationBarItems(leading: BackButton(mode: self.mode, dark: colorScheme == .dark))
             .onAppear(){
                 self.isNavigationBarHidden = false
             }

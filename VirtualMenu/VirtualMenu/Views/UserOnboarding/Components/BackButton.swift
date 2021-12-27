@@ -10,11 +10,14 @@ import SwiftUI
 
 struct BackButton: View {
     var mode: Binding<PresentationMode>
+    var dark: Bool = false
+    
     var body: some View {
         
         HStack{
             Button(action: goBack){
-                Image("back_button")
+                
+                Image(dark ? "white_back_button" : "back_button")
                     .renderingMode(.original)
             }
             

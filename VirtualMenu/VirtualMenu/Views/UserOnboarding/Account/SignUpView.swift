@@ -42,6 +42,7 @@ struct SignUpView: View {
     
     @EnvironmentObject var user: UserStore
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
+    @Environment (\.colorScheme) var colorScheme : ColorScheme
     
     @Environment(\.window) var window: UIWindow?
     @State var delegate: SignInWithAppleDelegates! = nil
@@ -56,13 +57,13 @@ struct SignUpView: View {
     
     var body: some View {
         ZStack {
-            Color(#colorLiteral(red: 0.9725490196, green: 0.968627451, blue: 0.9607843137, alpha: 1)).edgesIgnoringSafeArea(.all)
+            Color(colorScheme == .dark ? ColorManager.darkBack : #colorLiteral(red: 0.9725490196, green: 0.968627451, blue: 0.9607843137, alpha: 1)).edgesIgnoringSafeArea(.all)
             if user.showOnboarding {
                 VStack(spacing: 10) {
 //                    VStack{
                     Spacer().frame(width: UIScreen.main.bounds.width, height: 60)
                         Text("Create your account")
-                            .foregroundColor(ColorManager.textGray)
+                            .foregroundColor(colorScheme == .dark ? .white : ColorManager.textGray)
                             .font(.largeTitle).bold()
                             .font(.system(size: 36))
 //                            .padding(.leading, 40)
@@ -75,11 +76,11 @@ struct SignUpView: View {
 //                    Spacer()
 //                    Spacer().frame(width: UIScreen.main.bounds.width, height: 5)
                     
-                    CustomTextField(field: "Name",strLabel: "Jonny Ives", strField: $name, uiTextAutoCapitalizationType: .words, uiKeyboardType: .default).foregroundColor(.black)
+                    CustomTextField(field: "Name",strLabel: "Jonny Ives", dark: colorScheme == .dark  ,strField: $name, uiTextAutoCapitalizationType: .words, uiKeyboardType: .default).foregroundColor(colorScheme == .dark ? .white : .black)
                     
-                    CustomTextField(field: "Email",strLabel: "jonnyives@apple.com", strField: $email, uiTextAutoCapitalizationType: .none, uiKeyboardType: .emailAddress).foregroundColor(.black)
+                    CustomTextField(field: "Email",strLabel: "jonnyives@apple.com", dark: colorScheme == .dark  , strField: $email, uiTextAutoCapitalizationType: .none, uiKeyboardType: .emailAddress).foregroundColor(colorScheme == .dark ? .white : .black)
                     
-                    CustomPasswordField(field: "Password", strLabel: "••••••••••", password: $password).foregroundColor(.black)
+                    CustomPasswordField(field: "Password", strLabel: "••••••••••", dark: colorScheme == .dark, password: $password).foregroundColor(colorScheme == .dark ? .white : .black)
                     
                     Button(action: {
                         let dispatch = DispatchGroup()
@@ -113,7 +114,7 @@ struct SignUpView: View {
                     })
                     {
                         NavigationLink(destination: HomeScreenView(), isActive: $createdAccount){
-                            OrangeButton(strLabel: "Sign Up", width: 330, height: 40)
+                            OrangeButton(strLabel: "Sign Up", width: 330, height: 40, dark: colorScheme == .dark)
                                 .clipShape(RoundedRectangle(cornerRadius: 10, style: .circular))
                         }.disabled(!self.createdAccount)
                     }
@@ -169,7 +170,7 @@ struct SignUpView: View {
         })
         .navigationBarTitle("")
         .navigationBarBackButtonHidden(true)
-        .navigationBarItems(leading: BackButton(mode: self.mode))
+        .navigationBarItems(leading: BackButton(mode: self.mode, dark: colorScheme == .dark))
         .alert(isPresented: $showAlert) {
             Alert(title: Text("\(self.alertTitle)"), message: Text("\(self.alertMessage)"), dismissButton: .default(Text("Got it!")))
             }

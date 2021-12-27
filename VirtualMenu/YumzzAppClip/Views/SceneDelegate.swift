@@ -12,7 +12,6 @@ import SwiftUI
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
-    @State private var idstring : String = ""
 
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
@@ -21,44 +20,15 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
 
         // Create the SwiftUI view that provides the window contents.
-        let contentView = ContentView(id: "a1Lwu7xEFrhDh9wnVpCP")
-            .onContinueUserActivity(NSUserActivityTypeBrowsingWeb){ userActivity in
-                guard let incomingURL = userActivity.webpageURL,
-                      let components = NSURLComponents(url: incomingURL, resolvingAgainstBaseURL: true),
-                      let _ = components.queryItems
-                else{
-                    return
-                }
-                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "AppClipRest"), object: incomingURL)
-            }
-//        let contentView = ContentView(id: idstring)
-//            .onContinueUserActivity(NSUserActivityTypeBrowsingWeb){ userActivity in
-//                guard let incomingURL = userActivity.webpageURL,
-//                      let components = NSURLComponents(url: incomingURL, resolvingAgainstBaseURL: true),
-//                      let _ = components.queryItems
-//                else{
-//                    return
-//                }
-////                let restId = components.queryItems?.first(where: { $0.name == "restaurant" })?.value!
-////                self.idstring = restId!
-////                print("idstring: \()")
-//                switch components.path {
-//                        case "/restaurant":
-//                            if let queryItems = components.queryItems,
-//                               let restId = queryItems.first(where: { $0.name == "id" })?.value {
-//            //    /restaurant?id={id}
-//            //                    let dispatchGroup = DispatchGroup()
-//        //                        type(of: self).init(id: restId)
-////                                print("id: \(self.idstring)")
-//                                self.idstring = restId
-////                                print("id1: \(self.idstring)")
-//                            }
-//                        default:
-//                            break
-//                    }
-//
-//            }
+        print("here")
+        let contentView = StartView(id: "") //StartView()
+//        a1Lwu7xEFrhDh9wnVpCP
         let order = OrderModel()
+        for activity in connectionOptions.userActivities {
+            print("url: \(activity)")
+            print("url: \(activity.webpageURL)")
+//                    scene(scene, continue: activity)
+        }
 //        let user = UserStore()
 
         // Use a UIHostingController as window root view controller.

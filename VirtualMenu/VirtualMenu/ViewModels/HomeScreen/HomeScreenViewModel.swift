@@ -38,6 +38,70 @@ class HomeScreenViewModel: ObservableObject {
         }
     }
     
+    func checkPrevOrder(userID: String) -> (Date, Bool){
+        var recentDate: [Date] = []
+        var recToDate : [Date:Bool] = [:]
+        var retu : (Date, Bool) = (Date.init(), false)
+        let orders = db.collection("Order").getDocuments{ (snapshot, error) in
+            if let error = error {
+                print("Error getting documents: \(error)")
+            }
+            else{
+                for document in snapshot!.documents {
+                    DispatchQueue.main.async {
+                        if (userID == document.data()["userId"] as! String){
+                            let time = document.data()["time"] as! Timestamp
+                            let t = time.dateValue()
+//                            Collection.
+//                            var re = false
+                            guard var review = document.data()["review"] as? String else{
+//                                re = false
+                                recToDate[t] = false
+                                return
+                            }
+//                            if review != nil {
+////                                re = true
+//                                recToDate[t] = true
+//                            }
+                            if review != ""{
+                                recToDate[t] = true
+                            }
+                            else{
+                                recToDate[t] = false
+                            }
+//                            recToDate[t] = re
+                            recentDate.append(t)
+                            
+//                            recToDate[t] =
+                            
+//                            let x = t.timeIntervalSince(recentDate)
+                            
+                            //use swift algorithms here to find most recent time stamp comparing timesinceInterval
+                        }
+                        
+                        
+//                        if(self.checkInRadius(coordinate: document.get("location") as! GeoPoint)){
+//                            DispatchQueue.main.async {
+//                                self.allRestaurants.append(restaurant)
+//                            }
+//                        }
+                    }
+                    if(document == snapshot!.documents.last){
+                        let rec = recentDate.max()
+                        retu = (rec!, recToDate[rec!]!)
+                        self.dispatchGroup.leave()
+                        
+                    }
+                }
+            }
+        }
+            
+//            Database.database().reference().child("Order")
+//        let x =  Storage.storage()
+        
+        return retu
+    }
+    
     func fetchRestaurantsFB(){
         db.collection("Restaurant").getDocuments { (snapshot, error) in
             if let error = error {

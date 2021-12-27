@@ -8,7 +8,9 @@ struct ReceiptCard: View {
     
 //    var count: Int
 //    var name: String
+    
     var total: Double
+    var dark: Bool = false
     
     var tax = 5.00
         
@@ -20,36 +22,36 @@ struct ReceiptCard: View {
                 HStack{
                     Spacer().frame(width: 5, height: 0)
                     Text("Subtotal")
-                        .font(.system(size: 14)).bold().foregroundColor(.black)
+                        .font(.system(size: 14)).bold().foregroundColor(dark ? .white : .black)
 //                        .overlay(Text("\(count)"))
 //                    Spacer().frame(width: UIScreen.main.bounds.size.width/2, height: 0)
                     Spacer()
-                    Text("\(DishFB.formatPrice(price: total))").foregroundColor(.black)
+                    Text("\(DishFB.priceFix(price: String(total)))").foregroundColor(dark ? .white : .black)
                     Spacer().frame(width: 5, height: 0)
                 }
                 
                 HStack{
                     Spacer().frame(width: 5, height: 0)
                     Text("Tax & Fees")
-                        .font(.system(size: 14)).bold().foregroundColor(.black)
+                        .font(.system(size: 14)).bold().foregroundColor(dark ? .white : .black)
 //                        .overlay(Text("\(count)"))
 //                    Spacer().frame(width: UIScreen.main.bounds.size.width/2, height: 0)
                     Spacer()
-                    Text("\(DishFB.formatPrice(price: tax))").foregroundColor(.black)
+                    Text("\(DishFB.priceFix(price: String(tax)))").foregroundColor(dark ? .white : .black)
                     Spacer().frame(width: 5, height: 0)
                 }
                 
                 Divider().frame(width: (UIScreen.main.bounds.width/1.2), height: 10, alignment: .leading)
-                    .foregroundColor(Color.black)
+                    .foregroundColor(dark ? .white : Color.black)
                 
                 HStack{
                     Spacer().frame(width: 5, height: 0)
                     Text("Total")
-                        .font(.system(size: 14)).bold().foregroundColor(.black)
+                        .font(.system(size: 14)).bold().foregroundColor(dark ? .white : .black)
 //                        .overlay(Text("\(count)"))
                     Spacer()
 //                    Spacer().frame(width: UIScreen.main.bounds.size.width/1.7, height: 0)
-                    Text("\(DishFB.formatPrice(price: tax + total))").foregroundColor(.black)
+                    Text("\(DishFB.priceFix(price: String(tax + total)))").foregroundColor(dark ? .white : .black)
                     Spacer().frame(width: 5, height: 0)
 
 
@@ -88,7 +90,7 @@ struct ReceiptCard: View {
 //            }
             .frame(maxWidth: .infinity, alignment: .leading)
             .frame(height: 120)
-            .background(Color(.white))
+            .background(dark ? ColorManager.blackest : Color(.white))
             .cornerRadius(10)
             .shadow(radius: 2)
         }

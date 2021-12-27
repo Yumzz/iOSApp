@@ -14,6 +14,7 @@ struct OrangeButton: View {
     var strLabel: String
     var width: CGFloat
     var height: CGFloat
+    var dark: Bool = false
     
     var body: some View {
         Group {
@@ -28,6 +29,6 @@ struct OrangeButton: View {
 
            
         }
-        .background(ColorManager.yumzzOrange)
+        .background(dark ? ColorManager.darkModeOrange : ColorManager.yumzzOrange)
     }
 }

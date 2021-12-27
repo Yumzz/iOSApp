@@ -15,6 +15,7 @@ struct ReviewOrder: View {
     
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
     @EnvironmentObject var order : OrderModel
+    @Environment (\.colorScheme) var colorScheme : ColorScheme
     
     @State var dishCounts: [DishFB:Int] = [DishFB:Int]()
     
@@ -32,11 +33,11 @@ struct ReviewOrder: View {
     
     var body: some View {
         ZStack{
-            Color(#colorLiteral(red: 0.9725490196, green: 0.968627451, blue: 0.9607843137, alpha: 1)).edgesIgnoringSafeArea(.all)
+            Color(colorScheme == .dark ? ColorManager.darkBack : #colorLiteral(red: 0.9725490196, green: 0.968627451, blue: 0.9607843137, alpha: 1)).edgesIgnoringSafeArea(.all)
             VStack(alignment: .leading){
                 VStack{
                     HStack{
-                        BackButton(mode: self.mode)
+                        BackButton(mode: self.mode, dark: colorScheme == .dark)
 //                        #if !APPCLIP
 //                        XButton(mode: self.mode)
 //                        #endif
@@ -49,7 +50,7 @@ struct ReviewOrder: View {
         //                    Text("\(dish.name) - \(dishCounts[dish]!)")
                             VStack{
                                 HStack{
-                                    DishCardOrder(count: dishCounts[dish]!, name: dish.name, price: dish.price, dish: dish)
+                                    DishCardOrder(count: dishCounts[dish]!, name: dish.name, price: dish.price, dish: dish, dark: colorScheme == .dark)
                                     
                                     XButtonDelete()
                                         .onTapGesture {
@@ -106,7 +107,7 @@ struct ReviewOrder: View {
                                             ScrollView(.horizontal){
                                                 HStack(alignment: .center, spacing: 2){
                                                     Text("Instructions: \(self.choice[dish]!)")
-                                                        .font(.system(size: 10)).foregroundColor(.white)
+                                                        .font(.system(size: 10)).foregroundColor(colorScheme == .dark ? .black : .white)
                                                 }
                                             }
                                             Image(systemName: "pencil")
@@ -118,7 +119,7 @@ struct ReviewOrder: View {
 //                                                .colorScheme(ColorManager.yumzzOrange)
 //                                                .fixedSize(horizontal: 10, vertical: 10)
     //                                        }
-                                        }.frame(maxWidth: UIScreen.main.bounds.width/2, alignment: .leading)
+                                        }.frame(maxWidth: UIScreen.main.bounds.width/1.2, alignment: .leading)
                                         .frame(height: 20)
                                         .background(ColorManager.yumzzOrange)
                                         .cornerRadius(10)
@@ -137,23 +138,23 @@ struct ReviewOrder: View {
                 
                 VStack{
                     Text("Receipt")
-                        .foregroundColor(ColorManager.textGray)
+                        .foregroundColor(colorScheme == .dark ? .white : ColorManager.textGray)
                         .font(.system(size: 24)).bold()
-                    ReceiptCard(total: self.order.totalCost)
+                    ReceiptCard(total: self.order.totalCost, dark: colorScheme == .dark)
                 }
                 Spacer()
                 
 
                 #if !APPCLIP
                 HStack{
-                    OrangeButton(strLabel: "Call a Waiter", width: 167.5, height: 48)
+                    OrangeButton(strLabel: "Call a Waiter", width: 167.5, height: 48, dark: colorScheme == .dark)
                         .clipShape(RoundedRectangle(cornerRadius: 10, style: .circular))
                         .onTapGesture {
                             self.callWaiter = true
                             self.IoT = true
                         }
                     Spacer()
-                    InvertedOrangeButton(strLabel: "Send Order", width: 167.5, height: 48).clipShape(RoundedRectangle(cornerRadius: 10, style: .circular))
+                    InvertedOrangeButton(strLabel: "Send Order", width: 167.5, height: 48, dark: colorScheme == .dark).clipShape(RoundedRectangle(cornerRadius: 10, style: .circular))
                         .shadow(radius: 5)
                         .onTapGesture {
                             self.sendPrinterOrder = true
@@ -162,7 +163,7 @@ struct ReviewOrder: View {
                 }.padding(.horizontal)
                 #else
                 HStack{
-                    InvertedOrangeButton(strLabel: "Send Order", width: UIScreen.main.bounds.width - 40, height: 48).clipShape(RoundedRectangle(cornerRadius: 10, style: .circular))
+                    InvertedOrangeButton(strLabel: "Send Order", width: UIScreen.main.bounds.width - 40, height: 48, dark: colorScheme == .dark).clipShape(RoundedRectangle(cornerRadius: 10, style: .circular))
                     .shadow(radius: 5)
                     .onTapGesture {
                         self.sendPrinterOrder = true
@@ -200,7 +201,7 @@ struct ReviewOrder: View {
             }
             #if !APPCLIP
                 if(self.callWaiter){
-                    WaiterConnection()
+                    WaiterConnection(rest: self.order.restChosen)
                 }
             #endif
             

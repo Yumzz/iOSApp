@@ -14,13 +14,15 @@ struct InvertedOrangeButton: View {
     var strLabel: String
     var width: CGFloat
     var height: CGFloat
+    var dark: Bool = false
+
     
     var body: some View {
         Group {
             HStack(spacing: 10) {
                                 
                 Text(strLabel)
-                    .foregroundColor(ColorManager.yumzzOrange)
+                    .foregroundColor(dark ? ColorManager.white : ColorManager.yumzzOrange)
                                
             }
             .padding()
@@ -29,7 +31,7 @@ struct InvertedOrangeButton: View {
            
         }
         
-        .background(Color(UIColor().colorFromHex("#FFFFFF", 1)))
+        .background(dark ? ColorManager.blackest : Color(UIColor().colorFromHex("#FFFFFF", 1)))
         .shadow(radius: 5)
 //        .frame(width: width, height: height)
     }

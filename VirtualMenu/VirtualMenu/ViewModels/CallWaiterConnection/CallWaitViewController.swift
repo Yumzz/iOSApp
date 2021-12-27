@@ -43,6 +43,8 @@ class WaiterViewController: UIViewController {
     fileprivate var session = MQTTSession()
     fileprivate var completion: (()->())?
     
+    var rest: RestaurantFB = RestaurantFB.previewRest()
+    
     var loadingPrinterConnection = false
     
     override func viewDidLoad() {
@@ -58,10 +60,16 @@ class WaiterViewController: UIViewController {
             //parse out table num
             let d = DispatchGroup()
             d.enter()
+            var topic = self.rest.name.lowercased()
+            if(topic.lowercased().contains("vics")){
+                topic = "vics"
+            }
             self.num = getQueryStringParameter(url: text, param: "table", d: d)!
             d.notify(queue: .main){
                 print("yaaa: \(self.num)")
-                self.publishMessage("\(self.num)", onTopic: "raspberry/vics-callwaiter")
+                //vics => topic
+                print("publishtopic: raspberry/" + "vics" + "-callwaiter")
+                self.publishMessage("\(self.num)", onTopic: "raspberry/" + "vics" + "-callwaiter")
             }
 //                        self.loadingPrinterConnection = false
         }
@@ -71,6 +79,7 @@ class WaiterViewController: UIViewController {
         session?.connect() { error in
             print("connection completed with status \(String(describing: error))")
             if error != nil {
+                
                 self.updateUI(for: self.session?.status ?? .created)
             } else {
                 self.updateUI(for: self.session?.status ?? .error)
@@ -175,7 +184,16 @@ class WaiterViewController: UIViewController {
 //    }
 
     private func subscribe() {
-        self.session?.subscribe(toTopic: "raspberry/vics-callwaiter", at: .exactlyOnce) { error, result in
+//        let topic =
+        var topic = self.rest.name.lowercased()
+        if(topic.lowercased().contains("vics")){
+            print("in vics")
+            topic = "vics"
+        }
+        print("topic \(topic)")
+        //vics => topics
+        print("subscribetopic: raspberry/" + "vics" + "-callwaiter")
+        self.session?.subscribe(toTopic: "raspberry/" + "vics" + "-callwaiter", at: .exactlyOnce) { error, result in
             print("subscribe result error \(String(describing: error)) result \(result!)")
             //need to run connection to POS on raspberry pi as a python script
         }
@@ -212,6 +230,7 @@ extension WaiterViewController: MQTTSessionManagerDelegate, MQTTSessionDelegate 
 }
 
 struct WaiterConnection: UIViewControllerRepresentable {
+    var rest: RestaurantFB
     func updateUIViewController(_ uiViewController: WaiterViewController, context: UIViewControllerRepresentableContext<WaiterConnection>) {
         print("wow")
     }
@@ -223,6 +242,7 @@ struct WaiterConnection: UIViewControllerRepresentable {
     func makeUIViewController(context: UIViewControllerRepresentableContext<WaiterConnection>) -> WaiterViewController {
 //            code
         let connection = WaiterViewController()
+        connection.rest = rest
 //        connection.num = num
         return connection
         }

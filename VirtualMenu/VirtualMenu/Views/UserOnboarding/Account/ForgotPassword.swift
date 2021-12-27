@@ -20,6 +20,7 @@ struct ForgotPasswordView: View {
     
     @ObservedObject var forgotPassword = ForgotPasswordViewModel()
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
+    @Environment (\.colorScheme) var colorScheme : ColorScheme
 
     
     @State var isNavigationBarHidden: Bool = true
@@ -32,43 +33,52 @@ struct ForgotPasswordView: View {
     
     var body: some View {
         ZStack{
-            Color(#colorLiteral(red: 0.9725490196, green: 0.968627451, blue: 0.9607843137, alpha: 1)).edgesIgnoringSafeArea(.all)
+            Color(colorScheme == .dark ? ColorManager.darkBack : #colorLiteral(red: 0.9725490196, green: 0.968627451, blue: 0.9607843137, alpha: 1)).edgesIgnoringSafeArea(.all)
             Spacer().frame(width: UIScreen.main.bounds.width, height: 0)
             VStack{
                 Text("Retrieve Your Account")
-                    .foregroundColor(ColorManager.textGray)
+                    .foregroundColor(colorScheme == .dark ? .white : ColorManager.textGray)
                     .font(.largeTitle).bold()
                     .font(.system(size: 36))
                     .padding(.leading, 40)
-                    .padding(.trailing, 40)
+//                    .padding(.trailing, 40)
             }.position(x: UIScreen.main.bounds.width/2.5, y: 20)
             VStack{
 
-                CustomTextField(field: "Email", strLabel: "jonnyives@apple.com", strField: $email, uiTextAutoCapitalizationType: .none, uiKeyboardType: .emailAddress).foregroundColor(.black)
+                CustomTextField(field: "Email", strLabel: "jonnyives@apple.com", dark: colorScheme == .dark, strField: $email, uiTextAutoCapitalizationType: .none, uiKeyboardType: .emailAddress).foregroundColor(.black)
                     
                 Spacer().frame(height: 30)
 
                     
                     Button(action: {
                         let val = self.forgotPassword.forgotPasswordValidInputs(email: self.email)
+                        print("val: \(val)")
                         if (val == "") {
+                            print("valhere")
+                            let e = self.email
                             self.email = ""
                             self.alertTitle = "Email was sent"
                             self.alertMsg = "Use email to reset password"
                             self.showAlert.toggle()
-                            let x = self.forgotPassword.passwordReset(email: self.email)
+                            let x = self.forgotPassword.passwordReset(email: e)
                             if(x == ""){
                                 self.alertTitle = "Email was sent"
                                 self.showAlert.toggle()
                             }
+                            else{
+                                self.alertTitle = x
+                                self.alertMsg = "Email not reachable"
+                                self.showAlert.toggle()
+                            }
                         }
                         else{
+                            print("valnotthere")
                             self.alertTitle = "Email unable to be sent"
                             self.alertMsg = val
                             self.showAlert.toggle()
                         }
                     }) {
-                        OrangeButton(strLabel: "Reset your Password", width: 330, height: 48)
+                        OrangeButton(strLabel: "Reset your Password", width: 330, height: 48, dark: colorScheme == .dark)
                             .clipShape(RoundedRectangle(cornerRadius: 10, style: .circular))
                     }
 //                        .alert(isPresented: $showingAlert) {

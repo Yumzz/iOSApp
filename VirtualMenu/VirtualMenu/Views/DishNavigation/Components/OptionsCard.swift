@@ -15,6 +15,7 @@ struct OptionsCard: View {
     @State var optNames: [String] = [String]()
     @State var color : [String: Color] = [String: Color]()
     var exclusive: Bool
+    var dark: Bool = false
     
     @State var optCosts : Double = 0.0
     var dish: DishFB
@@ -72,13 +73,16 @@ struct OptionsCard: View {
                             VStack(alignment: .leading){
                                 Text("Add \(opt)")
                                     .font(.system(size: 18))
+                                    .foregroundColor(dark ? .white : .black)
                                 if(options[opt]! == 0.00){
                                     Text("Free")
                                         .font(.system(size: 14))
+                                        .foregroundColor(dark ? .white : .black)
                                 }
                                 else{
-                                    Text("\(DishFB.formatPrice(price: Double(options[opt]!)))")
+                                    Text("\(DishFB.priceFix(price: String(options[opt]!)))")
                                         .font(.system(size: 14))
+                                        .foregroundColor(dark ? .white : .black)
                                 }
                             }
                             Spacer()
@@ -93,7 +97,7 @@ struct OptionsCard: View {
                     }
                     
                 }
-            }.background(Color.white)
+            }.background(dark ? ColorManager.blackest : Color.white)
             .frame(width: UIScreen.main.bounds.width/1.3, height: 150, alignment: .center)
             .padding()
             

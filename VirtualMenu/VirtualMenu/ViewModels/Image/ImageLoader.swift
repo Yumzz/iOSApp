@@ -34,15 +34,16 @@ final class ImageLoader : ObservableObject {
                 self.image = imageCache.get(forKey: self.urlString!)
             }
             else{
-                if loadImageFromCache() {
-                    print("urlfromcache: \(urlString)")
-                    return
-                }
-                else{
-                    print("made here")
-                    loadImageFromUrl()
-
-                }
+                loadImageFromUrl()
+//                if loadImageFromCache() {
+//                    print("urlfromcache: \(urlString)")
+//                    return
+//                }
+//                else{
+//                    print("made here")
+//                    loadImageFromUrl()
+//
+//                }
             }
             
             

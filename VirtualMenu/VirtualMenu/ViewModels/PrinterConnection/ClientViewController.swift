@@ -72,7 +72,11 @@ class ClientViewController: UIViewController {
             dispatch.notify(queue: .main){
             print("ask: \(self.tableNum)")
 //            self.tableNum = getQueryStringParameter(url: text, param: "table", d: dispatch)!
-            self.publishMessage(" \(userProfile.fullName); \(self.dishInfo); \(self.tableNum)", onTopic: "raspberry/vics")
+            var topic = self.rest.name.lowercased()
+            if(topic.lowercased().contains("vics")){
+                topic = "vics"
+            }
+            self.publishMessage(" \(userProfile.fullName); \(self.dishInfo); \(self.tableNum)", onTopic: "raspberry/" + topic)
             }
 //                        self.loadingPrinterConnection = false
         }
@@ -178,7 +182,11 @@ class ClientViewController: UIViewController {
 //    }
 
     private func subscribe() {
-        self.session?.subscribe(toTopic: "raspberry/vics", at: .exactlyOnce) { error, result in
+        var topic = self.rest.name.lowercased()
+        if(topic.lowercased().contains("vics")){
+            topic = "vics"
+        }
+        self.session?.subscribe(toTopic: "raspberry/" + topic, at: .exactlyOnce) { error, result in
             print("subscribe result error \(String(describing: error)) result \(result!)")
             //need to run connection to POS on raspberry pi as a python script
         }
