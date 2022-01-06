@@ -89,22 +89,24 @@ struct DishDetailsView: View {
                                         TextField("Insert Special Instructions here", text: $specInstruc)
                                             .frame(width: UIScreen.main.bounds.width - 40, height: 40, alignment: .center)
                                             .textFieldStyle(RoundedBorderTextFieldStyle())
-                                            
-            //                                Spacer()
             //                            }
                                         HStack{
                                             Text(dish.name).font(.system(size: 24, weight: .semibold)).tracking(-0.41) .foregroundColor(colorScheme == .dark ? .white : .black)
                                             Spacer()
-    //                                        #if !APPCLIP
+//                                            #if !APPCLIP
                                             TagCard(dish: dish, card: false, dark: colorScheme == .dark)
     //                                        #endif
 
                                         }
+//                                        VStack{
                                         Text("\(dish.description)").font(.system(size: 14, weight: .semibold)).foregroundColor(colorScheme == .dark ? .white : Color(#colorLiteral(red: 0.71, green: 0.71, blue: 0.71, alpha: 1))).tracking(-0.41)
+//                                        }.frame(height: 100)
+                                        
                                         
                                         
                                        
                                     }.padding()
+//                                        .keyboardAdaptive()
     //                                .onDrag { () -> NSItemProvider in
     //
     //                                    scrollView.scrollTo( anchor: NSItemProvider.accessibilityActivationPoint())
@@ -229,8 +231,10 @@ struct DishDetailsView: View {
                                     }
             //                        Spacer()
                                 }
+                                
                             .background(RoundedRectangle(cornerRadius: /*@START_MENU_TOKEN@*/25.0/*@END_MENU_TOKEN@*/, style: /*@START_MENU_TOKEN@*/.continuous/*@END_MENU_TOKEN@*/).fill(colorScheme == .dark ? Color(ColorManager.darkBack) : Color(#colorLiteral(red: 0.9725490196, green: 0.968627451, blue: 0.9607843137, alpha: 1))))
                                 .offset(y: dish.options.isEmpty ? 200 : 100)
+//                                .keyboardAdaptive()
                             }
                             
                         }.ignoresSafeArea(edges: .bottom)

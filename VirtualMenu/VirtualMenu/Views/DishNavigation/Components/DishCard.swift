@@ -52,7 +52,9 @@ struct DishCard: View {
                         Text(dishName).bold()
 //                            .foregroundColor(Color.primary)
                             .foregroundColor(dark ? .white : .black)
-//                        TagCard(dish: dish, dark: dark)
+                        #if !APPCLIP
+                        TagCard(dish: dish, dark: dark)
+                        #endif
                     }
                     
                     if(dish.description != ""){

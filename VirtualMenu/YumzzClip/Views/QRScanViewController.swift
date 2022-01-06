@@ -95,16 +95,16 @@ class QRScanViewController: UIViewController, AVCaptureMetadataOutputObjectsDele
     func found(code: String) {
         print("code: \(code)")
         self.string = code
-        if(code.contains("call")){
-            print("callwait code: \(code)")
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "CallWait"), object: code)
-        }
-        if(code.contains("home")){
-            print("gotorestview: \(code)")
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "RestId"), object: self.string)
-        }
+//        if(code.contains("call")){
+//            print("callwait code: \(code)")
+//            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "CallWait"), object: code)
+//        }
+//        if(code.contains("home")){
+//            print("gotorestview: \(code)")
+//            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "RestId"), object: self.string)
+//        }
         
-//        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "RestId"), object: self.string)
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "RestId"), object: self.string)
 //        print("string: \(self.string)")
     }
 

@@ -13,9 +13,9 @@ target 'VirtualMenu' do
     pod 'Firebase/Storage'
     pod 'GoogleSignIn', '5.0.0'
     pod 'PromiseKit', '6.15.3'
-    pod 'MQTTClient'
-    pod 'FBSDKLoginKit', '9.3.0'
-    pod 'FBSDKCoreKit', '9.3.0'
+    pod 'MQTTClient', '0.14.0'
+    pod 'FBSDKLoginKit', '12.2.0'
+    pod 'FBSDKCoreKit', '12.2.0'
     pod 'SquarePointOfSaleSDK'
 end
 
@@ -24,25 +24,26 @@ end
 #end
 
 
-post_install do |installer|
-  installer.generated_projects.each do |project|
-    project.targets.each do |target|
-      target.build_configurations.each do |config|
-          config.build_settings['CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER'] = 'NO'
-      end
-    end
-  end
-end
-
-#target 'YumzzAppClip' do
- #    pod 'MQTTClient'
- #    pod 'SquarePointOfSaleSDK'
+#post_install do |installer|
+#  installer.generated_projects.each do |project|
+#    project.targets.each do |target|
+#      target.build_configurations.each do |config|
+#          config.build_settings['CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER'] = 'NO'
+#      end
+#    end
+#  end
 #end
 
 target 'YumzzClip' do
- pod 'MQTTClient'
+ pod 'MQTTClient', '0.14.0'
 end
-
+post_install do |pi|
+    pi.pods_project.targets.each do |t|
+        t.build_configurations.each do |config|
+            config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '14.0'
+        end
+    end
+end
 
 # add pods for any other desired Firebase products
 # https://firebase.google.com/docs/ios/setup#available-pods

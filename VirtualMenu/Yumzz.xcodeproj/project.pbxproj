@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		24CC143D80796C7ADD03649D /* Pods_YumzzClip.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C60B92ADC535406552768C17 /* Pods_YumzzClip.framework */; };
-		3222FD1EB7956E93158F8B8F /* Pods_VirtualMenu.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A2A6161ED3F03153044A9B8 /* Pods_VirtualMenu.framework */; };
 		34370CC72500D59A00ECD88B /* MenuSelectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34370CC62500D59A00ECD88B /* MenuSelectionViewModel.swift */; };
 		3482C0CF250C95D300FC362D /* BottomSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3482C0CE250C95D300FC362D /* BottomSheetView.swift */; };
 		34909E6F252D51E000B43D7B /* HomeScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34909E6E252D51E000B43D7B /* HomeScreenView.swift */; };
@@ -174,6 +172,7 @@
 		3AFA234624DC9C2000F90ED8 /* DishReviewFB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFA234524DC9C2000F90ED8 /* DishReviewFB.swift */; };
 		3AFA234824DCACEA00F90ED8 /* ReviewsButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFA234724DCACEA00F90ED8 /* ReviewsButton.swift */; };
 		3AFA234A24DCB14B00F90ED8 /* DishReviewsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFA234924DCB14B00F90ED8 /* DishReviewsView.swift */; };
+		9F4686C2C634CB908B41772E /* Pods_VirtualMenu.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E05AAC7779247385E2A66FAB /* Pods_VirtualMenu.framework */; };
 		A735992824ECD83300584BFD /* AccountProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A735992724ECD83300584BFD /* AccountProfileViewModel.swift */; };
 		A735992A24ECFDCF00584BFD /* AccountProfileLoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A735992924ECFDCF00584BFD /* AccountProfileLoginView.swift */; };
 		A777C3A424D3EC7A009658AA /* UserStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = A777C3A324D3EC7A009658AA /* UserStore.swift */; };
@@ -199,6 +198,7 @@
 		A797EA6624B938D5005158FA /* Montserrat-ThinItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A797EA5824B938D5005158FA /* Montserrat-ThinItalic.ttf */; };
 		A7D0F78324DF6B4100197631 /* FBURLImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7D0F78224DF6B4100197631 /* FBURLImage.swift */; };
 		A7FE996224F4A552006E5980 /* DishCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7FE996124F4A552006E5980 /* DishCard.swift */; };
+		B06761F93B5FF25B541BE71C /* Pods_YumzzClip.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F1C1D63DCD5EDFABCAED76B9 /* Pods_YumzzClip.framework */; };
 		C55FDD6524CABA2800CC8561 /* RestaurantFB.swift in Sources */ = {isa = PBXBuildFile; fileRef = C55FDD6424CABA2800CC8561 /* RestaurantFB.swift */; };
 		C5D0A16C24B1B6A300E44DF2 /* DishFB.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5D0A16B24B1B6A300E44DF2 /* DishFB.swift */; };
 /* End PBXBuildFile section */
@@ -266,7 +266,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		2D95E85350102BBBF29D37EF /* Pods-YumzzAppClip.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YumzzAppClip.release.xcconfig"; path = "Target Support Files/Pods-YumzzAppClip/Pods-YumzzAppClip.release.xcconfig"; sourceTree = "<group>"; };
 		3431BA56255A40B80018AFB5 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		34370CC62500D59A00ECD88B /* MenuSelectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuSelectionViewModel.swift; sourceTree = "<group>"; };
 		343A44BF252E21FE00109C90 /* RestaurantHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantHomeView.swift; sourceTree = "<group>"; };
@@ -278,7 +277,6 @@
 		34A966F7254762EF00AD84CD /* RestaurantReviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantReviewView.swift; sourceTree = "<group>"; };
 		34F39DA6253E58DF00C30346 /* YumzzRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = YumzzRelease.entitlements; sourceTree = "<group>"; };
 		34FCE2712507297F00329162 /* RatingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingView.swift; sourceTree = "<group>"; };
-		35B058904313819FEC0440FE /* Pods-YumzzClip.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YumzzClip.debug.xcconfig"; path = "Target Support Files/Pods-YumzzClip/Pods-YumzzClip.debug.xcconfig"; sourceTree = "<group>"; };
 		3A0745B4252B014C000EF6BD /* AppleButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleButton.swift; sourceTree = "<group>"; };
 		3A0745BA252B020F000EF6BD /* FacebookButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FacebookButton.swift; sourceTree = "<group>"; };
 		3A0745C0252B02BA000EF6BD /* GoogleButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleButton.swift; sourceTree = "<group>"; };
@@ -413,10 +411,8 @@
 		3AFA234524DC9C2000F90ED8 /* DishReviewFB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DishReviewFB.swift; sourceTree = "<group>"; };
 		3AFA234724DCACEA00F90ED8 /* ReviewsButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewsButton.swift; sourceTree = "<group>"; };
 		3AFA234924DCB14B00F90ED8 /* DishReviewsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DishReviewsView.swift; sourceTree = "<group>"; };
-		4DEA29E1E6D96625E1C573E0 /* Pods_YumzzAppClip.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_YumzzAppClip.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		6131BDDB476B1397FDB84ADE /* Pods-VirtualMenu.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VirtualMenu.debug.xcconfig"; path = "Target Support Files/Pods-VirtualMenu/Pods-VirtualMenu.debug.xcconfig"; sourceTree = "<group>"; };
-		67AB6D289823A48424CCF50C /* Pods-YumzzClip.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YumzzClip.release.xcconfig"; path = "Target Support Files/Pods-YumzzClip/Pods-YumzzClip.release.xcconfig"; sourceTree = "<group>"; };
-		6A2A6161ED3F03153044A9B8 /* Pods_VirtualMenu.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VirtualMenu.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		922E2D823F45785D48163DD5 /* Pods-YumzzClip.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YumzzClip.release.xcconfig"; path = "Target Support Files/Pods-YumzzClip/Pods-YumzzClip.release.xcconfig"; sourceTree = "<group>"; };
+		9C98B4273FB48EDC8C600364 /* Pods-VirtualMenu.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VirtualMenu.release.xcconfig"; path = "Target Support Files/Pods-VirtualMenu/Pods-VirtualMenu.release.xcconfig"; sourceTree = "<group>"; };
 		A731EB0D2495AD2300B75D05 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		A735992724ECD83300584BFD /* AccountProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountProfileViewModel.swift; sourceTree = "<group>"; };
 		A735992924ECFDCF00584BFD /* AccountProfileLoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountProfileLoginView.swift; sourceTree = "<group>"; };
@@ -444,12 +440,13 @@
 		A797EA5824B938D5005158FA /* Montserrat-ThinItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-ThinItalic.ttf"; sourceTree = "<group>"; };
 		A7D0F78224DF6B4100197631 /* FBURLImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBURLImage.swift; sourceTree = "<group>"; };
 		A7FE996124F4A552006E5980 /* DishCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DishCard.swift; sourceTree = "<group>"; };
+		C4AD816F4D966B88AC747DFF /* Pods-VirtualMenu.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VirtualMenu.debug.xcconfig"; path = "Target Support Files/Pods-VirtualMenu/Pods-VirtualMenu.debug.xcconfig"; sourceTree = "<group>"; };
 		C55FDD6424CABA2800CC8561 /* RestaurantFB.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestaurantFB.swift; sourceTree = "<group>"; };
 		C5CD0F2824AC4C6600F0A60D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		C5D0A16B24B1B6A300E44DF2 /* DishFB.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DishFB.swift; sourceTree = "<group>"; };
-		C60B92ADC535406552768C17 /* Pods_YumzzClip.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_YumzzClip.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		E1B739CC826CE22030EBC169 /* Pods-VirtualMenu.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VirtualMenu.release.xcconfig"; path = "Target Support Files/Pods-VirtualMenu/Pods-VirtualMenu.release.xcconfig"; sourceTree = "<group>"; };
-		F967686FDF16CEB02767CA85 /* Pods-YumzzAppClip.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YumzzAppClip.debug.xcconfig"; path = "Target Support Files/Pods-YumzzAppClip/Pods-YumzzAppClip.debug.xcconfig"; sourceTree = "<group>"; };
+		DB507AE4A2F0915F38155286 /* Pods-YumzzClip.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YumzzClip.debug.xcconfig"; path = "Target Support Files/Pods-YumzzClip/Pods-YumzzClip.debug.xcconfig"; sourceTree = "<group>"; };
+		E05AAC7779247385E2A66FAB /* Pods_VirtualMenu.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VirtualMenu.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F1C1D63DCD5EDFABCAED76B9 /* Pods_YumzzClip.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_YumzzClip.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -461,7 +458,7 @@
 				3AAFED4625AFB84000F34BAF /* FacebookLogin in Frameworks */,
 				3AAFED4425AFB83800F34BAF /* Combine.framework in Frameworks */,
 				3AAFED4825AFB85600F34BAF /* FacebookCore in Frameworks */,
-				3222FD1EB7956E93158F8B8F /* Pods_VirtualMenu.framework in Frameworks */,
+				9F4686C2C634CB908B41772E /* Pods_VirtualMenu.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -483,7 +480,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				24CC143D80796C7ADD03649D /* Pods_YumzzClip.framework in Frameworks */,
+				B06761F93B5FF25B541BE71C /* Pods_YumzzClip.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1058,9 +1055,8 @@
 				3AF6D6742578672E009E4240 /* Combine.framework */,
 				3A10F67125550CEF00E25BC6 /* AppAuth.framework */,
 				A731EB0D2495AD2300B75D05 /* CloudKit.framework */,
-				6A2A6161ED3F03153044A9B8 /* Pods_VirtualMenu.framework */,
-				4DEA29E1E6D96625E1C573E0 /* Pods_YumzzAppClip.framework */,
-				C60B92ADC535406552768C17 /* Pods_YumzzClip.framework */,
+				E05AAC7779247385E2A66FAB /* Pods_VirtualMenu.framework */,
+				F1C1D63DCD5EDFABCAED76B9 /* Pods_YumzzClip.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -1068,12 +1064,10 @@
 		7D43EDA24CF9AA630D4BB85D /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				6131BDDB476B1397FDB84ADE /* Pods-VirtualMenu.debug.xcconfig */,
-				E1B739CC826CE22030EBC169 /* Pods-VirtualMenu.release.xcconfig */,
-				F967686FDF16CEB02767CA85 /* Pods-YumzzAppClip.debug.xcconfig */,
-				2D95E85350102BBBF29D37EF /* Pods-YumzzAppClip.release.xcconfig */,
-				35B058904313819FEC0440FE /* Pods-YumzzClip.debug.xcconfig */,
-				67AB6D289823A48424CCF50C /* Pods-YumzzClip.release.xcconfig */,
+				C4AD816F4D966B88AC747DFF /* Pods-VirtualMenu.debug.xcconfig */,
+				9C98B4273FB48EDC8C600364 /* Pods-VirtualMenu.release.xcconfig */,
+				DB507AE4A2F0915F38155286 /* Pods-YumzzClip.debug.xcconfig */,
+				922E2D823F45785D48163DD5 /* Pods-YumzzClip.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -1133,14 +1127,14 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 3A987AFD2480350E0021F6E4 /* Build configuration list for PBXNativeTarget "VirtualMenu" */;
 			buildPhases = (
-				2551FEBDCE31C89C8713BC86 /* [CP] Check Pods Manifest.lock */,
+				1D51E7A5BDF8416F6FC364F1 /* [CP] Check Pods Manifest.lock */,
 				3A987ACF2480350C0021F6E4 /* Sources */,
 				3A987AD02480350C0021F6E4 /* Frameworks */,
 				3A987AD12480350C0021F6E4 /* Resources */,
 				34111066252262F20084975A /* Embed App Clips */,
-				015E444B54E32EABD274B988 /* [CP] Embed Pods Frameworks */,
-				0BDC29F01B4355DF09407BE1 /* [CP] Copy Pods Resources */,
 				3A5875CC2779345C00E3B6BC /* Embed Frameworks */,
+				59E1EF8EFAEEED1D54851DBB /* [CP] Embed Pods Frameworks */,
+				57B286CC04F2CEDF2FF51828 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1196,11 +1190,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 3AECE2972772974E007BEC00 /* Build configuration list for PBXNativeTarget "YumzzClip" */;
 			buildPhases = (
-				5D21E59D9D8F7D7263AD18C7 /* [CP] Check Pods Manifest.lock */,
+				E1E7A1E6BA3331B388568A1C /* [CP] Check Pods Manifest.lock */,
 				3AECE2672772974B007BEC00 /* Sources */,
 				3AECE2682772974B007BEC00 /* Frameworks */,
 				3AECE2692772974B007BEC00 /* Resources */,
-				83EF04BD56EA63623A99CB7B /* [CP] Embed Pods Frameworks */,
+				6F0BDCCE9BD3BF5A93C6A03A /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1377,41 +1371,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		015E444B54E32EABD274B988 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-VirtualMenu/Pods-VirtualMenu-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-VirtualMenu/Pods-VirtualMenu-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-VirtualMenu/Pods-VirtualMenu-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		0BDC29F01B4355DF09407BE1 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-VirtualMenu/Pods-VirtualMenu-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-VirtualMenu/Pods-VirtualMenu-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-VirtualMenu/Pods-VirtualMenu-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		2551FEBDCE31C89C8713BC86 /* [CP] Check Pods Manifest.lock */ = {
+		1D51E7A5BDF8416F6FC364F1 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1433,7 +1393,58 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		5D21E59D9D8F7D7263AD18C7 /* [CP] Check Pods Manifest.lock */ = {
+		57B286CC04F2CEDF2FF51828 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-VirtualMenu/Pods-VirtualMenu-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-VirtualMenu/Pods-VirtualMenu-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-VirtualMenu/Pods-VirtualMenu-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		59E1EF8EFAEEED1D54851DBB /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-VirtualMenu/Pods-VirtualMenu-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-VirtualMenu/Pods-VirtualMenu-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-VirtualMenu/Pods-VirtualMenu-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		6F0BDCCE9BD3BF5A93C6A03A /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-YumzzClip/Pods-YumzzClip-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-YumzzClip/Pods-YumzzClip-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-YumzzClip/Pods-YumzzClip-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E1E7A1E6BA3331B388568A1C /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1453,23 +1464,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		83EF04BD56EA63623A99CB7B /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-YumzzClip/Pods-YumzzClip-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-YumzzClip/Pods-YumzzClip-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-YumzzClip/Pods-YumzzClip-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -1845,7 +1839,7 @@
 		};
 		3A987AFE2480350E0021F6E4 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6131BDDB476B1397FDB84ADE /* Pods-VirtualMenu.debug.xcconfig */;
+			baseConfigurationReference = C4AD816F4D966B88AC747DFF /* Pods-VirtualMenu.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -1877,7 +1871,7 @@
 		};
 		3A987AFF2480350E0021F6E4 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E1B739CC826CE22030EBC169 /* Pods-VirtualMenu.release.xcconfig */;
+			baseConfigurationReference = 9C98B4273FB48EDC8C600364 /* Pods-VirtualMenu.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -1993,7 +1987,7 @@
 		};
 		3AECE2912772974D007BEC00 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 35B058904313819FEC0440FE /* Pods-YumzzClip.debug.xcconfig */;
+			baseConfigurationReference = DB507AE4A2F0915F38155286 /* Pods-YumzzClip.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -2006,7 +2000,9 @@
 				DEVELOPMENT_ASSET_PATHS = "\"YumzzClip/Preview Content\"";
 				DEVELOPMENT_TEAM = 3VUUCS34BU;
 				ENABLE_PREVIEWS = YES;
+				FRAMEWORK_SEARCH_PATHS = "\"${PODS_CONFIGURATION_BUILD_DIR}/MQTTClient\"";
 				GENERATE_INFOPLIST_FILE = YES;
+				HEADER_SEARCH_PATHS = "\"${PODS_CONFIGURATION_BUILD_DIR}/MQTTClient\"";
 				INFOPLIST_FILE = YumzzClip/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Yumzz;
 				INFOPLIST_KEY_NSCameraUsageDescription = "Please allow camera use for menu access and additional features.";
@@ -2015,12 +2011,13 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 8.0;
+				PODS_XCFRAMEWORKS_BUILD_DIR = "$(PODS_CONFIGURATION_BUILD_DIR)/XCFrameworkIntermediates";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ARMenu.VirtualMenu.Clip;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -2033,7 +2030,7 @@
 		};
 		3AECE2922772974D007BEC00 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 67AB6D289823A48424CCF50C /* Pods-YumzzClip.release.xcconfig */;
+			baseConfigurationReference = 922E2D823F45785D48163DD5 /* Pods-YumzzClip.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -2046,7 +2043,9 @@
 				DEVELOPMENT_ASSET_PATHS = "\"YumzzClip/Preview Content\"";
 				DEVELOPMENT_TEAM = 3VUUCS34BU;
 				ENABLE_PREVIEWS = YES;
+				FRAMEWORK_SEARCH_PATHS = "\"${PODS_CONFIGURATION_BUILD_DIR}/MQTTClient\"";
 				GENERATE_INFOPLIST_FILE = YES;
+				HEADER_SEARCH_PATHS = "\"${PODS_CONFIGURATION_BUILD_DIR}/MQTTClient\"";
 				INFOPLIST_FILE = YumzzClip/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Yumzz;
 				INFOPLIST_KEY_NSCameraUsageDescription = "Please allow camera use for menu access and additional features.";
@@ -2055,12 +2054,13 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 8.0;
+				PODS_XCFRAMEWORKS_BUILD_DIR = "$(PODS_CONFIGURATION_BUILD_DIR)/XCFrameworkIntermediates";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ARMenu.VirtualMenu.Clip;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

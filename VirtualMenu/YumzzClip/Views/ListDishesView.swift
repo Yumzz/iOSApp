@@ -73,12 +73,12 @@ struct ListDishesView: View {
                 }
                 else{
                     view.overlay(overlay, alignment: .bottom)
-                        .overlay(waitButt, alignment: .bottomLeading)
+//                        .overlay(waitButt, alignment: .bottomLeading)
                         .navigationBarHidden(self.isNavBarHidden)
                 }
             }else {
                 view
-                    .overlay(waitButt, alignment: .bottomLeading)
+//                    .overlay(waitButt, alignment: .bottomLeading)
                     .navigationBarHidden(self.isNavBarHidden)
             }
         }
@@ -237,24 +237,24 @@ struct ListDishesView: View {
 //
 //        }
         .sheet(isPresented: $showSheet2){
-            if(self.waitButtonClicked){
-                WaiterConnection(rest: self.order.restChosen)
-                    .onAppear(){
-                        print("waitconnection")
-                    }
-                    .onDisappear(){
-                        self.addtapped = true
-                        self.waitButtonClicked = false
-                        self.showSheet2 = false
-                    }
-            }
-            else{
+//            if(self.waitButtonClicked){
+//                WaiterConnection(rest: self.order.restChosen)
+//                    .onAppear(){
+//                        print("waitconnection")
+//                    }
+//                    .onDisappear(){
+//                        self.addtapped = true
+//                        self.waitButtonClicked = false
+//                        self.showSheet2 = false
+//                    }
+//            }
+//            else{
                 ReviewOrder()
                     .onDisappear(){
                         self.waitButtonClicked = false
                         self.showSheet2 = false
                     }
-            }
+//            }
         }
         .onAppear{
             self.dispatchGroup.notify(queue: .main){
