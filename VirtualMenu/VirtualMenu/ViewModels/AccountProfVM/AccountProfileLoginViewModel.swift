@@ -12,8 +12,8 @@ import FirebaseStorage
 import Firebase
 import FirebaseFirestoreSwift
 import GoogleSignIn
+//import FacebookCore
 import FBSDKLoginKit
-import FBSDKCoreKit
 import AuthenticationServices
 import CryptoKit
 

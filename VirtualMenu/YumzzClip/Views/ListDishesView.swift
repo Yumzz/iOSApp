@@ -85,18 +85,6 @@ struct ListDishesView: View {
 //        .navigationBarHidden(self.isNavBarHidden)
 
     }
-
-//    var overlay: some View {
-//        VStack{
-//                ViewCartButton(dishCount: self.order.allDishes)
-//                    .onTapGesture{
-////                        self.activeSheet = .second
-//                        self.showSheet2 = true
-//                    }
-//                    .clipShape(RoundedRectangle(cornerRadius: 10, style: .circular))
-//            Spacer().frame(width: 0, height: 10)
-//        }
-//    }
     
     var overlay: some View {
         VStack{
@@ -294,16 +282,20 @@ struct ListDishesView: View {
 //            self.isNavBarHidden = true
 //        }
         .alert(isPresented: $addo, TextFieldAlert(title: "Any Special Instructions?", message: "\(self.dishChosen.name) - \(self.dishChosen.description)") { (text) in
-                    if text != nil {
-                        print(text)
-                        if((self.order.dishChoice[self.dishChosen]?.isEmpty) != nil){
-                            self.order.dishChoice[self.dishChosen] = ""
-                        }
-                        self.order.dishChoice[self.dishChosen] = text!
-                        print(self.order.dishChoice[self.dishChosen])
+            if text != nil {
+                print(text)
+                if((self.order.dishChoice[self.dishChosen]?.isEmpty) != nil){
+                    self.order.dishChoice[self.dishChosen] = ""
+                }
+                self.order.dishChoice[self.dishChosen] = text!
+                print(self.order.dishChoice[self.dishChosen])
+                if(self.order.dishChoice[self.dishChosen] == ""){
+                    let result = self.order.dishChoice[self.dishChosen]!.trimmingCharacters(in: CharacterSet(charactersIn: "0123456789.").inverted)
+                    print("result: \(result)")
+                }
 //                        self.saveGroup(text: text!)
-                    }
-                })
+            }
+        })
 //        .gesture(
 //            DragGesture().updating($dragOffset, body: { (value, state, transaction) in
 //            if(value.translation.width > 100) {

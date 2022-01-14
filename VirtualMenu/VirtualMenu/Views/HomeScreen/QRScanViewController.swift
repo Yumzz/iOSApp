@@ -12,12 +12,17 @@ import UIKit
 class QRScanViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
     var captureSession: AVCaptureSession!
     var previewLayer: AVCaptureVideoPreviewLayer!
-
+    
+//    required init(choice: Int) {
+//        fatalError("init(coder:) has not been implemented")
+//        self.choice = choice
+//    }
     override func viewDidLoad() {
         super.viewDidLoad()
 
         view.backgroundColor = UIColor.black
         captureSession = AVCaptureSession()
+        
 
         guard let videoCaptureDevice = AVCaptureDevice.default(for: .video) else { return }
         let videoInput: AVCaptureDeviceInput
@@ -57,6 +62,7 @@ class QRScanViewController: UIViewController, AVCaptureMetadataOutputObjectsDele
         createScanningIndicator()
         createScanningFrame() 
     }
+    
 
     func failed() {
         let ac = UIAlertController(title: "Scanning not supported", message: "Your device does not support scanning a code from an item. Please use a device with a camera.", preferredStyle: .alert)

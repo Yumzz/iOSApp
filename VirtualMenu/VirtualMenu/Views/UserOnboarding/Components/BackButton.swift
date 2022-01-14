@@ -12,6 +12,7 @@ struct BackButton: View {
     var mode: Binding<PresentationMode>
     var dark: Bool = false
     
+    
     var body: some View {
         
         HStack{

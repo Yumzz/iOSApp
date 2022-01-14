@@ -1,5 +1,5 @@
 use_frameworks!
-
+platform :ios, '14.0'
 # add the Firebase pod for Google Analytic
 
 target 'VirtualMenu' do
@@ -14,8 +14,9 @@ target 'VirtualMenu' do
     pod 'GoogleSignIn', '5.0.0'
     pod 'PromiseKit', '6.15.3'
     pod 'MQTTClient', '0.14.0'
-    pod 'FBSDKLoginKit', '12.2.0'
-    pod 'FBSDKCoreKit', '12.2.0'
+#    pod 'FBSDKLoginKit', '12.2.1'
+#    pod 'FBSDKCoreKit', '12.2.1'
+    pod 'FacebookCore'
     pod 'SquarePointOfSaleSDK'
 end
 
@@ -36,6 +37,7 @@ end
 
 target 'YumzzClip' do
  pod 'MQTTClient', '0.14.0'
+ pod 'Instructions'
 end
 post_install do |pi|
     pi.pods_project.targets.each do |t|

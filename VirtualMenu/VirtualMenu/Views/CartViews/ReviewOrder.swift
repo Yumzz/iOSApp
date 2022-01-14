@@ -188,7 +188,11 @@ struct ReviewOrder: View {
             self.choice = self.order.dishChoice
             //create notification center observer
             NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: "OrderSent"), object: nil, queue: .main) { (Notification) in
+                print("order send caught")
                 self.order.orderSent()
+                self.dishes = self.order.dishesChosen
+//                self.mode.wrappedValue.dismiss()
+                
             }
             NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: "WaiterCalled"), object: nil, queue: .main) { (Notification) in
 //                self.order.orderSent()
@@ -198,6 +202,9 @@ struct ReviewOrder: View {
         .sheet(isPresented: $IoT){
             if(self.sendPrinterOrder){
                 ClientConnection(dishes: self.dishes, quantity: self.order.dishCounts, rest: self.order.restChosen)
+                    .onDisappear(){
+                        self.mode.wrappedValue.dismiss()
+                    }
             }
             #if !APPCLIP
                 if(self.callWaiter){

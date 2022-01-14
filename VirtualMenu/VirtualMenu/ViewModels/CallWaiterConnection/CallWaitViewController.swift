@@ -9,6 +9,7 @@
 import SwiftUI
 import UIKit
 import MQTTClient
+import Instructions
 
 // This MQTT client lib is a bit confusing in terms of what callbacks etc to use. The best example I found that works is here:
 // https://github.com/novastone-media/MQTT-Client-Framework/blob/master/MQTTSwift/MQTTSwift/MQTTSwift.swift
@@ -28,7 +29,7 @@ import MQTTClient
 //    }
 //}
 
-class WaiterViewController: UIViewController {
+class WaiterViewController: UIViewController, CoachMarksControllerDelegate, CoachMarksControllerDataSource  {
     //need to make this connect to printer and send dishes to printer to print
 
     let MQTT_HOST = "broker.emqx.io" // or IP address e.g. "192.168.0.194"
@@ -42,6 +43,7 @@ class WaiterViewController: UIViewController {
     private var transport = MQTTCFSocketTransport()
     fileprivate var session = MQTTSession()
     fileprivate var completion: (()->())?
+    let coachMarksController = CoachMarksController()
     
     var rest: RestaurantFB = RestaurantFB.previewRest()
     
@@ -53,6 +55,7 @@ class WaiterViewController: UIViewController {
         self.transport.host = MQTT_HOST
         self.transport.port = MQTT_PORT
         session?.transport = transport
+        self.coachMarksController.dataSource = self
         print("view model call waiter")
         NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: "CallWait"), object: nil, queue: .main) { [self] (Notification) in
 //                        self.pastOrders = Notification.object as! [Order]
@@ -85,6 +88,12 @@ class WaiterViewController: UIViewController {
                 self.updateUI(for: self.session?.status ?? .error)
             }
         }
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+
+        self.coachMarksController.start(in: .window(over: self))
     }
     
     private func updateUI(for clientStatus: MQTTSessionStatus) {
@@ -205,6 +214,30 @@ class WaiterViewController: UIViewController {
         session?.publishData(message.data(using: .utf8, allowLossyConversion: false), onTopic: topic, retain: false, qos: .exactlyOnce)
         
         print("published message after asking about table")
+    }
+    func numberOfCoachMarks(for coachMarksController: CoachMarksController) -> Int {
+        return 1
+    }
+    let pointOfInterest = UIView()
+    func coachMarksController(_ coachMarksController: CoachMarksController,
+                              coachMarkAt index: Int) -> CoachMark {
+        pointOfInterest.center = CGPoint(x: UIScreen.main.bounds.midX, y: UIScreen.main.bounds.midY)
+        return coachMarksController.helper.makeCoachMark(for: pointOfInterest)
+    }
+    func coachMarksController(
+        _ coachMarksController: CoachMarksController,
+        coachMarkViewsAt index: Int,
+        madeFrom coachMark: CoachMark
+    ) -> (bodyView: UIView & CoachMarkBodyView, arrowView: (UIView & CoachMarkArrowView)?) {
+        let coachViews = coachMarksController.helper.makeDefaultCoachViews(
+            withArrow: true,
+            arrowOrientation: .top
+        )
+
+        coachViews.bodyView.hintLabel.text = "Please scan the qr code with red border!"
+        coachViews.bodyView.nextLabel.text = "Order will be sent!"
+
+        return (bodyView: coachViews.bodyView, arrowView: coachViews.arrowView)
     }
     
     

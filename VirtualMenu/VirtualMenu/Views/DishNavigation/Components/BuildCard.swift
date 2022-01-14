@@ -181,7 +181,7 @@ struct BuildCard: View {
                     Text("Select Size:")
                         .font(.subheadline)
                         .fontWeight(.semibold)
-                        .foregroundColor(.black)
+                        .foregroundColor(colorScheme == .dark ? .white : .black)
                         
                     HStack{
                         ForEach(self.build.typePrice, id: \.self){
@@ -229,20 +229,20 @@ struct BuildCard: View {
                     Text("Select Options:")
                         .font(.subheadline)
                         .fontWeight(.semibold)
-                        .foregroundColor(.black)
+                        .foregroundColor(colorScheme == .dark ? .white : .black)
                     ForEach(self.build.typeOpt, id: \.self){
                         opt in
                         HStack{
                             Text("\(opt)")
                                     .font(.title)
                                     .fontWeight(.semibold)
-                                .foregroundColor(.black)
+                                .foregroundColor(colorScheme == .dark ? .white : .black)
                             ForEach(self.build.typePrice, id: \.self){
                                 type in
                                 StyledText(verbatim: "\(type): +\(self.build.priceOpts[opt]![type]!.componentsJoined(by: "/"))")
                                 .style(.highlight(), ranges: { self.indexPrice == -1 ? [$0.range(of: " " )!] :(self.typeClicked == type ? [$0.range(of: "\(self.build.priceOpts[opt]![self.typeClicked]![self.indexPrice])")!] : [$0.range(of: " " )!]
                                         ) })
-                                    .foregroundColor(.black)
+                                    .foregroundColor(colorScheme == .dark ? .white : .black)
                             }
                         }
                         
@@ -252,7 +252,7 @@ struct BuildCard: View {
                                 option in
                                 HStack{
                                     Text("\(option)")
-                                        .foregroundColor(.black)
+                                        .foregroundColor(colorScheme == .dark ? .white : .black)
 
                                     Spacer()
                                     

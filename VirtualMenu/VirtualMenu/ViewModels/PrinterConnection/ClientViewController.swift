@@ -9,6 +9,7 @@
 import SwiftUI
 import UIKit
 import MQTTClient
+import Instructions
 
 // This MQTT client lib is a bit confusing in terms of what callbacks etc to use. The best example I found that works is here:
 // https://github.com/novastone-media/MQTT-Client-Framework/blob/master/MQTTSwift/MQTTSwift/MQTTSwift.swift
@@ -28,7 +29,8 @@ import MQTTClient
 //    }
 //}
 
-class ClientViewController: UIViewController {
+class ClientViewController: UIViewController, CoachMarksControllerDelegate, CoachMarksControllerDataSource {
+    
     //need to make this connect to printer and send dishes to printer to print
 
     let MQTT_HOST = "broker.emqx.io" // or IP address e.g. "192.168.0.194"
@@ -38,6 +40,7 @@ class ClientViewController: UIViewController {
     var dishInfo: [(String, Double, Int, String)] = []
     var tableNum: String = ""
     var rest: RestaurantFB = RestaurantFB.previewRest()
+    let coachMarksController = CoachMarksController()
     
 //    @IBOutlet private weak var button: CircularButton!
 //    @IBOutlet private weak var statusLabel: UILabel!
@@ -51,11 +54,12 @@ class ClientViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.session?.delegate = self
-        
+        self.coachMarksController.dataSource = self
 //        QRScanViewController()
         self.transport.host = MQTT_HOST
         self.transport.port = MQTT_PORT
         session?.transport = transport
+//        self.coach
         print("view model print order")
 //        self.presentingViewController = QRScanViewController()
         NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: "PrintInfo"), object: nil, queue: .main) { [self] (Notification) in
@@ -70,13 +74,13 @@ class ClientViewController: UIViewController {
             self.tableNum = getQueryStringParameter(url: text, param: "table", d: dispatch)!
 //            let tab = text.queryItems?.first(where: { $0.name == "table" })?.value
             dispatch.notify(queue: .main){
-            print("ask: \(self.tableNum)")
-//            self.tableNum = getQueryStringParameter(url: text, param: "table", d: dispatch)!
-            var topic = self.rest.name.lowercased()
-            if(topic.lowercased().contains("vics")){
-                topic = "vics"
-            }
-            self.publishMessage(" \(userProfile.fullName); \(self.dishInfo); \(self.tableNum)", onTopic: "raspberry/" + topic)
+                print("ask: \(self.tableNum)")
+    //            self.tableNum = getQueryStringParameter(url: text, param: "table", d: dispatch)!
+                var topic = self.rest.name.lowercased()
+                if(topic.lowercased().contains("vics")){
+                    topic = "vics"
+                }
+                self.publishMessage(" \(userProfile.fullName); \(self.dishInfo); \(self.tableNum)", onTopic: "raspberry/vics")
             }
 //                        self.loadingPrinterConnection = false
         }
@@ -90,6 +94,12 @@ class ClientViewController: UIViewController {
                 self.updateUI(for: self.session?.status ?? .error)
             }
         }
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+
+        self.coachMarksController.start(in: .window(over: self))
     }
     
     private func updateUI(for clientStatus: MQTTSessionStatus) {
@@ -182,15 +192,18 @@ class ClientViewController: UIViewController {
 //    }
 
     private func subscribe() {
+        print("restname: \(self.rest.name)")
         var topic = self.rest.name.lowercased()
         if(topic.lowercased().contains("vics")){
             topic = "vics"
         }
-        self.session?.subscribe(toTopic: "raspberry/" + topic, at: .exactlyOnce) { error, result in
+        print("topic: \(topic)")
+        self.session?.subscribe(toTopic: "raspberry/vics", at: .exactlyOnce) { error, result in
             print("subscribe result error \(String(describing: error)) result \(result!)")
             //need to run connection to POS on raspberry pi as a python script
         }
         print("port: \(self.session?.port)")
+        print("raspberry/" + topic)
     }
     
     private func publishMessage(_ message: String, onTopic topic: String) {
@@ -198,6 +211,31 @@ class ClientViewController: UIViewController {
         session?.publishData(message.data(using: .utf8, allowLossyConversion: false), onTopic: topic, retain: false, qos: .exactlyOnce)
         
         print("published message after asking about table")
+    }
+    
+    func numberOfCoachMarks(for coachMarksController: CoachMarksController) -> Int {
+        return 1
+    }
+    let pointOfInterest = UIView()
+    func coachMarksController(_ coachMarksController: CoachMarksController,
+                              coachMarkAt index: Int) -> CoachMark {
+        pointOfInterest.center = CGPoint(x: UIScreen.main.bounds.midX, y: UIScreen.main.bounds.midY)
+        return coachMarksController.helper.makeCoachMark(for: pointOfInterest)
+    }
+    func coachMarksController(
+        _ coachMarksController: CoachMarksController,
+        coachMarkViewsAt index: Int,
+        madeFrom coachMark: CoachMark
+    ) -> (bodyView: UIView & CoachMarkBodyView, arrowView: (UIView & CoachMarkArrowView)?) {
+        let coachViews = coachMarksController.helper.makeDefaultCoachViews(
+            withArrow: true,
+            arrowOrientation: .top
+        )
+
+        coachViews.bodyView.hintLabel.text = "Please scan the qr code with green border!"
+//        coachViews.bodyView.nextLabel.text = "Order will be sent!"
+
+        return (bodyView: coachViews.bodyView, arrowView: coachViews.arrowView)
     }
     
     
@@ -215,6 +253,7 @@ extension ClientViewController: MQTTSessionManagerDelegate, MQTTSessionDelegate 
         print("delivered")
         DispatchQueue.main.async {
             self.completion?()
+            print("here in deliverance")
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: "OrderSent"), object: nil)
             self.dismiss(animated: true)
         }
@@ -245,16 +284,18 @@ struct ClientConnection: UIViewControllerRepresentable {
             }
             else{
                 print("yessss: \(self.order.dishChoice[d]!)")
+                print("noooo: \(quantity[d]!)")
                 dishTuple = (d.name, d.price, quantity[d]!, self.order.dishChoice[d]!)
             }
             dishInfo.append(dishTuple)
             
             if(d == self.dishes.last){
                 connection.dishInfo = dishInfo
+                connection.rest = rest
                 return connection
             }
         }
-        
+        connection.rest = rest
         return connection
         }
 

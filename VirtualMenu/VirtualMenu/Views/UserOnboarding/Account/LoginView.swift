@@ -1,3 +1,4 @@
+
 //
 //  LoginView.swift
 //  VirtualMenu
@@ -41,7 +42,8 @@ struct LoginView: View {
     @State var showBanner:Bool = true
     @State var bannerData: BannerModifier.BannerData = BannerModifier.BannerData(title: "Plant a Tree", detail: "For every person that signs up with email and password, we will plant a tree!")
     
-    @State var isNavigationBarHidden: Bool = true
+    @State var isNavigationBarHidden: Bool = false
+    @State var noBackNeeded: Bool = false
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
     @Environment (\.colorScheme) var colorScheme : ColorScheme
     
@@ -67,7 +69,7 @@ struct LoginView: View {
         ZStack {
         if user.showOnboarding {
 //        NavigationView{
-            ZStack{
+//            ZStack{
                 Color(colorScheme == .dark ? ColorManager.darkBack : #colorLiteral(red: 0.9725490196, green: 0.968627451, blue: 0.9607843137, alpha: 1)).edgesIgnoringSafeArea(.all)
             VStack{
                 VStack(spacing: 10){
@@ -160,17 +162,27 @@ struct LoginView: View {
                 
                 Spacer()
             }.banner(data: $bannerData, show: $showBanner)
-            }.navigationBarTitle("")
-            .navigationBarHidden(self.isNavigationBarHidden)
-            .edgesIgnoringSafeArea([.top, .bottom])
+                .navigationBarItems(leading: BackButton(mode: self.mode, dark: colorScheme == .dark))
+//                .navigationBarItems(leading: BackButton(mode: self.mode, dark: colorScheme == .dark))
+                .navigationBarHidden(false)
+//                .onAppear(){
+//                    print("simon: \(self.isNavigationBarHidden)")
+//                    self.isNavigationBarHidden = false
+//                    print("simon1: \(self.isNavigationBarHidden)")
+//                }
+//                .onDisappear(){
+//                    self.isNavigationBarHidden = true
+//                }
+    }
+            else{
+//                ZStack{
+                HomeScreenView()
+//                    .hiddenNavigationBarStyle()
+//                    .navigationBarTitle(" ")
+//                    .navigationBarHidden(true)
+//                    .navigationBarTitleDisplayMode(.inline)
+                    
 //            }
-    }else{
-            HomeScreenView()
-                .onAppear(){
-                    self.isNavigationBarHidden = true
-                    
-                    
-                }
     }
         }
         .keyboardAdaptive()
@@ -183,13 +195,13 @@ struct LoginView: View {
                 self.user.isLogged = true
             }
         })
-        .navigationBarTitle("")
-        .navigationBarHidden(self.isNavigationBarHidden)
+//        .navigationBarItems(leading: BackButton(mode: self.mode, dark: colorScheme == .dark))
+//        .navigationBarTitle(" ")
         .navigationBarBackButtonHidden(true)
-        .navigationBarItems(leading: BackButton(mode: self.mode, dark: colorScheme == .dark))
-            .onAppear(){
-                self.isNavigationBarHidden = false
-            }
+//        .navigationBarItems(leading: BackButton(mode: self.mode, dark: colorScheme == .dark))
+//        .onDisappear(){
+//            self.isNavigationBarHidden = true
+//        }
         .alert(isPresented: $showAlert){
             Alert(title: Text("\(self.alertTitle)"), message: Text("\(self.alertMsg)"), dismissButton: .default(Text("Got it!")))
         }
@@ -198,6 +210,8 @@ struct LoginView: View {
                 self.mode.wrappedValue.dismiss()
             }
         }))
+        .edgesIgnoringSafeArea([.top, .bottom])
+        
     
     }
         private func performExistingAccountFlows(){

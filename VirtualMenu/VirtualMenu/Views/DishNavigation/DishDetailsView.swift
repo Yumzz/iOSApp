@@ -223,7 +223,7 @@ struct DishDetailsView: View {
                                                     specInstruc = ""
                                                 }
                                                 
-            //                                    self.addtapped = true
+                                                self.addtapped = true
                                                 
                                                 
                                             }
@@ -363,6 +363,7 @@ struct DishDetailsView: View {
                                         let d = DispatchGroup()
                                         d.enter()
                                         self.order.addDish(dish: self.dish, rest: self.restaurant, dis: d)
+                                        
                                         i += 1
                                     }
                                     //ask about side order/choices here
@@ -372,10 +373,16 @@ struct DishDetailsView: View {
                                             self.order.dishChoice[dish] = ""
                                         }
                                         self.order.dishChoice[dish] = specInstruc
+                                        print("result here")
                                         if !dish.choices.isEmpty{
                                             NotificationCenter.default.post(name: Notification.Name(rawValue: "Special Instruct"), object: dish.choices)
                                         }
+                                        print("result here after post")
+                                        let result = self.order.dishChoice[dish]!.trimmingCharacters(in: CharacterSet(charactersIn: "0123456789.").inverted)
+                                        print("result: \(result)")
                                         specInstruc = ""
+                                        
+                                        
                                     }
                                     else{
                                         self.order.dishChoice[dish] = ""
@@ -407,6 +414,9 @@ struct DishDetailsView: View {
 //                Spacer()
 //            }
         }
+        .alert(isPresented: self.$addtapped){
+            return Alert(title: Text("Dish Added"))
+        }
         .edgesIgnoringSafeArea(.all)
         .navigationBarTitle("")
         .navigationBarBackButtonHidden(true)
@@ -414,7 +424,6 @@ struct DishDetailsView: View {
         .navigationBarItems(leading: WhiteBackButton(mode: self.presentationMode))
             .onAppear(){
                 self.isNavigationBarHidden = false
-                print("yessiririririr")
                 NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: "Special Instruct"), object: nil, queue: .main) { (Notification) in
                     print("added")
                     self.addIt = true

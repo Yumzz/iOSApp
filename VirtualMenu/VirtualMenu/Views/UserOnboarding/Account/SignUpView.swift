@@ -173,7 +173,7 @@ struct SignUpView: View {
         .navigationBarItems(leading: BackButton(mode: self.mode, dark: colorScheme == .dark))
         .alert(isPresented: $showAlert) {
             Alert(title: Text("\(self.alertTitle)"), message: Text("\(self.alertMessage)"), dismissButton: .default(Text("Got it!")))
-            }
+        }
 //        .alert(isPresented: $showAlert, content: { self.alert })
         .gesture(DragGesture().updating($dragOffset, body: { (value, state, transaction) in
             if(value.translation.width > 100) {

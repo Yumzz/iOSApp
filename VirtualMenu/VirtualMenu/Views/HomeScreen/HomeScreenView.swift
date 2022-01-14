@@ -154,53 +154,7 @@ struct HomeScreenView: View {
             ZStack {
                 Color(colorScheme == .dark ? ColorManager.darkBack : #colorLiteral(red: 0.9725490196, green: 0.968627451, blue: 0.9607843137, alpha: 1)).edgesIgnoringSafeArea(.all)
                 VStack {
-                    HStack {
-                        Text("Yumzz").font(.system(size: 36, weight: .bold)).frame(alignment: .leading)
-                            .foregroundColor(colorScheme == .dark ? .white : ColorManager.yumzzOrange)
-                        Spacer()
-                        Image(systemName: "qrcode.viewfinder")
-                            .font(.system(size: 24, weight: .bold)).padding()
-                            .foregroundColor(colorScheme == .dark ? ColorManager.darkModeOrange : ColorManager.yumzzOrange)
-                            .onTapGesture{
-                                self.activeSheet = .second
-                                self.qrCodeShow = true
-                                self.qrCodeShow2 = false
-                            }
-                        
-                        if (userProfile.profilePhotoURL == ""){
-                            Image(systemName: "person.crop.square.fill")
-                                .resizable()
-                                .aspectRatio(contentMode: .fill)
-                                .frame(width: 36, height: 36)
-                                .clipShape(RoundedRectangle(cornerRadius: 10))
-                                .onTapGesture {
-                                    self.showAccount = true
-                                }
-                                .sheet(isPresented: self.$showAccount) {
-                                    AccountProfileView()
-                                    //dismiss once confirmation alert is sent
-                                }
-                        }
-                        else{
-                            FBURLImage(url: "profilephotos/\(userProfile.userId)", imageWidth: 36, imageHeight: 36, circle: true)
-                                .clipShape(RoundedRectangle(cornerRadius: 10))
-                                .onTapGesture {
-                                    self.showAccount = true
-                                }
-                                .onAppear(){
-                                    print("zxcvbnm\(userProfile.profilePhoto.debugDescription)")
-                                }
-                                .sheet(isPresented: self.$showAccount) {
-                                    AccountProfileView()
-                                    //dismiss once confirmation alert is sent
-                                }
-    //                        Image(uiImage: userProfile.profilePhoto!.circle!)
-    //                            .resizable()
-    //                            .aspectRatio(contentMode: .fill)
-    //                            .frame(width: 36, height: 36)
-                                
-                        }
-                    }.foregroundColor(colorScheme == .dark ? ColorManager.darkModeOrange : Color(#colorLiteral(red: 0.88, green: 0.36, blue: 0.16, alpha: 1))).frame(alignment: .top).padding()
+                    Spacer().frame(height: 60)
                 ScrollView(.vertical, showsIndicators: false) {
                     VStack {
                         HStack {
@@ -251,15 +205,71 @@ struct HomeScreenView: View {
                     }
                 }
                 }.padding(.top, geometry.safeAreaInsets.top)
-    //                .background(Color(red: 0.953, green: 0.945, blue: 0.933))
+    //                .background(Color(red: 0.953, green: 0.945, blue: 0.933))\
+                    .navigationBarItems(leading: HStack {
+                        Text("Yumzz").font(.system(size: 36, weight: .bold))
+                            .foregroundColor(colorScheme == .dark ? .white : ColorManager.yumzzOrange)
+                        Spacer().frame(width: UIScreen.main.bounds.width/5)
+                        Image(systemName: "qrcode.viewfinder")
+                            .font(.system(size: 24, weight: .bold)).padding()
+                            .foregroundColor(colorScheme == .dark ? ColorManager.darkModeOrange : ColorManager.yumzzOrange)
+                            .onTapGesture{
+                                print("touched qr")
+                                self.activeSheet = .second
+                                self.qrCodeShow = true
+                                self.qrCodeShow2 = false
+                            }
+                        
+                        if (userProfile.profilePhotoURL == ""){
+                            Image(systemName: "person.crop.square.fill")
+                                .resizable()
+                                .aspectRatio(contentMode: .fill)
+                                .frame(width: 36, height: 36)
+                                .clipShape(RoundedRectangle(cornerRadius: 10))
+                                .onTapGesture {
+                                    self.showAccount = true
+                                }
+                                .sheet(isPresented: self.$showAccount) {
+                                    AccountProfileView()
+                                    //dismiss once confirmation alert is sent
+                                }
+                        }
+                        else{
+                            FBURLImage(url: "profilephotos/\(userProfile.userId)", imageWidth: 36, imageHeight: 36, circle: true)
+                                .clipShape(RoundedRectangle(cornerRadius: 10))
+                                .onTapGesture {
+                                    self.showAccount = true
+                                }
+                                .onAppear(){
+                                    print("zxcvbnm\(userProfile.profilePhoto.debugDescription)")
+                                }
+                                .sheet(isPresented: self.$showAccount) {
+                                    AccountProfileView()
+                                    //dismiss once confirmation alert is sent
+                                }
+    //                        Image(uiImage: userProfile.profilePhoto!.circle!)
+    //                            .resizable()
+    //                            .aspectRatio(contentMode: .fill)
+    //                            .frame(width: 36, height: 36)
+                                
+                        }
+                    }.foregroundColor(colorScheme == .dark ? ColorManager.darkModeOrange : Color(#colorLiteral(red: 0.88, green: 0.36, blue: 0.16, alpha: 1)))
+//                        .frame(alignment: .top)
+                        .padding()
+                        .onTapGesture(){
+                            print("tapped hstack")
+                        })
                 
                 .edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
                 .popover(isPresented: self.$qrCodeShow){
-                    QRScanView(completion: { textPerPage in
-                        if let text = textPerPage?.joined(separator: "\n").trimmingCharacters(in: .whitespacesAndNewlines) {
-                            print("wow: \(text)")
-                        }
-                    }).onDisappear(){
+//                    Home
+//                    QRScanView(completion: { textPerPage in
+//                        if let text = textPerPage?.joined(separator: "\n").trimmingCharacters(in: .whitespacesAndNewlines) {
+//                            print("wow: \(text)")
+//                        }
+//                    })
+                    MenuConnection()
+                        .onDisappear(){
                         activeSheet = .first
                         self.qrCodeShow = false
 //                        self.restChosen = false
@@ -284,7 +294,8 @@ struct HomeScreenView: View {
 //                            print("alert here now")
 //        //                    self.addtapped = true
 //                        })
-                .navigationBarTitle("").navigationBarHidden(true)
+//                .navigationBarTitle("").navigationBarHidden(true)
+//                .navigationBarBackButtonHidden(true)
                 .onAppear(){
                     self.dispatchGroup.notify(queue: .main){
                         NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: "ChooseRest"), object: nil, queue: .main) { [self] (Notification) in
@@ -354,10 +365,12 @@ struct HomeScreenView: View {
                     }
                 }
             }
+//            .hiddenNavigationBarStyle()
         }
 //
         
     }
+//    .hiddenNavigationBarStyle()
 }
     
     func getQueryStringParameter(url: String, param: String, d: DispatchGroup) -> String? {

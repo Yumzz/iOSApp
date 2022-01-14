@@ -209,6 +209,7 @@ class OrderModel: ObservableObject {
         self.buildIndexes = [BuildFB : Int]()
         self.buildOptsChosen = [BuildFB: [String]]()
         self.allDishes = 0
+        self.totalCost = 0.0
         self.currentOrder = Order.previewOrder()
         //save past order to firebase
     }
