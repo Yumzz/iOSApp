@@ -50,6 +50,21 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         print(handlePasswordlessSignIn(withURL: urlToOpen, facebook: facebook, google: google))
     }
     
+//    func updateUserInterfaceStyle() {
+//            DispatchQueue.main.async {
+//                switch UserDefaults.userInterfaceStyle {
+//                case 0:
+//                    self.window?.overrideUserInterfaceStyle = .unspecified
+//                case 1:
+//                    self.window?.overrideUserInterfaceStyle = .light
+//                case 2:
+//                    self.window?.overrideUserInterfaceStyle = .dark
+//                default:
+//                    self.window?.overrideUserInterfaceStyle = .unspecified
+//                }
+//            }
+//        }
+    
     func handlePasswordlessSignIn(withURL: URL, facebook: Bool, google: Bool) -> Bool{
         print("here")
         

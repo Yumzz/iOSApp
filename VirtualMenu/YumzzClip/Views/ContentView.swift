@@ -12,10 +12,14 @@ import SwiftUI
 struct ContentView: View {
     @State var rest: RestaurantFB = RestaurantFB.previewRest()
     @ObservedObject var viewModel : ContentViewModel
+    @State var id : String = ""
+//    @State var showBanner:Bool = true
+//    @State var bannerData: BannerModifier.BannerData = BannerModifier.BannerData(title: "Plant a Tree", detail: "Download the app and sign up, then we will plant a tree in your honor!")
     
     let dispatchGroup = DispatchGroup()
     
     init(id: String){
+        self.id = id
         self.viewModel = ContentViewModel(dis: dispatchGroup, id: id)
 //        self.viewModel.fetchStuff(dis: dispatchGroup)
     }
@@ -31,11 +35,26 @@ struct ContentView: View {
                 ListDishesView(restaurant: self.rest)
             }
         }
+//        .banner(data: $bannerData, show: $showBanner)
         .onAppear{
             self.dispatchGroup.notify(queue: .main){
                 print("appear")
-                self.rest = self.viewModel.restaurant!
-                print(self.rest.hour == "")
+                
+//                if(viewModel.restaurant != nil){
+                self.rest = self.viewModel.restaurant ?? RestaurantFB.previewRest()
+//                }
+                var hey = 0
+                while(self.rest.name == ""){
+                    print("reload bb")
+                    if(hey == 20){
+                        exit(-1)
+                    }
+                    var viewmo = ContentViewModel(dis: dispatchGroup, id: id)
+                    self.rest = viewmo.restaurant ?? RestaurantFB.previewRest()
+                    print(self.rest.hour == "")
+                    hey = hey + 1
+                }
+//
                 }
             }
         

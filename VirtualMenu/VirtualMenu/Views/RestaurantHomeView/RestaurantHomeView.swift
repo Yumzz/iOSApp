@@ -13,7 +13,6 @@ struct RestaurantHomeView: View {
     var restaurant: RestaurantFB
     
     @ObservedObject var menuSelectionVM: MenuSelectionViewModel
-    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @EnvironmentObject var order : OrderModel
     
     @Environment(\.colorScheme) var colorScheme : ColorScheme
@@ -253,7 +252,9 @@ struct RestaurantHomeView: View {
         .navigationBarTitle("")
         .navigationBarBackButtonHidden(true)
         .navigationBarHidden(false)
-        .navigationBarItems(leading: WhiteBackButton(mode: self.presentationMode))
+        .navigationBarItems(leading: WhiteBackButton(mode: self.mode).onTapGesture{
+            print("self.mode = \(self.mode)")
+        })
         .onAppear(){
             print("ask: \(self.distance)")
             self.isNavigationBarHidden = false
@@ -264,6 +265,7 @@ struct RestaurantHomeView: View {
         }
         .gesture(DragGesture().updating($dragOffset, body: { (value, state, transaction) in
             if(value.translation.width > 100) {
+                print("self.mode = \(self.mode)")
                 self.mode.wrappedValue.dismiss()
             }
         }))

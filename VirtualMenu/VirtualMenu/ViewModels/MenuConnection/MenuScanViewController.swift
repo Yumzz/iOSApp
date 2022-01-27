@@ -18,7 +18,7 @@ class MenuScanViewController: UIViewController, CoachMarksControllerDelegate, Co
     
 //    @IBOutlet private weak var button: CircularButton!
 //    @IBOutlet private weak var statusLabel: UILabel!
-    
+//    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     let coachMarksController = CoachMarksController()
     
 //    var rest: RestaurantFB = RestaurantFB.previewRest()
@@ -29,8 +29,11 @@ class MenuScanViewController: UIViewController, CoachMarksControllerDelegate, Co
         
         self.coachMarksController.dataSource = self
         print("view model call waiter")
+        
 //                        self.loadingPrinterConnection = false
         
+        //need to output text saying wrong qr code if callwait or print info
+//        self.reloadReady()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -42,6 +45,15 @@ class MenuScanViewController: UIViewController, CoachMarksControllerDelegate, Co
         hostView.center = self.view.center
         self.coachMarksController.start(in: .window(over: self))
     }
+    
+//    func reloadReady(){
+//        NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: "ReloadMenuScan"), object: nil, queue: .main) { [self] (Notification) in
+//            print("just reloadingview")
+////            self.viewDidLoad()
+//            self.presentationMode.wrappedValue.dismiss()
+////            self
+//        }
+//    }
     
 
     
@@ -81,8 +93,8 @@ class MenuScanViewController: UIViewController, CoachMarksControllerDelegate, Co
             arrowOrientation: .top
         )
 
-        coachViews.bodyView.hintLabel.text = "Please scan the qr code with blue border!"
-        coachViews.bodyView.nextLabel.text = "Order will be sent!"
+        coachViews.bodyView.hintLabel.text = "Scan the qr code with blue border!"
+//        coachViews.bodyView.nextLabel.text = "Order will be sent!"
 
         return (bodyView: coachViews.bodyView, arrowView: coachViews.arrowView)
     }
@@ -109,7 +121,9 @@ struct MenuConnection: UIViewControllerRepresentable {
 }
 
 struct MenuConnectionUI: View {
-//    @State var connecting: Bool
+    @State var wrongQRCode: Bool = false
+//    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+
     
     var body: some View {
             ZStack{
@@ -119,7 +133,7 @@ struct MenuConnectionUI: View {
                     if let text = textPerPage?.joined(separator: "\n").trimmingCharacters(in: .whitespacesAndNewlines) {
                         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "PrintInfo"), object: text)
                     }
-                })
+                }, choice: 0)
 //                Spacer().frame(width: UIScreen.main.bounds.width, height: 100)
 //                VStack{
 //                    Text("Calling Waiter")
@@ -128,5 +142,13 @@ struct MenuConnectionUI: View {
 //                }
 //                Spacer().frame(width: UIScreen.main.bounds.width, height: 100)
             }.frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
+//            .onAppear(){
+//                NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: "ReloadMenuScan"), object: nil, queue: .main) { [self] (Notification) in
+//                    print("just removingview")
+//                    self.presentationMode.wrappedValue.dismiss()
+////                    print("just reloadingview")
+//                }
+//            }
+
     }
 }

@@ -17,7 +17,7 @@ struct StartView: View {
             if(id == ""){
                 QRScanView(completion: { textPerPage in
                     print(textPerPage)
-                })
+                }, choice: 0)
                     .onAppear(){
                     NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: "RestId"), object: nil, queue: .main) { (tt) in
                         let i = tt.object as! String

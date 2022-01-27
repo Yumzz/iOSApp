@@ -36,6 +36,7 @@ class WaiterViewController: UIViewController, CoachMarksControllerDelegate, Coac
     let MQTT_PORT: UInt32 = 1883
     
     var num: String = ""
+    var wrongQRCode: Bool = false
     
 //    @IBOutlet private weak var button: CircularButton!
 //    @IBOutlet private weak var statusLabel: UILabel!
@@ -57,6 +58,9 @@ class WaiterViewController: UIViewController, CoachMarksControllerDelegate, Coac
         session?.transport = transport
         self.coachMarksController.dataSource = self
         print("view model call waiter")
+        
+        
+        //need to output text saying wrong qr code if printinfo or choose rest
         NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: "CallWait"), object: nil, queue: .main) { [self] (Notification) in
 //                        self.pastOrders = Notification.object as! [Order]
             var text = Notification.object as! String
@@ -234,8 +238,8 @@ class WaiterViewController: UIViewController, CoachMarksControllerDelegate, Coac
             arrowOrientation: .top
         )
 
-        coachViews.bodyView.hintLabel.text = "Please scan the qr code with red border!"
-        coachViews.bodyView.nextLabel.text = "Order will be sent!"
+        coachViews.bodyView.hintLabel.text = "Scan the qr code with red border!"
+//        coachViews.bodyView.nextLabel.text = "Order will be sent!"
 
         return (bodyView: coachViews.bodyView, arrowView: coachViews.arrowView)
     }
@@ -283,17 +287,17 @@ struct WaiterConnection: UIViewControllerRepresentable {
 }
 
 struct WaiterConnectionUI: View {
-//    @State var connecting: Bool
+    @State var wrongQRCode: Bool = false
     
     var body: some View {
             ZStack{
                 QRScanView(completion: { textPerPage in
                     print("ask: \(textPerPage)")
-                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: "PrintInfo"), object: textPerPage)
+                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: "CallWait"), object: textPerPage)
                     if let text = textPerPage?.joined(separator: "\n").trimmingCharacters(in: .whitespacesAndNewlines) {
-                        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "PrintInfo"), object: text)
+                        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "CallWait"), object: text)
                     }
-                })
+                }, choice: 1)
 //                Spacer().frame(width: UIScreen.main.bounds.width, height: 100)
 //                VStack{
 //                    Text("Calling Waiter")
@@ -302,7 +306,25 @@ struct WaiterConnectionUI: View {
 //                }
 //                Spacer().frame(width: UIScreen.main.bounds.width, height: 100)
             }.frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
+            
+            .onAppear(){
+                NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: "PrintInfoWrong"), object: nil, queue: .main) { [self] (Notification) in
+                    self.wrongQRCode = true
+                }
+                
+                NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: "ChooseRestWrong"), object: nil, queue: .main) { [self] (Notification) in
+                        self.wrongQRCode = true
+                }
+            }
+            .alert(isPresented: self.$wrongQRCode){
+                return Alert(title: Text("Wrong QR Code! Please drag down this view, reclick the qr scanner, and scan the QR Code with the red border!"))
+                self.wrongQRCode = false
+//                        print("just displayed alert and about to ask to reload")
+//                        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "ReloadMenuScan"), object: nil)
+//                        self.view.
+            }
     }
+    
 }
 
 //struct Loader: View {

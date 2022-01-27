@@ -8,7 +8,7 @@ struct ReceiptCard: View {
     
 //    var count: Int
 //    var name: String
-    
+    @State var pricePossIncrease: Bool = false
     var total: Double
     var dark: Bool = false
     
@@ -26,7 +26,7 @@ struct ReceiptCard: View {
 //                        .overlay(Text("\(count)"))
 //                    Spacer().frame(width: UIScreen.main.bounds.size.width/2, height: 0)
                     Spacer()
-                    Text("\(DishFB.priceFix(price: String(total)))").foregroundColor(dark ? .white : .black)
+                    Text("\(DishFB.priceFix(price: String(total)))" + (pricePossIncrease ? "+" : "")).foregroundColor(dark ? .white : .black)
                     Spacer().frame(width: 5, height: 0)
                 }
                 
@@ -38,7 +38,7 @@ struct ReceiptCard: View {
 //                    Spacer().frame(width: UIScreen.main.bounds.size.width/2, height: 0)
                     Spacer()
                     Text("\(DishFB.priceFix(price: String(tax)))").foregroundColor(dark ? .white : .black)
-                    Spacer().frame(width: 5, height: 0)
+                    Spacer().frame(width: (pricePossIncrease ? 15 : 5), height: 0)
                 }
                 
                 Divider().frame(width: (UIScreen.main.bounds.width/1.2), height: 10, alignment: .leading)
@@ -51,7 +51,7 @@ struct ReceiptCard: View {
 //                        .overlay(Text("\(count)"))
                     Spacer()
 //                    Spacer().frame(width: UIScreen.main.bounds.size.width/1.7, height: 0)
-                    Text("\(DishFB.priceFix(price: String(tax + total)))").foregroundColor(dark ? .white : .black)
+                    Text("\(DishFB.priceFix(price: String(tax + total)))" + (pricePossIncrease ? "+" : "")).foregroundColor(dark ? .white : .black)
                     Spacer().frame(width: 5, height: 0)
 
 
@@ -93,6 +93,14 @@ struct ReceiptCard: View {
             .background(dark ? ColorManager.blackest : Color(.white))
             .cornerRadius(10)
             .shadow(radius: 2)
+            .onAppear(){
+                NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: "PricePossIncrease"), object: nil, queue: .main) { [self] (Notification) in
+                    self.pricePossIncrease = true
+                }
+                NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: "IncrPriceNotPoss"), object: nil, queue: .main) { [self] (Notification) in
+                    self.pricePossIncrease = false
+                }
+            }
         }
         .padding(.horizontal)
     }

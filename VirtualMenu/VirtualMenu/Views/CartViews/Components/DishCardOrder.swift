@@ -9,6 +9,7 @@ struct DishCardOrder: View {
     var count: Int
     var name: String
     @State var price: Double
+    @State var possPriceIncrease: Bool = false
     
     var dish: DishFB
     var dark: Bool = false
@@ -47,18 +48,18 @@ struct DishCardOrder: View {
         //
                         if(String(dish.price).components(separatedBy: ".")[1].count < 2){
                             if(String(dish.price).components(separatedBy: ".")[1].count < 1){
-                                Text(String(dish.price) + "00").foregroundColor(dark ? .white : .black)
+                                Text(String(dish.price) + "00" + (possPriceIncrease ? "+" : "")).foregroundColor(dark ? .white : .black)
                                     .font(.system(size: 14)).bold()
                                 Spacer()
                             }
                             else{
-                                Text(String(dish.price) + "0").foregroundColor(dark ? .white : .black)
+                                Text(String(dish.price) + "0" + (possPriceIncrease ? "+" : "")).foregroundColor(dark ? .white : .black)
                                     .font(.system(size: 14)).bold()
                                 Spacer()
                             }
                         }
                         else{
-                            Text(String(dish.price))
+                            Text(String(dish.price) + (possPriceIncrease ? "+" : ""))
                                 .foregroundColor(dark ? .white : .black)
                                 .font(.system(size: 14)).bold()
                             Spacer()
@@ -96,6 +97,16 @@ struct DishCardOrder: View {
 //                .scaledToFit()
                 .padding(.horizontal)
                 .onAppear(){
+//                    if(dish.description.co)
+                    NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: "IncrPriceNotPoss"), object: nil, queue: .main) { [self] (Notification) in
+                        possPriceIncrease = false
+                    }
+                    var numSet = CharacterSet()
+                    numSet.insert(charactersIn: "0123456789")
+                    if(dish.description.rangeOfCharacter(from: numSet) != nil){
+                            possPriceIncrease = true
+                            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "PricePossIncrease"), object: nil)
+                    }
                     if(self.order.optsChosen[dish] != nil){
                         for x in self.order.optsChosen[dish]!{
                             self.price += Double(dish.options[x]!)

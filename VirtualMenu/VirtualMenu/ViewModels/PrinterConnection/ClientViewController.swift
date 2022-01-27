@@ -29,7 +29,8 @@ import Instructions
 //    }
 //}
 
-class ClientViewController: UIViewController, CoachMarksControllerDelegate, CoachMarksControllerDataSource {
+class ClientViewController: UIViewController, CoachMarksControllerDelegate, CoachMarksControllerDataSource
+{
     
     //need to make this connect to printer and send dishes to printer to print
 
@@ -41,6 +42,7 @@ class ClientViewController: UIViewController, CoachMarksControllerDelegate, Coac
     var tableNum: String = ""
     var rest: RestaurantFB = RestaurantFB.previewRest()
     let coachMarksController = CoachMarksController()
+//    @EnvironmentObject var order : OrderModel
     
 //    @IBOutlet private weak var button: CircularButton!
 //    @IBOutlet private weak var statusLabel: UILabel!
@@ -62,6 +64,14 @@ class ClientViewController: UIViewController, CoachMarksControllerDelegate, Coac
 //        self.coach
         print("view model print order")
 //        self.presentingViewController = QRScanViewController()
+        
+        //need to output text saying wrong qr code if callwait or choose rest
+        
+//        NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: "CallWait"), object: nil, queue: .main) { [self] (Notification) in
+//            var text = "Wrong QR code scanned"
+//
+//        }
+        
         NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: "PrintInfo"), object: nil, queue: .main) { [self] (Notification) in
 //                        self.pastOrders = Notification.object as! [Order]
             print("asked and gotten")
@@ -81,6 +91,7 @@ class ClientViewController: UIViewController, CoachMarksControllerDelegate, Coac
                     topic = "vics"
                 }
                 self.publishMessage(" \(userProfile.fullName); \(self.dishInfo); \(self.tableNum)", onTopic: "raspberry/vics")
+//                self.order.orderSent()
             }
 //                        self.loadingPrinterConnection = false
         }
@@ -98,7 +109,6 @@ class ClientViewController: UIViewController, CoachMarksControllerDelegate, Coac
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-
         self.coachMarksController.start(in: .window(over: self))
     }
     
@@ -212,7 +222,7 @@ class ClientViewController: UIViewController, CoachMarksControllerDelegate, Coac
         
         print("published message after asking about table")
     }
-    
+//#if !APPCLIP
     func numberOfCoachMarks(for coachMarksController: CoachMarksController) -> Int {
         return 1
     }
@@ -232,12 +242,13 @@ class ClientViewController: UIViewController, CoachMarksControllerDelegate, Coac
             arrowOrientation: .top
         )
 
-        coachViews.bodyView.hintLabel.text = "Please scan the qr code with green border!"
+        coachViews.bodyView.hintLabel.text = "Scan the qr code with green border!"
+//        coachViews.bodyView.fillSuperviewHorizontally()
 //        coachViews.bodyView.nextLabel.text = "Order will be sent!"
 
         return (bodyView: coachViews.bodyView, arrowView: coachViews.arrowView)
     }
-    
+//    #endif
     
 }
 
@@ -269,7 +280,8 @@ struct ClientConnection: UIViewControllerRepresentable {
     //add paramter of dishes and pass it through to viewcontroller to send as a message to printer to print
     typealias UIViewControllerType = ClientViewController
     func makeUIViewController(context: UIViewControllerRepresentableContext<ClientConnection>) -> ClientViewController {
-//            code 
+//            code
+        print("letsagoo")
         let connection = ClientViewController()
         connection.dishes = self.dishes
         connection.rest = rest
@@ -297,17 +309,18 @@ struct ClientConnection: UIViewControllerRepresentable {
         }
         connection.rest = rest
         return connection
-        }
+    }
 
         func updateUIViewController(_ uiViewController: ClientViewController, context: UIViewControllerRepresentableContext<ClientConnection>) {
 //            code
-            print("yes")
+            print("WE HERE BOII")
         }
 }
 
 struct PrintConnectionUI: View {
-//    @State var connecting: Bool
+    @State var wrongQRCode: Bool = false
     @State var string: String = ""
+    
     var body: some View {
             ZStack{
                 QRScanView(completion: { textPerPage in
@@ -320,7 +333,7 @@ struct PrintConnectionUI: View {
 //                        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "PrintInfo"), object: self.string)
                     }
                    
-                })
+                }, choice: 2)
 //                Spacer().frame(width: UIScreen.main.bounds.width, height: 100)
 //                VStack{
 //                    Text("Sending order to kitchen")
@@ -329,6 +342,20 @@ struct PrintConnectionUI: View {
 //                }
 //                Spacer().frame(width: UIScreen.main.bounds.width, height: 100)
             }.frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
+            .onAppear(){
+                NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: "CallWaitWrong"), object: nil, queue: .main) { [self] (Notification) in
+                    self.wrongQRCode = true
+                }
+                
+                NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: "ChooseRestWrong"), object: nil, queue: .main) { [self] (Notification) in
+                        self.wrongQRCode = true
+                }
+            }
+            .alert(isPresented: self.$wrongQRCode){
+                return Alert(title: Text("Wrong QR Code! Please drag down this view, reclick the qr scanner, and scan the QR Code with the green border!"))
+                self.wrongQRCode = false
+            }
+        
 //            .onAppear(){
 //            }
     }

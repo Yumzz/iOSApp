@@ -21,28 +21,27 @@ struct HomeScreenView: View {
     
     @State private var showAccount = false
     @State private var qrCodeShow = false
-    @State private var qrCodeShow2 = false
  
     
     @State var restaurants = [RestaurantFB]()
     @State var cityRests = [String: [RestaurantFB]]()
     
     @State var cities = [String]()
-    @State private var waitButtonClicked = false
+//    @State private var waitButtonClicked = false
     
     @State var rest = RestaurantFB.previewRest()
     @State private var restChosen = false
-    @State private var callWaiter = false
+//    @State private var callWaiter = false
     @State private var IoT = false
-    @State var orderRevNeed = false
+    @State var wrongQRCode = false
+    
+    @State var navbarhidden = false
     
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
     @GestureState private var dragOffset = CGSize.zero
     @Environment (\.colorScheme) var colorScheme : ColorScheme
 
-    
-    @State private var activeSheet: ActiveSheet?
-    
+        
     let dispatchGroup = DispatchGroup()
     
     @EnvironmentObject var order : OrderModel
@@ -58,28 +57,28 @@ struct HomeScreenView: View {
     var body: some View {
         Group {
             if(!self.order.dishesChosen.isEmpty || !self.order.buildsChosen.isEmpty){
-                if(self.waitButtonClicked){
-                    view.overlay(WaiterConnection(rest: self.order.restChosen), alignment: .bottom)
-                }
-                else{
+//                if(self.waitButtonClicked){
+//                    view.overlay(WaiterConnection(rest: self.order.restChosen), alignment: .bottom)
+//                }
+//                else{
                     view.overlay(overlay, alignment: .bottom)
 //                        .overlay(waitButt, alignment: (self.order.dishesChosen || !self.order.buildsChosen.isEmpty) ? .topTrailing : .bottomLeading)
-                        .overlay(waitButt, alignment: .topTrailing)
-                }
+//                        .overlay(waitButt, alignment: .topTrailing)
+//                }
                 
             } else {
-                if(self.waitButtonClicked){
+//                if(self.waitButtonClicked){
                     view
-                }
-                else{
-                    view
-                       .overlay(waitButt, alignment: .bottomLeading)
-                }
+//                }
+//                else{
+//                    view
+//                       .overlay(waitButt, alignment: .bottomLeading)
+//                }
              }
-            if self.waitButtonClicked {
-                view.sheet(isPresented: self.$waitButtonClicked){
-                    WaiterConnection(rest: self.order.restChosen)
-                }
+//            if self.waitButtonClicked {
+//                view.sheet(isPresented: self.$waitButtonClicked){
+//                    WaiterConnection(rest: self.order.restChosen)
+//                }
                 
 //                ZStack {
 //                    Color(#colorLiteral(red: 0.9725490196, green: 0.968627451, blue: 0.9607843137, alpha: 1))
@@ -92,7 +91,7 @@ struct HomeScreenView: View {
 //                .cornerRadius(20).shadow(radius: 20)
 //                .transition(.slide)
 //                .animation(.default)
-            }
+//            }
         }
     }
     
@@ -106,44 +105,40 @@ struct HomeScreenView: View {
         }
     }
     
-    var waitButt: some View {
-        VStack{
-            if(!self.order.dishesChosen.isEmpty || !self.order.buildsChosen.isEmpty){
-                Spacer().frame(height: 100)
-            }
-//            EmptyView()
-            OrangeButton(strLabel: "Call a Waiter", width: 167.5, height: 48, dark: colorScheme == .dark)
-                .clipShape(RoundedRectangle(cornerRadius: 10, style: .circular))
-                .onTapGesture {
-                    self.callWaiter = true
-                    self.IoT = true
-                    self.waitButtonClicked = true
-                }
-            Spacer().frame(height: 20)
-//            RecButton()
+//    var waitButt: some View {
+//        VStack{
+//            if(!self.order.dishesChosen.isEmpty || !self.order.buildsChosen.isEmpty){
+//                Spacer().frame(height: 100)
+//            }
+////            EmptyView()
+//            OrangeButton(strLabel: "Call a Waiter", width: 167.5, height: 48, dark: colorScheme == .dark)
+//                .clipShape(RoundedRectangle(cornerRadius: 10, style: .circular))
 //                .onTapGesture {
-//                    self.recButtonClicked = true
+//                    self.callWaiter = true
+//                    self.IoT = true
+//                    self.waitButtonClicked = true
 //                }
-//
-            if(self.order.dishesChosen != [] || !self.order.buildsChosen.isEmpty){
-                Spacer().frame(height: 20)
-            }
-//            Spacer().frame(width: 0, height: (!self.order.dishesChosen.isEmpty || !self.order.buildsChosen.isEmpty) ? 70 : 10)
-        }
-    }
+//            Spacer().frame(height: 20)
+////            RecButton()
+////                .onTapGesture {
+////                    self.recButtonClicked = true
+////                }
+////
+//            if(self.order.dishesChosen != [] || !self.order.buildsChosen.isEmpty){
+//                Spacer().frame(height: 20)
+//            }
+////            Spacer().frame(width: 0, height: (!self.order.dishesChosen.isEmpty || !self.order.buildsChosen.isEmpty) ? 70 : 10)
+//        }
+//    }
     
     var view: some View{
     GeometryReader { geometry in
         if(self.restChosen){
             RestaurantHomeView(restaurant: self.rest, distance: self.HomeScreenVM.getDistFromUser(coordinate: self.rest.coordinate))
-                .onAppear(){
-                    print("here")
-                    print("wohoo: \(self.HomeScreenVM.getDistFromUser(coordinate: self.rest.coordinate)) \(self.rest.coordinate)")
-                }
-                .navigationBarTitle("")
-                .navigationBarBackButtonHidden(true)
-                .navigationBarHidden(false)
-                .navigationBarItems(leading: WhiteBackButton(mode: self.mode))
+//                .navigationBarTitle("")
+//                .navigationBarBackButtonHidden(true)
+//                .navigationBarHidden(false)
+//                .navigationBarItems(leading: WhiteBackButton(mode: self.mode))
 //                .gesture(DragGesture().updating($dragOffset, body: { (value, state, transaction) in
 //                    if(value.translation.width > 100) {
 //                        self.mode.wrappedValue.dismiss()
@@ -215,9 +210,8 @@ struct HomeScreenView: View {
                             .foregroundColor(colorScheme == .dark ? ColorManager.darkModeOrange : ColorManager.yumzzOrange)
                             .onTapGesture{
                                 print("touched qr")
-                                self.activeSheet = .second
+//                                self.navbarhidden = true
                                 self.qrCodeShow = true
-                                self.qrCodeShow2 = false
                             }
                         
                         if (userProfile.profilePhotoURL == ""){
@@ -259,6 +253,14 @@ struct HomeScreenView: View {
                         .onTapGesture(){
                             print("tapped hstack")
                         })
+                    .onAppear(){
+                        self.navbarhidden = false
+                    }
+//                    .onDisappear(){
+//                        self.navbarhidden = true
+//                    }
+                    .navigationBarHidden(self.navbarhidden)
+                    .navigationBarTitleDisplayMode(.inline)
                 
                 .edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
                 .popover(isPresented: self.$qrCodeShow){
@@ -269,37 +271,40 @@ struct HomeScreenView: View {
 //                        }
 //                    })
                     MenuConnection()
-                        .onDisappear(){
-                        activeSheet = .first
+                    .onDisappear(){
+//                        if(self.rest.description != ""){
+//                            self.order.newOrder(rest: self.rest)
+//                        }
                         self.qrCodeShow = false
-//                        self.restChosen = false
-                        
                     }
+                    .onAppear(){
+                        NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: "PrintInfoWrong"), object: nil, queue: .main) { [self] (Notification) in
+                            print("qrcode printinfo here")
+                            self.wrongQRCode = true
+                        }
+//                        NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: "CallWaitWrong"), object: nil, queue: .main) { [self] (Notification) in
+//                            print("qrcode callwait here")
+//                            self.wrongQRCode = true
+//                        }
+                    }.alert(isPresented: self.$wrongQRCode){
+                        return Alert(title: Text("Wrong QR Code! Please drag down this view, reclick the qr scanner, and scan the QR Code with the blue border!"))
+                        self.wrongQRCode = false
+//                        print("just displayed alert and about to ask to reload")
+//                        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "ReloadMenuScan"), object: nil)
+//                        self.view.
+                    }
+//                    .alert(isPresented: $wrongQRCode, TextFieldAlert(title: "Wrong QR Code", message: "Please scan the QR Code with the blue border to see the menu") { (text) in
+//                                self.wrongQRCode = false
+//                        //need to refresh
+//                        self.qrCodeShow = false
+//                        self.qrCodeShow = true
+//                            })
                 }
-//                This for order review iteration
-//                .alert(isPresented: $orderRevNeed, TextFieldAlert(title: "How was Your Last Order?", message: "How") { (text) in
-//                            if text != nil {
-//                                print(text)
-//                                if((self.order.dishChoice[self.dish]?.isEmpty) != nil){
-//                                    self.order.dishChoice[self.dish] = ""
-//                                }
-//                                var newText = text?.replacingOccurrences(of: ";", with: ",")
-//                                self.order.dishChoice[self.dish] = newText!
-//
-//                                print(self.order.dishChoice[self.dish])
-//        //                        self.saveGroup(text: text!)
-//        //                        self.addtapped = true
-//                                self.choice = self.order.dishChoice
-//                            }
-//                            print("alert here now")
-//        //                    self.addtapped = true
-//                        })
-//                .navigationBarTitle("").navigationBarHidden(true)
-//                .navigationBarBackButtonHidden(true)
                 .onAppear(){
                     self.dispatchGroup.notify(queue: .main){
+//                        var code = ""
                         NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: "ChooseRest"), object: nil, queue: .main) { [self] (Notification) in
-                            
+//                            print("this is the code \(code)")
                             print("asked and gotten")
                             var text = Notification.object as! String
                             let d = DispatchGroup()
@@ -313,18 +318,17 @@ struct HomeScreenView: View {
 //                                rest = rest?.replacingOccurrences(of: "Vics", with: "Vic's")
 //
 //                            }
+                            self.order.newOrder(rest: self.restaurants.first(where: { $0.id.replacingOccurrences(of: " ", with: "") == rest })!)
                             print("ask: \(rest)")
                             
                             d.notify(queue: .main){
                 //                self.rest = self.restaurants.first(where: { $0.name == rest })!
                                 
-                                self.activeSheet = .first
                                 self.restChosen = true
                                 
                                 self.rest = self.restaurants.first(where: { $0.id.replacingOccurrences(of: " ", with: "") == rest })!
                                 print("ask: \(self.rest.description)")
                                 self.qrCodeShow = false
-                                self.qrCodeShow2 = true
                                 print("ask1: \(self.qrCodeShow)")
                                 
                 //                        self.
@@ -334,6 +338,8 @@ struct HomeScreenView: View {
                             
                             
                         }
+                        
+                        
                         self.restaurants = self.HomeScreenVM.allRestaurants
                         for x in self.restaurants {
         //                    let restSet = Set(arrayLiteral: cityRests[x.cityAddress].map({ $0.self }))
@@ -348,19 +354,6 @@ struct HomeScreenView: View {
                             if(!cities.contains(x.cityAddress)){
                                 self.cities.append(x.cityAddress)
                             }
-                        }
-                        if(userProfile.userId != ""){
-                            //order review add iteration
-                            //need to check if most recnt order exists without review
-//                            let prev = HomeScreenVM.checkPrevOrder(userID: userProfile.userId)
-//                            if prev.1 {
-                                //pop up about alert
-                                
-//                            }
-//                            if prev[1]{
-//                                
-//                            }
-                            
                         }
                     }
                 }
@@ -424,3 +417,45 @@ struct HomeScreenView_Previews: PreviewProvider {
         HomeScreenView()
     }
 }
+
+
+
+
+
+
+//                This for order review iteration
+//                .alert(isPresented: $orderRevNeed, TextFieldAlert(title: "How was Your Last Order?", message: "How") { (text) in
+//                            if text != nil {
+//                                print(text)
+//                                if((self.order.dishChoice[self.dish]?.isEmpty) != nil){
+//                                    self.order.dishChoice[self.dish] = ""
+//                                }
+//                                var newText = text?.replacingOccurrences(of: ";", with: ",")
+//                                self.order.dishChoice[self.dish] = newText!
+//
+//                                print(self.order.dishChoice[self.dish])
+//        //                        self.saveGroup(text: text!)
+//        //                        self.addtapped = true
+//                                self.choice = self.order.dishChoice
+//                            }
+//                            print("alert here now")
+//        //                    self.addtapped = true
+//                        })
+//                .navigationBarTitle("").navigationBarHidden(true)
+//                .navigationBarBackButtonHidden(true)
+
+
+
+//                        if(userProfile.userId != ""){
+                            //order review add iteration
+                            //need to check if most recnt order exists without review
+//                            let prev = HomeScreenVM.checkPrevOrder(userID: userProfile.userId)
+//                            if prev.1 {
+                                //pop up about alert
+                                
+//                            }
+//                            if prev[1]{
+//
+//                            }
+                            
+//                        }

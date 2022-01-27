@@ -12,17 +12,17 @@ import SwiftUI
 
 struct QRScanView: UIViewControllerRepresentable {
     private let completionHandler: ([String]?) -> Void
-//    var choice: Int = 0
+    var choice: Int
 
-    init(completion: @escaping ([String]?) -> Void) {
+    init(completion: @escaping ([String]?) -> Void, choice: Int) {
         self.completionHandler = completion
-//        self.choice = choice
+        self.choice = choice
     }
  
     typealias UIViewControllerType = QRScanViewController
      
     func makeUIViewController(context: UIViewControllerRepresentableContext<QRScanView>) -> QRScanViewController {
-        let viewController = QRScanViewController()
+        let viewController = QRScanViewController(choice: self.choice)
         return viewController
     }
      

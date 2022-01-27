@@ -59,6 +59,25 @@ struct ReviewOrder: View {
                                             self.dispatchGroup.notify(queue: .main){
                                                 self.dishCounts = self.order.dishCounts
                                                 self.dishes = self.order.dishesChosen
+                                                var noIncrease = false
+                                                if(!self.dishes.isEmpty){
+                                                    for d in self.dishes{
+                                                        var numSet = CharacterSet()
+                                                        numSet.insert(charactersIn: "0123456789")
+                                                        if(d.description.rangeOfCharacter(from: numSet) == nil){
+                                                            noIncrease = true
+                                                        }
+                                                        else{
+                                                            noIncrease = false
+                                                        }
+                                                    }
+                                                }
+                                                else{
+                                                    noIncrease = true
+                                                }
+                                                if(noIncrease){
+                                                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: "IncrPriceNotPoss"), object: nil)
+                                                }
 
                                             }
                                         }
@@ -101,33 +120,33 @@ struct ReviewOrder: View {
                                         
                                     }
     //                                Group {
-                                    if(self.order.dishChoice[dish]! != ""){
-                                        HStack(alignment: .center){
-    //                                        if(self.order.dishChoice[dish]! != ""){
-                                            ScrollView(.horizontal){
-                                                HStack(alignment: .center, spacing: 2){
-                                                    Text("Instructions: \(self.choice[dish]!)")
-                                                        .font(.system(size: 10)).foregroundColor(colorScheme == .dark ? .black : .white)
-                                                }
+//                                    if(self.order.dishChoice[dish]! != ""){
+                                    HStack(alignment: .center){
+//                                        if(self.order.dishChoice[dish]! != ""){
+                                        ScrollView(.horizontal){
+                                            HStack(alignment: .center, spacing: 2){
+                                                Text("Instructions: \(self.choice[dish]!)")
+                                                    .font(.system(size: 10)).foregroundColor(colorScheme == .dark ? .black : .white)
                                             }
-                                            Image(systemName: "pencil")
-                                                .onTapGesture{
-                                                    self.dish = dish
-                                                    self.changeInstructions = true
-                                                }
-                                                .background(ColorManager.yumzzOrange)
+                                        }
+                                        Image(systemName: "pencil")
+                                            .onTapGesture{
+                                                self.dish = dish
+                                                self.changeInstructions = true
+                                            }
+                                            .background(ColorManager.yumzzOrange)
 //                                                .colorScheme(ColorManager.yumzzOrange)
 //                                                .fixedSize(horizontal: 10, vertical: 10)
-    //                                        }
-                                        }.frame(maxWidth: UIScreen.main.bounds.width/1.2, alignment: .leading)
-                                        .frame(height: 20)
-                                        .background(ColorManager.yumzzOrange)
-                                        .cornerRadius(10)
-                                        .shadow(radius: 2)
+//                                        }
+                                    }.frame(maxWidth: UIScreen.main.bounds.width/1.2, alignment: .leading)
+                                    .frame(height: 20)
+                                    .background(ColorManager.yumzzOrange)
+                                    .cornerRadius(10)
+                                    .shadow(radius: 2)
                                         
     //                                    .scaledToFit()
     //                                }
-                                    }
+//                                    }
                                 }
                             }
                             
@@ -161,15 +180,16 @@ struct ReviewOrder: View {
                             self.IoT = true
                         }
                 }.padding(.horizontal)
-                #else
-                HStack{
-                    InvertedOrangeButton(strLabel: "Send Order", width: UIScreen.main.bounds.width - 40, height: 48, dark: colorScheme == .dark).clipShape(RoundedRectangle(cornerRadius: 10, style: .circular))
-                    .shadow(radius: 5)
-                    .onTapGesture {
-                        self.sendPrinterOrder = true
-                        self.IoT = true
-                    }
-            }.padding(.horizontal)
+//                #else
+//                HStack{
+//                    OrangeButton(strLabel: "Send Order", width: UIScreen.main.bounds.width - 40, height: 48, dark: colorScheme == .dark).clipShape(RoundedRectangle(cornerRadius: 10, style: .circular))
+//                    .shadow(radius: 5)
+//                    .onTapGesture {
+//                        print("tapped send order")
+//                        self.sendPrinterOrder = true
+//                        self.IoT = true
+//                    }
+//            }.padding(.horizontal)
 
                 
                 #endif
@@ -194,17 +214,29 @@ struct ReviewOrder: View {
 //                self.mode.wrappedValue.dismiss()
                 
             }
+            #if !APPCLIP
             NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: "WaiterCalled"), object: nil, queue: .main) { (Notification) in
 //                self.order.orderSent()
                 print("wow")
             }
+            #endif
         }
         .sheet(isPresented: $IoT){
             if(self.sendPrinterOrder){
+                #if !APPCLIP
                 ClientConnection(dishes: self.dishes, quantity: self.order.dishCounts, rest: self.order.restChosen)
                     .onDisappear(){
                         self.mode.wrappedValue.dismiss()
                     }
+                    .onAppear(){
+                        print("going to client connection")
+                    }
+//                #else
+//                PrintConnection(dishes: self.dishes, quantity: self.order.dishCounts, rest: self.order.restChosen)
+//                    .onAppear(){
+//                        print("going to client connection")
+//                    }
+                #endif
             }
             #if !APPCLIP
                 if(self.callWaiter){

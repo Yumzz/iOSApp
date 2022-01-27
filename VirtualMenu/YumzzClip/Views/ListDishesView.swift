@@ -45,6 +45,9 @@ struct ListDishesView: View {
 
     @EnvironmentObject var order : OrderModel
     @Environment (\.colorScheme) var colorScheme : ColorScheme
+    
+    @State var showBanner:Bool = true
+    @State var bannerData: BannerModifier.BannerData = BannerModifier.BannerData(title: "Plant a Tree", detail: "Download the app and sign up, then we will plant a tree in your honor!")
 
 
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
@@ -66,22 +69,26 @@ struct ListDishesView: View {
 
     var body: some View {
         Group {
-            if(!self.order.dishesChosen.isEmpty || !self.order.buildsChosen.isEmpty){
-                if(showDishDetails){
+                if(!self.order.dishesChosen.isEmpty || !self.order.buildsChosen.isEmpty){
+                    if(showDishDetails){
+                        view
+                            .navigationBarHidden(self.isNavBarHidden)
+                    }
+                    else{
+                        view.overlay(overlay, alignment: .bottom)
+    //                        .overlay(waitButt, alignment: .bottomLeading)
+                            .navigationBarHidden(self.isNavBarHidden)
+                        
+                    }
+                }else {
                     view
+    //                    .overlay(waitButt, alignment: .bottomLeading)
                         .navigationBarHidden(self.isNavBarHidden)
+    //                    .banner(data: $bannerData, show: $showBanner)
                 }
-                else{
-                    view.overlay(overlay, alignment: .bottom)
-//                        .overlay(waitButt, alignment: .bottomLeading)
-                        .navigationBarHidden(self.isNavBarHidden)
-                }
-            }else {
-                view
-//                    .overlay(waitButt, alignment: .bottomLeading)
-                    .navigationBarHidden(self.isNavBarHidden)
-            }
+            
         }
+//        .banner(data: $bannerData, show: $showBanner)
 //        .navigationBarHidden(self.isNavBarHidden)
 
     }
@@ -132,95 +139,103 @@ struct ListDishesView: View {
 //        EmptyView()
         ZStack {
             Color(colorScheme == .dark ? ColorManager.darkBack : #colorLiteral(red: 0.9725490196, green: 0.968627451, blue: 0.9607843137, alpha: 1)).edgesIgnoringSafeArea(.all)
-            ScrollView(.vertical) {
-                ScrollViewReader{ scrollView in
-//                VStack {
-                    Spacer().frame(height: 20)
-                    ScrollView(.horizontal, showsIndicators: false) {
-                        HStack(spacing: 10){
-                            ForEach(self.dishCats, id: \.name){ dishCategory in
-                                Text("\(dishCategory.name)")
-                                    .padding(.horizontal, 20)
-                                    .padding(.vertical, 10)
-                                    .font(.system(size: 12))
-                                    .scaledToFit()
-                                    .background((self.dishCategoryClicked == dishCategory) ?
-                                                    ColorManager.yumzzOrange.clipShape(RoundedRectangle(cornerRadius: 10, style: .circular)) : ColorManager.offWhiteBack.clipShape(RoundedRectangle(cornerRadius: 10, style: .circular)))
-                                    .foregroundColor((self.dishCategoryClicked == dishCategory) ?
-                                                        Color(UIColor().colorFromHex("#FFFFFF", 1)) : ColorManager.textGray)
-                                    .cornerRadius(5)
-                                    .onTapGesture {
-                                        if((self.dishCategoryClicked == dishCategory)){
-                                            self.dishCategoryClicked = DishCategory(isExpanded: false, dishes: [], name: "", description: "")
-                                        }
-                                        else{
-                                            self.dishCategoryClicked = dishCategory
-                                            scrollView.scrollTo(self.dishCats.firstIndex(of: dishCategory), anchor: .top)
+//            VStack{
+                ScrollView(.vertical) {
+//                    VStack{
+                    ScrollViewReader{ scrollView in
+    //                VStack {
+                        Spacer().frame(height: 20)
+                        ScrollView(.horizontal, showsIndicators: false) {
+                            HStack(spacing: 10){
+                                ForEach(self.dishCats, id: \.name){ dishCategory in
+                                    Text("\(dishCategory.name)")
+                                        .padding(.horizontal, 20)
+                                        .padding(.vertical, 10)
+                                        .font(.system(size: 12))
+                                        .scaledToFit()
+                                        .background((self.dishCategoryClicked == dishCategory) ?
+                                                        ColorManager.yumzzOrange.clipShape(RoundedRectangle(cornerRadius: 10, style: .circular)) : ColorManager.offWhiteBack.clipShape(RoundedRectangle(cornerRadius: 10, style: .circular)))
+                                        .foregroundColor((self.dishCategoryClicked == dishCategory) ?
+                                                            Color(UIColor().colorFromHex("#FFFFFF", 1)) : ColorManager.textGray)
+                                        .cornerRadius(5)
+                                        .onTapGesture {
+                                            if((self.dishCategoryClicked == dishCategory)){
+                                                self.dishCategoryClicked = DishCategory(isExpanded: false, dishes: [], name: "", description: "")
+                                            }
+                                            else{
+                                                self.dishCategoryClicked = dishCategory
+                                                scrollView.scrollTo(self.dishCats.firstIndex(of: dishCategory), anchor: .top)
+                                            }
                                         }
                                     }
+
                                 }
-
-                            }
-
-                    }
-////
-                    Spacer().frame(height: 20)
-////
-                    ForEach(self.dishCats, id: \.name){ dishCategory in
-                        VStack(alignment: .leading, spacing: 20) {
-//
-                            Text("\(dishCategory.name)")
-                                .font(.title)
-                                .fontWeight(.semibold)
-                                .padding(.leading)
-                                .foregroundColor(colorScheme == .dark ? .white : .black)
-////
-                            if(dishCategory.description != ""){
-                                Text("\(dishCategory.description)")
-                                    .font(.system(size: 14, weight: .semibold))
-                                    .foregroundColor(colorScheme == .dark ? .white : Color(#colorLiteral(red: 0.71, green: 0.71, blue: 0.71, alpha: 1))).tracking(-0.41)
-                            }
-//////
-                            VStack(spacing: 20){
-                                if dishCategory.dishes.isEmpty {
-                                    ForEach(dishCategory.builds, id: \.id) {
-                                        build in
-                                        Text("\(build.name)")
-                                            .font(.title)
-                                            .fontWeight(.semibold)
-                                            .padding(.leading)
-                                            .foregroundColor(colorScheme == .dark ? .white : .black)
-                                        Text("\(build.description)")
-                                            .font(.system(size: 14, weight: .semibold))
-                                            .foregroundColor(Color(#colorLiteral(red: 0.71, green: 0.71, blue: 0.71, alpha: 1))).tracking(-0.41)
-                                        BuildCard(build: build, rest: self.restaurant)
+                        }
+    ////
+                        Spacer().frame(height: 20)
+    ////
+                        ForEach(self.dishCats, id: \.name){ dishCategory in
+                            VStack(alignment: .leading, spacing: 20) {
+    //
+                                Text("\(dishCategory.name)")
+                                    .font(.title)
+                                    .fontWeight(.semibold)
+                                    .padding(.leading)
+                                    .foregroundColor(colorScheme == .dark ? .white : .black)
+    ////
+                                if(dishCategory.description != ""){
+                                    Text("\(dishCategory.description)")
+                                        .font(.system(size: 14, weight: .semibold))
+                                        .foregroundColor(colorScheme == .dark ? .white : Color(#colorLiteral(red: 0.71, green: 0.71, blue: 0.71, alpha: 1))).tracking(-0.41)
+                                }
+    //////
+                                VStack(spacing: 20){
+                                    if dishCategory.dishes.isEmpty {
+                                        ForEach(dishCategory.builds, id: \.id) {
+                                            build in
+                                            Text("\(build.name)")
+                                                .font(.title)
+                                                .fontWeight(.semibold)
+                                                .padding(.leading)
+                                                .foregroundColor(colorScheme == .dark ? .white : .black)
+                                            Text("\(build.description)")
+                                                .font(.system(size: 14, weight: .semibold))
+                                                .foregroundColor(Color(#colorLiteral(red: 0.71, green: 0.71, blue: 0.71, alpha: 1))).tracking(-0.41)
+                                            BuildCard(build: build, rest: self.restaurant)
+                                        }
+                                        Spacer().frame(height: 20)
+                                    }
+                                    ForEach(dishCategory.dishes, id: \.id) {
+                                        dish in
+                                        DishCard(dishName: dish.name, dishIngredients: dish.description, price: self.listDishVM.formatPrice(price: dish.price), singPrice:dish.options.isEmpty, rest: self.restaurant, dish: dish, dark: colorScheme == .dark)
+                                            .onTapGesture{
+                                                self.dishChosen = dish
+                                                self.showDishDetails = true
+    //                                            self.activeSheet = .first
+    //                                            self.showSheet2 = true
+                                            }
                                     }
                                     Spacer().frame(height: 20)
                                 }
-                                ForEach(dishCategory.dishes, id: \.id) {
-                                    dish in
-                                    DishCard(dishName: dish.name, dishIngredients: dish.description, price: self.listDishVM.formatPrice(price: dish.price), singPrice:dish.options.isEmpty, rest: self.restaurant, dish: dish, dark: colorScheme == .dark)
-                                        .onTapGesture{
-                                            self.dishChosen = dish
-                                            self.showDishDetails = true
-//                                            self.activeSheet = .first
-//                                            self.showSheet2 = true
-                                        }
-                                }
-                                Spacer().frame(height: 20)
-                            }
-                        }.id(self.dishCats.firstIndex(of: dishCategory))
+                            }.id(self.dishCats.firstIndex(of: dishCategory))
+                        }
+                        Spacer()
+    //                }
                     }
-                    Spacer()
 //                }
+    //                .banner(data: $bannerData, show: $showBanner)
                 }
-            }.navigationBarTitleDisplayMode(self.addtapped ? .inline : .automatic)
+            .navigationBarTitleDisplayMode(self.addtapped ? .inline : .automatic)
                 .frame(maxWidth: .infinity)
-            }
+                .banner(data: $bannerData, show: $showBanner)
+//            }
+        }
         .overlay(AppClipDishDetailsBottomSheetModal(display: $showDishDetails, backgroundColor: colorScheme == .dark ? .constant(Color(ColorManager.darkBack)) : .constant(ColorManager.offWhiteBack), rectangleColor: .constant(ColorManager.yumzzOrange)){
             DishDetailsView(dish: self.dishChosen, restaurant: self.restaurant)
         }
         )
+//        .banner(data: $bannerData, show: $showBanner)
+//        .overlay(banner(data: $bannerData, show: $showBanner))
 //        .sheet(isPresented: self.$waitButtonClicked){
 //
 //        }

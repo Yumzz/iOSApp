@@ -30,6 +30,7 @@ struct BuildCard: View {
     @EnvironmentObject var order : OrderModel
     #endif
     
+//    @available(iOS 14.0, *)
     var body: some View {
         ZStack {
             if build.individCost {
@@ -54,7 +55,7 @@ struct BuildCard: View {
                                  option in
                                 HStack{
                                     Text("\(option): $" + String.priceFix(price: (self.build.individualCosts[type]![((Int) (self.build.addOns[type]!.firstIndex(of: option)!))])))
-                                        .foregroundColor(.black)
+                                        .foregroundColor(colorScheme == .dark ? .white : .black)
 //
                                     
                                         
@@ -99,7 +100,7 @@ struct BuildCard: View {
                         
                         }
                         .padding(.horizontal)
-                        .background(colorScheme == .dark ? ColorManager.offWhiteBack : Color.white)
+                        .background(colorScheme == .dark ? Color.black : Color.white)
 //                        .frame(height: CGFloat((self.build.addOns[type]!.count))*32)
                         .cornerRadius(10)
                         
@@ -194,7 +195,7 @@ struct BuildCard: View {
                                 .onTapGesture {
                                     print(type)
                                 }
-                                .foregroundColor(.black)
+                                .foregroundColor(colorScheme == .dark ? .white : .black)
                                 ForEach(self.build.exclusiveOpts[type]!, id: \.self){
                                     size in
     //                                HStack{
@@ -305,7 +306,9 @@ struct BuildCard: View {
                             }
                         }
                         
-                    }.background(Color.white)
+                    }
+//                    .background(.black)
+                    .background((colorScheme == .dark) ? .black : .white)
                     .frame(width: UIScreen.main.bounds.width/1.3, height: 150, alignment: .center)
                     .padding()
                 }
