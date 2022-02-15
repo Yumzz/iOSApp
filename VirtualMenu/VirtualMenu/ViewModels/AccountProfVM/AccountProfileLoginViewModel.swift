@@ -27,7 +27,6 @@ class AccountProfileLoginViewModel: ObservableObject {
     
     func loginUser(email: String, password: String, disp: DispatchGroup? = nil){
         if(!email.isValidEmail || !password.isValidPassword){
-            print("invalid")
             self.alertMessage = "Your email or password is invalid"
             self.alertTitle = "Sign in error"
             disp?.leave()
@@ -90,8 +89,7 @@ class AccountProfileLoginViewModel: ObservableObject {
                     userProfile.profilePhoto = UIImage(data: data!)!
                     }
                 if(dispatch != nil){
-                print("leave")
-                dispatch!.leave()
+                    dispatch!.leave()
                 }
             }
         }
@@ -100,7 +98,6 @@ class AccountProfileLoginViewModel: ObservableObject {
     func logginFb() {
         socialLogin.attemptLoginFb(completion: { result, error in
             if(error == nil){
-                print("made it")
                 let d = DispatchGroup()
                 d.enter()
                 self.updateProfile(dispatch: d)
@@ -180,16 +177,13 @@ class AccountProfileLoginViewModel: ObservableObject {
             let dispatch = DispatchGroup()
             let fbLoginManager: LoginManager = LoginManager()
             fbLoginManager.logOut()
-            print("logged out")
             
             fbLoginManager.logIn(permissions: ["email"], from: UIApplication.shared.windows.last?.rootViewController) { (result, error) -> Void in
                 // print("RESULT: '\(result)' ")
 
                 if error != nil {
-                    print("error")
                     return
                 }else if(result!.isCancelled){
-                    print("result cancelled")
                     return
                 }
                 
@@ -241,8 +235,6 @@ class AccountProfileLoginViewModel: ObservableObject {
                         }
                         else{
                             //no account exists with this FB profile -> alert saying "please go to sign up"
-                            print("no account exists")
-                            print(error.debugDescription)
                             completion(result, error)
                             return
                         }

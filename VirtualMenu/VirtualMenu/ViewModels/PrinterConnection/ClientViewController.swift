@@ -28,6 +28,7 @@ import Instructions
 //        self.layer.borderColor = UIColor.blue.cgColor
 //    }
 //}
+var pastOrders: [Order] = []
 
 class ClientViewController: UIViewController, CoachMarksControllerDelegate, CoachMarksControllerDataSource
 {
@@ -71,6 +72,17 @@ class ClientViewController: UIViewController, CoachMarksControllerDelegate, Coac
 //            var text = "Wrong QR code scanned"
 //
 //        }
+        var forgetMessage = false
+        //turn this true and subsequently delete dishInfo if wrong QR
+        //add each sent message dish info to a global list of past orders
+        //if dishInfo is same as one before, then dont send it
+        NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: "CallWaitWrong"), object: nil, queue: .main) { [self] (Notification) in
+            forgetMessage = true
+        }
+        
+        NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: "ChooseRestWrong"), object: nil, queue: .main) { [self] (Notification) in
+            forgetMessage = true
+        }
         
         NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: "PrintInfo"), object: nil, queue: .main) { [self] (Notification) in
 //                        self.pastOrders = Notification.object as! [Order]
@@ -90,8 +102,38 @@ class ClientViewController: UIViewController, CoachMarksControllerDelegate, Coac
                 if(topic.lowercased().contains("vics")){
                     topic = "vics"
                 }
-                self.publishMessage(" \(userProfile.fullName); \(self.dishInfo); \(self.tableNum)", onTopic: "raspberry/vics")
-//                self.order.orderSent()
+                if(!forgetMessage){
+                    var total = 0.0
+                    var specInstructs = ""
+                    for inf in self.dishInfo{
+                        total += inf.1
+                        specInstructs = specInstructs + ", \(inf.3)"
+                    }
+                    
+                    let newOrder = Order(dishes: self.dishes, totalPrice: total, rest: self.rest.name, id: specInstructs, time: NSDate(timeIntervalSince1970: TimeInterval(NSDate().timeIntervalSince1970)) as Date, specialInstruc: specInstructs)
+                    var orderAlreadySent = false
+                    for pO in pastOrders{
+                        if (pO.rest == newOrder.rest && pO.dishes == newOrder.dishes && pO.specialInstruc == newOrder.specialInstruc) {
+                            orderAlreadySent = true
+                            print("already sent")
+                        }
+                    }
+                    if(!orderAlreadySent){
+                        self.publishMessage(" \(userProfile.fullName); \(self.dishInfo); \(self.tableNum)", onTopic: "raspberry/vics")
+                        pastOrders.append(newOrder)
+                    }
+                    else{
+                        self.dishInfo = []
+                        self.tableNum = ""
+                    }
+                }
+                else{
+                    print("forget message")
+                    forgetMessage = false
+                    self.dishInfo = []
+                    self.tableNum = ""
+                }
+                //need to notiffy this 
             }
 //                        self.loadingPrinterConnection = false
         }
@@ -219,7 +261,7 @@ class ClientViewController: UIViewController, CoachMarksControllerDelegate, Coac
     private func publishMessage(_ message: String, onTopic topic: String) {
         print("publishing message after asking about table")
         session?.publishData(message.data(using: .utf8, allowLossyConversion: false), onTopic: topic, retain: false, qos: .exactlyOnce)
-        
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "OrderSent"), object: nil)
         print("published message after asking about table")
     }
 //#if !APPCLIP
@@ -265,7 +307,7 @@ extension ClientViewController: MQTTSessionManagerDelegate, MQTTSessionDelegate 
         DispatchQueue.main.async {
             self.completion?()
             print("here in deliverance")
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "OrderSent"), object: nil)
+//            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "OrderSent"), object: nil)
             self.dismiss(animated: true)
         }
     }
@@ -281,7 +323,6 @@ struct ClientConnection: UIViewControllerRepresentable {
     typealias UIViewControllerType = ClientViewController
     func makeUIViewController(context: UIViewControllerRepresentableContext<ClientConnection>) -> ClientViewController {
 //            code
-        print("letsagoo")
         let connection = ClientViewController()
         connection.dishes = self.dishes
         connection.rest = rest
@@ -301,6 +342,7 @@ struct ClientConnection: UIViewControllerRepresentable {
             }
             dishInfo.append(dishTuple)
             
+            
             if(d == self.dishes.last){
                 connection.dishInfo = dishInfo
                 connection.rest = rest
@@ -313,7 +355,7 @@ struct ClientConnection: UIViewControllerRepresentable {
 
         func updateUIViewController(_ uiViewController: ClientViewController, context: UIViewControllerRepresentableContext<ClientConnection>) {
 //            code
-            print("WE HERE BOII")
+            print("update")
         }
 }
 
@@ -344,10 +386,12 @@ struct PrintConnectionUI: View {
             }.frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
             .onAppear(){
                 NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: "CallWaitWrong"), object: nil, queue: .main) { [self] (Notification) in
+                    print("callwaitwrong")
                     self.wrongQRCode = true
                 }
                 
                 NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: "ChooseRestWrong"), object: nil, queue: .main) { [self] (Notification) in
+                        print("chooserestwrong")
                         self.wrongQRCode = true
                 }
             }

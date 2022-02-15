@@ -23,7 +23,7 @@ struct BannerModifier: ViewModifier {
     func body(content: Content) -> some View {
         ZStack {
             if show{
-                VStack {
+                content.overlay(VStack {
                     // Banner Content Here
                     HStack {
                         VStack(alignment: .center, spacing: 2) {
@@ -51,9 +51,13 @@ struct BannerModifier: ViewModifier {
                             self.show = false
                         }
                     }
-                })
+                }))
             }
-            content
+            else{
+                content
+            }
+            
+//                .if()
         }
     }
     
@@ -66,3 +70,10 @@ extension View {
     }
 }
 
+extension View {
+    @ViewBuilder
+    func `if`<Transform: View>(_ condition: Bool, transform: (Self) -> Transform) -> some View {
+        if condition { transform(self) }
+        else { self }
+    }
+}

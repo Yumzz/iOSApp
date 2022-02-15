@@ -155,7 +155,7 @@ struct DishReviewsView: View {
             
         }
         .navigationBarBackButtonHidden(true)
-        .navigationBarItems(leading: WhiteBackButton(mode: self.mode))
+        .navigationBarItems(leading: BackButton(mode: self.mode))
         
     }
 }

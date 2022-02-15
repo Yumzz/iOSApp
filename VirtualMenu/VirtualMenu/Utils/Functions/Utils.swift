@@ -32,9 +32,6 @@ class Utils {
             
             let imagesRef = storage.reference().child("profilephotos/\(Auth.auth().currentUser!.uid)")
             
-            print(imagesRef.storage)
-            print(imagesRef.bucket)
-            print(imagesRef.name)
     //        PROFILE_IMGS_STORAGE_REF.child(Utilities.getCurrentUserId()).child("default.jpg")
             
             // Resize the image
@@ -66,8 +63,6 @@ class Utils {
                             if let error = error {
                                 print("Failed to change the profile image: \(error.localizedDescription)")
                             }else {
-                                print("Changed user profile image")
-                                
                                 guard let userId = Auth.auth().currentUser?.uid else {
                                     return
                                 }
@@ -81,7 +76,6 @@ class Utils {
                                         return
                                     }
                                 })
-                                    print("Updated user photoUrl")
                                     // Update cache
 //                                CacheManager.shared.cache(object: profileImage, key: userId)
                                     seal.fulfill(())
@@ -101,7 +95,6 @@ class Utils {
                     
                     // Observe the upload status
                     uploadTask.observe(.success) { (snapshot) in
-                        print("uploaded")
                         if(dispatch != nil){
                             dispatch!.leave()
                         }
@@ -145,7 +138,6 @@ class Utils {
     
     
     static func loadUserProfilePhoto(userId: String) -> UIImage? {
-        print("loadcalled")
         var retImage: UIImage? = nil
         
         Utils.getUserProfileImgURL(userId: userId) { (profileImgURL) in
@@ -163,7 +155,7 @@ class Utils {
                 }
                 
                 OperationQueue.main.addOperation {
-                    guard let image = UIImage(data: imageData) else { print("no image")
+                    guard let image = UIImage(data: imageData) else { 
                         return }
                     retImage = image
                     

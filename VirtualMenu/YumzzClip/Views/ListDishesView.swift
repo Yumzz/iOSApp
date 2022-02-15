@@ -44,7 +44,6 @@ struct ListDishesView: View {
     @State private var activeSheet: ActiveSheet?
 
     @EnvironmentObject var order : OrderModel
-    @Environment (\.colorScheme) var colorScheme : ColorScheme
     
     @State var showBanner:Bool = true
     @State var bannerData: BannerModifier.BannerData = BannerModifier.BannerData(title: "Plant a Tree", detail: "Download the app and sign up, then we will plant a tree in your honor!")
@@ -96,7 +95,7 @@ struct ListDishesView: View {
     var overlay: some View {
         VStack{
 //            NavigationLink(destination: ReviewOrder().navigationTitle("").navigationBarHidden(true)){
-                ViewCartButton(dishCount: self.order.allDishes)
+            ViewCartButton(dishCount: self.order.allDishes + self.order.allBuilds)
                     .clipShape(RoundedRectangle(cornerRadius: 10, style: .circular))
                     .onTapGesture {
                         self.showSheet2 = true
@@ -113,7 +112,7 @@ struct ListDishesView: View {
 //            if(!self.order.dishesChosen.isEmpty || !self.order.buildsChosen.isEmpty){
 //                Spacer().frame(height: 60)
 //            }
-            OrangeButton(strLabel: "Call a Waiter", width: 167.5, height: 48, dark: colorScheme == .dark)
+            OrangeButton(strLabel: "Call a Waiter", width: 167.5, height: 48)
                 .clipShape(RoundedRectangle(cornerRadius: 10, style: .circular))
                 .onTapGesture {
                     self.showSheet2 = true
@@ -138,7 +137,7 @@ struct ListDishesView: View {
     var view: some View {
 //        EmptyView()
         ZStack {
-            Color(colorScheme == .dark ? ColorManager.darkBack : #colorLiteral(red: 0.9725490196, green: 0.968627451, blue: 0.9607843137, alpha: 1)).edgesIgnoringSafeArea(.all)
+            Color("DarkBack").edgesIgnoringSafeArea(.all)
 //            VStack{
                 ScrollView(.vertical) {
 //                    VStack{
@@ -181,12 +180,12 @@ struct ListDishesView: View {
                                     .font(.title)
                                     .fontWeight(.semibold)
                                     .padding(.leading)
-                                    .foregroundColor(colorScheme == .dark ? .white : .black)
+                                    .foregroundColor(Color("Back"))
     ////
                                 if(dishCategory.description != ""){
                                     Text("\(dishCategory.description)")
                                         .font(.system(size: 14, weight: .semibold))
-                                        .foregroundColor(colorScheme == .dark ? .white : Color(#colorLiteral(red: 0.71, green: 0.71, blue: 0.71, alpha: 1))).tracking(-0.41)
+                                        .foregroundColor(Color("GreyWhite")).tracking(-0.41)
                                 }
     //////
                                 VStack(spacing: 20){
@@ -197,7 +196,7 @@ struct ListDishesView: View {
                                                 .font(.title)
                                                 .fontWeight(.semibold)
                                                 .padding(.leading)
-                                                .foregroundColor(colorScheme == .dark ? .white : .black)
+                                                .foregroundColor(Color("Back"))
                                             Text("\(build.description)")
                                                 .font(.system(size: 14, weight: .semibold))
                                                 .foregroundColor(Color(#colorLiteral(red: 0.71, green: 0.71, blue: 0.71, alpha: 1))).tracking(-0.41)
@@ -207,7 +206,7 @@ struct ListDishesView: View {
                                     }
                                     ForEach(dishCategory.dishes, id: \.id) {
                                         dish in
-                                        DishCard(dishName: dish.name, dishIngredients: dish.description, price: self.listDishVM.formatPrice(price: dish.price), singPrice:dish.options.isEmpty, rest: self.restaurant, dish: dish, dark: colorScheme == .dark)
+                                        DishCard(dishName: dish.name, dishIngredients: dish.description, price: self.listDishVM.formatPrice(price: dish.price), singPrice:dish.options.isEmpty, rest: self.restaurant, dish: dish)
                                             .onTapGesture{
                                                 self.dishChosen = dish
                                                 self.showDishDetails = true
@@ -230,7 +229,7 @@ struct ListDishesView: View {
                 .banner(data: $bannerData, show: $showBanner)
 //            }
         }
-        .overlay(AppClipDishDetailsBottomSheetModal(display: $showDishDetails, backgroundColor: colorScheme == .dark ? .constant(Color(ColorManager.darkBack)) : .constant(ColorManager.offWhiteBack), rectangleColor: .constant(ColorManager.yumzzOrange)){
+        .overlay(AppClipDishDetailsBottomSheetModal(display: $showDishDetails, backgroundColor: .constant(Color("DarkBack")), rectangleColor: .constant(ColorManager.yumzzOrange)){
             DishDetailsView(dish: self.dishChosen, restaurant: self.restaurant)
         }
         )

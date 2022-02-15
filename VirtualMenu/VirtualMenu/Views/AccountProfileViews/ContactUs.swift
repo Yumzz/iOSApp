@@ -17,7 +17,6 @@ struct ContactUs: View {
     @State private var alertTitle = ""
     @State var show = false
     @State private var textStyle = UIFont.TextStyle.body
-    @Environment (\.colorScheme) var colorScheme : ColorScheme
 
     
     @ObservedObject var contactUs = ContactUsViewModel()
@@ -28,16 +27,16 @@ struct ContactUs: View {
                 VStack (alignment: .leading) {
                     Text("Let's have a chat")
                         .font(.custom("Futura Bold", size: 22))
-                        .foregroundColor(colorScheme == .dark ? .white : ColorManager.yumzzOrange)
+                        .foregroundColor(Color("OrangeWhite"))
                     Spacer()
                         .frame(height: CGFloat(30))
-                        .foregroundColor(colorScheme == .dark ? .white : ColorManager.yumzzOrange)
+                        .foregroundColor(Color("OrangeWhite"))
                 }
                 VStack (alignment: .leading) {
                     Text("Where should we email you back?")
                         .padding(.leading, (UIScreen.main.bounds.width * 10) / 414)
                         .padding(.trailing, (UIScreen.main.bounds.width * 10) / 414)
-                        .foregroundColor(colorScheme == .dark ? .white : ColorManager.yumzzOrange)
+                        .foregroundColor(Color("OrangeWhite"))
                         
                     TextField("Email", text: $email)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
@@ -50,7 +49,7 @@ struct ContactUs: View {
                     Text("What is your name?")
                         .padding(.leading, (UIScreen.main.bounds.width * 10) / 414)
                         .padding(.trailing, (UIScreen.main.bounds.width * 10) / 414)
-                        .foregroundColor(colorScheme == .dark ? .white : ColorManager.yumzzOrange)
+                        .foregroundColor(Color("OrangeWhite"))
                     TextField("Name", text: $name)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
                         .padding(.leading, (UIScreen.main.bounds.width * 10) / 414)
@@ -75,7 +74,7 @@ struct ContactUs: View {
                     self.showingAlert.toggle()
                 }) {
                     Text("Send")
-                        .foregroundColor(colorScheme == .dark ? .white : ColorManager.yumzzOrange)
+                        .foregroundColor(Color("OrangeWhite"))
                 }
                 .alert(isPresented: $showingAlert) {
                     Alert(title: Text("Thank you for submitting"), message: Text("\(self.alertMessage)"), dismissButton: .default(Text("OK")))

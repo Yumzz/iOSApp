@@ -22,7 +22,6 @@ class CacheDishInfo: ObservableObject {
                     self.Dish = dish
                     break
                 case(.failure(let e)):
-                    print("error: \(e)")
                     break
             }
         }

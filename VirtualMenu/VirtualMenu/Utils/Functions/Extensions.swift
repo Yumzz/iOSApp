@@ -106,6 +106,12 @@ extension String {
     
 }
 
+extension Dictionary where Value: Equatable {
+    func someKey(forValue val: Value) -> Key? {
+        return first(where: { $1 == val })?.key
+    }
+}
+
 extension Double {
     func removeZerosFromEnd() -> String {
         let formatter = NumberFormatter()
@@ -128,13 +134,9 @@ extension String {
     }
     
     func sidesFixed(str: String, dishcat: [DishCategory]) -> String{
-        print("here")
         if str.contains("choice of side") {
-            print("contains")
             let results = dishcat.filter { $0.name == "Sides" }
             let results2 = dishcat.filter { $0.name == "Sidelines" }
-            print("results: \(results)")
-            print("results2: \(results2)")
             if(!results.isEmpty){
                 str.replacingOccurrences(of: "choice of side", with: "choice of \(results)")
             }

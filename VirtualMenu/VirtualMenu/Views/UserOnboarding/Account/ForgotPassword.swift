@@ -20,7 +20,6 @@ struct ForgotPasswordView: View {
     
     @ObservedObject var forgotPassword = ForgotPasswordViewModel()
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
-    @Environment (\.colorScheme) var colorScheme : ColorScheme
 
     
     @State var isNavigationBarHidden: Bool = true
@@ -33,11 +32,11 @@ struct ForgotPasswordView: View {
     
     var body: some View {
         ZStack{
-            Color(colorScheme == .dark ? ColorManager.darkBack : #colorLiteral(red: 0.9725490196, green: 0.968627451, blue: 0.9607843137, alpha: 1)).edgesIgnoringSafeArea(.all)
+            Color("DarkBack").edgesIgnoringSafeArea(.all)
             Spacer().frame(width: UIScreen.main.bounds.width, height: 0)
             VStack{
                 Text("Retrieve Your Account")
-                    .foregroundColor(colorScheme == .dark ? .white : ColorManager.textGray)
+                    .foregroundColor(Color("WhiteTextGrey"))
                     .font(.largeTitle).bold()
                     .font(.system(size: 36))
                     .padding(.leading, 40)
@@ -45,7 +44,7 @@ struct ForgotPasswordView: View {
             }.position(x: UIScreen.main.bounds.width/2.5, y: 20)
             VStack{
 
-                CustomTextField(field: "Email", strLabel: "jonnyives@apple.com", dark: colorScheme == .dark, strField: $email, uiTextAutoCapitalizationType: .none, uiKeyboardType: .emailAddress).foregroundColor(.black)
+                CustomTextField(field: "Email", strLabel: "jonnyives@apple.com", strField: $email, uiTextAutoCapitalizationType: .none, uiKeyboardType: .emailAddress).foregroundColor(.black)
                     
                 Spacer().frame(height: 30)
 
@@ -78,7 +77,7 @@ struct ForgotPasswordView: View {
                             self.showAlert.toggle()
                         }
                     }) {
-                        OrangeButton(strLabel: "Reset your Password", width: 330, height: 48, dark: colorScheme == .dark)
+                        OrangeButton(strLabel: "Reset your Password", width: 330, height: 48)
                             .clipShape(RoundedRectangle(cornerRadius: 10, style: .circular))
                     }
 //                        .alert(isPresented: $showingAlert) {

@@ -67,6 +67,6 @@ struct TagCard: View {
 //            .foregroundColor(Color.white)
            
 //        }
-        .background(card ? (dark ? ColorManager.blackest : Color.white) : ((dark ? Color(ColorManager.darkBack) : ColorManager.offWhiteBack)))
+        .background(card ? Color("DarkestWhite") : Color("BlackOffWhite"))
     }
 }

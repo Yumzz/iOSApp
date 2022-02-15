@@ -28,7 +28,6 @@ struct AccountProfileLoginView: View {
     @Environment(\.window) var window: UIWindow?
     @State var delegate: SignInWithAppleDelegates! = nil
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
-    @Environment (\.colorScheme) var colorScheme : ColorScheme
     
     ///Keyboard focus
     @State var isFocused = false
@@ -53,11 +52,11 @@ struct AccountProfileLoginView: View {
     
     var body: some View {
         ZStack{
-            Color(colorScheme == .dark ? ColorManager.darkBack : #colorLiteral(red: 0.9725490196, green: 0.968627451, blue: 0.9607843137, alpha: 1)).edgesIgnoringSafeArea(.all)
+            Color("DarkBack").edgesIgnoringSafeArea(.all)
             VStack{
                 VStack(spacing: 10){
                     Text("Login and enjoy!")
-                        .foregroundColor(colorScheme == .dark ? .white : ColorManager.textGray)
+                        .foregroundColor(Color("WhiteTextGrey"))
                         .font(.largeTitle).bold()
                         .font(.system(size: 36))
                         .padding(.leading, 40)
@@ -66,15 +65,15 @@ struct AccountProfileLoginView: View {
 //                    Spacer()
 //                        .position(x: UIScreen.main.bounds.width/2.5, y: 10)
                         
-                    CustomTextField(field: "Email", strLabel: "jonnyives@apple.com", dark: colorScheme == .dark, strField: $email, uiTextAutoCapitalizationType: .none, uiKeyboardType: .emailAddress)
+                    CustomTextField(field: "Email", strLabel: "jonnyives@apple.com", strField: $email, uiTextAutoCapitalizationType: .none, uiKeyboardType: .emailAddress)
 
-                    CustomPasswordField(field: "Password", strLabel: "••••••••••", dark: colorScheme == .dark, password: $password)
+                    CustomPasswordField(field: "Password", strLabel: "••••••••••", password: $password)
                         
     //                VStack {
                         HStack {
                             NavigationLink(destination: ForgotPasswordView()){
                                     Text("Forgot Password?")
-                                        .foregroundColor(colorScheme == .dark ? Color.white : Color(UIColor().colorFromHex("#B4B4B4", 1)))
+                                        .foregroundColor(Color("GreyWhite"))
                                         .font(.system(size: 12, weight: .bold, design: .default))
                                     
                                 }
@@ -113,7 +112,7 @@ struct AccountProfileLoginView: View {
                                 }
                             }
                         }) {
-                            OrangeButton(strLabel: "Login", width: 330, height: 48, dark: colorScheme == .dark)
+                            OrangeButton(strLabel: "Login", width: 330, height: 48)
                                 .clipShape(RoundedRectangle(cornerRadius: 10, style: .circular))
                         }
                 }
@@ -150,7 +149,7 @@ struct AccountProfileLoginView: View {
         .navigationBarTitle("")
         .navigationBarHidden(self.isNavigationBarHidden)
         .navigationBarBackButtonHidden(true)
-        .navigationBarItems(leading: BackButton(mode: self.mode, dark: colorScheme == .dark))
+        .navigationBarItems(leading: BackButton(mode: self.mode))
         .edgesIgnoringSafeArea([.top, .bottom])
         .onAppear(){
             self.isNavigationBarHidden = false

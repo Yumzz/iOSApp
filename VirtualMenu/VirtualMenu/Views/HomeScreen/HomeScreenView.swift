@@ -39,8 +39,6 @@ struct HomeScreenView: View {
     
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
     @GestureState private var dragOffset = CGSize.zero
-    @Environment (\.colorScheme) var colorScheme : ColorScheme
-
         
     let dispatchGroup = DispatchGroup()
     
@@ -98,7 +96,7 @@ struct HomeScreenView: View {
     var overlay: some View {
         VStack{
             NavigationLink(destination: ReviewOrder()){
-                ViewCartButton(dishCount: self.order.allDishes)
+                ViewCartButton(dishCount: self.order.allDishes + self.order.allBuilds)
                     .clipShape(RoundedRectangle(cornerRadius: 10, style: .circular))
             }
             Spacer().frame(width: 0, height: 10)
@@ -147,13 +145,13 @@ struct HomeScreenView: View {
         }
         else{
             ZStack {
-                Color(colorScheme == .dark ? ColorManager.darkBack : #colorLiteral(red: 0.9725490196, green: 0.968627451, blue: 0.9607843137, alpha: 1)).edgesIgnoringSafeArea(.all)
+                Color("DarkBack").edgesIgnoringSafeArea(.all)
                 VStack {
-                    Spacer().frame(height: 60)
+                    Spacer().frame(height: 40)
                 ScrollView(.vertical, showsIndicators: false) {
                     VStack {
                         HStack {
-                            Text("Near you").font(.system(size: 24, weight: .semibold)).foregroundColor(colorScheme == .dark ? .white : .black)
+                            Text("Near you").font(.system(size: 24, weight: .semibold)).foregroundColor(Color("Back"))
                             Spacer()
                         }.padding()
                         
@@ -164,7 +162,7 @@ struct HomeScreenView: View {
                                     NavigationLink(
                                         destination: RestaurantHomeView(restaurant: restaurant, distance: self.HomeScreenVM.getDistFromUser(coordinate: restaurant.coordinate))
                                     ) {
-                                        HSRestaurantCard(restaurant: restaurant, location: self.HomeScreenVM.getDistFromUser(coordinate: restaurant.coordinate),dark: colorScheme == .dark)
+                                        HSRestaurantCard(restaurant: restaurant, location: self.HomeScreenVM.getDistFromUser(coordinate: restaurant.coordinate))
                                     }
                                 }
                             }
@@ -174,7 +172,7 @@ struct HomeScreenView: View {
                         ForEach(self.cities, id:\.self) { city in
                             
                             HStack{
-                                Text("Popular in \(city)").font(.system(size: 24, weight: .semibold)).foregroundColor(colorScheme == .dark ? .white : .black)
+                                Text("Popular in \(city)").font(.system(size: 24, weight: .semibold)).foregroundColor(Color("Back"))
                                 Spacer()
                             }.padding()
                         
@@ -186,7 +184,7 @@ struct HomeScreenView: View {
                                         NavigationLink(
                                             destination: RestaurantHomeView(restaurant: rest, distance: self.HomeScreenVM.getDistFromUser(coordinate: rest.coordinate))
                                         ) {
-                                            HSRestaurantCard(restaurant: rest, location: self.HomeScreenVM.getDistFromUser(coordinate: rest.coordinate), dark: colorScheme == .dark)
+                                            HSRestaurantCard(restaurant: rest, location: self.HomeScreenVM.getDistFromUser(coordinate: rest.coordinate))
                                         }
 
 
@@ -203,11 +201,11 @@ struct HomeScreenView: View {
     //                .background(Color(red: 0.953, green: 0.945, blue: 0.933))\
                     .navigationBarItems(leading: HStack {
                         Text("Yumzz").font(.system(size: 36, weight: .bold))
-                            .foregroundColor(colorScheme == .dark ? .white : ColorManager.yumzzOrange)
+                            .foregroundColor(Color("OrangeWhite"))
                         Spacer().frame(width: UIScreen.main.bounds.width/5)
                         Image(systemName: "qrcode.viewfinder")
                             .font(.system(size: 24, weight: .bold)).padding()
-                            .foregroundColor(colorScheme == .dark ? ColorManager.darkModeOrange : ColorManager.yumzzOrange)
+                            .foregroundColor(Color("YumzzOrange"))
                             .onTapGesture{
                                 print("touched qr")
 //                                self.navbarhidden = true
@@ -247,7 +245,7 @@ struct HomeScreenView: View {
     //                            .frame(width: 36, height: 36)
                                 
                         }
-                    }.foregroundColor(colorScheme == .dark ? ColorManager.darkModeOrange : Color(#colorLiteral(red: 0.88, green: 0.36, blue: 0.16, alpha: 1)))
+                    }.foregroundColor(Color("YumzzOrange"))
 //                        .frame(alignment: .top)
                         .padding()
                         .onTapGesture(){
@@ -261,6 +259,7 @@ struct HomeScreenView: View {
 //                    }
                     .navigationBarHidden(self.navbarhidden)
                     .navigationBarTitleDisplayMode(.inline)
+                    .navigationBarBackButtonHidden(true)
                 
                 .edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
                 .popover(isPresented: self.$qrCodeShow){
@@ -388,7 +387,6 @@ struct HSRestaurantCard: View {
     var restaurant: RestaurantFB
 //    var HomeScreenVM : HomeScreenViewModel
     var location: Double
-    var dark: Bool = false
     
     var body: some View {
             VStack {
@@ -399,11 +397,11 @@ struct HSRestaurantCard: View {
                     Spacer()
                 }
                 HStack{
-                    Text(restaurant.name).font(.system(size: 18, weight: .bold)).tracking(-0.41).foregroundColor(dark ? .white : .black)
+                    Text(restaurant.name).font(.system(size: 18, weight: .bold)).tracking(-0.41).foregroundColor(Color("Back"))
                     Spacer()
                 }
                 HStack{
-                    Text("\(restaurant.price) | \(restaurant.ethnicity) | \(self.location.removeZerosFromEnd()) miles").font(.system(size: 12, weight: .semibold)).foregroundColor(dark ? .white : Color(#colorLiteral(red: 0.7, green: 0.7, blue: 0.7, alpha: 1))).tracking(-0.41)
+                    Text("\(restaurant.price) | \(restaurant.ethnicity) | \(self.location.removeZerosFromEnd()) miles").font(.system(size: 12, weight: .semibold)).foregroundColor(Color("GreyWhite")).tracking(-0.41)
                     Spacer()
                 }
             }.frame(width: 175, height: 150)

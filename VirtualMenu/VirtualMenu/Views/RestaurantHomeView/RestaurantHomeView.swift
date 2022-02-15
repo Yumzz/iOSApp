@@ -14,9 +14,7 @@ struct RestaurantHomeView: View {
     
     @ObservedObject var menuSelectionVM: MenuSelectionViewModel
     @EnvironmentObject var order : OrderModel
-    
-    @Environment(\.colorScheme) var colorScheme : ColorScheme
-    
+        
     @State var isNavigationBarHidden: Bool = true
     @State var dishesChosen: Bool = false
     
@@ -66,7 +64,7 @@ struct RestaurantHomeView: View {
     
     var body: some View {
         ZStack{
-            Color(colorScheme == .dark ? ColorManager.darkBack : #colorLiteral(red: 0.9725490196, green: 0.968627451, blue: 0.9607843137, alpha: 1)).edgesIgnoringSafeArea(.all)
+            Color("DarkBack").edgesIgnoringSafeArea(.all)
             ScrollView(.vertical){
                 ZStack {
                     VStack{
@@ -83,7 +81,7 @@ struct RestaurantHomeView: View {
 //                        } else {
                         VStack(alignment: .leading){
                             HStack{
-                                Text(restaurant.name).font(.system(size: 24, weight: .semibold)).tracking(-0.41).foregroundColor(colorScheme == .dark ? .white : ColorManager.textGray)
+                                Text(restaurant.name).font(.system(size: 24, weight: .semibold)).tracking(-0.41).foregroundColor(Color("WhiteTextGrey"))
                                 Spacer()
 //                                Button(action: {
 //                                    
@@ -99,7 +97,7 @@ struct RestaurantHomeView: View {
 //                                }
                             }
                             HStack{
-                                Text("\(restaurant.price) | \(restaurant.ethnicity) | \(self.distance.removeZerosFromEnd()) miles | \(self.restaurant.hour)").font(.system(size: 14, weight: .semibold)).foregroundColor(colorScheme == .dark ? Color(#colorLiteral(red: 0.9725490196, green: 0.968627451, blue: 0.9607843137, alpha: 1)): ColorManager.textGray).tracking(-0.41)
+                                Text("\(restaurant.price) | \(restaurant.ethnicity) | \(self.distance.removeZerosFromEnd()) miles | \(self.restaurant.hour)").font(.system(size: 14, weight: .semibold)).foregroundColor(Color("WhiteTextGrey")).tracking(-0.41)
                             }
                             
                             HStack{
@@ -141,8 +139,8 @@ struct RestaurantHomeView: View {
                                             .frame(width: 150)
                                     }
                                     .padding()
-                                    .foregroundColor(colorScheme == .dark ? .white : Color(#colorLiteral(red: 0.88, green: 0.36, blue: 0.16, alpha: 1)))
-                                    .background(RoundedRectangle(cornerRadius: 15, style: .continuous).fill(colorScheme == .dark ? ColorManager.darkModeOrange : .white ).frame(height: 50))
+                                    .foregroundColor(Color("OrangeWhite"))
+                                    .background(RoundedRectangle(cornerRadius: 15, style: .continuous).fill(Color("WhiteOrange")).frame(height: 50))
                                 }
                                 Spacer()
                                 HStack{
@@ -168,8 +166,8 @@ struct RestaurantHomeView: View {
                                                 .frame(width: 80, height: 20)
                                         }
                                         .padding()
-                                        .foregroundColor(colorScheme == .dark ? .white : Color(#colorLiteral(red: 0.88, green: 0.36, blue: 0.16, alpha: 1)))
-                                        .background(RoundedRectangle(cornerRadius: 15, style: .continuous).fill(colorScheme == .dark ? ColorManager.darkModeOrange : .white).frame(height: 50))
+                                        .foregroundColor(Color("OrangeWhite"))
+                                        .background(RoundedRectangle(cornerRadius: 15, style: .continuous).fill(Color("WhiteOrange")).frame(height: 50))
                                     }
                                 }
                                 
@@ -178,7 +176,7 @@ struct RestaurantHomeView: View {
                             if(!self.menuSelectionVM.featuredDishes.isEmpty){
                                 VStack{
                                     HStack{
-                                        Text("Popular").font(.system(size: 24, weight: .semibold)).foregroundColor(colorScheme == .dark ? .white : .black)
+                                        Text("Popular").font(.system(size: 24, weight: .semibold)).foregroundColor(Color("Back"))
                                         Spacer()
                                     }
                                 }
@@ -191,7 +189,7 @@ struct RestaurantHomeView: View {
                                             NavigationLink(
                                                 destination: DishDetailsView(dish: dish, restaurant: self.restaurant).navigationBarHidden(false)
                                             ) {
-                                                PopularDishCard(dish: dish, dark: colorScheme == .dark)
+                                                PopularDishCard(dish: dish)
                                             }
 //                                            #endif
                                             
@@ -206,7 +204,7 @@ struct RestaurantHomeView: View {
                                 if(self.dishesChosen || !self.order.buildsChosen.isEmpty){
     //                                #if !APPCLIP
                                     NavigationLink(destination: ReviewOrder()){
-                                        ViewCartButton(dishCount: self.order.allDishes)
+                                        ViewCartButton(dishCount: self.order.allDishes + self.order.allBuilds)
                                             .clipShape(RoundedRectangle(cornerRadius: 10, style: .circular))
                                     }
     //                                #endif
@@ -222,8 +220,7 @@ struct RestaurantHomeView: View {
                         }.padding()
 //                        }
                     }
-                    .background(RoundedRectangle(cornerRadius: /*@START_MENU_TOKEN@*/25.0/*@END_MENU_TOKEN@*/, style: /*@START_MENU_TOKEN@*/.continuous/*@END_MENU_TOKEN@*/).fill(
-                        colorScheme == .dark ? Color(ColorManager.darkBack) : Color(#colorLiteral(red: 0.9725490196, green: 0.968627451, blue: 0.9607843137, alpha: 1))))
+                    .background(RoundedRectangle(cornerRadius: /*@START_MENU_TOKEN@*/25.0/*@END_MENU_TOKEN@*/, style: /*@START_MENU_TOKEN@*/.continuous/*@END_MENU_TOKEN@*/).fill(Color("DarkBack")))
                     .offset(y:190)
                     Spacer().frame(width: 0, height: 40)
                 }
@@ -231,7 +228,7 @@ struct RestaurantHomeView: View {
             #if !APPCLIP
             if self.popUpShown {
                 ZStack {
-                    Color(colorScheme == .dark ? ColorManager.darkBack : #colorLiteral(red: 0.9725490196, green: 0.968627451, blue: 0.9607843137, alpha: 1))
+                    Color("DarkBack")
                     VStack {
                         RatingView(menuSelectionVM: self.menuSelectionVM, isOpen: self.$popUpShown)
                     }.padding()
@@ -252,7 +249,7 @@ struct RestaurantHomeView: View {
         .navigationBarTitle("")
         .navigationBarBackButtonHidden(true)
         .navigationBarHidden(false)
-        .navigationBarItems(leading: WhiteBackButton(mode: self.mode).onTapGesture{
+        .navigationBarItems(leading: BackButton(mode: self.mode).onTapGesture{
             print("self.mode = \(self.mode)")
         })
         .onAppear(){
@@ -276,7 +273,6 @@ struct RestaurantHomeView: View {
 
 struct PopularDishCard: View {
     var dish: DishFB
-    var dark: Bool = false
 //    var p = ""
     var body: some View {
         VStack {
@@ -287,22 +283,22 @@ struct PopularDishCard: View {
                 Spacer()
             }
             HStack{
-                Text(dish.name).foregroundColor(dark ? .white : Color.black).font(.system(size: 18, weight: .bold)).tracking(-0.41)
+                Text(dish.name).foregroundColor(Color("Back")).font(.system(size: 18, weight: .bold)).tracking(-0.41)
                 Spacer()
             }
             HStack{
                 if(String(dish.price).components(separatedBy: ".")[1].count < 2){
                     if(String(dish.price).components(separatedBy: ".")[1].count < 1){
-                        Text(String(dish.price) + "00").font(.system(size: 12, weight: .semibold)).foregroundColor(dark ? .white : Color(#colorLiteral(red: 0.7, green: 0.7, blue: 0.7, alpha: 1))).tracking(-0.41)
+                        Text(String(dish.price) + "00").font(.system(size: 12, weight: .semibold)).foregroundColor(Color("GreyWhite")).tracking(-0.41)
                         Spacer()
                     }
                     else{
-                        Text(String(dish.price) + "0").font(.system(size: 12, weight: .semibold)).foregroundColor(dark ? .white : Color(#colorLiteral(red: 0.7, green: 0.7, blue: 0.7, alpha: 1))).tracking(-0.41)
+                        Text(String(dish.price) + "0").font(.system(size: 12, weight: .semibold)).foregroundColor(Color("GreyWhite")).tracking(-0.41)
                         Spacer()
                     }
                 }
                 else{
-                    Text(String(dish.price)).font(.system(size: 12, weight: .semibold)).foregroundColor(dark ? .white : Color(#colorLiteral(red: 0.7, green: 0.7, blue: 0.7, alpha: 1))).tracking(-0.41)
+                    Text(String(dish.price)).font(.system(size: 12, weight: .semibold)).foregroundColor(Color("GreyWhite")).tracking(-0.41)
                     Spacer()
                 }
                 

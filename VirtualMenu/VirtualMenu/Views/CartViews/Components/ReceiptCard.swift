@@ -9,49 +9,45 @@ struct ReceiptCard: View {
 //    var count: Int
 //    var name: String
     @State var pricePossIncrease: Bool = false
-    var total: Double
-    var dark: Bool = false
-    
+    var total: Double    
     var tax = 5.00
-        
-    @Environment (\.colorScheme) var colorScheme:ColorScheme
-    
+            
     var body: some View {
         Group {
             VStack(alignment: .leading, spacing: 2) {
                 HStack{
                     Spacer().frame(width: 5, height: 0)
                     Text("Subtotal")
-                        .font(.system(size: 14)).bold().foregroundColor(dark ? .white : .black)
+                        .font(.system(size: 14)).bold().foregroundColor(Color("Blackest"))
 //                        .overlay(Text("\(count)"))
 //                    Spacer().frame(width: UIScreen.main.bounds.size.width/2, height: 0)
                     Spacer()
-                    Text("\(DishFB.priceFix(price: String(total)))" + (pricePossIncrease ? "+" : "")).foregroundColor(dark ? .white : .black)
+                    Text("\(DishFB.priceFix(price: String(total)))" + (pricePossIncrease ? "+" : "")).foregroundColor(Color("Blackest"))
                     Spacer().frame(width: 5, height: 0)
                 }
                 
                 HStack{
                     Spacer().frame(width: 5, height: 0)
                     Text("Tax & Fees")
-                        .font(.system(size: 14)).bold().foregroundColor(dark ? .white : .black)
+                        .font(.system(size: 14)).bold().foregroundColor(Color("Blackest"))
 //                        .overlay(Text("\(count)"))
 //                    Spacer().frame(width: UIScreen.main.bounds.size.width/2, height: 0)
                     Spacer()
-                    Text("\(DishFB.priceFix(price: String(tax)))").foregroundColor(dark ? .white : .black)
+                    Text("\(DishFB.priceFix(price: String(tax)))").foregroundColor(Color("Blackest"))
                     Spacer().frame(width: (pricePossIncrease ? 15 : 5), height: 0)
                 }
                 
                 Divider().frame(width: (UIScreen.main.bounds.width/1.2), height: 10, alignment: .leading)
-                    .foregroundColor(dark ? .white : Color.black)
+                    .foregroundColor(Color("Back"))
                 
                 HStack{
                     Spacer().frame(width: 5, height: 0)
                     Text("Total")
-                        .font(.system(size: 14)).bold().foregroundColor(dark ? .white : .black)
+                        .font(.system(size: 14)).bold().foregroundColor(Color("Blackest"))
 //                        .overlay(Text("\(count)"))
                     Spacer()
 //                    Spacer().frame(width: UIScreen.main.bounds.size.width/1.7, height: 0)
-                    Text("\(DishFB.priceFix(price: String(tax + total)))" + (pricePossIncrease ? "+" : "")).foregroundColor(dark ? .white : .black)
+                    Text("\(DishFB.priceFix(price: String(tax + total)))" + (pricePossIncrease ? "+" : "")).foregroundColor(Color("Blackest"))
                     Spacer().frame(width: 5, height: 0)
 
 
@@ -90,7 +86,7 @@ struct ReceiptCard: View {
 //            }
             .frame(maxWidth: .infinity, alignment: .leading)
             .frame(height: 120)
-            .background(dark ? ColorManager.blackest : Color(.white))
+            .background(Color("DarkestWhite"))
             .cornerRadius(10)
             .shadow(radius: 2)
             .onAppear(){

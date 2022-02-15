@@ -23,9 +23,7 @@ struct DishPreviewCard: View {
     @State private var alertTitle = ""
     
     @EnvironmentObject var order : OrderModel
-    
-    @Environment (\.colorScheme) var colorScheme:ColorScheme
-    
+        
     var body: some View {
         Group {
             HStack(alignment: .center, spacing: 20) {

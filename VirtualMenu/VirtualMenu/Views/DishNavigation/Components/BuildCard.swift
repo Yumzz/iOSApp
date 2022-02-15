@@ -19,16 +19,14 @@ struct BuildCard: View {
     @State var indexPrice: Int = -1
     @State var count: Int = 1
     @State var total = 0.00
-//    var dark: Bool = false
-    @Environment (\.colorScheme) var colorScheme : ColorScheme
-    
+//    var dark: Bool = false    
     var d = DispatchGroup()
 
     var rest: RestaurantFB
 
-    #if !APPCLIP
+//    #if !APPCLIP
     @EnvironmentObject var order : OrderModel
-    #endif
+//    #endif
     
 //    @available(iOS 14.0, *)
     var body: some View {
@@ -43,7 +41,7 @@ struct BuildCard: View {
                             .padding(.horizontal, 20)
                             .padding(.vertical, 10)
 //                            .font(.subheadline)
-                            .foregroundColor(colorScheme == .dark ? .white : .black)
+                            .foregroundColor(Color("Back"))
                             .font(Font.headline.weight(.bold))
                             .font(.system(size: 24))
 //                            .onTapGesture {
@@ -55,7 +53,7 @@ struct BuildCard: View {
                                  option in
                                 HStack{
                                     Text("\(option): $" + String.priceFix(price: (self.build.individualCosts[type]![((Int) (self.build.addOns[type]!.firstIndex(of: option)!))])))
-                                        .foregroundColor(colorScheme == .dark ? .white : .black)
+                                        .foregroundColor(Color("Back"))
 //
                                     
                                         
@@ -100,7 +98,7 @@ struct BuildCard: View {
                         
                         }
                         .padding(.horizontal)
-                        .background(colorScheme == .dark ? Color.black : Color.white)
+                        .background(Color("BackOpp"))
 //                        .frame(height: CGFloat((self.build.addOns[type]!.count))*32)
                         .cornerRadius(10)
                         
@@ -158,17 +156,23 @@ struct BuildCard: View {
                                 print("here")
                                     //if size not clicked then show alert
                                     // go through each clicked option and add up based on type clicked
-                                    #if !APPCLIP
+//                                    #if !APPCLIP
 //                                    var i = 0
 //                                    while i < self.count{
-//                                        self.d.enter()
-                                        self.order.addBuildOwn(build: self.build, rest: self.rest, dis: d, total: self.total, optionsChosen: self.addOnClicked)
+                                if(self.order.buildChoice[build] == nil){
+                                    self.order.buildChoice[build] = ""
+                                }
+                                for c in self.addOnClicked{
+                                    self.order.buildChoice[build]! += c
+                                }
+                                    self.d.enter()
+                                    self.order.addBuildOwn(build: self.build, rest: self.rest, dis: d, total: self.total, optionsChosen: self.addOnClicked)
 //                                        self.d.notify(queue: .main){
 //                                            NotificationCenter.default.post(name: Notification.Name(rawValue: "Alert"), object: false)
 //                                        }
 //                                        i += 1
 //                                    }
-                                    #endif
+//                                    #endif
                                     
                                 }
                             }
@@ -182,7 +186,7 @@ struct BuildCard: View {
                     Text("Select Size:")
                         .font(.subheadline)
                         .fontWeight(.semibold)
-                        .foregroundColor(colorScheme == .dark ? .white : .black)
+                        .foregroundColor(Color("Back"))
                         
                     HStack{
                         ForEach(self.build.typePrice, id: \.self){
@@ -195,7 +199,7 @@ struct BuildCard: View {
                                 .onTapGesture {
                                     print(type)
                                 }
-                                .foregroundColor(colorScheme == .dark ? .white : .black)
+                                .foregroundColor(Color("Back"))
                                 ForEach(self.build.exclusiveOpts[type]!, id: \.self){
                                     size in
     //                                HStack{
@@ -230,20 +234,20 @@ struct BuildCard: View {
                     Text("Select Options:")
                         .font(.subheadline)
                         .fontWeight(.semibold)
-                        .foregroundColor(colorScheme == .dark ? .white : .black)
+                        .foregroundColor(Color("Back"))
                     ForEach(self.build.typeOpt, id: \.self){
                         opt in
                         HStack{
                             Text("\(opt)")
                                     .font(.title)
                                     .fontWeight(.semibold)
-                                .foregroundColor(colorScheme == .dark ? .white : .black)
+                                .foregroundColor(Color("Back"))
                             ForEach(self.build.typePrice, id: \.self){
                                 type in
                                 StyledText(verbatim: "\(type): +\(self.build.priceOpts[opt]![type]!.componentsJoined(by: "/"))")
                                 .style(.highlight(), ranges: { self.indexPrice == -1 ? [$0.range(of: " " )!] :(self.typeClicked == type ? [$0.range(of: "\(self.build.priceOpts[opt]![self.typeClicked]![self.indexPrice])")!] : [$0.range(of: " " )!]
                                         ) })
-                                    .foregroundColor(colorScheme == .dark ? .white : .black)
+                                    .foregroundColor(Color("Back"))
                             }
                         }
                         
@@ -253,7 +257,7 @@ struct BuildCard: View {
                                 option in
                                 HStack{
                                     Text("\(option)")
-                                        .foregroundColor(colorScheme == .dark ? .white : .black)
+                                        .foregroundColor(Color("Back"))
 
                                     Spacer()
                                     
@@ -308,7 +312,7 @@ struct BuildCard: View {
                         
                     }
 //                    .background(.black)
-                    .background((colorScheme == .dark) ? .black : .white)
+                    .background(Color("BackOpp"))
                     .frame(width: UIScreen.main.bounds.width/1.3, height: 150, alignment: .center)
                     .padding()
                 }
@@ -368,17 +372,19 @@ struct BuildCard: View {
                             else{
                                 //if size not clicked then show alert
                                 // go through each clicked option and add up based on type clicked
-                                #if !APPCLIP
+//                                #if !APPCLIP
                                 var i = 0
                                 while i < self.count{
                                     self.d.enter()
+                                    
+//                                    self.order.buildChoice[self.build]
                                     self.order.addBuildOwn(build: self.build, rest: self.rest, dis: d, total: self.total, optionsChosen: self.addOnClicked)
                                     self.d.notify(queue: .main){
                                         NotificationCenter.default.post(name: Notification.Name(rawValue: "Alert"), object: false)
                                     }
                                     i += 1
                                 }
-                                #endif
+//                                #endif
                                 
                             }
                         }

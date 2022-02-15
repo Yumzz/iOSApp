@@ -40,10 +40,12 @@ class OrderModel: ObservableObject {
     var buildOptsChosen: [BuildFB: [String]] = [BuildFB: [String]]()
     
     var dishChoice : [DishFB: String] = [DishFB.previewDish(): ""]
+    var buildChoice : [BuildFB: String] = [BuildFB.previewBuild(): ""]
     //["Substitute": 0, "Choice of": 1, "Add": 2]
     var currentOrder: Order = Order.previewOrder()
 
     var allDishes: Int
+    var allBuilds: Int
 //    var dishRestaurant : [DishFB : RestaurantFB] = [DishFB : RestaurantFB]()
     
     init() {
@@ -53,6 +55,7 @@ class OrderModel: ObservableObject {
         self.dishIndexes = [DishFB : Int]()
         self.dishCounts = [DishFB : Int]()
         self.allDishes = 0
+        self.allBuilds = 0
         self.totalCost = 0.0
     }
 
@@ -99,7 +102,7 @@ class OrderModel: ObservableObject {
     
     func addBuildOwn(build: BuildFB, rest: RestaurantFB, dis: DispatchGroup, total: Double, optionsChosen: Set<String>){
         if(rest.name == self.restChosen.name || self.restChosen.name == ""){
-            self.allDishes += 1
+            self.allBuilds += 1
             if(buildCounts[build] == nil){
                 buildIndexes[build] = buildCounts.count
                 buildsChosen.append(build)
@@ -116,7 +119,7 @@ class OrderModel: ObservableObject {
         }
         else{
             self.newOrder(rest: rest)
-            self.allDishes = 1
+            self.allBuilds = 1
         }
     }
     
@@ -170,6 +173,36 @@ class OrderModel: ObservableObject {
 //        let x = DishFB.formatPrice(price: self.totalCost - dish.price)
     }
     
+    func deleteBuild(build: BuildFB, dis: DispatchGroup){
+        if(allBuilds == 1){
+            buildsChosen.removeAll()
+            buildIndexes.removeAll()
+            allBuilds = 0
+            buildCounts.removeAll()
+        }
+        else{
+            allBuilds = allBuilds - 1
+            buildCounts[build] = buildCounts[build]! - 1
+            if(buildCounts[build] == 0){
+                var index = buildIndexes[build]! + 1
+                //every dish after this one needs to have dishIndex for them go down by 1 each
+                while index < buildsChosen.count {
+        //            dishIndexes[]
+        //            dishesChosen.get
+                    let build = buildsChosen[index]
+                    buildIndexes[build] = buildIndexes[build]! - 1
+                    index = index + 1
+                }
+                buildsChosen.remove(at: buildIndexes[build]!)
+                buildIndexes.removeValue(forKey: build)
+                buildCounts.removeValue(forKey: build)
+            }
+        }
+        self.totalAmount()
+        print("leave")
+        dis.leave()
+    }
+    
     //func - total the amount
     func totalAmount(){
         self.totalCost = 0.00
@@ -178,6 +211,15 @@ class OrderModel: ObservableObject {
             let x = self.totalCost + dish.price
             self.totalCost = Double(round(1000*x)/1000)
         }
+        for build in self.buildsChosen{
+//            print("price: \(dish.price)")
+            let x = self.totalCost + build.basePrice
+//            for p in self.build.priceOpts {
+//
+//            }
+            self.totalCost += Double(round(1000*x)/1000)
+        }
+        
         
 //        print("total: \(self.totalCost)")
     }

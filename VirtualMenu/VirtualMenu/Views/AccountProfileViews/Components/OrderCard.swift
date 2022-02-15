@@ -14,7 +14,6 @@ struct OrderCard: View {
     var order: Order
     @State var dishesString = ""
     let dateFormatter = DateFormatter()
-    var dark : Bool = false
     
     var body: some View {
         Group {
@@ -25,18 +24,18 @@ struct OrderCard: View {
                 
                 VStack(alignment: .leading, spacing: 10) {
                     Text(order.rest).bold()
-                        .foregroundColor(dark ? .white : ColorManager.yumzzOrange)
+                        .foregroundColor(Color("WhiteOrange"))
                     
                     
                     Text(self.dishesString)
-                        .foregroundColor(dark ? .white : ColorManager.textGray)
+                        .foregroundColor(Color("WhiteTextGrey"))
                         .font(.system(size: 14))
                     
-                    Text(dateFormatter.string(from: self.order.time)).foregroundColor(dark ? .white : .black)
+                    Text(dateFormatter.string(from: self.order.time)).foregroundColor(Color("Back"))
                         .font(.system(size: 14))
                     
                     Text(String(self.order.totalPrice))
-                        .foregroundColor(dark ? .white : Color(UIColor().colorFromHex("#C4C4C4", 1)))
+                        .foregroundColor(Color("GreyWhite"))
                         .font(.system(size: 14))
                     
                     
@@ -45,7 +44,7 @@ struct OrderCard: View {
                 
             }.frame(maxWidth: .infinity, alignment: .leading)
             .frame(height: 112)
-            .background(dark ? Color(ColorManager.darkBack) : Color(.white))
+            .background(Color("DarkBack"))
             .cornerRadius(10)
             .onAppear(){
                 dateFormatter.dateStyle = .medium

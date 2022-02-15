@@ -59,7 +59,6 @@ struct BuildFB {
     }
     
     init?(snapshot: QueryDocumentSnapshot) {
-        print("building build")
         let individCost = snapshot.data()["individualCost"] as? Bool
         guard
             let name = snapshot.data()["Name"] as? String else {
@@ -120,7 +119,7 @@ struct BuildFB {
         self.rest = rest
         self.addOns = addons
         self.id = UUID()
-
+        print("basePrice: \(basePrice)")
         self.individCost = individCost!
         self.basePrice = Double(basePrice)
 //        self.priceOpts = self.extractPrices(opts: priceopts)
@@ -199,6 +198,7 @@ struct BuildFB {
         self.rest = rest
         self.addOns = addons
         self.id = UUID()
+        print("basePrice: \(basePrice)")
         self.basePrice = Double(basePrice)
         self.individCost = individCost!
 //        self.priceOpts = self.extractPrices(opts: priceopts)
@@ -254,6 +254,8 @@ struct BuildFB {
         self.addOns = addons
         self.id = UUID()
         self.individCost = individCost
+        print("basePrice: \(basePrice)")
+        self.basePrice = Double(basePrice)
 //        self.priceOpts = self.extractPrices(opts: priceopts)
         for x in addOns.keys {
             if(!self.typeOpt.contains(x)){
@@ -291,7 +293,7 @@ extension BuildFB: Hashable {
         #if !APPCLIP
         return BuildFB(name: "", description: "", rest: "", addOns: ["":[""]], exclusiveOpts: ["":[""]], priceOpts: ["":["":[]]], sizePrice: ["":[""]], individualCost: false, individCosts: ["":[]])
         #else
-        return BuildFB(json: ["Name": "", "Description": "", "Restaurant": "", "Add-Ons": [], "Exclusive-Opts" : [], "PriceOpts": [], "SizePrice": [], "individualCost": false])!
+        return BuildFB(json: ["Name": "", "Description": "", "Restaurant": "", "Add-Ons": ["":[""]], "Exclusive-Opts" : ["":[""]], "PriceOpts": ["":["":[]]], "SizePrice": ["":[""]], "individualCost": false, "BasePrice": 0])!
         #endif
     }
     

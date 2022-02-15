@@ -19,7 +19,6 @@ class ReportProblemViewModel: ObservableObject{
         let results = self.reportProblemButton(email: email, name: name, messageBody: messageBody)
         let result = results[0]
         let title = results[1]
-        print(result)
         if(result == ""){
             disp.leave()
             disp.notify(queue: .main){
@@ -45,7 +44,6 @@ class ReportProblemViewModel: ObservableObject{
             var request = URLRequest(url: url)
             request.httpMethod = "POST"
             let bodyData = "name=\(name)&email=\(email)&message=\(messageBody)&Type=Problem"
-            print(bodyData)
             request.httpBody = bodyData.data(using: .utf8)
             
             URLSession.shared.dataTask(with: request) { data, response, error in

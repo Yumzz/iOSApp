@@ -15,24 +15,23 @@ import FirebaseFirestore
 struct ProfileButton: View {
     
     var label: String
-    var dark: Bool = false
     
     var body: some View{
         Group {
             HStack {
                 VStack(alignment: .leading) {
                     Text(label)
-                        .foregroundColor(dark ? .white : Color(UIColor().colorFromHex("#000000", 1)))
+                        .foregroundColor(Color("Blackest"))
                         .font(.system(size: 24))
                 }
                 Spacer()
                 VStack(alignment: .trailing){
-                    dark ? Image("forward_white_button") : Image("forward_button")
+                    Image("forward_button")
 //                        .foregroundColor(Color(UIColor().colorFromHex("#FFFFFF", 1)))
                 }
             }
             .frame(width: UIScreen.main.bounds.width/1.1, height: 55, alignment: .leading)
-            .background(dark ? ColorManager.blackest : Color(.white))
+            .background(Color("DarkestWhite"))
 
             .cornerRadius(10)
 //            .shadow(radius: 2)
@@ -59,15 +58,13 @@ struct AccountProfileView: View {
     
     @EnvironmentObject var user: UserStore
     @ObservedObject var accountVM = AccountProfileViewModel()
-    
-    @Environment (\.colorScheme) var colorScheme : ColorScheme
-    
+        
     private var locationManager = LocationManager()
     
     var body: some View {
         NavigationView{
             ZStack{
-                Color(colorScheme == .dark ? ColorManager.darkBack :  UIColor().colorFromHex("#F3F1EE", 1)).edgesIgnoringSafeArea(.all)
+                Color("DarkBack").edgesIgnoringSafeArea(.all)
     //            if self.show{
     //                GeometryReader{_ in
     //                    Loader()
@@ -88,13 +85,13 @@ struct AccountProfileView: View {
                                         self.showingImagePicker.toggle()
                                     }, label: {
                                         Text("Edit Profile Photo")
-                                            .foregroundColor(colorScheme == .dark ? .white : ColorManager.textGray)
+                                            .foregroundColor(Color("WhiteTextGrey"))
                                     })
                                     Spacer().frame(height: 15)
                                     if(userProfile.fullName != ""){
                                         Text(userProfile.fullName)
                                             .font(.custom("Open Sans-SemiBold", size: 30))
-                                            .foregroundColor(colorScheme == .dark ? .white : ColorManager.yumzzOrange )
+                                            .foregroundColor(Color("WhiteOrange"))
                                     }
                                 }
                                 else{
@@ -107,7 +104,7 @@ struct AccountProfileView: View {
                                         self.showingImagePicker.toggle()
                                     }, label: {
                                         Text("Edit Profile Photo")
-                                            .foregroundColor(colorScheme == .dark ? .white : ColorManager.textGray)
+                                            .foregroundColor(Color("WhiteTextGrey"))
                                     })
                                     Spacer().frame(height: 15)
                                     if(userProfile.fullName != ""){
@@ -130,12 +127,12 @@ struct AccountProfileView: View {
                                     self.showingImagePicker.toggle()
                                 }, label: {
                                     Text("Edit Profile Photo")
-                                        .foregroundColor(colorScheme == .dark ? .white : ColorManager.textGray)
+                                        .foregroundColor(Color("WhiteTextGrey"))
                                 })
                                 Spacer().frame(height: 15)
                                 Text(userProfile.fullName)
                                     .font(.custom("Open Sans-SemiBold", size: 30))
-                                    .foregroundColor(colorScheme == .dark ? .white : ColorManager.textGray)
+                                    .foregroundColor(Color("WhiteTextGrey"))
                             }
                         }
     //                    VStack{
@@ -150,27 +147,27 @@ struct AccountProfileView: View {
                             VStack(alignment: .leading, spacing: 10){
                                 
                                 NavigationLink(destination: ContactUs()) {
-                                    ProfileButton(label: "  Contact Us", dark: colorScheme == .dark)
+                                    ProfileButton(label: "  Contact Us")
                                 }.buttonStyle(PlainButtonStyle())
                                 
                                 
                                 NavigationLink(destination: ReportProblem()) {
-                                    ProfileButton(label: "  Report Problem", dark: colorScheme == .dark)
+                                    ProfileButton(label: "  Report Problem")
                                 }.buttonStyle(PlainButtonStyle())
                                 
                                 NavigationLink(destination: SuggestRestaurant()) {
-                                    ProfileButton(label: "  Suggest Restaurant", dark: colorScheme == .dark)
+                                    ProfileButton(label: "  Suggest Restaurant")
                                 }.buttonStyle(PlainButtonStyle())
                                 
                                 NavigationLink(destination: PastOrders()) {
-                                    ProfileButton(label: "  Past Orders", dark: colorScheme == .dark)
+                                    ProfileButton(label: "  Past Orders")
                                 }.buttonStyle(PlainButtonStyle())
                             }
                             
                             Spacer().frame(height: 20)
                             if(userProfile.userId == ""){
                                 NavigationLink(destination: AccountProfileLoginView()){
-                                    OrangeButton(strLabel: "Sign In", width: 141, height: 48, dark: colorScheme == .dark)
+                                    OrangeButton(strLabel: "Sign In", width: 141, height: 48)
                                         .foregroundColor(Color(UIColor().colorFromHex("#FFFFFF", 1)))
                                         .clipShape(RoundedRectangle(cornerRadius: 10, style: .circular))
     //                                    .onTapGesture(){
@@ -210,7 +207,7 @@ struct AccountProfileView: View {
                                       print ("Error signing out: %@", signOutError)
                                     }
                                 }){
-                                    OrangeButton(strLabel: "Sign Out", width: 141, height: 48, dark: colorScheme == .dark)
+                                    OrangeButton(strLabel: "Sign Out", width: 141, height: 48)
                                         .foregroundColor(Color(UIColor().colorFromHex("#FFFFFF", 1)))
                                         .clipShape(RoundedRectangle(cornerRadius: 10, style: .circular))
                                     }

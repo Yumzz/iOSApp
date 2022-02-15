@@ -23,7 +23,6 @@ struct DishDetailsView: View {
     
     @EnvironmentObject var order : OrderModel
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
-    @Environment (\.colorScheme) var colorScheme : ColorScheme
     
 //    @State private var keyboardHeight: CGFloat = 0
     
@@ -55,7 +54,7 @@ struct DishDetailsView: View {
     
     var body: some View {
         ZStack{
-            Color(colorScheme == .dark ? ColorManager.darkBack : #colorLiteral(red: 0.9725490196, green: 0.968627451, blue: 0.9607843137, alpha: 1)).edgesIgnoringSafeArea(.all)
+            Color("DarkBack").edgesIgnoringSafeArea(.all)
 //            ScrollView(.vertical){
                 ZStack {
                     #if !APPCLIP
@@ -91,16 +90,15 @@ struct DishDetailsView: View {
                                             .textFieldStyle(RoundedBorderTextFieldStyle())
             //                            }
                                         HStack{
-                                            Text(dish.name).font(.system(size: 24, weight: .semibold)).tracking(-0.41) .foregroundColor(colorScheme == .dark ? .white : .black)
+                                            Text(dish.name).font(.system(size: 24, weight: .semibold)).tracking(-0.41) .foregroundColor(Color("Back"))
                                             Spacer()
-//                                            #if !APPCLIP
-                                            TagCard(dish: dish, card: false, dark: colorScheme == .dark)
-    //                                        #endif
+                                            #if !APPCLIP
+                                            TagCard(dish: dish, card: false)
+                                            #endif
 
                                         }
-//                                        VStack{
-                                        Text("\(dish.description)").font(.system(size: 14, weight: .semibold)).foregroundColor(colorScheme == .dark ? .white : Color(#colorLiteral(red: 0.71, green: 0.71, blue: 0.71, alpha: 1))).tracking(-0.41)
-//                                        }.frame(height: 100)
+                                        Text("\(dish.description)").font(.system(size: 14, weight: .semibold)).foregroundColor(Color("GreyWhite")).tracking(-0.41)
+                                        
                                         
                                         
                                         
@@ -120,7 +118,7 @@ struct DishDetailsView: View {
                                                     .font(.system(size: 24))
                                             }
                                             VStack{
-                                                OptionsCard(options: dish.options, exclusive: dish.exclusive, dark: colorScheme == .dark  ,dish: dish)
+                                                OptionsCard(options: dish.options, exclusive: dish.exclusive, dish: dish)
                                             }
                                         }
                                     }
@@ -142,7 +140,7 @@ struct DishDetailsView: View {
                                             Text("\(self.count)")
                                                 .font(.system(size: 16, weight: .semibold))
                                                 .font(.footnote)
-                                                .foregroundColor(colorScheme == .dark ? .white : Color.black)
+                                                .foregroundColor(Color("Blackest"))
                                                 .frame(width: 30)
                                             Image(systemName: "plus")
                                                 .font(.system(size: 18))
@@ -152,7 +150,7 @@ struct DishDetailsView: View {
                                                 }
                                         }
                                         .padding()
-                                        .background(colorScheme == .dark ? ColorManager.blackest : Color.white)
+                                        .background(Color("DarkestWhite"))
                                         .cornerRadius(10)
                                         .frame(width: 122, height: 48)
 
@@ -232,7 +230,7 @@ struct DishDetailsView: View {
             //                        Spacer()
                                 }
                                 
-                            .background(RoundedRectangle(cornerRadius: /*@START_MENU_TOKEN@*/25.0/*@END_MENU_TOKEN@*/, style: /*@START_MENU_TOKEN@*/.continuous/*@END_MENU_TOKEN@*/).fill(colorScheme == .dark ? Color(ColorManager.darkBack) : Color(#colorLiteral(red: 0.9725490196, green: 0.968627451, blue: 0.9607843137, alpha: 1))))
+                            .background(RoundedRectangle(cornerRadius: /*@START_MENU_TOKEN@*/25.0/*@END_MENU_TOKEN@*/, style: /*@START_MENU_TOKEN@*/.continuous/*@END_MENU_TOKEN@*/).fill(Color("DarkBack")))
                                 .offset(y: dish.options.isEmpty ? 200 : 100)
 //                                .keyboardAdaptive()
                             }
@@ -246,14 +244,14 @@ struct DishDetailsView: View {
                             
 //                            VStack{
                             HStack{
-                                Text(dish.name).font(.system(size: 24, weight: .semibold)).tracking(-0.41) .foregroundColor(colorScheme == .dark ? .white : .black)
+                                Text(dish.name).font(.system(size: 24, weight: .semibold)).tracking(-0.41) .foregroundColor(Color("Back"))
 //                                        #if !APPCLIP
 //                                        #endif
                             }
                             VStack{
-                                Text("\(dish.description)").font(.system(size: 14, weight: .semibold)).foregroundColor(colorScheme == .dark ? .white : Color(#colorLiteral(red: 0.71, green: 0.71, blue: 0.71, alpha: 1))).tracking(-0.41)
+                                Text("\(dish.description)").font(.system(size: 14, weight: .semibold)).foregroundColor(Color("GreyWhite")).tracking(-0.41)
 //                                dish.description.lengthOfBytes(using: String.Encoding)
-                            }.frame(height: max(80, CGFloat(dish.description.count/5)))
+                            }.frame(height: max(120, CGFloat(dish.description.count/3)))
                                 .onAppear(){
                                     print("size: \(CGFloat(dish.description.count/5))")
                                 }
@@ -282,7 +280,7 @@ struct DishDetailsView: View {
                                         .font(.system(size: 24))
                                 }
                                 VStack{
-                                    OptionsCard(options: dish.options, exclusive: dish.exclusive, dark: colorScheme == .dark  ,dish: dish)
+                                    OptionsCard(options: dish.options, exclusive: dish.exclusive, dish: dish)
                                 }
                             }
                         }
@@ -304,7 +302,7 @@ struct DishDetailsView: View {
                                 Text("\(self.count)")
                                     .font(.system(size: 16, weight: .semibold))
                                     .font(.footnote)
-                                    .foregroundColor(colorScheme == .dark ? .white : Color.black)
+                                    .foregroundColor(Color("Blackest"))
                                     .frame(width: 30)
                                 Image(systemName: "plus")
                                     .font(.system(size: 18))
@@ -314,7 +312,7 @@ struct DishDetailsView: View {
                                     }
                             }
                             .padding()
-                            .background(colorScheme == .dark ? ColorManager.blackest : Color.white)
+                            .background(Color("DarkestWhite"))
                             .cornerRadius(10)
                             .frame(width: 122, height: 48)
 
@@ -421,7 +419,7 @@ struct DishDetailsView: View {
         .navigationBarTitle("")
         .navigationBarBackButtonHidden(true)
         .navigationBarHidden(self.isNavigationBarHidden)
-        .navigationBarItems(leading: WhiteBackButton(mode: self.presentationMode))
+        .navigationBarItems(leading: BackButton(mode: self.presentationMode))
             .onAppear(){
                 self.isNavigationBarHidden = false
                 NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: "Special Instruct"), object: nil, queue: .main) { (Notification) in

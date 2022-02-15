@@ -20,7 +20,6 @@ struct DishCard: View {
     var rest: RestaurantFB
     
     var dish: DishFB
-    var dark: Bool = false
     
     let dispatchGroup = DispatchGroup()
     
@@ -31,9 +30,7 @@ struct DishCard: View {
 //    #if !APPCLIP
     @EnvironmentObject var order : OrderModel
 //    #endif
-    
-    @Environment (\.colorScheme) var colorScheme:ColorScheme
-    
+        
     var body: some View {
         Group {
             HStack(alignment: .center, spacing: 10) {
@@ -51,31 +48,31 @@ struct DishCard: View {
                     HStack{
                         Text(dishName).bold()
 //                            .foregroundColor(Color.primary)
-                            .foregroundColor(dark ? .white : .black)
+                            .foregroundColor(Color("Back"))
                         #if !APPCLIP
-                        TagCard(dish: dish, dark: dark)
+                        TagCard(dish: dish)
                         #endif
                     }
                     
                     if(dish.description != ""){
                         Text(dishIngredients)
     //                        .foregroundColor(Color.secondary)
-                            .foregroundColor(dark ? .white : .gray)
+                            .foregroundColor(Color("GreyWhite"))
                             .font(.system(size: 14))
                     }
                     
                     if(String(dish.price).components(separatedBy: ".")[1].count < 2){
                         if(String(dish.price).components(separatedBy: ".")[1].count < 1){
-                            Text(String(dish.price) + "00").font(.system(size: 12, weight: .semibold)).foregroundColor(dark ? ColorManager.darkModeOrange : Color(#colorLiteral(red: 0.7, green: 0.7, blue: 0.7, alpha: 1))).tracking(-0.41)
+                            Text(String(dish.price) + "00").font(.system(size: 12, weight: .semibold)).foregroundColor(Color("OrangeGrey")).tracking(-0.41)
                             Spacer()
                         }
                         else{
-                            Text(String(dish.price) + "0").font(.system(size: 12, weight: .semibold)).foregroundColor(dark ? .white : Color(#colorLiteral(red: 0.7, green: 0.7, blue: 0.7, alpha: 1))).tracking(-0.41)
+                            Text(String(dish.price) + "0").font(.system(size: 12, weight: .semibold)).foregroundColor(Color("GreyWhite")).tracking(-0.41)
                             Spacer()
                         }
                     }
                     else{
-                        Text(String(dish.price)).font(.system(size: 12, weight: .semibold)).foregroundColor(dark ? .white : Color(#colorLiteral(red: 0.7, green: 0.7, blue: 0.7, alpha: 1))).tracking(-0.41)
+                        Text(String(dish.price)).font(.system(size: 12, weight: .semibold)).foregroundColor(Color("GreyWhite")).tracking(-0.41)
                         Spacer()
                     }
 //                    Text(price.numOfNums() < 4 ? (price.numOfNums() < 3 ? price + "00" : price + "0") : price)
@@ -97,11 +94,11 @@ struct DishCard: View {
 //                #if !APPCLIP
                 ZStack {
                     Rectangle()
-                        .fill(dark ? ColorManager.darkModeOrange : Color("YumzzOrange"))
+                        .fill(Color("YumzzOrange"))
                         .frame(width: 20, height: 6)
                     
                     Rectangle()
-                        .fill(dark ? ColorManager.darkModeOrange : Color("YumzzOrange"))
+                        .fill(Color("YumzzOrange"))
                         .frame(width: 6, height: 20)
                 }
                 .onTapGesture {
@@ -138,7 +135,7 @@ struct DishCard: View {
             }
             .frame(maxWidth: .infinity, alignment: .leading)
             .frame(height: 112)
-            .background(dark ? Color(.black) : Color(.white))
+            .background(Color("DarkestWhite"))
             .cornerRadius(10)
             
         }

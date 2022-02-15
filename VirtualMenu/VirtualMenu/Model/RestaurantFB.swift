@@ -49,8 +49,8 @@ struct RestaurantFB {
 //    var reviews: [CKRecord.Reference]? = nil
     var hour: String = " 9 am - 5 pm"
     var price: String
-    var ratingSum: Int64
-    var n_Ratings: Int64
+    var ratingSum: Int64 = 0
+    var n_Ratings: Int64 = 0
     
     
     
@@ -70,7 +70,6 @@ struct RestaurantFB {
         self.featuredDishRefs = featuredDishRefs
         self.coordinate = coordinate
         if(address != ""){
-//            print("wow: \(address.components(separatedBy: delimiter)[2])")
             self.cityAddress = address.components(separatedBy: delimiter)[1] + (address.components(separatedBy: delimiter)[2]).components(separatedBy: " ")[0]
             self.streetAddress = address.components(separatedBy: delimiter)[0]
         }
@@ -90,7 +89,6 @@ struct RestaurantFB {
     init?(snapshot: QueryDocumentSnapshot){
        guard
            let name = snapshot.data()["Name"] as? String else {
-           print("no rest name")
            return nil
        }
 //        guard
@@ -113,49 +111,40 @@ struct RestaurantFB {
        
        guard
            let description = snapshot.data()["description"] as? String else{
-               print("no description")
                return nil
        }
        guard
            let ethnicity = snapshot.data()["Ethnicity"] as? String else {
-           print("no ethnicity")
            return nil
        }
         guard
             let address = snapshot.data()["Address"] as? String else {
-            print("no address")
             return nil
         }
 
        guard
            let coordinate = snapshot.data()["location"] as? GeoPoint else {
-           print("no coordinate")
            return nil
        }
         
         guard
             let phone = snapshot.data()["Phone"] as? String else {
-            print("no coordinate")
             return nil
         }
         guard
             let price = snapshot.data()["price_range"] as? String else {
-            print("no coordinate")
             return nil
         }
         guard
             let n_Ratings = snapshot.data()["N_Ratings"] as? Int64 else {
-            print("no n_rating")
             return nil
         }
         guard
             let ratingSum = snapshot.data()["RatingSum"] as? Int64 else {
-            print("no RatingSum: \(name)")
             return nil
         }
         guard
             let id = snapshot.data()["id"] as? String else{
-                print("no id")
                 return nil
         }
        
@@ -200,7 +189,6 @@ struct RestaurantFB {
 
         guard
             let name = snapshot.data()["Name"] as? String else {
-                print("no rest name")
                 return nil
         }
 //        guard
@@ -224,50 +212,41 @@ struct RestaurantFB {
         
         guard
             let description = snapshot.data()["description"] as? String else{
-                print("no description")
                 return nil
         }
         guard
             let ethnicity = snapshot.data()["Ethnicity"] as? String else {
-                print("no ethnicity")
                 return nil
         }
         
         guard
             let address = snapshot.data()["Address"] as? String else {
-            print("no address")
             return nil
         }
 
         guard
             let coordinate = snapshot.data()["location"] as? GeoPoint else {
-                print("no coordinate")
                 return nil
         }
         
         guard
             let phone = snapshot.data()["Phone"] as? String else {
-            print("no coordinate")
             return nil
         }
         guard
             let price = snapshot.data()["price_range"] as? String else {
-            print("no coordinate")
             return nil
         }
         guard
             let ratingSum = snapshot.data()["RatingSum"] as? Int64 else {
-            print("no RatingSum")
             return nil
         }
         guard
             let n_Ratings = snapshot.data()["N_Ratings"] as? Int64 else {
-            print("no RatingSum")
             return nil
         }
         guard
             let id = snapshot.data()["id"] as? String else{
-                print("no id")
                 return nil
         }
 //        guard
@@ -313,7 +292,6 @@ struct RestaurantFB {
     init?(snapshot: DocumentSnapshot){
        guard
            let name = snapshot.data()?["Name"] as? String else {
-           print("no rest name")
            return nil
        }
 //        guard
@@ -336,51 +314,42 @@ struct RestaurantFB {
         
         guard
             let id = snapshot.data()?["id"] as? String else{
-                print("no id")
                 return nil
         }
        guard
            let description = snapshot.data()?["description"] as? String else{
-               print("no description")
                return nil
        }
        guard
            let ethnicity = snapshot.data()?["Ethnicity"] as? String else {
-           print("no ethnicity")
            return nil
        }
         guard
             let address = snapshot.data()?["Address"] as? String else {
-            print("no address")
             return nil
         }
 
        guard
            let coordinate = snapshot.data()?["location"] as? GeoPoint else {
-           print("no coordinate")
            return nil
        }
         
         guard
             let phone = snapshot.data()?["Phone"] as? String else {
-            print("no coordinate")
             return nil
         }
         guard
             let price = snapshot.data()?["price_range"] as? String else {
-            print("no coordinate")
             return nil
         }
-        guard
-            let n_Ratings = snapshot.data()?["N_Ratings"] as? Int64 else {
-            print("no n_rating")
-            return nil
-        }
-        guard
-            let ratingSum = snapshot.data()?["RatingSum"] as? Int64 else {
-            print("no RatingSum: \(name)")
-            return nil
-        }
+//        guard
+//            let n_Ratings = snapshot.data()?["N_Ratings"] as? Int64 else {
+//            return nil
+//        }
+//        guard
+//            let ratingSum = snapshot.data()?["RatingSum"] as? Int64 else {
+//            return nil
+//        }
         
        
        self.key = snapshot.documentID
@@ -394,8 +363,8 @@ struct RestaurantFB {
        self.cityAddress = address.components(separatedBy: delimiter)[1] + (address.components(separatedBy: delimiter)[2]).components(separatedBy: " ")[0]
        self.streetAddress = address.components(separatedBy: delimiter)[0]
        self.phone = phone
-       self.ratingSum = ratingSum
-       self.n_Ratings = n_Ratings
+//       self.ratingSum = ratingSum
+//       self.n_Ratings = n_Ratings
        self.price = price
        self.price = self.getDollaSigns(price: price)
         if(snapshot.get("hours") != nil){
@@ -415,6 +384,17 @@ struct RestaurantFB {
                 self.reviews = reviews
             }
         }
+        if(snapshot.get("N_Ratings") != nil){
+            if let rati = snapshot.data()?["N_Ratings"] as? Int64{
+                self.n_Ratings = rati
+            }
+        }
+        if(snapshot.get("RatingSum") != nil){
+            if let ratiSum = snapshot.data()?["RatingSum"] as? Int64{
+                self.ratingSum = ratiSum
+            }
+        }
+        
         self.ref = snapshot.reference
     }
     
@@ -429,61 +409,50 @@ struct RestaurantFB {
     init?(json: [String:Any]){
         guard let description = json["description"] as? String
         else{
-            print("wow")
             return nil
         }
              guard let name = json["Name"] as? String
              else{
-                print("wow2")
                 return nil
             }
               guard let price_range = json["price_range"] as? String
               else{
-                  print("wow3")
                   return nil
               }
               guard let ethnicity = json["Ethnicity"] as? String
               else{
-                  print("wow4")
                   return nil
               }
         guard
               let locationDict = json["location"] as? [String:Double]
         else{
-            print("wow5")
             return nil
         }
 //              let latitude = locationDict["_latitude"] as? Double,
 //              let longitude = locationDict["_longitude"] as? Double,
             guard let hours = json["hours"] as? [String:String]
             else{
-                print("wow6")
                 return nil
             }
         guard
               let phone = json["Phone"] as? String
         else{
-            print("wow7")
             return nil
         }
              guard let address = json["Address"] as? String
              else{
-                 print("wow8")
                  return nil
              }
               guard let key = json["id"] as? String
               else{
-                  print("wow9")
                   return nil
               }
               guard let num_ratings = json["N_Ratings"] as? Int
               else{
-                  print("wow10")
                   return nil
               }
               guard let rating_sum = json["RatingSum"] as? Int
         else {
-            print("initialization failed")
             return nil
         }
         if(hours[""] != ""){

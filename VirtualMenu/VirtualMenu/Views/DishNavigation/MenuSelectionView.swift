@@ -172,7 +172,7 @@ struct MenuSelectionView: View {
 //            .background(GradientView().edgesIgnoringSafeArea(.all))
             .navigationBarHidden(false)
             .navigationBarBackButtonHidden(true)
-            .navigationBarItems(leading: WhiteBackButton(mode: self.mode))
+            .navigationBarItems(leading: BackButton(mode: self.mode))
             if $showPopUp.wrappedValue {
                 ZStack {
                     Color.white

@@ -42,7 +42,6 @@ struct ListDishesView: View {
     @State var appclip = false
         
     @EnvironmentObject var order : OrderModel
-    @Environment (\.colorScheme) var colorScheme : ColorScheme
 
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
     @GestureState private var dragOffset = CGSize.zero
@@ -95,7 +94,7 @@ struct ListDishesView: View {
 //            if(!self.order.dishesChosen.isEmpty || !self.order.buildsChosen.isEmpty){
 //                Spacer().frame(height: 60)
 //            }
-            OrangeButton(strLabel: "Call a Waiter", width: 167.5, height: 48, dark: colorScheme == .dark)
+            OrangeButton(strLabel: "Call a Waiter", width: 167.5, height: 48)
                 .clipShape(RoundedRectangle(cornerRadius: 10, style: .circular))
                 .onTapGesture {
                     self.waitButtonClicked = true
@@ -117,7 +116,7 @@ struct ListDishesView: View {
     var overlay: some View {
         VStack{
             NavigationLink(destination: ReviewOrder().navigationTitle("").navigationBarHidden(true)){
-                ViewCartButton(dishCount: self.order.allDishes)
+                ViewCartButton(dishCount: self.order.allDishes + self.order.allBuilds)
                     .clipShape(RoundedRectangle(cornerRadius: 10, style: .circular))
             }
             Spacer().frame(width: 0, height: 10)
@@ -128,7 +127,7 @@ struct ListDishesView: View {
     var view: some View {
         
         ZStack {
-            Color(colorScheme == .dark ? ColorManager.darkBack : #colorLiteral(red: 0.9725490196, green: 0.968627451, blue: 0.9607843137, alpha: 1)).edgesIgnoringSafeArea(.all)
+            Color("DarkBack").edgesIgnoringSafeArea(.all)
             ScrollView(.vertical) {
                 ScrollViewReader{ scrollView in
                 VStack {
@@ -170,13 +169,13 @@ struct ListDishesView: View {
                                 .font(.title)
                                 .fontWeight(.semibold)
                                 .padding(.leading)
-                                .foregroundColor(colorScheme == .dark ? .white : .black)
+                                .foregroundColor(Color("Back"))
                 
 //
                             if(dishCategory.description != ""){
                                 Text("\(dishCategory.description)")
                                     .font(.system(size: 14, weight: .semibold))
-                                    .foregroundColor(colorScheme == .dark ? .white : Color(#colorLiteral(red: 0.71, green: 0.71, blue: 0.71, alpha: 1)))
+                                    .foregroundColor(Color("GreyWhite"))
                                     .tracking(-0.41)
                             }
 //
@@ -188,7 +187,7 @@ struct ListDishesView: View {
                                             .font(.title)
                                             .fontWeight(.semibold)
                                             .padding(.leading)
-                                            .foregroundColor(colorScheme == .dark ? .white : .black)
+                                            .foregroundColor(Color("Back"))
                                         VStack{
                                             Text("\(build.description)")
                                                 .font(.system(size: 14, weight: .semibold))
@@ -216,7 +215,7 @@ struct ListDishesView: View {
                                         NavigationLink(destination:
                                             DishDetailsView(dish: dish, restaurant: self.restaurant).navigationBarHidden(false)
                                         ) {
-                                            DishCard(dishName: dish.name, dishIngredients: dish.description, price: self.listDishVM.formatPrice(price: dish.price), singPrice:dish.options.isEmpty, rest: self.restaurant, dish: dish, dark: colorScheme == .dark)
+                                            DishCard(dishName: dish.name, dishIngredients: dish.description, price: self.listDishVM.formatPrice(price: dish.price), singPrice:dish.options.isEmpty, rest: self.restaurant, dish: dish)
                                         }
                                 }
                                 Spacer().frame(height: 20)
@@ -265,7 +264,7 @@ struct ListDishesView: View {
         .navigationBarTitle("\(self.restname)")
         .navigationBarBackButtonHidden(true)
         .navigationBarHidden(self.isNavBarHidden)
-        .navigationBarItems(leading: BackButton(mode: self.mode, dark: colorScheme == .dark))
+        .navigationBarItems(leading: BackButton(mode: self.mode))
 //        .onDisappear(){
 //            self.restname = ""
 //            self.isNavBarHidden = true

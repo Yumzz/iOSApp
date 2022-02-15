@@ -17,6 +17,7 @@ struct Order: Hashable {
     var id: String = ""
     var time: Date = Date()
     var specialInstruc: String = ""
+    var tNum: String = ""
 }
 
 extension Order {

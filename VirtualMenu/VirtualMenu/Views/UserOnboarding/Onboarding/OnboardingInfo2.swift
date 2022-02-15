@@ -15,7 +15,6 @@ struct OnboardingInfo2: View {
 
     @EnvironmentObject var user: UserStore
     @ObservedObject var loginVM = LoginViewModel()
-    @Environment (\.colorScheme) var colorScheme : ColorScheme
 
     var body: some View {
         
@@ -23,13 +22,13 @@ struct OnboardingInfo2: View {
         ZStack{
 //            NavigationView{
                 ZStack{
-                    Color(colorScheme == .dark ? ColorManager.darkBack : #colorLiteral(red: 0.9725490196, green: 0.968627451, blue: 0.9607843137, alpha: 1)).edgesIgnoringSafeArea(.all)
+                    Color("DarkBack").edgesIgnoringSafeArea(.all)
                 VStack{
                     Spacer().frame(width: UIScreen.main.bounds.width, height: 80)
                     
                     VStack(spacing: 20){
                         Text("Welcome to Yumzz")
-                            .foregroundColor(colorScheme == .dark ? ColorManager.white : Color(UIColor().colorFromHex("#3A3A3A", 1)))
+                            .foregroundColor(Color("Back"))
                             .font(.largeTitle).bold()
                             .font(.system(size: 36))
                             .padding(.leading, 40)
@@ -46,12 +45,12 @@ struct OnboardingInfo2: View {
                 //sign in as guest button
                     VStack(spacing: 20){
                         NavigationLink(destination: SignUpView()){
-                            OrangeButton(strLabel: "Sign Up", width: 330, height: 48, dark: colorScheme == .dark)
+                            OrangeButton(strLabel: "Sign Up", width: 330, height: 48)
                                 .clipShape(RoundedRectangle(cornerRadius: 10, style: .circular))
                         }
                         
                         NavigationLink(destination: LoginView(loggedin: $loggedIn)){
-                            InvertedOrangeButton(strLabel: "Login", width: 330, height: 48, dark: colorScheme == .dark)
+                            InvertedOrangeButton(strLabel: "Login", width: 330, height: 48)
                                 .clipShape(RoundedRectangle(cornerRadius: 10, style: .circular))
                                 .shadow(radius: 5)
                         }
@@ -81,7 +80,7 @@ struct OnboardingInfo2: View {
                                   print ("Error signing out: %@", signOutError)
                                 }
                         }){
-                            InvertedOrangeButton(strLabel: "Use app as a guest", width: 330, height: 48, dark: colorScheme == .dark)
+                            InvertedOrangeButton(strLabel: "Use app as a guest", width: 330, height: 48)
                                 .clipShape(RoundedRectangle(cornerRadius: 10, style: .circular))
                                 .shadow(radius: 5)
                         }

@@ -14,8 +14,6 @@ struct ReviewCard: View {
     var urlImage:FBURLImage?
     
     var review: String
-
-    @Environment (\.colorScheme) var colorScheme:ColorScheme
     
     var body: some View {
         

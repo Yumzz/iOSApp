@@ -12,7 +12,6 @@ struct DishCardOrder: View {
     @State var possPriceIncrease: Bool = false
     
     var dish: DishFB
-    var dark: Bool = false
     let dispatchGroup = DispatchGroup()
     @EnvironmentObject var order : OrderModel
     
@@ -31,7 +30,7 @@ struct DishCardOrder: View {
 //                                .cornerRadius(10)
 //                                .overlay(Text("\(count)").foregroundColor(.black))
 //                        }
-                        (Text("\(count)").foregroundColor(dark ? .white : .black))
+                        (Text("\(count)").foregroundColor(Color("Blackest")))
                             .font(.system(size: 14))
 //                        Spacer()
 //                            .frame(maxWidth: 0)
@@ -39,7 +38,7 @@ struct DishCardOrder: View {
                         VStack {
                             ScrollView(.horizontal){
                                 Text(name).bold()
-                                    .foregroundColor(dark ? .white : .black)
+                                    .foregroundColor(Color("Blackest"))
                                     .font(.system(size: 14))
                             }
                         }
@@ -48,19 +47,19 @@ struct DishCardOrder: View {
         //
                         if(String(dish.price).components(separatedBy: ".")[1].count < 2){
                             if(String(dish.price).components(separatedBy: ".")[1].count < 1){
-                                Text(String(dish.price) + "00" + (possPriceIncrease ? "+" : "")).foregroundColor(dark ? .white : .black)
+                                Text(String(dish.price) + "00" + (possPriceIncrease ? "+" : "")).foregroundColor(Color("Blackest"))
                                     .font(.system(size: 14)).bold()
                                 Spacer()
                             }
                             else{
-                                Text(String(dish.price) + "0" + (possPriceIncrease ? "+" : "")).foregroundColor(dark ? .white : .black)
+                                Text(String(dish.price) + "0" + (possPriceIncrease ? "+" : "")).foregroundColor(Color("Blackest"))
                                     .font(.system(size: 14)).bold()
                                 Spacer()
                             }
                         }
                         else{
                             Text(String(dish.price) + (possPriceIncrease ? "+" : ""))
-                                .foregroundColor(dark ? .white : .black)
+                                .foregroundColor(Color("Blackest"))
                                 .font(.system(size: 14)).bold()
                             Spacer()
                         }
@@ -74,22 +73,12 @@ struct DishCardOrder: View {
         //                .frame(height: 70)
         //                .padding(.leading, 5)
                         
-        //                VStack {
-        //                    XButtonDelete()
-        //                        .onTapGesture {
-        //                            self.dispatchGroup.enter()
-        //                            self.order.deleteDish(dish: self.dish, dis: self.dispatchGroup)
-        //                            self.dispatchGroup.notify(queue: .main){
-        //
-        //                            }
-        //                        }
-        //                    }
         //
 
                     }
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .frame(height: 55)
-                    .background(dark ? ColorManager.blackest : Color(.white))
+                    .background(Color("DarkestWhite"))
                     .cornerRadius(10)
                     .shadow(radius: 2)
 //                    .scaledToFit()

@@ -69,23 +69,18 @@ struct DishFB {
     init?(snapshot: QueryDocumentSnapshot) {
         guard
             let name = snapshot.data()["Name"] as? String else {
-                print("no dish name:\(snapshot.data())")
                 return nil
         }
         guard var price = snapshot.data()["Price"] as? String else {
-            print("no price: \(name)")
             return nil
         }
         guard let description = snapshot.data()["Description"] as? String else {
-            print("no description")
             return nil
         }
         guard let type = snapshot.data()["Type"] as? String else {
-            print("no type")
             return nil
         }
         guard let restau = snapshot.data()["Restaurant"] as? String else {
-            print("no dishes' rest")
             return nil
         }
 //        if(storage.child("Restaurant/\(self.coverPhotoURL)") != nil){
@@ -143,20 +138,16 @@ struct DishFB {
             }
         }
         else{
-            print("name of no image exists: \(name)")
             self.coverPhotoURL = ""
             self.photoExists = false
         }
         if(snapshot.get("choices") != nil){
-            print(snapshot.data()["choices"])
             self.choices = ((snapshot.data()["choices"] as? [String:[String:[String]]])!)
         }
         if(snapshot.get("photoExists") != nil){
-            print("photoexists variable: \(name)")
             self.photoExists = (snapshot.data()["photoExists"] as? Bool)!
             if self.photoExists {
                 self.coverPhotoURL = "Restaurant/\(self.restaurant.lowercased())/dish/\(self.name.lowercased().replacingOccurrences(of: " ", with: "-"))/photo/Picture.jpg"
-                print("image exists: \(name)")
                 self.photoExists = true
             }
             else{
@@ -177,32 +168,25 @@ struct DishFB {
     init?(snapshot: DocumentSnapshot) {
         guard
             let name = snapshot.data()?["Name"] as? String else {
-                print("no dish name: \(snapshot.data())")
                 return nil
         }
         guard var price = snapshot.data()?["Price"] as? String else {
-            print("no price")
             return nil
         }
         guard let description = snapshot.data()?["Description"] as? String else {
-            print("no description: \(snapshot.data()?["Description"])")
             return nil
         }
         guard let type = snapshot.data()?["Type"] as? String else {
-            print("no type")
             return nil
         }
         guard let restau = snapshot.data()?["Restaurant"] as? String else {
-            print("no dishes' rest")
             return nil
         }
         if(snapshot.get("taste_profile") != nil){
             guard let taste = snapshot.data()?["taste_profile"] as? [Int] else {
-                print("no taste_profile")
                 return nil
             }
             guard let taste_tags = snapshot.data()?["tp_tags"] as? [String] else {
-                print("no tp_tags")
                 return nil
             }
 //            let taste = (snapshot.data()!["taste_profile"] as? [String])!
@@ -242,9 +226,7 @@ struct DishFB {
         if(snapshot.get("photoExists") != nil){
             self.photoExists = (snapshot.data()!["photoExists"] as? Bool)!
             self.coverPhotoURL = "Restaurant/\(self.restaurant.lowercased())/dish/\(self.name.lowercased().replacingOccurrences(of: " ", with: "-"))/photo/Picture.jpg"
-            print("image exists: \(name)")
             self.photoExists = true
-            print("photoexists variable: \(name)")
         }
         else{
             var exist = false
@@ -255,7 +237,6 @@ struct DishFB {
 
         if(snapshot.get("choices") != nil){
             self.choices = (snapshot.data()!["choices"] as? [String:[String:[String]]])!
-            print("hello: \(self.choices)")
         }
 //        else{
 //            print("no image exists")
@@ -264,7 +245,6 @@ struct DishFB {
     }
     
     init?(json: [String:Any], dis: DispatchGroup){
-        print("here in dishfb")
         guard let description = json["Description"] as? String,
               let name = json["Name"] as? String,
               let type = json["Type"] as? String,
@@ -272,7 +252,6 @@ struct DishFB {
               var price = json["Price"] as? String,
               let rest = json["Restaurant"] as? String
         else {
-            print("initialization failed")
             return nil
         }
         
@@ -315,7 +294,6 @@ struct DishFB {
         self.coverPhotoURL = url
         self.photoExists = exist
 
-        print("name of dish: \(self.name)")
         dis.leave()
         
     }
@@ -330,7 +308,6 @@ struct DishFB {
               let price = json["Price"] as? String,
               let rest = json["Restaurant"] as? String
         else {
-            print("initialization failed")
             return nil
         }
         
@@ -344,7 +321,6 @@ struct DishFB {
         for dcomponent in descriptcomponents {
             sentencenum = sentencenum + 1
             if (dcomponent.contains(" or ")){
-                print(dcomponent)
             }
         }
         
@@ -375,18 +351,15 @@ struct DishFB {
               let tp_nums = json["taste_profile"] as? [Int],
             let tp_tags = json["tp_tags"] as? [String]
             else {
-            print("initialization failed")
             return nil
         }
         
         guard let choices = json["choices"] as? [String:[String:[String]]] else {
-            print("no choices")
             let choices = ["":[""]]
             return nil
         }
         
         if(choices != ["":["":[""]]]){
-            print(choices)
             self.choices = choices
         }
         
@@ -400,7 +373,6 @@ struct DishFB {
         for dcomponent in descriptcomponents {
             sentencenum = sentencenum + 1
             if (dcomponent.contains(" or ")){
-                print(dcomponent)
             }
         }
         let pa = price.components(separatedBy: ".")[1]
@@ -417,7 +389,6 @@ struct DishFB {
         self.price = p.doubleValue
         self.type = type
         self.coverPhotoURL = "Restaurant/\(rest.lowercased())/dish/\(name.lowercased().replacingOccurrences(of: " ", with: "-"))/photo/Picture.jpg".replacingOccurrences(of: "//", with: "")
-        print("Restaurant/\(self.coverPhotoURL)")
         self.restaurant = rest
 //        self.tp_nums = tp_nums
 //        self.tp_tags = tp_tags
@@ -468,21 +439,15 @@ extension DishFB: Hashable {
     
     static func formatPrice(price: Double) -> String {
         var x =  "$" + (price.truncatingRemainder(dividingBy: 1) == 0 ? String(format: "%.2f", price) : String(price))
-        print(x)
         if let range = x.range(of: ".") {
             let afterdeci = x[range.upperBound...].trimmingCharacters(in: .whitespaces)
-            print(afterdeci) // prints "123.456.7891"
             if(afterdeci.numOfNums() < 2){
-                print(x.numOfNums())
-                print("less")
                 x = x + "0"
-                print(x)
             }
 //            if(afterdeci.numOfNums() > 2){
 //
 //            }
         }
-        print("x: \(x)")
         return x
     }
     

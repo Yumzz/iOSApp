@@ -12,7 +12,6 @@ struct CustomTextField: View {
     
     var field: String
     var strLabel: String
-    var dark: Bool = false
     
     @Binding var strField: String
     
@@ -25,7 +24,7 @@ struct CustomTextField: View {
             Text(field)
                 .padding(.trailing, (UIScreen.main.bounds.width * 40) / 55)
                 .font(.system(size: (UIScreen.main.bounds.width * 15) / 514, weight: .regular, design: .default))
-                .foregroundColor(dark ? .white : ColorManager.yumzzOrange)
+                .foregroundColor(Color("OrangeWhite"))
             TextField(strLabel, text: $strField)
                 .frame(height: (UIScreen.main.bounds.width * 40) / 414, alignment: .center)
                 .padding(.leading, (UIScreen.main.bounds.width * 40) / 414)
@@ -34,12 +33,12 @@ struct CustomTextField: View {
                 .imageScale(.small)
                 .keyboardType(uiKeyboardType)
                 .autocapitalization(uiTextAutoCapitalizationType)
-                .foregroundColor(dark ? .white : Color(UIColor().colorFromHex("#F88379", 1)))
+                .foregroundColor(Color("PinkishOrange"))
             Divider()
                 .frame(width: UIScreen.main.bounds.width/1.2, height: 20, alignment: .leading)
                 .padding(.leading, (UIScreen.main.bounds.width * 40) / 414)
                 .padding(.trailing, (UIScreen.main.bounds.width * 40) / 414)
-                .foregroundColor(dark ? .white : Color(UIColor().colorFromHex("000000", 1)))
+                .foregroundColor(Color("Back"))
 //                .textFieldStyle(RoundedBorderTextFieldStyle())
                 
 //                .shadow(radius: 4)

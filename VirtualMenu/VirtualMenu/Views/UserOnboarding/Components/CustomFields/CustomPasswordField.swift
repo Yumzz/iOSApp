@@ -12,7 +12,6 @@ struct CustomPasswordField: View {
     
     var field: String
     var strLabel: String
-    var dark: Bool = false
     
     @Binding var password: String
     
@@ -21,14 +20,14 @@ struct CustomPasswordField: View {
             Text(field)
                 .padding(.trailing, (UIScreen.main.bounds.width * 40) / 60)
                 .font(.system(size: (UIScreen.main.bounds.width * 15) / 514, weight: .regular, design: .default))
-                .foregroundColor(dark ? .white : ColorManager.yumzzOrange)
+                .foregroundColor(Color("OrangeWhite"))
             SecureField(strLabel, text: $password)
                 .frame(height: (UIScreen.main.bounds.width * 40) / 414, alignment: .center)
                 .padding(.leading, (UIScreen.main.bounds.width * 40) / 414)
                 .padding(.trailing, (UIScreen.main.bounds.width * 40) / 414)
                 .font(.system(size: (UIScreen.main.bounds.width * 15) / 414, weight: .regular, design: .default))
                 .imageScale(.small)
-                .foregroundColor(dark ? .white : Color(UIColor().colorFromHex("#F88379", 1)))
+                .foregroundColor(Color("PinkishOrange"))
 //                .border(SeparatorShapeStyle(), width: 5)
 //                .textFieldStyle(RoundedBorderTextFieldStyle())
 //                .shadow(radius: 4)
@@ -36,7 +35,7 @@ struct CustomPasswordField: View {
                 .frame(width: UIScreen.main.bounds.width/1.2, height: 10, alignment: .leading)
                 .padding(.leading, (UIScreen.main.bounds.width * 40) / 414)
                 .padding(.trailing, (UIScreen.main.bounds.width * 40) / 414)
-                .foregroundColor(dark ? .white : Color(UIColor().colorFromHex("000000", 1)))
+                .foregroundColor(Color("Back"))
 
         }
     }

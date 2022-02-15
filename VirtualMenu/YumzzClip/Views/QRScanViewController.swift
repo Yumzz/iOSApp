@@ -8,7 +8,6 @@
 
 import AVFoundation
 import UIKit
-import Instructions
 
 class QRScanViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
     var captureSession: AVCaptureSession!

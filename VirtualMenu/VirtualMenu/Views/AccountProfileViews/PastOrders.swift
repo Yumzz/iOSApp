@@ -21,8 +21,6 @@ struct PastOrders: View {
     
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
     @EnvironmentObject var order : OrderModel
-    @Environment (\.colorScheme) var colorScheme : ColorScheme
-
 
     @State var isNavBarHidden = false
     @GestureState private var dragOffset = CGSize.zero
@@ -43,11 +41,11 @@ struct PastOrders: View {
 
     var body: some View {
         ZStack {
-            Color(colorScheme == .dark ? ColorManager.darkBack : #colorLiteral(red: 0.9725490196, green: 0.968627451, blue: 0.9607843137, alpha: 1)).edgesIgnoringSafeArea(.all)
+            Color("DarkBack").edgesIgnoringSafeArea(.all)
             if !self.pastOrders.isEmpty {
                 ScrollView(.vertical) {
                     ForEach(self.pastOrders, id: \.self){ pOrder in
-                        OrderCard(order: pOrder, dark: colorScheme == .dark)
+                        OrderCard(order: pOrder)
                         
                         Spacer().frame(height: 20)
                     }

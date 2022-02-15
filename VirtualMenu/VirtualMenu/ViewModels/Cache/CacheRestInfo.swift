@@ -22,7 +22,6 @@ class CacheRestInfo: ObservableObject {
                     self.rest = rest
                     break
                 case(.failure(let e)):
-                    print("error: \(e)")
                     break
             }
         }
