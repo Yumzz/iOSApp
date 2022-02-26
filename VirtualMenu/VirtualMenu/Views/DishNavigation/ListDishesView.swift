@@ -32,6 +32,7 @@ struct ListDishesView: View {
      
     @State var addtapped = false
     @State var addWOSize = false
+    @State var dishCategoryChosen: DishCategory = DishCategory(isExpanded: false, dishes: [], name: "", description: "")
     
     @State var addo = false
     @State var showingAlert = false
@@ -215,7 +216,7 @@ struct ListDishesView: View {
                                         NavigationLink(destination:
                                             DishDetailsView(dish: dish, restaurant: self.restaurant).navigationBarHidden(false)
                                         ) {
-                                            DishCard(dishName: dish.name, dishIngredients: dish.description, price: self.listDishVM.formatPrice(price: dish.price), singPrice:dish.options.isEmpty, rest: self.restaurant, dish: dish)
+                                            DishCard(dishName: dish.name, dishIngredients: dish.description, price: self.listDishVM.formatPrice(price: dish.price), singPrice:dish.options.isEmpty, rest: self.restaurant, dish: dish, dishCat: dishCategory)
                                         }
                                 }
                                 Spacer().frame(height: 20)
@@ -249,8 +250,10 @@ struct ListDishesView: View {
 //                    self.addtapped = true
 //                }
                 NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: "Special Instruction"), object: nil, queue: .main) { (Notification) in
-                    var tup = Notification.object! as! (DishFB, Bool)
+                    var tup = Notification.object! as! (DishFB, Bool, DishCategory)
                     self.dishChosen = tup.0
+                    self.dishCategoryChosen = tup.2
+                    order.dishCats = [self.dishChosen : self.dishCategoryChosen]
                     print("added2")
 //                    self.dishChosen.description = self.dishChosen.description.sidesFixed(str: self.dishChosen.description, dishcat: self.dishCats)
                     self.addo = true
@@ -269,7 +272,7 @@ struct ListDishesView: View {
 //            self.restname = ""
 //            self.isNavBarHidden = true
 //        }
-        .alert(isPresented: $addo, TextFieldAlert(title: "Any Special Instructions?", message: "\(self.dishChosen.name) - \(self.dishChosen.description)") { (text) in
+        .alert(isPresented: $addo, TextFieldAlert(title: "Any Special Instructions?", message: "\(self.dishChosen.name) - \(self.dishChosen.description) \(self.dishCategoryChosen.description)") { (text) in
                     if text != nil {
                         print(text)
                         if((self.order.dishChoice[self.dishChosen]?.isEmpty) != nil){

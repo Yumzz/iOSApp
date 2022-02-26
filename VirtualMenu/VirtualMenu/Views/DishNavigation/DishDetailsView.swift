@@ -67,8 +67,10 @@ struct DishDetailsView: View {
                             
                         }
                         else{
-                            RoundedRectangle(cornerSize: CGSize(width: 5, height: 5)).frame(width: 375, height: 240).foregroundColor(.black)
+                            FBURLImage(url:  restaurant.coverPhotoURL, imageWidth: 375, imageHeight: 240, circle: false)
                             Spacer()
+//                            RoundedRectangle(cornerSize: CGSize(width: 5, height: 5)).frame(width: 375, height: 240).foregroundColor(.black)
+//                            Spacer()
                         }
                     }
 //                    #endif

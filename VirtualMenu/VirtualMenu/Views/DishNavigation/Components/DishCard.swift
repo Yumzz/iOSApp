@@ -20,7 +20,7 @@ struct DishCard: View {
     var rest: RestaurantFB
     
     var dish: DishFB
-    
+    var dishCat: DishCategory
     let dispatchGroup = DispatchGroup()
     
 //    @State private var alertMessage = ""
@@ -121,7 +121,7 @@ struct DishCard: View {
                         //ask for side choice here
                         self.dispatchGroup.notify(queue: .main){
                             print("posted special instruction haha")
-                            NotificationCenter.default.post(name: Notification.Name(rawValue: "Special Instruction"), object: (dish, singPrice))
+                            NotificationCenter.default.post(name: Notification.Name(rawValue: "Special Instruction"), object: (dish, singPrice, dishCat))
 //                            NotificationCenter.default.post(name: Notification.Name(rawValue: "Alert"), object: singPrice)
 //                            if !dish.choices.isEmpty{
 //

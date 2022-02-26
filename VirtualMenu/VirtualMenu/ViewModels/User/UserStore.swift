@@ -9,6 +9,7 @@
 import SwiftUI
 
 class UserStore: ObservableObject {
+    var guest: Bool = false
     @Published var isLogged: Bool = {
         // Register the app default:
         UserDefaults.standard.register(defaults: ["isLogged" : false])

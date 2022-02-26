@@ -13,7 +13,7 @@ struct ChoicesCard: View {
     var types = ["Substitute", "Choice of", "Add"]
     //incoming data - ["choice of" - ["", "", ""] , "add" - [["", "",""]:"price"], "substitute" - [["", "",""]:"price"]
     var choices : [String:[String:[String]]]
-    let choiceSelect = ["substitute", "choice of", "add"]
+    let choiceSelect = ["substitute", "choice of", "add", "required"]
     var choiceSelected = ["", "", ""]
     var dish : DishFB
     

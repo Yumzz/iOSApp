@@ -31,6 +31,9 @@ struct ReviewOrder: View {
     @State var changeInstructions = false
     @State var changeBuildOpts = false
     
+    @State var choicesNotMet: Bool = false
+    @State var choicesExist: [String] = []
+    @State var choicesSpecInstruct: String = ""
     @State var dish: DishFB = DishFB.previewDish()
     @State var build: BuildFB = BuildFB.previewBuild()
     @State var buildOptString: String = ""
@@ -85,6 +88,16 @@ struct ReviewOrder: View {
                                                 }
                                                 if(noIncrease){
                                                     NotificationCenter.default.post(name: NSNotification.Name(rawValue: "IncrPriceNotPoss"), object: nil)
+                                                }
+                                                if let index = choicesExist.firstIndex(of: dish.name) {
+                                                    choicesExist.remove(at: index)
+                                                }
+                                                if(choicesExist.isEmpty){
+                                                    choicesNotMet = false
+                                                }
+                                                choicesSpecInstruct = choicesSpecInstruct.replacingOccurrences(of: self.dish.name, with: "")
+                                                if(choicesExist.isEmpty){
+                                                    choicesNotMet = false
                                                 }
 
                                             }
@@ -322,18 +335,6 @@ struct ReviewOrder: View {
                             self.IoT = true
                         }
                 }.padding(.horizontal)
-//                #else
-//                HStack{
-//                    OrangeButton(strLabel: "Send Order", width: UIScreen.main.bounds.width - 40, height: 48, dark: colorScheme == .dark).clipShape(RoundedRectangle(cornerRadius: 10, style: .circular))
-//                    .shadow(radius: 5)
-//                    .onTapGesture {
-//                        print("tapped send order")
-//                        self.sendPrinterOrder = true
-//                        self.IoT = true
-//                    }
-//            }.padding(.horizontal)
-
-                
                 #endif
                 Spacer()
             }
@@ -355,6 +356,58 @@ struct ReviewOrder: View {
                 }
             }
             
+            for d in self.dishes {
+                if(d.requiredChoices != -1){
+                    var alreadyMet = false
+                    let split = self.order.dishChoice[d]!.split(separator: " ")
+                    for cho in split{
+                        print("cho: \(cho)")
+                        if(d.choices[String(d.requiredChoices)]?["required"] != nil){
+                            print("choices \(d.choices[String(d.requiredChoices)])")
+                            if((d.choices[String(d.requiredChoices)]?["required"]!.contains(String(cho))) != nil){
+                                alreadyMet = true
+                            }
+                            
+                        }
+                        
+//                        for choi in dish.choices[String(d.requiredChoices)]!["required"]!{
+//                            if(choi.contains(String(cho))){
+//                                print("contains?: \(choi)")
+//                                alreadyMet = true
+//                            }
+//                        }
+                    }
+                    
+                    //check if dish.choices[String(d.requiredChoices)]!["required"]!.contains(self.order.dishChoice[d])
+                    if(!alreadyMet){
+                        choicesExist.append(d.name)
+                        choicesSpecInstruct += "\(d.name), "
+//                        if(self.order.dishChoice[d] == ""){
+                        choicesNotMet = true
+    //                        choicesSpecInstruct = [d:false]
+//                        }
+                    }
+                }
+//                else{
+//                    choicesExist = [d:false]
+//                }
+                if(d == self.dishes.last){
+                    if(choicesSpecInstruct != ""){
+                        choicesSpecInstruct = String(choicesSpecInstruct.dropLast(2))
+
+                    }
+                    //                    choicesExist
+//                    choicesExist.removeValue(forKey: DishFB.previewDish())
+//                    choicesSpecInstruct.removeValue(forKey: DishFB.previewDish())
+                }
+//                if(self.order.dishChoice[d] == ""){
+//                    choicesSpecInstruct = [d:false]
+//                }
+//                else{
+//                    choicesSpecInstruct = [d:true]
+//                }
+            }
+            
             //create notification center observer
             #if !APPCLIP
             NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: "OrderSent"), object: nil, queue: .main) { (Notification) in
@@ -369,14 +422,54 @@ struct ReviewOrder: View {
                 print("wow")
             }
             #endif
+            NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: "RequiredChoicesMet"), object: nil, queue: .main) { (Notification) in
+//                self.order.orderSent()
+                var dish = Notification.object! as! DishFB
+                if let index = choicesExist.firstIndex(of: dish.name) {
+                    choicesExist.remove(at: index)
+                }
+                choicesSpecInstruct = choicesSpecInstruct.replacingOccurrences(of: dish.name, with: "")
+                if(choicesExist.isEmpty){
+                    choicesNotMet = false
+                }
+//                var tup = Notification.object! as! (DishFB, Bool)
+                print("wow")
+            }
         }
         .sheet(isPresented: $IoT){
             if(self.sendPrinterOrder){
                 #if !APPCLIP
+//                if(self.dishes)
+                //if any dish has choices and does not have special instructions - show alert first saying you need to choose something!
+//                if(){
+//
+//                }
+                if(choicesNotMet){
+                    RequiredChoicesAlertView(choicesSpecInstruct: self.choicesSpecInstruct, order: self.order)
+                        .onDisappear(){
+                            self.choice = self.order.dishChoice
+                            
+                        }
+                }
+                else{
                 ClientConnection(dishes: self.dishes, quantity: self.order.dishCounts, rest: self.order.restChosen)
+//                    .onAppear(){
+//
+//                    }
                     .onDisappear(){
                         self.mode.wrappedValue.dismiss()
                     }
+//                    .alert(isPresented: $choicesNotMet){
+//                        Alert(title: Text("Must Input Instructions"), message: Text("\(choicesSpecInstruct) need instructions before order can be sent. Please edit these instructions by clicking on the pencil and read the alert carefully."), dismissButton: .default(Text("Got it!")))
+////                            .onDisappear(){
+////                                if(choicesNotMet){
+////                                    self.mode.wrappedValue.dismiss()
+////                                }
+                }
+//
+//                    }
+//                }
+                
 //                #else
 //                PrintConnection(dishes: self.dishes, quantity: self.order.dishCounts, rest: self.order.restChosen)
 //                    .onAppear(){
@@ -392,7 +485,7 @@ struct ReviewOrder: View {
             
 //            ClientConnection(dishes: self.dishes, quantity: self.order.dishCounts, rest: self.order.restChosen)
         }
-        .alert(isPresented: $changeInstructions, TextFieldAlert(title: "Edit Special Instructions?", message: "\(self.dish.name) - \(self.dish.description)") { (text) in
+        .alert(isPresented: $changeInstructions, TextFieldAlert(title: "Edit Special Instructions?", message: "\(self.dish.name) - \(self.dish.description) \(order.dishCats[self.dish] != nil ? order.dishCats[self.dish]!.description : "")") { (text) in
                     if text != nil {
                         print(text)
                         if((self.order.dishChoice[self.dish]?.isEmpty) != nil){
@@ -405,6 +498,51 @@ struct ReviewOrder: View {
 //                        self.saveGroup(text: text!)
 //                        self.addtapped = true
                         self.choice = self.order.dishChoice
+                        if(self.dish.requiredChoices != -1){
+////                            choicesExist.append(self.dish.name)
+                            if(self.order.dishChoice[self.dish] == ""){
+                                choicesNotMet = true
+                                choicesExist.append(self.dish.name)
+                                choicesSpecInstruct += "\(self.dish.name), "
+                            }
+                            else{
+//
+//            //                        for choi in dish.choices[String(d.requiredChoices)]!["required"]!{
+//            //                            if(choi.contains(String(cho))){
+//            //                                print("contains?: \(choi)")
+//            //                                alreadyMet = true
+//            //                            }
+//            //                        }
+//                                }
+                                var dishChoiceMet = false
+                                let split = self.order.dishChoice[self.dish]!.split(separator: " ")
+                                for cho in split{
+                                    if(self.dish.choices[String(self.dish.requiredChoices)]?["required"] != nil){
+                                        if((self.dish.choices[String(self.dish.requiredChoices)]?["required"]!.contains(String(cho))) != nil){
+                                            dishChoiceMet = true
+                                        }
+                                    }
+                                }
+//                                for choice in self.dish.choices[String(self.dish.requiredChoices)]!["required"] ?? [""]{
+//                                    if(choice != ""){
+//                                        if(self.order.dishChoice[dish]!.contains(choice)){
+//                                            dishChoiceNotMet = false
+//                                        }
+//                                    }
+//                                }
+                                if(dishChoiceMet){
+                                    if let index = choicesExist.firstIndex(of: self.dish.name) {
+                                        choicesExist.remove(at: index)
+                                    }
+                                    choicesSpecInstruct = choicesSpecInstruct.replacingOccurrences(of: self.dish.name, with: "")
+                                }
+                                if(choicesExist.isEmpty){
+                                    choicesNotMet = false
+                                }
+
+                            }
+                        }
+                        
                     }
                     print("alert here now")
 //                    self.addtapped = true

@@ -10,6 +10,10 @@ import SwiftUI
 import UIKit
 import MQTTClient
 import Instructions
+import FirebaseFirestore
+import FirebaseStorage
+import Firebase
+import FirebaseFirestoreSwift
 
 // This MQTT client lib is a bit confusing in terms of what callbacks etc to use. The best example I found that works is here:
 // https://github.com/novastone-media/MQTT-Client-Framework/blob/master/MQTTSwift/MQTTSwift/MQTTSwift.swift
@@ -43,6 +47,9 @@ class ClientViewController: UIViewController, CoachMarksControllerDelegate, Coac
     var tableNum: String = ""
     var rest: RestaurantFB = RestaurantFB.previewRest()
     let coachMarksController = CoachMarksController()
+    private var db = Firestore.firestore()
+//    @Published
+    var newOrder: Order = Order(dishes: [], totalPrice: 0.0, rest: "")
 //    @EnvironmentObject var order : OrderModel
     
 //    @IBOutlet private weak var button: CircularButton!
@@ -110,7 +117,7 @@ class ClientViewController: UIViewController, CoachMarksControllerDelegate, Coac
                         specInstructs = specInstructs + ", \(inf.3)"
                     }
                     
-                    let newOrder = Order(dishes: self.dishes, totalPrice: total, rest: self.rest.name, id: specInstructs, time: NSDate(timeIntervalSince1970: TimeInterval(NSDate().timeIntervalSince1970)) as Date, specialInstruc: specInstructs)
+                    newOrder = Order(dishes: self.dishes, totalPrice: total, rest: self.rest.name, id: userProfile.userId, time: NSDate(timeIntervalSince1970: TimeInterval(NSDate().timeIntervalSince1970)) as Date, specialInstruc: specInstructs)
                     var orderAlreadySent = false
                     for pO in pastOrders{
                         if (pO.rest == newOrder.rest && pO.dishes == newOrder.dishes && pO.specialInstruc == newOrder.specialInstruc) {
@@ -121,6 +128,7 @@ class ClientViewController: UIViewController, CoachMarksControllerDelegate, Coac
                     if(!orderAlreadySent){
                         self.publishMessage(" \(userProfile.fullName); \(self.dishInfo); \(self.tableNum)", onTopic: "raspberry/vics")
                         pastOrders.append(newOrder)
+                        self.addOrder()
                     }
                     else{
                         self.dishInfo = []
@@ -191,6 +199,44 @@ class ClientViewController: UIViewController, CoachMarksControllerDelegate, Coac
 //                    self.button.isEnabled = false
             }
         }
+    }
+    
+    func addOrder(){
+        
+        var data: [String : Any] = [:]
+        //go through all dishes and retrieve reference of them
+        var dishRefs : [String] = []
+        for d in self.newOrder.dishes {
+            let docRef = db.collection("Dish").whereField("Name", isEqualTo: d.name).whereField("Restaurant", isEqualTo: d.restaurant)
+            docRef.getDocuments { [self] snap, err in
+                for doc in snap!.documents{
+                    print("Dish/\(doc.reference.documentID)")
+                    dishRefs.append("\(doc.reference.documentID)")
+                    if(d == self.newOrder.dishes.last){
+                        newOrder.specialInstruc.removeFirst()
+                        newOrder.specialInstruc.removeFirst()
+                        print("Dish/\(newOrder.specialInstruc)")
+                        data = ["instruct": newOrder.specialInstruc, "userId": (newOrder.id == "" ? "guest" : newOrder.id), "totalPrice": newOrder.totalPrice, "rest": d.restaurant, "time": newOrder.time, "dishes":dishRefs] as [String : Any]
+                        print("Dish/\(data)")
+                        do {
+                            let _ = try db.collection("Order").addDocument(data: data)
+                        }
+                        catch{
+                            print(error)
+                        }
+                    }
+                }
+            }
+            data = ["instruct": newOrder.specialInstruc, "userId": (newOrder.id == "" ? "guest" : newOrder.id), "totalPrice": newOrder.totalPrice, "rest": newOrder.rest, "time": newOrder.time, "dishes":dishRefs] as [String : Any]
+//        }
+        
+        }
+    }
+    
+    func stringFromDate(_ date: Date) -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "dd MMM yyyy HH:mm" //yyyy
+        return formatter.string(from: date)
     }
     
     func getQueryStringParameter(url: String, param: String, d: DispatchGroup) -> String? {

@@ -15,6 +15,7 @@
 		34A966F2254691C200AD84CD /* RestaurantReviewFB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34A966F1254691C200AD84CD /* RestaurantReviewFB.swift */; };
 		34A966F8254762EF00AD84CD /* RestaurantReviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34A966F7254762EF00AD84CD /* RestaurantReviewView.swift */; };
 		34FCE2722507297F00329162 /* RatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34FCE2712507297F00329162 /* RatingView.swift */; };
+		3A01B5C927BF8ED00090E1F2 /* RequiredChoicesAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A01B5C827BF8ECF0090E1F2 /* RequiredChoicesAlertView.swift */; };
 		3A0745B5252B014D000EF6BD /* AppleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0745B4252B014C000EF6BD /* AppleButton.swift */; };
 		3A0745BB252B020F000EF6BD /* FacebookButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0745BA252B020F000EF6BD /* FacebookButton.swift */; };
 		3A0745C1252B02BA000EF6BD /* GoogleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0745C0252B02BA000EF6BD /* GoogleButton.swift */; };
@@ -82,6 +83,7 @@
 		3A987B102481511B0021F6E4 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A987B0F2481511B0021F6E4 /* ContentView.swift */; };
 		3A99EEA32790AEF3000D6DB7 /* MenuScanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A99EEA22790AEF3000D6DB7 /* MenuScanViewController.swift */; };
 		3AA9897624B517F00070FD97 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA9897524B517F00070FD97 /* Extensions.swift */; };
+		3AA9C5CE27C1DB91009983F8 /* RequiredChoicesCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA9C5CD27C1DB91009983F8 /* RequiredChoicesCard.swift */; };
 		3AAFED4425AFB83800F34BAF /* Combine.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AF6D6742578672E009E4240 /* Combine.framework */; };
 		3AAFED4625AFB84000F34BAF /* FacebookLogin in Frameworks */ = {isa = PBXBuildFile; productRef = 3AAFED4525AFB84000F34BAF /* FacebookLogin */; };
 		3AAFED4825AFB85600F34BAF /* FacebookCore in Frameworks */ = {isa = PBXBuildFile; productRef = 3AAFED4725AFB85600F34BAF /* FacebookCore */; };
@@ -281,6 +283,7 @@
 		34A966F7254762EF00AD84CD /* RestaurantReviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantReviewView.swift; sourceTree = "<group>"; };
 		34F39DA6253E58DF00C30346 /* YumzzRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = YumzzRelease.entitlements; sourceTree = "<group>"; };
 		34FCE2712507297F00329162 /* RatingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingView.swift; sourceTree = "<group>"; };
+		3A01B5C827BF8ECF0090E1F2 /* RequiredChoicesAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequiredChoicesAlertView.swift; sourceTree = "<group>"; };
 		3A0745B4252B014C000EF6BD /* AppleButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleButton.swift; sourceTree = "<group>"; };
 		3A0745BA252B020F000EF6BD /* FacebookButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FacebookButton.swift; sourceTree = "<group>"; };
 		3A0745C0252B02BA000EF6BD /* GoogleButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleButton.swift; sourceTree = "<group>"; };
@@ -356,6 +359,7 @@
 		3A987B0F2481511B0021F6E4 /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		3A99EEA22790AEF3000D6DB7 /* MenuScanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuScanViewController.swift; sourceTree = "<group>"; };
 		3AA9897524B517F00070FD97 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		3AA9C5CD27C1DB91009983F8 /* RequiredChoicesCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequiredChoicesCard.swift; sourceTree = "<group>"; };
 		3ABA90F024F63DB500695B06 /* BlackButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlackButton.swift; sourceTree = "<group>"; };
 		3ABA90F424F64EDE00695B06 /* GuestButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuestButton.swift; sourceTree = "<group>"; };
 		3ABD6A7F253AC1D40082681A /* XButtonDelete.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XButtonDelete.swift; sourceTree = "<group>"; };
@@ -588,6 +592,8 @@
 			children = (
 				3A3DD57D2538331600536D62 /* Components */,
 				3A3DD57325380E0F00536D62 /* ReviewOrder.swift */,
+				3AA9C5CD27C1DB91009983F8 /* RequiredChoicesCard.swift */,
+				3A01B5C827BF8ECF0090E1F2 /* RequiredChoicesAlertView.swift */,
 			);
 			path = CartViews;
 			sourceTree = "<group>";
@@ -927,6 +933,13 @@
 			path = DishNavigationVM;
 			sourceTree = "<group>";
 		};
+		3AD62C3327C9D9E000F4E535 /* OrderRec */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = OrderRec;
+			sourceTree = "<group>";
+		};
 		3AECE26C2772974B007BEC00 /* YumzzClip */ = {
 			isa = PBXGroup;
 			children = (
@@ -1087,6 +1100,7 @@
 		A73B1B5924B0FDA800A8C6A8 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				3AD62C3327C9D9E000F4E535 /* OrderRec */,
 				3AED7BD425CB533B00341E95 /* Cache */,
 				3A3E1DE1256FC6A700812E67 /* Image */,
 				3A3E1DD9256FC5E500812E67 /* Cart */,
@@ -1497,6 +1511,7 @@
 				A779ACAA250D4F7400146565 /* ImageCache.swift in Sources */,
 				3AD1D26D275C9C26004D29C5 /* SwiftAlgorithms.swift in Sources */,
 				3AF6D65A2572882A009E4240 /* BuildFB.swift in Sources */,
+				3A01B5C927BF8ED00090E1F2 /* RequiredChoicesAlertView.swift in Sources */,
 				3AF5C23A2649BFBE00E9BC30 /* RecView.swift in Sources */,
 				3ACAD170250ACE2000B24CEB /* LoginViewModel.swift in Sources */,
 				3A987AD92480350C0021F6E4 /* SceneDelegate.swift in Sources */,
@@ -1547,6 +1562,7 @@
 				3A4E2E2024C6244600C34DD8 /* ForgotPassword.swift in Sources */,
 				A735992824ECD83300584BFD /* AccountProfileViewModel.swift in Sources */,
 				C5D0A16C24B1B6A300E44DF2 /* DishFB.swift in Sources */,
+				3AA9C5CE27C1DB91009983F8 /* RequiredChoicesCard.swift in Sources */,
 				3A0745C7252B0871000EF6BD /* BackButton.swift in Sources */,
 				3ACAD187250AF4B200B24CEB /* ListDishesViewModel.swift in Sources */,
 				3A530DF124D8E07F00CBDE28 /* BottomSheetModal.swift in Sources */,
@@ -1747,7 +1763,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -1806,7 +1822,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -1826,7 +1842,7 @@
 				CODE_SIGN_ENTITLEMENTS = VirtualMenu/VirtualMenu.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_ASSET_PATHS = "\"VirtualMenu/Preview Content\"";
 				DEVELOPMENT_TEAM = 3VUUCS34BU;
 				ENABLE_BITCODE = YES;
@@ -1838,13 +1854,13 @@
 					"PB_ENABLE_MALLOC=1",
 				);
 				INFOPLIST_FILE = VirtualMenu/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_QUOTE_LINKER_ARGUMENTS_FOR_COMPILER_DRIVER = YES;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 10;
+				MARKETING_VERSION = 11;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ARMenu.VirtualMenu;
 				PRODUCT_NAME = Yumzz;
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1865,7 +1881,7 @@
 				CODE_SIGN_ENTITLEMENTS = VirtualMenu/YumzzRelease.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_ASSET_PATHS = "\"VirtualMenu/Preview Content\"";
 				DEVELOPMENT_TEAM = 3VUUCS34BU;
 				ENABLE_BITCODE = YES;
@@ -1877,13 +1893,13 @@
 					"PB_ENABLE_MALLOC=1",
 				);
 				INFOPLIST_FILE = VirtualMenu/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_QUOTE_LINKER_ARGUMENTS_FOR_COMPILER_DRIVER = YES;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 10;
+				MARKETING_VERSION = 11;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ARMenu.VirtualMenu;
 				PRODUCT_NAME = Yumzz;
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1911,7 +1927,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = iOSAppDev.VirtualMenuTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/VirtualMenu.app/VirtualMenu";
 			};
 			name = Debug;
@@ -1933,7 +1949,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = iOSAppDev.VirtualMenuTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/VirtualMenu.app/VirtualMenu";
 			};
 			name = Release;
@@ -1953,7 +1969,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = iOSAppDev.VirtualMenuUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 				TEST_TARGET_NAME = VirtualMenu;
 			};
 			name = Debug;
@@ -1973,7 +1989,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = iOSAppDev.VirtualMenuUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 				TEST_TARGET_NAME = VirtualMenu;
 			};
 			name = Release;
@@ -1988,7 +2004,7 @@
 				CODE_SIGN_ENTITLEMENTS = YumzzClip/YumzzClip.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_ASSET_PATHS = "\"YumzzClip/Preview Content\"";
 				DEVELOPMENT_TEAM = 3VUUCS34BU;
 				ENABLE_BITCODE = YES;
@@ -2010,12 +2026,12 @@
 				INFOPLIST_KEY_UIStatusBarHidden = NO;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 10;
+				MARKETING_VERSION = 11;
 				PODS_XCFRAMEWORKS_BUILD_DIR = "$(PODS_CONFIGURATION_BUILD_DIR)/XCFrameworkIntermediates";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ARMenu.VirtualMenu.Clip;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2037,7 +2053,7 @@
 				CODE_SIGN_ENTITLEMENTS = YumzzClip/YumzzClip.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_ASSET_PATHS = "\"YumzzClip/Preview Content\"";
 				DEVELOPMENT_TEAM = 3VUUCS34BU;
 				ENABLE_BITCODE = YES;
@@ -2059,12 +2075,12 @@
 				INFOPLIST_KEY_UIStatusBarHidden = NO;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 10;
+				MARKETING_VERSION = 11;
 				PODS_XCFRAMEWORKS_BUILD_DIR = "$(PODS_CONFIGURATION_BUILD_DIR)/XCFrameworkIntermediates";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ARMenu.VirtualMenu.Clip;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2084,7 +2100,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
 				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = 7XP2RUZ6VP;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -2093,7 +2109,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/YumzzClip.app/YumzzClip";
 			};
 			name = Debug;
@@ -2106,7 +2122,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
 				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = 7XP2RUZ6VP;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -2115,7 +2131,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/YumzzClip.app/YumzzClip";
 			};
 			name = Release;
@@ -2127,16 +2143,16 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
 				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = 7XP2RUZ6VP;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 8.0;
+				MARKETING_VERSION = 11.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ARMenu.VirtualMenu.YumzzClipUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 				TEST_TARGET_NAME = YumzzClip;
 			};
 			name = Debug;
@@ -2148,16 +2164,16 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
 				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = 7XP2RUZ6VP;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 8.0;
+				MARKETING_VERSION = 11.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ARMenu.VirtualMenu.YumzzClipUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 				TEST_TARGET_NAME = YumzzClip;
 			};
 			name = Release;

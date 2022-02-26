@@ -31,6 +31,7 @@ class OrderModel: ObservableObject {
     var alertMessage: String = ""
     
     //do i want these attributes to cause an update when they change
+    var dishCats: [DishFB : DishCategory] = [DishFB : DishCategory]()
     var dishIndexes : [DishFB : Int] = [DishFB : Int]()
     var dishCounts : [DishFB : Int] = [DishFB : Int]()
     var optsChosen: [DishFB: [String]] = [DishFB: [String]]()

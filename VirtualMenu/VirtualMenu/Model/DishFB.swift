@@ -36,6 +36,7 @@ struct DishFB {
     // add - choices
     // substitute - a for b
     var choices: [String:[String:[String]]] = ["":["":[""]]]
+    var requiredChoices: Int = -1
     
     #if !APPCLIP
     init(name: String, key: String = "", description: String, price: Double, type: String, restaurant: String) {
@@ -133,9 +134,9 @@ struct DishFB {
         }
         if(snapshot.get("photoExists") != nil){
             self.photoExists = (snapshot.data()["photoExists"] as? Bool)!
-            if(self.photoExists){
-                
-            }
+//            if(self.photoExists){
+//
+//            }
         }
         else{
             self.coverPhotoURL = ""
@@ -143,6 +144,9 @@ struct DishFB {
         }
         if(snapshot.get("choices") != nil){
             self.choices = ((snapshot.data()["choices"] as? [String:[String:[String]]])!)
+        }
+        if(snapshot.get("requiredChoices") != nil){
+            self.requiredChoices = (snapshot.data()["requiredChoices"] as? Int)!
         }
         if(snapshot.get("photoExists") != nil){
             self.photoExists = (snapshot.data()["photoExists"] as? Bool)!
@@ -237,6 +241,10 @@ struct DishFB {
 
         if(snapshot.get("choices") != nil){
             self.choices = (snapshot.data()!["choices"] as? [String:[String:[String]]])!
+        }
+        
+        if(snapshot.get("requiredChoices") != nil){
+            self.requiredChoices = (snapshot.data()!["requiredChoices"] as? Int)!
         }
 //        else{
 //            print("no image exists")
@@ -355,12 +363,21 @@ struct DishFB {
         }
         
         guard let choices = json["choices"] as? [String:[String:[String]]] else {
-            let choices = ["":[""]]
+            let choices = ["":["":[""]]]
             return nil
         }
         
         if(choices != ["":["":[""]]]){
             self.choices = choices
+        }
+        
+        guard let requiredChoices = json["requiredChoices"] as? Int else {
+            let requiredChoices = false
+            return nil
+        }
+        
+        if(requiredChoices != -1){
+            self.requiredChoices = requiredChoices
         }
         
         self.id = UUID()

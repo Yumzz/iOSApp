@@ -59,6 +59,9 @@ struct OnboardingInfo2: View {
                             let firebaseAuth = Auth.auth()
                             do {
                                 defer{
+//                                    user.isLogged = false
+//                                    user.showOnboarding = false
+                                    user.guest = true
                                     self.loginVM.ridProfile()
                                     Auth.auth().signInAnonymously() { (authResult, error) in
                                       // ...
@@ -79,7 +82,7 @@ struct OnboardingInfo2: View {
                                 } catch let signOutError as NSError {
                                   print ("Error signing out: %@", signOutError)
                                 }
-                        }){
+                        }.navigationBarTitleDisplayMode(.inline)){
                             InvertedOrangeButton(strLabel: "Use app as a guest", width: 330, height: 48)
                                 .clipShape(RoundedRectangle(cornerRadius: 10, style: .circular))
                                 .shadow(radius: 5)

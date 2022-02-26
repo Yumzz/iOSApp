@@ -27,6 +27,7 @@ struct HomeScreenView: View {
     @State var cityRests = [String: [RestaurantFB]]()
     
     @State var cities = [String]()
+//    @State private var orderRecButtonClicked = false
 //    @State private var waitButtonClicked = false
     
     @State var rest = RestaurantFB.previewRest()
@@ -38,6 +39,7 @@ struct HomeScreenView: View {
     @State var navbarhidden = false
     
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
+    @EnvironmentObject var user: UserStore
     @GestureState private var dragOffset = CGSize.zero
         
     let dispatchGroup = DispatchGroup()
@@ -60,6 +62,8 @@ struct HomeScreenView: View {
 //                }
 //                else{
                     view.overlay(overlay, alignment: .bottom)
+//                    .overlay(OrderRecButton, alignment: .bottomLeading)
+
 //                        .overlay(waitButt, alignment: (self.order.dishesChosen || !self.order.buildsChosen.isEmpty) ? .topTrailing : .bottomLeading)
 //                        .overlay(waitButt, alignment: .topTrailing)
 //                }
@@ -67,6 +71,7 @@ struct HomeScreenView: View {
             } else {
 //                if(self.waitButtonClicked){
                     view
+//                    .overlay(OrderRecButton, alignment: .bottomLeading)
 //                }
 //                else{
 //                    view
@@ -90,7 +95,8 @@ struct HomeScreenView: View {
 //                .transition(.slide)
 //                .animation(.default)
 //            }
-        }
+        }                    .navigationBarTitleDisplayMode(.inline)
+
     }
     
     var overlay: some View {
@@ -102,6 +108,20 @@ struct HomeScreenView: View {
             Spacer().frame(width: 0, height: 10)
         }
     }
+    
+//    var OrderRecButton: some View {
+//        VStack{
+//
+//            OrangeButton(strLabel: "Get Local Recommendation", width: 325, height: 48)
+//                .clipShape(RoundedRectangle(cornerRadius: 10, style: .circular))
+//
+//            }
+//        .onTapGesture(){
+//            self.qrCodeShow = true
+//            self.orderRecButtonClicked = true
+//
+//        }
+//    }
     
 //    var waitButt: some View {
 //        VStack{
@@ -147,7 +167,7 @@ struct HomeScreenView: View {
             ZStack {
                 Color("DarkBack").edgesIgnoringSafeArea(.all)
                 VStack {
-                    Spacer().frame(height: 40)
+                    Spacer().frame(height: user.guest ? 10 : UIScreen.main.bounds.height/8)
                 ScrollView(.vertical, showsIndicators: false) {
                     VStack {
                         HStack {
@@ -245,9 +265,11 @@ struct HomeScreenView: View {
     //                            .frame(width: 36, height: 36)
                                 
                         }
-                    }.foregroundColor(Color("YumzzOrange"))
+                        
+                    }.navigationBarTitleDisplayMode(.inline)
+                    .foregroundColor(Color("YumzzOrange"))
 //                        .frame(alignment: .top)
-                        .padding()
+//                        .padding()
                         .onTapGesture(){
                             print("tapped hstack")
                         })
@@ -269,29 +291,38 @@ struct HomeScreenView: View {
 //                            print("wow: \(text)")
 //                        }
 //                    })
-                    MenuConnection()
-                    .onDisappear(){
-//                        if(self.rest.description != ""){
-//                            self.order.newOrder(rest: self.rest)
-//                        }
-                        self.qrCodeShow = false
-                    }
-                    .onAppear(){
-                        NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: "PrintInfoWrong"), object: nil, queue: .main) { [self] (Notification) in
-                            print("qrcode printinfo here")
-                            self.wrongQRCode = true
+//                    if(self.orderRecButtonClicked){
+//                        OrderRecChoose()
+//                            .onDisappear(){
+//                                self.orderRecButtonClicked = false
+//                            }
+//                    }
+//                    else{
+                        MenuConnection()
+                        .onDisappear(){
+    //                        if(self.rest.description != ""){
+    //                            self.order.newOrder(rest: self.rest)
+    //                        }
+                            self.qrCodeShow = false
                         }
-//                        NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: "CallWaitWrong"), object: nil, queue: .main) { [self] (Notification) in
-//                            print("qrcode callwait here")
-//                            self.wrongQRCode = true
-//                        }
-                    }.alert(isPresented: self.$wrongQRCode){
-                        return Alert(title: Text("Wrong QR Code! Please drag down this view, reclick the qr scanner, and scan the QR Code with the blue border!"))
-                        self.wrongQRCode = false
-//                        print("just displayed alert and about to ask to reload")
-//                        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "ReloadMenuScan"), object: nil)
-//                        self.view.
-                    }
+                        .onAppear(){
+                            NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: "PrintInfoWrong"), object: nil, queue: .main) { [self] (Notification) in
+                                print("qrcode printinfo here")
+                                self.wrongQRCode = true
+                            }
+    //                        NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: "CallWaitWrong"), object: nil, queue: .main) { [self] (Notification) in
+    //                            print("qrcode callwait here")
+    //                            self.wrongQRCode = true
+    //                        }
+                        }.alert(isPresented: self.$wrongQRCode){
+                            return Alert(title: Text("Wrong QR Code! Please drag down this view, reclick the qr scanner, and scan the QR Code with the blue border!"))
+                            self.wrongQRCode = false
+    //                        print("just displayed alert and about to ask to reload")
+    //                        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "ReloadMenuScan"), object: nil)
+    //                        self.view.
+                        }
+//                    }
+                    
 //                    .alert(isPresented: $wrongQRCode, TextFieldAlert(title: "Wrong QR Code", message: "Please scan the QR Code with the blue border to see the menu") { (text) in
 //                                self.wrongQRCode = false
 //                        //need to refresh
@@ -326,9 +357,9 @@ struct HomeScreenView: View {
                                 self.restChosen = true
                                 
                                 self.rest = self.restaurants.first(where: { $0.id.replacingOccurrences(of: " ", with: "") == rest })!
-                                print("ask: \(self.rest.description)")
+//                                print("ask: \(self.rest.description)")
                                 self.qrCodeShow = false
-                                print("ask1: \(self.qrCodeShow)")
+//                                print("ask1: \(self.qrCodeShow)")
                                 
                 //                        self.
                 //                        RestaurantHomeView(restaurant: self.rest, distance: self.HomeScreenVM.getDistFromUser(coordinate: self.rest.coordinate))

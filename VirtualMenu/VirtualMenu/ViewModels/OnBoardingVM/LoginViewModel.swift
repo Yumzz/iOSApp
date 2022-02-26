@@ -11,6 +11,7 @@ import SwiftUI
 import FirebaseStorage
 import Firebase
 import FirebaseFirestoreSwift
+import FirebaseFirestore
 import GoogleSignIn
 import FBSDKLoginKit
 import FBSDKCoreKit
@@ -71,6 +72,7 @@ class LoginViewModel: ObservableObject {
 
     func ridProfile(){
         userProfile = UserProfile(userId: "", fullName: "", emailAddress: "", profilePicture: "", profPhoto: nil)
+//        user.showOnboarding = false
     }
 
     func loginUser(email: String, password: String, disp: DispatchGroup? = nil){

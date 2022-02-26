@@ -45,10 +45,10 @@ struct ContentView: View {
 //                }
                 var hey = 0
                 while(self.rest.name == ""){
-                    print("reload bb")
-                    if(hey == 20){
-                        exit(-1)
-                    }
+                    print("reload bb: \(hey)")
+//                    if(hey == 20){
+//                        exit(-1)
+//                    }
                     var viewmo = ContentViewModel(dis: dispatchGroup, id: id)
                     self.rest = viewmo.restaurant ?? RestaurantFB.previewRest()
                     print(self.rest.hour == "")
