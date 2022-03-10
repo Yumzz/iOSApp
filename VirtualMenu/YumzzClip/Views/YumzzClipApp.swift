@@ -15,7 +15,8 @@ struct YumzzClipApp: App {
     let order = OrderModel()
     var body: some Scene {
         WindowGroup {
-            StartView().environmentObject(order)
+//            StartView().environmentObject(order)
+            ContentView(id: "a1Lwu7xEFrhDh9wnVpCP").environmentObject(order)
         }
     }
 }

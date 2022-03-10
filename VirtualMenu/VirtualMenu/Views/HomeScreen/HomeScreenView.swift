@@ -27,7 +27,7 @@ struct HomeScreenView: View {
     @State var cityRests = [String: [RestaurantFB]]()
     
     @State var cities = [String]()
-//    @State private var orderRecButtonClicked = false
+    @State private var orderRecButtonClicked = false
 //    @State private var waitButtonClicked = false
     
     @State var rest = RestaurantFB.previewRest()
@@ -114,8 +114,8 @@ struct HomeScreenView: View {
 //
 //            OrangeButton(strLabel: "Get Local Recommendation", width: 325, height: 48)
 //                .clipShape(RoundedRectangle(cornerRadius: 10, style: .circular))
-//
-//            }
+//            Spacer().frame(width: UIScreen.main.bounds.width, height: 40)
+//        }
 //        .onTapGesture(){
 //            self.qrCodeShow = true
 //            self.orderRecButtonClicked = true

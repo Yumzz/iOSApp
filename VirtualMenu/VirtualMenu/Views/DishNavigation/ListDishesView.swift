@@ -138,14 +138,14 @@ struct ListDishesView: View {
                                 Text("\(dishCategory.name)")
                                     .padding(.horizontal, 20)
                                     .padding(.vertical, 10)
-                                    .font(.system(size: 12))
+                                    .font(.system(size: 20))
                                     .scaledToFit()
                                     .background((self.dishCategoryClicked == dishCategory) ? 
-                                                    ColorManager.yumzzOrange.clipShape(RoundedRectangle(cornerRadius: 10, style: .circular)) :
-                                                     ColorManager.offWhiteBack.clipShape(RoundedRectangle(cornerRadius: 10, style: .circular)))
+                                                    ColorManager.yumzzOrange.clipShape(RoundedRectangle(cornerRadius: 18, style: .circular)) :
+                                                     ColorManager.offWhiteBack.clipShape(RoundedRectangle(cornerRadius: 18, style: .circular)))
                                     .foregroundColor((self.dishCategoryClicked == dishCategory) ?
                                                         Color(UIColor().colorFromHex("#FFFFFF", 1)) : ColorManager.textGray)
-                                    .cornerRadius(5)
+                                    .cornerRadius(13)
                                     .onTapGesture {
                                         if((self.dishCategoryClicked == dishCategory)){
                                             self.dishCategoryClicked = DishCategory(isExpanded: false, dishes: [], name: "", description: "")

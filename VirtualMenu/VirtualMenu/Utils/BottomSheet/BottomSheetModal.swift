@@ -177,6 +177,7 @@ struct AppClipDishDetailsBottomSheetModal<Content: View>: View {
   private let backgroundOpacity = 0.65
   private let dragIndicatorVerticalPadding: CGFloat = 20
 
+  @Environment(\.presentationMode) var mode: Binding<PresentationMode>
   @State private var offset = CGSize.zero
   @Binding var display: Bool
   @Binding var backgroundColor: Color
@@ -190,6 +191,12 @@ struct AppClipDishDetailsBottomSheetModal<Content: View>: View {
         background
         modal
       }
+    }
+    .onAppear(){
+        NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: "DishAdded"), object: nil, queue: .main) { [self] (Notification) in
+            print("tryin to dismiss")
+            self.display = false
+        }
     }
     .keyboardAdaptive()
     .edgesIgnoringSafeArea(.all)

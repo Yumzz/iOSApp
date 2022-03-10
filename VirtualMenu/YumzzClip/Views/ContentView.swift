@@ -49,10 +49,14 @@ struct ContentView: View {
 //                    if(hey == 20){
 //                        exit(-1)
 //                    }
-                    var viewmo = ContentViewModel(dis: dispatchGroup, id: id)
-                    self.rest = viewmo.restaurant ?? RestaurantFB.previewRest()
-                    print(self.rest.hour == "")
-                    hey = hey + 1
+                    var dgroup = DispatchGroup()
+                    var viewmo = ContentViewModel(dis: dgroup, id: id)
+                    dgroup.notify(queue: .main){
+                        
+                        self.rest = viewmo.restaurant ?? RestaurantFB.previewRest()
+                        print(self.rest.hour == "")
+                        hey = hey + 1
+                    }
                 }
 //
                 }

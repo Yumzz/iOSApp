@@ -183,6 +183,7 @@ struct DishDetailsView: View {
                                                 
             //                                    Image(systemName: "cart.fill.badge.plus")
             //                                        .font(.system(size: 18))
+                                                
                                                 Text("Add to Cart")
                                                     .font(.system(size: 16, weight: .semibold))
                                                     .font(.footnote)
@@ -391,8 +392,12 @@ struct DishDetailsView: View {
                                         }
                                         specInstruc = ""
                                     }
-                                    
+                                    #if APPCLIP
+                                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: "DishAdded"), object: nil)
+                                    self.mode.wrappedValue.dismiss()
+                                    #endif
 //                                    self.addtapped = true
+                                    //send notification to 
                                     
                                     
                                 }

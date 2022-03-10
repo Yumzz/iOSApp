@@ -90,7 +90,7 @@ struct OnboardingInfo2: View {
                     }
                     Spacer()
                     
-                }
+                
                 }.navigationBarTitle("")
                 .navigationBarHidden(true)
 //                    .onAppear(){
@@ -100,7 +100,7 @@ struct OnboardingInfo2: View {
 //                        self.isNavigationBarHidden = false
 //
 //                    }
-//            }
+            }
             
 //            Spacer().fame(height: 80)
 
@@ -108,6 +108,7 @@ struct OnboardingInfo2: View {
         .navigationBarHidden(true)
     }
 }
+    
 
 struct OnboardingInfo2_Previews: PreviewProvider {
     static var previews: some View {

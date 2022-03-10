@@ -27,6 +27,7 @@
 		3A13B6E024C1813D0006458B /* ContactUs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A13B6DF24C1813D0006458B /* ContactUs.swift */; };
 		3A13B6E424C1816B0006458B /* ReportProblem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A13B6E324C1816B0006458B /* ReportProblem.swift */; };
 		3A13B6ED24C3D9FB0006458B /* SuggestRestaurant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A13B6EC24C3D9FB0006458B /* SuggestRestaurant.swift */; };
+		3A1BBD1427CA0D7B00209B3C /* RecCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A1BBD1327CA0D7B00209B3C /* RecCard.swift */; };
 		3A2A00A3271924F6009FC3CD /* PastOrders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A2A00A2271924F6009FC3CD /* PastOrders.swift */; };
 		3A2A00A9271928C0009FC3CD /* PastOrdersViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A2A00A8271928C0009FC3CD /* PastOrdersViewModel.swift */; };
 		3A2A00B0271B9E5E009FC3CD /* OrderCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A2A00AF271B9E5E009FC3CD /* OrderCard.swift */; };
@@ -66,6 +67,7 @@
 		3A5B0DB8253FDD9B00A0BE41 /* MiniViewCartButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5B0DB7253FDD9B00A0BE41 /* MiniViewCartButton.swift */; };
 		3A5F685424FE230200F9B43D /* TextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5F685324FE230200F9B43D /* TextView.swift */; };
 		3A5F685624FE470C00F9B43D /* ReviewCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5F685524FE470C00F9B43D /* ReviewCard.swift */; };
+		3A62F5BD27CC40F2005BDF6E /* RecCardVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A62F5BC27CC40F2005BDF6E /* RecCardVM.swift */; };
 		3A64017026FA9841003D3FFA /* ChoicesCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A64016F26FA9841003D3FFA /* ChoicesCard.swift */; };
 		3A6477F224B68D060077EF30 /* UserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6477F124B68D060077EF30 /* UserProfile.swift */; };
 		3A6638E125844C6B00AC9C1A /* BuildOptsCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6638E025844C6B00AC9C1A /* BuildOptsCard.swift */; };
@@ -223,6 +225,13 @@
 			remoteGlobalIDString = 3A987AD22480350C0021F6E4;
 			remoteInfo = VirtualMenu;
 		};
+		3AAB7DDE27D01E3500E9ED9A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3A987ACB2480350C0021F6E4 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 3A987AD22480350C0021F6E4;
+			remoteInfo = VirtualMenu;
+		};
 		3AECE27D2772974D007BEC00 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 3A987ACB2480350C0021F6E4 /* Project object */;
@@ -296,6 +305,7 @@
 		3A13B6DF24C1813D0006458B /* ContactUs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactUs.swift; sourceTree = "<group>"; };
 		3A13B6E324C1816B0006458B /* ReportProblem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportProblem.swift; sourceTree = "<group>"; };
 		3A13B6EC24C3D9FB0006458B /* SuggestRestaurant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestRestaurant.swift; sourceTree = "<group>"; };
+		3A1BBD1327CA0D7B00209B3C /* RecCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecCard.swift; sourceTree = "<group>"; };
 		3A2A00A2271924F6009FC3CD /* PastOrders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PastOrders.swift; sourceTree = "<group>"; };
 		3A2A00A8271928C0009FC3CD /* PastOrdersViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PastOrdersViewModel.swift; sourceTree = "<group>"; };
 		3A2A00AF271B9E5E009FC3CD /* OrderCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderCard.swift; sourceTree = "<group>"; };
@@ -335,6 +345,7 @@
 		3A5B0DB7253FDD9B00A0BE41 /* MiniViewCartButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiniViewCartButton.swift; sourceTree = "<group>"; };
 		3A5F685324FE230200F9B43D /* TextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextView.swift; sourceTree = "<group>"; };
 		3A5F685524FE470C00F9B43D /* ReviewCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewCard.swift; sourceTree = "<group>"; };
+		3A62F5BC27CC40F2005BDF6E /* RecCardVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecCardVM.swift; sourceTree = "<group>"; };
 		3A64016F26FA9841003D3FFA /* ChoicesCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChoicesCard.swift; sourceTree = "<group>"; };
 		3A6477F124B68D060077EF30 /* UserProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfile.swift; sourceTree = "<group>"; };
 		3A6638E025844C6B00AC9C1A /* BuildOptsCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildOptsCard.swift; sourceTree = "<group>"; };
@@ -783,6 +794,14 @@
 			name = "Recovered References";
 			sourceTree = "<group>";
 		};
+		3A62F5BB27CC40CD005BDF6E /* OrderRecVM */ = {
+			isa = PBXGroup;
+			children = (
+				3A62F5BC27CC40F2005BDF6E /* RecCardVM.swift */,
+			);
+			path = OrderRecVM;
+			sourceTree = "<group>";
+		};
 		3A874622268AEE3C000FC3CA /* PrinterConnection */ = {
 			isa = PBXGroup;
 			children = (
@@ -936,6 +955,7 @@
 		3AD62C3327C9D9E000F4E535 /* OrderRec */ = {
 			isa = PBXGroup;
 			children = (
+				3A1BBD1327CA0D7B00209B3C /* RecCard.swift */,
 			);
 			path = OrderRec;
 			sourceTree = "<group>";
@@ -1119,6 +1139,7 @@
 		A73B1B5D24B0FF4100A8C6A8 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				3A62F5BB27CC40CD005BDF6E /* OrderRecVM */,
 				3A99EEA42790B350000D6DB7 /* MenuConnection */,
 				3A33807C271430630086F4A0 /* CallWaiterConnection */,
 				3A874622268AEE3C000FC3CA /* PrinterConnection */,
@@ -1260,6 +1281,7 @@
 			);
 			dependencies = (
 				3AECE2882772974D007BEC00 /* PBXTargetDependency */,
+				3AAB7DDF27D01E3500E9ED9A /* PBXTargetDependency */,
 			);
 			name = YumzzClipUITests;
 			productName = YumzzClipUITests;
@@ -1522,6 +1544,7 @@
 				3A87575324EC910A004ABECC /* PostReviewButton.swift in Sources */,
 				3A530DF324D9769100CBDE28 /* DishCategory.swift in Sources */,
 				3A4E2E3724D21CDC00C34DD8 /* Coordinator.swift in Sources */,
+				3A1BBD1427CA0D7B00209B3C /* RecCard.swift in Sources */,
 				3A5F685424FE230200F9B43D /* TextView.swift in Sources */,
 				A7D0F78324DF6B4100197631 /* FBURLImage.swift in Sources */,
 				3A5B0DB8253FDD9B00A0BE41 /* MiniViewCartButton.swift in Sources */,
@@ -1551,6 +1574,7 @@
 				3ABA90F524F64EDE00695B06 /* GuestButton.swift in Sources */,
 				3A2A00A9271928C0009FC3CD /* PastOrdersViewModel.swift in Sources */,
 				3AC3FE7C27BB16B700908FA3 /* DishAdminView.swift in Sources */,
+				3A62F5BD27CC40F2005BDF6E /* RecCardVM.swift in Sources */,
 				A7912A2824CF87260052988C /* CoralButton.swift in Sources */,
 				3A3DD57425380E1000536D62 /* ReviewOrder.swift in Sources */,
 				34370CC72500D59A00ECD88B /* MenuSelectionViewModel.swift in Sources */,
@@ -1678,6 +1702,11 @@
 			isa = PBXTargetDependency;
 			target = 3A987AD22480350C0021F6E4 /* VirtualMenu */;
 			targetProxy = 3A987AF52480350E0021F6E4 /* PBXContainerItemProxy */;
+		};
+		3AAB7DDF27D01E3500E9ED9A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 3A987AD22480350C0021F6E4 /* VirtualMenu */;
+			targetProxy = 3AAB7DDE27D01E3500E9ED9A /* PBXContainerItemProxy */;
 		};
 		3AECE27E2772974D007BEC00 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -1842,7 +1871,7 @@
 				CODE_SIGN_ENTITLEMENTS = VirtualMenu/VirtualMenu.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"VirtualMenu/Preview Content\"";
 				DEVELOPMENT_TEAM = 3VUUCS34BU;
 				ENABLE_BITCODE = YES;
@@ -1860,7 +1889,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 11;
+				MARKETING_VERSION = 13;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ARMenu.VirtualMenu;
 				PRODUCT_NAME = Yumzz;
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1881,7 +1910,7 @@
 				CODE_SIGN_ENTITLEMENTS = VirtualMenu/YumzzRelease.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"VirtualMenu/Preview Content\"";
 				DEVELOPMENT_TEAM = 3VUUCS34BU;
 				ENABLE_BITCODE = YES;
@@ -1899,7 +1928,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 11;
+				MARKETING_VERSION = 13;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ARMenu.VirtualMenu;
 				PRODUCT_NAME = Yumzz;
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -2004,7 +2033,7 @@
 				CODE_SIGN_ENTITLEMENTS = YumzzClip/YumzzClip.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"YumzzClip/Preview Content\"";
 				DEVELOPMENT_TEAM = 3VUUCS34BU;
 				ENABLE_BITCODE = YES;
@@ -2026,12 +2055,13 @@
 				INFOPLIST_KEY_UIStatusBarHidden = NO;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 11;
+				MARKETING_VERSION = 13;
 				PODS_XCFRAMEWORKS_BUILD_DIR = "$(PODS_CONFIGURATION_BUILD_DIR)/XCFrameworkIntermediates";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ARMenu.VirtualMenu.Clip;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2053,7 +2083,7 @@
 				CODE_SIGN_ENTITLEMENTS = YumzzClip/YumzzClip.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"YumzzClip/Preview Content\"";
 				DEVELOPMENT_TEAM = 3VUUCS34BU;
 				ENABLE_BITCODE = YES;
@@ -2075,12 +2105,13 @@
 				INFOPLIST_KEY_UIStatusBarHidden = NO;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 11;
+				MARKETING_VERSION = 13;
 				PODS_XCFRAMEWORKS_BUILD_DIR = "$(PODS_CONFIGURATION_BUILD_DIR)/XCFrameworkIntermediates";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ARMenu.VirtualMenu.Clip;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2100,11 +2131,11 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
 				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 7XP2RUZ6VP;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 8.0;
+				MARKETING_VERSION = 13.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ARMenu.VirtualMenu.YumzzClipTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
@@ -2122,11 +2153,11 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
 				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 7XP2RUZ6VP;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 8.0;
+				MARKETING_VERSION = 13.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ARMenu.VirtualMenu.YumzzClipTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
@@ -2143,11 +2174,11 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
 				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 7XP2RUZ6VP;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 11.0;
+				MARKETING_VERSION = 13.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ARMenu.VirtualMenu.YumzzClipUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
@@ -2164,11 +2195,11 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
 				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 7XP2RUZ6VP;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 11.0;
+				MARKETING_VERSION = 13.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ARMenu.VirtualMenu.YumzzClipUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
