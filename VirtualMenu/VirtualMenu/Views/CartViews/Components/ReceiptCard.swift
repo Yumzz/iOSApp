@@ -10,7 +10,7 @@ struct ReceiptCard: View {
 //    var name: String
     @State var pricePossIncrease: Bool = false
     var total: Double    
-    var tax = 5.00
+    var tax = 0.1028
             
     var body: some View {
         Group {
@@ -33,7 +33,7 @@ struct ReceiptCard: View {
 //                        .overlay(Text("\(count)"))
 //                    Spacer().frame(width: UIScreen.main.bounds.size.width/2, height: 0)
                     Spacer()
-                    Text("\(DishFB.priceFix(price: String(tax)))").foregroundColor(Color("Blackest"))
+                    Text("\(DishFB.priceFix(price: String(String(tax*total).prefix(4))))").foregroundColor(Color("Blackest"))
                     Spacer().frame(width: (pricePossIncrease ? 15 : 5), height: 0)
                 }
                 
@@ -47,7 +47,7 @@ struct ReceiptCard: View {
 //                        .overlay(Text("\(count)"))
                     Spacer()
 //                    Spacer().frame(width: UIScreen.main.bounds.size.width/1.7, height: 0)
-                    Text("\(DishFB.priceFix(price: String(tax + total)))" + (pricePossIncrease ? "+" : "")).foregroundColor(Color("Blackest"))
+                    Text("\(DishFB.priceFix(price: String(tax + total)).prefix(5))" + (pricePossIncrease ? "+" : "")).foregroundColor(Color("Blackest"))
                     Spacer().frame(width: 5, height: 0)
 
 

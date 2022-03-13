@@ -31,6 +31,9 @@ struct ReviewOrder: View {
     @State var changeInstructions = false
     @State var changeBuildOpts = false
     
+    @State var showBanner:Bool = false
+    @State var bannerData: BannerModifier.BannerData = BannerModifier.BannerData(title: "Need App to Send Order", detail: "You can view the menu and see the total of your cary, but you need to download the app to send the order in, see photos of the food, or call the waiter!")
+    
     @State var choicesNotMet: Bool = false
     @State var choicesExist: [String] = []
     @State var choicesSpecInstruct: String = ""
@@ -340,6 +343,7 @@ struct ReviewOrder: View {
             }
 
         }
+        .banner(data: $bannerData, show: $showBanner)
         .navigationBarTitle("Review \(self.order.restChosen.name) Order")
         .navigationBarHidden(true)
         .navigationBarBackButtonHidden(true)
@@ -355,6 +359,12 @@ struct ReviewOrder: View {
                     self.buildOptString += ", " + v
                 }
             }
+            
+            #if APPCLIP
+            showBanner = true
+            #else
+            showBanner = false
+            #endif
             
             for d in self.dishes {
                 if(d.requiredChoices != -1){

@@ -47,68 +47,71 @@ class RecCardVM: ObservableObject {
         }
     }
     
-//    func compareDishes(userTP: String) -> [Int]{
-//        var maxDishes : Set<DishFB> = []
-//        getLocalDishes()
-//        guard let url = URL(string: "https://yumzztasteprofile.azurewebsites.net/api/YumzzPredictionAPIV2?code=k3EK4IBtnVunHEZD0M07LJrZgk90Mq9usP9tg8Am5mSN9jytHsIkpg==&user_tp_raw=\(userTP)&dishes_tp_raw=\(self.dishIngredString)beef,fish;fish,japanese;chinese,noodle,hotpot") else {
-//        //                        print("Invalid URL")
-//            return
+    func compareDishes(userTP: String) -> [Int]{
+        var maxDishes : Set<DishFB> = []
+        getLocalDishes()
+        guard let url = URL(string: "https://yumzztasteprofile.azurewebsites.net/api/YumzzPredictionAPIV2?code=k3EK4IBtnVunHEZD0M07LJrZgk90Mq9usP9tg8Am5mSN9jytHsIkpg==&user_tp_raw=\(userTP)&dishes_tp_raw=\(self.dishIngredString)beef,fish;fish,japanese;chinese,noodle,hotpot") else {
+        //                        print("Invalid URL")
+            return
+        }
+
+        var compareRequest = URLRequest(url: url)
+        request.httpMethod = "GET"
+
+        let dataTask = URLSession.shared.dataTask(with: compareRequest) { data, urlresponse, err in
+            if let err = err {
+                print("Request error: \(err)")
+            }
+            guard let response = response as? HTTPURLResponse else {return}
+
+            if response.statusCode == 200 {
+                guard let data = data else{ return }
+                DispatchQueue.main.async {
+                    do {
+                        let decodedRatings = try! decoder.decode([Float].self, from: data)
+//                        min
+                        //need to get top 5 dishes' indexes -> return dishes at those indexes
+                        //
+                        //create a set of maxdishes, insert when above min, keep min dish index, remove [maxdishes.remove(at: maxes[min])] when dish no longer a max dish, rewrite min and min dish index accordingly
+
+                        var minIndex = 0
+                        var min = 0
+                        var dRIndex = -1
+                        for dR in decodedRatings{
+                            dRIndex += 1
+                            if(dR > min){
+                                maxDishes.insert(dishes[dRIndex])
+                                if(minIndex > -1){
+                                    
+                                }
+                            }
+
+//                            for max
+//                            maxDishes.insert()
+//                            decodedRatings.
+                        }
+                    }
+                    catch let err {
+                        print("Error decoding: ", err)
+                    }
+                }
+            }
+            dataTask.resume()
+        }
+//        print("choicesurl: \(url)")
+
+//        let (data, _) = try await URLSession.shared.data(from: url)
+//        if let decodedResponse = try? JSONDecoder().decode(Response.self, from: data) {
+//            results = decodedResponse.results
 //        }
-//
-//        var compareRequest = URLRequest(url: url)
-//        request.httpMethod = "GET"
-//
-//        let dataTask = URLSession.shared.dataTask(with: compareRequest) { data, urlresponse, err in
-//            if let err = err {
-//                print("Request error: \(err)")
-//            }
-//            guard let response = response as? HTTPURLResponse else {return}
-//
-//            if response.statusCode == 200 {
-//                guard let data = data else{ return }
-//                DispatchQueue.main.async {
-//                    do {
-//                        let decodedRatings = try! decoder.decode([Float].self, from: data)
-////                        min
-//                        //need to get top 5 dishes' indexes -> return dishes at those indexes
-//                        //
-//                        //create a set of maxdishes, insert when above min, keep min dish index, remove [maxdishes.remove(at: maxes[min])] when dish no longer a max dish, rewrite min and min dish index accordingly
-//
-//                        var minIndex = 0
-//                        var min = 0
-//                        var dRIndex = -1
-//                        for dR in decodedRatings{
-//                            dRIndex += 1
-//                            if(dR > min){
-//                                maxDishes.insert(dishes[dRIndex])
-//                            }
-//
-////                            for max
-////                            maxDishes.insert()
-////                            decodedRatings.
-//                        }
-//                    }
-//                    catch let err {
-//                        print("Error decoding: ", err)
-//                    }
-//                }
-//            }
-//            dataTask.resume()
-//        }
-////        print("choicesurl: \(url)")
-//
-////        let (data, _) = try await URLSession.shared.data(from: url)
-////        if let decodedResponse = try? JSONDecoder().decode(Response.self, from: data) {
-////            results = decodedResponse.results
-////        }
-//
-//        //
-////                        let (data, _) = try await URLSession.shared.data(from: url)
-//        //
-//        //                    if let decodedResponse = try? JSONDecoder().decode(Response.self, from: data) {
-//        //                        results = decodedResponse.results
-//        //                    }
-//    }
+
+        //
+//                        let (data, _) = try await URLSession.shared.data(from: url)
+        //
+        //                    if let decodedResponse = try? JSONDecoder().decode(Response.self, from: data) {
+        //                        results = decodedResponse.results
+        //                    }
+    }
     
 //    func getDistFromUser(coordinate: GeoPoint) -> Double {
 //        //haversine formula - distance in miles
