@@ -62,7 +62,7 @@ struct HomeScreenView: View {
 //                }
 //                else{
                     view.overlay(overlay, alignment: .bottom)
-//                    .overlay(OrderRecButton, alignment: .bottomLeading)
+                    .overlay(OrderRecButton, alignment: .bottomLeading)
 
 //                        .overlay(waitButt, alignment: (self.order.dishesChosen || !self.order.buildsChosen.isEmpty) ? .topTrailing : .bottomLeading)
 //                        .overlay(waitButt, alignment: .topTrailing)
@@ -71,7 +71,7 @@ struct HomeScreenView: View {
             } else {
 //                if(self.waitButtonClicked){
                     view
-//                    .overlay(OrderRecButton, alignment: .bottomLeading)
+                    .overlay(OrderRecButton, alignment: .bottomLeading)
 //                }
 //                else{
 //                    view
@@ -109,19 +109,19 @@ struct HomeScreenView: View {
         }
     }
     
-//    var OrderRecButton: some View {
-//        VStack{
-//
-//            OrangeButton(strLabel: "Get Local Recommendation", width: 325, height: 48)
-//                .clipShape(RoundedRectangle(cornerRadius: 10, style: .circular))
-//            Spacer().frame(width: UIScreen.main.bounds.width, height: 40)
-//        }
-//        .onTapGesture(){
-//            self.qrCodeShow = true
-//            self.orderRecButtonClicked = true
-//
-//        }
-//    }
+    var OrderRecButton: some View {
+        VStack{
+
+            OrangeButton(strLabel: "Get Local Recommendation", width: 325, height: 48)
+                .clipShape(RoundedRectangle(cornerRadius: 10, style: .circular))
+            Spacer().frame(width: UIScreen.main.bounds.width, height: 40)
+        }
+        .onTapGesture(){
+            self.qrCodeShow = true
+            self.orderRecButtonClicked = true
+
+        }
+    }
     
 //    var waitButt: some View {
 //        VStack{
@@ -291,13 +291,13 @@ struct HomeScreenView: View {
 //                            print("wow: \(text)")
 //                        }
 //                    })
-//                    if(self.orderRecButtonClicked){
-//                        OrderRecChoose()
-//                            .onDisappear(){
-//                                self.orderRecButtonClicked = false
-//                            }
-//                    }
-//                    else{
+                    if(self.orderRecButtonClicked){
+                        OrderRecChoose()
+                            .onDisappear(){
+                                self.orderRecButtonClicked = false
+                            }
+                    }
+                    else{
                         MenuConnection()
                         .onDisappear(){
     //                        if(self.rest.description != ""){
@@ -321,7 +321,7 @@ struct HomeScreenView: View {
     //                        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "ReloadMenuScan"), object: nil)
     //                        self.view.
                         }
-//                    }
+                    }
                     
 //                    .alert(isPresented: $wrongQRCode, TextFieldAlert(title: "Wrong QR Code", message: "Please scan the QR Code with the blue border to see the menu") { (text) in
 //                                self.wrongQRCode = false

@@ -49,22 +49,6 @@
 		3A4E2E3B24D21E8E00C34DD8 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A4E2E3A24D21E8E00C34DD8 /* LocationManager.swift */; };
 		3A4E2E3D24D2275F00C34DD8 /* SearchBarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A4E2E3C24D2275F00C34DD8 /* SearchBarButton.swift */; };
 		3A4E2E3F24D2403300C34DD8 /* RestaurantDishViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A4E2E3E24D2403300C34DD8 /* RestaurantDishViewModel.swift */; };
-		3A50F91E27DC38BE00F84016 /* FocusSquareSegment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A50F91D27DC38BE00F84016 /* FocusSquareSegment.swift */; };
-		3A50F92027DC38D100F84016 /* FocusSquare.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A50F91F27DC38D100F84016 /* FocusSquare.swift */; };
-		3A50F92327DC394700F84016 /* VirtualObjectSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A50F92227DC394700F84016 /* VirtualObjectSelection.swift */; };
-		3A50F92527DC396A00F84016 /* StatusViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A50F92427DC396A00F84016 /* StatusViewController.swift */; };
-		3A50F92727DC398900F84016 /* ThresholdPanGesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A50F92627DC398900F84016 /* ThresholdPanGesture.swift */; };
-		3A50F92A27DC39BB00F84016 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A50F92927DC39BB00F84016 /* Utilities.swift */; };
-		3A50F92D27DC3A7100F84016 /* Virtual Object Loader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A50F92C27DC3A7100F84016 /* Virtual Object Loader.swift */; };
-		3A50F92F27DC3A9800F84016 /* Virtual Object.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A50F92E27DC3A9800F84016 /* Virtual Object.swift */; };
-		3A50F93127DC3AC900F84016 /* VirtualObjectARView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A50F93027DC3AC900F84016 /* VirtualObjectARView.swift */; };
-		3A50F93327DC3AFD00F84016 /* VirtualObjectInteraction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A50F93227DC3AFD00F84016 /* VirtualObjectInteraction.swift */; };
-		3A50F93527DC3B6B00F84016 /* ARViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A50F93427DC3B6B00F84016 /* ARViewController.swift */; };
-		3A50F93727DC3BB100F84016 /* ARViewController+Actions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A50F93627DC3BB100F84016 /* ARViewController+Actions.swift */; };
-		3A50F93927DC3BE900F84016 /* ARViewController+ARSCNViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A50F93827DC3BE900F84016 /* ARViewController+ARSCNViewDelegate.swift */; };
-		3A50F93B27DC3C4700F84016 /* ARViewController+CoachingOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A50F93A27DC3C4700F84016 /* ARViewController+CoachingOverlay.swift */; };
-		3A50F93D27DC3C8000F84016 /* ARViewController+ObjectSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A50F93C27DC3C8000F84016 /* ARViewController+ObjectSelection.swift */; };
-		3A50F93F27DC3F1E00F84016 /* AR.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3A50F93E27DC3F1E00F84016 /* AR.storyboard */; };
 		3A530DEF24D8E00100CBDE28 /* isClick.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A530DEE24D8E00100CBDE28 /* isClick.swift */; };
 		3A530DF124D8E07F00CBDE28 /* BottomSheetModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A530DF024D8E07F00CBDE28 /* BottomSheetModal.swift */; };
 		3A530DF324D9769100CBDE28 /* DishCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A530DF224D9769100CBDE28 /* DishCategory.swift */; };
@@ -87,6 +71,9 @@
 		3A64017026FA9841003D3FFA /* ChoicesCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A64016F26FA9841003D3FFA /* ChoicesCard.swift */; };
 		3A6477F224B68D060077EF30 /* UserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6477F124B68D060077EF30 /* UserProfile.swift */; };
 		3A6638E125844C6B00AC9C1A /* BuildOptsCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6638E025844C6B00AC9C1A /* BuildOptsCard.swift */; };
+		3A70314D27E7EB5D00713CDE /* PaymentHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A70314C27E7EB5D00713CDE /* PaymentHandler.swift */; };
+		3A70314E27E7F03400713CDE /* PaymentHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A70314C27E7EB5D00713CDE /* PaymentHandler.swift */; };
+		3A70314F27E7F03600713CDE /* AppleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0745B4252B014C000EF6BD /* AppleButton.swift */; };
 		3A822728255A10B60002A233 /* BuildCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A822727255A10B60002A233 /* BuildCard.swift */; };
 		3A858E98271CC0DB00360A94 /* BannerModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A858E97271CC0DB00360A94 /* BannerModifier.swift */; };
 		3A874624268AEECE000FC3CA /* ClientViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A874623268AEECE000FC3CA /* ClientViewController.swift */; };
@@ -343,22 +330,6 @@
 		3A4E2E3A24D21E8E00C34DD8 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		3A4E2E3C24D2275F00C34DD8 /* SearchBarButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBarButton.swift; sourceTree = "<group>"; };
 		3A4E2E3E24D2403300C34DD8 /* RestaurantDishViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantDishViewModel.swift; sourceTree = "<group>"; };
-		3A50F91D27DC38BE00F84016 /* FocusSquareSegment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusSquareSegment.swift; sourceTree = "<group>"; };
-		3A50F91F27DC38D100F84016 /* FocusSquare.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusSquare.swift; sourceTree = "<group>"; };
-		3A50F92227DC394700F84016 /* VirtualObjectSelection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VirtualObjectSelection.swift; sourceTree = "<group>"; };
-		3A50F92427DC396A00F84016 /* StatusViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusViewController.swift; sourceTree = "<group>"; };
-		3A50F92627DC398900F84016 /* ThresholdPanGesture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThresholdPanGesture.swift; sourceTree = "<group>"; };
-		3A50F92927DC39BB00F84016 /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
-		3A50F92C27DC3A7100F84016 /* Virtual Object Loader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Virtual Object Loader.swift"; sourceTree = "<group>"; };
-		3A50F92E27DC3A9800F84016 /* Virtual Object.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Virtual Object.swift"; sourceTree = "<group>"; };
-		3A50F93027DC3AC900F84016 /* VirtualObjectARView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VirtualObjectARView.swift; sourceTree = "<group>"; };
-		3A50F93227DC3AFD00F84016 /* VirtualObjectInteraction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VirtualObjectInteraction.swift; sourceTree = "<group>"; };
-		3A50F93427DC3B6B00F84016 /* ARViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARViewController.swift; sourceTree = "<group>"; };
-		3A50F93627DC3BB100F84016 /* ARViewController+Actions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ARViewController+Actions.swift"; sourceTree = "<group>"; };
-		3A50F93827DC3BE900F84016 /* ARViewController+ARSCNViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ARViewController+ARSCNViewDelegate.swift"; sourceTree = "<group>"; };
-		3A50F93A27DC3C4700F84016 /* ARViewController+CoachingOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ARViewController+CoachingOverlay.swift"; sourceTree = "<group>"; };
-		3A50F93C27DC3C8000F84016 /* ARViewController+ObjectSelection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ARViewController+ObjectSelection.swift"; sourceTree = "<group>"; };
-		3A50F93E27DC3F1E00F84016 /* AR.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AR.storyboard; sourceTree = "<group>"; };
 		3A530DEE24D8E00100CBDE28 /* isClick.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = isClick.swift; sourceTree = "<group>"; };
 		3A530DF024D8E07F00CBDE28 /* BottomSheetModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetModal.swift; sourceTree = "<group>"; };
 		3A530DF224D9769100CBDE28 /* DishCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DishCategory.swift; sourceTree = "<group>"; };
@@ -381,6 +352,7 @@
 		3A64016F26FA9841003D3FFA /* ChoicesCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChoicesCard.swift; sourceTree = "<group>"; };
 		3A6477F124B68D060077EF30 /* UserProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfile.swift; sourceTree = "<group>"; };
 		3A6638E025844C6B00AC9C1A /* BuildOptsCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildOptsCard.swift; sourceTree = "<group>"; };
+		3A70314C27E7EB5D00713CDE /* PaymentHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentHandler.swift; sourceTree = "<group>"; };
 		3A822727255A10B60002A233 /* BuildCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildCard.swift; sourceTree = "<group>"; };
 		3A858E97271CC0DB00360A94 /* BannerModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerModifier.swift; sourceTree = "<group>"; };
 		3A874623268AEECE000FC3CA /* ClientViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientViewController.swift; sourceTree = "<group>"; };
@@ -635,6 +607,7 @@
 			children = (
 				3A3DD57D2538331600536D62 /* Components */,
 				3A3DD57325380E0F00536D62 /* ReviewOrder.swift */,
+				3A70314C27E7EB5D00713CDE /* PaymentHandler.swift */,
 				3AA9C5CD27C1DB91009983F8 /* RequiredChoicesCard.swift */,
 				3A01B5C827BF8ECF0090E1F2 /* RequiredChoicesAlertView.swift */,
 			);
@@ -803,61 +776,6 @@
 				3AED7BD925DF3C7800341E95 /* DishAdminFetchView.swift */,
 			);
 			path = AdminView;
-			sourceTree = "<group>";
-		};
-		3A50F91B27DC388600F84016 /* AR */ = {
-			isa = PBXGroup;
-			children = (
-				3A50F92B27DC3A5100F84016 /* Virtual Objects */,
-				3A50F92827DC39A100F84016 /* Utilities */,
-				3A50F92127DC392400F84016 /* Additional VIew Controllers */,
-				3A50F91C27DC388D00F84016 /* Focus Square */,
-				3A50F92627DC398900F84016 /* ThresholdPanGesture.swift */,
-				3A50F93027DC3AC900F84016 /* VirtualObjectARView.swift */,
-				3A50F93227DC3AFD00F84016 /* VirtualObjectInteraction.swift */,
-				3A50F93427DC3B6B00F84016 /* ARViewController.swift */,
-				3A50F93627DC3BB100F84016 /* ARViewController+Actions.swift */,
-				3A50F93827DC3BE900F84016 /* ARViewController+ARSCNViewDelegate.swift */,
-				3A50F93A27DC3C4700F84016 /* ARViewController+CoachingOverlay.swift */,
-				3A50F93C27DC3C8000F84016 /* ARViewController+ObjectSelection.swift */,
-				3A50F93E27DC3F1E00F84016 /* AR.storyboard */,
-			);
-			path = AR;
-			sourceTree = "<group>";
-		};
-		3A50F91C27DC388D00F84016 /* Focus Square */ = {
-			isa = PBXGroup;
-			children = (
-				3A50F91D27DC38BE00F84016 /* FocusSquareSegment.swift */,
-				3A50F91F27DC38D100F84016 /* FocusSquare.swift */,
-			);
-			path = "Focus Square";
-			sourceTree = "<group>";
-		};
-		3A50F92127DC392400F84016 /* Additional VIew Controllers */ = {
-			isa = PBXGroup;
-			children = (
-				3A50F92227DC394700F84016 /* VirtualObjectSelection.swift */,
-				3A50F92427DC396A00F84016 /* StatusViewController.swift */,
-			);
-			path = "Additional VIew Controllers";
-			sourceTree = "<group>";
-		};
-		3A50F92827DC39A100F84016 /* Utilities */ = {
-			isa = PBXGroup;
-			children = (
-				3A50F92927DC39BB00F84016 /* Utilities.swift */,
-			);
-			path = Utilities;
-			sourceTree = "<group>";
-		};
-		3A50F92B27DC3A5100F84016 /* Virtual Objects */ = {
-			isa = PBXGroup;
-			children = (
-				3A50F92C27DC3A7100F84016 /* Virtual Object Loader.swift */,
-				3A50F92E27DC3A9800F84016 /* Virtual Object.swift */,
-			);
-			path = "Virtual Objects";
 			sourceTree = "<group>";
 		};
 		3A5633B824F9010A0059B603 /* SignInWithAppleHelpers */ = {
@@ -1207,7 +1125,6 @@
 		A73B1B5924B0FDA800A8C6A8 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				3A50F91B27DC388600F84016 /* AR */,
 				3AD62C3327C9D9E000F4E535 /* OrderRec */,
 				3AED7BD425CB533B00341E95 /* Cache */,
 				3A3E1DE1256FC6A700812E67 /* Image */,
@@ -1457,7 +1374,6 @@
 				3A0745D525301CE5000EF6BD /* Colors.xcassets in Resources */,
 				A797EA5924B938D5005158FA /* Montserrat-MediumItalic.ttf in Resources */,
 				A797EA6524B938D5005158FA /* Montserrat-Light.ttf in Resources */,
-				3A50F93F27DC3F1E00F84016 /* AR.storyboard in Resources */,
 				A797EA5B24B938D5005158FA /* Montserrat-Medium.ttf in Resources */,
 				A797EA6424B938D5005158FA /* Montserrat-LightItalic.ttf in Resources */,
 				A797EA6324B938D5005158FA /* Montserrat-Thin.ttf in Resources */,
@@ -1587,11 +1503,9 @@
 				3A5633C824F90E080059B603 /* SignInWithApple.swift in Sources */,
 				3A5633C224F902280059B603 /* EnvironmentWindowKey.swift in Sources */,
 				3A13B6E024C1813D0006458B /* ContactUs.swift in Sources */,
-				3A50F93927DC3BE900F84016 /* ARViewController+ARSCNViewDelegate.swift in Sources */,
 				34FCE2722507297F00329162 /* RatingView.swift in Sources */,
 				3A3DD56C253654CA00536D62 /* DishPreviewCard.swift in Sources */,
 				3AFA234624DC9C2000F90ED8 /* DishReviewFB.swift in Sources */,
-				3A50F91E27DC38BE00F84016 /* FocusSquareSegment.swift in Sources */,
 				3A987B102481511B0021F6E4 /* ContentView.swift in Sources */,
 				34A5D663249BF6DF00E4FE9C /* DishDetailsView.swift in Sources */,
 				3AED7BEF25DF565000341E95 /* RestaurantHomeView.swift in Sources */,
@@ -1606,11 +1520,8 @@
 				A7912A2324CF7DED0052988C /* CustomTextField.swift in Sources */,
 				A7FE996224F4A552006E5980 /* DishCard.swift in Sources */,
 				3ACAD172250ADDEA00B24CEB /* ForgotPasswordViewModel.swift in Sources */,
-				3A50F93127DC3AC900F84016 /* VirtualObjectARView.swift in Sources */,
-				3A50F92327DC394700F84016 /* VirtualObjectSelection.swift in Sources */,
 				3A6477F224B68D060077EF30 /* UserProfile.swift in Sources */,
 				3A5633BC24F901B70059B603 /* SignInWithAppleManager.swift in Sources */,
-				3A50F93527DC3B6B00F84016 /* ARViewController.swift in Sources */,
 				3A99EEA32790AEF3000D6DB7 /* MenuScanViewController.swift in Sources */,
 				3A822728255A10B60002A233 /* BuildCard.swift in Sources */,
 				3A3DD589253838A700536D62 /* ReceiptCard.swift in Sources */,
@@ -1623,14 +1534,12 @@
 				3AF77F7025E00852000F520F /* CacheDishInfo.swift in Sources */,
 				3AED7BDA25DF3C7800341E95 /* DishAdminFetchView.swift in Sources */,
 				3A13B6E424C1816B0006458B /* ReportProblem.swift in Sources */,
-				3A50F93327DC3AFD00F84016 /* VirtualObjectInteraction.swift in Sources */,
 				3A3DD58F2538396B00536D62 /* XButton.swift in Sources */,
 				A779ACAA250D4F7400146565 /* ImageCache.swift in Sources */,
 				3AD1D26D275C9C26004D29C5 /* SwiftAlgorithms.swift in Sources */,
 				3AF6D65A2572882A009E4240 /* BuildFB.swift in Sources */,
 				3A01B5C927BF8ED00090E1F2 /* RequiredChoicesAlertView.swift in Sources */,
 				3AF5C23A2649BFBE00E9BC30 /* RecView.swift in Sources */,
-				3A50F92527DC396A00F84016 /* StatusViewController.swift in Sources */,
 				3ACAD170250ACE2000B24CEB /* LoginViewModel.swift in Sources */,
 				3A987AD92480350C0021F6E4 /* SceneDelegate.swift in Sources */,
 				3AFA234824DCACEA00F90ED8 /* ReviewsButton.swift in Sources */,
@@ -1656,17 +1565,13 @@
 				3A4E2E3F24D2403300C34DD8 /* RestaurantDishViewModel.swift in Sources */,
 				34A966F8254762EF00AD84CD /* RestaurantReviewView.swift in Sources */,
 				3ACAD178250AE6E400B24CEB /* ReportProblemViewModel.swift in Sources */,
-				3A50F93B27DC3C4700F84016 /* ARViewController+CoachingOverlay.swift in Sources */,
 				3AF1BA90252A92DD00FAA9A0 /* InvertedOrangeButton.swift in Sources */,
 				3A13B6ED24C3D9FB0006458B /* SuggestRestaurant.swift in Sources */,
 				3AF1BA8A252A92B500FAA9A0 /* OrangeButton.swift in Sources */,
 				A78531FA24DE312600F94C67 /* ImageLoader.swift in Sources */,
 				34909E75252D5D0500B43D7B /* HomeScreenViewModel.swift in Sources */,
-				3A50F92027DC38D100F84016 /* FocusSquare.swift in Sources */,
 				3ACAD189250B161A00B24CEB /* RestCategory.swift in Sources */,
-				3A50F92F27DC3A9800F84016 /* Virtual Object.swift in Sources */,
 				3A3DD5952539378700536D62 /* ViewCartButton.swift in Sources */,
-				3A50F92D27DC3A7100F84016 /* Virtual Object Loader.swift in Sources */,
 				C55FDD6524CABA2800CC8561 /* RestaurantFB.swift in Sources */,
 				3AA9897624B517F00070FD97 /* Extensions.swift in Sources */,
 				3AF1BA84252A926900FAA9A0 /* OnboardingInfo.swift in Sources */,
@@ -1675,7 +1580,6 @@
 				3A2A00A9271928C0009FC3CD /* PastOrdersViewModel.swift in Sources */,
 				3AC3FE7C27BB16B700908FA3 /* DishAdminView.swift in Sources */,
 				3A62F5BD27CC40F2005BDF6E /* RecCardVM.swift in Sources */,
-				3A50F93727DC3BB100F84016 /* ARViewController+Actions.swift in Sources */,
 				A7912A2824CF87260052988C /* CoralButton.swift in Sources */,
 				3A3DD57425380E1000536D62 /* ReviewOrder.swift in Sources */,
 				34370CC72500D59A00ECD88B /* MenuSelectionViewModel.swift in Sources */,
@@ -1686,10 +1590,8 @@
 				A735992A24ECFDCF00584BFD /* AccountProfileLoginView.swift in Sources */,
 				3A4E2E2024C6244600C34DD8 /* ForgotPassword.swift in Sources */,
 				A735992824ECD83300584BFD /* AccountProfileViewModel.swift in Sources */,
-				3A50F92A27DC39BB00F84016 /* Utilities.swift in Sources */,
 				C5D0A16C24B1B6A300E44DF2 /* DishFB.swift in Sources */,
 				3AA9C5CE27C1DB91009983F8 /* RequiredChoicesCard.swift in Sources */,
-				3A50F93D27DC3C8000F84016 /* ARViewController+ObjectSelection.swift in Sources */,
 				3A0745C7252B0871000EF6BD /* BackButton.swift in Sources */,
 				3ACAD187250AF4B200B24CEB /* ListDishesViewModel.swift in Sources */,
 				3A530DF124D8E07F00CBDE28 /* BottomSheetModal.swift in Sources */,
@@ -1700,12 +1602,12 @@
 				3A0745BB252B020F000EF6BD /* FacebookButton.swift in Sources */,
 				3AEAE24E27B4CBC400BDD21B /* BuildCardOrder.swift in Sources */,
 				3AEB331C2572092000A61C0E /* WhiteBackButton.swift in Sources */,
+				3A70314D27E7EB5D00713CDE /* PaymentHandler.swift in Sources */,
 				3AF9926524A2B7C9005446D8 /* LoginView.swift in Sources */,
 				A7912A2A24CF8EFE0052988C /* CustomPasswordField.swift in Sources */,
 				3AF5C2402649CAD500E9BC30 /* MatchMeButton.swift in Sources */,
 				3A4A0E70249EB9320030635E /* AccountProfileView.swift in Sources */,
 				3AFA234424DBA42E00F90ED8 /* OrderButton.swift in Sources */,
-				3A50F92727DC398900F84016 /* ThresholdPanGesture.swift in Sources */,
 				3ACAD16E250AC7A600B24CEB /* SignUpViewModel.swift in Sources */,
 				3AF9927524A53AC0005446D8 /* SignUpView.swift in Sources */,
 				3AF1BA96252A93F400FAA9A0 /* OnboardingInfo2.swift in Sources */,
@@ -1738,6 +1640,7 @@
 				3AECE2C72773C484007BEC00 /* OrderModel.swift in Sources */,
 				3AECE2CB2773C505007BEC00 /* ReviewOrder.swift in Sources */,
 				3AECE29E27729A44007BEC00 /* ListDishesViewModel.swift in Sources */,
+				3A70314F27E7F03600713CDE /* AppleButton.swift in Sources */,
 				3AECE2CE2773C50D007BEC00 /* ReceiptCard.swift in Sources */,
 				3AECE2AB27729AF8007BEC00 /* StartView.swift in Sources */,
 				3AECE2B827729B7C007BEC00 /* Order.swift in Sources */,
@@ -1745,6 +1648,7 @@
 				3AECE2AD27729B1E007BEC00 /* QRScanViewController.swift in Sources */,
 				3AECE2C32773C415007BEC00 /* OrderButton.swift in Sources */,
 				3AECE2D32773C73E007BEC00 /* BackButton.swift in Sources */,
+				3A70314E27E7F03400713CDE /* PaymentHandler.swift in Sources */,
 				3AECE2B327729B6E007BEC00 /* DishFB.swift in Sources */,
 				3AECE2D82773D4E2007BEC00 /* YumzzClipApp.swift in Sources */,
 				3AECE2A027729A5A007BEC00 /* Navigation.swift in Sources */,
@@ -1993,7 +1897,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 13;
+				MARKETING_VERSION = 14;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ARMenu.VirtualMenu;
 				PRODUCT_NAME = Yumzz;
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -2032,7 +1936,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 13;
+				MARKETING_VERSION = 14;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ARMenu.VirtualMenu;
 				PRODUCT_NAME = Yumzz;
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -2165,7 +2069,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 13;
+				MARKETING_VERSION = 14;
 				PODS_XCFRAMEWORKS_BUILD_DIR = "$(PODS_CONFIGURATION_BUILD_DIR)/XCFrameworkIntermediates";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ARMenu.VirtualMenu.Clip;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2215,7 +2119,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 13;
+				MARKETING_VERSION = 14;
 				PODS_XCFRAMEWORKS_BUILD_DIR = "$(PODS_CONFIGURATION_BUILD_DIR)/XCFrameworkIntermediates";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ARMenu.VirtualMenu.Clip;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2239,7 +2143,7 @@
 				DEVELOPMENT_TEAM = 7XP2RUZ6VP;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 13.0;
+				MARKETING_VERSION = 14.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ARMenu.VirtualMenu.YumzzClipTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
@@ -2261,7 +2165,7 @@
 				DEVELOPMENT_TEAM = 7XP2RUZ6VP;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 13.0;
+				MARKETING_VERSION = 14.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ARMenu.VirtualMenu.YumzzClipTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
@@ -2282,7 +2186,7 @@
 				DEVELOPMENT_TEAM = 7XP2RUZ6VP;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 13.0;
+				MARKETING_VERSION = 14.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ARMenu.VirtualMenu.YumzzClipUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
@@ -2303,7 +2207,7 @@
 				DEVELOPMENT_TEAM = 7XP2RUZ6VP;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 13.0;
+				MARKETING_VERSION = 14.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ARMenu.VirtualMenu.YumzzClipUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;

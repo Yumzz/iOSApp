@@ -8,6 +8,7 @@
 
 import Foundation
 import SwiftUI
+import PassKit
 #if !APPCLIP
 import MQTTClient
 #endif
@@ -321,7 +322,11 @@ struct ReviewOrder: View {
                 }
                 Spacer()
                 
-
+                HStack{
+                    ApplePayButton(total: Float(self.order.totalCost))
+                        .clipShape(RoundedRectangle(cornerRadius: 10, style: .circular))
+                }
+                
                 #if !APPCLIP
                 HStack{
                     OrangeButton(strLabel: "Call a Waiter", width: 167.5, height: 48)
@@ -560,3 +565,22 @@ struct ReviewOrder: View {
     }
 }
 
+
+//struct ApplePayButton: UIViewRepresentable {
+//        func updateUIView(_ uiView: PKPaymentButton, context: Context) {
+//
+//        }
+//        func makeUIView(context: Context) -> PKPaymentButton {
+//                return PKPaymentButton(paymentButtonType: .plain, paymentButtonStyle: .black)
+//        }
+//}
+//struct ApplePayButtonStyle: ButtonStyle {
+//        func makeBody(configuration: Self.Configuration) -> some View {
+//             return ApplePayButton()
+//        }
+//}
+//Button( action: {
+//        self.setupPKPaymentRequest()
+//}, label: { Text("")} )
+//.frame(width: 212, height: 38, alignment: .center)
+//.buttonStyle(ApplePayButtonStyle()
