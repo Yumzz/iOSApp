@@ -12,17 +12,18 @@ target 'VirtualMenu' do
     pod 'FirebaseFirestoreSwift'
     pod 'Firebase/Storage'
     pod 'GoogleSignIn', '5.0.0'
+    pod 'GoogleUtilities', '7.8.0'
     pod 'PromiseKit', '6.15.3'
     pod 'MQTTClient', '0.14.0'
+    pod 'BoringSSL-GRPC'
 #    pod 'FBSDKLoginKit', '12.2.1'
 #    pod 'FBSDKCoreKit', '12.2.1'
     pod 'FacebookCore'
+    pod 'FacebookLogin'
     pod 'SquarePointOfSaleSDK'
 end
 
-#target 'YumzzAppClip' do
- #   pod 'Firebase'
-#end
+
 
 
 #post_install do |installer|

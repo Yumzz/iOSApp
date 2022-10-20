@@ -20,25 +20,25 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
 
         // Create the SwiftUI view that provides the window contents.
-        print("here")
-        let contentView = StartView(id: "") //StartView()
-//        a1Lwu7xEFrhDh9wnVpCP
-        let order = OrderModel()
-        for activity in connectionOptions.userActivities {
-            print("url: \(activity)")
-            print("url: \(activity.webpageURL)")
-//                    scene(scene, continue: activity)
-        }
-//        let user = UserStore()
-
-        // Use a UIHostingController as window root view controller.
-        if let windowScene = scene as? UIWindowScene {
-            let window = UIWindow(windowScene: windowScene)
-            let navigation = Navigation(window: window)
-            window.rootViewController = UIHostingController(rootView: contentView.environmentObject(order).environmentObject(navigation))
-            self.window = window
-            window.makeKeyAndVisible()
-        }
+//        print("here")
+//        let contentView = StartView(id: "") //StartView()
+////        a1Lwu7xEFrhDh9wnVpCP
+//        let order = OrderModel()
+//        for activity in connectionOptions.userActivities {
+//            print("url: \(activity)")
+//            print("url: \(activity.webpageURL)")
+////                    scene(scene, continue: activity)
+//        }
+////        let user = UserStore()
+//
+//        // Use a UIHostingController as window root view controller.
+//        if let windowScene = scene as? UIWindowScene {
+//            let window = UIWindow(windowScene: windowScene)
+//            let navigation = Navigation(window: window)
+//            window.rootViewController = UIHostingController(rootView: contentView.environmentObject(order).environmentObject(navigation))
+//            self.window = window
+//            window.makeKeyAndVisible()
+//        }
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

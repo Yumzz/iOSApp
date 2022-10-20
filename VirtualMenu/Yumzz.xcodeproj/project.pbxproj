@@ -127,11 +127,8 @@
 		3AECE2A227729A7E007BEC00 /* DestinationHostingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AECE2A127729A7E007BEC00 /* DestinationHostingController.swift */; };
 		3AECE2A527729AA2007BEC00 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AECE2A427729AA2007BEC00 /* AppDelegate.swift */; };
 		3AECE2A727729AB3007BEC00 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AECE2A627729AB3007BEC00 /* SceneDelegate.swift */; };
-		3AECE2A927729ADE007BEC00 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AECE2A827729ADE007BEC00 /* ContentView.swift */; };
-		3AECE2AB27729AF8007BEC00 /* StartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AECE2AA27729AF8007BEC00 /* StartView.swift */; };
 		3AECE2AD27729B1E007BEC00 /* QRScanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AECE2AC27729B1E007BEC00 /* QRScanViewController.swift */; };
 		3AECE2AF27729B2D007BEC00 /* QRScanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AECE2AE27729B2D007BEC00 /* QRScanView.swift */; };
-		3AECE2B127729B46007BEC00 /* ListDishesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AECE2B027729B46007BEC00 /* ListDishesView.swift */; };
 		3AECE2B227729B54007BEC00 /* RestaurantFB.swift in Sources */ = {isa = PBXBuildFile; fileRef = C55FDD6424CABA2800CC8561 /* RestaurantFB.swift */; };
 		3AECE2B327729B6E007BEC00 /* DishFB.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5D0A16B24B1B6A300E44DF2 /* DishFB.swift */; };
 		3AECE2B527729B73007BEC00 /* DishCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A530DF224D9769100CBDE28 /* DishCategory.swift */; };
@@ -183,6 +180,53 @@
 		3AFA234624DC9C2000F90ED8 /* DishReviewFB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFA234524DC9C2000F90ED8 /* DishReviewFB.swift */; };
 		3AFA234824DCACEA00F90ED8 /* ReviewsButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFA234724DCACEA00F90ED8 /* ReviewsButton.swift */; };
 		3AFA234A24DCB14B00F90ED8 /* DishReviewsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFA234924DCB14B00F90ED8 /* DishReviewsView.swift */; };
+		3B0C8C5B28F6DD5800A66113 /* ARView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3B0C8C5A28F6DD5800A66113 /* ARView.storyboard */; };
+		3B0C8C5E28F6E79700A66113 /* ARView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3B0C8C5A28F6DD5800A66113 /* ARView.storyboard */; };
+		3B783EDE28F6CA37005452AC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B783EDD28F6CA37005452AC /* ViewController.swift */; };
+		3B783EE228F6CB42005452AC /* VirtualObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B783EE128F6CB42005452AC /* VirtualObject.swift */; };
+		3B783EE428F6CB74005452AC /* VirtualObjectInteraction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B783EE328F6CB74005452AC /* VirtualObjectInteraction.swift */; };
+		3B783EE628F6CCDA005452AC /* VirtualObjectSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B783EE528F6CCDA005452AC /* VirtualObjectSelection.swift */; };
+		3B783EE828F6CCF5005452AC /* ARViewController+ObjectSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B783EE728F6CCF5005452AC /* ARViewController+ObjectSelection.swift */; };
+		3B783EEA28F6CD15005452AC /* ARViewController+Actions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B783EE928F6CD15005452AC /* ARViewController+Actions.swift */; };
+		3B783EEC28F6CD61005452AC /* StatusViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B783EEB28F6CD61005452AC /* StatusViewController.swift */; };
+		3B783EEE28F6CD8A005452AC /* FocusSquareSegment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B783EED28F6CD8A005452AC /* FocusSquareSegment.swift */; };
+		3B783EF028F6CDA0005452AC /* FocusSqaure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B783EEF28F6CDA0005452AC /* FocusSqaure.swift */; };
+		3B783EF128F6CDFE005452AC /* VirtualObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B783EE128F6CB42005452AC /* VirtualObject.swift */; };
+		3B783EF228F6CE02005452AC /* VirtualObjectInteraction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B783EE328F6CB74005452AC /* VirtualObjectInteraction.swift */; };
+		3B783EF328F6CE04005452AC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B783EDD28F6CA37005452AC /* ViewController.swift */; };
+		3B783EF428F6CE09005452AC /* VirtualObjectSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B783EE528F6CCDA005452AC /* VirtualObjectSelection.swift */; };
+		3B783EF528F6CE0C005452AC /* ARViewController+ObjectSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B783EE728F6CCF5005452AC /* ARViewController+ObjectSelection.swift */; };
+		3B783EF628F6CE0E005452AC /* ARViewController+Actions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B783EE928F6CD15005452AC /* ARViewController+Actions.swift */; };
+		3B783EF728F6CE13005452AC /* StatusViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B783EEB28F6CD61005452AC /* StatusViewController.swift */; };
+		3B783EF828F6CE16005452AC /* FocusSquareSegment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B783EED28F6CD8A005452AC /* FocusSquareSegment.swift */; };
+		3B783EF928F6CE18005452AC /* FocusSqaure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B783EEF28F6CDA0005452AC /* FocusSqaure.swift */; };
+		3BE9263A28F677A000A12EEA /* ARModelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BE9263928F677A000A12EEA /* ARModelView.swift */; };
+		3BE9263D28F677DB00A12EEA /* SurveyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BE9263C28F677DB00A12EEA /* SurveyView.swift */; };
+		3BE9263F28F677F200A12EEA /* SurveyHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BE9263E28F677F200A12EEA /* SurveyHelper.swift */; };
+		3BE9264128F6780700A12EEA /* SurveyModelClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BE9264028F6780700A12EEA /* SurveyModelClass.swift */; };
+		3BE9264328F6781B00A12EEA /* YumzzSurvey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BE9264228F6781B00A12EEA /* YumzzSurvey.swift */; };
+		3BE9264B28F678A500A12EEA /* ViewController+ARSCNView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BE9264A28F678A500A12EEA /* ViewController+ARSCNView.swift */; };
+		3BE9264C28F678A500A12EEA /* ViewController+ARSCNView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BE9264A28F678A500A12EEA /* ViewController+ARSCNView.swift */; };
+		3BE9264E28F678C300A12EEA /* ViewController+CoachingOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BE9264D28F678C300A12EEA /* ViewController+CoachingOverlay.swift */; };
+		3BE9264F28F678C300A12EEA /* ViewController+CoachingOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BE9264D28F678C300A12EEA /* ViewController+CoachingOverlay.swift */; };
+		3BE9265428F678F700A12EEA /* VirtualObjectARView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BE9265328F678F700A12EEA /* VirtualObjectARView.swift */; };
+		3BE9265528F678F700A12EEA /* VirtualObjectARView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BE9265328F678F700A12EEA /* VirtualObjectARView.swift */; };
+		3BE9265A28F6793200A12EEA /* VirtualObjectLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BE9265928F6793100A12EEA /* VirtualObjectLoader.swift */; };
+		3BE9265B28F6793200A12EEA /* VirtualObjectLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BE9265928F6793100A12EEA /* VirtualObjectLoader.swift */; };
+		3BE9266028F6796800A12EEA /* ThresholdPanGesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BE9265F28F6796800A12EEA /* ThresholdPanGesture.swift */; };
+		3BE9266128F6796800A12EEA /* ThresholdPanGesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BE9265F28F6796800A12EEA /* ThresholdPanGesture.swift */; };
+		3BE9266728F679E700A12EEA /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BE9266628F679E700A12EEA /* Utilities.swift */; };
+		3BE9266828F679E700A12EEA /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BE9266628F679E700A12EEA /* Utilities.swift */; };
+		3BE9266A28F679FF00A12EEA /* CustomActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BE9266928F679FF00A12EEA /* CustomActivityIndicator.swift */; };
+		3BE9266B28F679FF00A12EEA /* CustomActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BE9266928F679FF00A12EEA /* CustomActivityIndicator.swift */; };
+		3BE9267D28F67AC700A12EEA /* ARViewControllerVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BE9267C28F67AC700A12EEA /* ARViewControllerVM.swift */; };
+		3BE9267E28F67AC700A12EEA /* ARViewControllerVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BE9267C28F67AC700A12EEA /* ARViewControllerVM.swift */; };
+		3BE9268028F67CBB00A12EEA /* ListDishesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AECE2B027729B46007BEC00 /* ListDishesView.swift */; };
+		3BE9268128F67E3100A12EEA /* SurveyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BE9263C28F677DB00A12EEA /* SurveyView.swift */; };
+		3BE9268228F67E5B00A12EEA /* SurveyModelClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BE9264028F6780700A12EEA /* SurveyModelClass.swift */; };
+		3BE9268328F67E6300A12EEA /* SurveyHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BE9263E28F677F200A12EEA /* SurveyHelper.swift */; };
+		3BE9268428F67EAE00A12EEA /* YumzzSurvey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BE9264228F6781B00A12EEA /* YumzzSurvey.swift */; };
+		639AC01DCC784061F38DF383 /* Pods_VirtualMenu.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 60CB767AC630FB73AB83A17B /* Pods_VirtualMenu.framework */; };
 		A735992824ECD83300584BFD /* AccountProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A735992724ECD83300584BFD /* AccountProfileViewModel.swift */; };
 		A735992A24ECFDCF00584BFD /* AccountProfileLoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A735992924ECFDCF00584BFD /* AccountProfileLoginView.swift */; };
 		A777C3A424D3EC7A009658AA /* UserStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = A777C3A324D3EC7A009658AA /* UserStore.swift */; };
@@ -208,7 +252,6 @@
 		A797EA6624B938D5005158FA /* Montserrat-ThinItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A797EA5824B938D5005158FA /* Montserrat-ThinItalic.ttf */; };
 		A7D0F78324DF6B4100197631 /* FBURLImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7D0F78224DF6B4100197631 /* FBURLImage.swift */; };
 		A7FE996224F4A552006E5980 /* DishCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7FE996124F4A552006E5980 /* DishCard.swift */; };
-		BB864C0AA8C3628E471C4338 /* Pods_VirtualMenu.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 103B77D25A54CB08AA0C442D /* Pods_VirtualMenu.framework */; };
 		C55FDD6524CABA2800CC8561 /* RestaurantFB.swift in Sources */ = {isa = PBXBuildFile; fileRef = C55FDD6424CABA2800CC8561 /* RestaurantFB.swift */; };
 		C5D0A16C24B1B6A300E44DF2 /* DishFB.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5D0A16B24B1B6A300E44DF2 /* DishFB.swift */; };
 /* End PBXBuildFile section */
@@ -283,7 +326,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		103B77D25A54CB08AA0C442D /* Pods_VirtualMenu.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VirtualMenu.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		0A54982F196767C530335B13 /* Pods-VirtualMenu.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VirtualMenu.debug.xcconfig"; path = "Target Support Files/Pods-VirtualMenu/Pods-VirtualMenu.debug.xcconfig"; sourceTree = "<group>"; };
 		3431BA56255A40B80018AFB5 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		34370CC62500D59A00ECD88B /* MenuSelectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuSelectionViewModel.swift; sourceTree = "<group>"; };
 		343A44BF252E21FE00109C90 /* RestaurantHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantHomeView.swift; sourceTree = "<group>"; };
@@ -438,7 +481,31 @@
 		3AFA234524DC9C2000F90ED8 /* DishReviewFB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DishReviewFB.swift; sourceTree = "<group>"; };
 		3AFA234724DCACEA00F90ED8 /* ReviewsButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewsButton.swift; sourceTree = "<group>"; };
 		3AFA234924DCB14B00F90ED8 /* DishReviewsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DishReviewsView.swift; sourceTree = "<group>"; };
-		5248A6A026AC855DE5C8F91B /* Pods-VirtualMenu.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VirtualMenu.debug.xcconfig"; path = "Target Support Files/Pods-VirtualMenu/Pods-VirtualMenu.debug.xcconfig"; sourceTree = "<group>"; };
+		3B0C8C5A28F6DD5800A66113 /* ARView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ARView.storyboard; sourceTree = "<group>"; };
+		3B783EDD28F6CA37005452AC /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		3B783EE128F6CB42005452AC /* VirtualObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VirtualObject.swift; sourceTree = "<group>"; };
+		3B783EE328F6CB74005452AC /* VirtualObjectInteraction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VirtualObjectInteraction.swift; sourceTree = "<group>"; };
+		3B783EE528F6CCDA005452AC /* VirtualObjectSelection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VirtualObjectSelection.swift; sourceTree = "<group>"; };
+		3B783EE728F6CCF5005452AC /* ARViewController+ObjectSelection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ARViewController+ObjectSelection.swift"; sourceTree = "<group>"; };
+		3B783EE928F6CD15005452AC /* ARViewController+Actions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ARViewController+Actions.swift"; sourceTree = "<group>"; };
+		3B783EEB28F6CD61005452AC /* StatusViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusViewController.swift; sourceTree = "<group>"; };
+		3B783EED28F6CD8A005452AC /* FocusSquareSegment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusSquareSegment.swift; sourceTree = "<group>"; };
+		3B783EEF28F6CDA0005452AC /* FocusSqaure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusSqaure.swift; sourceTree = "<group>"; };
+		3BE9263928F677A000A12EEA /* ARModelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARModelView.swift; sourceTree = "<group>"; };
+		3BE9263C28F677DB00A12EEA /* SurveyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurveyView.swift; sourceTree = "<group>"; };
+		3BE9263E28F677F200A12EEA /* SurveyHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurveyHelper.swift; sourceTree = "<group>"; };
+		3BE9264028F6780700A12EEA /* SurveyModelClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurveyModelClass.swift; sourceTree = "<group>"; };
+		3BE9264228F6781B00A12EEA /* YumzzSurvey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YumzzSurvey.swift; sourceTree = "<group>"; };
+		3BE9264A28F678A500A12EEA /* ViewController+ARSCNView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+ARSCNView.swift"; sourceTree = "<group>"; };
+		3BE9264D28F678C300A12EEA /* ViewController+CoachingOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+CoachingOverlay.swift"; sourceTree = "<group>"; };
+		3BE9265328F678F700A12EEA /* VirtualObjectARView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VirtualObjectARView.swift; sourceTree = "<group>"; };
+		3BE9265928F6793100A12EEA /* VirtualObjectLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VirtualObjectLoader.swift; sourceTree = "<group>"; };
+		3BE9265F28F6796800A12EEA /* ThresholdPanGesture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThresholdPanGesture.swift; sourceTree = "<group>"; };
+		3BE9266628F679E700A12EEA /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
+		3BE9266928F679FF00A12EEA /* CustomActivityIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomActivityIndicator.swift; sourceTree = "<group>"; };
+		3BE9267C28F67AC700A12EEA /* ARViewControllerVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARViewControllerVM.swift; sourceTree = "<group>"; };
+		4F4E5F21533D3B1DCF776202 /* Pods-VirtualMenu.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VirtualMenu.release.xcconfig"; path = "Target Support Files/Pods-VirtualMenu/Pods-VirtualMenu.release.xcconfig"; sourceTree = "<group>"; };
+		60CB767AC630FB73AB83A17B /* Pods_VirtualMenu.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VirtualMenu.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A731EB0D2495AD2300B75D05 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		A735992724ECD83300584BFD /* AccountProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountProfileViewModel.swift; sourceTree = "<group>"; };
 		A735992924ECFDCF00584BFD /* AccountProfileLoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountProfileLoginView.swift; sourceTree = "<group>"; };
@@ -469,7 +536,6 @@
 		C55FDD6424CABA2800CC8561 /* RestaurantFB.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestaurantFB.swift; sourceTree = "<group>"; };
 		C5CD0F2824AC4C6600F0A60D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		C5D0A16B24B1B6A300E44DF2 /* DishFB.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DishFB.swift; sourceTree = "<group>"; };
-		D0AC14A4A1AF1C154B211164 /* Pods-VirtualMenu.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VirtualMenu.release.xcconfig"; path = "Target Support Files/Pods-VirtualMenu/Pods-VirtualMenu.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -482,7 +548,7 @@
 				3AAFED4625AFB84000F34BAF /* FacebookLogin in Frameworks */,
 				3AAFED4425AFB83800F34BAF /* Combine.framework in Frameworks */,
 				3AAFED4825AFB85600F34BAF /* FacebookCore in Frameworks */,
-				BB864C0AA8C3628E471C4338 /* Pods_VirtualMenu.framework in Frameworks */,
+				639AC01DCC784061F38DF383 /* Pods_VirtualMenu.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1022,8 +1088,10 @@
 				3AECE2A627729AB3007BEC00 /* SceneDelegate.swift */,
 				3AECE2D72773D4E2007BEC00 /* YumzzClipApp.swift */,
 				3AECE2A827729ADE007BEC00 /* ContentView.swift */,
+				3BE9263928F677A000A12EEA /* ARModelView.swift */,
 				3AECE2AA27729AF8007BEC00 /* StartView.swift */,
 				3AECE2AC27729B1E007BEC00 /* QRScanViewController.swift */,
+				3BE9263B28F677BA00A12EEA /* Survey */,
 				3AECE2AE27729B2D007BEC00 /* QRScanView.swift */,
 				3AECE2B027729B46007BEC00 /* ListDishesView.swift */,
 			);
@@ -1099,6 +1167,65 @@
 			path = Components;
 			sourceTree = "<group>";
 		};
+		3BE9263B28F677BA00A12EEA /* Survey */ = {
+			isa = PBXGroup;
+			children = (
+				3BE9263C28F677DB00A12EEA /* SurveyView.swift */,
+				3BE9263E28F677F200A12EEA /* SurveyHelper.swift */,
+				3BE9264028F6780700A12EEA /* SurveyModelClass.swift */,
+				3BE9264228F6781B00A12EEA /* YumzzSurvey.swift */,
+			);
+			path = Survey;
+			sourceTree = "<group>";
+		};
+		3BE9264428F6783400A12EEA /* AR */ = {
+			isa = PBXGroup;
+			children = (
+				3B783EDD28F6CA37005452AC /* ViewController.swift */,
+				3B0C8C5A28F6DD5800A66113 /* ARView.storyboard */,
+				3BE9264A28F678A500A12EEA /* ViewController+ARSCNView.swift */,
+				3BE9264D28F678C300A12EEA /* ViewController+CoachingOverlay.swift */,
+				3BE9265328F678F700A12EEA /* VirtualObjectARView.swift */,
+				3B783EE128F6CB42005452AC /* VirtualObject.swift */,
+				3BE9265928F6793100A12EEA /* VirtualObjectLoader.swift */,
+				3B783EE328F6CB74005452AC /* VirtualObjectInteraction.swift */,
+				3BE9265F28F6796800A12EEA /* ThresholdPanGesture.swift */,
+				3B783EE528F6CCDA005452AC /* VirtualObjectSelection.swift */,
+				3B783EE728F6CCF5005452AC /* ARViewController+ObjectSelection.swift */,
+				3B783EE928F6CD15005452AC /* ARViewController+Actions.swift */,
+				3BE9266928F679FF00A12EEA /* CustomActivityIndicator.swift */,
+				3B783EEB28F6CD61005452AC /* StatusViewController.swift */,
+				3BE9266C28F67A0A00A12EEA /* FocusGroup */,
+				3BE9266528F679D800A12EEA /* Utilities */,
+			);
+			path = AR;
+			sourceTree = "<group>";
+		};
+		3BE9266528F679D800A12EEA /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				3BE9266628F679E700A12EEA /* Utilities.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		3BE9266C28F67A0A00A12EEA /* FocusGroup */ = {
+			isa = PBXGroup;
+			children = (
+				3B783EED28F6CD8A005452AC /* FocusSquareSegment.swift */,
+				3B783EEF28F6CDA0005452AC /* FocusSqaure.swift */,
+			);
+			path = FocusGroup;
+			sourceTree = "<group>";
+		};
+		3BE9267B28F67AB200A12EEA /* AR */ = {
+			isa = PBXGroup;
+			children = (
+				3BE9267C28F67AC700A12EEA /* ARViewControllerVM.swift */,
+			);
+			path = AR;
+			sourceTree = "<group>";
+		};
 		72573513B3F6B92305A269F4 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -1108,7 +1235,7 @@
 				3AF6D6742578672E009E4240 /* Combine.framework */,
 				3A10F67125550CEF00E25BC6 /* AppAuth.framework */,
 				A731EB0D2495AD2300B75D05 /* CloudKit.framework */,
-				103B77D25A54CB08AA0C442D /* Pods_VirtualMenu.framework */,
+				60CB767AC630FB73AB83A17B /* Pods_VirtualMenu.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -1116,8 +1243,8 @@
 		7D43EDA24CF9AA630D4BB85D /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				5248A6A026AC855DE5C8F91B /* Pods-VirtualMenu.debug.xcconfig */,
-				D0AC14A4A1AF1C154B211164 /* Pods-VirtualMenu.release.xcconfig */,
+				0A54982F196767C530335B13 /* Pods-VirtualMenu.debug.xcconfig */,
+				4F4E5F21533D3B1DCF776202 /* Pods-VirtualMenu.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -1125,6 +1252,7 @@
 		A73B1B5924B0FDA800A8C6A8 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				3BE9264428F6783400A12EEA /* AR */,
 				3AD62C3327C9D9E000F4E535 /* OrderRec */,
 				3AED7BD425CB533B00341E95 /* Cache */,
 				3A3E1DE1256FC6A700812E67 /* Image */,
@@ -1144,6 +1272,7 @@
 		A73B1B5D24B0FF4100A8C6A8 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				3BE9267B28F67AB200A12EEA /* AR */,
 				3A62F5BB27CC40CD005BDF6E /* OrderRecVM */,
 				3A99EEA42790B350000D6DB7 /* MenuConnection */,
 				3A33807C271430630086F4A0 /* CallWaiterConnection */,
@@ -1180,14 +1309,14 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 3A987AFD2480350E0021F6E4 /* Build configuration list for PBXNativeTarget "VirtualMenu" */;
 			buildPhases = (
-				46EBC03787541EB10A24A197 /* [CP] Check Pods Manifest.lock */,
+				529913EB56AD201BA4A38377 /* [CP] Check Pods Manifest.lock */,
 				3A987ACF2480350C0021F6E4 /* Sources */,
 				3A987AD02480350C0021F6E4 /* Frameworks */,
 				3A987AD12480350C0021F6E4 /* Resources */,
 				34111066252262F20084975A /* Embed App Clips */,
 				3A5875CC2779345C00E3B6BC /* Embed Frameworks */,
-				D8427BA0F2BBD1A71C3B2573 /* [CP] Embed Pods Frameworks */,
-				EA36954686FC08B6535B5598 /* [CP] Copy Pods Resources */,
+				871C0499D80911761FC53C9A /* [CP] Embed Pods Frameworks */,
+				FCAF9901828F21D2DF52D27F /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1367,6 +1496,7 @@
 				3A987AE32480350E0021F6E4 /* LaunchScreen.storyboard in Resources */,
 				3A987AE02480350E0021F6E4 /* Preview Assets.xcassets in Resources */,
 				A797EA5A24B938D5005158FA /* Montserrat-Regular.ttf in Resources */,
+				3B0C8C5B28F6DD5800A66113 /* ARView.storyboard in Resources */,
 				A797EA5D24B938D5005158FA /* Montserrat-Italic.ttf in Resources */,
 				3A987ADD2480350E0021F6E4 /* Assets.xcassets in Resources */,
 				A797EA6624B938D5005158FA /* Montserrat-ThinItalic.ttf in Resources */,
@@ -1401,6 +1531,7 @@
 			files = (
 				3AD0BFFF27797DE00023BF1E /* GoogleService-Info.plist in Resources */,
 				3AECE2752772974D007BEC00 /* Preview Assets.xcassets in Resources */,
+				3B0C8C5E28F6E79700A66113 /* ARView.storyboard in Resources */,
 				3AB49A812773E4CF00CBDFD2 /* Colors.xcassets in Resources */,
 				3AECE2722772974D007BEC00 /* Assets.xcassets in Resources */,
 			);
@@ -1423,7 +1554,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		46EBC03787541EB10A24A197 /* [CP] Check Pods Manifest.lock */ = {
+		529913EB56AD201BA4A38377 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1445,7 +1576,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		D8427BA0F2BBD1A71C3B2573 /* [CP] Embed Pods Frameworks */ = {
+		871C0499D80911761FC53C9A /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1462,7 +1593,7 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-VirtualMenu/Pods-VirtualMenu-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		EA36954686FC08B6535B5598 /* [CP] Copy Pods Resources */ = {
+		FCAF9901828F21D2DF52D27F /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1487,12 +1618,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				3A5633CE24FC8FE70059B603 /* OrderModel.swift in Sources */,
+				3B783EEE28F6CD8A005452AC /* FocusSquareSegment.swift in Sources */,
 				3A5F685624FE470C00F9B43D /* ReviewCard.swift in Sources */,
+				3BE9265428F678F700A12EEA /* VirtualObjectARView.swift in Sources */,
 				3A10F6242554D6B900E25BC6 /* QRScanView.swift in Sources */,
 				3A5633CC24FA33790059B603 /* Order.swift in Sources */,
 				3AF77F6B25DFFEB0000F520F /* Cache.swift in Sources */,
 				3A4A0E72249EB94D0030635E /* ImagePicker.swift in Sources */,
 				3A0745C1252B02BA000EF6BD /* GoogleButton.swift in Sources */,
+				3B783EDE28F6CA37005452AC /* ViewController.swift in Sources */,
 				3A33807E2714308E0086F4A0 /* CallWaitViewController.swift in Sources */,
 				3A4E2E3B24D21E8E00C34DD8 /* LocationManager.swift in Sources */,
 				3ACAD176250AE56C00B24CEB /* ContactUsViewModel.swift in Sources */,
@@ -1500,6 +1634,7 @@
 				3A45AD8D24B3FE8800CF3A8F /* Constants.swift in Sources */,
 				3ACAD182250AF07100B24CEB /* DishReviewsViewModel.swift in Sources */,
 				3AF6D66F25784106009E4240 /* AccountProfileLoginViewModel.swift in Sources */,
+				3B783EEC28F6CD61005452AC /* StatusViewController.swift in Sources */,
 				3A5633C824F90E080059B603 /* SignInWithApple.swift in Sources */,
 				3A5633C224F902280059B603 /* EnvironmentWindowKey.swift in Sources */,
 				3A13B6E024C1813D0006458B /* ContactUs.swift in Sources */,
@@ -1507,12 +1642,15 @@
 				3A3DD56C253654CA00536D62 /* DishPreviewCard.swift in Sources */,
 				3AFA234624DC9C2000F90ED8 /* DishReviewFB.swift in Sources */,
 				3A987B102481511B0021F6E4 /* ContentView.swift in Sources */,
+				3BE9266A28F679FF00A12EEA /* CustomActivityIndicator.swift in Sources */,
 				34A5D663249BF6DF00E4FE9C /* DishDetailsView.swift in Sources */,
 				3AED7BEF25DF565000341E95 /* RestaurantHomeView.swift in Sources */,
 				3A64017026FA9841003D3FFA /* ChoicesCard.swift in Sources */,
 				3A6638E125844C6B00AC9C1A /* BuildOptsCard.swift in Sources */,
 				3AF9926824A2B918005446D8 /* Utils.swift in Sources */,
 				3A4E2E3D24D2275F00C34DD8 /* SearchBarButton.swift in Sources */,
+				3BE9265A28F6793200A12EEA /* VirtualObjectLoader.swift in Sources */,
+				3BE9267D28F67AC700A12EEA /* ARViewControllerVM.swift in Sources */,
 				3A987AD72480350C0021F6E4 /* AppDelegate.swift in Sources */,
 				3A0745B5252B014D000EF6BD /* AppleButton.swift in Sources */,
 				3A5633D524FCED0C0059B603 /* DishNavButton.swift in Sources */,
@@ -1527,13 +1665,16 @@
 				3A3DD589253838A700536D62 /* ReceiptCard.swift in Sources */,
 				3AF9926A24A2B95C005446D8 /* InputValidation.swift in Sources */,
 				3ACAD174250AE39D00B24CEB /* SuggestRestaurantViewModel.swift in Sources */,
+				3B783EE228F6CB42005452AC /* VirtualObject.swift in Sources */,
 				A777C3A424D3EC7A009658AA /* UserStore.swift in Sources */,
+				3BE9268328F67E6300A12EEA /* SurveyHelper.swift in Sources */,
 				3A5633BE24F901E80059B603 /* SignInWithAppleDelegates.swift in Sources */,
 				A7912A2624CF82140052988C /* WhiteButton.swift in Sources */,
 				3482C0CF250C95D300FC362D /* BottomSheetView.swift in Sources */,
 				3AF77F7025E00852000F520F /* CacheDishInfo.swift in Sources */,
 				3AED7BDA25DF3C7800341E95 /* DishAdminFetchView.swift in Sources */,
 				3A13B6E424C1816B0006458B /* ReportProblem.swift in Sources */,
+				3BE9268228F67E5B00A12EEA /* SurveyModelClass.swift in Sources */,
 				3A3DD58F2538396B00536D62 /* XButton.swift in Sources */,
 				A779ACAA250D4F7400146565 /* ImageCache.swift in Sources */,
 				3AD1D26D275C9C26004D29C5 /* SwiftAlgorithms.swift in Sources */,
@@ -1549,6 +1690,7 @@
 				3A87575324EC910A004ABECC /* PostReviewButton.swift in Sources */,
 				3A530DF324D9769100CBDE28 /* DishCategory.swift in Sources */,
 				3A4E2E3724D21CDC00C34DD8 /* Coordinator.swift in Sources */,
+				3B783EEA28F6CD15005452AC /* ARViewController+Actions.swift in Sources */,
 				3A1BBD1427CA0D7B00209B3C /* RecCard.swift in Sources */,
 				3A5F685424FE230200F9B43D /* TextView.swift in Sources */,
 				A7D0F78324DF6B4100197631 /* FBURLImage.swift in Sources */,
@@ -1561,6 +1703,7 @@
 				3A2A00A3271924F6009FC3CD /* PastOrders.swift in Sources */,
 				3ABD6A80253AC1D40082681A /* XButtonDelete.swift in Sources */,
 				3AFA234A24DCB14B00F90ED8 /* DishReviewsView.swift in Sources */,
+				3BE9266728F679E700A12EEA /* Utilities.swift in Sources */,
 				3ABA90F124F63DB500695B06 /* BlackButton.swift in Sources */,
 				3A4E2E3F24D2403300C34DD8 /* RestaurantDishViewModel.swift in Sources */,
 				34A966F8254762EF00AD84CD /* RestaurantReviewView.swift in Sources */,
@@ -1572,34 +1715,43 @@
 				34909E75252D5D0500B43D7B /* HomeScreenViewModel.swift in Sources */,
 				3ACAD189250B161A00B24CEB /* RestCategory.swift in Sources */,
 				3A3DD5952539378700536D62 /* ViewCartButton.swift in Sources */,
+				3BE9264E28F678C300A12EEA /* ViewController+CoachingOverlay.swift in Sources */,
 				C55FDD6524CABA2800CC8561 /* RestaurantFB.swift in Sources */,
 				3AA9897624B517F00070FD97 /* Extensions.swift in Sources */,
 				3AF1BA84252A926900FAA9A0 /* OnboardingInfo.swift in Sources */,
 				3AED7BF025DF565100341E95 /* ListDishesView.swift in Sources */,
 				3ABA90F524F64EDE00695B06 /* GuestButton.swift in Sources */,
 				3A2A00A9271928C0009FC3CD /* PastOrdersViewModel.swift in Sources */,
+				3B783EE828F6CCF5005452AC /* ARViewController+ObjectSelection.swift in Sources */,
 				3AC3FE7C27BB16B700908FA3 /* DishAdminView.swift in Sources */,
 				3A62F5BD27CC40F2005BDF6E /* RecCardVM.swift in Sources */,
 				A7912A2824CF87260052988C /* CoralButton.swift in Sources */,
 				3A3DD57425380E1000536D62 /* ReviewOrder.swift in Sources */,
 				34370CC72500D59A00ECD88B /* MenuSelectionViewModel.swift in Sources */,
+				3B783EF028F6CDA0005452AC /* FocusSqaure.swift in Sources */,
 				3A3DD57F2538333100536D62 /* DishCardOrder.swift in Sources */,
+				3B783EE628F6CCDA005452AC /* VirtualObjectSelection.swift in Sources */,
 				3A3DD5A62539736A00536D62 /* OptionsCard.swift in Sources */,
 				3AF77F7625E17F43000F520F /* CacheRestInfo.swift in Sources */,
+				3BE9264B28F678A500A12EEA /* ViewController+ARSCNView.swift in Sources */,
 				3A0745DB253021CB000EF6BD /* ColorManager.swift in Sources */,
 				A735992A24ECFDCF00584BFD /* AccountProfileLoginView.swift in Sources */,
+				3B783EE428F6CB74005452AC /* VirtualObjectInteraction.swift in Sources */,
 				3A4E2E2024C6244600C34DD8 /* ForgotPassword.swift in Sources */,
 				A735992824ECD83300584BFD /* AccountProfileViewModel.swift in Sources */,
 				C5D0A16C24B1B6A300E44DF2 /* DishFB.swift in Sources */,
 				3AA9C5CE27C1DB91009983F8 /* RequiredChoicesCard.swift in Sources */,
+				3BE9266028F6796800A12EEA /* ThresholdPanGesture.swift in Sources */,
 				3A0745C7252B0871000EF6BD /* BackButton.swift in Sources */,
 				3ACAD187250AF4B200B24CEB /* ListDishesViewModel.swift in Sources */,
+				3BE9268128F67E3100A12EEA /* SurveyView.swift in Sources */,
 				3A530DF124D8E07F00CBDE28 /* BottomSheetModal.swift in Sources */,
 				34A966F2254691C200AD84CD /* RestaurantReviewFB.swift in Sources */,
 				3A5633BA24F9014C0059B603 /* SignInWithAppleCoordinator.swift in Sources */,
 				3A858E98271CC0DB00360A94 /* BannerModifier.swift in Sources */,
 				3A874624268AEECE000FC3CA /* ClientViewController.swift in Sources */,
 				3A0745BB252B020F000EF6BD /* FacebookButton.swift in Sources */,
+				3BE9268428F67EAE00A12EEA /* YumzzSurvey.swift in Sources */,
 				3AEAE24E27B4CBC400BDD21B /* BuildCardOrder.swift in Sources */,
 				3AEB331C2572092000A61C0E /* WhiteBackButton.swift in Sources */,
 				3A70314D27E7EB5D00713CDE /* PaymentHandler.swift in Sources */,
@@ -1635,46 +1787,66 @@
 			buildActionMask = 2147483647;
 			files = (
 				3AD0C0012779B7570023BF1E /* OrangeButton.swift in Sources */,
+				3BE9265B28F6793200A12EEA /* VirtualObjectLoader.swift in Sources */,
+				3BE9263D28F677DB00A12EEA /* SurveyView.swift in Sources */,
 				3AECE2CF2773C50F007BEC00 /* DishCardOrder.swift in Sources */,
 				3AECE2BA2773B5D5007BEC00 /* BuildFB.swift in Sources */,
 				3AECE2C72773C484007BEC00 /* OrderModel.swift in Sources */,
+				3BE9268028F67CBB00A12EEA /* ListDishesView.swift in Sources */,
 				3AECE2CB2773C505007BEC00 /* ReviewOrder.swift in Sources */,
 				3AECE29E27729A44007BEC00 /* ListDishesViewModel.swift in Sources */,
 				3A70314F27E7F03600713CDE /* AppleButton.swift in Sources */,
 				3AECE2CE2773C50D007BEC00 /* ReceiptCard.swift in Sources */,
-				3AECE2AB27729AF8007BEC00 /* StartView.swift in Sources */,
 				3AECE2B827729B7C007BEC00 /* Order.swift in Sources */,
+				3B783EF128F6CDFE005452AC /* VirtualObject.swift in Sources */,
 				3A3CD16C27A34520007916C4 /* BannerModifier.swift in Sources */,
+				3BE9263F28F677F200A12EEA /* SurveyHelper.swift in Sources */,
 				3AECE2AD27729B1E007BEC00 /* QRScanViewController.swift in Sources */,
 				3AECE2C32773C415007BEC00 /* OrderButton.swift in Sources */,
 				3AECE2D32773C73E007BEC00 /* BackButton.swift in Sources */,
+				3B783EF628F6CE0E005452AC /* ARViewController+Actions.swift in Sources */,
+				3BE9266B28F679FF00A12EEA /* CustomActivityIndicator.swift in Sources */,
+				3B783EF428F6CE09005452AC /* VirtualObjectSelection.swift in Sources */,
 				3A70314E27E7F03400713CDE /* PaymentHandler.swift in Sources */,
+				3B783EF328F6CE04005452AC /* ViewController.swift in Sources */,
 				3AECE2B327729B6E007BEC00 /* DishFB.swift in Sources */,
 				3AECE2D82773D4E2007BEC00 /* YumzzClipApp.swift in Sources */,
 				3AECE2A027729A5A007BEC00 /* Navigation.swift in Sources */,
 				3AECE2BF2773C387007BEC00 /* ColorManager.swift in Sources */,
 				3AECE2A227729A7E007BEC00 /* DestinationHostingController.swift in Sources */,
+				3BE9264328F6781B00A12EEA /* YumzzSurvey.swift in Sources */,
+				3B783EF928F6CE18005452AC /* FocusSqaure.swift in Sources */,
+				3BE9265528F678F700A12EEA /* VirtualObjectARView.swift in Sources */,
+				3B783EF728F6CE13005452AC /* StatusViewController.swift in Sources */,
 				3AECE2C42773C41C007BEC00 /* DishCard.swift in Sources */,
 				3AECE2CA2773C4D7007BEC00 /* DishDetailsView.swift in Sources */,
 				3AECE2C52773C423007BEC00 /* ChoicesCard.swift in Sources */,
+				3BE9267E28F67AC700A12EEA /* ARViewControllerVM.swift in Sources */,
 				3AECE2B727729B7A007BEC00 /* UserProfile.swift in Sources */,
 				3AECE2A527729AA2007BEC00 /* AppDelegate.swift in Sources */,
+				3B783EF528F6CE0C005452AC /* ARViewController+ObjectSelection.swift in Sources */,
+				3BE9266828F679E700A12EEA /* Utilities.swift in Sources */,
 				3AECE2B527729B73007BEC00 /* DishCategory.swift in Sources */,
-				3AECE2A927729ADE007BEC00 /* ContentView.swift in Sources */,
+				3B783EF828F6CE16005452AC /* FocusSquareSegment.swift in Sources */,
+				3BE9264128F6780700A12EEA /* SurveyModelClass.swift in Sources */,
 				3AECE2C12773C38F007BEC00 /* Extensions.swift in Sources */,
-				3AECE2B127729B46007BEC00 /* ListDishesView.swift in Sources */,
 				3AECE2D42773C74A007BEC00 /* OptionsCard.swift in Sources */,
 				3AECE2C92773C4BF007BEC00 /* MiniViewCartButton.swift in Sources */,
 				3AE4598127750E8B002EFE28 /* BottomSheetModal.swift in Sources */,
 				3AECE2C02773C389007BEC00 /* Constants.swift in Sources */,
+				3B783EF228F6CE02005452AC /* VirtualObjectInteraction.swift in Sources */,
 				3AECE29C27729A2C007BEC00 /* ContentViewModel.swift in Sources */,
 				3AECE2C62773C428007BEC00 /* BuildCard.swift in Sources */,
 				3AECE2C82773C4BD007BEC00 /* ViewCartButton.swift in Sources */,
+				3BE9266128F6796800A12EEA /* ThresholdPanGesture.swift in Sources */,
 				3AECE2D02773C6D5007BEC00 /* InvertedOrangeButton.swift in Sources */,
 				3AECE2D22773C6E7007BEC00 /* WhiteBackButton.swift in Sources */,
+				3BE9264F28F678C300A12EEA /* ViewController+CoachingOverlay.swift in Sources */,
 				3AECE2CD2773C50A007BEC00 /* XButtonDelete.swift in Sources */,
+				3BE9263A28F677A000A12EEA /* ARModelView.swift in Sources */,
 				3AECE2CC2773C508007BEC00 /* XButton.swift in Sources */,
 				3AECE2AF27729B2D007BEC00 /* QRScanView.swift in Sources */,
+				3BE9264C28F678A500A12EEA /* ViewController+ARSCNView.swift in Sources */,
 				3AEAE24F27B4CFC300BDD21B /* BuildCardOrder.swift in Sources */,
 				3AECE2B227729B54007BEC00 /* RestaurantFB.swift in Sources */,
 				3AECE2A727729AB3007BEC00 /* SceneDelegate.swift in Sources */,
@@ -1783,12 +1955,13 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = 3VUUCS34BU;
+				ENABLE_BITCODE = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				FRAMEWORK_SEARCH_PATHS = "";
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_NO_COMMON_BLOCKS = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -1800,6 +1973,8 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_KEY_UIRequiredDeviceCapabilities = "";
+				INFOPLIST_KEY_UIRequiresFullScreen = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -1848,17 +2023,20 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 3VUUCS34BU;
+				ENABLE_BITCODE = NO;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				FRAMEWORK_SEARCH_PATHS = "";
 				GCC_C_LANGUAGE_STANDARD = gnu11;
-				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_NO_COMMON_BLOCKS = NO;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_KEY_UIRequiredDeviceCapabilities = "";
+				INFOPLIST_KEY_UIRequiresFullScreen = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
@@ -1871,7 +2049,7 @@
 		};
 		3A987AFE2480350E0021F6E4 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5248A6A026AC855DE5C8F91B /* Pods-VirtualMenu.debug.xcconfig */;
+			baseConfigurationReference = 0A54982F196767C530335B13 /* Pods-VirtualMenu.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -1879,10 +2057,10 @@
 				CODE_SIGN_ENTITLEMENTS = VirtualMenu/VirtualMenu.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"VirtualMenu/Preview Content\"";
 				DEVELOPMENT_TEAM = 3VUUCS34BU;
-				ENABLE_BITCODE = YES;
+				ENABLE_BITCODE = NO;
 				ENABLE_PREVIEWS = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"COCOAPODS=1",
@@ -1891,16 +2069,21 @@
 					"PB_ENABLE_MALLOC=1",
 				);
 				INFOPLIST_FILE = VirtualMenu/Info.plist;
+				INFOPLIST_KEY_UIRequiredDeviceCapabilities = "";
+				INFOPLIST_KEY_UIRequiresFullScreen = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_QUOTE_LINKER_ARGUMENTS_FOR_COMPILER_DRIVER = YES;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 14;
+				MARKETING_VERSION = 16;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ARMenu.VirtualMenu;
 				PRODUCT_NAME = Yumzz;
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_INSTALL_OBJC_HEADER = YES;
 				SWIFT_PRECOMPILE_BRIDGING_HEADER = YES;
 				SWIFT_VERSION = 5.0;
@@ -1910,7 +2093,7 @@
 		};
 		3A987AFF2480350E0021F6E4 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D0AC14A4A1AF1C154B211164 /* Pods-VirtualMenu.release.xcconfig */;
+			baseConfigurationReference = 4F4E5F21533D3B1DCF776202 /* Pods-VirtualMenu.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -1918,10 +2101,10 @@
 				CODE_SIGN_ENTITLEMENTS = VirtualMenu/YumzzRelease.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"VirtualMenu/Preview Content\"";
 				DEVELOPMENT_TEAM = 3VUUCS34BU;
-				ENABLE_BITCODE = YES;
+				ENABLE_BITCODE = NO;
 				ENABLE_PREVIEWS = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"COCOAPODS=1",
@@ -1930,16 +2113,21 @@
 					"PB_ENABLE_MALLOC=1",
 				);
 				INFOPLIST_FILE = VirtualMenu/Info.plist;
+				INFOPLIST_KEY_UIRequiredDeviceCapabilities = "";
+				INFOPLIST_KEY_UIRequiresFullScreen = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_QUOTE_LINKER_ARGUMENTS_FOR_COMPILER_DRIVER = YES;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 14;
+				MARKETING_VERSION = 16;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ARMenu.VirtualMenu;
 				PRODUCT_NAME = Yumzz;
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_INSTALL_OBJC_HEADER = YES;
 				SWIFT_PRECOMPILE_BRIDGING_HEADER = YES;
 				SWIFT_VERSION = 5.0;
@@ -2041,10 +2229,10 @@
 				CODE_SIGN_ENTITLEMENTS = YumzzClip/YumzzClip.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"YumzzClip/Preview Content\"";
 				DEVELOPMENT_TEAM = 3VUUCS34BU;
-				ENABLE_BITCODE = YES;
+				ENABLE_BITCODE = NO;
 				ENABLE_PREVIEWS = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/MQTTClient\"",
@@ -2058,7 +2246,7 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIRequiredDeviceCapabilities = armv7;
+				INFOPLIST_KEY_UIRequiredDeviceCapabilities = "";
 				INFOPLIST_KEY_UIRequiresFullScreen = YES;
 				INFOPLIST_KEY_UIStatusBarHidden = NO;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
@@ -2069,11 +2257,14 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 14;
+				MARKETING_VERSION = 16;
 				PODS_XCFRAMEWORKS_BUILD_DIR = "$(PODS_CONFIGURATION_BUILD_DIR)/XCFrameworkIntermediates";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ARMenu.VirtualMenu.Clip;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG APPCLIP";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -2091,10 +2282,10 @@
 				CODE_SIGN_ENTITLEMENTS = YumzzClip/YumzzClip.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"YumzzClip/Preview Content\"";
 				DEVELOPMENT_TEAM = 3VUUCS34BU;
-				ENABLE_BITCODE = YES;
+				ENABLE_BITCODE = NO;
 				ENABLE_PREVIEWS = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/MQTTClient\"",
@@ -2108,7 +2299,7 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIRequiredDeviceCapabilities = armv7;
+				INFOPLIST_KEY_UIRequiredDeviceCapabilities = "";
 				INFOPLIST_KEY_UIRequiresFullScreen = YES;
 				INFOPLIST_KEY_UIStatusBarHidden = NO;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
@@ -2119,11 +2310,14 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 14;
+				MARKETING_VERSION = 16;
 				PODS_XCFRAMEWORKS_BUILD_DIR = "$(PODS_CONFIGURATION_BUILD_DIR)/XCFrameworkIntermediates";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ARMenu.VirtualMenu.Clip;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = APPCLIP;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -2139,11 +2333,11 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
 				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = 7XP2RUZ6VP;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 14.0;
+				MARKETING_VERSION = 16.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ARMenu.VirtualMenu.YumzzClipTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
@@ -2161,11 +2355,11 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
 				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = 7XP2RUZ6VP;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 14.0;
+				MARKETING_VERSION = 16.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ARMenu.VirtualMenu.YumzzClipTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
@@ -2182,11 +2376,11 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
 				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = 7XP2RUZ6VP;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 14.0;
+				MARKETING_VERSION = 16.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ARMenu.VirtualMenu.YumzzClipUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
@@ -2203,11 +2397,11 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
 				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = 7XP2RUZ6VP;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 14.0;
+				MARKETING_VERSION = 16.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ARMenu.VirtualMenu.YumzzClipUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
